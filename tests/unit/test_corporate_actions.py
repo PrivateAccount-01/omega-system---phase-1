@@ -105,3 +105,64 @@ def test_immutability_correction(db_session) -> None:
     )
     db_session.flush()
     assert corrected.supersedes_id == active[0].id
+
+
+def test_multiple_actions_same_date_are_paired_by_event_identity(db_session) -> None:
+    svc = CorporateActionService()
+    bonus_payload = {
+        "isin": "INE009A01021",
+        "ex_date": "2018-06-14",
+        "record_date": "2018-06-16",
+        "bonus_ratio_numerator": "1",
+        "bonus_ratio_denominator": "1",
+        "board_meeting_date": "2018-04-13",
+    }
+    split_payload = {
+        "isin": "INE009A01021",
+        "ex_date": "2018-06-14",
+        "old_face_value": "10",
+        "new_face_value": "5",
+    }
+    svc.add_staging_record(
+        db_session,
+        Exchange.NSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        bonus_payload,
+    )
+    svc.add_staging_record(
+        db_session,
+        Exchange.BSE,
+        "INE009A01021",
+        CorporateActionType.SPLIT,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 14),
+        split_payload,
+    )
+    svc.add_staging_record(
+        db_session,
+        Exchange.NSE,
+        "INE009A01021",
+        CorporateActionType.SPLIT,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 14),
+        split_payload,
+    )
+    svc.add_staging_record(
+        db_session,
+        Exchange.BSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        bonus_payload,
+    )
+
+    results = svc.run_daily_confirmation(db_session, as_of=date(2018, 6, 14))
+    assert len(results) == 2

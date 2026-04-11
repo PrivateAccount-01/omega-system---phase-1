@@ -8,8 +8,10 @@ from decimal import Decimal
 from sqlalchemy import and_, select
 from sqlalchemy.orm import Session
 
-from omegadata.db.models import ConfirmedCorporateAction, CorporateActionStaging, ManualReviewQueue
+from omegadata.db.models import ConfirmedCorporateAction, CorporateActionStaging
 from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
+from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
+from omegadata.track_b.manual_review import ManualReviewService
 
 REQUIRED_FIELDS: dict[CorporateActionType, tuple[str, ...]] = {
     CorporateActionType.BONUS: (
@@ -49,6 +51,10 @@ class ConfirmationResult:
 
 
 class CorporateActionService:
+    def __init__(self) -> None:
+        self.matcher = CorporateActionMatcher()
+        self.review_service = ManualReviewService()
+
     @staticmethod
     def _validate_required_fields(action_type: CorporateActionType, payload: Mapping[str, object]) -> list[str]:
         required = REQUIRED_FIELDS.get(action_type, ("isin", "ex_date"))
@@ -63,16 +69,16 @@ class CorporateActionService:
         isin: str | None,
         event_date: date | None,
         reason: str,
+        payload: dict[str, object],
     ) -> bool:
-        review_id = session.scalar(
-            select(ManualReviewQueue.id)
-            .where(ManualReviewQueue.category == category)
-            .where(ManualReviewQueue.isin == isin)
-            .where(ManualReviewQueue.event_date == event_date)
-            .where(ManualReviewQueue.reason == reason)
-            .where(ManualReviewQueue.resolved.is_(False))
+        return ManualReviewService().review_exists(
+            session,
+            category=category,
+            isin=isin,
+            event_date=event_date,
+            reason=reason,
+            payload=payload,
         )
-        return review_id is not None
 
     def _queue_review(
         self,
@@ -82,7 +88,7 @@ class CorporateActionService:
         isin: str | None,
         event_date: date | None,
         reason: str,
-        payload: dict[str, str],
+        payload: Mapping[str, object],
     ) -> None:
         if self._review_exists(
             session,
@@ -90,16 +96,16 @@ class CorporateActionService:
             isin=isin,
             event_date=event_date,
             reason=reason,
+            payload=dict(payload),
         ):
             return
-        session.add(
-            ManualReviewQueue(
-                category=category,
-                isin=isin,
-                event_date=event_date,
-                reason=reason,
-                payload=payload,
-            )
+        self.review_service.queue_review(
+            session,
+            category=category,
+            isin=isin,
+            event_date=event_date,
+            reason=reason,
+            payload=dict(payload),
         )
 
     def _required_fields_complete(
@@ -149,43 +155,43 @@ class CorporateActionService:
             select(CorporateActionStaging).where(CorporateActionStaging.matched.is_(False))
         ).all()
 
-        grouped: dict[tuple[str, date | None], list[CorporateActionStaging]] = {}
+        grouped: dict[str, list[CorporateActionStaging]] = {}
         for row in staged:
-            grouped.setdefault((row.isin, row.ex_date), []).append(row)
+            grouped.setdefault(row.isin, []).append(row)
 
         results: list[ConfirmationResult] = []
-        for (_isin, _ex_date), rows in grouped.items():
-            nse = next((r for r in rows if r.source == Exchange.NSE), None)
-            bse = next((r for r in rows if r.source in {Exchange.BSE, Exchange.BSE_ONLY}), None)
+        for rows in grouped.values():
+            nse_rows = [row for row in rows if row.source == Exchange.NSE]
+            bse_rows = [row for row in rows if row.source in {Exchange.BSE, Exchange.BSE_ONLY}]
+            pairs, unmatched_nse, unmatched_bse = self.matcher.match_pairs(nse_rows, bse_rows)
 
-            if nse and bse:
-                confirmed = self._confirm_pair(session=session, nse=nse, bse=bse)
+            for pair in pairs:
+                confirmed = self._confirm_pair(session=session, nse=pair.nse, bse=pair.bse)
                 if confirmed is not None:
                     results.append(confirmed)
-                continue
 
-            lone = nse or bse or rows[0]
-            if not self._is_stale_unmatched(lone, as_of):
-                continue
+            for lone in [*unmatched_nse, *unmatched_bse]:
+                if not self._is_stale_unmatched(lone, as_of):
+                    continue
 
-            self._queue_review(
-                session,
-                category="CORPORATE_ACTION_UNMATCHED",
-                isin=lone.isin,
-                event_date=lone.ex_date,
-                reason="Unmatched staging record older than 48 hours",
-                payload={"source": lone.source.value, "action_type": lone.action_type.value},
-            )
-            self._required_fields_complete(session, row=lone)
-            if lone.source != Exchange.NSE:
                 self._queue_review(
                     session,
-                    category="CORPORATE_ACTION_SOURCE_GAP",
+                    category="CORPORATE_ACTION_UNMATCHED",
                     isin=lone.isin,
-                    event_date=lone.ex_date,
-                    reason="BSE record found without NSE match",
-                    payload={"action_type": lone.action_type.value},
+                    event_date=self.matcher.event_date(lone),
+                    reason="Unmatched staging record older than 48 hours",
+                    payload={"source": lone.source.value, "action_type": lone.action_type.value},
                 )
+                self._required_fields_complete(session, row=lone)
+                if lone.source != Exchange.NSE:
+                    self._queue_review(
+                        session,
+                        category="CORPORATE_ACTION_SOURCE_GAP",
+                        isin=lone.isin,
+                        event_date=self.matcher.event_date(lone),
+                        reason="BSE record found without NSE match",
+                        payload={"action_type": lone.action_type.value, "source": lone.source.value},
+                    )
 
         return results
 

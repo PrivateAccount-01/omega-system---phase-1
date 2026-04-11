@@ -18,12 +18,14 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from omegadata.config import settings
-from omegadata.db.models import PriceRecord
+from omegadata.db.models import InstrumentMaster, PriceRecord
 from omegadata.db.session import get_session, init_db
-from omegadata.domain import QueryContext
+from omegadata.domain import Exchange, PublicationState, QueryContext, ReviewDecision
 from omegadata.track_a.monitoring import API_REQUEST_COUNTER, API_REQUEST_LATENCY
 from omegadata.track_a.slo import SLOTracker
 from omegadata.track_b.confidence import ConfidenceScorer
+from omegadata.track_b.manual_review import ManualReviewService
+from omegadata.track_b.publication import PublicationService
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 from omegadata.verification.audit import build_audit_summary
 
@@ -38,6 +40,8 @@ app = FastAPI(title="OmegaData API", version="0.1.0", lifespan=lifespan)
 confidence = ConfidenceScorer()
 universe = PointInTimeUniverseManager()
 slo_tracker = SLOTracker(window_minutes=5, availability_target=0.995, p95_target_ms=750.0)
+publication = PublicationService()
+reviews = ManualReviewService()
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
 UI_DIR = ROOT_DIR / "src" / "omegadata" / "ui"
@@ -56,10 +60,52 @@ class PriceOut(BaseModel):
 
 class PriceResponse(BaseModel):
     isin: str
+    exchange: Exchange
     context: QueryContext
     records: list[PriceOut]
     excluded_records: int
     excluded_date_range: tuple[date, date] | None
+    blocked_records: int = 0
+    blocked_date_range: tuple[date, date] | None = None
+
+
+class ReviewOut(BaseModel):
+    id: int
+    category: str
+    isin: str | None
+    event_date: date | None
+    reason: str
+    payload: dict[str, object]
+    created_at: str
+    resolved: bool
+
+
+class ReviewResolutionIn(BaseModel):
+    decision: ReviewDecision
+    reviewer: str
+    notes: str
+
+
+class ReprocessCompletionIn(BaseModel):
+    completed_by: str
+    notes: str
+
+
+class PublicationBlockOut(BaseModel):
+    review_id: int
+    category: str
+    scope: str
+    reason: str
+    requires_reprocess: bool
+
+
+class PublicationStatusOut(BaseModel):
+    isin: str
+    exchange: Exchange
+    blocked_records: int
+    blocked_date_range: tuple[date, date] | None
+    state: PublicationState
+    blocks: list[PublicationBlockOut]
 
 
 def _get_db() -> Generator[Session, None, None]:
@@ -68,6 +114,26 @@ def _get_db() -> Generator[Session, None, None]:
 
 
 SessionDep = Annotated[Session, Depends(_get_db)]
+
+
+def _require_api_key(x_api_key: Annotated[str, Header()] = "") -> None:
+    if x_api_key != settings.api_key:
+        raise HTTPException(status_code=401, detail="invalid api key")
+
+
+InternalAuthDep = Annotated[None, Depends(_require_api_key)]
+
+
+def _resolve_exchange(session: Session, isin: str, exchange: Exchange | None) -> Exchange:
+    if exchange is not None:
+        return exchange
+    primary = session.scalar(select(InstrumentMaster.primary_exchange).where(InstrumentMaster.isin == isin))
+    if primary is None:
+        raise HTTPException(
+            status_code=400,
+            detail="exchange is required when no canonical primary exchange is configured for the ISIN",
+        )
+    return primary
 
 @app.middleware("http")
 async def observe_requests(
@@ -122,7 +188,7 @@ def slo_status() -> dict[str, object]:
 
 
 @app.get("/implementation/audit")
-def implementation_audit() -> dict[str, object]:
+def implementation_audit(_auth: InternalAuthDep) -> dict[str, object]:
     audit_path = ARTIFACT_DIR / "implementation_audit.json"
     if audit_path.exists():
         return dict(json.loads(audit_path.read_text(encoding="utf-8")))
@@ -130,7 +196,7 @@ def implementation_audit() -> dict[str, object]:
 
 
 @app.get("/implementation/test-results")
-def implementation_test_results() -> dict[str, str]:
+def implementation_test_results(_auth: InternalAuthDep) -> dict[str, str]:
     unit_path = ARTIFACT_DIR / "unit_test_results.txt"
     realdata_path = ARTIFACT_DIR / "realdata_test_results.txt"
     return {
@@ -148,18 +214,26 @@ def get_prices(
     isin: str,
     session: SessionDep,
     context: Annotated[QueryContext, Query()] = QueryContext.BACKTEST,
+    exchange: Exchange | None = None,
 ) -> PriceResponse:
+    resolved_exchange = _resolve_exchange(session, isin, exchange)
     rows = list(
         session.scalars(
-        select(PriceRecord)
-        .where(PriceRecord.isin == isin)
-        .order_by(PriceRecord.trade_date.asc())
+            select(PriceRecord)
+            .where(PriceRecord.isin == isin)
+            .where(PriceRecord.exchange == resolved_exchange)
+            .order_by(PriceRecord.trade_date.asc())
         ).all()
     )
 
     kept, excluded_count, excluded_range = confidence.filter_records(rows, context)
+    blocked_count = 0
+    blocked_range: tuple[date, date] | None = None
+    if context != QueryContext.AUDIT:
+        kept, blocked_count, blocked_range = publication.filter_records(session, kept)
     return PriceResponse(
         isin=isin,
+        exchange=resolved_exchange,
         context=context,
         records=[
             PriceOut(
@@ -174,8 +248,10 @@ def get_prices(
             )
             for r in kept
         ],
-        excluded_records=excluded_count,
+        excluded_records=excluded_count + blocked_count,
         excluded_date_range=excluded_range,
+        blocked_records=blocked_count,
+        blocked_date_range=blocked_range,
     )
 
 
@@ -183,20 +259,22 @@ def get_prices(
 def get_prices_audit(
     isin: str,
     session: SessionDep,
-    x_api_key: Annotated[str, Header()] = "",
+    _auth: InternalAuthDep,
+    exchange: Exchange | None = None,
 ) -> PriceResponse:
-    if x_api_key != settings.api_key:
-        raise HTTPException(status_code=401, detail="invalid api key")
+    resolved_exchange = _resolve_exchange(session, isin, exchange)
     rows = list(
         session.scalars(
-        select(PriceRecord)
-        .where(PriceRecord.isin == isin)
-        .order_by(PriceRecord.trade_date.asc())
+            select(PriceRecord)
+            .where(PriceRecord.isin == isin)
+            .where(PriceRecord.exchange == resolved_exchange)
+            .order_by(PriceRecord.trade_date.asc())
         ).all()
     )
     kept, excluded_count, excluded_range = confidence.filter_records(rows, QueryContext.AUDIT)
     return PriceResponse(
         isin=isin,
+        exchange=resolved_exchange,
         context=QueryContext.AUDIT,
         records=[
             PriceOut(
@@ -229,3 +307,109 @@ def get_universe(
         "isins": [item.isin for item in entries],
         "count": len(entries),
     }
+
+
+@app.get("/reviews/open", response_model=list[ReviewOut])
+def get_open_reviews(session: SessionDep, _auth: InternalAuthDep) -> list[ReviewOut]:
+    rows = reviews.list_open_reviews(session)
+    return [
+        ReviewOut(
+            id=row.id,
+            category=row.category,
+            isin=row.isin,
+            event_date=row.event_date,
+            reason=row.reason,
+            payload=dict(row.payload or {}),
+            created_at=row.created_at.isoformat(),
+            resolved=row.resolved,
+        )
+        for row in rows
+    ]
+
+
+@app.post("/reviews/{review_id}/resolve")
+def resolve_review(
+    review_id: int,
+    body: ReviewResolutionIn,
+    session: SessionDep,
+    _auth: InternalAuthDep,
+) -> dict[str, object]:
+    result = reviews.resolve_review(
+        session,
+        review_id=review_id,
+        decision=body.decision,
+        reviewer=body.reviewer,
+        notes=body.notes,
+    )
+    return {
+        "review_id": result.review_id,
+        "decision": result.decision.value,
+        "requires_reprocess": result.requires_reprocess,
+        "reprocess_status": result.reprocess_status,
+    }
+
+
+@app.post("/reviews/{review_id}/reprocess-complete")
+def complete_reprocess(
+    review_id: int,
+    body: ReprocessCompletionIn,
+    session: SessionDep,
+    _auth: InternalAuthDep,
+) -> dict[str, object]:
+    payload = reviews.complete_reprocess(
+        session,
+        review_id=review_id,
+        completed_by=body.completed_by,
+        notes=body.notes,
+    )
+    return {"review_id": review_id, "reprocess_status": payload.get("reprocess_status", "UNKNOWN")}
+
+
+@app.get("/publication/status/{isin}", response_model=PublicationStatusOut)
+def publication_status(
+    isin: str,
+    session: SessionDep,
+    _auth: InternalAuthDep,
+    exchange: Exchange | None = None,
+) -> PublicationStatusOut:
+    resolved_exchange = _resolve_exchange(session, isin, exchange)
+    rows = list(
+        session.scalars(
+            select(PriceRecord)
+            .where(PriceRecord.isin == isin)
+            .where(PriceRecord.exchange == resolved_exchange)
+            .order_by(PriceRecord.trade_date.asc())
+        ).all()
+    )
+    blocked_dates: list[date] = []
+    blocks: list[PublicationBlockOut] = []
+    seen_blocks: set[tuple[int, str]] = set()
+    for row in rows:
+        status = publication.status_for_row(session, row)
+        if status.state != PublicationState.BLOCKED:
+            continue
+        blocked_dates.append(row.trade_date)
+        for block in status.blocks:
+            key = (block.review_id, block.category)
+            if key in seen_blocks:
+                continue
+            seen_blocks.add(key)
+            blocks.append(
+                PublicationBlockOut(
+                    review_id=block.review_id,
+                    category=block.category,
+                    scope=block.scope.value,
+                    reason=block.reason,
+                    requires_reprocess=block.requires_reprocess,
+                )
+            )
+    blocked_range = None if not blocked_dates else (min(blocked_dates), max(blocked_dates))
+    state = PublicationState.BLOCKED if blocked_dates else PublicationState.PUBLISHABLE
+    return PublicationStatusOut(
+        isin=isin,
+        exchange=resolved_exchange,
+        blocked_records=len(blocked_dates),
+        blocked_date_range=blocked_range,
+        state=state,
+        blocks=blocks,
+    )

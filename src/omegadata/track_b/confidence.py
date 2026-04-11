@@ -48,7 +48,7 @@ class ConfidenceScorer:
             elif discrepancy > Decimal("0.005"):
                 score -= Decimal("0.25")
         if inputs.cross_validation_failed:
-            score = min(score, Decimal("0.50"))
+            score = Decimal("0.00")
         if inputs.has_medium_ca:
             score -= Decimal("0.15")
         if inputs.has_low_ca:

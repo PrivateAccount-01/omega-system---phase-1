@@ -14,23 +14,38 @@ os.environ["OMEGA_DB_URL"] = "sqlite:///./test_api.db"
 from omegadata.api import main as api_main
 from omegadata.api.main import app
 from omegadata.config import settings
-from omegadata.db.models import CorporateActionStaging, PriceRecord
+from omegadata.db.models import (
+    CorporateActionStaging,
+    InstrumentMaster,
+    ManualReviewQueue,
+    PriceRecord,
+)
 from omegadata.db.session import get_session, init_db
-from omegadata.domain import CorporateActionType, Exchange, InstrumentType
+from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 from omegadata.track_a.download_manager import DownloadManager
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.isin_master import ISINMasterService
 
 
-def test_api_threshold_enforcement() -> None:
-    settings.db_url = "sqlite:///./test_api.db"
+def test_api_threshold_enforcement(tmp_path: Path) -> None:
+    db_path = tmp_path / "api_threshold.db"
+    settings.db_url = f"sqlite:///{db_path}"
     init_db()
     scorer = ConfidenceScorer()
     with get_session() as session:
+        session.execute(delete(InstrumentMaster))
         session.execute(delete(PriceRecord))
         session.add_all(
             [
+                InstrumentMaster(
+                    isin="INE009A01021",
+                    instrument_type=InstrumentType.EQUITY,
+                    primary_exchange=Exchange.NSE,
+                    company_name="Aqylon Nexus Ltd",
+                    listed_date=date(2020, 1, 1),
+                    active=True,
+                ),
                 PriceRecord(
                     isin="INE009A01021",
                     exchange=Exchange.NSE,
@@ -85,11 +100,11 @@ def test_api_threshold_enforcement() -> None:
         )
 
     with TestClient(app) as client:
-        backtest = client.get("/prices/INE009A01021?context=BACKTEST")
+        backtest = client.get("/prices/INE009A01021?context=BACKTEST&exchange=NSE")
         assert backtest.status_code == 200
         assert len(backtest.json()["records"]) >= 1
 
-        live = client.get("/prices/INE009A01021?context=LIVE_SIGNAL")
+        live = client.get("/prices/INE009A01021?context=LIVE_SIGNAL&exchange=NSE")
         assert live.status_code == 200
         assert live.json()["excluded_records"] >= 1
 
@@ -106,11 +121,12 @@ def test_verification_and_terminal_endpoints(tmp_path: Path, monkeypatch) -> Non
     (root / "realdata_test_results.txt").write_text("real ok", encoding="utf-8")
 
     with TestClient(app) as client:
-        audit = client.get("/implementation/audit")
+        headers = {"x-api-key": settings.api_key}
+        audit = client.get("/implementation/audit", headers=headers)
         assert audit.status_code == 200
         assert audit.json()["counts"]["implemented"] == 1
 
-        test_results = client.get("/implementation/test-results")
+        test_results = client.get("/implementation/test-results", headers=headers)
         assert test_results.status_code == 200
         assert "unit ok" in test_results.json()["unit"]
 
@@ -280,7 +296,7 @@ def test_run_track_b_preserves_failed_cross_source_validation_penalty(tmp_path: 
             .where(PriceRecord.trade_date == date(2024, 1, 1))
         )
         assert row is not None
-        assert Decimal(str(row.confidence_score)) == Decimal("0.50")
+        assert Decimal(str(row.confidence_score)) == Decimal("0.00")
 
 
 def test_run_track_b_requires_explicit_market_proxy(tmp_path: Path) -> None:
@@ -359,3 +375,187 @@ def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, m
     assert second.path.exists()
     assert first.manifest_path.exists()
     assert second.manifest_path.exists()
+
+
+def test_prices_endpoint_requires_canonical_exchange_when_primary_missing(tmp_path: Path) -> None:
+    db_path = tmp_path / "api_missing_exchange.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    with get_session() as session:
+        session.execute(delete(PriceRecord))
+        session.execute(delete(InstrumentMaster))
+        session.add(
+            PriceRecord(
+                isin="INE000A01010",
+                exchange=Exchange.NSE,
+                trade_date=date(2024, 1, 1),
+                open_price=Decimal("10"),
+                high_price=Decimal("10"),
+                low_price=Decimal("10"),
+                close_price=Decimal("10"),
+                volume=Decimal("100"),
+                raw_source="nse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            )
+        )
+
+    with TestClient(app) as client:
+        response = client.get("/prices/INE000A01010")
+        assert response.status_code == 400
+        assert "exchange is required" in response.json()["detail"]
+
+
+def test_prices_endpoint_does_not_mix_exchanges_and_defaults_to_primary_exchange(tmp_path: Path) -> None:
+    db_path = tmp_path / "api_canonical_exchange.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    with get_session() as session:
+        session.execute(delete(PriceRecord))
+        session.execute(delete(InstrumentMaster))
+        session.add(
+            InstrumentMaster(
+                isin="INE111A01010",
+                instrument_type=InstrumentType.EQUITY,
+                primary_exchange=Exchange.NSE,
+                company_name="Canon Co",
+                listed_date=date(2020, 1, 1),
+                active=True,
+            )
+        )
+        session.add_all(
+            [
+                PriceRecord(
+                    isin="INE111A01010",
+                    exchange=Exchange.NSE,
+                    trade_date=date(2024, 1, 1),
+                    open_price=Decimal("100"),
+                    high_price=Decimal("101"),
+                    low_price=Decimal("99"),
+                    close_price=Decimal("100"),
+                    volume=Decimal("100"),
+                    raw_source="nse_bhavcopy",
+                    confidence_score=Decimal("1.00"),
+                ),
+                PriceRecord(
+                    isin="INE111A01010",
+                    exchange=Exchange.BSE,
+                    trade_date=date(2024, 1, 1),
+                    open_price=Decimal("200"),
+                    high_price=Decimal("201"),
+                    low_price=Decimal("199"),
+                    close_price=Decimal("200"),
+                    volume=Decimal("100"),
+                    raw_source="bse_bhavcopy",
+                    confidence_score=Decimal("1.00"),
+                ),
+            ]
+        )
+
+    with TestClient(app) as client:
+        response = client.get("/prices/INE111A01010")
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["exchange"] == "NSE"
+        assert len(payload["records"]) == 1
+        assert payload["records"][0]["close_price"] == "100.000000"
+
+
+def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_path: Path) -> None:
+    db_path = tmp_path / "api_publication_workflow.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    with get_session() as session:
+        session.execute(delete(ManualReviewQueue))
+        session.execute(delete(PriceRecord))
+        session.execute(delete(InstrumentMaster))
+        session.add(
+            InstrumentMaster(
+                isin="INE222A01010",
+                instrument_type=InstrumentType.EQUITY,
+                primary_exchange=Exchange.NSE,
+                company_name="Blocked Co",
+                listed_date=date(2020, 1, 1),
+                active=True,
+            )
+        )
+        session.add_all(
+            [
+                PriceRecord(
+                    isin="INE222A01010",
+                    exchange=Exchange.NSE,
+                    trade_date=date(2024, 1, 1),
+                    open_price=Decimal("10"),
+                    high_price=Decimal("10"),
+                    low_price=Decimal("10"),
+                    close_price=Decimal("10"),
+                    volume=Decimal("100"),
+                    raw_source="nse_bhavcopy",
+                    confidence_score=Decimal("1.00"),
+                ),
+                PriceRecord(
+                    isin="INE222A01010",
+                    exchange=Exchange.NSE,
+                    trade_date=date(2024, 1, 2),
+                    open_price=Decimal("11"),
+                    high_price=Decimal("11"),
+                    low_price=Decimal("11"),
+                    close_price=Decimal("11"),
+                    volume=Decimal("100"),
+                    raw_source="nse_bhavcopy",
+                    confidence_score=Decimal("1.00"),
+                ),
+            ]
+        )
+        session.add(
+            ManualReviewQueue(
+                category="CORPORATE_ACTION_REQUIRED_FIELDS",
+                isin="INE222A01010",
+                event_date=date(2024, 1, 1),
+                reason="Missing required fields in corporate action payload",
+                payload={
+                    "requires_reprocess": True,
+                    "block_scope": "FORWARD_SERIES",
+                    "reprocess_status": "REVIEW_PENDING",
+                },
+                resolved=False,
+            )
+        )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        prices = client.get("/prices/INE222A01010?exchange=NSE&context=BACKTEST")
+        assert prices.status_code == 200
+        assert prices.json()["records"] == []
+        assert prices.json()["blocked_records"] == 2
+
+        status = client.get("/publication/status/INE222A01010?exchange=NSE", headers=headers)
+        assert status.status_code == 200
+        assert status.json()["state"] == PublicationState.BLOCKED.value
+        assert status.json()["blocked_records"] == 2
+
+        open_reviews = client.get("/reviews/open", headers=headers)
+        assert open_reviews.status_code == 200
+        review_id = open_reviews.json()[0]["id"]
+
+        resolution = client.post(
+            f"/reviews/{review_id}/resolve",
+            headers=headers,
+            json={"decision": "REMEDIATED", "reviewer": "ops", "notes": "fixed input and replay queued"},
+        )
+        assert resolution.status_code == 200
+        assert resolution.json()["reprocess_status"] == "PENDING"
+
+        still_blocked = client.get("/publication/status/INE222A01010?exchange=NSE", headers=headers)
+        assert still_blocked.json()["blocked_records"] == 2
+
+        completed = client.post(
+            f"/reviews/{review_id}/reprocess-complete",
+            headers=headers,
+            json={"completed_by": "ops", "notes": "full replay complete"},
+        )
+        assert completed.status_code == 200
+
+        released = client.get("/publication/status/INE222A01010?exchange=NSE", headers=headers)
+        assert released.json()["state"] == PublicationState.PUBLISHABLE.value
+        prices_after = client.get("/prices/INE222A01010?exchange=NSE&context=BACKTEST")
+        assert len(prices_after.json()["records"]) == 2

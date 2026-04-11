@@ -1,0 +1,45 @@
+{
+  "version": "2026-04-11",
+  "policies": {
+    "CROSS_SOURCE_VALIDATION_FAIL": {
+      "blocks_publication": true,
+      "scope": "RECORD",
+      "requires_reprocess": false
+    },
+    "SYSTEMATIC_DISAGREEMENT": {
+      "blocks_publication": true,
+      "scope": "INSTRUMENT",
+      "requires_reprocess": false
+    },
+    "CORPORATE_ACTION_REQUIRED_FIELDS": {
+      "blocks_publication": true,
+      "scope": "FORWARD_SERIES",
+      "requires_reprocess": true
+    },
+    "CORPORATE_ACTION_UNMATCHED": {
+      "blocks_publication": true,
+      "scope": "FORWARD_SERIES",
+      "requires_reprocess": true
+    },
+    "CORPORATE_ACTION_SOURCE_GAP": {
+      "blocks_publication": true,
+      "scope": "FORWARD_SERIES",
+      "requires_reprocess": true
+    },
+    "CORPORATE_ACTION_TYPE_FAIL": {
+      "blocks_publication": true,
+      "scope": "FORWARD_SERIES",
+      "requires_reprocess": true
+    },
+    "CORPORATE_ACTION_TYPE_MISMATCH": {
+      "blocks_publication": true,
+      "scope": "FORWARD_SERIES",
+      "requires_reprocess": true
+    },
+    "CORPORATE_ACTION_PARAMETER_MISMATCH": {
+      "blocks_publication": true,
+      "scope": "FORWARD_SERIES",
+      "requires_reprocess": true
+    }
+  }
+}

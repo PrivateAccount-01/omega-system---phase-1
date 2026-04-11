@@ -228,3 +228,37 @@ def test_unmatched_staging_older_than_48h_is_escalated(db_session) -> None:
         select(ManualReviewQueue).where(ManualReviewQueue.category == "CORPORATE_ACTION_UNMATCHED")
     )
     assert review is not None
+
+
+def test_validator_treats_bse_only_as_valid_bse_candidate(db_session) -> None:
+    db_session.add_all(
+        [
+            CorporateActionStaging(
+                source=Exchange.NSE,
+                isin="INE009A01021",
+                action_type=CorporateActionType.RIGHTS,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 2),
+                record_date=date(2026, 4, 2),
+                payload={"isin": "INE009A01021", "issue_price": "100", "rights_ratio_numerator": "1", "rights_ratio_denominator": "4"},
+                matched=False,
+            ),
+            CorporateActionStaging(
+                source=Exchange.BSE_ONLY,
+                isin="INE009A01021",
+                action_type=CorporateActionType.RIGHTS,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 2),
+                record_date=date(2026, 4, 2),
+                payload={"isin": "INE009A01021", "issue_price": "100", "rights_ratio_numerator": "1", "rights_ratio_denominator": "4"},
+                matched=False,
+            ),
+        ]
+    )
+
+    outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
+    assert any(outcome.result == ValidationResult.PASS for outcome in outcomes)
+    coverage_warn = db_session.scalar(
+        select(ValidationAuditLog).where(ValidationAuditLog.field_compared == "corporate_action_coverage")
+    )
+    assert coverage_warn is None

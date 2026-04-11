@@ -4,17 +4,17 @@ from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
 
-from sqlalchemy import and_, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from omegadata.db.models import (
-    ConfirmedCorporateAction,
     CorporateActionStaging,
-    ManualReviewQueue,
     PriceRecord,
     ValidationAuditLog,
 )
 from omegadata.domain import Exchange, ValidationResult
+from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
+from omegadata.track_b.manual_review import ManualReviewService
 
 
 @dataclass(frozen=True)
@@ -26,6 +26,10 @@ class ValidationOutcome:
 
 
 class CrossSourceValidator:
+    def __init__(self) -> None:
+        self.matcher = CorporateActionMatcher()
+        self.review_service = ManualReviewService()
+
     @staticmethod
     def _audit_exists(
         session: Session,
@@ -86,7 +90,7 @@ class CrossSourceValidator:
                 )
                 outcomes.append(outcome)
                 if outcome.result == ValidationResult.FAIL:
-                    nse.confidence_score = min(Decimal(str(nse.confidence_score)), Decimal("0.50"))
+                    nse.confidence_score = Decimal("0.00")
             signed_diffs.append(Decimal(str(nse.close_price)) - Decimal(str(bse.close_price)))
 
         self._detect_systematic_disagreement(session, isin, signed_diffs)
@@ -160,84 +164,6 @@ class CrossSourceValidator:
     def validate_corporate_actions(self, session: Session, isin: str) -> list[ValidationOutcome]:
         outcomes: list[ValidationOutcome] = []
 
-        # Keep strict confirmed-pair validation for cases where both sources are confirmed.
-        confirmed_rows = session.scalars(
-            select(ConfirmedCorporateAction)
-            .where(ConfirmedCorporateAction.isin == isin)
-            .where(ConfirmedCorporateAction.superseded.is_(False))
-            .order_by(ConfirmedCorporateAction.ex_date.asc())
-        ).all()
-        nse_confirmed = [row for row in confirmed_rows if row.source_preference == Exchange.NSE]
-        for confirmed_row in nse_confirmed:
-            confirmed_pair = session.scalar(
-                select(ConfirmedCorporateAction).where(
-                    and_(
-                        ConfirmedCorporateAction.isin == confirmed_row.isin,
-                        ConfirmedCorporateAction.ex_date == confirmed_row.ex_date,
-                        ConfirmedCorporateAction.source_preference == Exchange.BSE,
-                        ConfirmedCorporateAction.superseded.is_(False),
-                    )
-                )
-            )
-            if confirmed_pair is None:
-                continue
-
-            if confirmed_row.action_type != confirmed_pair.action_type:
-                data_date = (
-                    confirmed_row.ex_date
-                    or confirmed_row.announcement_date
-                    or confirmed_row.record_date
-                )
-                if data_date is None:
-                    continue
-                outcomes.append(
-                    self._persist_categorical_result(
-                        session=session,
-                        source_1="NSE",
-                        source_2="BSE",
-                        isin=confirmed_row.isin,
-                        data_date=data_date,
-                        field="action_type",
-                        left=confirmed_row.action_type.value,
-                        right=confirmed_pair.action_type.value,
-                        result=ValidationResult.FAIL,
-                        diff_pct=Decimal("1"),
-                        tolerance=Decimal("0"),
-                        notes="Corporate action type mismatch across confirmed sources",
-                    )
-                )
-                continue
-
-            for key, left_val in confirmed_row.parameters.items():
-                right_val = confirmed_pair.parameters.get(key)
-                if right_val in (None, "") or left_val in (None, ""):
-                    continue
-                try:
-                    left = Decimal(str(left_val))
-                    right = Decimal(str(right_val))
-                except Exception:
-                    continue
-                data_date = (
-                    confirmed_row.ex_date
-                    or confirmed_row.announcement_date
-                    or confirmed_row.record_date
-                )
-                if data_date is None:
-                    continue
-                outcomes.append(
-                    self._compare_numeric(
-                        session=session,
-                        source_1="NSE",
-                        source_2="BSE",
-                        isin=confirmed_row.isin,
-                        data_date=data_date,
-                        field=key,
-                        left=left,
-                        right=right,
-                        tolerance=Decimal("0.01"),
-                    )
-                )
-
         nse_rows = session.scalars(
             select(CorporateActionStaging)
             .where(CorporateActionStaging.isin == isin)
@@ -247,41 +173,75 @@ class CrossSourceValidator:
         bse_rows = session.scalars(
             select(CorporateActionStaging)
             .where(CorporateActionStaging.isin == isin)
-            .where(CorporateActionStaging.source == Exchange.BSE)
+            .where(CorporateActionStaging.source.in_([Exchange.BSE, Exchange.BSE_ONLY]))
             .order_by(CorporateActionStaging.ex_date.asc())
         ).all()
 
         if not nse_rows:
             return outcomes
 
-        for staged_row in nse_rows:
+        pairs, unmatched_nse, _unmatched_bse = self.matcher.match_pairs(list(nse_rows), list(bse_rows))
+
+        for staged_row in unmatched_nse:
             nse_date = self._event_date(staged_row)
             if nse_date is None:
                 continue
-            candidates = [bse for bse in bse_rows if self._event_date(bse) is not None]
-            if not candidates:
-                outcomes.append(
-                    self._persist_categorical_result(
-                        session=session,
-                        source_1="NSE",
-                        source_2="BSE",
-                        isin=isin,
-                        data_date=nse_date,
-                        field="corporate_action_coverage",
-                        left="present",
-                        right="missing",
-                        result=ValidationResult.WARN,
-                        diff_pct=Decimal("1"),
-                        tolerance=Decimal("0"),
-                        notes="No BSE corporate action candidate for NSE action",
-                    )
+            anchor_date = nse_date
+            nearby_candidates = [
+                candidate
+                for candidate in bse_rows
+                if self._event_date(candidate) is not None
+                and self._date_gap_days(anchor_date, self._event_date(candidate)) <= 5
+            ]
+            if nearby_candidates:
+                nearest = min(
+                    nearby_candidates,
+                    key=lambda candidate: self._date_gap_days(
+                        anchor_date,
+                        self._event_date(candidate) or anchor_date,
+                    ),
                 )
-                continue
-
-            staging_pair = min(
-                candidates,
-                key=lambda b: self._date_gap_days(nse_date, self._event_date(b)),
+                if nearest.action_type != staged_row.action_type:
+                    outcomes.append(
+                        self._persist_categorical_result(
+                            session=session,
+                            source_1="NSE",
+                            source_2="BSE",
+                            isin=isin,
+                            data_date=anchor_date,
+                            field="action_type",
+                            left=staged_row.action_type.value,
+                            right=nearest.action_type.value,
+                            result=ValidationResult.FAIL,
+                            diff_pct=Decimal("1"),
+                            tolerance=Decimal("0"),
+                            notes="Corporate action type mismatch across nearby source candidates",
+                        )
+                    )
+                    continue
+            outcomes.append(
+                self._persist_categorical_result(
+                    session=session,
+                    source_1="NSE",
+                    source_2="BSE",
+                    isin=isin,
+                    data_date=anchor_date,
+                    field="corporate_action_coverage",
+                    left="present",
+                    right="missing",
+                    result=ValidationResult.WARN,
+                    diff_pct=Decimal("1"),
+                    tolerance=Decimal("0"),
+                    notes="No BSE corporate action candidate for NSE action",
+                )
             )
+
+        for pair in pairs:
+            staged_row = pair.nse
+            staging_pair = pair.bse
+            nse_date = self._event_date(staged_row)
+            if nse_date is None:
+                continue
             pair_date = self._event_date(staging_pair)
             assert pair_date is not None
 
@@ -355,7 +315,7 @@ class CrossSourceValidator:
         return outcomes
 
     @staticmethod
-    def _event_date(row: CorporateActionStaging | ConfirmedCorporateAction) -> date | None:
+    def _event_date(row: CorporateActionStaging) -> date | None:
         return row.ex_date or row.announcement_date or row.record_date
 
     @staticmethod
@@ -419,14 +379,13 @@ class CrossSourceValidator:
         session.add(audit)
 
         if result == ValidationResult.FAIL:
-            session.add(
-                ManualReviewQueue(
-                    category="CROSS_SOURCE_VALIDATION_FAIL",
-                    isin=isin,
-                    event_date=data_date,
-                    reason=f"{field} exceeds 2x tolerance",
-                    payload={"left": str(left), "right": str(right), "diff_pct": str(diff_pct)},
-                )
+            self.review_service.queue_review(
+                session,
+                category="CROSS_SOURCE_VALIDATION_FAIL",
+                isin=isin,
+                event_date=data_date,
+                reason=f"{field} exceeds 2x tolerance",
+                payload={"left": str(left), "right": str(right), "diff_pct": str(diff_pct), "field": field},
             )
         return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
@@ -476,14 +435,13 @@ class CrossSourceValidator:
         session.add(audit)
 
         if result == ValidationResult.FAIL:
-            session.add(
-                ManualReviewQueue(
-                    category="CORPORATE_ACTION_TYPE_FAIL",
-                    isin=isin,
-                    event_date=data_date,
-                    reason=notes,
-                    payload={"left": left, "right": right, "field": field},
-                )
+            self.review_service.queue_review(
+                session,
+                category="CORPORATE_ACTION_TYPE_FAIL",
+                isin=isin,
+                event_date=data_date,
+                reason=notes,
+                payload={"left": left, "right": right, "field": field},
             )
 
         return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
@@ -499,12 +457,11 @@ class CrossSourceValidator:
         last_five = signed_diffs[-5:]
         same_sign = all(x > 0 for x in last_five) or all(x < 0 for x in last_five)
         if same_sign:
-            session.add(
-                ManualReviewQueue(
-                    category="SYSTEMATIC_DISAGREEMENT",
-                    isin=isin,
-                    event_date=None,
-                    reason="Consecutive directional disagreement across five observations",
-                    payload={"last_five": [str(x) for x in last_five]},
-                )
+            self.review_service.queue_review(
+                session,
+                category="SYSTEMATIC_DISAGREEMENT",
+                isin=isin,
+                event_date=None,
+                reason="Consecutive directional disagreement across five observations",
+                payload={"last_five": [str(x) for x in last_five]},
             )

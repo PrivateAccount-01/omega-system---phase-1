@@ -5,9 +5,8 @@ from decimal import Decimal
 
 from sqlalchemy import select
 
-from omegadata.db.models import ConfirmedCorporateAction, ManualReviewQueue, PriceRecord
+from omegadata.db.models import CorporateActionStaging, ManualReviewQueue, PriceRecord
 from omegadata.domain import (
-    ConfidenceLevel,
     CorporateActionType,
     DiscontinuityCategory,
     Exchange,
@@ -99,27 +98,25 @@ def test_cross_source_price_validation_warn_and_fail(db_session) -> None:
 def test_cross_source_ca_type_mismatch_creates_review(db_session) -> None:
     db_session.add_all(
         [
-            ConfirmedCorporateAction(
+            CorporateActionStaging(
+                source=Exchange.NSE,
                 isin="INE009A01021",
                 action_type=CorporateActionType.BONUS,
-                confidence=ConfidenceLevel.HIGH,
                 announcement_date=date(2024, 1, 1),
                 ex_date=date(2024, 1, 2),
                 record_date=date(2024, 1, 2),
-                parameters={"bonus_ratio_numerator": "1", "bonus_ratio_denominator": "1"},
-                source_preference=Exchange.NSE,
-                superseded=False,
+                payload={"bonus_ratio_numerator": "1", "bonus_ratio_denominator": "1"},
+                matched=False,
             ),
-            ConfirmedCorporateAction(
+            CorporateActionStaging(
+                source=Exchange.BSE,
                 isin="INE009A01021",
                 action_type=CorporateActionType.SPLIT,
-                confidence=ConfidenceLevel.HIGH,
                 announcement_date=date(2024, 1, 1),
                 ex_date=date(2024, 1, 2),
                 record_date=date(2024, 1, 2),
-                parameters={"old_face_value": "10", "new_face_value": "5"},
-                source_preference=Exchange.BSE,
-                superseded=False,
+                payload={"old_face_value": "10", "new_face_value": "5"},
+                matched=False,
             ),
         ]
     )

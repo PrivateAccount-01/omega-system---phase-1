@@ -25,20 +25,33 @@ def _price(
     volume: str = "100",
 ) -> None:
     close_dec = Decimal(close)
-    db_session.add(
-        PriceRecord(
-            isin=isin,
-            exchange=exchange,
-            trade_date=trade_date,
-            open_price=close_dec,
-            high_price=close_dec,
-            low_price=close_dec,
-            close_price=close_dec,
-            volume=Decimal(volume),
-            raw_source="nse_bhavcopy" if exchange == Exchange.NSE else "bse_stockreach_graph",
-            confidence_score=Decimal("1.00"),
-        )
+    existing = db_session.scalar(
+        select(PriceRecord)
+        .where(PriceRecord.isin == isin)
+        .where(PriceRecord.exchange == exchange)
+        .where(PriceRecord.trade_date == trade_date)
     )
+    if existing is None:
+        db_session.add(
+            PriceRecord(
+                isin=isin,
+                exchange=exchange,
+                trade_date=trade_date,
+                open_price=close_dec,
+                high_price=close_dec,
+                low_price=close_dec,
+                close_price=close_dec,
+                volume=Decimal(volume),
+                raw_source="nse_bhavcopy" if exchange == Exchange.NSE else "bse_stockreach_graph",
+                confidence_score=Decimal("1.00"),
+            )
+        )
+        return
+    existing.open_price = close_dec
+    existing.high_price = close_dec
+    existing.low_price = close_dec
+    existing.close_price = close_dec
+    existing.volume = Decimal(volume)
 
 
 def _action(

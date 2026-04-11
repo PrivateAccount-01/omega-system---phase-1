@@ -73,3 +73,20 @@ class QueryContext(StrEnum):
     BACKTEST = "BACKTEST"
     RESEARCH = "RESEARCH"
     AUDIT = "AUDIT"
+
+
+class ReviewBlockScope(StrEnum):
+    RECORD = "RECORD"
+    FORWARD_SERIES = "FORWARD_SERIES"
+    INSTRUMENT = "INSTRUMENT"
+
+
+class ReviewDecision(StrEnum):
+    REMEDIATED = "REMEDIATED"
+    FALSE_POSITIVE = "FALSE_POSITIVE"
+    OVERRIDE_APPROVED = "OVERRIDE_APPROVED"
+
+
+class PublicationState(StrEnum):
+    PUBLISHABLE = "PUBLISHABLE"
+    BLOCKED = "BLOCKED"
