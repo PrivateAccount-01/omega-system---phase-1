@@ -1,0 +1,41 @@
+﻿{
+    "captured_at":  "2026-04-07T19:13:16",
+    "api":  {
+                "health":  {
+                               "status":  "ok"
+                           },
+                "slo":  {
+                            "window_minutes":  5,
+                            "total_requests":  21,
+                            "availability":  1.0,
+                            "p95_latency_ms":  13.201009991462342,
+                            "availability_target":  0.995,
+                            "p95_target_ms":  750.0,
+                            "availability_breach":  false,
+                            "latency_breach":  false
+                        },
+                "audit_counts":  {
+                                     "implemented":  13,
+                                     "partial":  1,
+                                     "missing":  0
+                                 },
+                "audit_severity":  {
+                                       "critical":  1,
+                                       "high":  3,
+                                       "medium":  2,
+                                       "low":  0,
+                                       "none":  8
+                                   }
+            },
+    "db":  {
+               "counts":  {
+                              "price_records":  0,
+                              "confirmed_corporate_actions":  0,
+                              "discontinuity_events":  0,
+                              "validation_logs":  0
+                          },
+               "sample_isins":  [
+
+                                ]
+           }
+}

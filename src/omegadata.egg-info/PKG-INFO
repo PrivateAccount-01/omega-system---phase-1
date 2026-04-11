@@ -1,0 +1,106 @@
+Metadata-Version: 2.4
+Name: omegadata
+Version: 0.1.0
+Summary: OmegaData Bloomberg-grade market data infrastructure for Indian equities
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: uvicorn[standard]>=0.30.0
+Requires-Dist: pydantic>=2.9.0
+Requires-Dist: pydantic-settings>=2.4.0
+Requires-Dist: sqlalchemy>=2.0.32
+Requires-Dist: psycopg[binary]>=3.2.9
+Requires-Dist: alembic>=1.13.2
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: tenacity>=9.0.0
+Requires-Dist: pandas>=2.2.2
+Requires-Dist: pyarrow>=17.0.0
+Requires-Dist: numpy>=2.1.0
+Requires-Dist: prometheus-client>=0.20.0
+Requires-Dist: redis>=5.0.8
+Requires-Dist: confluent-kafka>=2.5.3
+Requires-Dist: clickhouse-connect>=0.7.18
+Requires-Dist: python-dateutil>=2.9.0.post0
+Requires-Dist: pendulum>=3.0.0
+Requires-Dist: orjson>=3.10.7
+Requires-Dist: python-multipart>=0.0.9
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3.2; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.24.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0.0; extra == "dev"
+Requires-Dist: ruff>=0.6.4; extra == "dev"
+Requires-Dist: mypy>=1.11.2; extra == "dev"
+Requires-Dist: types-python-dateutil>=2.9.0.20240316; extra == "dev"
+
+# OmegaData
+
+OmegaData is the production data layer for Indian equity market data with strict specification-driven behavior for corporate action handling, confidence scoring, point-in-time universes, and cross-source validation.
+
+Default transactional backend is PostgreSQL and schema lifecycle is managed through Alembic migrations.
+
+## Build Principles
+
+- Track A: infrastructure and operational pipeline components.
+- Track B: deterministic financial data correctness components.
+- Real data only for strategy-quality integration checks.
+- No hidden logic: all critical transformations are auditable.
+
+## Quick Start
+
+1. Create a Python 3.11+ environment.
+2. Install dependencies:
+
+```bash
+pip install -e .[dev]
+```
+
+3. Run unit tests:
+
+```bash
+pytest tests/unit
+```
+
+4. Run real-data integration tests (network required):
+
+```bash
+pytest -m realdata tests/integration
+```
+
+5. Run API server:
+
+```bash
+uvicorn omegadata.api.main:app --reload
+```
+
+6. Apply database migrations:
+
+```bash
+alembic upgrade head
+```
+
+7. Start local infrastructure stack:
+
+```bash
+docker compose up -d
+```
+
+## Structure
+
+- `src/omegadata/track_a`: ingestion, orchestration, storage, infra wiring.
+- `src/omegadata/track_b`: ISIN master, CA system, adjustment engine, discontinuity, universe, confidence, validation.
+- `src/omegadata/pipelines`: sequential integration pipeline.
+- `airflow/dags`: scheduler definitions.
+- `infra/clickhouse`: DDL for analytics warehouse.
+- `alembic`: PostgreSQL schema migrations.
+- `infra/monitoring`: Prometheus, Alertmanager, and Grafana provisioning.
+
+## Operations
+
+- Prometheus metrics endpoint: `GET /metrics`
+- SLO status endpoint: `GET /slo/status`
+- Monthly quality report DAG: `omegadata_monthly_quality_report`
+- Manual monthly report generation:
+
+```bash
+python scripts/run_monthly_quality_report.py --as-of 2026-04-07
+```

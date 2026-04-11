@@ -1,0 +1,95 @@
+from __future__ import annotations
+
+from datetime import date
+
+from sqlalchemy import select
+
+from omegadata.db.models import ManualReviewQueue
+from omegadata.domain import CorporateActionType, Exchange
+from omegadata.track_b.corporate_actions import CorporateActionService
+
+
+def test_dual_source_high_confidence_confirmation(db_session) -> None:
+    svc = CorporateActionService()
+    payload = {
+        "isin": "INE009A01021",
+        "ex_date": "2018-06-14",
+        "record_date": "2018-06-16",
+        "bonus_ratio_numerator": "1",
+        "bonus_ratio_denominator": "1",
+        "board_meeting_date": "2018-04-13",
+    }
+    svc.add_staging_record(
+        db_session,
+        Exchange.NSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        payload,
+    )
+    svc.add_staging_record(
+        db_session,
+        Exchange.BSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        payload,
+    )
+    results = svc.run_daily_confirmation(db_session, as_of=date(2018, 6, 14))
+    assert len(results) == 1
+    assert results[0].confidence.value == "HIGH"
+
+
+def test_required_fields_missing_goes_to_review(db_session) -> None:
+    svc = CorporateActionService()
+    svc.add_staging_record(
+        db_session,
+        Exchange.NSE,
+        "INE009A01021",
+        CorporateActionType.RIGHTS,
+        date(2020, 1, 1),
+        date(2020, 2, 1),
+        date(2020, 2, 2),
+        payload={"isin": "INE009A01021", "ex_date": "2020-02-01"},
+    )
+    svc.run_daily_confirmation(db_session, as_of=date(2020, 2, 3))
+    review = db_session.scalar(select(ManualReviewQueue))
+    assert review is not None
+    assert review.category == "CORPORATE_ACTION_REQUIRED_FIELDS"
+
+
+def test_immutability_correction(db_session) -> None:
+    svc = CorporateActionService()
+    payload = {
+        "isin": "INE009A01021",
+        "ex_date": "2018-06-14",
+        "record_date": "2018-06-16",
+        "bonus_ratio_numerator": "1",
+        "bonus_ratio_denominator": "1",
+        "board_meeting_date": "2018-04-13",
+    }
+    stage = svc.add_staging_record(
+        db_session,
+        Exchange.NSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        payload,
+    )
+    svc.run_daily_confirmation(db_session, as_of=date(2018, 6, 14))
+    stage  # keep linter happy with explicit use in this test context
+    active = svc.get_active_actions(db_session, "INE009A01021")
+    assert len(active) == 1
+    corrected = svc.apply_correction(
+        db_session,
+        original_id=active[0].id,
+        corrected_parameters={**payload, "bonus_ratio_denominator": "2"},
+    )
+    db_session.flush()
+    assert corrected.supersedes_id == active[0].id

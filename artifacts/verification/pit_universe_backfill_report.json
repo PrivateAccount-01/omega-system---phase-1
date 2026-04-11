@@ -1,0 +1,47 @@
+{
+  "seed_pack": "tests\\fixtures\\pit_universe_seed_pack.json",
+  "db_url": "sqlite:///./pit_universe_test_clean.db",
+  "loaded_rows": 70,
+  "snapshot_validations": [
+    {
+      "index_name": "NIFTY50",
+      "as_of_date": "2015-10-31",
+      "matched": true,
+      "expected_count": 50,
+      "actual_count": 50,
+      "source": "SEBI Bulletin November 2015 Table 26"
+    },
+    {
+      "index_name": "NIFTY50",
+      "as_of_date": "2019-11-30",
+      "matched": true,
+      "expected_count": 50,
+      "actual_count": 50,
+      "source": "SEBI Bulletin December 2019 Table 25"
+    },
+    {
+      "index_name": "NIFTY50",
+      "as_of_date": "2020-03-19",
+      "matched": true,
+      "expected_count": 50,
+      "actual_count": 50,
+      "source": "NSE Indices press release replacing Yes Bank with Shree Cement"
+    },
+    {
+      "index_name": "NIFTY50",
+      "as_of_date": "2022-05-31",
+      "matched": true,
+      "expected_count": 50,
+      "actual_count": 50,
+      "source": "SEBI Bulletin June 2022 Table 25"
+    },
+    {
+      "index_name": "NIFTY50",
+      "as_of_date": "2025-02-28",
+      "matched": true,
+      "expected_count": 50,
+      "actual_count": 50,
+      "source": "SEBI Bulletin Annexure Tables March 2025 Table 25"
+    }
+  ]
+}

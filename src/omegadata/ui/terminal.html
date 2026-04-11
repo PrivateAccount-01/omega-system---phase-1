@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OmegaData Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/terminal-assets/terminal.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <header class="topbar reveal">
+      <div class="brand">OMEGADATA TERMINAL</div>
+      <div class="topmeta">
+        <span class="pill">TRACK A+B</span>
+        <span class="pill">REAL DATA</span>
+        <span class="live-dot" id="liveDot"></span>
+      </div>
+    </header>
+
+    <main class="grid-layout">
+      <section class="panel reveal" id="snapshotPanel">
+        <h2>Implementation Snapshot</h2>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="kpi-label">Implemented</div>
+            <div class="kpi-value" id="implementedCount">-</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Partial</div>
+            <div class="kpi-value warning" id="partialCount">-</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Critical Gaps</div>
+            <div class="kpi-value danger" id="criticalCount">-</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">High Gaps</div>
+            <div class="kpi-value caution" id="highCount">-</div>
+          </div>
+        </div>
+        <div class="note" id="generatedAt">Audit timestamp: loading...</div>
+      </section>
+
+      <section class="panel reveal" id="sloPanel">
+        <h2>SLO Pulse</h2>
+        <div class="slo-grid">
+          <div>
+            <div class="kpi-label">Availability</div>
+            <div class="kpi-value" id="availabilityVal">-</div>
+          </div>
+          <div>
+            <div class="kpi-label">P95 Latency</div>
+            <div class="kpi-value" id="latencyVal">-</div>
+          </div>
+          <div>
+            <div class="kpi-label">Window</div>
+            <div class="kpi-value" id="windowVal">-</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel wide reveal" id="matrixPanel">
+        <h2>Track Compliance Matrix</h2>
+        <table class="terminal-table">
+          <thead>
+            <tr>
+              <th>Track</th>
+              <th>Component</th>
+              <th>Status</th>
+              <th>Severity</th>
+              <th>Open Gaps</th>
+            </tr>
+          </thead>
+          <tbody id="matrixBody"></tbody>
+        </table>
+      </section>
+
+      <section class="panel reveal" id="unitPanel">
+        <h2>Unit Test Tape</h2>
+        <pre id="unitResult" class="console-block">Loading unit test evidence...</pre>
+      </section>
+
+      <section class="panel reveal" id="realPanel">
+        <h2>Real Data Tape</h2>
+        <pre id="realResult" class="console-block">Loading real-data evidence...</pre>
+      </section>
+
+      <section class="panel wide reveal" id="riskPanel">
+        <h2>Verification Commentary</h2>
+        <ul class="risk-list" id="riskList"></ul>
+      </section>
+    </main>
+
+    <script src="/terminal-assets/terminal.js"></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-04-06",
+  "before": {
+    "price_records": 26876,
+    "ca_staging": 124,
+    "ca_confirmed": 125,
+    "validations": 60
+  },
+  "after_first": {
+    "price_records": 26876,
+    "ca_staging": 124,
+    "ca_confirmed": 125,
+    "validations": 60
+  },
+  "after_second": {
+    "price_records": 26876,
+    "ca_staging": 124,
+    "ca_confirmed": 125,
+    "validations": 60
+  },
+  "delta_first": {
+    "price_records": 0,
+    "ca_staging": 0,
+    "ca_confirmed": 0,
+    "validations": 0
+  },
+  "delta_second": {
+    "price_records": 0,
+    "ca_staging": 0,
+    "ca_confirmed": 0,
+    "validations": 0
+  },
+  "run1": {
+    "ingest_paths": [
+      "data\\raw\\nse_equity_bhavcopy\\year=2026\\month=04\\20260406.zip",
+      "data\\raw\\nse_corporate_actions\\year=2026\\month=04\\20260406.bin",
+      "data\\raw\\bse_corporate_actions\\year=2026\\month=04\\20260406.bin",
+      "data\\raw\\nse_fii_dii\\year=2026\\month=04\\20260406.bin",
+      "data\\raw\\india_vix\\year=2026\\month=04\\20260406.bin"
+    ],
+    "confirmed_actions": 0,
+    "adjusted_rows": 26876,
+    "discontinuities": 141,
+    "validations": 3
+  },
+  "run2": {
+    "ingest_paths": [
+      "data\\raw\\nse_equity_bhavcopy\\year=2026\\month=04\\20260406.zip",
+      "data\\raw\\nse_corporate_actions\\year=2026\\month=04\\20260406.bin",
+      "data\\raw\\bse_corporate_actions\\year=2026\\month=04\\20260406.bin",
+      "data\\raw\\nse_fii_dii\\year=2026\\month=04\\20260406.bin",
+      "data\\raw\\india_vix\\year=2026\\month=04\\20260406.bin"
+    ],
+    "confirmed_actions": 0,
+    "adjusted_rows": 26876,
+    "discontinuities": 141,
+    "validations": 3
+  }
+}

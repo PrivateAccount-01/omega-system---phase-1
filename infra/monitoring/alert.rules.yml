@@ -1,0 +1,29 @@
+groups:
+  - name: omegadata-slo
+    rules:
+      - alert: OmegaDataAPIAvailabilityBreach
+        expr: (1 - (sum(rate(omegadata_api_requests_total{status=~"5.."}[5m])) / sum(rate(omegadata_api_requests_total[5m])))) < 0.995
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "OmegaData API availability below SLO"
+          description: "5-minute availability is below 99.5%."
+
+      - alert: OmegaDataP95LatencyBreach
+        expr: histogram_quantile(0.95, sum(rate(omegadata_api_request_latency_seconds_bucket[5m])) by (le)) > 0.75
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "OmegaData API p95 latency above SLO"
+          description: "5-minute p95 latency exceeded 750ms."
+
+      - alert: OmegaDataFailoverSpike
+        expr: increase(omegadata_download_failover_total[30m]) > 10
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "NSE source failover spike"
+          description: "Download failover switched to alternate official URLs more than 10 times in 30m."

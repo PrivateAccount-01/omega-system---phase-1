@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-04-08T13:17:08.719466+00:00",
+  "pipeline_summary": {
+    "successful_days": 11,
+    "failed_days": 9,
+    "total_confirmed_actions": 1,
+    "total_adjusted_rows": 227230,
+    "total_discontinuities": 1489,
+    "total_validations": 33
+  },
+  "pipeline_failed_days": 9,
+  "pipeline_failure_examples": [
+    {
+      "as_of": "2026-03-21",
+      "error": "Unable to download NSE_EQUITY_BHAVCOPY after 6 attempts; last error: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1081)"
+    },
+    {
+      "as_of": "2026-03-22",
+      "error": "Unable to download NSE_EQUITY_BHAVCOPY after 6 attempts; last error: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1081)"
+    },
+    {
+      "as_of": "2026-03-26",
+      "error": "Unable to download NSE_EQUITY_BHAVCOPY after 6 attempts; last error: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1081)"
+    }
+  ],
+  "idempotency": {
+    "delta_first": {
+      "price_records": 0,
+      "ca_staging": 0,
+      "ca_confirmed": 0,
+      "validations": 0
+    },
+    "delta_second": {
+      "price_records": 0,
+      "ca_staging": 0,
+      "ca_confirmed": 0,
+      "validations": 0
+    },
+    "run1_validations": 3,
+    "run2_validations": 3
+  },
+  "trackb_coverage": {
+    "percent": 84.75894245723173,
+    "covered_lines": 545,
+    "num_statements": 643
+  },
+  "api_stress": {
+    "elapsed_ms": 12910.05549998954,
+    "results": {
+      "http://127.0.0.1:8000/health": {
+        "ok": 500,
+        "fail": 0,
+        "max_ms": 159.5204000477679
+      },
+      "http://127.0.0.1:8000/slo/status": {
+        "ok": 500,
+        "fail": 0,
+        "max_ms": 61.533300031442195
+      },
+      "http://127.0.0.1:8000/implementation/audit": {
+        "ok": 500,
+        "fail": 0,
+        "max_ms": 138.18690000334755
+      }
+    }
+  },
+  "realdata_tests": "...                                                                      [100%]\r\n3 passed in 2.79s\r\n",
+  "unit_tests": "..............................                                           [100%]\r\n============================== warnings summary ===============================\r\nsrc\\omegadata\\api\\main.py:61\r\n  E:\\omega system - phase 1\\src\\omegadata\\api\\main.py:61: DeprecationWarning: \r\n          on_event is deprecated, use lifespan event handlers instead.\r\n  \r\n          Read more about it in the\r\n          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).\r\n          \r\n    @app.on_event(\"startup\")\r\n\r\n.venv\\Lib\\site-packages\\fastapi\\applications.py:4656\r\n  E:\\omega system - phase 1\\.venv\\Lib\\site-packages\\fastapi\\applications.py:4656: DeprecationWarning: \r\n          on_event is deprecated, use lifespan event handlers instead.\r\n  \r\n          Read more about it in the\r\n          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).\r\n          \r\n    return self.router.on_event(event_type)  # ty: ignore[deprecated]\r\n\r\ntests/unit/test_adjustment_engine.py: 4 warnings\r\ntests/unit/test_confidence_and_validation.py: 7 warnings\r\ntests/unit/test_corporate_actions.py: 9 warnings\r\ntests/unit/test_discontinuity.py: 6 warnings\r\ntests/unit/test_isin_master.py: 7 warnings\r\ntests/unit/test_trackb_extreme_edges.py: 23 warnings\r\ntests/unit/test_universe_manager.py: 6 warnings\r\n  E:\\omega system - phase 1\\.venv\\Lib\\site-packages\\sqlalchemy\\sql\\schema.py:3624: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\r\n    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore\r\n\r\ntests/unit/test_operations_layer.py::test_alert_router_suppressed_without_webhook\r\n  E:\\omega system - phase 1\\tests\\unit\\test_operations_layer.py:40: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\r\n    created_at=datetime.utcnow(),\r\n\r\ntests/unit/test_trackb_extreme_edges.py::test_unmatched_staging_older_than_48h_is_escalated\r\n  E:\\omega system - phase 1\\tests\\unit\\test_trackb_extreme_edges.py:224: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\r\n    rec.fetched_at = datetime.utcnow() - timedelta(days=3)\r\n\r\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\r\n=============================== tests coverage ================================\r\n_______________ coverage: platform win32, python 3.14.3-final-0 _______________\r\n\r\nName                                               Stmts   Miss  Cover   Missing\r\n--------------------------------------------------------------------------------\r\nsrc\\omegadata\\track_b\\__init__.py                      0      0   100%\r\nsrc\\omegadata\\track_b\\adjustment_engine.py           100     13    87%   32, 109, 115, 125, 132, 136, 146, 148, 162-167\r\nsrc\\omegadata\\track_b\\confidence.py                   72      3    96%   44, 46, 58\r\nsrc\\omegadata\\track_b\\corporate_actions.py           109     20    82%   102, 128-129, 142, 154, 197, 233-235, 240-249, 259, 291\r\nsrc\\omegadata\\track_b\\cross_source_validation.py     133     24    82%   71, 115, 136-146, 179, 210-226, 232, 256, 285, 301, 420-423\r\nsrc\\omegadata\\track_b\\discontinuity.py                95     14    85%   33-37, 39-43, 73, 91, 100, 106\r\nsrc\\omegadata\\track_b\\isin_master.py                  80     14    82%   68, 72, 104-111, 122-130, 150, 179-188, 201\r\nsrc\\omegadata\\track_b\\universe_manager.py             54     10    81%   66, 87-95, 118, 150-164\r\n--------------------------------------------------------------------------------\r\nTOTAL                                                643     98    85%\r\nCoverage JSON written to file artifacts/verification/coverage_trackb.json\r\n30 passed, 66 warnings in 16.06s\r\n"
+}
