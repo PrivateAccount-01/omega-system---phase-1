@@ -57,7 +57,9 @@ def test_required_fields_missing_goes_to_review(db_session) -> None:
         payload={"isin": "INE009A01021", "ex_date": "2020-02-01"},
     )
     svc.run_daily_confirmation(db_session, as_of=date(2020, 2, 3))
-    review = db_session.scalar(select(ManualReviewQueue))
+    review = db_session.scalar(
+        select(ManualReviewQueue).where(ManualReviewQueue.category == "CORPORATE_ACTION_REQUIRED_FIELDS")
+    )
     assert review is not None
     assert review.category == "CORPORATE_ACTION_REQUIRED_FIELDS"
 
@@ -82,8 +84,18 @@ def test_immutability_correction(db_session) -> None:
         date(2018, 6, 16),
         payload,
     )
+    svc.add_staging_record(
+        db_session,
+        Exchange.BSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        payload,
+    )
     svc.run_daily_confirmation(db_session, as_of=date(2018, 6, 14))
-    stage  # keep linter happy with explicit use in this test context
+    assert stage.source == Exchange.NSE
     active = svc.get_active_actions(db_session, "INE009A01021")
     assert len(active) == 1
     corrected = svc.apply_correction(

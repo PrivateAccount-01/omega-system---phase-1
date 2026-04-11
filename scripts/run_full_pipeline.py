@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import argparse
-from datetime import date, timedelta
 import json
+from datetime import date, timedelta
 
+from omegadata.config import settings
 from omegadata.db.session import init_db
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 
@@ -11,6 +12,7 @@ from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run OmegaData full pipeline across recent days.")
     parser.add_argument("--days", type=int, default=10, help="Number of recent days to attempt.")
+    parser.add_argument("--market-isin", default=settings.market_proxy_isin or None, help="Explicit market benchmark ISIN")
     args = parser.parse_args()
 
     init_db()
@@ -21,7 +23,7 @@ def main() -> None:
     for offset in range(args.days, 0, -1):
         as_of = date.today() - timedelta(days=offset)
         try:
-            summary = pipe.run_full_day(as_of=as_of, market_isin=None)
+            summary = pipe.run_full_day(as_of=as_of, market_isin=args.market_isin)
             runs.append({
                 "as_of": as_of.isoformat(),
                 "ingest_paths": summary.ingest_paths,

@@ -1,18 +1,18 @@
 from __future__ import annotations
 
-from datetime import datetime
 import json
-from pathlib import Path
+from datetime import datetime
 from importlib import import_module
+from pathlib import Path
 
 DAG = import_module("airflow").DAG
 PythonOperator = import_module("airflow.operators.python").PythonOperator
 
-from omegadata.config import settings
-from scripts.run_quarterly_secondary_validation import run_validation_pack_file
-
 
 def run_quarterly_validation() -> None:
+    from omegadata.config import settings
+    from scripts.run_quarterly_secondary_validation import run_validation_pack_file
+
     out_dir = Path(settings.report_root)
     out_dir.mkdir(parents=True, exist_ok=True)
     pack_path = Path(settings.quarterly_validation_pack)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import suppress
 from datetime import date, timedelta
 
 import httpx
@@ -28,10 +29,8 @@ def probe_corporate_actions() -> None:
             "https://www.nseindia.com",
             "https://www.nseindia.com/companies-listing/corporate-filings-actions",
         ]:
-            try:
+            with suppress(Exception):
                 client.get(warm)
-            except Exception:
-                pass
 
         for url in urls:
             try:

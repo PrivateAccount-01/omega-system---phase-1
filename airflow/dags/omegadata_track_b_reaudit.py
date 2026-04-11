@@ -6,12 +6,13 @@ from importlib import import_module
 DAG = import_module("airflow").DAG
 PythonOperator = import_module("airflow.operators.python").PythonOperator
 
-from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
-
 
 def run_weekly_reaudit() -> None:
+    from omegadata.config import settings
+    from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+
     pipeline = OmegaDataSequentialPipeline()
-    pipeline.run_track_b(as_of=datetime.utcnow().date(), market_isin=None)
+    pipeline.run_track_b(as_of=datetime.utcnow().date(), market_isin=settings.market_proxy_isin or None)
 
 
 with DAG(

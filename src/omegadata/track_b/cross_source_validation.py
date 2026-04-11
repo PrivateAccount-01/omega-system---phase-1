@@ -8,8 +8,8 @@ from sqlalchemy import and_, select
 from sqlalchemy.orm import Session
 
 from omegadata.db.models import (
-    CorporateActionStaging,
     ConfirmedCorporateAction,
+    CorporateActionStaging,
     ManualReviewQueue,
     PriceRecord,
     ValidationAuditLog,
@@ -19,6 +19,7 @@ from omegadata.domain import Exchange, ValidationResult
 
 @dataclass(frozen=True)
 class ValidationOutcome:
+    data_date: date
     result: ValidationResult
     field: str
     difference_pct: Decimal
@@ -69,22 +70,24 @@ class CrossSourceValidator:
             bse = bse_by_date.get(nse.trade_date)
             if bse is None:
                 continue
-            outcome = self._compare_numeric(
-                session=session,
-                source_1="NSE",
-                source_2="BSE",
-                isin=isin,
-                data_date=nse.trade_date,
-                field="close_price",
-                left=Decimal(str(nse.close_price)),
-                right=Decimal(str(bse.close_price)),
-                tolerance=Decimal("0.0010"),
-            )
-            outcomes.append(outcome)
+            synthetic_bse = str(bse.raw_source).lower().startswith("bse_stockreach_graph")
+            fields = ("close_price",) if synthetic_bse else ("open_price", "high_price", "low_price", "close_price")
+            for field in fields:
+                outcome = self._compare_numeric(
+                    session=session,
+                    source_1="NSE",
+                    source_2="BSE",
+                    isin=isin,
+                    data_date=nse.trade_date,
+                    field=field,
+                    left=Decimal(str(getattr(nse, field))),
+                    right=Decimal(str(getattr(bse, field))),
+                    tolerance=Decimal("0.0010"),
+                )
+                outcomes.append(outcome)
+                if outcome.result == ValidationResult.FAIL:
+                    nse.confidence_score = min(Decimal(str(nse.confidence_score)), Decimal("0.50"))
             signed_diffs.append(Decimal(str(nse.close_price)) - Decimal(str(bse.close_price)))
-
-            if outcome.result == ValidationResult.FAIL:
-                nse.confidence_score = Decimal("0.50")
 
         self._detect_systematic_disagreement(session, isin, signed_diffs)
         return outcomes
@@ -164,32 +167,39 @@ class CrossSourceValidator:
             .where(ConfirmedCorporateAction.superseded.is_(False))
             .order_by(ConfirmedCorporateAction.ex_date.asc())
         ).all()
-        nse_confirmed = [r for r in confirmed_rows if r.source_preference == Exchange.NSE]
-        for row in nse_confirmed:
-            pair = session.scalar(
+        nse_confirmed = [row for row in confirmed_rows if row.source_preference == Exchange.NSE]
+        for confirmed_row in nse_confirmed:
+            confirmed_pair = session.scalar(
                 select(ConfirmedCorporateAction).where(
                     and_(
-                        ConfirmedCorporateAction.isin == row.isin,
-                        ConfirmedCorporateAction.ex_date == row.ex_date,
+                        ConfirmedCorporateAction.isin == confirmed_row.isin,
+                        ConfirmedCorporateAction.ex_date == confirmed_row.ex_date,
                         ConfirmedCorporateAction.source_preference == Exchange.BSE,
                         ConfirmedCorporateAction.superseded.is_(False),
                     )
                 )
             )
-            if pair is None:
+            if confirmed_pair is None:
                 continue
 
-            if row.action_type != pair.action_type:
+            if confirmed_row.action_type != confirmed_pair.action_type:
+                data_date = (
+                    confirmed_row.ex_date
+                    or confirmed_row.announcement_date
+                    or confirmed_row.record_date
+                )
+                if data_date is None:
+                    continue
                 outcomes.append(
                     self._persist_categorical_result(
                         session=session,
                         source_1="NSE",
                         source_2="BSE",
-                        isin=row.isin,
-                        data_date=row.ex_date or row.announcement_date or row.record_date,
+                        isin=confirmed_row.isin,
+                        data_date=data_date,
                         field="action_type",
-                        left=row.action_type.value,
-                        right=pair.action_type.value,
+                        left=confirmed_row.action_type.value,
+                        right=confirmed_pair.action_type.value,
                         result=ValidationResult.FAIL,
                         diff_pct=Decimal("1"),
                         tolerance=Decimal("0"),
@@ -198,8 +208,8 @@ class CrossSourceValidator:
                 )
                 continue
 
-            for key, left_val in row.parameters.items():
-                right_val = pair.parameters.get(key)
+            for key, left_val in confirmed_row.parameters.items():
+                right_val = confirmed_pair.parameters.get(key)
                 if right_val in (None, "") or left_val in (None, ""):
                     continue
                 try:
@@ -207,13 +217,19 @@ class CrossSourceValidator:
                     right = Decimal(str(right_val))
                 except Exception:
                     continue
-                data_date = row.ex_date or row.announcement_date or row.record_date
+                data_date = (
+                    confirmed_row.ex_date
+                    or confirmed_row.announcement_date
+                    or confirmed_row.record_date
+                )
+                if data_date is None:
+                    continue
                 outcomes.append(
                     self._compare_numeric(
                         session=session,
                         source_1="NSE",
                         source_2="BSE",
-                        isin=row.isin,
+                        isin=confirmed_row.isin,
                         data_date=data_date,
                         field=key,
                         left=left,
@@ -238,13 +254,11 @@ class CrossSourceValidator:
         if not nse_rows:
             return outcomes
 
-        for row in nse_rows:
-            nse_date = self._event_date(row)
+        for staged_row in nse_rows:
+            nse_date = self._event_date(staged_row)
             if nse_date is None:
                 continue
-            candidates = [
-                bse for bse in bse_rows if self._event_date(bse) is not None
-            ]
+            candidates = [bse for bse in bse_rows if self._event_date(bse) is not None]
             if not candidates:
                 outcomes.append(
                     self._persist_categorical_result(
@@ -264,24 +278,24 @@ class CrossSourceValidator:
                 )
                 continue
 
-            pair = min(
+            staging_pair = min(
                 candidates,
                 key=lambda b: self._date_gap_days(nse_date, self._event_date(b)),
             )
-            pair_date = self._event_date(pair)
+            pair_date = self._event_date(staging_pair)
             assert pair_date is not None
 
-            if row.action_type != pair.action_type:
+            if staged_row.action_type != staging_pair.action_type:
                 outcomes.append(
                     self._persist_categorical_result(
                         session=session,
                         source_1="NSE",
                         source_2="BSE",
-                        isin=row.isin,
+                        isin=staged_row.isin,
                         data_date=nse_date,
                         field="action_type",
-                        left=row.action_type.value,
-                        right=pair.action_type.value,
+                        left=staged_row.action_type.value,
+                        right=staging_pair.action_type.value,
                         result=ValidationResult.FAIL,
                         diff_pct=Decimal("1"),
                         tolerance=Decimal("0"),
@@ -299,14 +313,14 @@ class CrossSourceValidator:
                 result = ValidationResult.FAIL
 
             outcomes.append(
-                self._persist_categorical_result(
-                    session=session,
-                    source_1="NSE",
-                    source_2="BSE",
-                    isin=row.isin,
-                    data_date=nse_date,
-                    field="action_date_alignment_days",
-                    left=nse_date.isoformat(),
+                    self._persist_categorical_result(
+                        session=session,
+                        source_1="NSE",
+                        source_2="BSE",
+                        isin=staged_row.isin,
+                        data_date=nse_date,
+                        field="action_date_alignment_days",
+                        left=nse_date.isoformat(),
                     right=pair_date.isoformat(),
                     result=result,
                     diff_pct=Decimal(str(gap_days)),
@@ -315,8 +329,8 @@ class CrossSourceValidator:
                 )
             )
 
-            for key, left_val in row.payload.items():
-                right_val = pair.payload.get(key)
+            for key, left_val in staged_row.payload.items():
+                right_val = staging_pair.payload.get(key)
                 if right_val in (None, "") or left_val in (None, ""):
                     continue
                 try:
@@ -324,13 +338,13 @@ class CrossSourceValidator:
                     right = Decimal(str(right_val))
                 except Exception:
                     continue
-                data_date = row.ex_date or nse_date
+                data_date = staged_row.ex_date or nse_date
                 outcomes.append(
                     self._compare_numeric(
                         session=session,
                         source_1="NSE",
                         source_2="BSE",
-                        isin=row.isin,
+                        isin=staged_row.isin,
                         data_date=data_date,
                         field=key,
                         left=left,
@@ -341,7 +355,7 @@ class CrossSourceValidator:
         return outcomes
 
     @staticmethod
-    def _event_date(row: CorporateActionStaging) -> date | None:
+    def _event_date(row: CorporateActionStaging | ConfirmedCorporateAction) -> date | None:
         return row.ex_date or row.announcement_date or row.record_date
 
     @staticmethod
@@ -400,7 +414,7 @@ class CrossSourceValidator:
             right=str(right),
             result=result,
         ):
-            return ValidationOutcome(result=result, field=field, difference_pct=diff_pct)
+            return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
         session.add(audit)
 
@@ -414,7 +428,7 @@ class CrossSourceValidator:
                     payload={"left": str(left), "right": str(right), "diff_pct": str(diff_pct)},
                 )
             )
-        return ValidationOutcome(result=result, field=field, difference_pct=diff_pct)
+        return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
     def _persist_categorical_result(
         self,
@@ -457,7 +471,7 @@ class CrossSourceValidator:
             right=right,
             result=result,
         ):
-            return ValidationOutcome(result=result, field=field, difference_pct=diff_pct)
+            return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
         session.add(audit)
 
@@ -472,7 +486,7 @@ class CrossSourceValidator:
                 )
             )
 
-        return ValidationOutcome(result=result, field=field, difference_pct=diff_pct)
+        return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
     def _detect_systematic_disagreement(
         self,

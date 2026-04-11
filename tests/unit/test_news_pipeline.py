@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from omegadata.track_a.news_pipeline import EventImpactEngine, NewsEvent
 
@@ -18,7 +18,7 @@ def test_processing_deadlines_follow_spec() -> None:
     market_event = NewsEvent(
         event_id="evt-1",
         event_type="MONETARY_POLICY_CHANGE",
-        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=timezone.utc),
+        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=UTC),
         magnitude_score=0.9,
         direction=1.0,
         source="RBI",
@@ -26,7 +26,7 @@ def test_processing_deadlines_follow_spec() -> None:
     sector_event = NewsEvent(
         event_id="evt-2",
         event_type="COMMODITY_SHOCK",
-        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=timezone.utc),
+        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=UTC),
         magnitude_score=0.7,
         direction=-1.0,
         source="GOV",
@@ -35,7 +35,7 @@ def test_processing_deadlines_follow_spec() -> None:
     company_event = NewsEvent(
         event_id="evt-3",
         event_type="EARNINGS_RELEASE",
-        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=timezone.utc),
+        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=UTC),
         magnitude_score=0.5,
         direction=1.0,
         source="NSE",
@@ -44,7 +44,7 @@ def test_processing_deadlines_follow_spec() -> None:
     gdelt_event = NewsEvent(
         event_id="evt-4",
         event_type="REGULATORY_CHANGE",
-        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=timezone.utc),
+        timestamp=datetime(2026, 4, 10, 8, 0, tzinfo=UTC),
         magnitude_score=0.4,
         direction=-1.0,
         source="GDELT",
@@ -60,12 +60,12 @@ def test_processing_deadlines_follow_spec() -> None:
 def test_event_impact_cached_in_required_redis_shape() -> None:
     cache = FakeCache()
     engine = EventImpactEngine(cache=cache)
-    as_of = datetime(2026, 4, 10, 12, 0, tzinfo=timezone.utc)
+    as_of = datetime(2026, 4, 10, 12, 0, tzinfo=UTC)
     events = [
         NewsEvent(
             event_id="evt-market",
             event_type="GLOBAL_RISK_OFF",
-            timestamp=datetime(2026, 4, 10, 11, 0, tzinfo=timezone.utc),
+            timestamp=datetime(2026, 4, 10, 11, 0, tzinfo=UTC),
             magnitude_score=0.8,
             direction=-1.0,
             source="GDELT",
@@ -73,7 +73,7 @@ def test_event_impact_cached_in_required_redis_shape() -> None:
         NewsEvent(
             event_id="evt-company",
             event_type="MANAGEMENT_CHANGE",
-            timestamp=datetime(2026, 4, 10, 11, 30, tzinfo=timezone.utc),
+            timestamp=datetime(2026, 4, 10, 11, 30, tzinfo=UTC),
             magnitude_score=0.3,
             direction=1.0,
             source="NSE",

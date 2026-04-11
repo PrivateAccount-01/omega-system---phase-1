@@ -1,12 +1,11 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from math import exp
-from typing import Iterable
 
 from omegadata.track_a.redis_cache import RedisCache
-
 
 MARKET_WIDE_EVENT_TYPES = {
     "MONETARY_POLICY_CHANGE",
@@ -93,9 +92,9 @@ class EventImpactEngine:
     @staticmethod
     def recency_weight(event_timestamp: datetime, as_of: datetime) -> float:
         if event_timestamp.tzinfo is None:
-            event_timestamp = event_timestamp.replace(tzinfo=timezone.utc)
+            event_timestamp = event_timestamp.replace(tzinfo=UTC)
         if as_of.tzinfo is None:
-            as_of = as_of.replace(tzinfo=timezone.utc)
+            as_of = as_of.replace(tzinfo=UTC)
         hours_since_event = max((as_of - event_timestamp).total_seconds() / 3600.0, 0.0)
         return float(exp(-DECAY_LAMBDA * hours_since_event))
 
@@ -140,9 +139,9 @@ class EventImpactEngine:
             score=round(score, 6),
             dominant_event=dominant.event_id,
             event_type=dominant.event_type,
-            event_timestamp=dominant.timestamp.astimezone(timezone.utc).isoformat(),
+            event_timestamp=dominant.timestamp.astimezone(UTC).isoformat(),
             confidence=round(dominant.confidence, 6),
-            expires_at=expires_at.astimezone(timezone.utc).isoformat(),
+            expires_at=expires_at.astimezone(UTC).isoformat(),
         )
 
     def cache_current_impact(

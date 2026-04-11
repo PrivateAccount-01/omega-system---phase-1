@@ -10,8 +10,8 @@ from sqlalchemy.orm import Session
 from omegadata.db.models import (
     CrossListingMap,
     DelistingRecord,
-    IPORegistry,
     InstrumentMaster,
+    IPORegistry,
     SymbolChangeLog,
     SymbolMap,
 )

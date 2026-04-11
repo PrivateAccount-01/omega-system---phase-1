@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     alert_webhook_url: str = ""
     alert_min_severity: str = "WARN"
     api_key: str = Field(default="change-me", min_length=8)
+    market_proxy_isin: str = ""
     quarterly_validation_pack: str = "./artifacts/verification/quarterly_validation_input.json"
 
 

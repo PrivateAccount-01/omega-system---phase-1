@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 
@@ -35,7 +35,7 @@ def main() -> None:
     unit_text = _read_text(root / "unit_test_results.txt")
 
     report = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "pipeline_summary": pipeline.get("summary", {}),
         "pipeline_failed_days": len(pipeline.get("errors", [])),
         "pipeline_failure_examples": pipeline.get("errors", [])[:3],

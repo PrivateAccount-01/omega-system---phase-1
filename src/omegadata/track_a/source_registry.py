@@ -80,6 +80,27 @@ SOURCE_REGISTRY: dict[str, DataSource] = {
         checksum="sha256",
         parquet_partition_template="source=nse_fo/year={YYYY}/month={MM}/day={DD}",
     ),
+    "BSE_EQUITY_BHAVCOPY": DataSource(
+        name="BSE Equity Bhavcopy",
+        eras=(
+            SourceEra(
+                name="all",
+                start_date=None,
+                end_date=None,
+                url_pattern="https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}.ZIP",
+                file_format="csv_zip",
+                schema_note="BSE equity bhavcopy with OHLCV and ISIN columns.",
+            ),
+        ),
+        max_requests_per_minute=12,
+        max_retries=5,
+        checksum="sha256",
+        parquet_partition_template="source=bse_equity/year={YYYY}/month={MM}/day={DD}",
+        failover_url_patterns=(
+            "https://www.bseindia.com/download/BhavCopy/Equity/EQ{DDMMYY}_CSV.ZIP",
+            "https://www.bseindia.com/download/BhavCopy/Equity/eq{DDMMYY}_csv.zip",
+        ),
+    ),
     "NSE_FII_DII": DataSource(
         name="NSE FII DII Activity",
         eras=(

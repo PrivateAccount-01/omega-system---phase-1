@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 
-class InstrumentType(str, Enum):
+class InstrumentType(StrEnum):
     EQUITY = "EQUITY"
     EQUITY_PREFERENCE = "EQUITY_PREFERENCE"
     DEBENTURE = "DEBENTURE"
@@ -19,13 +19,13 @@ class InstrumentType(str, Enum):
     COMMODITY_FUTURES = "COMMODITY_FUTURES"
 
 
-class Exchange(str, Enum):
+class Exchange(StrEnum):
     NSE = "NSE"
     BSE = "BSE"
     BSE_ONLY = "BSE_ONLY"
 
 
-class CorporateActionType(str, Enum):
+class CorporateActionType(StrEnum):
     BONUS = "BONUS"
     SPLIT = "SPLIT"
     SPLIT_REVERSE = "SPLIT_REVERSE"
@@ -48,25 +48,25 @@ class CorporateActionType(str, Enum):
     UNCLASSIFIED = "UNCLASSIFIED"
 
 
-class ConfidenceLevel(str, Enum):
+class ConfidenceLevel(StrEnum):
     HIGH = "HIGH"
     MEDIUM = "MEDIUM"
     LOW = "LOW"
 
 
-class DiscontinuityCategory(str, Enum):
+class DiscontinuityCategory(StrEnum):
     A = "A"
     B = "B"
     C = "C"
 
 
-class ValidationResult(str, Enum):
+class ValidationResult(StrEnum):
     PASS = "PASS"
     WARN = "WARN"
     FAIL = "FAIL"
 
 
-class QueryContext(str, Enum):
+class QueryContext(StrEnum):
     SIGNAL_COMPUTATION = "SIGNAL_COMPUTATION"
     REGIME_CLASSIFICATION = "REGIME_CLASSIFICATION"
     LIVE_SIGNAL = "LIVE_SIGNAL"

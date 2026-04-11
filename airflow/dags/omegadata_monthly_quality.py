@@ -8,10 +8,10 @@ from importlib import import_module
 DAG = import_module("airflow").DAG
 PythonOperator = import_module("airflow.operators.python").PythonOperator
 
-from omegadata.pipelines.monthly_quality_pipeline import run_monthly_quality_report
-
 
 def run_monthly() -> None:
+    from omegadata.pipelines.monthly_quality_pipeline import run_monthly_quality_report
+
     result = run_monthly_quality_report(datetime.utcnow().date())
     print(f"Monthly quality report generated: {result.path}")
 

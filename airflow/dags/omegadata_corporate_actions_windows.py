@@ -1,21 +1,21 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
-from airflow import DAG
 from airflow.operators.python import PythonOperator
 
+from airflow import DAG
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 
 
 def run_scheduled_collection() -> None:
     pipeline = OmegaDataSequentialPipeline()
-    pipeline.run_scheduled_corporate_action_collection(datetime.now(timezone.utc))
+    pipeline.run_scheduled_corporate_action_collection(datetime.now(UTC))
 
 
 def run_scheduled_confirmation() -> None:
     pipeline = OmegaDataSequentialPipeline()
-    pipeline.run_scheduled_track_b_confirmation(datetime.now(timezone.utc))
+    pipeline.run_scheduled_track_b_confirmation(datetime.now(UTC))
 
 
 with DAG(

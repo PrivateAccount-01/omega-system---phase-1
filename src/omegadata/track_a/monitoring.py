@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from prometheus_client import Counter, Histogram
 
-
 DOWNLOAD_COUNTER = Counter(
     "omegadata_download_total",
     "Count of source downloads",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-11T06:07:14.550356+00:00",
+  "generated_at": "2026-04-11T07:42:13.822496+00:00",
   "counts": {
     "implemented": 15,
     "partial": 0,
@@ -27,7 +27,7 @@
     {
       "track": "A",
       "component": "Download Manager",
-      "requirement": "Retry/backoff, checksum verification, anti-bot handling, official failover",
+      "requirement": "Retry/backoff, checksum verification, anti-bot handling, immutable raw artifact capture, official failover",
       "status": "implemented",
       "evidence": [
         "src/omegadata/track_a/download_manager.py",
@@ -117,6 +117,7 @@
       "status": "implemented",
       "evidence": [
         "src/omegadata/track_b/corporate_actions.py",
+        "src/omegadata/track_b/corporate_action_parser.py",
         "tests/unit/test_corporate_actions.py",
         "src/omegadata/track_a/collection_schedule.py",
         "airflow/dags/omegadata_corporate_actions_windows.py"
@@ -142,7 +143,7 @@
     {
       "track": "B",
       "component": "Component 4 Discontinuity Detector",
-      "requirement": "Idiosyncratic return detection with beta fallback hierarchy and exclusion dates",
+      "requirement": "Idiosyncratic return detection with explicit market proxy and exclusion dates",
       "status": "implemented",
       "evidence": [
         "src/omegadata/track_b/discontinuity.py",
@@ -200,7 +201,7 @@
     {
       "track": "B",
       "component": "Reference Corpus",
-      "requirement": "12 hand-computed corporate action reference cases from NSE history",
+      "requirement": "Official-source-backed corporate action reference corpus from bundled NSE artifacts",
       "status": "implemented",
       "evidence": [
         "tests/unit/test_adjustment_engine.py",

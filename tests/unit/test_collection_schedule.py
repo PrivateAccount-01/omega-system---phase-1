@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from omegadata.track_a.collection_schedule import (
     due_corporate_action_sources,
@@ -11,16 +11,16 @@ from omegadata.track_a.collection_schedule import (
 
 
 def test_due_corporate_action_windows_match_ist_schedule() -> None:
-    nse_run = datetime(2026, 4, 10, 1, 30, tzinfo=timezone.utc)
-    bse_run = datetime(2026, 4, 10, 2, 0, tzinfo=timezone.utc)
+    nse_run = datetime(2026, 4, 10, 1, 30, tzinfo=UTC)
+    bse_run = datetime(2026, 4, 10, 2, 0, tzinfo=UTC)
 
     assert due_corporate_action_sources(nse_run) == ["NSE_CORPORATE_ACTIONS"]
     assert due_corporate_action_sources(bse_run) == ["BSE_CORPORATE_ACTIONS"]
 
 
 def test_confirmation_window_enforced() -> None:
-    valid_run = datetime(2026, 4, 10, 14, 30, tzinfo=timezone.utc)
-    invalid_run = datetime(2026, 4, 10, 5, 0, tzinfo=timezone.utc)
+    valid_run = datetime(2026, 4, 10, 14, 30, tzinfo=UTC)
+    invalid_run = datetime(2026, 4, 10, 5, 0, tzinfo=UTC)
 
     assert should_run_corporate_action_confirmation(valid_run) is True
     require_confirmation_window(valid_run)

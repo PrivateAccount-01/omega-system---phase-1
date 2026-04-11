@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import date
-from decimal import Decimal
 import csv
 import io
 import json
-from pathlib import Path
 import zipfile
+from dataclasses import dataclass
+from datetime import date
+from decimal import Decimal
+from pathlib import Path
 
 import pandas as pd
 from sqlalchemy import and_, delete, or_, select
@@ -185,7 +185,7 @@ class PointInTimeUniverseManager:
         if isinstance(seed_pack, dict):
             return seed_pack
         path = Path(seed_pack)
-        return json.loads(path.read_text(encoding="utf-8"))
+        return dict(json.loads(path.read_text(encoding="utf-8")))
 
     @staticmethod
     def _scan_symbol_isin_map(raw_root: Path) -> dict[str, str]:

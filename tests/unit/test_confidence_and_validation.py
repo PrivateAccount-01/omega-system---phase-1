@@ -6,7 +6,13 @@ from decimal import Decimal
 from sqlalchemy import select
 
 from omegadata.db.models import ConfirmedCorporateAction, ManualReviewQueue, PriceRecord
-from omegadata.domain import ConfidenceLevel, CorporateActionType, DiscontinuityCategory, Exchange, QueryContext
+from omegadata.domain import (
+    ConfidenceLevel,
+    CorporateActionType,
+    DiscontinuityCategory,
+    Exchange,
+    QueryContext,
+)
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.cross_source_validation import CrossSourceValidator
 
@@ -18,6 +24,7 @@ def test_confidence_floor_and_thresholds() -> None:
             is_secondary_source=True,
             cross_validation_available=False,
             cross_validation_discrepancy_pct=Decimal("0.01"),
+            cross_validation_failed=True,
             has_medium_ca=True,
             has_low_ca=True,
             rights_subscription_fallback_zero=True,

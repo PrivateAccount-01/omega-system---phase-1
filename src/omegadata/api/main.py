@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import json
+from collections.abc import AsyncGenerator, Awaitable, Callable, Generator
+from contextlib import asynccontextmanager
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
 from time import perf_counter
+from typing import Annotated
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, Response
 from fastapi.responses import FileResponse
@@ -25,7 +28,13 @@ from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 from omegadata.verification.audit import build_audit_summary
 
 
-app = FastAPI(title="OmegaData API", version="0.1.0")
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncGenerator[None, None]:
+    init_db()
+    yield
+
+
+app = FastAPI(title="OmegaData API", version="0.1.0", lifespan=lifespan)
 confidence = ConfidenceScorer()
 universe = PointInTimeUniverseManager()
 slo_tracker = SLOTracker(window_minutes=5, availability_target=0.995, p95_target_ms=750.0)
@@ -53,18 +62,18 @@ class PriceResponse(BaseModel):
     excluded_date_range: tuple[date, date] | None
 
 
-def _get_db() -> Session:
+def _get_db() -> Generator[Session, None, None]:
     with get_session() as session:
         yield session
 
 
-@app.on_event("startup")
-def startup() -> None:
-    init_db()
-
+SessionDep = Annotated[Session, Depends(_get_db)]
 
 @app.middleware("http")
-async def observe_requests(request: Request, call_next):
+async def observe_requests(
+    request: Request,
+    call_next: Callable[[Request], Awaitable[Response]],
+) -> Response:
     started = perf_counter()
     response = await call_next(request)
     elapsed_ms = (perf_counter() - started) * 1000.0
@@ -116,7 +125,7 @@ def slo_status() -> dict[str, object]:
 def implementation_audit() -> dict[str, object]:
     audit_path = ARTIFACT_DIR / "implementation_audit.json"
     if audit_path.exists():
-        return json.loads(audit_path.read_text(encoding="utf-8"))
+        return dict(json.loads(audit_path.read_text(encoding="utf-8")))
     return build_audit_summary()
 
 
@@ -137,14 +146,16 @@ def implementation_test_results() -> dict[str, str]:
 @app.get("/prices/{isin}", response_model=PriceResponse)
 def get_prices(
     isin: str,
-    context: QueryContext = Query(QueryContext.BACKTEST),
-    session: Session = Depends(_get_db),
+    session: SessionDep,
+    context: Annotated[QueryContext, Query()] = QueryContext.BACKTEST,
 ) -> PriceResponse:
-    rows = session.scalars(
+    rows = list(
+        session.scalars(
         select(PriceRecord)
         .where(PriceRecord.isin == isin)
         .order_by(PriceRecord.trade_date.asc())
-    ).all()
+        ).all()
+    )
 
     kept, excluded_count, excluded_range = confidence.filter_records(rows, context)
     return PriceResponse(
@@ -171,16 +182,18 @@ def get_prices(
 @app.get("/audit/prices/{isin}", response_model=PriceResponse)
 def get_prices_audit(
     isin: str,
-    x_api_key: str = Header(default=""),
-    session: Session = Depends(_get_db),
+    session: SessionDep,
+    x_api_key: Annotated[str, Header()] = "",
 ) -> PriceResponse:
     if x_api_key != settings.api_key:
         raise HTTPException(status_code=401, detail="invalid api key")
-    rows = session.scalars(
+    rows = list(
+        session.scalars(
         select(PriceRecord)
         .where(PriceRecord.isin == isin)
         .order_by(PriceRecord.trade_date.asc())
-    ).all()
+        ).all()
+    )
     kept, excluded_count, excluded_range = confidence.filter_records(rows, QueryContext.AUDIT)
     return PriceResponse(
         isin=isin,
@@ -204,7 +217,11 @@ def get_prices_audit(
 
 
 @app.get("/universe/{index_name}")
-def get_universe(index_name: str, as_of_date: date, session: Session = Depends(_get_db)) -> dict[str, object]:
+def get_universe(
+    index_name: str,
+    as_of_date: date,
+    session: SessionDep,
+) -> dict[str, object]:
     entries = universe.get_universe(session=session, index_name=index_name, as_of_date=as_of_date)
     return {
         "index_name": index_name,

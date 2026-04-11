@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from airflow import DAG
 from airflow.operators.python import PythonOperator
 
+from airflow import DAG
 from omegadata.track_a.orchestration import IngestionOrchestrator
 
 

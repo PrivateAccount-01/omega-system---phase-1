@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from statistics import quantiles
 
 
@@ -26,12 +26,12 @@ class SLOTracker:
         self._events: deque[tuple[datetime, int, float]] = deque()
 
     def record(self, status_code: int, latency_ms: float) -> None:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         self._events.append((now, status_code, latency_ms))
         self._evict_old(now)
 
     def snapshot(self) -> SLOSnapshot:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         self._evict_old(now)
         if not self._events:
             return SLOSnapshot(
@@ -49,10 +49,7 @@ class SLOTracker:
         successes = sum(1 for _, status, _ in self._events if status < 500)
         availability = successes / total
         latencies = [latency for _, _, latency in self._events]
-        if len(latencies) >= 20:
-            p95 = quantiles(latencies, n=100)[94]
-        else:
-            p95 = max(latencies)
+        p95 = quantiles(latencies, n=100)[94] if len(latencies) >= 20 else max(latencies)
 
         return SLOSnapshot(
             window_minutes=self.window_minutes,

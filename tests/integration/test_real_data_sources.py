@@ -4,8 +4,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from omegadata.track_a.download_manager import DownloadError, DownloadManager
-
+from omegadata.track_a.download_manager import DownloadManager
 
 pytestmark = [pytest.mark.realdata]
 

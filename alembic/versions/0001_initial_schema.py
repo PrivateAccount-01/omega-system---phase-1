@@ -8,7 +8,6 @@ Create Date: 2026-04-07
 from __future__ import annotations
 
 from alembic import op
-
 from omegadata.db import models  # noqa: F401
 from omegadata.db.base import Base
 

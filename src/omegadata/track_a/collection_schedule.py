@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, time, timedelta, timezone
+from datetime import UTC, datetime, time
 from zoneinfo import ZoneInfo
-
 
 IST = ZoneInfo("Asia/Kolkata")
 
@@ -43,8 +42,8 @@ MATCH_CONFIRMATION_TIME = time(hour=20, minute=0)
 
 def _ensure_aware_utc(run_at: datetime) -> datetime:
     if run_at.tzinfo is None:
-        return run_at.replace(tzinfo=timezone.utc)
-    return run_at.astimezone(timezone.utc)
+        return run_at.replace(tzinfo=UTC)
+    return run_at.astimezone(UTC)
 
 
 def _target_for(run_at: datetime, scheduled_time_ist: time) -> datetime:
@@ -57,7 +56,7 @@ def _target_for(run_at: datetime, scheduled_time_ist: time) -> datetime:
 
 
 def _within_grace(run_at: datetime, target: datetime, grace_minutes: int) -> bool:
-    delta = abs((_ensure_aware_utc(run_at) - target.astimezone(timezone.utc)).total_seconds())
+    delta = abs((_ensure_aware_utc(run_at) - target.astimezone(UTC)).total_seconds())
     return delta <= grace_minutes * 60
 
 

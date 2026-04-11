@@ -3,16 +3,17 @@ from __future__ import annotations
 import csv
 import io
 import json
-import re
+import zipfile
+from collections.abc import Mapping
 from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from decimal import Decimal
 from pathlib import Path
-from typing import Mapping
-import zipfile
 
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
+from omegadata.config import settings
 from omegadata.db.models import (
     CorporateActionStaging,
     DiscontinuityEvent,
@@ -22,13 +23,14 @@ from omegadata.db.models import (
 )
 from omegadata.db.session import get_session
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType
-from omegadata.track_a.orchestration import IngestionOrchestrator
 from omegadata.track_a.collection_schedule import (
     due_corporate_action_sources,
     require_confirmation_window,
 )
+from omegadata.track_a.orchestration import IngestionOrchestrator
 from omegadata.track_b.adjustment_engine import PriceAdjustmentEngine
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
+from omegadata.track_b.corporate_action_parser import CorporateActionParser
 from omegadata.track_b.corporate_actions import CorporateActionService
 from omegadata.track_b.cross_source_validation import CrossSourceValidator
 from omegadata.track_b.discontinuity import DiscontinuityDetector
@@ -44,20 +46,10 @@ class PipelineSummary:
 
 
 class OmegaDataSequentialPipeline:
-    _RATIO_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*:\s*(\d+(?:\.\d+)?)")
-    _DIVIDEND_PATTERN = re.compile(
-        r"\bdividend\b[^0-9]*(?:rs|re)\.?\s*([0-9]+(?:\.[0-9]+)?)",
-        re.IGNORECASE,
-    )
-    _FACE_VALUE_PATTERN = re.compile(
-        r"\bfrom\s+r(?:s|e)\.?\s*([0-9]+(?:\.[0-9]+)?)"
-        r".*?\bto\s+r(?:s|e)\.?\s*([0-9]+(?:\.[0-9]+)?)",
-        re.IGNORECASE,
-    )
-
     def __init__(self) -> None:
         self.ingestor = IngestionOrchestrator()
         self.ca_service = CorporateActionService()
+        self.ca_parser = CorporateActionParser()
         self.adjustment_engine = PriceAdjustmentEngine()
         self.discontinuity_detector = DiscontinuityDetector()
         self.confidence_scorer = ConfidenceScorer()
@@ -65,15 +57,7 @@ class OmegaDataSequentialPipeline:
 
     @staticmethod
     def _to_decimal(value: str | int | float | None) -> Decimal | None:
-        if value in (None, ""):
-            return None
-        text = str(value).replace(",", "").strip()
-        if not text:
-            return None
-        try:
-            return Decimal(text)
-        except Exception:
-            return None
+        return CorporateActionParser.to_decimal(value)
 
     @staticmethod
     def _parse_date(value: str | None) -> date | None:
@@ -117,52 +101,22 @@ class OmegaDataSequentialPipeline:
                 return value
         return ""
 
-    def _populate_subject_derived_fields(
+    def _ensure_instrument(
         self,
+        session: Session,
+        isin: str,
+        symbol: str,
+        trade_date: date,
         *,
-        payload: dict[str, object],
-        action_type: CorporateActionType,
-        purpose: str,
+        exchange: Exchange = Exchange.NSE,
     ) -> None:
-        if not purpose.strip():
-            return
-
-        ratio_match = self._RATIO_PATTERN.search(purpose)
-        if ratio_match:
-            left = self._to_decimal(ratio_match.group(1))
-            right = self._to_decimal(ratio_match.group(2))
-            if left is not None and right is not None:
-                if action_type == CorporateActionType.BONUS:
-                    payload.setdefault("bonus_ratio_numerator", str(left))
-                    payload.setdefault("bonus_ratio_denominator", str(right))
-                if action_type in {CorporateActionType.RIGHTS, CorporateActionType.RIGHTS_RENOUNCE}:
-                    payload.setdefault("rights_ratio_numerator", str(left))
-                    payload.setdefault("rights_ratio_denominator", str(right))
-
-        if action_type in {CorporateActionType.DIVIDEND_CASH, CorporateActionType.DIVIDEND_SPECIAL}:
-            dividend_match = self._DIVIDEND_PATTERN.search(purpose)
-            if dividend_match is not None:
-                amount = self._to_decimal(dividend_match.group(1))
-                if amount is not None:
-                    payload.setdefault("dividend_per_share", str(amount))
-
-        if action_type in {CorporateActionType.SPLIT, CorporateActionType.SPLIT_REVERSE}:
-            fv_match = self._FACE_VALUE_PATTERN.search(purpose)
-            if fv_match is not None:
-                old_face_value = self._to_decimal(fv_match.group(1))
-                new_face_value = self._to_decimal(fv_match.group(2))
-                if old_face_value is not None and new_face_value is not None:
-                    payload.setdefault("old_face_value", str(old_face_value))
-                    payload.setdefault("new_face_value", str(new_face_value))
-
-    def _ensure_instrument(self, session, isin: str, symbol: str, trade_date: date) -> None:
         inst = session.get(InstrumentMaster, isin)
         if inst is None:
             session.add(
                 InstrumentMaster(
                     isin=isin,
                     instrument_type=InstrumentType.EQUITY,
-                    primary_exchange=Exchange.NSE,
+                    primary_exchange=exchange,
                     company_name=symbol,
                     listed_date=trade_date,
                     active=True,
@@ -172,7 +126,7 @@ class OmegaDataSequentialPipeline:
         existing_symbol = session.scalar(
             select(SymbolMap)
             .where(SymbolMap.isin == isin)
-            .where(SymbolMap.exchange == Exchange.NSE)
+            .where(SymbolMap.exchange == exchange)
             .where(SymbolMap.symbol == symbol)
             .where(SymbolMap.valid_to.is_(None))
         )
@@ -180,14 +134,14 @@ class OmegaDataSequentialPipeline:
             session.add(
                 SymbolMap(
                     isin=isin,
-                    exchange=Exchange.NSE,
+                    exchange=exchange,
                     symbol=symbol,
                     valid_from=trade_date,
                     valid_to=None,
                 )
             )
 
-    def _load_bhavcopy_prices(self, session, path: Path, trade_date: date) -> int:
+    def _load_bhavcopy_prices(self, session: Session, path: Path, trade_date: date) -> int:
         if not path.exists():
             return 0
 
@@ -232,6 +186,11 @@ class OmegaDataSequentialPipeline:
 
             if not isin or not symbol or None in (open_p, high_p, low_p, close_p, volume):
                 continue
+            assert open_p is not None
+            assert high_p is not None
+            assert low_p is not None
+            assert close_p is not None
+            assert volume is not None
 
             self._ensure_instrument(session, isin=isin, symbol=symbol, trade_date=trade_date)
             existing = session.scalar(
@@ -264,6 +223,79 @@ class OmegaDataSequentialPipeline:
 
         return loaded
 
+    def _load_bse_bhavcopy_prices(self, session: Session, path: Path, trade_date: date) -> int:
+        if not path.exists():
+            return 0
+
+        payload = path.read_bytes()
+        if path.suffix.lower() == ".zip":
+            with zipfile.ZipFile(io.BytesIO(payload)) as zf:
+                names = [name for name in zf.namelist() if name.lower().endswith(".csv")]
+                if not names:
+                    return 0
+                payload = zf.read(names[0])
+
+        text = payload.decode("utf-8", errors="ignore")
+        reader = csv.DictReader(io.StringIO(text))
+        loaded = 0
+
+        for raw in reader:
+            row = self._normalize_row(raw)
+            isin = self._first_present(row, ("ISIN_CODE", "ISIN", "ISIN_NO"))
+            symbol = self._first_present(row, ("SC_NAME", "SYMBOL", "SC_CODE"))
+            open_p = self._to_decimal(self._first_present(row, ("OPEN", "OPEN_PRICE")))
+            high_p = self._to_decimal(self._first_present(row, ("HIGH", "HIGH_PRICE")))
+            low_p = self._to_decimal(self._first_present(row, ("LOW", "LOW_PRICE")))
+            close_p = self._to_decimal(self._first_present(row, ("CLOSE", "CLOSE_PRICE")))
+            volume = self._to_decimal(
+                self._first_present(row, ("NO_OF_SHRS", "TOTTRDQTY", "VOLUME", "NET_TURNOV"))
+            )
+
+            if not isin or not symbol or None in (open_p, high_p, low_p, close_p, volume):
+                continue
+            assert open_p is not None
+            assert high_p is not None
+            assert low_p is not None
+            assert close_p is not None
+            assert volume is not None
+
+            self._ensure_instrument(
+                session,
+                isin=isin,
+                symbol=symbol,
+                trade_date=trade_date,
+                exchange=Exchange.BSE,
+            )
+            existing = session.scalar(
+                select(PriceRecord)
+                .where(PriceRecord.isin == isin)
+                .where(PriceRecord.exchange == Exchange.BSE)
+                .where(PriceRecord.trade_date == trade_date)
+            )
+            if existing is None:
+                existing = PriceRecord(
+                    isin=isin,
+                    exchange=Exchange.BSE,
+                    trade_date=trade_date,
+                    open_price=open_p,
+                    high_price=high_p,
+                    low_price=low_p,
+                    close_price=close_p,
+                    volume=volume,
+                    raw_source="bse_bhavcopy",
+                )
+                session.add(existing)
+            else:
+                existing.open_price = open_p
+                existing.high_price = high_p
+                existing.low_price = low_p
+                existing.close_price = close_p
+                existing.volume = volume
+                existing.raw_source = "bse_bhavcopy"
+            loaded += 1
+
+        return loaded
+
     @staticmethod
     def _parse_bse_graph_trade_date(value: object) -> date | None:
         if value is None:
@@ -278,7 +310,7 @@ class OmegaDataSequentialPipeline:
                 continue
         return None
 
-    def _load_bse_prices_from_stockreach(self, session, as_of: date) -> int:
+    def _load_bse_prices_from_stockreach(self, session: Session, as_of: date) -> int:
         nse_isins = {
             row[0]
             for row in session.execute(
@@ -376,30 +408,7 @@ class OmegaDataSequentialPipeline:
 
         return loaded
 
-    @staticmethod
-    def _map_action_type(text: str) -> CorporateActionType:
-        value = text.upper()
-        if "BONUS" in value:
-            return CorporateActionType.BONUS
-        if "BUY BACK" in value or "BUYBACK" in value:
-            return CorporateActionType.BUYBACK_OPEN_MARKET
-        if "SPLIT" in value and "REVERSE" in value:
-            return CorporateActionType.SPLIT_REVERSE
-        if "SPLIT" in value:
-            return CorporateActionType.SPLIT
-        if "RIGHT" in value:
-            return CorporateActionType.RIGHTS
-        if "DEMERGER" in value:
-            return CorporateActionType.DEMERGER_PARENT
-        if "MERGER" in value or "AMALGAMATION" in value:
-            return CorporateActionType.MERGER_TARGET
-        if "DIVIDEND" in value and "SPECIAL" in value:
-            return CorporateActionType.DIVIDEND_SPECIAL
-        if "DIVIDEND" in value:
-            return CorporateActionType.DIVIDEND_CASH
-        return CorporateActionType.UNCLASSIFIED
-
-    def _load_corporate_actions(self, session, source: Exchange, path: Path) -> int:
+    def _load_corporate_actions(self, session: Session, source: Exchange, path: Path) -> int:
         if not path.exists():
             return 0
         content = path.read_text(encoding="utf-8", errors="ignore")
@@ -420,7 +429,7 @@ class OmegaDataSequentialPipeline:
 
         loaded = 0
         for item in records:
-            normalized = self._normalize_row({k: v for k, v in item.items()})
+            normalized = self._normalize_row(dict(item))
             isin = self._first_present(normalized, ("ISIN", "ISIN_CODE", "SECURITY_ISIN"))
             symbol = self._first_present(
                 normalized,
@@ -438,7 +447,7 @@ class OmegaDataSequentialPipeline:
                 normalized,
                 ("PURPOSE", "SUBJECT", "DESCRIPTION", "CORP_ACTION", "ACTION_TYPE", "NEWSSUB"),
             )
-            action_type = self._map_action_type(purpose)
+            action_type = self.ca_parser.map_action_type(purpose)
             if action_type == CorporateActionType.UNCLASSIFIED and not purpose.strip():
                 continue
 
@@ -514,7 +523,7 @@ class OmegaDataSequentialPipeline:
                         payload["rights_ratio_numerator"] = str(lval)
                         payload["rights_ratio_denominator"] = str(rval)
 
-            self._populate_subject_derived_fields(
+            self.ca_parser.enrich_payload_from_subject(
                 payload=payload,
                 action_type=action_type,
                 purpose=purpose,
@@ -537,6 +546,7 @@ class OmegaDataSequentialPipeline:
     def run_track_a(self, as_of: date) -> dict[str, str]:
         sources = [
             "NSE_EQUITY_BHAVCOPY",
+            "BSE_EQUITY_BHAVCOPY",
             "NSE_CORPORATE_ACTIONS",
             "BSE_CORPORATE_ACTIONS",
             "NSE_FII_DII",
@@ -554,6 +564,8 @@ class OmegaDataSequentialPipeline:
 
         with get_session() as session:
             self._load_bhavcopy_prices(session, Path(paths["NSE_EQUITY_BHAVCOPY"]), as_of)
+            if paths.get("BSE_EQUITY_BHAVCOPY"):
+                self._load_bse_bhavcopy_prices(session, Path(paths["BSE_EQUITY_BHAVCOPY"]), as_of)
             if paths.get("NSE_CORPORATE_ACTIONS"):
                 self._load_corporate_actions(
                     session,
@@ -566,17 +578,16 @@ class OmegaDataSequentialPipeline:
                     Exchange.BSE,
                     Path(paths["BSE_CORPORATE_ACTIONS"]),
                 )
-            self._load_bse_prices_from_stockreach(session, as_of=as_of)
         return paths
 
     def run_scheduled_corporate_action_collection(self, run_at: datetime) -> dict[str, str]:
-        aware_run_at = run_at if run_at.tzinfo is not None else run_at.replace(tzinfo=timezone.utc)
+        aware_run_at = run_at if run_at.tzinfo is not None else run_at.replace(tzinfo=UTC)
         due_sources = due_corporate_action_sources(aware_run_at)
         if not due_sources:
             raise ValueError(f"No corporate action source is due at {aware_run_at.isoformat()}")
 
         paths: dict[str, str] = {}
-        as_of = aware_run_at.astimezone(timezone.utc).date()
+        as_of = aware_run_at.astimezone(UTC).date()
         for source_key in due_sources:
             paths[source_key] = self.ingestor.ingest_raw_source(source_key, as_of)
 
@@ -595,14 +606,25 @@ class OmegaDataSequentialPipeline:
                 )
         return paths
 
+    def _resolve_market_isin(self, session: Session, market_isin: str | None) -> str | None:
+        if market_isin:
+            return market_isin
+        if settings.market_proxy_isin:
+            return settings.market_proxy_isin
+        has_prices = session.scalar(select(PriceRecord.id).limit(1)) is not None
+        if not has_prices:
+            return None
+        raise ValueError("market_isin is required; pass it explicitly or set OMEGA_MARKET_PROXY_ISIN")
+
     def run_track_b(self, as_of: date, market_isin: str | None = None) -> tuple[int, int, int, int]:
         with get_session() as session:
             confirmations = self.ca_service.run_daily_confirmation(session, as_of=as_of)
 
             adjusted_rows = 0
             isins = [row[0] for row in session.execute(select(PriceRecord.isin).distinct()).all()]
-            if market_isin is None and isins:
-                market_isin = isins[0]
+            resolved_market_isin = self._resolve_market_isin(session, market_isin)
+            if resolved_market_isin is not None and resolved_market_isin not in set(isins):
+                raise LookupError(f"Configured market proxy {resolved_market_isin} is not present in price records")
 
             for isin in isins:
                 adjusted_rows += self.adjustment_engine.recompute_adjusted_series(
@@ -612,24 +634,42 @@ class OmegaDataSequentialPipeline:
                 )
 
             discontinuities = []
-            if market_isin is not None:
+            if resolved_market_isin is not None:
                 discontinuities = self.discontinuity_detector.detect(
                     session,
-                    market_isin=market_isin,
+                    market_isin=resolved_market_isin,
                     exchange=Exchange.NSE,
                 )
 
             validation_count = 0
+            price_validation_map: dict[tuple[str, date], dict[str, object]] = {}
             for isin in isins:
-                validation_count += len(self.validator.validate_nse_bse_prices(session, isin))
+                price_outcomes = self.validator.validate_nse_bse_prices(session, isin)
+                validation_count += len(price_outcomes)
+                for outcome in price_outcomes:
+                    key = (isin, outcome.data_date)
+                    state = price_validation_map.setdefault(
+                        key,
+                        {"max_diff": Decimal("0"), "failed": False},
+                    )
+                    state["max_diff"] = max(Decimal(str(state["max_diff"])), outcome.difference_pct)
+                    if outcome.result.value == "FAIL":
+                        state["failed"] = True
                 validation_count += len(self.validator.validate_corporate_actions(session, isin))
 
+            nse_pairs = {
+                (row[0], row[1])
+                for row in session.execute(
+                    select(PriceRecord.isin, PriceRecord.trade_date).where(PriceRecord.exchange == Exchange.NSE)
+                ).all()
+            }
             bse_pairs = {
                 (row[0], row[1])
                 for row in session.execute(
                     select(PriceRecord.isin, PriceRecord.trade_date).where(PriceRecord.exchange == Exchange.BSE)
                 ).all()
             }
+            matched_pairs = nse_pairs & bse_pairs
             discontinuity_map = {
                 (event.isin, event.event_date): event.category
                 for event in session.scalars(select(DiscontinuityEvent)).all()
@@ -642,10 +682,16 @@ class OmegaDataSequentialPipeline:
                 rights_fallback = any(
                     bool(item.get("subscription_price_fallback_zero", False)) for item in chain
                 )
+                validation_state = price_validation_map.get((row.isin, row.trade_date))
                 inputs = ConfidenceInputs(
                     is_secondary_source=(row.raw_source.lower() != "nse_bhavcopy"),
-                    cross_validation_available=((row.isin, row.trade_date) in bse_pairs),
-                    cross_validation_discrepancy_pct=None,
+                    cross_validation_available=((row.isin, row.trade_date) in matched_pairs),
+                    cross_validation_discrepancy_pct=(
+                        None
+                        if validation_state is None
+                        else Decimal(str(validation_state["max_diff"]))
+                    ),
+                    cross_validation_failed=bool(validation_state and validation_state["failed"]),
                     has_medium_ca=has_medium,
                     has_low_ca=has_low,
                     rights_subscription_fallback_zero=rights_fallback,
@@ -663,8 +709,8 @@ class OmegaDataSequentialPipeline:
         market_isin: str | None = None,
     ) -> tuple[int, int, int, int]:
         require_confirmation_window(run_at)
-        aware_run_at = run_at if run_at.tzinfo is not None else run_at.replace(tzinfo=timezone.utc)
-        return self.run_track_b(as_of=aware_run_at.astimezone(timezone.utc).date(), market_isin=market_isin)
+        aware_run_at = run_at if run_at.tzinfo is not None else run_at.replace(tzinfo=UTC)
+        return self.run_track_b(as_of=aware_run_at.astimezone(UTC).date(), market_isin=market_isin)
 
     def run_full_day(self, as_of: date, market_isin: str | None = None) -> PipelineSummary:
         paths = self.run_track_a(as_of)

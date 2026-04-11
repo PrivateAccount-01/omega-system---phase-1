@@ -16,6 +16,7 @@ class ConfidenceInputs:
     is_secondary_source: bool
     cross_validation_available: bool
     cross_validation_discrepancy_pct: Decimal | None
+    cross_validation_failed: bool
     has_medium_ca: bool
     has_low_ca: bool
     rights_subscription_fallback_zero: bool
@@ -46,6 +47,8 @@ class ConfidenceScorer:
                 score -= Decimal("0.05")
             elif discrepancy > Decimal("0.005"):
                 score -= Decimal("0.25")
+        if inputs.cross_validation_failed:
+            score = min(score, Decimal("0.50"))
         if inputs.has_medium_ca:
             score -= Decimal("0.15")
         if inputs.has_low_ca:

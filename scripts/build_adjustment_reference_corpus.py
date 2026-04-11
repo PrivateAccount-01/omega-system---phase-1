@@ -3,65 +3,24 @@ from __future__ import annotations
 import csv
 import io
 import json
-from dataclasses import dataclass
-from decimal import Decimal, ROUND_HALF_UP
-from pathlib import Path
 import zipfile
+from datetime import datetime
+from decimal import ROUND_HALF_UP, Decimal
+from pathlib import Path
 
+from omegadata.track_b.corporate_action_parser import CorporateActionParser
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RAW_ROOT = PROJECT_ROOT / "data" / "raw"
 OUTPUT_PATH = PROJECT_ROOT / "tests" / "fixtures" / "adjustment_reference_corpus.json"
+PRICE_MONTH_DIR = RAW_ROOT / "nse_equity_bhavcopy" / "year=2026" / "month=04"
+ACTION_GLOB = RAW_ROOT / "nse_corporate_actions" / "year=2026"
+ASSERTION_DATES = ("2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07")
+PARSER = CorporateActionParser()
 
 
-@dataclass(frozen=True)
-class ReferenceCaseSpec:
-    isin: str
-    symbol: str
-    action_type: str
-    ex_date: str
-    record_date: str
-    subject: str
-    snapshot_path: str
-    assertion_dates: tuple[str, ...]
-    parameters: dict[str, str]
-
-
-CASE_SPECS = (
-    ReferenceCaseSpec(
-        isin="INE200M01013",
-        symbol="VBL",
-        action_type="DIVIDEND_CASH",
-        ex_date="2026-04-08",
-        record_date="2026-04-08",
-        subject="Dividend - Re 0.50 Per Share",
-        snapshot_path="data/raw/nse_corporate_actions/year=2026/month=04/20260402.bin",
-        assertion_dates=("2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07"),
-        parameters={"dividend_per_share": "0.50"},
-    ),
-    ReferenceCaseSpec(
-        isin="INE039O01011",
-        symbol="JASH",
-        action_type="DIVIDEND_CASH",
-        ex_date="2026-04-10",
-        record_date="2026-04-10",
-        subject="Interim Dividend - Re 0.60 Per Share",
-        snapshot_path="data/raw/nse_corporate_actions/year=2026/month=04/20260402.bin",
-        assertion_dates=("2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07"),
-        parameters={"dividend_per_share": "0.60"},
-    ),
-    ReferenceCaseSpec(
-        isin="INE219Y01018",
-        symbol="RMDRIP",
-        action_type="BONUS",
-        ex_date="2026-04-10",
-        record_date="2026-04-10",
-        subject="Bonus 5:7",
-        snapshot_path="data/raw/nse_corporate_actions/year=2026/month=04/20260402.bin",
-        assertion_dates=("2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07"),
-        parameters={"bonus_ratio_numerator": "5", "bonus_ratio_denominator": "7"},
-    ),
-)
+def _to_iso_date(value: str) -> str:
+    return datetime.strptime(value, "%d-%b-%Y").date().isoformat()
 
 
 def _parse_decimal(value: str) -> Decimal:
@@ -93,77 +52,140 @@ def _load_bhavcopy_rows(zip_path: Path) -> dict[str, dict[str, str]]:
             return rows
 
 
-def _read_prices(symbol: str) -> list[dict[str, str]]:
-    month_dir = RAW_ROOT / "nse_equity_bhavcopy" / "year=2026" / "month=04"
-    prices: list[dict[str, str]] = []
-    for zip_path in sorted(month_dir.glob("*.zip")):
+def _price_history() -> dict[str, list[dict[str, str]]]:
+    history: dict[str, list[dict[str, str]]] = {}
+    for zip_path in sorted(PRICE_MONTH_DIR.glob("*.zip")):
         rows = _load_bhavcopy_rows(zip_path)
-        if symbol not in rows:
+        trade_date = f"{zip_path.stem[:4]}-{zip_path.stem[4:6]}-{zip_path.stem[6:8]}"
+        for symbol, row in rows.items():
+            history.setdefault(symbol, []).append(
+                {
+                    "trade_date": trade_date,
+                    "close": str(row.get("CLOSE") or row.get("ClsPric") or "").strip(),
+                    "volume": str(row.get("TOTTRDQTY") or row.get("TtlTradgVol") or "").strip(),
+                }
+            )
+    return history
+
+
+def _adjustment_factors(action_type: str, parameters: dict[str, str]) -> tuple[Decimal, Decimal]:
+    if action_type == "BONUS":
+        numerator = Decimal(parameters["bonus_ratio_numerator"])
+        denominator = Decimal(parameters["bonus_ratio_denominator"])
+        ratio = numerator / denominator
+        price_factor = Decimal("1") / (Decimal("1") + ratio)
+        return price_factor, Decimal("1") / price_factor
+    if action_type == "SPLIT":
+        old_face_value = Decimal(parameters["old_face_value"])
+        new_face_value = Decimal(parameters["new_face_value"])
+        return new_face_value / old_face_value, old_face_value / new_face_value
+    return Decimal("1"), Decimal("1")
+
+
+def _assertions(
+    *,
+    action_type: str,
+    parameters: dict[str, str],
+    prices_by_date: dict[str, dict[str, str]],
+) -> list[dict[str, str]]:
+    price_factor, volume_factor = _adjustment_factors(action_type, parameters)
+    return [
+        {
+            "trade_date": trade_date,
+            "raw_close": prices_by_date[trade_date]["close"],
+            "raw_volume": prices_by_date[trade_date]["volume"],
+            "expected_adjusted_close": _quantize_price(
+                _parse_decimal(prices_by_date[trade_date]["close"]) * price_factor
+            ),
+            "expected_adjusted_volume": _quantize_volume(
+                _parse_decimal(prices_by_date[trade_date]["volume"]) * volume_factor
+            ),
+            "expected_cumulative_price_factor": _quantize_factor(price_factor),
+            "expected_cumulative_volume_factor": _quantize_factor(volume_factor),
+        }
+        for trade_date in ASSERTION_DATES
+        if trade_date in prices_by_date
+    ]
+
+
+def _raw_action_rows() -> list[dict[str, str]]:
+    seen: set[tuple[str, str, str]] = set()
+    rows: list[dict[str, str]] = []
+    for path in sorted(ACTION_GLOB.glob("month=*/*.bin")):
+        parsed = json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+        if not isinstance(parsed, list):
             continue
-        row = rows[symbol]
-        prices.append(
-            {
-                "trade_date": f"{zip_path.stem[:4]}-{zip_path.stem[4:6]}-{zip_path.stem[6:8]}",
-                "close": str(row.get("CLOSE") or row.get("ClsPric") or "").strip(),
-                "volume": str(row.get("TOTTRDQTY") or row.get("TtlTradgVol") or "").strip(),
-            }
-        )
-    return prices
-
-
-def _expected_values(spec: ReferenceCaseSpec, trade_date: str, prices_by_date: dict[str, dict[str, str]]) -> dict[str, str]:
-    row = prices_by_date[trade_date]
-    raw_close = _parse_decimal(row["close"])
-    raw_volume = _parse_decimal(row["volume"])
-
-    if spec.action_type == "BONUS":
-        factor = Decimal("7") / Decimal("12")
-        volume_factor = Decimal("12") / Decimal("7")
-    else:
-        factor = Decimal("1")
-        volume_factor = Decimal("1")
-
-    return {
-        "trade_date": trade_date,
-        "raw_close": row["close"],
-        "raw_volume": row["volume"],
-        "expected_adjusted_close": _quantize_price(raw_close * factor),
-        "expected_adjusted_volume": _quantize_volume(raw_volume * volume_factor),
-        "expected_cumulative_price_factor": _quantize_factor(factor),
-        "expected_cumulative_volume_factor": _quantize_factor(volume_factor),
-    }
+        for item in parsed:
+            if not isinstance(item, dict):
+                continue
+            symbol = str(item.get("symbol") or "").strip()
+            isin = str(item.get("isin") or "").strip()
+            subject = str(item.get("subject") or "").strip()
+            ex_date = str(item.get("exDate") or "").strip()
+            if not symbol or not isin or not subject or not ex_date:
+                continue
+            dedupe_key = (isin, ex_date, subject)
+            if dedupe_key in seen:
+                continue
+            seen.add(dedupe_key)
+            rows.append(
+                {
+                    "isin": isin,
+                    "symbol": symbol,
+                    "company_name": str(item.get("comp") or symbol).strip(),
+                    "subject": subject,
+                    "ex_date": _to_iso_date(ex_date),
+                    "record_date": _to_iso_date(str(item.get("recDate") or ex_date).strip()),
+                    "snapshot_path": path.relative_to(PROJECT_ROOT).as_posix(),
+                }
+            )
+    return rows
 
 
 def build_reference_corpus() -> dict[str, object]:
+    price_history = _price_history()
     cases: list[dict[str, object]] = []
-    for spec in CASE_SPECS:
-        prices = _read_prices(spec.symbol)
+
+    for raw in _raw_action_rows():
+        prices = price_history.get(raw["symbol"])
+        if not prices:
+            continue
         prices_by_date = {row["trade_date"]: row for row in prices}
-        assertions = [
-            _expected_values(spec, trade_date=trade_date, prices_by_date=prices_by_date)
-            for trade_date in spec.assertion_dates
-        ]
+        parameters: dict[str, object] = {}
+        action_type = PARSER.map_action_type(raw["subject"])
+        PARSER.enrich_payload_from_subject(
+            payload=parameters,
+            action_type=action_type,
+            purpose=raw["subject"],
+        )
+        normalized_parameters = {key: str(value) for key, value in parameters.items()}
         cases.append(
             {
-                "isin": spec.isin,
-                "symbol": spec.symbol,
-                "action_type": spec.action_type,
-                "ex_date": spec.ex_date,
-                "record_date": spec.record_date,
-                "subject": spec.subject,
-                "parameters": spec.parameters,
-                "snapshot_path": spec.snapshot_path,
+                "label": f"{raw['symbol']}_{raw['ex_date']}_{action_type.value}",
+                "isin": raw["isin"],
+                "symbol": raw["symbol"],
+                "company_name": raw["company_name"],
+                "action_type": action_type.value,
+                "ex_date": raw["ex_date"],
+                "record_date": raw["record_date"],
+                "subject": raw["subject"],
+                "parameters": normalized_parameters,
+                "snapshot_path": raw["snapshot_path"],
                 "price_paths": [
                     f"data/raw/nse_equity_bhavcopy/year=2026/month=04/{row['trade_date'].replace('-', '')}.zip"
                     for row in prices
                 ],
                 "prices": prices,
-                "assertions": assertions,
+                "assertions": _assertions(
+                    action_type=action_type.value,
+                    parameters=normalized_parameters,
+                    prices_by_date=prices_by_date,
+                ),
             }
         )
 
     return {
-        "case_count": sum(len(case["assertions"]) for case in cases),
+        "case_count": len(cases),
         "cases": cases,
     }
 
@@ -172,7 +194,7 @@ def main() -> None:
     corpus = build_reference_corpus()
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(corpus, indent=2), encoding="utf-8")
-    print(f"Wrote {OUTPUT_PATH} with {corpus['case_count']} assertions")
+    print(f"Wrote {OUTPUT_PATH} with {corpus['case_count']} cases")
 
 
 if __name__ == "__main__":

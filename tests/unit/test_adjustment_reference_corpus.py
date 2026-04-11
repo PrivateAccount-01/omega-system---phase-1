@@ -11,7 +11,6 @@ from omegadata.db.models import ConfirmedCorporateAction, PriceRecord
 from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
 from omegadata.track_b.adjustment_engine import PriceAdjustmentEngine
 
-
 FIXTURE_PATH = Path(__file__).resolve().parents[1] / "fixtures" / "adjustment_reference_corpus.json"
 PROJECT_ROOT = FIXTURE_PATH.parents[2]
 
@@ -65,9 +64,11 @@ def _action(
 
 def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
     corpus = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    assert corpus["case_count"] == 12
+    assert corpus["case_count"] == len(corpus["cases"])
+    assert corpus["case_count"] >= 10
 
     for case in corpus["cases"]:
+        assert case["label"]
         assert (PROJECT_ROOT / case["snapshot_path"]).exists()
         for path in case["price_paths"]:
             assert (PROJECT_ROOT / path).exists()

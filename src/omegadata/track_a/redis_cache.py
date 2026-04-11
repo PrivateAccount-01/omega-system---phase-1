@@ -20,4 +20,5 @@ class RedisCache:
         payload = self.client.get(key)
         if payload is None:
             return None
-        return json.loads(payload)
+        decoded = json.loads(str(payload))
+        return dict(decoded)

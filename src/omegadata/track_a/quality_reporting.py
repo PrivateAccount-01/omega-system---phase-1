@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from sqlalchemy import extract, func, select
@@ -29,6 +29,14 @@ class MonthlyDataQualityReporter:
         self.report_root = Path(settings.report_root)
         self.report_root.mkdir(parents=True, exist_ok=True)
 
+    @staticmethod
+    def _as_int(value: object, default: int = 0) -> int:
+        if isinstance(value, int):
+            return value
+        if isinstance(value, str):
+            return int(value)
+        return default
+
     def generate(self, session: Session, year: int, month: int) -> ReportResult:
         current = self.confidence.monthly_report(session, year=year, month=month)
         prev = self._prev_month(year, month)
@@ -37,17 +45,21 @@ class MonthlyDataQualityReporter:
         validation_stats = self._validation_summary(session, year, month)
         ca_coverage = self._corporate_action_coverage(session, year, month)
 
+        current_records = self._as_int(current["records"])
+        current_zero_confidence = self._as_int(current["zero_confidence_count"])
+        previous_records = self._as_int(previous.get("records", 0))
+        previous_zero_confidence = self._as_int(previous.get("zero_confidence_count", 0))
+
         report = {
-            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "generated_at": datetime.now(UTC).isoformat(),
             "period": {"year": year, "month": month},
-            "records_processed": current["records"],
+            "records_processed": current_records,
             "confidence_histogram": current["histogram"],
             "below_thresholds": current["below_thresholds"],
-            "zero_confidence_count": current["zero_confidence_count"],
+            "zero_confidence_count": current_zero_confidence,
             "trend_vs_previous_month": {
-                "records_delta": current["records"] - previous.get("records", 0),
-                "zero_confidence_delta": current["zero_confidence_count"]
-                - previous.get("zero_confidence_count", 0),
+                "records_delta": current_records - previous_records,
+                "zero_confidence_delta": current_zero_confidence - previous_zero_confidence,
             },
             "validation_summary": validation_stats,
             "corporate_action_dual_source_coverage": ca_coverage,
@@ -58,8 +70,8 @@ class MonthlyDataQualityReporter:
         out_path = out_dir / "data_quality_report.json"
         out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
-        if current["records"] > 0:
-            zero_rate = current["zero_confidence_count"] / current["records"]
+        if current_records > 0:
+            zero_rate = current_zero_confidence / current_records
             if zero_rate > 0.001:
                 self.alert_router.route(
                     AlertEvent(
@@ -69,7 +81,7 @@ class MonthlyDataQualityReporter:
                             f"Zero-confidence record ratio {zero_rate:.4%} exceeds 0.10% monthly threshold"
                         ),
                         source="monthly_quality_report",
-                        created_at=datetime.now(timezone.utc),
+                        created_at=datetime.now(UTC),
                     )
                 )
 
@@ -100,18 +112,24 @@ class MonthlyDataQualityReporter:
 
     @staticmethod
     def _corporate_action_coverage(session: Session, year: int, month: int) -> float:
-        total = session.scalar(
+        total = int(
+            session.scalar(
             select(func.count())
             .select_from(ConfirmedCorporateAction)
             .where(extract("year", ConfirmedCorporateAction.created_at) == year)
             .where(extract("month", ConfirmedCorporateAction.created_at) == month)
         )
-        high = session.scalar(
+            or 0
+        )
+        high = int(
+            session.scalar(
             select(func.count())
             .select_from(ConfirmedCorporateAction)
             .where(extract("year", ConfirmedCorporateAction.created_at) == year)
             .where(extract("month", ConfirmedCorporateAction.created_at) == month)
             .where(ConfirmedCorporateAction.confidence == ConfidenceLevel.HIGH)
+        )
+            or 0
         )
         if not total:
             return 0.0

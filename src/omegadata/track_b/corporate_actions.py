@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
@@ -7,9 +8,8 @@ from decimal import Decimal
 from sqlalchemy import and_, select
 from sqlalchemy.orm import Session
 
-from omegadata.db.models import CorporateActionStaging, ConfirmedCorporateAction, ManualReviewQueue
+from omegadata.db.models import ConfirmedCorporateAction, CorporateActionStaging, ManualReviewQueue
 from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
-
 
 REQUIRED_FIELDS: dict[CorporateActionType, tuple[str, ...]] = {
     CorporateActionType.BONUS: (
@@ -50,10 +50,76 @@ class ConfirmationResult:
 
 class CorporateActionService:
     @staticmethod
-    def _validate_required_fields(action_type: CorporateActionType, payload: dict[str, object]) -> list[str]:
+    def _validate_required_fields(action_type: CorporateActionType, payload: Mapping[str, object]) -> list[str]:
         required = REQUIRED_FIELDS.get(action_type, ("isin", "ex_date"))
         missing = [field for field in required if payload.get(field) in (None, "")]
         return missing
+
+    @staticmethod
+    def _review_exists(
+        session: Session,
+        *,
+        category: str,
+        isin: str | None,
+        event_date: date | None,
+        reason: str,
+    ) -> bool:
+        review_id = session.scalar(
+            select(ManualReviewQueue.id)
+            .where(ManualReviewQueue.category == category)
+            .where(ManualReviewQueue.isin == isin)
+            .where(ManualReviewQueue.event_date == event_date)
+            .where(ManualReviewQueue.reason == reason)
+            .where(ManualReviewQueue.resolved.is_(False))
+        )
+        return review_id is not None
+
+    def _queue_review(
+        self,
+        session: Session,
+        *,
+        category: str,
+        isin: str | None,
+        event_date: date | None,
+        reason: str,
+        payload: dict[str, str],
+    ) -> None:
+        if self._review_exists(
+            session,
+            category=category,
+            isin=isin,
+            event_date=event_date,
+            reason=reason,
+        ):
+            return
+        session.add(
+            ManualReviewQueue(
+                category=category,
+                isin=isin,
+                event_date=event_date,
+                reason=reason,
+                payload=payload,
+            )
+        )
+
+    def _required_fields_complete(
+        self,
+        session: Session,
+        *,
+        row: CorporateActionStaging,
+    ) -> bool:
+        errors = self._validate_required_fields(row.action_type, row.payload)
+        if not errors:
+            return True
+        self._queue_review(
+            session,
+            category="CORPORATE_ACTION_REQUIRED_FIELDS",
+            isin=row.isin,
+            event_date=row.ex_date,
+            reason="Missing required fields in corporate action payload",
+            payload={"missing_fields": ",".join(errors), "source": row.source.value},
+        )
+        return False
 
     def add_staging_record(
         self,
@@ -90,28 +156,36 @@ class CorporateActionService:
         results: list[ConfirmationResult] = []
         for (_isin, _ex_date), rows in grouped.items():
             nse = next((r for r in rows if r.source == Exchange.NSE), None)
-            bse = next((r for r in rows if r.source == Exchange.BSE), None)
+            bse = next((r for r in rows if r.source in {Exchange.BSE, Exchange.BSE_ONLY}), None)
 
             if nse and bse:
-                results.append(self._confirm_pair(session=session, nse=nse, bse=bse))
+                confirmed = self._confirm_pair(session=session, nse=nse, bse=bse)
+                if confirmed is not None:
+                    results.append(confirmed)
                 continue
-            if nse:
-                results.append(self._confirm_single(session=session, row=nse, confidence=ConfidenceLevel.MEDIUM))
-                continue
-            if bse:
-                results.append(self._confirm_single(session=session, row=bse, confidence=ConfidenceLevel.LOW))
 
-        unmatched_old = [r for r in staged if not r.matched and self._is_stale_unmatched(r, as_of)]
-        for row in unmatched_old:
-            session.add(
-                ManualReviewQueue(
-                    category="CORPORATE_ACTION_UNMATCHED",
-                    isin=row.isin,
-                    event_date=row.ex_date,
-                    reason="Unmatched staging record older than 48 hours",
-                    payload={"source": row.source.value, "action_type": row.action_type.value},
-                )
+            lone = nse or bse or rows[0]
+            if not self._is_stale_unmatched(lone, as_of):
+                continue
+
+            self._queue_review(
+                session,
+                category="CORPORATE_ACTION_UNMATCHED",
+                isin=lone.isin,
+                event_date=lone.ex_date,
+                reason="Unmatched staging record older than 48 hours",
+                payload={"source": lone.source.value, "action_type": lone.action_type.value},
             )
+            self._required_fields_complete(session, row=lone)
+            if lone.source != Exchange.NSE:
+                self._queue_review(
+                    session,
+                    category="CORPORATE_ACTION_SOURCE_GAP",
+                    isin=lone.isin,
+                    event_date=lone.ex_date,
+                    reason="BSE record found without NSE match",
+                    payload={"action_type": lone.action_type.value},
+                )
 
         return results
 
@@ -137,43 +211,32 @@ class CorporateActionService:
         session: Session,
         nse: CorporateActionStaging,
         bse: CorporateActionStaging,
-    ) -> ConfirmationResult:
+    ) -> ConfirmationResult | None:
         if nse.action_type != bse.action_type:
             confidence = ConfidenceLevel.MEDIUM
-            session.add(
-                ManualReviewQueue(
-                    category="CORPORATE_ACTION_TYPE_MISMATCH",
-                    isin=nse.isin,
-                    event_date=nse.ex_date,
-                    reason="NSE and BSE action type mismatch",
-                    payload={"nse": nse.action_type.value, "bse": bse.action_type.value},
-                )
+            self._queue_review(
+                session,
+                category="CORPORATE_ACTION_TYPE_MISMATCH",
+                isin=nse.isin,
+                event_date=nse.ex_date,
+                reason="NSE and BSE action type mismatch",
+                payload={"nse": nse.action_type.value, "bse": bse.action_type.value},
             )
         else:
             mismatch = self._payload_mismatch(nse.payload, bse.payload)
             confidence = ConfidenceLevel.HIGH if not mismatch else ConfidenceLevel.MEDIUM
             if mismatch:
-                session.add(
-                    ManualReviewQueue(
-                        category="CORPORATE_ACTION_PARAMETER_MISMATCH",
-                        isin=nse.isin,
-                        event_date=nse.ex_date,
-                        reason="NSE and BSE corporate action parameters disagree",
-                        payload={"differences": ",".join(mismatch)},
-                    )
-                )
-
-        errors = self._validate_required_fields(nse.action_type, nse.payload)
-        if errors:
-            session.add(
-                ManualReviewQueue(
-                    category="CORPORATE_ACTION_REQUIRED_FIELDS",
+                self._queue_review(
+                    session,
+                    category="CORPORATE_ACTION_PARAMETER_MISMATCH",
                     isin=nse.isin,
                     event_date=nse.ex_date,
-                    reason="Missing required fields in corporate action payload",
-                    payload={"missing_fields": ",".join(errors), "source": "NSE"},
+                    reason="NSE and BSE corporate action parameters disagree",
+                    payload={"differences": ",".join(mismatch)},
                 )
-            )
+
+        if not self._required_fields_complete(session, row=nse):
+            return None
 
         confirmed = ConfirmedCorporateAction(
             isin=nse.isin,
@@ -195,27 +258,17 @@ class CorporateActionService:
     def _confirm_single(
         self, session: Session, row: CorporateActionStaging, confidence: ConfidenceLevel
     ) -> ConfirmationResult:
-        errors = self._validate_required_fields(row.action_type, row.payload)
-        if errors:
-            session.add(
-                ManualReviewQueue(
-                    category="CORPORATE_ACTION_REQUIRED_FIELDS",
-                    isin=row.isin,
-                    event_date=row.ex_date,
-                    reason="Missing required fields in corporate action payload",
-                    payload={"missing_fields": ",".join(errors), "source": row.source.value},
-                )
-            )
+        if not self._required_fields_complete(session, row=row):
+            raise ValueError(f"Corporate action {row.id} cannot be auto-confirmed with missing required fields")
 
         if confidence == ConfidenceLevel.LOW:
-            session.add(
-                ManualReviewQueue(
-                    category="CORPORATE_ACTION_SOURCE_GAP",
-                    isin=row.isin,
-                    event_date=row.ex_date,
-                    reason="BSE record found without NSE match",
-                    payload={"action_type": row.action_type.value},
-                )
+            self._queue_review(
+                session,
+                category="CORPORATE_ACTION_SOURCE_GAP",
+                isin=row.isin,
+                event_date=row.ex_date,
+                reason="BSE record found without NSE match",
+                payload={"action_type": row.action_type.value},
             )
 
         confirmed = ConfirmedCorporateAction(
@@ -235,7 +288,7 @@ class CorporateActionService:
         return ConfirmationResult(confirmed_id=confirmed.id, confidence=confidence)
 
     @staticmethod
-    def _payload_mismatch(nse_payload: dict[str, object], bse_payload: dict[str, object]) -> list[str]:
+    def _payload_mismatch(nse_payload: Mapping[str, object], bse_payload: Mapping[str, object]) -> list[str]:
         mismatches: list[str] = []
         shared_keys = set(nse_payload) & set(bse_payload)
         for key in sorted(shared_keys):
@@ -252,14 +305,14 @@ class CorporateActionService:
     @staticmethod
     def _numerically_close(left: object, right: object, tolerance: Decimal) -> bool:
         try:
-            l = Decimal(str(left))
-            r = Decimal(str(right))
+            left_dec = Decimal(str(left))
+            right_dec = Decimal(str(right))
         except Exception:
             return False
 
-        if r == 0:
-            return l == 0
-        rel = abs((l - r) / r)
+        if right_dec == 0:
+            return left_dec == 0
+        rel = abs((left_dec - right_dec) / right_dec)
         return rel <= tolerance
 
     def apply_correction(
@@ -289,12 +342,14 @@ class CorporateActionService:
         return corrected
 
     def get_active_actions(self, session: Session, isin: str) -> list[ConfirmedCorporateAction]:
-        return session.scalars(
+        return list(
+            session.scalars(
             select(ConfirmedCorporateAction)
             .where(ConfirmedCorporateAction.isin == isin)
             .where(ConfirmedCorporateAction.superseded.is_(False))
             .order_by(ConfirmedCorporateAction.ex_date.asc())
-        ).all()
+            ).all()
+        )
 
     def get_action_on_date(
         self,

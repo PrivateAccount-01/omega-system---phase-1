@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import json
 from datetime import date
 from decimal import Decimal
-import json
 from pathlib import Path
 
 import pandas as pd
@@ -13,7 +13,6 @@ from omegadata.db.base import Base
 from omegadata.domain import Exchange, InstrumentType
 from omegadata.track_b.isin_master import ISINMasterService
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
-
 
 SEED_PACK_PATH = Path(__file__).resolve().parents[1] / "fixtures" / "pit_universe_seed_pack.json"
 PROJECT_ROOT = SEED_PACK_PATH.parents[2]

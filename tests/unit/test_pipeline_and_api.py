@@ -1,14 +1,13 @@
 from __future__ import annotations
 
+import json
 import os
 from datetime import date
 from decimal import Decimal
-import json
 from pathlib import Path
 
 from fastapi.testclient import TestClient
-from sqlalchemy import delete
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
 os.environ["OMEGA_DB_URL"] = "sqlite:///./test_api.db"
 
@@ -19,6 +18,7 @@ from omegadata.db.models import CorporateActionStaging, PriceRecord
 from omegadata.db.session import get_session, init_db
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+from omegadata.track_a.download_manager import DownloadManager
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.isin_master import ISINMasterService
 
@@ -46,6 +46,7 @@ def test_api_threshold_enforcement() -> None:
                             is_secondary_source=False,
                             cross_validation_available=True,
                             cross_validation_discrepancy_pct=Decimal("0.0"),
+                            cross_validation_failed=False,
                             has_medium_ca=False,
                             has_low_ca=False,
                             rights_subscription_fallback_zero=False,
@@ -70,6 +71,7 @@ def test_api_threshold_enforcement() -> None:
                             is_secondary_source=True,
                             cross_validation_available=False,
                             cross_validation_discrepancy_pct=None,
+                            cross_validation_failed=False,
                             has_medium_ca=False,
                             has_low_ca=False,
                             rights_subscription_fallback_zero=False,
@@ -217,3 +219,143 @@ def test_nse_subject_parsing_extracts_core_corporate_action_parameters(
 
     assert dividend.action_type == CorporateActionType.DIVIDEND_CASH
     assert dividend.payload["dividend_per_share"] == "0.60"
+
+
+def test_run_track_b_preserves_failed_cross_source_validation_penalty(tmp_path: Path) -> None:
+    db_path = tmp_path / "trackb_penalty.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    settings.market_proxy_isin = "MARKET000001"
+    init_db()
+
+    with get_session() as session:
+        session.execute(delete(PriceRecord))
+        session.add_all(
+            [
+                PriceRecord(
+                    isin="INE009A01021",
+                    exchange=Exchange.NSE,
+                    trade_date=date(2024, 1, 1),
+                    open_price=Decimal("100"),
+                    high_price=Decimal("100"),
+                    low_price=Decimal("100"),
+                    close_price=Decimal("100"),
+                    volume=Decimal("100"),
+                    raw_source="nse_bhavcopy",
+                    confidence_score=Decimal("1.00"),
+                ),
+                PriceRecord(
+                    isin="INE009A01021",
+                    exchange=Exchange.BSE,
+                    trade_date=date(2024, 1, 1),
+                    open_price=Decimal("110"),
+                    high_price=Decimal("110"),
+                    low_price=Decimal("110"),
+                    close_price=Decimal("110"),
+                    volume=Decimal("100"),
+                    raw_source="bse_bhavcopy",
+                    confidence_score=Decimal("1.00"),
+                ),
+                PriceRecord(
+                    isin="MARKET000001",
+                    exchange=Exchange.NSE,
+                    trade_date=date(2024, 1, 1),
+                    open_price=Decimal("200"),
+                    high_price=Decimal("200"),
+                    low_price=Decimal("200"),
+                    close_price=Decimal("200"),
+                    volume=Decimal("100"),
+                    raw_source="nse_bhavcopy",
+                    confidence_score=Decimal("1.00"),
+                ),
+            ]
+        )
+
+    OmegaDataSequentialPipeline().run_track_b(as_of=date(2024, 1, 1), market_isin="MARKET000001")
+
+    with get_session() as session:
+        row = session.scalar(
+            select(PriceRecord)
+            .where(PriceRecord.isin == "INE009A01021")
+            .where(PriceRecord.exchange == Exchange.NSE)
+            .where(PriceRecord.trade_date == date(2024, 1, 1))
+        )
+        assert row is not None
+        assert Decimal(str(row.confidence_score)) == Decimal("0.50")
+
+
+def test_run_track_b_requires_explicit_market_proxy(tmp_path: Path) -> None:
+    db_path = tmp_path / "trackb_market_proxy.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    settings.market_proxy_isin = ""
+    init_db()
+
+    with get_session() as session:
+        session.execute(delete(PriceRecord))
+        session.add(
+            PriceRecord(
+                isin="INE009A01021",
+                exchange=Exchange.NSE,
+                trade_date=date(2024, 1, 1),
+                open_price=Decimal("100"),
+                high_price=Decimal("100"),
+                low_price=Decimal("100"),
+                close_price=Decimal("100"),
+                volume=Decimal("100"),
+                raw_source="nse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            )
+        )
+
+    try:
+        OmegaDataSequentialPipeline().run_track_b(as_of=date(2024, 1, 1), market_isin=None)
+        raise AssertionError("expected ValueError when market proxy is absent")
+    except ValueError as exc:
+        assert "market_isin is required" in str(exc)
+
+
+def test_bse_bhavcopy_loader_preserves_official_ohlc(tmp_path: Path, db_session) -> None:
+    csv_payload = (
+        "SC_CODE,SC_NAME,OPEN,HIGH,LOW,CLOSE,NO_OF_SHRS,ISIN_CODE\n"
+        "500112,SBI,601.5,612.0,598.0,610.25,250000,INE062A01020\n"
+    )
+    zip_path = tmp_path / "bse.zip"
+    import zipfile
+
+    with zipfile.ZipFile(zip_path, "w") as zf:
+        zf.writestr("EQ_ISINCODE_010124.CSV", csv_payload)
+
+    loaded = OmegaDataSequentialPipeline()._load_bse_bhavcopy_prices(
+        db_session,
+        zip_path,
+        date(2024, 1, 1),
+    )
+    row = db_session.scalar(select(PriceRecord).where(PriceRecord.exchange == Exchange.BSE))
+    assert loaded == 1
+    assert row is not None
+    assert Decimal(str(row.open_price)) == Decimal("601.5")
+    assert Decimal(str(row.high_price)) == Decimal("612.0")
+    assert Decimal(str(row.low_price)) == Decimal("598.0")
+    assert Decimal(str(row.close_price)) == Decimal("610.25")
+    assert row.raw_source == "bse_bhavcopy"
+
+
+def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, monkeypatch) -> None:
+    settings.raw_root = str(tmp_path)
+    manager = DownloadManager()
+    payloads = [b"first-payload", b"second-payload"]
+
+    def fake_request(*args, **kwargs):
+        return payloads.pop(0)
+
+    monkeypatch.setattr(manager, "_bootstrap_nse_session", lambda client: None)
+    monkeypatch.setattr(manager, "_request_with_workarounds", fake_request)
+    monkeypatch.setattr(manager, "_validate_payload", lambda source_key, payload: None)
+
+    first = manager.download("NSE_EQUITY_BHAVCOPY", date(2024, 1, 2))
+    second = manager.download("NSE_EQUITY_BHAVCOPY", date(2024, 1, 2))
+
+    assert first.path != second.path
+    assert first.path.exists()
+    assert second.path.exists()
+    assert first.manifest_path.exists()
+    assert second.manifest_path.exists()

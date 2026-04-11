@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import hashlib
 import json
-import ssl
-from dataclasses import dataclass
-from datetime import date, datetime, timezone
-from pathlib import Path
 import random
+import ssl
 import time
+from dataclasses import dataclass
+from datetime import UTC, date, datetime
+from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -29,6 +29,7 @@ class DownloadArtifact:
     source_key: str
     as_of: date
     path: Path
+    manifest_path: Path
     checksum: str
     bytes_downloaded: int
     used_url: str
@@ -151,7 +152,7 @@ class DownloadManager:
         req = Request(url=url, headers=headers, method="GET")
         try:
             with urlopen(req, timeout=60.0, context=context) as response:
-                payload = response.read()
+                payload = bytes(response.read())
         except HTTPError as exc:
             raise DownloadError(f"HTTP {exc.code} via urllib for {url}") from exc
         except URLError as exc:
@@ -184,6 +185,7 @@ class DownloadManager:
             pattern.replace("{YYYY}", f"{as_of.year:04d}")
             .replace("{MM}", f"{as_of.month:02d}")
             .replace("{DD}", f"{as_of.day:02d}")
+            .replace("{DDMMYY}", as_of.strftime("%d%m%y"))
             .replace("{YYYYMMDD}", as_of.strftime("%Y%m%d"))
             .replace("{DDMONYYYY}", as_of.strftime("%d%b%Y").upper())
             .replace("{MON}", as_of.strftime("%b").upper())
@@ -215,9 +217,10 @@ class DownloadManager:
             except Exception as exc:  # noqa: BLE001
                 raise DownloadError(f"Non-JSON payload for {source_key}") from exc
 
-            if source_key == "NSE_CORPORATE_ACTIONS" and isinstance(parsed, dict):
-                if str(parsed.get("message", "")).lower().startswith("missing index"):
-                    raise DownloadError("NSE corporate actions payload indicates missing index")
+            if source_key == "NSE_CORPORATE_ACTIONS" and isinstance(parsed, dict) and str(
+                parsed.get("message", "")
+            ).lower().startswith("missing index"):
+                raise DownloadError("NSE corporate actions payload indicates missing index")
 
     def download(self, source_key: str, as_of: date) -> DownloadArtifact:
         if source_key not in SOURCE_REGISTRY:
@@ -267,7 +270,7 @@ class DownloadManager:
                         f"Last error: {last_error}"
                     ),
                     source="download_manager",
-                    created_at=datetime.now(timezone.utc),
+                    created_at=datetime.now(UTC),
                 )
             )
             raise DownloadError(
@@ -280,7 +283,7 @@ class DownloadManager:
                     title="Source Failover Triggered",
                     message=f"{source_key} succeeded after failover in {attempts} attempts via {used_url}",
                     source="download_manager",
-                    created_at=datetime.now(timezone.utc),
+                    created_at=datetime.now(UTC),
                 )
             )
         DOWNLOAD_COUNTER.labels(source=source_key, status="success").inc()
@@ -299,12 +302,33 @@ class DownloadManager:
         elif used_url.endswith(".txt"):
             suffix = ".txt"
 
-        output = out_dir / f"{as_of.strftime('%Y%m%d')}{suffix}"
-        output.write_bytes(payload)
+        artifact_stem = f"{as_of.strftime('%Y%m%d')}__{digest[:12]}"
+        output = out_dir / f"{artifact_stem}{suffix}"
+        if not output.exists():
+            output.write_bytes(payload)
+
+        manifest_payload = {
+            "source_key": source_key,
+            "as_of": as_of.isoformat(),
+            "checksum": digest,
+            "storage_mode": "immutable_versioned",
+            "artifact_path": str(output),
+            "bytes_downloaded": len(payload),
+            "used_url": used_url,
+            "attempts": attempts,
+            "downloaded_at": datetime.now(UTC).isoformat(),
+        }
+        manifest_path = out_dir / f"{artifact_stem}.manifest.json"
+        if not manifest_path.exists():
+            manifest_path.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
+
+        latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+        latest_pointer.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
         return DownloadArtifact(
             source_key=source_key,
             as_of=as_of,
             path=output,
+            manifest_path=manifest_path,
             checksum=digest,
             bytes_downloaded=len(payload),
             used_url=used_url,

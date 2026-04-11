@@ -1,9 +1,11 @@
 {
-  "case_count": 12,
+  "case_count": 10,
   "cases": [
     {
+      "label": "VBL_2026-04-08_DIVIDEND_CASH",
       "isin": "INE200M01013",
       "symbol": "VBL",
+      "company_name": "Varun Beverages Limited",
       "action_type": "DIVIDEND_CASH",
       "ex_date": "2026-04-08",
       "record_date": "2026-04-08",
@@ -11,7 +13,7 @@
       "parameters": {
         "dividend_per_share": "0.50"
       },
-      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=04/20260402.bin",
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
       "price_paths": [
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
@@ -19,6 +21,7 @@
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
       ],
       "prices": [
@@ -51,6 +54,11 @@
           "trade_date": "2026-04-09",
           "close": "422.90",
           "volume": "5743167"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "431.60",
+          "volume": "5731496"
         },
         {
           "trade_date": "2026-04-10",
@@ -98,8 +106,100 @@
       ]
     },
     {
+      "label": "706GS2046_2026-04-09_DIVIDEND_CASH",
+      "isin": "IN0020160068",
+      "symbol": "706GS2046",
+      "company_name": "GOVERNMENT OF INDIA",
+      "action_type": "DIVIDEND_CASH",
+      "ex_date": "2026-04-09",
+      "record_date": "2026-04-09",
+      "subject": "Interest Payment",
+      "parameters": {},
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+      "price_paths": [
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260406.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
+      ],
+      "prices": [
+        {
+          "trade_date": "2026-04-01",
+          "close": "99.50",
+          "volume": "1000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "close": "99.50",
+          "volume": "2500"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "close": "99.00",
+          "volume": "8400"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "close": "98.25",
+          "volume": "601"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "99.00",
+          "volume": "551"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "99.00",
+          "volume": "551"
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-04-01",
+          "raw_close": "99.50",
+          "raw_volume": "1000",
+          "expected_adjusted_close": "99.500000",
+          "expected_adjusted_volume": "1000.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "raw_close": "99.50",
+          "raw_volume": "2500",
+          "expected_adjusted_close": "99.500000",
+          "expected_adjusted_volume": "2500.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "raw_close": "99.00",
+          "raw_volume": "8400",
+          "expected_adjusted_close": "99.000000",
+          "expected_adjusted_volume": "8400.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "raw_close": "98.25",
+          "raw_volume": "601",
+          "expected_adjusted_close": "98.250000",
+          "expected_adjusted_volume": "601.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        }
+      ]
+    },
+    {
+      "label": "JASH_2026-04-10_DIVIDEND_CASH",
       "isin": "INE039O01011",
       "symbol": "JASH",
+      "company_name": "Jash Engineering Limited",
       "action_type": "DIVIDEND_CASH",
       "ex_date": "2026-04-10",
       "record_date": "2026-04-10",
@@ -107,7 +207,7 @@
       "parameters": {
         "dividend_per_share": "0.60"
       },
-      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=04/20260402.bin",
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
       "price_paths": [
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
@@ -115,6 +215,7 @@
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
       ],
       "prices": [
@@ -147,6 +248,11 @@
           "trade_date": "2026-04-09",
           "close": "399.25",
           "volume": "68606"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "402.65",
+          "volume": "87889"
         },
         {
           "trade_date": "2026-04-10",
@@ -194,8 +300,633 @@
       ]
     },
     {
+      "label": "AUROPHARMA_2026-04-17_BUYBACK_OPEN_MARKET",
+      "isin": "INE406A01029",
+      "symbol": "AUROPHARMA",
+      "company_name": "Aurobindo Pharma Limited",
+      "action_type": "BUYBACK_OPEN_MARKET",
+      "ex_date": "2026-04-17",
+      "record_date": "2026-04-17",
+      "subject": "Buy Back",
+      "parameters": {},
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+      "price_paths": [
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260406.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
+      ],
+      "prices": [
+        {
+          "trade_date": "2026-04-01",
+          "close": "1342.10",
+          "volume": "2595497"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "close": "1333.70",
+          "volume": "1870240"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "close": "1340.40",
+          "volume": "1519668"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "close": "1330.00",
+          "volume": "1557945"
+        },
+        {
+          "trade_date": "2026-04-08",
+          "close": "1335.70",
+          "volume": "3256118"
+        },
+        {
+          "trade_date": "2026-04-09",
+          "close": "1340.40",
+          "volume": "938616"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "1349.40",
+          "volume": "907020"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "1349.40",
+          "volume": "907020"
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-04-01",
+          "raw_close": "1342.10",
+          "raw_volume": "2595497",
+          "expected_adjusted_close": "1342.100000",
+          "expected_adjusted_volume": "2595497.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "raw_close": "1333.70",
+          "raw_volume": "1870240",
+          "expected_adjusted_close": "1333.700000",
+          "expected_adjusted_volume": "1870240.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "raw_close": "1340.40",
+          "raw_volume": "1519668",
+          "expected_adjusted_close": "1340.400000",
+          "expected_adjusted_volume": "1519668.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "raw_close": "1330.00",
+          "raw_volume": "1557945",
+          "expected_adjusted_close": "1330.000000",
+          "expected_adjusted_volume": "1557945.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        }
+      ]
+    },
+    {
+      "label": "PASHUPATI_2026-04-17_SPLIT",
+      "isin": "INE124Y01010",
+      "symbol": "PASHUPATI",
+      "company_name": "Pashupati Cotspin Limited",
+      "action_type": "SPLIT",
+      "ex_date": "2026-04-17",
+      "record_date": "2026-04-17",
+      "subject": "Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share",
+      "parameters": {
+        "old_face_value": "10",
+        "new_face_value": "1"
+      },
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+      "price_paths": [
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260406.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
+      ],
+      "prices": [
+        {
+          "trade_date": "2026-04-01",
+          "close": "985.40",
+          "volume": "2816"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "close": "980.90",
+          "volume": "1356"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "close": "996.75",
+          "volume": "2642"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "close": "989.15",
+          "volume": "3691"
+        },
+        {
+          "trade_date": "2026-04-08",
+          "close": "1000.00",
+          "volume": "8945"
+        },
+        {
+          "trade_date": "2026-04-09",
+          "close": "997.55",
+          "volume": "2582"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "999.30",
+          "volume": "3575"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "999.30",
+          "volume": "3575"
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-04-01",
+          "raw_close": "985.40",
+          "raw_volume": "2816",
+          "expected_adjusted_close": "98.540000",
+          "expected_adjusted_volume": "28160.0000",
+          "expected_cumulative_price_factor": "0.100000000000",
+          "expected_cumulative_volume_factor": "10.000000000000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "raw_close": "980.90",
+          "raw_volume": "1356",
+          "expected_adjusted_close": "98.090000",
+          "expected_adjusted_volume": "13560.0000",
+          "expected_cumulative_price_factor": "0.100000000000",
+          "expected_cumulative_volume_factor": "10.000000000000"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "raw_close": "996.75",
+          "raw_volume": "2642",
+          "expected_adjusted_close": "99.675000",
+          "expected_adjusted_volume": "26420.0000",
+          "expected_cumulative_price_factor": "0.100000000000",
+          "expected_cumulative_volume_factor": "10.000000000000"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "raw_close": "989.15",
+          "raw_volume": "3691",
+          "expected_adjusted_close": "98.915000",
+          "expected_adjusted_volume": "36910.0000",
+          "expected_cumulative_price_factor": "0.100000000000",
+          "expected_cumulative_volume_factor": "10.000000000000"
+        }
+      ]
+    },
+    {
+      "label": "SANOFI_2026-04-22_DIVIDEND_CASH",
+      "isin": "INE058A01010",
+      "symbol": "SANOFI",
+      "company_name": "Sanofi India Limited",
+      "action_type": "DIVIDEND_CASH",
+      "ex_date": "2026-04-22",
+      "record_date": "2026-04-22",
+      "subject": "Dividend - Rs 48 Per Share",
+      "parameters": {
+        "dividend_per_share": "48"
+      },
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+      "price_paths": [
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260406.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
+      ],
+      "prices": [
+        {
+          "trade_date": "2026-04-01",
+          "close": "3262.40",
+          "volume": "35296"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "close": "3265.00",
+          "volume": "27203"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "close": "3339.70",
+          "volume": "38447"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "close": "3381.50",
+          "volume": "34701"
+        },
+        {
+          "trade_date": "2026-04-08",
+          "close": "3419.40",
+          "volume": "53323"
+        },
+        {
+          "trade_date": "2026-04-09",
+          "close": "3463.50",
+          "volume": "47179"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "3491.90",
+          "volume": "43320"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "3491.90",
+          "volume": "43320"
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-04-01",
+          "raw_close": "3262.40",
+          "raw_volume": "35296",
+          "expected_adjusted_close": "3262.400000",
+          "expected_adjusted_volume": "35296.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "raw_close": "3265.00",
+          "raw_volume": "27203",
+          "expected_adjusted_close": "3265.000000",
+          "expected_adjusted_volume": "27203.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "raw_close": "3339.70",
+          "raw_volume": "38447",
+          "expected_adjusted_close": "3339.700000",
+          "expected_adjusted_volume": "38447.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "raw_close": "3381.50",
+          "raw_volume": "34701",
+          "expected_adjusted_close": "3381.500000",
+          "expected_adjusted_volume": "34701.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        }
+      ]
+    },
+    {
+      "label": "CIEINDIA_2026-04-22_DIVIDEND_CASH",
+      "isin": "INE536H01010",
+      "symbol": "CIEINDIA",
+      "company_name": "CIE Automotive India Limited",
+      "action_type": "DIVIDEND_CASH",
+      "ex_date": "2026-04-22",
+      "record_date": "2026-04-22",
+      "subject": "Dividend - Rs 7 Per Share",
+      "parameters": {
+        "dividend_per_share": "7"
+      },
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+      "price_paths": [
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260406.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
+      ],
+      "prices": [
+        {
+          "trade_date": "2026-04-01",
+          "close": "454.95",
+          "volume": "104242"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "close": "456.10",
+          "volume": "122902"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "close": "467.65",
+          "volume": "285647"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "close": "458.65",
+          "volume": "140788"
+        },
+        {
+          "trade_date": "2026-04-08",
+          "close": "469.10",
+          "volume": "669723"
+        },
+        {
+          "trade_date": "2026-04-09",
+          "close": "479.60",
+          "volume": "434336"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "485.75",
+          "volume": "198186"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "485.75",
+          "volume": "198186"
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-04-01",
+          "raw_close": "454.95",
+          "raw_volume": "104242",
+          "expected_adjusted_close": "454.950000",
+          "expected_adjusted_volume": "104242.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "raw_close": "456.10",
+          "raw_volume": "122902",
+          "expected_adjusted_close": "456.100000",
+          "expected_adjusted_volume": "122902.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "raw_close": "467.65",
+          "raw_volume": "285647",
+          "expected_adjusted_close": "467.650000",
+          "expected_adjusted_volume": "285647.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "raw_close": "458.65",
+          "raw_volume": "140788",
+          "expected_adjusted_close": "458.650000",
+          "expected_adjusted_volume": "140788.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        }
+      ]
+    },
+    {
+      "label": "SCHAEFFLER_2026-04-23_DIVIDEND_CASH",
+      "isin": "INE513A01014",
+      "symbol": "SCHAEFFLER",
+      "company_name": "Schaeffler India Limited",
+      "action_type": "DIVIDEND_CASH",
+      "ex_date": "2026-04-23",
+      "record_date": "2026-04-23",
+      "subject": "Dividend - Rs 35 Per Share",
+      "parameters": {
+        "dividend_per_share": "35"
+      },
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+      "price_paths": [
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260406.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
+      ],
+      "prices": [
+        {
+          "trade_date": "2026-04-01",
+          "close": "3870.60",
+          "volume": "70468"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "close": "3764.40",
+          "volume": "89461"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "close": "3782.70",
+          "volume": "68166"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "close": "3706.40",
+          "volume": "90816"
+        },
+        {
+          "trade_date": "2026-04-08",
+          "close": "3884.70",
+          "volume": "155420"
+        },
+        {
+          "trade_date": "2026-04-09",
+          "close": "3846.10",
+          "volume": "236450"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "3905.50",
+          "volume": "154179"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "3905.50",
+          "volume": "154179"
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-04-01",
+          "raw_close": "3870.60",
+          "raw_volume": "70468",
+          "expected_adjusted_close": "3870.600000",
+          "expected_adjusted_volume": "70468.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "raw_close": "3764.40",
+          "raw_volume": "89461",
+          "expected_adjusted_close": "3764.400000",
+          "expected_adjusted_volume": "89461.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "raw_close": "3782.70",
+          "raw_volume": "68166",
+          "expected_adjusted_close": "3782.700000",
+          "expected_adjusted_volume": "68166.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "raw_close": "3706.40",
+          "raw_volume": "90816",
+          "expected_adjusted_close": "3706.400000",
+          "expected_adjusted_volume": "90816.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        }
+      ]
+    },
+    {
+      "label": "VESUVIUS_2026-04-30_DIVIDEND_CASH",
+      "isin": "INE386A01015",
+      "symbol": "VESUVIUS",
+      "company_name": "Vesuvius India Limited",
+      "action_type": "DIVIDEND_CASH",
+      "ex_date": "2026-04-30",
+      "record_date": "2026-04-30",
+      "subject": "Dividend - Rs 1.50 Per Share",
+      "parameters": {
+        "dividend_per_share": "1.50"
+      },
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+      "price_paths": [
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260406.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
+      ],
+      "prices": [
+        {
+          "trade_date": "2026-04-01",
+          "close": "443.65",
+          "volume": "127048"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "close": "458.50",
+          "volume": "173108"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "close": "456.20",
+          "volume": "66695"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "close": "452.50",
+          "volume": "93897"
+        },
+        {
+          "trade_date": "2026-04-08",
+          "close": "463.15",
+          "volume": "121259"
+        },
+        {
+          "trade_date": "2026-04-09",
+          "close": "456.15",
+          "volume": "151104"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "460.00",
+          "volume": "113592"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "460.00",
+          "volume": "113592"
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-04-01",
+          "raw_close": "443.65",
+          "raw_volume": "127048",
+          "expected_adjusted_close": "443.650000",
+          "expected_adjusted_volume": "127048.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-02",
+          "raw_close": "458.50",
+          "raw_volume": "173108",
+          "expected_adjusted_close": "458.500000",
+          "expected_adjusted_volume": "173108.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-06",
+          "raw_close": "456.20",
+          "raw_volume": "66695",
+          "expected_adjusted_close": "456.200000",
+          "expected_adjusted_volume": "66695.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        },
+        {
+          "trade_date": "2026-04-07",
+          "raw_close": "452.50",
+          "raw_volume": "93897",
+          "expected_adjusted_close": "452.500000",
+          "expected_adjusted_volume": "93897.0000",
+          "expected_cumulative_price_factor": "1.000000000000",
+          "expected_cumulative_volume_factor": "1.000000000000"
+        }
+      ]
+    },
+    {
+      "label": "RMDRIP_2026-04-10_BONUS",
       "isin": "INE219Y01018",
       "symbol": "RMDRIP",
+      "company_name": "R M Drip and Sprinklers Systems Limited",
       "action_type": "BONUS",
       "ex_date": "2026-04-10",
       "record_date": "2026-04-10",
@@ -204,7 +935,7 @@
         "bonus_ratio_numerator": "5",
         "bonus_ratio_denominator": "7"
       },
-      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=04/20260402.bin",
+      "snapshot_path": "data/raw/nse_corporate_actions/year=2026/month=03/20260330.bin",
       "price_paths": [
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260401.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260402.zip",
@@ -212,6 +943,7 @@
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260407.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260408.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260409.zip",
+        "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip",
         "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410.zip"
       ],
       "prices": [
@@ -244,6 +976,11 @@
           "trade_date": "2026-04-09",
           "close": "45.10",
           "volume": "1956793"
+        },
+        {
+          "trade_date": "2026-04-10",
+          "close": "26.78",
+          "volume": "1646738"
         },
         {
           "trade_date": "2026-04-10",

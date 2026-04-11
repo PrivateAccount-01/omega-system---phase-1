@@ -3,8 +3,6 @@ from __future__ import annotations
 from datetime import date
 from decimal import Decimal
 
-from sqlalchemy import select
-
 from omegadata.db.models import ConfirmedCorporateAction, ExclusionDate, PriceRecord
 from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
 from omegadata.track_b.discontinuity import DiscontinuityDetector
