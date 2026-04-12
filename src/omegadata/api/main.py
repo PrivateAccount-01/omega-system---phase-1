@@ -65,6 +65,8 @@ class PriceResponse(BaseModel):
     records: list[PriceOut]
     excluded_records: int
     excluded_date_range: tuple[date, date] | None
+    confidence_excluded_records: int = 0
+    confidence_excluded_date_range: tuple[date, date] | None = None
     blocked_records: int = 0
     blocked_date_range: tuple[date, date] | None = None
 
@@ -132,8 +134,15 @@ def _resolve_exchange(session: Session, isin: str, exchange: Exchange | None) ->
         raise HTTPException(
             status_code=400,
             detail="exchange is required when no canonical primary exchange is configured for the ISIN",
-        )
+    )
     return primary
+
+
+def _merge_ranges(*ranges: tuple[date, date] | None) -> tuple[date, date] | None:
+    values = [item for current in ranges if current is not None for item in current]
+    if not values:
+        return None
+    return min(values), max(values)
 
 @app.middleware("http")
 async def observe_requests(
@@ -226,11 +235,20 @@ def get_prices(
         ).all()
     )
 
-    kept, excluded_count, excluded_range = confidence.filter_records(rows, context)
+    publishable_rows = rows
+    blocked_rows: list[PriceRecord] = []
     blocked_count = 0
     blocked_range: tuple[date, date] | None = None
     if context != QueryContext.AUDIT:
-        kept, blocked_count, blocked_range = publication.filter_records(session, kept)
+        publishable_rows, blocked_rows, _ = publication.evaluate_records(session, rows)
+        blocked_count = len(blocked_rows)
+        if blocked_rows:
+            blocked_dates = sorted({row.trade_date for row in blocked_rows})
+            blocked_range = (blocked_dates[0], blocked_dates[-1])
+    kept, confidence_excluded_count, confidence_excluded_range = confidence.filter_records(
+        publishable_rows,
+        context,
+    )
     return PriceResponse(
         isin=isin,
         exchange=resolved_exchange,
@@ -248,8 +266,10 @@ def get_prices(
             )
             for r in kept
         ],
-        excluded_records=excluded_count + blocked_count,
-        excluded_date_range=excluded_range,
+        excluded_records=confidence_excluded_count + blocked_count,
+        excluded_date_range=_merge_ranges(confidence_excluded_range, blocked_range),
+        confidence_excluded_records=confidence_excluded_count,
+        confidence_excluded_date_range=confidence_excluded_range,
         blocked_records=blocked_count,
         blocked_date_range=blocked_range,
     )
@@ -291,6 +311,8 @@ def get_prices_audit(
         ],
         excluded_records=excluded_count,
         excluded_date_range=excluded_range,
+        confidence_excluded_records=excluded_count,
+        confidence_excluded_date_range=excluded_range,
     )
 
 
@@ -381,15 +403,13 @@ def publication_status(
             .order_by(PriceRecord.trade_date.asc())
         ).all()
     )
-    blocked_dates: list[date] = []
+    _publishable_rows, blocked_rows, reviews_with_policy = publication.evaluate_records(session, rows)
     blocks: list[PublicationBlockOut] = []
     seen_blocks: set[tuple[int, str]] = set()
-    for row in rows:
-        status = publication.status_for_row(session, row)
-        if status.state != PublicationState.BLOCKED:
-            continue
-        blocked_dates.append(row.trade_date)
-        for block in status.blocks:
+    blocked_dates = sorted({row.trade_date for row in blocked_rows})
+    _, blocks_by_date = publication.blocked_dates(rows, reviews_with_policy)
+    for current_date in blocked_dates:
+        for block in blocks_by_date.get(current_date, []):
             key = (block.review_id, block.category)
             if key in seen_blocks:
                 continue
@@ -403,7 +423,7 @@ def publication_status(
                     requires_reprocess=block.requires_reprocess,
                 )
             )
-    blocked_range = None if not blocked_dates else (min(blocked_dates), max(blocked_dates))
+    blocked_range = None if not blocked_dates else (blocked_dates[0], blocked_dates[-1])
     state = PublicationState.BLOCKED if blocked_dates else PublicationState.PUBLISHABLE
     return PublicationStatusOut(
         isin=isin,

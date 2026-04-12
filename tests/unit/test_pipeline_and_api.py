@@ -103,10 +103,14 @@ def test_api_threshold_enforcement(tmp_path: Path) -> None:
         backtest = client.get("/prices/INE009A01021?context=BACKTEST&exchange=NSE")
         assert backtest.status_code == 200
         assert len(backtest.json()["records"]) >= 1
+        assert backtest.json()["confidence_excluded_records"] == 0
+        assert backtest.json()["blocked_records"] == 0
 
         live = client.get("/prices/INE009A01021?context=LIVE_SIGNAL&exchange=NSE")
         assert live.status_code == 200
         assert live.json()["excluded_records"] >= 1
+        assert live.json()["confidence_excluded_records"] >= 1
+        assert live.json()["blocked_records"] == 0
 
 
 def test_verification_and_terminal_endpoints(tmp_path: Path, monkeypatch) -> None:
@@ -527,6 +531,8 @@ def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_pat
         assert prices.status_code == 200
         assert prices.json()["records"] == []
         assert prices.json()["blocked_records"] == 2
+        assert prices.json()["confidence_excluded_records"] == 0
+        assert prices.json()["excluded_date_range"] == ["2024-01-01", "2024-01-02"]
 
         status = client.get("/publication/status/INE222A01010?exchange=NSE", headers=headers)
         assert status.status_code == 200
@@ -559,3 +565,70 @@ def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_pat
         assert released.json()["state"] == PublicationState.PUBLISHABLE.value
         prices_after = client.get("/prices/INE222A01010?exchange=NSE&context=BACKTEST")
         assert len(prices_after.json()["records"]) == 2
+
+
+def test_false_positive_resolution_unblocks_without_reprocess(tmp_path: Path) -> None:
+    db_path = tmp_path / "api_false_positive.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    with get_session() as session:
+        session.execute(delete(ManualReviewQueue))
+        session.execute(delete(PriceRecord))
+        session.execute(delete(InstrumentMaster))
+        session.add(
+            InstrumentMaster(
+                isin="INE333A01010",
+                instrument_type=InstrumentType.EQUITY,
+                primary_exchange=Exchange.NSE,
+                company_name="False Positive Co",
+                listed_date=date(2020, 1, 1),
+                active=True,
+            )
+        )
+        session.add(
+            PriceRecord(
+                isin="INE333A01010",
+                exchange=Exchange.NSE,
+                trade_date=date(2024, 1, 1),
+                open_price=Decimal("10"),
+                high_price=Decimal("10"),
+                low_price=Decimal("10"),
+                close_price=Decimal("10"),
+                volume=Decimal("100"),
+                raw_source="nse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            )
+        )
+        session.add(
+            ManualReviewQueue(
+                category="CORPORATE_ACTION_UNMATCHED",
+                isin="INE333A01010",
+                event_date=date(2024, 1, 1),
+                reason="Unmatched staging record older than 48 hours",
+                payload={
+                    "requires_reprocess": True,
+                    "block_scope": "FORWARD_SERIES",
+                    "reprocess_status": "REVIEW_PENDING",
+                },
+                resolved=False,
+            )
+        )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        before = client.get("/publication/status/INE333A01010?exchange=NSE", headers=headers)
+        assert before.json()["state"] == PublicationState.BLOCKED.value
+
+        open_reviews = client.get("/reviews/open", headers=headers)
+        review_id = next(item["id"] for item in open_reviews.json() if item["isin"] == "INE333A01010")
+
+        resolution = client.post(
+            f"/reviews/{review_id}/resolve",
+            headers=headers,
+            json={"decision": "FALSE_POSITIVE", "reviewer": "ops", "notes": "source mismatch alert was incorrect"},
+        )
+        assert resolution.status_code == 200
+        assert resolution.json()["reprocess_status"] == "NOT_REQUIRED"
+
+        after = client.get("/publication/status/INE333A01010?exchange=NSE", headers=headers)
+        assert after.json()["state"] == PublicationState.PUBLISHABLE.value

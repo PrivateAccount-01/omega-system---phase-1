@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
+from functools import cache
 
 from omegadata.db.models import CorporateActionStaging
 
@@ -87,23 +88,49 @@ class CorporateActionMatcher:
         nse_rows: list[CorporateActionStaging],
         bse_rows: list[CorporateActionStaging],
     ) -> tuple[list[MatchedCorporateActionPair], list[CorporateActionStaging], list[CorporateActionStaging]]:
-        candidates: list[MatchedCorporateActionPair] = []
-        for nse in nse_rows:
-            for bse in bse_rows:
-                score = self.score_pair(nse, bse)
-                if score > 0:
-                    candidates.append(MatchedCorporateActionPair(nse=nse, bse=bse, score=score))
-        candidates.sort(key=lambda pair: pair.score, reverse=True)
+        score_grid = [
+            [max(self.score_pair(nse, bse), 0) for bse in bse_rows]
+            for nse in nse_rows
+        ]
+
+        @cache
+        def best_total(nse_index: int, used_mask: int) -> int:
+            if nse_index >= len(nse_rows):
+                return 0
+            best = best_total(nse_index + 1, used_mask)
+            for bse_index, score in enumerate(score_grid[nse_index]):
+                if score <= 0 or (used_mask & (1 << bse_index)):
+                    continue
+                best = max(
+                    best,
+                    score + best_total(nse_index + 1, used_mask | (1 << bse_index)),
+                )
+            return best
 
         matched_nse_ids: set[int] = set()
         matched_bse_ids: set[int] = set()
         pairs: list[MatchedCorporateActionPair] = []
-        for candidate in candidates:
-            if candidate.nse.id in matched_nse_ids or candidate.bse.id in matched_bse_ids:
+        used_mask = 0
+        for nse_index, nse in enumerate(nse_rows):
+            skip_total = best_total(nse_index + 1, used_mask)
+            chosen_bse_index: int | None = None
+            chosen_score = 0
+            for bse_index, score in enumerate(score_grid[nse_index]):
+                if score <= 0 or (used_mask & (1 << bse_index)):
+                    continue
+                candidate_total = score + best_total(nse_index + 1, used_mask | (1 << bse_index))
+                if candidate_total < skip_total:
+                    continue
+                if chosen_bse_index is None or score > chosen_score:
+                    chosen_bse_index = bse_index
+                    chosen_score = score
+            if chosen_bse_index is None:
                 continue
-            pairs.append(candidate)
-            matched_nse_ids.add(candidate.nse.id)
-            matched_bse_ids.add(candidate.bse.id)
+            bse = bse_rows[chosen_bse_index]
+            pairs.append(MatchedCorporateActionPair(nse=nse, bse=bse, score=chosen_score))
+            matched_nse_ids.add(nse.id)
+            matched_bse_ids.add(bse.id)
+            used_mask |= 1 << chosen_bse_index
 
         unmatched_nse = [row for row in nse_rows if row.id not in matched_nse_ids]
         unmatched_bse = [row for row in bse_rows if row.id not in matched_bse_ids]

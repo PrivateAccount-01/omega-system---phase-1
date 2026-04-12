@@ -43,9 +43,16 @@ def _reference_corpus_gaps() -> list[str]:
     if corpus is None:
         return ["adjustment reference corpus fixture is missing"]
 
+    hand_computed = _read_json("tests/fixtures/adjustment_reference_hand_computed.json")
+    if hand_computed is None:
+        return ["hand-computed adjustment reference corpus fixture is missing"]
+
     cases = corpus.get("cases", [])
     if not isinstance(cases, list):
         return ["adjustment reference corpus cases payload is malformed"]
+    hand_cases = hand_computed.get("cases", [])
+    if not isinstance(hand_cases, list):
+        return ["hand-computed adjustment reference corpus cases payload is malformed"]
 
     declared_count = corpus.get("case_count")
     actual_count = len(cases)
@@ -58,6 +65,28 @@ def _reference_corpus_gaps() -> list[str]:
         gaps.append(f"reference corpus has only {actual_count} official cases; expected at least 10")
     if any("label" not in case for case in cases if isinstance(case, dict)):
         gaps.append("reference corpus contains unlabeled cases")
+    hand_declared_count = hand_computed.get("case_count")
+    hand_actual_count = len(hand_cases)
+    if hand_declared_count != hand_actual_count:
+        gaps.append(
+            f"hand-computed reference corpus declares {hand_declared_count} cases but contains {hand_actual_count}"
+        )
+    if hand_actual_count < 12:
+        gaps.append(f"hand-computed reference corpus has only {hand_actual_count} cases; expected at least 12")
+    required_action_types = {"RIGHTS", "DEMERGER_PARENT", "MERGER_TARGET", "SPLIT_REVERSE"}
+    observed_action_types = {
+        str(action)
+        for case in hand_cases
+        if isinstance(case, dict)
+        for action in [case.get("action_type")] + [
+            row.get("action_type")
+            for row in case.get("actions", [])
+            if isinstance(row, dict)
+        ]
+        if action is not None
+    }
+    if not required_action_types.issubset(observed_action_types):
+        gaps.append("hand-computed reference corpus does not cover all required transformational action types")
     return gaps
 
 
@@ -196,6 +225,7 @@ def build_audit_items() -> list[AuditItem]:
                 "tests/unit/test_adjustment_engine.py",
                 "tests/unit/test_adjustment_reference_corpus.py",
                 "tests/fixtures/adjustment_reference_corpus.json",
+                "tests/fixtures/adjustment_reference_hand_computed.json",
                 "scripts/build_adjustment_reference_corpus.py",
             ],
             checks=(_reference_corpus_gaps,),
@@ -255,6 +285,7 @@ def build_audit_items() -> list[AuditItem]:
                 "tests/unit/test_adjustment_engine.py",
                 "tests/unit/test_adjustment_reference_corpus.py",
                 "tests/fixtures/adjustment_reference_corpus.json",
+                "tests/fixtures/adjustment_reference_hand_computed.json",
                 "scripts/build_adjustment_reference_corpus.py",
             ],
             checks=(_reference_corpus_gaps,),

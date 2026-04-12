@@ -12,6 +12,9 @@ from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
 from omegadata.track_b.adjustment_engine import PriceAdjustmentEngine
 
 FIXTURE_PATH = Path(__file__).resolve().parents[1] / "fixtures" / "adjustment_reference_corpus.json"
+HAND_COMPUTED_FIXTURE_PATH = (
+    Path(__file__).resolve().parents[1] / "fixtures" / "adjustment_reference_hand_computed.json"
+)
 PROJECT_ROOT = FIXTURE_PATH.parents[2]
 
 
@@ -131,6 +134,97 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
     assert bonus_pre_row is not None
     assert bonus_pre_row.adjustment_chain[0]["action_type"] == "BONUS"
     assert bonus_pre_row.adjustment_chain[0]["ca_confidence"] == "HIGH"
+
+
+def test_reference_corpus_hand_computed_transformational_cases(db_session) -> None:
+    corpus = json.loads(HAND_COMPUTED_FIXTURE_PATH.read_text(encoding="utf-8"))
+    assert corpus["case_count"] == len(corpus["cases"])
+    assert corpus["case_count"] >= 12
+
+    action_types = set()
+    sequential_cases = 0
+    engine = PriceAdjustmentEngine()
+
+    for case in corpus["cases"]:
+        assert case["label"]
+        for row in case["prices"]:
+            _price(
+                db_session,
+                isin=case["isin"],
+                trade_date=date.fromisoformat(row["trade_date"]),
+                close=row["close"],
+                volume=row["volume"],
+            )
+        for row in case.get("aux_prices", []):
+            _price(
+                db_session,
+                isin=row["isin"],
+                trade_date=date.fromisoformat(row["trade_date"]),
+                close=row["close"],
+                volume=row["volume"],
+            )
+        actions = case["actions"]
+        if len(actions) > 1:
+            sequential_cases += 1
+        for action in actions:
+            action_types.add(action["action_type"])
+            db_session.add(
+                _action(
+                    isin=case["isin"],
+                    action_type=CorporateActionType(action["action_type"]),
+                    ex_date=date.fromisoformat(action["ex_date"]),
+                    parameters=dict(action["parameters"]),
+                )
+            )
+
+    db_session.flush()
+
+    for case in corpus["cases"]:
+        engine.recompute_adjusted_series(db_session, case["isin"])
+        for assertion in case["assertions"]:
+            row = db_session.scalar(
+                select(PriceRecord)
+                .where(PriceRecord.isin == case["isin"])
+                .where(PriceRecord.trade_date == date.fromisoformat(assertion["trade_date"]))
+            )
+            assert row is not None
+            assert Decimal(str(row.adjusted_close_price)) == Decimal(assertion["expected_adjusted_close"])
+            assert Decimal(str(row.adjusted_volume)) == Decimal(assertion["expected_adjusted_volume"])
+            assert Decimal(str(row.cumulative_price_factor)) == Decimal(
+                assertion["expected_cumulative_price_factor"]
+            )
+            assert Decimal(str(row.cumulative_volume_factor)) == Decimal(
+                assertion["expected_cumulative_volume_factor"]
+            )
+
+    rights_fallback = db_session.scalar(
+        select(PriceRecord)
+        .where(PriceRecord.isin == "MANUAL000005")
+        .where(PriceRecord.trade_date == date(2026, 1, 1))
+    )
+    preliminary_demerger = db_session.scalar(
+        select(PriceRecord)
+        .where(PriceRecord.isin == "MANUAL000006")
+        .where(PriceRecord.trade_date == date(2026, 1, 1))
+    )
+    final_demerger = db_session.scalar(
+        select(PriceRecord)
+        .where(PriceRecord.isin == "MANUAL000007")
+        .where(PriceRecord.trade_date == date(2026, 1, 1))
+    )
+    assert rights_fallback is not None
+    assert preliminary_demerger is not None
+    assert final_demerger is not None
+    assert rights_fallback.adjustment_chain[0]["subscription_price_fallback_zero"] is True
+    assert preliminary_demerger.adjustment_chain[0]["demerger_adjustment_stage"] == "PRELIMINARY"
+    assert final_demerger.adjustment_chain[0]["demerger_adjustment_stage"] == "FINAL"
+    assert sequential_cases >= 2
+    assert {
+        "RIGHTS",
+        "DEMERGER_PARENT",
+        "MERGER_TARGET",
+        "SPLIT_REVERSE",
+    }.issubset(action_types)
 
 
 def test_reference_corpus_multiple_action_chain_and_demerger_finalization(db_session) -> None:

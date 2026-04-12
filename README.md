@@ -1,6 +1,6 @@
 # OmegaData
 
-OmegaData is the production data layer for Indian equity market data with strict specification-driven behavior for corporate action handling, confidence scoring, point-in-time universes, and cross-source validation.
+OmegaData is a pre-production financial data platform for Indian equity market data with strict specification-driven behavior for corporate action handling, confidence scoring, point-in-time universes, and cross-source validation.
 
 Default transactional backend is PostgreSQL and schema lifecycle is managed through Alembic migrations.
 
@@ -32,19 +32,25 @@ pytest tests/unit
 pytest -m realdata tests/integration
 ```
 
-5. Run API server:
+5. Generate a live-source probe artifact for operational verification:
+
+```bash
+python scripts/generate_source_probe_report.py
+```
+
+6. Run API server:
 
 ```bash
 uvicorn omegadata.api.main:app --reload
 ```
 
-6. Apply database migrations:
+7. Apply database migrations:
 
 ```bash
 alembic upgrade head
 ```
 
-7. Start local infrastructure stack:
+8. Start local infrastructure stack:
 
 ```bash
 docker compose up -d
@@ -59,6 +65,12 @@ docker compose up -d
 - `infra/clickhouse`: DDL for analytics warehouse.
 - `alembic`: PostgreSQL schema migrations.
 - `infra/monitoring`: Prometheus, Alertmanager, and Grafana provisioning.
+
+## Maturity
+
+- This repo is in pre-production hardening, not claimed production-grade trust infrastructure.
+- Unit and integration tests are meaningful, but live-source robustness must be proven by recurring external probe artifacts and operational review.
+- Internal verification endpoints are intended for controlled environments and should be protected behind API access.
 
 ## Operations
 

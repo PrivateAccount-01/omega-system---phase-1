@@ -89,8 +89,6 @@ class CrossSourceValidator:
                     tolerance=Decimal("0.0010"),
                 )
                 outcomes.append(outcome)
-                if outcome.result == ValidationResult.FAIL:
-                    nse.confidence_score = Decimal("0.00")
             signed_diffs.append(Decimal(str(nse.close_price)) - Decimal(str(bse.close_price)))
 
         self._detect_systematic_disagreement(session, isin, signed_diffs)

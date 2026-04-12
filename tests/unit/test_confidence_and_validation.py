@@ -93,6 +93,14 @@ def test_cross_source_price_validation_warn_and_fail(db_session) -> None:
     outcomes = CrossSourceValidator().validate_nse_bse_prices(db_session, "INE009A01021")
     assert any(o.result.value == "WARN" for o in outcomes)
     assert any(o.result.value == "FAIL" for o in outcomes)
+    failed_row = db_session.scalar(
+        select(PriceRecord)
+        .where(PriceRecord.isin == "INE009A01021")
+        .where(PriceRecord.exchange == Exchange.NSE)
+        .where(PriceRecord.trade_date == date(2024, 1, 2))
+    )
+    assert failed_row is not None
+    assert Decimal(str(failed_row.confidence_score)) == Decimal("1.00")
 
 
 def test_cross_source_ca_type_mismatch_creates_review(db_session) -> None:

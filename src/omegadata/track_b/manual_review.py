@@ -138,7 +138,9 @@ class ManualReviewService:
         }
         review.resolved = True
 
-        if requires_reprocess and decision != ReviewDecision.OVERRIDE_APPROVED:
+        if decision in {ReviewDecision.FALSE_POSITIVE, ReviewDecision.OVERRIDE_APPROVED}:
+            payload["reprocess_status"] = "NOT_REQUIRED"
+        elif requires_reprocess:
             payload["reprocess_status"] = "PENDING"
             request = {
                 "review_id": review.id,
