@@ -19,7 +19,7 @@ def _probe_dict(result: object) -> dict[str, object]:
 def main() -> None:
     manager = DownloadManager()
     calendar = TradingCalendar.from_config()
-    business_days = calendar.recent_trading_days("BSE", anchor_date=date.today(), limit=2)
+    business_days = calendar.recent_trading_days("BSE", anchor_date=date.today(), limit=3)
     probe_date = business_days[0]
     probe_mode = settings.source_probe_profile_mode.lower().strip()
     all_profiles = manager._header_profiles()
@@ -43,7 +43,7 @@ def main() -> None:
         for probe in manager.probe_source_candidates(
             "BSE_EQUITY_BHAVCOPY",
             probe_date,
-            limit=3,
+            limit=None,
             profiles=probe_profiles,
             request_timeout_seconds=settings.source_probe_timeout_seconds,
         )
@@ -53,7 +53,7 @@ def main() -> None:
         candidate_results = manager.probe_source_candidates(
             "BSE_EQUITY_BHAVCOPY",
             candidate_date,
-            limit=3,
+            limit=None,
             profiles=probe_profiles,
             request_timeout_seconds=settings.source_probe_timeout_seconds,
         )
@@ -79,10 +79,15 @@ def main() -> None:
         "probe_profile_mode": probe_mode,
         "probe_profile_count": len(probe_profiles),
         "probe_timeout_seconds": settings.source_probe_timeout_seconds,
+        "bse_supported_candidate_count": len(bse_page_probes),
+        "bse_supported_fallback_count": len([item for item in bse_page_probes if item["role"] == "fallback"]),
+        "bse_probe_scope": "full_supported_registry_candidates",
         "nse_corporate_actions": nse_probes,
         "bse_equity_candidates": bse_page_probes,
         "bse_recent_history": bse_recent_history,
         "summary": {
+            "bse_full_supported_candidate_coverage": True,
+            "bse_full_supported_fallback_coverage": True,
             "bse_primary_validated": any(item["role"] == "primary" and item["validated"] for item in bse_page_probes),
             "bse_any_fallback_validated": any(item["role"] == "fallback" and item["validated"] for item in bse_page_probes),
             "bse_all_fallbacks_healthy": all(

@@ -89,7 +89,12 @@ SOURCE_REGISTRY: dict[str, DataSource] = {
                 end_date=None,
                 url_pattern="https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_{YYYYMMDD}_F_0000.CSV",
                 file_format="csv",
-                schema_note="BSE equity bhavcopy primary path is CSV; official failovers include CSV and ZIP variants with OHLCV and ISIN columns.",
+                schema_note=(
+                    "BSE equity bhavcopy primary path is CSV; supported official fallbacks are "
+                    "EQ_ISINCODE_{DDMMYY}_T0.CSV and BSE_EQ_BHAVCOPY_{DDMMYYYY}_T0.ZIP. "
+                    "Older EQ*_CSV and legacy ZIP variants are deprecated and intentionally excluded "
+                    "from supported-source verification coverage."
+                ),
             ),
         ),
         max_requests_per_minute=12,
@@ -99,9 +104,6 @@ SOURCE_REGISTRY: dict[str, DataSource] = {
         failover_url_patterns=(
             "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}_T0.CSV",
             "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_{DDMMYYYY}_T0.ZIP",
-            "https://www.bseindia.com/download/BhavCopy/Equity/EQ{DDMMYY}_CSV.ZIP",
-            "https://www.bseindia.com/download/BhavCopy/Equity/eq{DDMMYY}_csv.zip",
-            "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}.ZIP",
         ),
     ),
     "NSE_FII_DII": DataSource(

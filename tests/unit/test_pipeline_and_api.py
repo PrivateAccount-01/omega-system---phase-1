@@ -752,7 +752,12 @@ def test_bse_candidate_detection_allows_bse_subdomains() -> None:
 def test_bse_source_registry_primary_format_is_csv() -> None:
     from omegadata.track_a.source_registry import SOURCE_REGISTRY
 
-    assert SOURCE_REGISTRY["BSE_EQUITY_BHAVCOPY"].eras[0].file_format == "csv"
+    source = SOURCE_REGISTRY["BSE_EQUITY_BHAVCOPY"]
+    assert source.eras[0].file_format == "csv"
+    assert source.failover_url_patterns == (
+        "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}_T0.CSV",
+        "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_{DDMMYYYY}_T0.ZIP",
+    )
 
 
 def test_bse_zip_payload_validation_checks_contents() -> None:
@@ -829,7 +834,18 @@ def test_trading_calendar_skips_configured_holidays() -> None:
     calendar = TradingCalendar(
         holidays_by_exchange={
             "BSE": {date(2026, 4, 10)},
-        }
+        },
+        coverage_years_by_exchange={"BSE": {2026}},
     )
     days = calendar.recent_trading_days("BSE", anchor_date=date(2026, 4, 13), limit=2)
     assert days == [date(2026, 4, 9), date(2026, 4, 8)]
+
+
+def test_trading_calendar_requires_explicit_year_coverage() -> None:
+    calendar = TradingCalendar(
+        holidays_by_exchange={"BSE": {date(2026, 4, 10)}},
+        coverage_years_by_exchange={"BSE": {2026}},
+    )
+
+    with pytest.raises(ValueError):
+        calendar.recent_trading_days("BSE", anchor_date=date(2027, 1, 5), limit=1)

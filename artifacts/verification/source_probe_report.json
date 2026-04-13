@@ -1,10 +1,13 @@
 {
-  "generated_at": "2026-04-13T04:12:48.247543+00:00",
+  "generated_at": "2026-04-13T04:58:13.614432+00:00",
   "probe_date": "2026-04-10",
   "calendar_mode": "configured_trading_calendar",
   "probe_profile_mode": "deterministic",
   "probe_profile_count": 1,
   "probe_timeout_seconds": 8.0,
+  "bse_supported_candidate_count": 3,
+  "bse_supported_fallback_count": 2,
+  "bse_probe_scope": "full_supported_registry_candidates",
   "nse_corporate_actions": [
     {
       "source_key": "NSE_CORPORATE_ACTIONS",
@@ -81,9 +84,19 @@
       "any_fallback_validated": true,
       "all_fallbacks_healthy": true,
       "overall_validated": true
+    },
+    {
+      "date": "2026-04-08",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "any_fallback_validated": true,
+      "all_fallbacks_healthy": true,
+      "overall_validated": true
     }
   ],
   "summary": {
+    "bse_full_supported_candidate_coverage": true,
+    "bse_full_supported_fallback_coverage": true,
     "bse_primary_validated": true,
     "bse_any_fallback_validated": true,
     "bse_all_fallbacks_healthy": true,

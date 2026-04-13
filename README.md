@@ -91,3 +91,9 @@ python scripts/run_monthly_quality_report.py --as-of 2026-04-07
 - `CORPORATE_ACTION_FALSE_NEGATIVE_RISK` is a non-blocking triage queue, not a passive metric.
 - Reviewers should inspect the nearby candidate within one business day, decide whether it is the same economic event, and either close it as `FALSE_POSITIVE` or escalate it into a blocking corporate-action review category with notes.
 - The review payload carries `triage_instructions` from governed policy so operators can see the expected handling steps directly in the queue item.
+
+## Calendar Maintenance
+
+- Source probing and trading-day selection fail closed outside the configured `coverage_years` in [trading_holidays_india.json](/mnt/e/omega system - phase 1/config/trading_holidays_india.json).
+- Before a new calendar year begins, update both the holiday dates and `coverage_years` for each supported exchange; otherwise verification intentionally raises instead of degrading to weekend-only behavior.
+- NSE and BSE holiday lists are stored separately on purpose, even when the current equity-market schedule is identical, so exchange-specific divergences can be recorded explicitly.
