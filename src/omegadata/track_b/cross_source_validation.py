@@ -259,6 +259,18 @@ class CrossSourceValidator:
                 and self.matcher.has_economic_signal(staged_row, best_candidate)
             ):
                 CORPORATE_ACTION_UNMATCHED_COUNTER.labels(classification="ambiguous_near_candidate").inc()
+                self.review_service.queue_review(
+                    session,
+                    category="CORPORATE_ACTION_FALSE_NEGATIVE_RISK",
+                    isin=isin,
+                    event_date=anchor_date,
+                    reason="Potential corporate-action false negative risk from nearby economically related candidate",
+                    payload={
+                        "nse_action_type": staged_row.action_type.value,
+                        "candidate_action_type": best_candidate.action_type.value,
+                        "score": str(best_score),
+                    },
+                )
                 outcomes.append(
                     self._persist_categorical_result(
                         session=session,

@@ -24,8 +24,36 @@ def _probe(url: str, headers: dict[str, str]) -> dict[str, object]:
         return {"url": url, "error": str(exc)}
 
 
+def _recent_business_days(limit: int = 10) -> list[date]:
+    today = date.today()
+    values: list[date] = []
+    offset = 1
+    while len(values) < limit:
+        candidate = today - timedelta(days=offset)
+        offset += 1
+        if candidate.weekday() >= 5:
+            continue
+        values.append(candidate)
+    return values
+
+
+def _select_bse_probe_date(manager: DownloadManager, bse_headers: dict[str, str]) -> tuple[date, list[dict[str, object]]]:
+    fallback_date = _recent_business_days(1)[0]
+    fallback_urls = manager._candidate_urls("BSE_EQUITY_BHAVCOPY", fallback_date)[:3]
+    fallback_probes = [_probe(url, bse_headers) for url in fallback_urls]
+
+    for candidate_date in _recent_business_days(10):
+        urls = manager._candidate_urls("BSE_EQUITY_BHAVCOPY", candidate_date)[:3]
+        if not urls:
+            continue
+        probes = [_probe(url, bse_headers) for url in urls]
+        if any(probe.get("status_code") == 200 for probe in probes):
+            return candidate_date, probes
+
+    return fallback_date, fallback_probes
+
+
 def main() -> None:
-    probe_date = date.today() - timedelta(days=3)
     manager = DownloadManager()
     nse_headers = {
         "User-Agent": (
@@ -50,12 +78,12 @@ def main() -> None:
             with suppress(Exception):
                 client.get(url)
 
+    probe_date, bse_probes = _select_bse_probe_date(manager, bse_headers)
     probes = [
         _probe("https://www.nseindia.com/api/corporates-corporateActions?index=equities", nse_headers),
         _probe("https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3", bse_headers),
     ]
-    for url in manager._candidate_urls("BSE_EQUITY_BHAVCOPY", probe_date)[:3]:
-        probes.append(_probe(url, bse_headers))
+    probes.extend(bse_probes)
     out_dir = Path("artifacts/verification")
     out_dir.mkdir(parents=True, exist_ok=True)
     report = {

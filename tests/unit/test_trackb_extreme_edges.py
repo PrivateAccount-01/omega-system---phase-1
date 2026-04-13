@@ -327,3 +327,7 @@ def test_unmatched_validation_tracks_false_negative_risk(db_session) -> None:
         select(ValidationAuditLog).where(ValidationAuditLog.field_compared == "corporate_action_false_negative_risk")
     )
     assert audit is not None
+    review = db_session.scalar(
+        select(ManualReviewQueue).where(ManualReviewQueue.category == "CORPORATE_ACTION_FALSE_NEGATIVE_RISK")
+    )
+    assert review is not None

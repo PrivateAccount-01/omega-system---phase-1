@@ -1,15 +1,20 @@
 from __future__ import annotations
 
+import csv
 import hashlib
+import io
 import json
 import random
 import re
 import ssl
 import time
+import zipfile
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.error import HTTPError, URLError
+from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 
 import httpx
@@ -42,6 +47,43 @@ class DownloadManager:
         self.raw_root = Path(settings.raw_root)
         self.raw_root.mkdir(parents=True, exist_ok=True)
         self.alert_router = AlertRouter()
+
+    @staticmethod
+    def _expected_bse_equity_markers(as_of: date) -> tuple[str, ...]:
+        return (
+            f"BhavCopy_BSE_CM_0_0_0_{as_of:%Y%m%d}_F_0000.CSV".lower(),
+            f"EQ_ISINCODE_{as_of:%d%m%y}_T0.CSV".lower(),
+            f"BSE_EQ_BHAVCOPY_{as_of:%d%m%Y}_T0.ZIP".lower(),
+            f"EQ{as_of:%d%m%y}_CSV.ZIP".lower(),
+            f"eq{as_of:%d%m%y}_csv.zip".lower(),
+        )
+
+    @staticmethod
+    def _looks_like_bse_equity_url(url: str, as_of: date) -> bool:
+        parsed = urlparse(url)
+        if parsed.netloc.lower() != "www.bseindia.com":
+            return False
+        if "/download/bhavcopy/equity/" not in parsed.path.lower():
+            return False
+        lowered = url.lower()
+        return any(marker in lowered for marker in DownloadManager._expected_bse_equity_markers(as_of))
+
+    @staticmethod
+    def _extract_bse_links_from_html(page_html: str, base_url: str) -> list[str]:
+        class _LinkExtractor(HTMLParser):
+            def __init__(self) -> None:
+                super().__init__()
+                self.links: list[str] = []
+
+            def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+                for name, value in attrs:
+                    if name.lower() not in {"href", "src", "data-url"} or not value:
+                        continue
+                    self.links.append(urljoin(base_url, value))
+
+        parser = _LinkExtractor()
+        parser.feed(page_html)
+        return parser.links
 
     @staticmethod
     def _is_nse_url(url: str) -> bool:
@@ -196,17 +238,17 @@ class DownloadManager:
 
     @staticmethod
     def _extract_bse_equity_urls(page_html: str, as_of: date) -> list[str]:
-        date_tokens = {
-            as_of.strftime("%Y%m%d"),
-            as_of.strftime("%d%m%y"),
-            as_of.strftime("%d%m%Y"),
-        }
-        pattern = re.compile(r"https://www\.bseindia\.com/download/BhavCopy/Equity/[^\"'\s<]+", re.IGNORECASE)
+        base_url = "https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3"
         candidates: list[str] = []
-        for url in pattern.findall(page_html):
-            if not any(token in url for token in date_tokens):
-                continue
-            candidates.append(url)
+        for url in DownloadManager._extract_bse_links_from_html(page_html, base_url):
+            if DownloadManager._looks_like_bse_equity_url(url, as_of):
+                candidates.append(url)
+
+        text_pattern = re.compile(r"(?:https://www\.bseindia\.com|/download)/[^\"'\s<]+", re.IGNORECASE)
+        for raw in text_pattern.findall(page_html):
+            url = urljoin(base_url, raw)
+            if DownloadManager._looks_like_bse_equity_url(url, as_of):
+                candidates.append(url)
         return list(dict.fromkeys(candidates))
 
     def _discover_bse_equity_urls(self, as_of: date) -> list[str]:
@@ -232,21 +274,59 @@ class DownloadManager:
         return list(dict.fromkeys(urls))
 
     @staticmethod
+    def _validate_csv_header(header_line: str, expected_columns: tuple[str, ...], *, source_key: str) -> None:
+        if "html" in header_line.lower():
+            raise DownloadError(f"{source_key} returned HTML instead of market data")
+        reader = csv.reader([header_line])
+        row = next(reader, [])
+        normalized = {column.strip().lower() for column in row}
+        if not any(column.lower() in normalized for column in expected_columns):
+            raise DownloadError(f"{source_key} payload is missing expected columns")
+
+    @staticmethod
+    def _validate_bse_equity_zip_payload(payload: bytes) -> None:
+        try:
+            with zipfile.ZipFile(io.BytesIO(payload)) as zf:
+                names = [name for name in zf.namelist() if name.lower().endswith(".csv")]
+                if not names:
+                    raise DownloadError("BSE equity bhavcopy zip contains no CSV files")
+                chosen_name = names[0]
+                lowered_name = chosen_name.lower()
+                expected_name_tokens = ("bhavcopy", "eq_isincode", "bse_eq_bhavcopy", "eq")
+                if not any(token in lowered_name for token in expected_name_tokens):
+                    raise DownloadError("BSE equity bhavcopy zip contains an unexpected CSV filename")
+                lines = zf.read(chosen_name).decode("utf-8", errors="ignore").splitlines()
+        except zipfile.BadZipFile as exc:
+            raise DownloadError("BSE equity bhavcopy zip payload is invalid") from exc
+
+        if not lines:
+            raise DownloadError("BSE equity bhavcopy zip CSV is empty")
+        DownloadManager._validate_csv_header(
+            lines[0],
+            ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb"),
+            source_key="BSE_EQUITY_BHAVCOPY",
+        )
+
+    @staticmethod
     def _validate_payload(source_key: str, payload: bytes) -> None:
+        if source_key == "BSE_EQUITY_BHAVCOPY":
+            if payload.startswith(b"PK\x03\x04"):
+                DownloadManager._validate_bse_equity_zip_payload(payload)
+                return
+            text = payload.decode("utf-8", errors="ignore").strip()
+            if not text:
+                raise DownloadError(f"Empty payload for {source_key}")
+            header = text.splitlines()[0] if text.splitlines() else ""
+            DownloadManager._validate_csv_header(
+                header,
+                ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb"),
+                source_key=source_key,
+            )
+            return
+
         text = payload.decode("utf-8", errors="ignore").strip()
         if not text:
             raise DownloadError(f"Empty payload for {source_key}")
-
-        if source_key == "BSE_EQUITY_BHAVCOPY":
-            if payload.startswith(b"PK\x03\x04"):
-                return
-            header = text.splitlines()[0] if text.splitlines() else ""
-            if "html" in header.lower():
-                raise DownloadError("BSE equity bhavcopy returned HTML instead of market data")
-            expected_columns = ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb")
-            if not any(column in header for column in expected_columns):
-                raise DownloadError("BSE equity bhavcopy payload is missing expected columns")
-            return
 
         json_sources = {
             "NSE_CORPORATE_ACTIONS",

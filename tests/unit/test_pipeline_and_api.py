@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import io
 import json
 import os
 from datetime import date
@@ -719,6 +720,37 @@ def test_bse_candidate_extraction_uses_live_page_patterns() -> None:
         "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV",
         "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP",
     ]
+
+
+def test_bse_candidate_extraction_supports_relative_paths() -> None:
+    html = """
+    <a href="/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260410_F_0000.CSV">csv</a>
+    <div data-url="/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV"></div>
+    <script>const zip = "/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP";</script>
+    """
+    urls = DownloadManager._extract_bse_equity_urls(html, date(2026, 4, 10))
+    assert urls == [
+        "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260410_F_0000.CSV",
+        "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV",
+        "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP",
+    ]
+
+
+def test_bse_source_registry_primary_format_is_csv() -> None:
+    from omegadata.track_a.source_registry import SOURCE_REGISTRY
+
+    assert SOURCE_REGISTRY["BSE_EQUITY_BHAVCOPY"].eras[0].file_format == "csv"
+
+
+def test_bse_zip_payload_validation_checks_contents() -> None:
+    import zipfile
+
+    bad_zip = io.BytesIO()
+    with zipfile.ZipFile(bad_zip, "w") as zf:
+        zf.writestr("unexpected.txt", "not a csv")
+
+    with pytest.raises(DownloadError):
+        DownloadManager._validate_payload("BSE_EQUITY_BHAVCOPY", bad_zip.getvalue())
 
 
 def test_review_policy_cache_reloads_on_file_change(tmp_path: Path, monkeypatch) -> None:
