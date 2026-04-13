@@ -1,10 +1,34 @@
 {
-  "generated_at": "2026-04-13T04:58:13.614432+00:00",
+  "generated_at": "2026-04-13T05:42:19.272939+00:00",
   "probe_date": "2026-04-10",
   "calendar_mode": "configured_trading_calendar",
   "probe_profile_mode": "deterministic",
   "probe_profile_count": 1,
   "probe_timeout_seconds": 8.0,
+  "calendar_maintenance": [
+    {
+      "exchange": "BSE",
+      "status": "healthy",
+      "warning": false,
+      "message": "Trading-calendar coverage for BSE is current.",
+      "covered_years": [
+        2026
+      ],
+      "latest_covered_year": 2026,
+      "days_until_expiry": 262
+    },
+    {
+      "exchange": "NSE",
+      "status": "healthy",
+      "warning": false,
+      "message": "Trading-calendar coverage for NSE is current.",
+      "covered_years": [
+        2026
+      ],
+      "latest_covered_year": 2026,
+      "days_until_expiry": 262
+    }
+  ],
   "bse_supported_candidate_count": 3,
   "bse_supported_fallback_count": 2,
   "bse_probe_scope": "full_supported_registry_candidates",

@@ -19,6 +19,14 @@ def _probe_dict(result: object) -> dict[str, object]:
 def main() -> None:
     manager = DownloadManager()
     calendar = TradingCalendar.from_config()
+    calendar_maintenance = calendar.all_coverage_statuses(
+        anchor_date=date.today(),
+        warning_window_days=settings.trading_calendar_warning_window_days,
+    )
+    bse_calendar_status = next(
+        (item for item in calendar_maintenance if item["exchange"] == "BSE"),
+        None,
+    )
     business_days = calendar.recent_trading_days("BSE", anchor_date=date.today(), limit=3)
     probe_date = business_days[0]
     probe_mode = settings.source_probe_profile_mode.lower().strip()
@@ -75,10 +83,15 @@ def main() -> None:
     report = {
         "generated_at": datetime.now(UTC).isoformat(),
         "probe_date": probe_date.isoformat(),
-        "calendar_mode": "configured_trading_calendar",
+        "calendar_mode": (
+            "configured_trading_calendar"
+            if bse_calendar_status and bse_calendar_status["status"] != "expired"
+            else "weekday_fallback_due_to_expired_calendar_coverage"
+        ),
         "probe_profile_mode": probe_mode,
         "probe_profile_count": len(probe_profiles),
         "probe_timeout_seconds": settings.source_probe_timeout_seconds,
+        "calendar_maintenance": calendar_maintenance,
         "bse_supported_candidate_count": len(bse_page_probes),
         "bse_supported_fallback_count": len([item for item in bse_page_probes if item["role"] == "fallback"]),
         "bse_probe_scope": "full_supported_registry_candidates",

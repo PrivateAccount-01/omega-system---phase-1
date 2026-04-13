@@ -4,6 +4,11 @@
     "NSE": [2026],
     "BSE": [2026]
   },
+  "maintenance": {
+    "owner_role": "OmegaData data operations",
+    "renewal_window_days": 60,
+    "runbook": "Update coverage_years and holiday dates before the next calendar year, then rerun scripts/check_trading_calendar_coverage.py and scripts/generate_source_probe_report.py."
+  },
   "holidays": {
     "NSE": [
       "2026-01-26",

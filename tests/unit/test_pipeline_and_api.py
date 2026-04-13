@@ -758,6 +758,11 @@ def test_bse_source_registry_primary_format_is_csv() -> None:
         "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}_T0.CSV",
         "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_{DDMMYYYY}_T0.ZIP",
     )
+    assert source.deprecated_failover_url_patterns == (
+        "https://www.bseindia.com/download/BhavCopy/Equity/EQ{DDMMYY}_CSV.ZIP",
+        "https://www.bseindia.com/download/BhavCopy/Equity/eq{DDMMYY}_csv.zip",
+        "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}.ZIP",
+    )
 
 
 def test_bse_zip_payload_validation_checks_contents() -> None:
@@ -841,11 +846,31 @@ def test_trading_calendar_skips_configured_holidays() -> None:
     assert days == [date(2026, 4, 9), date(2026, 4, 8)]
 
 
-def test_trading_calendar_requires_explicit_year_coverage() -> None:
+def test_trading_calendar_degrades_without_explicit_year_coverage() -> None:
     calendar = TradingCalendar(
         holidays_by_exchange={"BSE": {date(2026, 4, 10)}},
         coverage_years_by_exchange={"BSE": {2026}},
     )
 
+    days = calendar.recent_trading_days("BSE", anchor_date=date(2027, 1, 5), limit=1)
+    assert days == [date(2027, 1, 4)]
+
     with pytest.raises(ValueError):
-        calendar.recent_trading_days("BSE", anchor_date=date(2027, 1, 5), limit=1)
+        calendar.recent_trading_days("BSE", anchor_date=date(2027, 1, 5), limit=1, strict=True)
+
+
+def test_trading_calendar_coverage_status_warns_near_expiry() -> None:
+    calendar = TradingCalendar(
+        holidays_by_exchange={"BSE": {date(2026, 12, 25)}},
+        coverage_years_by_exchange={"BSE": {2026}},
+    )
+
+    status = calendar.coverage_status(
+        "BSE",
+        anchor_date=date(2026, 12, 1),
+        warning_window_days=60,
+    )
+
+    assert status["status"] == "warning"
+    assert status["warning"] is True
+    assert status["latest_covered_year"] == 2026

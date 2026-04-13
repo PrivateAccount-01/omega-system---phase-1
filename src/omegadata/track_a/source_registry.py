@@ -23,6 +23,7 @@ class DataSource:
     checksum: str
     parquet_partition_template: str
     failover_url_patterns: tuple[str, ...] = ()
+    deprecated_failover_url_patterns: tuple[str, ...] = ()
 
 
 SOURCE_REGISTRY: dict[str, DataSource] = {
@@ -104,6 +105,11 @@ SOURCE_REGISTRY: dict[str, DataSource] = {
         failover_url_patterns=(
             "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}_T0.CSV",
             "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_{DDMMYYYY}_T0.ZIP",
+        ),
+        deprecated_failover_url_patterns=(
+            "https://www.bseindia.com/download/BhavCopy/Equity/EQ{DDMMYY}_CSV.ZIP",
+            "https://www.bseindia.com/download/BhavCopy/Equity/eq{DDMMYY}_csv.zip",
+            "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{DDMMYY}.ZIP",
         ),
     ),
     "NSE_FII_DII": DataSource(

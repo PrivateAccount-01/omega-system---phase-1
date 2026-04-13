@@ -95,5 +95,8 @@ python scripts/run_monthly_quality_report.py --as-of 2026-04-07
 ## Calendar Maintenance
 
 - Source probing and trading-day selection fail closed outside the configured `coverage_years` in [trading_holidays_india.json](/mnt/e/omega system - phase 1/config/trading_holidays_india.json).
+- Runtime probing no longer hard-stops on stale calendar coverage; it degrades to weekday fallback and records the stale-coverage warning in verification artifacts so the system stays available while the issue remains visible.
 - Before a new calendar year begins, update both the holiday dates and `coverage_years` for each supported exchange; otherwise verification intentionally raises instead of degrading to weekend-only behavior.
 - NSE and BSE holiday lists are stored separately on purpose, even when the current equity-market schedule is identical, so exchange-specific divergences can be recorded explicitly.
+- Ownership sits with `OmegaData data operations`; the maintenance metadata and renewal window live in [trading_holidays_india.json](/mnt/e/omega system - phase 1/config/trading_holidays_india.json).
+- Run [check_trading_calendar_coverage.py](/mnt/e/omega system - phase 1/scripts/check_trading_calendar_coverage.py) in CI or before year-end rollover; the repo also includes a scheduled GitHub Actions guard in [.github/workflows/trading-calendar-guard.yml](/mnt/e/omega system - phase 1/.github/workflows/trading-calendar-guard.yml).
