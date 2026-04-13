@@ -167,6 +167,24 @@ class ManualReviewQueue(Base):
     resolved: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
 
+class ReprocessJob(Base):
+    __tablename__ = "reprocess_job"
+    __table_args__ = (
+        Index("ix_reprocess_job_status_created", "status", "created_at"),
+        UniqueConstraint("review_id", name="uq_reprocess_job_review"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    review_id: Mapped[int] = mapped_column(ForeignKey("manual_review_queue.id"), nullable=False)
+    isin: Mapped[str | None] = mapped_column(String(12))
+    event_date: Mapped[date | None] = mapped_column(Date)
+    status: Mapped[str] = mapped_column(String(32), nullable=False, default="QUEUED")
+    requested_payload: Mapped[dict[str, str | int | float | bool | list[object] | dict[str, object] | None]] = mapped_column(JSON, default=dict)
+    completion_payload: Mapped[dict[str, str | int | float | bool | list[object] | dict[str, object] | None] | None] = mapped_column(JSON)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime)
+
+
 class PriceRecord(Base):
     __tablename__ = "price_record"
     __table_args__ = (

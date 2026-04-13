@@ -4,7 +4,6 @@ import csv
 import hashlib
 import io
 import json
-import random
 import re
 import ssl
 import time
@@ -18,7 +17,6 @@ from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 
 import httpx
-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 from omegadata.config import settings
 from omegadata.track_a.alerting import AlertEvent, AlertRouter
@@ -57,6 +55,7 @@ class FetchResult:
     status_code: int | None
     content_type: str
     transport: str
+    request_attempts: int
 
 
 @dataclass(frozen=True)
@@ -70,6 +69,11 @@ class SourceProbeResult:
     content_type: str
     bytes_downloaded: int
     attempts: int
+    request_attempts: int
+    transport: str | None
+    header_profile: str | None
+    elapsed_seconds: float
+    failure_stage: str | None
     error: str | None
     validation_error: str | None
     body_preview: str
@@ -157,7 +161,6 @@ class DownloadManager:
                 "(KHTML, like Gecko) Version/17.4 Safari/605.1.15"
             ),
         ]
-        random.shuffle(user_agents)
         return [
             {
                 "User-Agent": ua,
@@ -183,18 +186,23 @@ class DownloadManager:
         return profile
 
     @staticmethod
+    def _profile_name(profile: dict[str, str]) -> str:
+        user_agent = profile.get("User-Agent", "")
+        if "Chrome" in user_agent:
+            return "chrome_desktop"
+        if "Firefox" in user_agent:
+            return "firefox_desktop"
+        if "Safari" in user_agent and "Chrome" not in user_agent:
+            return "safari_desktop"
+        return "generic"
+
+    @staticmethod
     def _hash_content(data: bytes, algo: str) -> str:
         if algo.lower() == "md5":
             return hashlib.md5(data, usedforsecurity=False).hexdigest()
         return hashlib.sha256(data).hexdigest()
 
-    @retry(
-        retry=retry_if_exception_type((httpx.HTTPError, DownloadError)),
-        wait=wait_exponential(multiplier=1, min=1, max=30),
-        stop=stop_after_attempt(5),
-        reraise=True,
-    )
-    def _request(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
+    def _request_once(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
         response = client.get(url, timeout=timeout_seconds)
         if response.status_code in {403, 429}:
             raise DownloadError(
@@ -215,7 +223,30 @@ class DownloadManager:
             status_code=response.status_code,
             content_type=response.headers.get("content-type", ""),
             transport="httpx",
+            request_attempts=1,
         )
+
+    def _request(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
+        attempts = 0
+        last_error: Exception | None = None
+        while attempts < 5:
+            attempts += 1
+            try:
+                result = self._request_once(client, url, timeout_seconds=timeout_seconds)
+                return FetchResult(
+                    payload=result.payload,
+                    status_code=result.status_code,
+                    content_type=result.content_type,
+                    transport=result.transport,
+                    request_attempts=attempts,
+                )
+            except (httpx.HTTPError, DownloadError) as exc:
+                last_error = exc
+                if attempts >= 5:
+                    raise
+                delay = min(30.0, 2 ** (attempts - 1))
+                time.sleep(delay)
+        raise DownloadError(f"Request failed for {url}: {last_error}", stage="request")
 
     def _bootstrap_nse_session(self, client: httpx.Client) -> None:
         # NSE APIs require a warmed session with cookies set by the landing page.
@@ -268,6 +299,7 @@ class DownloadManager:
             status_code=200,
             content_type=content_type,
             transport="urllib",
+            request_attempts=1,
         )
 
     def _request_with_workarounds(
@@ -482,11 +514,18 @@ class DownloadManager:
             last_content_type = ""
             last_bytes = 0
             last_preview = ""
+            last_transport: str | None = None
+            last_failure_stage: str | None = None
+            last_profile_name: str | None = None
+            last_request_attempts = 0
             validated = False
             attempts = 0
+            elapsed_seconds = 0.0
 
             for profile in probe_profiles:
                 attempts += 1
+                last_profile_name = self._profile_name(profile)
+                started = time.perf_counter()
                 try:
                     result = self._fetch_candidate(
                         source_key,
@@ -499,15 +538,21 @@ class DownloadManager:
                     last_content_type = result.content_type
                     last_bytes = len(result.payload)
                     last_preview = result.payload[:220].decode("utf-8", errors="ignore").replace("\n", " ")
+                    last_transport = result.transport
+                    last_request_attempts = result.request_attempts
+                    elapsed_seconds = time.perf_counter() - started
                     validated = True
                     last_error = None
                     last_validation_error = None
+                    last_failure_stage = None
                     break
                 except Exception as exc:  # noqa: BLE001
+                    elapsed_seconds = time.perf_counter() - started
                     last_error = str(exc)
                     last_preview = ""
                     if isinstance(exc, DownloadError):
                         last_status_code = exc.status_code
+                        last_failure_stage = exc.stage
                         if exc.stage == "validation":
                             last_validation_error = last_error
                     elif "payload" in last_error.lower() or "html" in last_error.lower() or "csv" in last_error.lower():
@@ -525,6 +570,11 @@ class DownloadManager:
                     content_type=last_content_type,
                     bytes_downloaded=last_bytes,
                     attempts=attempts,
+                    request_attempts=last_request_attempts,
+                    transport=last_transport,
+                    header_profile=last_profile_name,
+                    elapsed_seconds=elapsed_seconds,
+                    failure_stage=last_failure_stage,
                     error=last_error,
                     validation_error=last_validation_error,
                     body_preview=last_preview,
@@ -564,7 +614,7 @@ class DownloadManager:
                         consecutive_failures += 1
                         if self._is_nse_url(url) and self._is_tls_error(exc):
                             delay = min(8.0, 0.75 * (2 ** min(consecutive_failures, 4)))
-                            delay += random.uniform(0.05, 0.35)
+                            delay += 0.2
                             time.sleep(delay)
                         continue
                 if payload is not None:

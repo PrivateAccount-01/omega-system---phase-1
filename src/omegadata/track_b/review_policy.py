@@ -17,6 +17,9 @@ class ReviewPolicy:
     requires_reprocess: bool
     triage_instructions: str = ""
     sla_business_days: int | None = None
+    assignment_team: str = "market-data-ops"
+    escalation_severity: str = "ERROR"
+    blocks_release_when_overdue: bool = True
 
 
 @dataclass(frozen=True)
@@ -34,6 +37,9 @@ class ReviewPolicySet:
                 requires_reprocess=False,
                 triage_instructions="Review the evidence, record a clear disposition, and close the review explicitly.",
                 sla_business_days=None,
+                assignment_team="market-data-ops",
+                escalation_severity="ERROR",
+                blocks_release_when_overdue=True,
             ),
         )
 
@@ -58,6 +64,9 @@ def _read_policy_set(path: Path) -> ReviewPolicySet:
                     if isinstance(raw.get("sla_business_days"), int)
                     else None
                 ),
+                assignment_team=str(raw.get("assignment_team", "market-data-ops")),
+                escalation_severity=str(raw.get("escalation_severity", "ERROR")).upper(),
+                blocks_release_when_overdue=bool(raw.get("blocks_release_when_overdue", True)),
             )
     return ReviewPolicySet(version=version, policies=policies)
 

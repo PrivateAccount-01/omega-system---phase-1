@@ -1,0 +1,121 @@
+{
+  "version": "2026-04-13",
+  "cases": [
+    {
+      "label": "CIEINDIA_DIVIDEND_MATCH",
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      },
+      "nse": {
+        "isin": "INE536H01010",
+        "action_type": "DIVIDEND_CASH",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-04-22",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA",
+          "dividend_per_share": "7"
+        }
+      },
+      "bse": {
+        "isin": "INE536H01010",
+        "action_type": "DIVIDEND_CASH",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-04-23",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA"
+        }
+      },
+      "expected": "match"
+    },
+    {
+      "label": "CIEINDIA_TYPE_MISMATCH",
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      },
+      "nse": {
+        "isin": "INE536H01010",
+        "action_type": "DIVIDEND_CASH",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-04-22",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA",
+          "dividend_per_share": "7"
+        }
+      },
+      "bse": {
+        "isin": "INE536H01010",
+        "action_type": "BONUS",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-04-23",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA"
+        }
+      },
+      "expected": "type_mismatch"
+    },
+    {
+      "label": "CIEINDIA_AMBIGUOUS_NEARBY",
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      },
+      "nse": {
+        "isin": "INE536H01010",
+        "action_type": "DIVIDEND_CASH",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-04-22",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA",
+          "dividend_per_share": "7"
+        }
+      },
+      "bse": {
+        "isin": "INE536H01010",
+        "action_type": "DIVIDEND_CASH",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-04-29",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA"
+        }
+      },
+      "expected": "ambiguous"
+    },
+    {
+      "label": "CIEINDIA_NO_MATCH_FAR_GAP",
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      },
+      "nse": {
+        "isin": "INE536H01010",
+        "action_type": "DIVIDEND_CASH",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-04-22",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA",
+          "dividend_per_share": "7"
+        }
+      },
+      "bse": {
+        "isin": "INE536H01010",
+        "action_type": "DIVIDEND_CASH",
+        "announcement_date": "2026-03-19",
+        "ex_date": "2026-05-20",
+        "record_date": null,
+        "payload": {
+          "symbol": "CIEINDIA"
+        }
+      },
+      "expected": "no_match"
+    }
+  ]
+}

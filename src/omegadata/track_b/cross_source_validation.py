@@ -16,6 +16,7 @@ from omegadata.domain import Exchange, ValidationResult
 from omegadata.track_a.monitoring import CORPORATE_ACTION_UNMATCHED_COUNTER
 from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
 from omegadata.track_b.manual_review import ManualReviewService
+from omegadata.track_b.tolerance_policy import load_tolerance_policy
 
 
 @dataclass(frozen=True)
@@ -33,6 +34,8 @@ class PriceToleranceContext:
     liquidity_bucket: str
     synthetic_bse: bool
     field: str
+    source_quality: str
+    imputed: bool
 
 
 class CrossSourceValidator:
@@ -136,14 +139,28 @@ class CrossSourceValidator:
             tolerance = max(tolerance, Decimal("0.0040"))
         if field != "close_price":
             tolerance += Decimal("0.0005")
-        if nse.is_imputed or bse.is_imputed:
+        imputed = nse.is_imputed or bse.is_imputed
+        if imputed:
             tolerance = max(tolerance, Decimal("0.0035"))
+        source_quality = "synthetic" if synthetic_bse else "official"
+        policy = load_tolerance_policy()
+        if policy is not None:
+            matched = policy.match(
+                liquidity_bucket=liquidity_bucket,
+                source_quality=source_quality,
+                field=field,
+                imputed=imputed,
+            )
+            if matched is not None:
+                tolerance = Decimal(matched.tolerance_pct)
         return PriceToleranceContext(
             tolerance=tolerance,
             effective_notional=effective_notional,
             liquidity_bucket=liquidity_bucket,
             synthetic_bse=synthetic_bse,
             field=field,
+            source_quality=source_quality,
+            imputed=imputed,
         )
 
     @staticmethod
@@ -245,7 +262,8 @@ class CrossSourceValidator:
                 (candidate, self.matcher.relatedness_score(staged_row, candidate))
                 for candidate in bse_rows
                 if self._event_date(candidate) is not None
-                and self._date_gap_days(anchor_date, self._event_date(candidate)) <= 10
+                and self._date_gap_days(anchor_date, self._event_date(candidate))
+                <= self.matcher.policy.related_candidate_gap_days
             ]
             best_candidate: CorporateActionStaging | None = None
             best_score = -10_000
@@ -253,7 +271,7 @@ class CrossSourceValidator:
                 best_candidate, best_score = max(scored_candidates, key=lambda item: item[1])
             if (
                 best_candidate is not None
-                and best_score >= 60
+                and best_score >= self.matcher.policy.high_similarity_threshold
                 and self.matcher.has_economic_signal(staged_row, best_candidate)
                 and best_candidate.action_type != staged_row.action_type
             ):
@@ -280,7 +298,7 @@ class CrossSourceValidator:
                     continue
             if (
                 best_candidate is not None
-                and best_score >= 35
+                and best_score >= self.matcher.policy.ambiguous_similarity_threshold
                 and self.matcher.has_economic_signal(staged_row, best_candidate)
             ):
                 CORPORATE_ACTION_UNMATCHED_COUNTER.labels(classification="ambiguous_near_candidate").inc()
@@ -445,7 +463,7 @@ class CrossSourceValidator:
 
         if diff_pct <= tolerance:
             result = ValidationResult.PASS
-        elif diff_pct <= tolerance * 2:
+        elif diff_pct < tolerance * 2:
             result = ValidationResult.WARN
         else:
             result = ValidationResult.FAIL

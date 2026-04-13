@@ -6,6 +6,7 @@ from decimal import Decimal
 from functools import cache
 
 from omegadata.db.models import CorporateActionStaging
+from omegadata.track_b.matching_policy import MatchingPolicy, load_matching_policy
 
 ECONOMIC_KEYS = {
     "bonus_ratio_numerator",
@@ -23,6 +24,11 @@ ECONOMIC_KEYS = {
     "acquirer_isin",
 }
 
+CONTEXTUAL_SIGNAL_KEYS = {
+    "symbol",
+    "company_name",
+}
+
 
 @dataclass(frozen=True)
 class MatchedCorporateActionPair:
@@ -32,6 +38,9 @@ class MatchedCorporateActionPair:
 
 
 class CorporateActionMatcher:
+    def __init__(self, policy: MatchingPolicy | None = None) -> None:
+        self.policy = policy or load_matching_policy()
+
     @staticmethod
     def event_date(row: CorporateActionStaging) -> date | None:
         return row.ex_date or row.record_date or row.announcement_date
@@ -61,12 +70,16 @@ class CorporateActionMatcher:
                 score += 4
             else:
                 score -= 5
+        if shared:
+            score += self.policy.economic_overlap_bonus
         return score
 
     def economic_overlap_count(self, left: CorporateActionStaging, right: CorporateActionStaging) -> int:
         left_payload = left.payload or {}
         right_payload = right.payload or {}
-        return len(ECONOMIC_KEYS & set(left_payload) & set(right_payload))
+        structural = 1 if getattr(left, "isin", None) == getattr(right, "isin", None) else 0
+        contextual = len(CONTEXTUAL_SIGNAL_KEYS & set(left_payload) & set(right_payload))
+        return len(ECONOMIC_KEYS & set(left_payload) & set(right_payload)) + structural + contextual
 
     def has_economic_signal(self, left: CorporateActionStaging, right: CorporateActionStaging) -> bool:
         return self.economic_overlap_count(left, right) > 0 or self._payload_score(left, right) > 0
@@ -77,7 +90,7 @@ class CorporateActionMatcher:
         if left_date is None or right_date is None:
             return -5_000
         gap_days = abs((left_date - right_date).days)
-        if gap_days > 10:
+        if gap_days > self.policy.related_candidate_gap_days:
             return -2_000
 
         score = 50 - (gap_days * 4)
@@ -100,7 +113,7 @@ class CorporateActionMatcher:
         if left_date is None or right_date is None:
             return -5_000
         gap_days = abs((left_date - right_date).days)
-        if gap_days > 30:
+        if gap_days > self.policy.pair_max_gap_days:
             return -2_000
         score = 100 - (gap_days * 5)
         if left.ex_date and right.ex_date and left.ex_date == right.ex_date:
@@ -128,7 +141,7 @@ class CorporateActionMatcher:
                 return 0
             best = best_total(nse_index + 1, used_mask)
             for bse_index, score in enumerate(score_grid[nse_index]):
-                if score <= 0 or (used_mask & (1 << bse_index)):
+                if score < self.policy.pair_min_score or (used_mask & (1 << bse_index)):
                     continue
                 best = max(
                     best,
@@ -145,7 +158,7 @@ class CorporateActionMatcher:
             chosen_bse_index: int | None = None
             chosen_score = 0
             for bse_index, score in enumerate(score_grid[nse_index]):
-                if score <= 0 or (used_mask & (1 << bse_index)):
+                if score < self.policy.pair_min_score or (used_mask & (1 << bse_index)):
                     continue
                 candidate_total = score + best_total(nse_index + 1, used_mask | (1 << bse_index))
                 if candidate_total < skip_total:

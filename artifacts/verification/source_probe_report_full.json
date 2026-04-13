@@ -1,0 +1,166 @@
+{
+  "generated_at": "2026-04-13T15:55:07.616668+00:00",
+  "workflow": "diagnostic",
+  "probe_date": "2026-04-10",
+  "calendar_mode": "configured_trading_calendar",
+  "calendar_config_state": "loaded",
+  "calendar_config_path": "config/trading_holidays_india.json",
+  "calendar_config_error": null,
+  "probe_profile_mode": "full",
+  "probe_profile_count": 3,
+  "probe_timeout_seconds": 8.0,
+  "calendar_maintenance": [
+    {
+      "exchange": "BSE",
+      "status": "healthy",
+      "warning": false,
+      "message": "Trading-calendar coverage for BSE is current.",
+      "covered_years": [
+        2026
+      ],
+      "latest_covered_year": 2026,
+      "days_until_expiry": 262,
+      "config_error": null
+    },
+    {
+      "exchange": "NSE",
+      "status": "healthy",
+      "warning": false,
+      "message": "Trading-calendar coverage for NSE is current.",
+      "covered_years": [
+        2026
+      ],
+      "latest_covered_year": 2026,
+      "days_until_expiry": 262,
+      "config_error": null
+    }
+  ],
+  "bse_supported_candidate_count": 3,
+  "bse_probed_candidate_count": 3,
+  "bse_supported_fallback_count": 2,
+  "bse_probed_fallback_count": 2,
+  "bse_probe_scope": "full_supported_registry_candidates",
+  "nse_corporate_actions": [
+    {
+      "source_key": "NSE_CORPORATE_ACTIONS",
+      "as_of": "2026-04-13",
+      "url": "https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+      "role": "primary",
+      "validated": true,
+      "status_code": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes_downloaded": 2100,
+      "attempts": 1,
+      "request_attempts": 1,
+      "transport": "httpx",
+      "header_profile": "chrome_desktop",
+      "elapsed_seconds": 0.44867140002315864,
+      "failure_stage": null,
+      "error": null,
+      "validation_error": null,
+      "body_preview": "[{\"symbol\":\"AUROPHARMA\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"1\",\"subject\":\"Buy Back\",\"exDate\":\"17-Apr-2026\",\"recDate\":\"17-Apr-2026\",\"bcStartDate\":\"-\",\"bcEndDate\":\"-\",\"ndStartDate\":\"-\",\"comp\":\"Aurobindo Pharma Limited\",\"isi"
+    }
+  ],
+  "bse_equity_candidates": [
+    {
+      "source_key": "BSE_EQUITY_BHAVCOPY",
+      "as_of": "2026-04-10",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260410_F_0000.CSV",
+      "role": "primary",
+      "validated": true,
+      "status_code": 200,
+      "content_type": "application/octet-stream",
+      "bytes_downloaded": 836825,
+      "attempts": 1,
+      "request_attempts": 1,
+      "transport": "httpx",
+      "header_profile": "chrome_desktop",
+      "elapsed_seconds": 0.13685449998592958,
+      "failure_stage": null,
+      "error": null,
+      "validation_error": null,
+      "body_preview": "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,FininstrmActlXpryDt,StrkPric,OptnTp,FinInstrmNm,OpnPric,HghPric,LwPric,ClsPric,LastPric,PrvsClsgPric,UndrlygPric,SttlmPric,OpnIntrst,ChngInOpnInt"
+    },
+    {
+      "source_key": "BSE_EQUITY_BHAVCOPY",
+      "as_of": "2026-04-10",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV",
+      "role": "fallback",
+      "validated": true,
+      "status_code": 200,
+      "content_type": "application/octet-stream",
+      "bytes_downloaded": 150,
+      "attempts": 1,
+      "request_attempts": 1,
+      "transport": "httpx",
+      "header_profile": "chrome_desktop",
+      "elapsed_seconds": 0.13195390003966168,
+      "failure_stage": null,
+      "error": null,
+      "validation_error": null,
+      "body_preview": "SC_CODE,SC_NAME,SC_GROUP,SC_TYPE,OPEN,HIGH,LOW,CLOSE,LAST,PREVCLOSE,NO_TRADES,NO_OF_SHRS,NET_TURNOV,TDCLOINDI,ISIN_CODE,TRADING_DATE,FILLER2,FILLER3\r "
+    },
+    {
+      "source_key": "BSE_EQUITY_BHAVCOPY",
+      "as_of": "2026-04-10",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP",
+      "role": "fallback",
+      "validated": true,
+      "status_code": 200,
+      "content_type": "application/x-zip-compressed",
+      "bytes_downloaded": 360,
+      "attempts": 1,
+      "request_attempts": 5,
+      "transport": "httpx",
+      "header_profile": "chrome_desktop",
+      "elapsed_seconds": 15.3043570999871,
+      "failure_stage": null,
+      "error": null,
+      "validation_error": null,
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000m\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_10042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
+    }
+  ],
+  "bse_recent_history": [
+    {
+      "date": "2026-04-10",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "all_supported_fallbacks_probed": true,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
+      "all_supported_fallbacks_healthy": true,
+      "overall_validated": true
+    },
+    {
+      "date": "2026-04-09",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "all_supported_fallbacks_probed": true,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
+      "all_supported_fallbacks_healthy": true,
+      "overall_validated": true
+    },
+    {
+      "date": "2026-04-08",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "all_supported_fallbacks_probed": true,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
+      "all_supported_fallbacks_healthy": true,
+      "overall_validated": true
+    }
+  ],
+  "summary": {
+    "all_supported_candidates_probed": true,
+    "all_supported_fallbacks_probed": true,
+    "bse_primary_validated": true,
+    "bse_any_fallback_validated": true,
+    "all_supported_fallbacks_healthy": true,
+    "healthy_fallback_count": 2,
+    "failed_fallback_count": 0,
+    "bse_any_candidate_validated": true,
+    "bse_failed_candidates": []
+  }
+}

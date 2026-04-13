@@ -4,6 +4,8 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 
 def _read_json(path: Path) -> dict:
     raw = path.read_bytes()
@@ -26,7 +28,7 @@ def _read_text(path: Path) -> str:
 
 
 def main() -> None:
-    root = Path("artifacts/verification")
+    root = REPO_ROOT / "artifacts/verification"
     pipeline = _read_json(root / "pipeline_execution_result.json")
     idempotency = _read_json(root / "idempotency_check.json")
     coverage = _read_json(root / "coverage_trackb.json")

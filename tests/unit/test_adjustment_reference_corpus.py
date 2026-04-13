@@ -90,6 +90,7 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
     corpus = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
     assert corpus["case_count"] == len(corpus["cases"])
     assert corpus["case_count"] >= 10
+    assert corpus["transformational_case_count"] >= 2
 
     for case in corpus["cases"]:
         assert case["label"]

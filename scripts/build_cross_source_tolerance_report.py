@@ -30,6 +30,33 @@ def _quantile(sorted_values: list[Decimal], q: Decimal) -> Decimal | None:
     return sorted_values[idx]
 
 
+def _tolerance_ceiling(field: str, liquidity_bucket: str, imputed: bool) -> Decimal:
+    if imputed:
+        return Decimal("0.0500")
+    if field == "close_price":
+        return Decimal("0.0200")
+    if field in {"high_price", "low_price"}:
+        return Decimal("0.0400") if liquidity_bucket == "micro" else Decimal("0.0300")
+    return Decimal("0.0500") if liquidity_bucket == "micro" else Decimal("0.0350")
+
+
+def _recommended_tolerance(
+    sorted_values: list[Decimal],
+    field: str,
+    imputed: bool,
+    liquidity_bucket: str,
+) -> Decimal:
+    p95 = _quantile(sorted_values, Decimal("0.95")) or Decimal("0.0010")
+    p99 = _quantile(sorted_values, Decimal("0.99")) or p95
+    floor = Decimal("0.0010")
+    if field != "close_price":
+        floor = Decimal("0.0015")
+    if imputed:
+        floor = max(floor, Decimal("0.0035"))
+    recommended = max(floor, p95 * Decimal("1.20"), p99 * Decimal("0.90"))
+    return min(recommended, _tolerance_ceiling(field, liquidity_bucket, imputed))
+
+
 def _count_matches_sqlite(path: Path) -> dict[str, int]:
     con = sqlite3.connect(path)
     cur = con.cursor()
@@ -142,7 +169,7 @@ def _sqlite_display_url(path: Path) -> str:
 
 def _build_summary() -> list[dict[str, object]]:
     validator = CrossSourceValidator()
-    buckets: dict[tuple[str, str, str], list[Decimal]] = defaultdict(list)
+    buckets: dict[tuple[str, str, str, bool], list[Decimal]] = defaultdict(list)
 
     with get_session() as session:
         nse_rows = session.scalars(
@@ -175,23 +202,37 @@ def _build_summary() -> list[dict[str, object]]:
                     diff_pct = abs((left - right) / right)
                 context = validator._price_tolerance_context(nse=nse, bse=bse, field=field)
                 buckets[
-                    (context.liquidity_bucket, "synthetic" if synthetic_bse else "official", field)
+                    (
+                        context.liquidity_bucket,
+                        "synthetic" if synthetic_bse else "official",
+                        field,
+                        context.imputed,
+                    )
                 ].append(diff_pct)
 
     summary: list[dict[str, object]] = []
-    for (liquidity_bucket, source_quality, field), values in sorted(buckets.items()):
+    for (liquidity_bucket, source_quality, field, imputed), values in sorted(buckets.items()):
         ordered = sorted(values)
         p50 = _quantile(ordered, Decimal("0.50"))
         p95 = _quantile(ordered, Decimal("0.95"))
+        p99 = _quantile(ordered, Decimal("0.99"))
+        recommended = _recommended_tolerance(ordered, field, imputed, liquidity_bucket)
+        warning_breaches = sum(1 for value in ordered if value > recommended)
+        fail_breaches = sum(1 for value in ordered if value > recommended * Decimal("2"))
         summary.append(
             {
                 "liquidity_bucket": liquidity_bucket,
                 "source_quality": source_quality,
                 "field": field,
+                "imputed": imputed,
                 "observation_count": len(ordered),
                 "p50_diff_pct": None if p50 is None else str(p50),
                 "p95_diff_pct": None if p95 is None else str(p95),
+                "p99_diff_pct": None if p99 is None else str(p99),
                 "max_diff_pct": str(ordered[-1]),
+                "recommended_tolerance_pct": str(recommended),
+                "warning_breach_rate": warning_breaches / len(ordered),
+                "fail_breach_rate": fail_breaches / len(ordered),
             }
         )
     return summary
@@ -205,6 +246,7 @@ def main() -> None:
     out_dir = REPO_ROOT / "artifacts/verification"
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "cross_source_tolerance_report.json"
+    policy_path = (REPO_ROOT / settings.cross_source_tolerance_policy_path).resolve()
 
     selected_db_url = settings.db_url
     artifact_db_url = settings.db_url
@@ -243,10 +285,34 @@ def main() -> None:
             "db_url": artifact_db_url,
             "source_db": source_db_description,
             "status": "ok" if summary else "no_observations",
+            "acceptance_criteria": {
+                "warning_breach_rate_limit": 0.08,
+                "fail_breach_rate_limit": 0.02,
+            },
             "groups": summary,
         }
         if enrichment is not None:
             artifact["enrichment"] = enrichment
+        if summary:
+            policy_payload = {
+                "version": datetime.now(UTC).date().isoformat(),
+                "generated_at": artifact["generated_at"],
+                "source_db": source_db_description,
+                "entries": [
+                    {
+                        "liquidity_bucket": row["liquidity_bucket"],
+                        "source_quality": row["source_quality"],
+                        "field": row["field"],
+                        "imputed": row["imputed"],
+                        "tolerance_pct": row["recommended_tolerance_pct"],
+                        "warning_breach_rate_limit": artifact["acceptance_criteria"]["warning_breach_rate_limit"],
+                        "fail_breach_rate_limit": artifact["acceptance_criteria"]["fail_breach_rate_limit"],
+                    }
+                    for row in summary
+                ],
+            }
+            policy_path.parent.mkdir(parents=True, exist_ok=True)
+            policy_path.write_text(json.dumps(policy_payload, indent=2), encoding="utf-8")
     except Exception as exc:  # noqa: BLE001
         artifact = {
             "generated_at": datetime.now(UTC).isoformat(),

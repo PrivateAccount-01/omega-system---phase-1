@@ -180,6 +180,17 @@ class TradingCalendar:
         anchor_date: date,
         warning_window_days: int,
     ) -> dict[str, object]:
+        if self.config_state == "invalid":
+            return {
+                "exchange": exchange,
+                "status": "invalid_config",
+                "warning": True,
+                "message": f"Trading-calendar configuration for {exchange} is invalid.",
+                "covered_years": [],
+                "latest_covered_year": None,
+                "days_until_expiry": None,
+                "config_error": self.config_error,
+            }
         covered_years = sorted(self.coverage_years_by_exchange.get(exchange, set()))
         if not covered_years:
             return {
@@ -190,6 +201,7 @@ class TradingCalendar:
                 "covered_years": [],
                 "latest_covered_year": None,
                 "days_until_expiry": None,
+                "config_error": self.config_error,
             }
 
         latest_covered_year = covered_years[-1]
@@ -222,6 +234,7 @@ class TradingCalendar:
             "covered_years": covered_years,
             "latest_covered_year": latest_covered_year,
             "days_until_expiry": days_until_expiry,
+            "config_error": self.config_error,
         }
 
     def all_coverage_statuses(

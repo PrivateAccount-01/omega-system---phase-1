@@ -26,6 +26,7 @@ from omegadata.track_a.slo import SLOTracker
 from omegadata.track_b.confidence import ConfidenceScorer
 from omegadata.track_b.manual_review import ManualReviewService
 from omegadata.track_b.publication import PublicationService
+from omegadata.track_b.release_readiness import ReleaseReadinessService
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 from omegadata.verification.audit import build_audit_summary
 
@@ -42,6 +43,7 @@ universe = PointInTimeUniverseManager()
 slo_tracker = SLOTracker(window_minutes=5, availability_target=0.995, p95_target_ms=750.0)
 publication = PublicationService()
 reviews = ManualReviewService()
+release_readiness = ReleaseReadinessService()
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
 UI_DIR = ROOT_DIR / "src" / "omegadata" / "ui"
@@ -91,6 +93,11 @@ class ReviewResolutionIn(BaseModel):
 class ReprocessCompletionIn(BaseModel):
     completed_by: str
     notes: str
+    rebuilt_tables: list[str]
+    rebuilt_isins: list[str] = []
+    validation_checks: list[str]
+    evidence_paths: list[str]
+    date_range: dict[str, str] | None = None
 
 
 class PublicationBlockOut(BaseModel):
@@ -372,6 +379,7 @@ def resolve_review(
         "decision": result.decision.value,
         "requires_reprocess": result.requires_reprocess,
         "reprocess_status": result.reprocess_status,
+        "reprocess_job_id": result.reprocess_job_id,
     }
 
 
@@ -388,12 +396,22 @@ def complete_reprocess(
             review_id=review_id,
             completed_by=body.completed_by,
             notes=body.notes,
+            rebuilt_tables=body.rebuilt_tables,
+            rebuilt_isins=body.rebuilt_isins,
+            validation_checks=body.validation_checks,
+            evidence_paths=body.evidence_paths,
+            date_range=body.date_range,
         )
     except LookupError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     return {"review_id": review_id, "reprocess_status": payload.get("reprocess_status", "UNKNOWN")}
+
+
+@app.get("/release/readiness")
+def get_release_readiness(session: SessionDep, _auth: InternalAuthDep) -> dict[str, object]:
+    return release_readiness.evaluate(session)
 
 
 @app.get("/publication/status/{isin}", response_model=PublicationStatusOut)

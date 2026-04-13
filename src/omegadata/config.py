@@ -24,11 +24,15 @@ class Settings(BaseSettings):
     market_proxy_isin: str = ""
     quarterly_validation_pack: str = "./artifacts/verification/quarterly_validation_input.json"
     review_policy_path: str = "./config/review_policies.json"
+    cross_source_tolerance_policy_path: str = "./config/cross_source_tolerance_policy.json"
+    corporate_action_matching_policy_path: str = "./config/corporate_action_matching_policy.json"
+    release_readiness_policy_path: str = "./config/release_readiness_policy.json"
     trading_holiday_path: str = "./config/trading_holidays_india.json"
     trading_calendar_warning_window_days: int = 60
     source_probe_profile_mode: str = "deterministic"
     source_probe_timeout_seconds: float = 8.0
     reprocess_root: str = "./artifacts/reprocess_queue"
+    probe_history_days: int = 3
 
 
 settings = Settings()

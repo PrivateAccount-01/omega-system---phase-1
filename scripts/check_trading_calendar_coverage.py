@@ -6,6 +6,8 @@ from pathlib import Path
 
 from omegadata.track_a.trading_calendar import TradingCalendar
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 
 def main() -> None:
     calendar = TradingCalendar.from_config()
@@ -14,7 +16,7 @@ def main() -> None:
         warning_window_days=calendar.maintenance.renewal_window_days,
     )
 
-    out_dir = Path("artifacts/verification")
+    out_dir = REPO_ROOT / "artifacts/verification"
     out_dir.mkdir(parents=True, exist_ok=True)
     artifact = {
         "generated_at": datetime.now(UTC).isoformat(),
@@ -35,7 +37,7 @@ def main() -> None:
         level = status["status"]
         message = str(status["message"])
         exchange = str(status["exchange"])
-        if level in {"expired", "missing"} and exchange in calendar.maintenance.supported_exchanges:
+        if level in {"expired", "missing", "invalid_config"} and exchange in calendar.maintenance.supported_exchanges:
             fail = True
             print(f"::error::{exchange}: {message}")
         elif level == "warning":

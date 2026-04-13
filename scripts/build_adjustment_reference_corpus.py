@@ -53,19 +53,20 @@ def _load_bhavcopy_rows(zip_path: Path) -> dict[str, dict[str, str]]:
 
 
 def _price_history() -> dict[str, list[dict[str, str]]]:
-    history: dict[str, list[dict[str, str]]] = {}
+    history: dict[str, dict[str, dict[str, str]]] = {}
     for zip_path in sorted(PRICE_MONTH_DIR.glob("*.zip")):
         rows = _load_bhavcopy_rows(zip_path)
         trade_date = f"{zip_path.stem[:4]}-{zip_path.stem[4:6]}-{zip_path.stem[6:8]}"
         for symbol, row in rows.items():
-            history.setdefault(symbol, []).append(
-                {
-                    "trade_date": trade_date,
-                    "close": str(row.get("CLOSE") or row.get("ClsPric") or "").strip(),
-                    "volume": str(row.get("TOTTRDQTY") or row.get("TtlTradgVol") or "").strip(),
-                }
-            )
-    return history
+            history.setdefault(symbol, {})[trade_date] = {
+                "trade_date": trade_date,
+                "close": str(row.get("CLOSE") or row.get("ClsPric") or "").strip(),
+                "volume": str(row.get("TOTTRDQTY") or row.get("TtlTradgVol") or "").strip(),
+            }
+    return {
+        symbol: [rows[key] for key in sorted(rows)]
+        for symbol, rows in history.items()
+    }
 
 
 def _adjustment_factors(action_type: str, parameters: dict[str, str]) -> tuple[Decimal, Decimal]:
@@ -171,10 +172,12 @@ def build_reference_corpus() -> dict[str, object]:
                 "subject": raw["subject"],
                 "parameters": normalized_parameters,
                 "snapshot_path": raw["snapshot_path"],
-                "price_paths": [
-                    f"data/raw/nse_equity_bhavcopy/year=2026/month=04/{row['trade_date'].replace('-', '')}.zip"
-                    for row in prices
-                ],
+                "price_paths": list(
+                    dict.fromkeys(
+                        f"data/raw/nse_equity_bhavcopy/year=2026/month=04/{row['trade_date'].replace('-', '')}.zip"
+                        for row in prices
+                    )
+                ),
                 "prices": prices,
                 "assertions": _assertions(
                     action_type=action_type.value,
@@ -184,8 +187,12 @@ def build_reference_corpus() -> dict[str, object]:
             }
         )
 
+    transformational_types = {"BONUS", "SPLIT", "SPLIT_REVERSE", "RIGHTS", "RIGHTS_RENOUNCE", "MERGER_TARGET", "DEMERGER_PARENT"}
+    transformational_cases = [case for case in cases if case["action_type"] in transformational_types]
     return {
         "case_count": len(cases),
+        "transformational_case_count": len(transformational_cases),
+        "transformational_case_labels": [case["label"] for case in transformational_cases],
         "cases": cases,
     }
 

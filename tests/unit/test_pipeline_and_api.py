@@ -21,6 +21,7 @@ from omegadata.db.models import (
     InstrumentMaster,
     ManualReviewQueue,
     PriceRecord,
+    ReprocessJob,
 )
 from omegadata.db.session import get_session, init_db
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState
@@ -403,6 +404,7 @@ def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, m
             status_code=200,
             content_type="application/octet-stream",
             transport="test",
+            request_attempts=1,
         )
 
     monkeypatch.setattr(manager, "_bootstrap_nse_session", lambda client: None)
@@ -552,6 +554,7 @@ def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_pat
     init_db()
     with get_session() as session:
         session.execute(delete(ManualReviewQueue))
+        session.execute(delete(ReprocessJob))
         session.execute(delete(PriceRecord))
         session.execute(delete(InstrumentMaster))
         session.add(
@@ -633,6 +636,7 @@ def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_pat
         )
         assert resolution.status_code == 200
         assert resolution.json()["reprocess_status"] == "PENDING"
+        assert resolution.json()["reprocess_job_id"] is not None
 
         still_blocked = client.get("/publication/status/INE222A01010?exchange=NSE", headers=headers)
         assert still_blocked.json()["blocked_records"] == 2
@@ -640,7 +644,15 @@ def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_pat
         completed = client.post(
             f"/reviews/{review_id}/reprocess-complete",
             headers=headers,
-            json={"completed_by": "ops", "notes": "full replay complete"},
+            json={
+                "completed_by": "ops",
+                "notes": "full replay complete",
+                "rebuilt_tables": ["price_record", "confirmed_corporate_action"],
+                "rebuilt_isins": ["INE222A01010"],
+                "validation_checks": ["cross_source_validation", "adjustment_chain_rebuild"],
+                "evidence_paths": ["artifacts/verification/source_probe_report.json"],
+                "date_range": {"start": "2024-01-01", "end": "2024-01-02"},
+            },
         )
         assert completed.status_code == 200
 
@@ -656,6 +668,7 @@ def test_false_positive_resolution_unblocks_without_reprocess(tmp_path: Path) ->
     init_db()
     with get_session() as session:
         session.execute(delete(ManualReviewQueue))
+        session.execute(delete(ReprocessJob))
         session.execute(delete(PriceRecord))
         session.execute(delete(InstrumentMaster))
         session.add(
@@ -719,7 +732,14 @@ def test_false_positive_resolution_unblocks_without_reprocess(tmp_path: Path) ->
         rejected = client.post(
             f"/reviews/{review_id}/reprocess-complete",
             headers=headers,
-            json={"completed_by": "ops", "notes": "should not be allowed"},
+            json={
+                "completed_by": "ops",
+                "notes": "should not be allowed",
+                "rebuilt_tables": ["price_record"],
+                "rebuilt_isins": ["INE333A01010"],
+                "validation_checks": ["cross_source_validation"],
+                "evidence_paths": ["artifacts/verification/source_probe_report.json"],
+            },
         )
         assert rejected.status_code == 400
 
@@ -731,6 +751,7 @@ def test_complete_reprocess_requires_pending_request_artifact(tmp_path: Path) ->
     init_db()
     with get_session() as session:
         session.execute(delete(ManualReviewQueue))
+        session.execute(delete(ReprocessJob))
         session.execute(delete(InstrumentMaster))
         session.add(
             InstrumentMaster(
@@ -768,7 +789,14 @@ def test_complete_reprocess_requires_pending_request_artifact(tmp_path: Path) ->
         rejected = client.post(
             "/reviews/1/reprocess-complete",
             headers=headers,
-            json={"completed_by": "ops", "notes": "missing request artifact"},
+            json={
+                "completed_by": "ops",
+                "notes": "missing request artifact",
+                "rebuilt_tables": ["price_record"],
+                "rebuilt_isins": ["INE444A01010"],
+                "validation_checks": ["cross_source_validation"],
+                "evidence_paths": ["artifacts/verification/source_probe_report.json"],
+            },
         )
         assert rejected.status_code == 400
 
@@ -1030,7 +1058,7 @@ def test_trading_calendar_invalid_config_reports_invalid_state(
     )
     by_exchange = {str(status["exchange"]): status for status in statuses}
     assert set(by_exchange) == {"BSE", "NSE"}
-    assert all(status["status"] == "missing" for status in by_exchange.values())
+    assert all(status["status"] == "invalid_config" for status in by_exchange.values())
 
 
 def test_manual_review_open_listing_marks_sla_breach(tmp_path: Path) -> None:

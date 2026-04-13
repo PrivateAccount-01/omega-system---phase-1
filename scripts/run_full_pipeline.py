@@ -3,10 +3,13 @@ from __future__ import annotations
 import argparse
 import json
 from datetime import date, timedelta
+from pathlib import Path
 
 from omegadata.config import settings
 from omegadata.db.session import init_db
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> None:
@@ -47,7 +50,9 @@ def main() -> None:
         },
         "errors": errors,
     }
-    with open("artifacts/verification/pipeline_execution_result.json", "w", encoding="utf-8") as handle:
+    out_path = REPO_ROOT / "artifacts/verification/pipeline_execution_result.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open("w", encoding="utf-8") as handle:
         json.dump(output, handle, indent=2)
     print(json.dumps(output, indent=2))
 

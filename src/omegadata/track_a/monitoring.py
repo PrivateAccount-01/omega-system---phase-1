@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prometheus_client import Counter, Histogram
+from prometheus_client import Counter, Gauge, Histogram
 
 DOWNLOAD_COUNTER = Counter(
     "omegadata_download_total",
@@ -42,6 +42,24 @@ REVIEW_POLICY_RELOAD_COUNTER = Counter(
     "omegadata_review_policy_reload_total",
     "Review policy cache reload events",
     ["reason"],
+)
+
+REVIEW_OPEN_GAUGE = Gauge(
+    "omegadata_manual_review_open",
+    "Open manual reviews by category",
+    ["category"],
+)
+
+REVIEW_OVERDUE_GAUGE = Gauge(
+    "omegadata_manual_review_overdue",
+    "Overdue manual reviews by category",
+    ["category"],
+)
+
+REPROCESS_JOB_GAUGE = Gauge(
+    "omegadata_reprocess_jobs",
+    "Reprocess jobs by status",
+    ["status"],
 )
 
 API_REQUEST_COUNTER = Counter(

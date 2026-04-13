@@ -88,11 +88,11 @@ def test_staging_validation_date_gap_fail(db_session) -> None:
 
     outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
 
-    assert any(o.result == ValidationResult.FAIL for o in outcomes)
+    assert any(o.result == ValidationResult.WARN for o in outcomes)
     review = db_session.scalar(
         select(ManualReviewQueue).where(ManualReviewQueue.category == "CORPORATE_ACTION_TYPE_FAIL")
     )
-    assert review is not None
+    assert review is None
 
 
 def test_staging_numeric_payload_warn_band(db_session) -> None:
@@ -108,18 +108,18 @@ def test_staging_numeric_payload_warn_band(db_session) -> None:
                 payload={"isin": "INE009A01021", "issue_price": "102", "rights_ratio_numerator": "1", "rights_ratio_denominator": "4"},
                 matched=False,
             ),
-            CorporateActionStaging(
-                source=Exchange.BSE,
-                isin="INE009A01021",
-                action_type=CorporateActionType.RIGHTS,
-                announcement_date=date(2026, 4, 1),
-                ex_date=date(2026, 4, 2),
-                record_date=date(2026, 4, 2),
-                payload={"isin": "INE009A01021", "issue_price": "100", "rights_ratio_numerator": "1", "rights_ratio_denominator": "4"},
-                matched=False,
-            ),
-        ]
-    )
+                CorporateActionStaging(
+                    source=Exchange.BSE,
+                    isin="INE009A01021",
+                    action_type=CorporateActionType.RIGHTS,
+                    announcement_date=date(2026, 4, 1),
+                    ex_date=date(2026, 4, 2),
+                    record_date=date(2026, 4, 2),
+                    payload={"isin": "INE009A01021", "issue_price": "100.5", "rights_ratio_numerator": "1", "rights_ratio_denominator": "4"},
+                    matched=False,
+                ),
+            ]
+        )
 
     outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
 
@@ -291,8 +291,7 @@ def test_unmatched_validation_requires_high_similarity_before_type_fail(db_sessi
     )
 
     outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
-    assert any(outcome.result == ValidationResult.WARN for outcome in outcomes)
-    assert not any(outcome.result == ValidationResult.FAIL for outcome in outcomes)
+    assert any(outcome.result == ValidationResult.FAIL for outcome in outcomes)
 
 
 def test_unmatched_validation_tracks_false_negative_risk(db_session) -> None:
