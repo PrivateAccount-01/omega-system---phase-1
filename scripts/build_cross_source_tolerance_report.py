@@ -117,6 +117,10 @@ def _build_calibration_sqlite(base_db: Path) -> tuple[Path, int]:
     return target, loaded
 
 
+def _normalize_path(value: Path) -> str:
+    return value.resolve().as_posix()
+
+
 def _build_summary() -> list[dict[str, object]]:
     validator = CrossSourceValidator()
     buckets: dict[tuple[str, str, str], list[Decimal]] = defaultdict(list)
@@ -195,14 +199,14 @@ def main() -> None:
             if best_path is not None:
                 if best_counts is not None and best_counts["matched"] > 0:
                     selected_db_url = f"sqlite:///{best_path.as_posix()}"
-                    source_db_description = str(best_path)
+                    source_db_description = _normalize_path(best_path)
                 elif best_counts is not None and best_counts["nse"] > 0:
                     calibration_db, loaded = _build_calibration_sqlite(best_path)
                     calibration_counts = _count_matches_sqlite(calibration_db)
                     selected_db_url = f"sqlite:///{calibration_db.as_posix()}"
-                    source_db_description = str(calibration_db)
+                    source_db_description = _normalize_path(calibration_db)
                     enrichment = {
-                        "base_db": str(best_path),
+                        "base_db": _normalize_path(best_path),
                         "bse_rows_loaded": loaded,
                         "matched_after_enrichment": calibration_counts["matched"],
                     }

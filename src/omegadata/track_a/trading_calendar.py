@@ -211,7 +211,8 @@ class TradingCalendar:
         warning_window_days: int,
     ) -> list[dict[str, object]]:
         exchanges = sorted(
-            set(self.coverage_years_by_exchange)
+            set(self.maintenance.supported_exchanges)
+            | set(self.coverage_years_by_exchange)
             | set(self.holidays_by_exchange)
         )
         return [

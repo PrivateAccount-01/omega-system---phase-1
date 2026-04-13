@@ -26,7 +26,7 @@ from omegadata.db.session import get_session, init_db
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 from omegadata.track_a.download_manager import DownloadError, DownloadManager, FetchResult
-from omegadata.track_a.trading_calendar import TradingCalendar
+from omegadata.track_a.trading_calendar import CalendarMaintenance, TradingCalendar
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.isin_master import ISINMasterService
 from omegadata.track_b.review_policy import invalidate_review_policy_cache, load_review_policies
@@ -972,6 +972,40 @@ def test_trading_calendar_loads_maintenance_metadata_from_config(tmp_path: Path,
     assert calendar.maintenance.owner_role == "Market Ops"
     assert calendar.maintenance.renewal_window_days == 45
     assert calendar.maintenance.supported_exchanges == ("BSE",)
+
+
+def test_trading_calendar_statuses_include_supported_exchanges_without_coverage() -> None:
+    calendar = TradingCalendar(
+        holidays_by_exchange={},
+        coverage_years_by_exchange={},
+        maintenance=CalendarMaintenance(supported_exchanges=("NSE", "BSE")),
+    )
+
+    statuses = calendar.all_coverage_statuses(
+        anchor_date=date(2026, 4, 13),
+        warning_window_days=60,
+    )
+
+    assert [status["exchange"] for status in statuses] == ["BSE", "NSE"]
+    assert all(status["status"] == "missing" for status in statuses)
+
+
+def test_trading_calendar_missing_config_still_reports_supported_exchange_statuses(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    missing_path = tmp_path / "missing_holidays.json"
+    monkeypatch.setattr(settings, "trading_holiday_path", str(missing_path))
+
+    calendar = TradingCalendar.from_config()
+    statuses = calendar.all_coverage_statuses(
+        anchor_date=date(2026, 4, 13),
+        warning_window_days=calendar.maintenance.renewal_window_days,
+    )
+
+    by_exchange = {str(status["exchange"]): status for status in statuses}
+    assert set(by_exchange) == {"BSE", "NSE"}
+    assert all(status["status"] == "missing" for status in by_exchange.values())
 
 
 def test_manual_review_open_listing_marks_sla_breach(tmp_path: Path) -> None:
