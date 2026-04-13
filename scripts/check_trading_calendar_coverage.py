@@ -18,6 +18,8 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     artifact = {
         "generated_at": datetime.now(UTC).isoformat(),
+        "calendar_config_state": calendar.config_state,
+        "calendar_config_path": calendar.config_path,
         "warning_window_days": calendar.maintenance.renewal_window_days,
         "owner_role": calendar.maintenance.owner_role,
         "runbook": calendar.maintenance.runbook,

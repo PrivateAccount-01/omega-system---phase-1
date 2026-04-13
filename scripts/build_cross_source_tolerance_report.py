@@ -58,17 +58,26 @@ def _count_matches_sqlite(path: Path) -> dict[str, int]:
 
 def _discover_sqlite_candidates() -> list[Path]:
     excluded_parts = {".venv", ".git", ".mypy_cache", "__pycache__", "node_modules"}
+    excluded_paths = {
+        Path("artifacts/verification/tolerance_calibration.sqlite").resolve(),
+    }
     candidates: list[Path] = []
     for path in Path(".").rglob("*.db"):
         if any(part in excluded_parts for part in path.parts):
+            continue
+        if path.resolve() in excluded_paths:
             continue
         candidates.append(path)
     for path in Path(".").rglob("*.sqlite"):
         if any(part in excluded_parts for part in path.parts):
             continue
+        if path.resolve() in excluded_paths:
+            continue
         candidates.append(path)
     for path in Path(".").rglob("*.sqlite3"):
         if any(part in excluded_parts for part in path.parts):
+            continue
+        if path.resolve() in excluded_paths:
             continue
         candidates.append(path)
     return sorted(set(candidates))
@@ -118,7 +127,11 @@ def _build_calibration_sqlite(base_db: Path) -> tuple[Path, int]:
 
 
 def _normalize_path(value: Path) -> str:
-    return value.resolve().as_posix()
+    resolved = value.resolve()
+    try:
+        return resolved.relative_to(Path.cwd().resolve()).as_posix()
+    except ValueError:
+        return resolved.as_posix()
 
 
 def _build_summary() -> list[dict[str, object]]:

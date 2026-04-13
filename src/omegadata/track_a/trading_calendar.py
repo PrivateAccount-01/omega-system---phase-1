@@ -21,12 +21,19 @@ class TradingCalendar:
     holidays_by_exchange: dict[str, set[date]]
     coverage_years_by_exchange: dict[str, set[int]]
     maintenance: CalendarMaintenance = field(default_factory=CalendarMaintenance)
+    config_state: str = "loaded"
+    config_path: str | None = None
 
     @classmethod
     def from_config(cls) -> TradingCalendar:
         path = Path(settings.trading_holiday_path)
         if not path.exists():
-            return cls(holidays_by_exchange={}, coverage_years_by_exchange={})
+            return cls(
+                holidays_by_exchange={},
+                coverage_years_by_exchange={},
+                config_state="missing",
+                config_path=path.as_posix(),
+            )
         payload = json.loads(path.read_text(encoding="utf-8"))
         holidays_by_exchange: dict[str, set[date]] = {}
         coverage_years_by_exchange: dict[str, set[int]] = {}
@@ -81,6 +88,8 @@ class TradingCalendar:
             holidays_by_exchange=holidays_by_exchange,
             coverage_years_by_exchange=coverage_years_by_exchange,
             maintenance=maintenance,
+            config_state="loaded",
+            config_path=path.as_posix(),
         )
 
     def year_is_covered(self, exchange: str, year: int) -> bool:

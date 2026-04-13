@@ -998,6 +998,8 @@ def test_trading_calendar_missing_config_still_reports_supported_exchange_status
     monkeypatch.setattr(settings, "trading_holiday_path", str(missing_path))
 
     calendar = TradingCalendar.from_config()
+    assert calendar.config_state == "missing"
+    assert calendar.config_path == missing_path.as_posix()
     statuses = calendar.all_coverage_statuses(
         anchor_date=date(2026, 4, 13),
         warning_window_days=calendar.maintenance.renewal_window_days,
