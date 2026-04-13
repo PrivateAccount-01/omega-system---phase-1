@@ -372,7 +372,7 @@ def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, m
 
     monkeypatch.setattr(manager, "_bootstrap_nse_session", lambda client: None)
     monkeypatch.setattr(manager, "_request_with_workarounds", fake_request)
-    monkeypatch.setattr(manager, "_validate_payload", lambda source_key, payload: None)
+    monkeypatch.setattr(manager, "_validate_payload", lambda source_key, payload, **kwargs: None)
 
     first = manager.download("NSE_EQUITY_BHAVCOPY", date(2024, 1, 2))
     second = manager.download("NSE_EQUITY_BHAVCOPY", date(2024, 1, 2))
@@ -736,6 +736,13 @@ def test_bse_candidate_extraction_supports_relative_paths() -> None:
     ]
 
 
+def test_bse_candidate_detection_allows_bse_subdomains() -> None:
+    assert DownloadManager._looks_like_bse_equity_url(
+        "https://cdn.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV",
+        date(2026, 4, 10),
+    )
+
+
 def test_bse_source_registry_primary_format_is_csv() -> None:
     from omegadata.track_a.source_registry import SOURCE_REGISTRY
 
@@ -751,6 +758,21 @@ def test_bse_zip_payload_validation_checks_contents() -> None:
 
     with pytest.raises(DownloadError):
         DownloadManager._validate_payload("BSE_EQUITY_BHAVCOPY", bad_zip.getvalue())
+
+
+def test_bse_zip_payload_validation_selects_expected_member_by_date() -> None:
+    import zipfile
+
+    payload = io.BytesIO()
+    with zipfile.ZipFile(payload, "w") as zf:
+        zf.writestr("other_file.csv", "junk,data\n1,2\n")
+        zf.writestr(
+            "BSE_EQ_BHAVCOPY_10042026_T0.csv",
+            "SC_CODE,SC_NAME,OPEN,HIGH,LOW,CLOSE,LAST,PREVCLOSE,NO_TRADES,NO_OF_SHRS,NET_TURNOV,TDCLOINDI,ISIN_CODE\n"
+            "500112,SBI,1,1,1,1,1,1,1,1,1,I,INE062A01020\n",
+        )
+
+    DownloadManager._validate_payload("BSE_EQUITY_BHAVCOPY", payload.getvalue(), as_of=date(2026, 4, 10))
 
 
 def test_review_policy_cache_reloads_on_file_change(tmp_path: Path, monkeypatch) -> None:

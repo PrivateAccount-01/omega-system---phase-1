@@ -42,6 +42,22 @@ class DownloadArtifact:
     attempts: int
 
 
+@dataclass(frozen=True)
+class SourceProbeResult:
+    source_key: str
+    as_of: date
+    url: str
+    role: str
+    validated: bool
+    status_code: int | None
+    content_type: str
+    bytes_downloaded: int
+    attempts: int
+    error: str | None
+    validation_error: str | None
+    body_preview: str
+
+
 class DownloadManager:
     def __init__(self) -> None:
         self.raw_root = Path(settings.raw_root)
@@ -61,9 +77,11 @@ class DownloadManager:
     @staticmethod
     def _looks_like_bse_equity_url(url: str, as_of: date) -> bool:
         parsed = urlparse(url)
-        if parsed.netloc.lower() != "www.bseindia.com":
+        host = parsed.netloc.lower()
+        if host and not (host == "bseindia.com" or host.endswith(".bseindia.com")):
             return False
-        if "/download/bhavcopy/equity/" not in parsed.path.lower():
+        path = parsed.path.lower()
+        if "bhavcopy" not in path or "equity" not in path:
             return False
         lowered = url.lower()
         return any(marker in lowered for marker in DownloadManager._expected_bse_equity_markers(as_of))
@@ -284,17 +302,42 @@ class DownloadManager:
             raise DownloadError(f"{source_key} payload is missing expected columns")
 
     @staticmethod
-    def _validate_bse_equity_zip_payload(payload: bytes) -> None:
+    def _select_bse_equity_zip_member(zf: zipfile.ZipFile, as_of: date | None) -> str:
+        names = [name for name in zf.namelist() if name.lower().endswith(".csv")]
+        if not names:
+            raise DownloadError("BSE equity bhavcopy zip contains no CSV files")
+
+        marker_scores: list[tuple[int, str]] = []
+        expected_markers = set()
+        if as_of is not None:
+            expected_markers = set(DownloadManager._expected_bse_equity_markers(as_of))
+
+        for name in names:
+            lowered = name.lower()
+            score = 0
+            if expected_markers and any(marker in lowered for marker in expected_markers):
+                score += 100
+            if "bse_eq_bhavcopy" in lowered:
+                score += 50
+            if "eq_isincode" in lowered:
+                score += 40
+            if "bhavcopy_bse_cm" in lowered:
+                score += 30
+            if "eq" in lowered:
+                score += 5
+            marker_scores.append((score, name))
+
+        marker_scores.sort(key=lambda item: (-item[0], item[1].lower()))
+        best_score, best_name = marker_scores[0]
+        if best_score <= 0:
+            raise DownloadError("BSE equity bhavcopy zip contains no expected CSV member")
+        return best_name
+
+    @staticmethod
+    def _validate_bse_equity_zip_payload(payload: bytes, as_of: date | None = None) -> None:
         try:
             with zipfile.ZipFile(io.BytesIO(payload)) as zf:
-                names = [name for name in zf.namelist() if name.lower().endswith(".csv")]
-                if not names:
-                    raise DownloadError("BSE equity bhavcopy zip contains no CSV files")
-                chosen_name = names[0]
-                lowered_name = chosen_name.lower()
-                expected_name_tokens = ("bhavcopy", "eq_isincode", "bse_eq_bhavcopy", "eq")
-                if not any(token in lowered_name for token in expected_name_tokens):
-                    raise DownloadError("BSE equity bhavcopy zip contains an unexpected CSV filename")
+                chosen_name = DownloadManager._select_bse_equity_zip_member(zf, as_of)
                 lines = zf.read(chosen_name).decode("utf-8", errors="ignore").splitlines()
         except zipfile.BadZipFile as exc:
             raise DownloadError("BSE equity bhavcopy zip payload is invalid") from exc
@@ -308,10 +351,10 @@ class DownloadManager:
         )
 
     @staticmethod
-    def _validate_payload(source_key: str, payload: bytes) -> None:
+    def _validate_payload(source_key: str, payload: bytes, *, as_of: date | None = None) -> None:
         if source_key == "BSE_EQUITY_BHAVCOPY":
             if payload.startswith(b"PK\x03\x04"):
-                DownloadManager._validate_bse_equity_zip_payload(payload)
+                DownloadManager._validate_bse_equity_zip_payload(payload, as_of)
                 return
             text = payload.decode("utf-8", errors="ignore").strip()
             if not text:
@@ -345,6 +388,78 @@ class DownloadManager:
             ).lower().startswith("missing index"):
                 raise DownloadError("NSE corporate actions payload indicates missing index")
 
+    def probe_source_candidates(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        limit: int | None = None,
+    ) -> list[SourceProbeResult]:
+        candidate_urls = self._candidate_urls(source_key, as_of)
+        if limit is not None:
+            candidate_urls = candidate_urls[:limit]
+
+        results: list[SourceProbeResult] = []
+        for idx, url in enumerate(candidate_urls):
+            role = "primary" if idx == 0 else "fallback"
+            last_error: str | None = None
+            last_validation_error: str | None = None
+            last_status_code: int | None = None
+            last_content_type = ""
+            last_bytes = 0
+            last_preview = ""
+            validated = False
+            attempts = 0
+
+            for profile in self._header_profiles():
+                attempts += 1
+                request_headers = self._profile_for_url(profile, url)
+                try:
+                    with httpx.Client(headers=request_headers, follow_redirects=True, timeout=60.0) as client:
+                        if self._is_nse_url(url):
+                            self._bootstrap_nse_session(client)
+                        response = client.get(url, timeout=60.0)
+                    last_status_code = response.status_code
+                    last_content_type = response.headers.get("content-type", "")
+                    payload = response.content
+                    last_bytes = len(payload)
+                    last_preview = response.text[:220].replace("\n", " ")
+                    if response.status_code >= 400:
+                        last_error = f"HTTP {response.status_code}"
+                        continue
+                    try:
+                        self._validate_payload(source_key, payload, as_of=as_of)
+                        validated = True
+                        last_error = None
+                        last_validation_error = None
+                        break
+                    except Exception as exc:  # noqa: BLE001
+                        last_validation_error = str(exc)
+                        last_error = str(exc)
+                        continue
+                except Exception as exc:  # noqa: BLE001
+                    last_error = str(exc)
+                    last_preview = ""
+                    continue
+
+            results.append(
+                SourceProbeResult(
+                    source_key=source_key,
+                    as_of=as_of,
+                    url=url,
+                    role=role,
+                    validated=validated,
+                    status_code=last_status_code,
+                    content_type=last_content_type,
+                    bytes_downloaded=last_bytes,
+                    attempts=attempts,
+                    error=last_error,
+                    validation_error=last_validation_error,
+                    body_preview=last_preview,
+                )
+            )
+        return results
+
     def download(self, source_key: str, as_of: date) -> DownloadArtifact:
         if source_key not in SOURCE_REGISTRY:
             raise KeyError(f"Unknown source key: {source_key}")
@@ -366,7 +481,7 @@ class DownloadManager:
                             if self._is_nse_url(url):
                                 self._bootstrap_nse_session(client)
                             payload = self._request_with_workarounds(client, url, request_headers)
-                            self._validate_payload(source_key, payload)
+                            self._validate_payload(source_key, payload, as_of=as_of)
                             used_url = url
                             if idx > 0:
                                 FAILOVER_COUNTER.labels(source=source_key).inc()
