@@ -23,6 +23,7 @@ class TradingCalendar:
     maintenance: CalendarMaintenance = field(default_factory=CalendarMaintenance)
     config_state: str = "loaded"
     config_path: str | None = None
+    config_error: str | None = None
 
     @classmethod
     def from_config(cls) -> TradingCalendar:
@@ -34,7 +35,16 @@ class TradingCalendar:
                 config_state="missing",
                 config_path=path.as_posix(),
             )
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            return cls(
+                holidays_by_exchange={},
+                coverage_years_by_exchange={},
+                config_state="invalid",
+                config_path=path.as_posix(),
+                config_error=str(exc),
+            )
         holidays_by_exchange: dict[str, set[date]] = {}
         coverage_years_by_exchange: dict[str, set[int]] = {}
         raw_maintenance = payload.get("maintenance", {})
@@ -90,6 +100,7 @@ class TradingCalendar:
             maintenance=maintenance,
             config_state="loaded",
             config_path=path.as_posix(),
+            config_error=None,
         )
 
     def year_is_covered(self, exchange: str, year: int) -> bool:

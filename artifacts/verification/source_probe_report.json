@@ -1,7 +1,10 @@
 {
-  "generated_at": "2026-04-13T12:14:22.317338+00:00",
+  "generated_at": "2026-04-13T15:06:54.910352+00:00",
   "probe_date": "2026-04-10",
   "calendar_mode": "configured_trading_calendar",
+  "calendar_config_state": "loaded",
+  "calendar_config_path": "config/trading_holidays_india.json",
+  "calendar_config_error": null,
   "probe_profile_mode": "deterministic",
   "probe_profile_count": 1,
   "probe_timeout_seconds": 8.0,
@@ -43,7 +46,7 @@
       "validated": true,
       "status_code": 200,
       "content_type": "application/json; charset=utf-8",
-      "bytes_downloaded": 1797,
+      "bytes_downloaded": 2100,
       "attempts": 1,
       "error": null,
       "validation_error": null,
@@ -84,14 +87,14 @@
       "as_of": "2026-04-10",
       "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP",
       "role": "fallback",
-      "validated": true,
-      "status_code": 200,
-      "content_type": "application/x-zip-compressed",
-      "bytes_downloaded": 360,
+      "validated": false,
+      "status_code": null,
+      "content_type": "",
+      "bytes_downloaded": 0,
       "attempts": 1,
-      "error": null,
+      "error": "The read operation timed out",
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000m\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_10042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
+      "body_preview": ""
     }
   ],
   "bse_recent_history": [
@@ -125,8 +128,10 @@
     "bse_full_supported_fallback_coverage": true,
     "bse_primary_validated": true,
     "bse_any_fallback_validated": true,
-    "bse_all_fallbacks_healthy": true,
+    "bse_all_fallbacks_healthy": false,
     "bse_any_candidate_validated": true,
-    "bse_failed_candidates": []
+    "bse_failed_candidates": [
+      "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP"
+    ]
   }
 }

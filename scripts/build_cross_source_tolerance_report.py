@@ -18,6 +18,8 @@ from omegadata.domain import Exchange
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 from omegadata.track_b.cross_source_validation import CrossSourceValidator
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 
 def _quantile(sorted_values: list[Decimal], q: Decimal) -> Decimal | None:
     if not sorted_values:
@@ -59,22 +61,22 @@ def _count_matches_sqlite(path: Path) -> dict[str, int]:
 def _discover_sqlite_candidates() -> list[Path]:
     excluded_parts = {".venv", ".git", ".mypy_cache", "__pycache__", "node_modules"}
     excluded_paths = {
-        Path("artifacts/verification/tolerance_calibration.sqlite").resolve(),
+        (REPO_ROOT / "artifacts/verification/tolerance_calibration.sqlite").resolve(),
     }
     candidates: list[Path] = []
-    for path in Path(".").rglob("*.db"):
+    for path in REPO_ROOT.rglob("*.db"):
         if any(part in excluded_parts for part in path.parts):
             continue
         if path.resolve() in excluded_paths:
             continue
         candidates.append(path)
-    for path in Path(".").rglob("*.sqlite"):
+    for path in REPO_ROOT.rglob("*.sqlite"):
         if any(part in excluded_parts for part in path.parts):
             continue
         if path.resolve() in excluded_paths:
             continue
         candidates.append(path)
-    for path in Path(".").rglob("*.sqlite3"):
+    for path in REPO_ROOT.rglob("*.sqlite3"):
         if any(part in excluded_parts for part in path.parts):
             continue
         if path.resolve() in excluded_paths:
@@ -99,7 +101,7 @@ def _best_sqlite_candidate() -> tuple[Path | None, dict[str, int] | None]:
 
 
 def _local_bse_artifacts() -> list[tuple[date, Path]]:
-    latest_files = sorted(Path("data/raw/bse_equity_bhavcopy").rglob("*.latest.json"))
+    latest_files = sorted((REPO_ROOT / "data/raw/bse_equity_bhavcopy").rglob("*.latest.json"))
     artifacts: list[tuple[date, Path]] = []
     for latest in latest_files:
         payload = json.loads(latest.read_text(encoding="utf-8"))
@@ -111,7 +113,7 @@ def _local_bse_artifacts() -> list[tuple[date, Path]]:
 
 
 def _build_calibration_sqlite(base_db: Path) -> tuple[Path, int]:
-    out_dir = Path("artifacts/verification")
+    out_dir = REPO_ROOT / "artifacts/verification"
     out_dir.mkdir(parents=True, exist_ok=True)
     target = out_dir / "tolerance_calibration.sqlite"
     shutil.copyfile(base_db, target)
@@ -129,9 +131,13 @@ def _build_calibration_sqlite(base_db: Path) -> tuple[Path, int]:
 def _normalize_path(value: Path) -> str:
     resolved = value.resolve()
     try:
-        return resolved.relative_to(Path.cwd().resolve()).as_posix()
+        return resolved.relative_to(REPO_ROOT).as_posix()
     except ValueError:
         return resolved.as_posix()
+
+
+def _sqlite_display_url(path: Path) -> str:
+    return f"sqlite:///{_normalize_path(path)}"
 
 
 def _build_summary() -> list[dict[str, object]]:
@@ -196,27 +202,31 @@ def main() -> None:
     parser.add_argument("--db-url", dest="db_url", default=None)
     args = parser.parse_args()
 
-    out_dir = Path("artifacts/verification")
+    out_dir = REPO_ROOT / "artifacts/verification"
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "cross_source_tolerance_report.json"
 
     selected_db_url = settings.db_url
+    artifact_db_url = settings.db_url
     source_db_description = "configured_db_url"
     enrichment: dict[str, object] | None = None
 
     try:
         if args.db_url:
             selected_db_url = str(args.db_url)
+            artifact_db_url = str(args.db_url)
         else:
             best_path, best_counts = _best_sqlite_candidate()
             if best_path is not None:
                 if best_counts is not None and best_counts["matched"] > 0:
-                    selected_db_url = f"sqlite:///{best_path.as_posix()}"
+                    selected_db_url = f"sqlite:///{best_path.resolve().as_posix()}"
+                    artifact_db_url = _sqlite_display_url(best_path)
                     source_db_description = _normalize_path(best_path)
                 elif best_counts is not None and best_counts["nse"] > 0:
                     calibration_db, loaded = _build_calibration_sqlite(best_path)
                     calibration_counts = _count_matches_sqlite(calibration_db)
-                    selected_db_url = f"sqlite:///{calibration_db.as_posix()}"
+                    selected_db_url = f"sqlite:///{calibration_db.resolve().as_posix()}"
+                    artifact_db_url = _sqlite_display_url(calibration_db)
                     source_db_description = _normalize_path(calibration_db)
                     enrichment = {
                         "base_db": _normalize_path(best_path),
@@ -230,7 +240,7 @@ def main() -> None:
 
         artifact: dict[str, object] = {
             "generated_at": datetime.now(UTC).isoformat(),
-            "db_url": selected_db_url,
+            "db_url": artifact_db_url,
             "source_db": source_db_description,
             "status": "ok" if summary else "no_observations",
             "groups": summary,
@@ -240,7 +250,7 @@ def main() -> None:
     except Exception as exc:  # noqa: BLE001
         artifact = {
             "generated_at": datetime.now(UTC).isoformat(),
-            "db_url": selected_db_url,
+            "db_url": artifact_db_url,
             "source_db": source_db_description,
             "status": "db_unavailable",
             "error": str(exc),

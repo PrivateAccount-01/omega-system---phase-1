@@ -20,6 +20,7 @@ def main() -> None:
         "generated_at": datetime.now(UTC).isoformat(),
         "calendar_config_state": calendar.config_state,
         "calendar_config_path": calendar.config_path,
+        "calendar_config_error": calendar.config_error,
         "warning_window_days": calendar.maintenance.renewal_window_days,
         "owner_role": calendar.maintenance.owner_role,
         "runbook": calendar.maintenance.runbook,

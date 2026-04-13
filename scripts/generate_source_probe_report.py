@@ -94,9 +94,14 @@ def main() -> None:
         "probe_date": probe_date.isoformat(),
         "calendar_mode": (
             "configured_trading_calendar"
-            if bse_calendar_status and bse_calendar_status["status"] not in {"expired", "missing"}
-            else "weekday_fallback_due_to_missing_or_expired_calendar_coverage"
+            if calendar.config_state == "loaded"
+            and bse_calendar_status
+            and bse_calendar_status["status"] not in {"expired", "missing"}
+            else "weekday_fallback_due_to_missing_invalid_or_expired_calendar_coverage"
         ),
+        "calendar_config_state": calendar.config_state,
+        "calendar_config_path": calendar.config_path,
+        "calendar_config_error": calendar.config_error,
         "probe_profile_mode": probe_mode,
         "probe_profile_count": len(probe_profiles),
         "probe_timeout_seconds": settings.source_probe_timeout_seconds,

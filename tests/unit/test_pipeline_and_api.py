@@ -1010,6 +1010,29 @@ def test_trading_calendar_missing_config_still_reports_supported_exchange_status
     assert all(status["status"] == "missing" for status in by_exchange.values())
 
 
+def test_trading_calendar_invalid_config_reports_invalid_state(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    invalid_path = tmp_path / "invalid_holidays.json"
+    invalid_path.write_text("{invalid json", encoding="utf-8")
+    monkeypatch.setattr(settings, "trading_holiday_path", str(invalid_path))
+
+    calendar = TradingCalendar.from_config()
+
+    assert calendar.config_state == "invalid"
+    assert calendar.config_path == invalid_path.as_posix()
+    assert calendar.config_error is not None
+
+    statuses = calendar.all_coverage_statuses(
+        anchor_date=date(2026, 4, 13),
+        warning_window_days=calendar.maintenance.renewal_window_days,
+    )
+    by_exchange = {str(status["exchange"]): status for status in statuses}
+    assert set(by_exchange) == {"BSE", "NSE"}
+    assert all(status["status"] == "missing" for status in by_exchange.values())
+
+
 def test_manual_review_open_listing_marks_sla_breach(tmp_path: Path) -> None:
     db_path = tmp_path / "review_sla.db"
     settings.db_url = f"sqlite:///{db_path}"
