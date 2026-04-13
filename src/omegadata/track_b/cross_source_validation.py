@@ -13,6 +13,7 @@ from omegadata.db.models import (
     ValidationAuditLog,
 )
 from omegadata.domain import Exchange, ValidationResult
+from omegadata.track_a.monitoring import CORPORATE_ACTION_UNMATCHED_COUNTER
 from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
 from omegadata.track_b.manual_review import ManualReviewService
 
@@ -100,21 +101,28 @@ class CrossSourceValidator:
     def _price_tolerance(*, nse: PriceRecord, bse: PriceRecord, field: str) -> Decimal:
         tolerance = Decimal("0.0010")
         synthetic_bse = str(bse.raw_source).lower().startswith("bse_stockreach_graph")
+        nse_notional = Decimal(str(nse.close_price)) * Decimal(str(nse.volume))
+        bse_notional = Decimal(str(bse.close_price)) * Decimal(str(bse.volume))
+        if nse_notional > 0 and bse_notional > 0:
+            effective_notional = (Decimal("2") * nse_notional * bse_notional) / (nse_notional + bse_notional)
+        else:
+            effective_notional = min(nse_notional, bse_notional)
+
+        if effective_notional < Decimal("250000"):
+            tolerance = Decimal("0.0045")
+        elif effective_notional < Decimal("1000000"):
+            tolerance = Decimal("0.0030")
+        elif effective_notional < Decimal("5000000"):
+            tolerance = Decimal("0.0020")
+        elif effective_notional < Decimal("20000000"):
+            tolerance = Decimal("0.0015")
+
         if synthetic_bse:
-            tolerance = Decimal("0.0040")
-
-        max_close = max(Decimal(str(nse.close_price)), Decimal(str(bse.close_price)))
-        max_volume = max(Decimal(str(nse.volume)), Decimal(str(bse.volume)))
-        traded_notional = max_close * max_volume
-        if traded_notional < Decimal("250000"):
-            tolerance = max(tolerance, Decimal("0.0050"))
-        elif traded_notional < Decimal("1000000"):
-            tolerance = max(tolerance, Decimal("0.0025"))
-
+            tolerance = max(tolerance, Decimal("0.0040"))
         if field != "close_price":
-            tolerance = max(tolerance, tolerance + Decimal("0.0005"))
+            tolerance += Decimal("0.0005")
         if nse.is_imputed or bse.is_imputed:
-            tolerance = max(tolerance, Decimal("0.0030"))
+            tolerance = max(tolerance, Decimal("0.0035"))
         return tolerance
 
     def validate_monthly_flow_consistency(
@@ -221,9 +229,10 @@ class CrossSourceValidator:
             if (
                 best_candidate is not None
                 and best_score >= 60
-                and self.matcher.economic_overlap_count(staged_row, best_candidate) > 0
+                and self.matcher.has_economic_signal(staged_row, best_candidate)
                 and best_candidate.action_type != staged_row.action_type
             ):
+                    CORPORATE_ACTION_UNMATCHED_COUNTER.labels(classification="type_mismatch_fail").inc()
                     outcomes.append(
                         self._persist_categorical_result(
                             session=session,
@@ -244,6 +253,33 @@ class CrossSourceValidator:
                         )
                     )
                     continue
+            if (
+                best_candidate is not None
+                and best_score >= 35
+                and self.matcher.has_economic_signal(staged_row, best_candidate)
+            ):
+                CORPORATE_ACTION_UNMATCHED_COUNTER.labels(classification="ambiguous_near_candidate").inc()
+                outcomes.append(
+                    self._persist_categorical_result(
+                        session=session,
+                        source_1="NSE",
+                        source_2="BSE",
+                        isin=isin,
+                        data_date=anchor_date,
+                        field="corporate_action_false_negative_risk",
+                        left=staged_row.action_type.value,
+                        right=best_candidate.action_type.value,
+                        result=ValidationResult.WARN,
+                        diff_pct=Decimal("1"),
+                        tolerance=Decimal("0"),
+                        notes=(
+                            "Unmatched NSE action has an economically related BSE candidate below "
+                            f"mismatch threshold (score={best_score})"
+                        ),
+                    )
+                )
+            else:
+                CORPORATE_ACTION_UNMATCHED_COUNTER.labels(classification="no_candidate").inc()
             outcomes.append(
                 self._persist_categorical_result(
                     session=session,

@@ -27,6 +27,7 @@ from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 from omegadata.track_a.download_manager import DownloadError, DownloadManager
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.isin_master import ISINMasterService
+from omegadata.track_b.review_policy import invalidate_review_policy_cache, load_review_policies
 
 
 def test_api_threshold_enforcement(tmp_path: Path) -> None:
@@ -704,3 +705,61 @@ def test_run_track_a_requires_bse_bhavcopy(monkeypatch, tmp_path: Path) -> None:
 
     with pytest.raises(DownloadError):
         pipeline.run_track_a(date(2026, 4, 13))
+
+
+def test_bse_candidate_extraction_uses_live_page_patterns() -> None:
+    html = """
+    <a href="https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260410_F_0000.CSV">csv</a>
+    <a href="https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV">isin</a>
+    <a href="https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP">zip</a>
+    """
+    urls = DownloadManager._extract_bse_equity_urls(html, date(2026, 4, 10))
+    assert urls == [
+        "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260410_F_0000.CSV",
+        "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV",
+        "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP",
+    ]
+
+
+def test_review_policy_cache_reloads_on_file_change(tmp_path: Path, monkeypatch) -> None:
+    policy_path = tmp_path / "review_policies.json"
+    policy_path.write_text(
+        json.dumps(
+            {
+                "version": "v1",
+                "policies": {
+                    "CROSS_SOURCE_VALIDATION_FAIL": {
+                        "blocks_publication": True,
+                        "scope": "RECORD",
+                        "requires_reprocess": False,
+                    }
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(settings, "review_policy_path", str(policy_path))
+    invalidate_review_policy_cache()
+
+    first = load_review_policies()
+    assert first.version == "v1"
+
+    policy_path.write_text(
+        json.dumps(
+            {
+                "version": "v2",
+                "policies": {
+                    "CROSS_SOURCE_VALIDATION_FAIL": {
+                        "blocks_publication": True,
+                        "scope": "INSTRUMENT",
+                        "requires_reprocess": False,
+                    }
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    second = load_review_policies()
+    assert second.version == "v2"
+    assert second.for_category("CROSS_SOURCE_VALIDATION_FAIL").scope.value == "INSTRUMENT"

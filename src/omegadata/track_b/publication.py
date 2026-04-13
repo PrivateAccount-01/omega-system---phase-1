@@ -29,11 +29,8 @@ class PublicationStatus:
 
 
 class PublicationService:
-    def __init__(self) -> None:
-        self._policy_set = load_review_policies()
-
     def _policy_for_category(self, category: str) -> ReviewPolicy:
-        return self._policy_set.for_category(category)
+        return load_review_policies().for_category(category)
 
     @staticmethod
     def _resolution_decision(review: ManualReviewQueue) -> str | None:

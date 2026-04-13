@@ -32,6 +32,18 @@ FAILOVER_COUNTER = Counter(
     ["source"],
 )
 
+CORPORATE_ACTION_UNMATCHED_COUNTER = Counter(
+    "omegadata_corporate_action_unmatched_total",
+    "Classification of unmatched corporate action validation outcomes",
+    ["classification"],
+)
+
+REVIEW_POLICY_RELOAD_COUNTER = Counter(
+    "omegadata_review_policy_reload_total",
+    "Review policy cache reload events",
+    ["reason"],
+)
+
 API_REQUEST_COUNTER = Counter(
     "omegadata_api_requests_total",
     "Total API requests",

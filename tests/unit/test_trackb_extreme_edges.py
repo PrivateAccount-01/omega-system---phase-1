@@ -293,3 +293,37 @@ def test_unmatched_validation_requires_high_similarity_before_type_fail(db_sessi
     outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
     assert any(outcome.result == ValidationResult.WARN for outcome in outcomes)
     assert not any(outcome.result == ValidationResult.FAIL for outcome in outcomes)
+
+
+def test_unmatched_validation_tracks_false_negative_risk(db_session) -> None:
+    db_session.add_all(
+        [
+            CorporateActionStaging(
+                source=Exchange.NSE,
+                isin="INE009A01021",
+                action_type=CorporateActionType.DIVIDEND_CASH,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 8),
+                record_date=date(2026, 4, 8),
+                payload={"isin": "INE009A01021", "dividend_per_share": "1.25"},
+                matched=False,
+            ),
+            CorporateActionStaging(
+                source=Exchange.BSE,
+                isin="INE009A01021",
+                action_type=CorporateActionType.DIVIDEND_SPECIAL,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 2),
+                record_date=date(2026, 4, 2),
+                payload={"isin": "INE009A01021", "dividend_per_share": "1.25"},
+                matched=False,
+            ),
+        ]
+    )
+
+    outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
+    assert any(outcome.field == "corporate_action_false_negative_risk" for outcome in outcomes)
+    audit = db_session.scalar(
+        select(ValidationAuditLog).where(ValidationAuditLog.field_compared == "corporate_action_false_negative_risk")
+    )
+    assert audit is not None

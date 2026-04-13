@@ -34,6 +34,20 @@ def test_real_nse_equity_download_recent_date() -> None:
     pytest.fail(f"No NSE equity bhavcopy available for recent days: {last_error}")
 
 
+def test_real_bse_equity_download_recent_date() -> None:
+    manager = DownloadManager()
+    last_error: Exception | None = None
+    for d in _recent_days(12):
+        try:
+            artifact = manager.download("BSE_EQUITY_BHAVCOPY", d)
+            assert artifact.bytes_downloaded > 0
+            return
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+            continue
+    pytest.fail(f"No BSE equity bhavcopy available for recent days: {last_error}")
+
+
 def test_real_nse_corporate_actions_endpoint() -> None:
     manager = DownloadManager()
     last_error: Exception | None = None

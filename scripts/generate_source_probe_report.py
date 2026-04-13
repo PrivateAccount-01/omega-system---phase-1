@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import json
 from contextlib import suppress
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 import httpx
+
+from omegadata.track_a.download_manager import DownloadManager
 
 
 def _probe(url: str, headers: dict[str, str]) -> dict[str, object]:
@@ -23,6 +25,8 @@ def _probe(url: str, headers: dict[str, str]) -> dict[str, object]:
 
 
 def main() -> None:
+    probe_date = date.today() - timedelta(days=3)
+    manager = DownloadManager()
     nse_headers = {
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -48,12 +52,15 @@ def main() -> None:
 
     probes = [
         _probe("https://www.nseindia.com/api/corporates-corporateActions?index=equities", nse_headers),
-        _probe("https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426.ZIP", bse_headers),
+        _probe("https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3", bse_headers),
     ]
+    for url in manager._candidate_urls("BSE_EQUITY_BHAVCOPY", probe_date)[:3]:
+        probes.append(_probe(url, bse_headers))
     out_dir = Path("artifacts/verification")
     out_dir.mkdir(parents=True, exist_ok=True)
     report = {
         "generated_at": datetime.now(UTC).isoformat(),
+        "probe_date": probe_date.isoformat(),
         "probes": probes,
     }
     out_path = out_dir / "source_probe_report.json"

@@ -68,6 +68,9 @@ class CorporateActionMatcher:
         right_payload = right.payload or {}
         return len(ECONOMIC_KEYS & set(left_payload) & set(right_payload))
 
+    def has_economic_signal(self, left: CorporateActionStaging, right: CorporateActionStaging) -> bool:
+        return self.economic_overlap_count(left, right) > 0 or self._payload_score(left, right) > 0
+
     def relatedness_score(self, left: CorporateActionStaging, right: CorporateActionStaging) -> int:
         left_date = self.event_date(left)
         right_date = self.event_date(right)

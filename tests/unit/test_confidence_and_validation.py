@@ -56,10 +56,10 @@ def test_cross_source_price_validation_warn_and_fail(db_session) -> None:
                 isin="INE009A01021",
                 exchange=Exchange.BSE,
                 trade_date=date(2024, 1, 1),
-                open_price=Decimal("100.15"),
-                high_price=Decimal("100.15"),
-                low_price=Decimal("100.15"),
-                close_price=Decimal("100.15"),
+                open_price=Decimal("100.35"),
+                high_price=Decimal("100.35"),
+                low_price=Decimal("100.35"),
+                close_price=Decimal("100.35"),
                 volume=Decimal("20000"),
                 raw_source="bse_bhavcopy",
                 confidence_score=Decimal("1.00"),
@@ -134,6 +134,43 @@ def test_cross_source_price_validation_uses_dynamic_low_liquidity_tolerance(db_s
     )
 
     outcomes = CrossSourceValidator().validate_nse_bse_prices(db_session, "INELOW010001")
+    close_outcome = next(
+        outcome for outcome in outcomes if outcome.field == "close_price" and outcome.data_date == date(2024, 1, 1)
+    )
+    assert close_outcome.result.value == "PASS"
+
+
+def test_cross_source_price_validation_uses_two_sided_liquidity_not_max_side(db_session) -> None:
+    db_session.add_all(
+        [
+            PriceRecord(
+                isin="INETWOSIDED1",
+                exchange=Exchange.NSE,
+                trade_date=date(2024, 1, 1),
+                open_price=Decimal("100"),
+                high_price=Decimal("100"),
+                low_price=Decimal("100"),
+                close_price=Decimal("100"),
+                volume=Decimal("500000"),
+                raw_source="nse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            ),
+            PriceRecord(
+                isin="INETWOSIDED1",
+                exchange=Exchange.BSE,
+                trade_date=date(2024, 1, 1),
+                open_price=Decimal("100.30"),
+                high_price=Decimal("100.30"),
+                low_price=Decimal("100.30"),
+                close_price=Decimal("100.30"),
+                volume=Decimal("500"),
+                raw_source="bse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            ),
+        ]
+    )
+
+    outcomes = CrossSourceValidator().validate_nse_bse_prices(db_session, "INETWOSIDED1")
     close_outcome = next(
         outcome for outcome in outcomes if outcome.field == "close_price" and outcome.data_date == date(2024, 1, 1)
     )

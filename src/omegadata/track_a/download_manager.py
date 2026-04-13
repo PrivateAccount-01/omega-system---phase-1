@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import random
+import re
 import ssl
 import time
 from dataclasses import dataclass
@@ -186,15 +187,46 @@ class DownloadManager:
             .replace("{MM}", f"{as_of.month:02d}")
             .replace("{DD}", f"{as_of.day:02d}")
             .replace("{DDMMYY}", as_of.strftime("%d%m%y"))
+            .replace("{DDMMYYYY}", as_of.strftime("%d%m%Y"))
             .replace("{YYYYMMDD}", as_of.strftime("%Y%m%d"))
             .replace("{DDMONYYYY}", as_of.strftime("%d%b%Y").upper())
             .replace("{MON}", as_of.strftime("%b").upper())
             .replace("{HH}", "00")
         )
 
+    @staticmethod
+    def _extract_bse_equity_urls(page_html: str, as_of: date) -> list[str]:
+        date_tokens = {
+            as_of.strftime("%Y%m%d"),
+            as_of.strftime("%d%m%y"),
+            as_of.strftime("%d%m%Y"),
+        }
+        pattern = re.compile(r"https://www\.bseindia\.com/download/BhavCopy/Equity/[^\"'\s<]+", re.IGNORECASE)
+        candidates: list[str] = []
+        for url in pattern.findall(page_html):
+            if not any(token in url for token in date_tokens):
+                continue
+            candidates.append(url)
+        return list(dict.fromkeys(candidates))
+
+    def _discover_bse_equity_urls(self, as_of: date) -> list[str]:
+        page_url = "https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3"
+        base_profile = self._header_profiles()[0]
+        headers = self._profile_for_url(base_profile, page_url)
+        try:
+            with httpx.Client(headers=headers, follow_redirects=True, timeout=30.0) as client:
+                response = client.get(page_url)
+                response.raise_for_status()
+        except Exception:
+            return []
+        return self._extract_bse_equity_urls(response.text, as_of)
+
     def _candidate_urls(self, source_key: str, as_of: date) -> list[str]:
         source = SOURCE_REGISTRY[source_key]
-        urls = [self._render_url(source_key, as_of)]
+        urls: list[str] = []
+        if source_key == "BSE_EQUITY_BHAVCOPY":
+            urls.extend(self._discover_bse_equity_urls(as_of))
+        urls.append(self._render_url(source_key, as_of))
         urls.extend(self._render_pattern(pattern, as_of) for pattern in source.failover_url_patterns)
         # Preserve order while deduplicating.
         return list(dict.fromkeys(urls))
@@ -204,6 +236,17 @@ class DownloadManager:
         text = payload.decode("utf-8", errors="ignore").strip()
         if not text:
             raise DownloadError(f"Empty payload for {source_key}")
+
+        if source_key == "BSE_EQUITY_BHAVCOPY":
+            if payload.startswith(b"PK\x03\x04"):
+                return
+            header = text.splitlines()[0] if text.splitlines() else ""
+            if "html" in header.lower():
+                raise DownloadError("BSE equity bhavcopy returned HTML instead of market data")
+            expected_columns = ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb")
+            if not any(column in header for column in expected_columns):
+                raise DownloadError("BSE equity bhavcopy payload is missing expected columns")
+            return
 
         json_sources = {
             "NSE_CORPORATE_ACTIONS",
