@@ -11,11 +11,19 @@ from omegadata.db.models import ConfirmedCorporateAction, PriceRecord
 from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
 from omegadata.track_b.adjustment_engine import PriceAdjustmentEngine
 
-FIXTURE_PATH = Path(__file__).resolve().parents[1] / "fixtures" / "adjustment_reference_corpus.json"
-HAND_COMPUTED_FIXTURE_PATH = (
-    Path(__file__).resolve().parents[1] / "fixtures" / "adjustment_reference_hand_computed.json"
+FIXTURE_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "fixtures"
+    / "official_source"
+    / "adjustment_reference_corpus.json"
 )
-PROJECT_ROOT = FIXTURE_PATH.parents[2]
+HAND_COMPUTED_FIXTURE_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "fixtures"
+    / "synthetic_manual"
+    / "adjustment_reference_hand_computed.json"
+)
+PROJECT_ROOT = FIXTURE_PATH.parents[3]
 
 
 def _price(
@@ -86,6 +94,15 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
     for case in corpus["cases"]:
         assert case["label"]
         assert (PROJECT_ROOT / case["snapshot_path"]).exists()
+        assert len(case["price_paths"]) == len(
+            {str(path) for path in case["price_paths"]}
+        )
+        assert len(case["prices"]) == len(
+            {
+                (row["trade_date"], row["close"], row["volume"])
+                for row in case["prices"]
+            }
+        )
         for path in case["price_paths"]:
             assert (PROJECT_ROOT / path).exists()
         for row in case["prices"]:
@@ -139,7 +156,7 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
 def test_reference_corpus_hand_computed_transformational_cases(db_session) -> None:
     corpus = json.loads(HAND_COMPUTED_FIXTURE_PATH.read_text(encoding="utf-8"))
     assert corpus["case_count"] == len(corpus["cases"])
-    assert corpus["case_count"] >= 12
+    assert corpus["case_count"] >= 14
 
     action_types = set()
     sequential_cases = 0
@@ -221,6 +238,7 @@ def test_reference_corpus_hand_computed_transformational_cases(db_session) -> No
     assert sequential_cases >= 2
     assert {
         "RIGHTS",
+        "RIGHTS_RENOUNCE",
         "DEMERGER_PARENT",
         "MERGER_TARGET",
         "SPLIT_REVERSE",

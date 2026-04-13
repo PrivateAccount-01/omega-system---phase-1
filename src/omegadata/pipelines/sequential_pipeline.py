@@ -242,13 +242,16 @@ class OmegaDataSequentialPipeline:
         for raw in reader:
             row = self._normalize_row(raw)
             isin = self._first_present(row, ("ISIN_CODE", "ISIN", "ISIN_NO"))
-            symbol = self._first_present(row, ("SC_NAME", "SYMBOL", "SC_CODE"))
-            open_p = self._to_decimal(self._first_present(row, ("OPEN", "OPEN_PRICE")))
-            high_p = self._to_decimal(self._first_present(row, ("HIGH", "HIGH_PRICE")))
-            low_p = self._to_decimal(self._first_present(row, ("LOW", "LOW_PRICE")))
-            close_p = self._to_decimal(self._first_present(row, ("CLOSE", "CLOSE_PRICE")))
+            symbol = self._first_present(row, ("TCKRSYMB", "SC_NAME", "SYMBOL", "SC_CODE", "FININSTRMNM"))
+            open_p = self._to_decimal(self._first_present(row, ("OPEN", "OPEN_PRICE", "OPNPRIC")))
+            high_p = self._to_decimal(self._first_present(row, ("HIGH", "HIGH_PRICE", "HGHPRIC")))
+            low_p = self._to_decimal(self._first_present(row, ("LOW", "LOW_PRICE", "LWPRIC")))
+            close_p = self._to_decimal(self._first_present(row, ("CLOSE", "CLOSE_PRICE", "CLSPRIC")))
             volume = self._to_decimal(
-                self._first_present(row, ("NO_OF_SHRS", "TOTTRDQTY", "VOLUME", "NET_TURNOV"))
+                self._first_present(
+                    row,
+                    ("NO_OF_SHRS", "TOTTRDQTY", "VOLUME", "TTLTRADGVOL", "TTLTRADG_VOL"),
+                )
             )
 
             if not isin or not symbol or None in (open_p, high_p, low_p, close_p, volume):
@@ -311,102 +314,9 @@ class OmegaDataSequentialPipeline:
         return None
 
     def _load_bse_prices_from_stockreach(self, session: Session, as_of: date) -> int:
-        nse_isins = {
-            row[0]
-            for row in session.execute(
-                select(PriceRecord.isin)
-                .where(PriceRecord.exchange == Exchange.NSE)
-                .where(PriceRecord.trade_date == as_of)
-            ).all()
-        }
-        if not nse_isins:
-            return 0
-
-        bse_rows = session.scalars(
-            select(CorporateActionStaging).where(CorporateActionStaging.source == Exchange.BSE)
-        ).all()
-        isin_to_scrip: dict[str, str] = {}
-        for row in bse_rows:
-            if row.isin not in nse_isins:
-                continue
-            payload = row.payload or {}
-            scrip_code = str(
-                payload.get("scrip_code")
-                or payload.get("scrip_cd")
-                or payload.get("SCRIP_CODE")
-                or ""
-            ).strip()
-            if scrip_code and scrip_code.isdigit():
-                isin_to_scrip[row.isin] = scrip_code
-
-        loaded = 0
-        for isin, scrip_code in isin_to_scrip.items():
-            try:
-                graph = self.ingestor.download_manager.fetch_bse_stockreach_graph(
-                    scrip_code=scrip_code,
-                    from_date=as_of,
-                    to_date=as_of,
-                )
-            except Exception:
-                continue
-
-            raw_points = graph.get("Data")
-            if not raw_points:
-                continue
-
-            try:
-                if isinstance(raw_points, str):
-                    points = json.loads(raw_points)
-                elif isinstance(raw_points, list):
-                    points = raw_points
-                else:
-                    continue
-            except Exception:
-                continue
-
-            for point in points:
-                if not isinstance(point, dict):
-                    continue
-                trade_date = self._parse_bse_graph_trade_date(point.get("dttm"))
-                if trade_date != as_of:
-                    continue
-
-                close_price = self._to_decimal(point.get("vale1"))
-                volume = self._to_decimal(point.get("vole"))
-                if close_price is None:
-                    continue
-                if volume is None:
-                    volume = Decimal("0")
-
-                existing = session.scalar(
-                    select(PriceRecord)
-                    .where(PriceRecord.isin == isin)
-                    .where(PriceRecord.exchange == Exchange.BSE)
-                    .where(PriceRecord.trade_date == trade_date)
-                )
-                if existing is None:
-                    existing = PriceRecord(
-                        isin=isin,
-                        exchange=Exchange.BSE,
-                        trade_date=trade_date,
-                        open_price=close_price,
-                        high_price=close_price,
-                        low_price=close_price,
-                        close_price=close_price,
-                        volume=volume,
-                        raw_source="bse_stockreach_graph",
-                    )
-                    session.add(existing)
-                else:
-                    existing.open_price = close_price
-                    existing.high_price = close_price
-                    existing.low_price = close_price
-                    existing.close_price = close_price
-                    existing.volume = volume
-                    existing.raw_source = "bse_stockreach_graph"
-                loaded += 1
-
-        return loaded
+        raise RuntimeError(
+            "Synthetic BSE StockReach graph loading is disabled; official BSE bhavcopy is required."
+        )
 
     def _load_corporate_actions(self, session: Session, source: Exchange, path: Path) -> int:
         if not path.exists():

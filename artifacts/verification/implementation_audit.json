@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T03:13:41.819938+00:00",
+  "generated_at": "2026-04-13T12:42:44.622216+00:00",
   "counts": {
     "implemented": 15,
     "partial": 0,
@@ -134,8 +134,7 @@
         "src/omegadata/track_b/adjustment_engine.py",
         "tests/unit/test_adjustment_engine.py",
         "tests/unit/test_adjustment_reference_corpus.py",
-        "tests/fixtures/adjustment_reference_corpus.json",
-        "tests/fixtures/adjustment_reference_hand_computed.json",
+        "tests/fixtures/official_source/adjustment_reference_corpus.json",
         "scripts/build_adjustment_reference_corpus.py"
       ],
       "gaps": [],
@@ -163,7 +162,6 @@
       "evidence": [
         "src/omegadata/track_b/universe_manager.py",
         "tests/unit/test_universe_manager.py",
-        "tests/fixtures/pit_universe_seed_pack.json",
         "scripts/build_pit_universe_seed_pack.py",
         "scripts/backfill_pit_universe.py",
         "artifacts/verification/pit_universe_backfill_report.json"
@@ -202,13 +200,12 @@
     {
       "track": "B",
       "component": "Reference Corpus",
-      "requirement": "Official-source-backed corporate action reference corpus from bundled NSE artifacts",
+      "requirement": "Official-source-backed corporate action verification corpus from bundled NSE artifacts",
       "status": "implemented",
       "evidence": [
         "tests/unit/test_adjustment_engine.py",
         "tests/unit/test_adjustment_reference_corpus.py",
-        "tests/fixtures/adjustment_reference_corpus.json",
-        "tests/fixtures/adjustment_reference_hand_computed.json",
+        "tests/fixtures/official_source/adjustment_reference_corpus.json",
         "scripts/build_adjustment_reference_corpus.py"
       ],
       "gaps": [],

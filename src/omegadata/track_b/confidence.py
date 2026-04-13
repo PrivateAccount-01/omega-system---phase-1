@@ -35,6 +35,10 @@ class ConfidenceScorer:
         QueryContext.AUDIT: Decimal("0.00"),
     }
 
+    @staticmethod
+    def _is_non_publishable_synthetic_row(row: PriceRecord) -> bool:
+        return str(row.raw_source).lower().startswith("bse_stockreach_graph")
+
     def compute_score(self, inputs: ConfidenceInputs) -> Decimal:
         score = Decimal("1.00")
         if inputs.is_secondary_source:
@@ -76,8 +80,16 @@ class ConfidenceScorer:
         context: QueryContext,
     ) -> tuple[list[PriceRecord], int, tuple[date, date] | None]:
         min_score = self.THRESHOLDS[context]
-        kept = [r for r in records if Decimal(str(r.confidence_score)) >= min_score]
-        excluded = [r for r in records if Decimal(str(r.confidence_score)) < min_score]
+        excluded = [
+            r
+            for r in records
+            if Decimal(str(r.confidence_score)) < min_score
+            or (
+                context != QueryContext.AUDIT
+                and self._is_non_publishable_synthetic_row(r)
+            )
+        ]
+        kept = [r for r in records if r not in excluded]
         if not excluded:
             return kept, 0, None
         dates = sorted(r.trade_date for r in excluded)

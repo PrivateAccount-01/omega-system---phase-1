@@ -16,6 +16,7 @@ class ReviewPolicy:
     scope: ReviewBlockScope
     requires_reprocess: bool
     triage_instructions: str = ""
+    sla_business_days: int | None = None
 
 
 @dataclass(frozen=True)
@@ -32,6 +33,7 @@ class ReviewPolicySet:
                 scope=ReviewBlockScope.RECORD,
                 requires_reprocess=False,
                 triage_instructions="Review the evidence, record a clear disposition, and close the review explicitly.",
+                sla_business_days=None,
             ),
         )
 
@@ -51,6 +53,11 @@ def _read_policy_set(path: Path) -> ReviewPolicySet:
                 scope=ReviewBlockScope(str(raw.get("scope", ReviewBlockScope.RECORD.value))),
                 requires_reprocess=bool(raw.get("requires_reprocess", False)),
                 triage_instructions=str(raw.get("triage_instructions", "")),
+                sla_business_days=(
+                    int(raw["sla_business_days"])
+                    if isinstance(raw.get("sla_business_days"), int)
+                    else None
+                ),
             )
     return ReviewPolicySet(version=version, policies=policies)
 

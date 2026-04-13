@@ -6,6 +6,7 @@ from pathlib import Path
 
 from omegadata.config import settings
 from omegadata.track_a.download_manager import DownloadManager
+from omegadata.track_a.source_registry import SOURCE_REGISTRY
 from omegadata.track_a.trading_calendar import TradingCalendar
 
 
@@ -21,7 +22,7 @@ def main() -> None:
     calendar = TradingCalendar.from_config()
     calendar_maintenance = calendar.all_coverage_statuses(
         anchor_date=date.today(),
-        warning_window_days=settings.trading_calendar_warning_window_days,
+        warning_window_days=calendar.maintenance.renewal_window_days,
     )
     bse_calendar_status = next(
         (item for item in calendar_maintenance if item["exchange"] == "BSE"),
@@ -29,6 +30,12 @@ def main() -> None:
     )
     business_days = calendar.recent_trading_days("BSE", anchor_date=date.today(), limit=3)
     probe_date = business_days[0]
+    bse_source = SOURCE_REGISTRY["BSE_EQUITY_BHAVCOPY"]
+    expected_primary_url = manager._render_url("BSE_EQUITY_BHAVCOPY", probe_date)
+    expected_fallback_urls = {
+        manager._render_pattern(pattern, probe_date) for pattern in bse_source.failover_url_patterns
+    }
+    expected_supported_candidate_urls = {expected_primary_url, *expected_fallback_urls}
     probe_mode = settings.source_probe_profile_mode.lower().strip()
     all_profiles = manager._header_profiles()
     if probe_mode == "full":
@@ -80,27 +87,31 @@ def main() -> None:
 
     out_dir = Path("artifacts/verification")
     out_dir.mkdir(parents=True, exist_ok=True)
+    probed_urls = {item["url"] for item in bse_page_probes}
+    probed_fallback_urls = {item["url"] for item in bse_page_probes if item["role"] == "fallback"}
     report = {
         "generated_at": datetime.now(UTC).isoformat(),
         "probe_date": probe_date.isoformat(),
         "calendar_mode": (
             "configured_trading_calendar"
-            if bse_calendar_status and bse_calendar_status["status"] != "expired"
-            else "weekday_fallback_due_to_expired_calendar_coverage"
+            if bse_calendar_status and bse_calendar_status["status"] not in {"expired", "missing"}
+            else "weekday_fallback_due_to_missing_or_expired_calendar_coverage"
         ),
         "probe_profile_mode": probe_mode,
         "probe_profile_count": len(probe_profiles),
         "probe_timeout_seconds": settings.source_probe_timeout_seconds,
         "calendar_maintenance": calendar_maintenance,
-        "bse_supported_candidate_count": len(bse_page_probes),
-        "bse_supported_fallback_count": len([item for item in bse_page_probes if item["role"] == "fallback"]),
+        "bse_supported_candidate_count": len(expected_supported_candidate_urls),
+        "bse_probed_candidate_count": len(probed_urls),
+        "bse_supported_fallback_count": len(expected_fallback_urls),
+        "bse_probed_fallback_count": len(probed_fallback_urls),
         "bse_probe_scope": "full_supported_registry_candidates",
         "nse_corporate_actions": nse_probes,
         "bse_equity_candidates": bse_page_probes,
         "bse_recent_history": bse_recent_history,
         "summary": {
-            "bse_full_supported_candidate_coverage": True,
-            "bse_full_supported_fallback_coverage": True,
+            "bse_full_supported_candidate_coverage": expected_supported_candidate_urls.issubset(probed_urls),
+            "bse_full_supported_fallback_coverage": expected_fallback_urls.issubset(probed_fallback_urls),
             "bse_primary_validated": any(item["role"] == "primary" and item["validated"] for item in bse_page_probes),
             "bse_any_fallback_validated": any(item["role"] == "fallback" and item["validated"] for item in bse_page_probes),
             "bse_all_fallbacks_healthy": all(

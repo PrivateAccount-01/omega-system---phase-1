@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from decimal import Decimal
 
 from sqlalchemy import func, select
@@ -221,7 +221,7 @@ def test_unmatched_staging_older_than_48h_is_escalated(db_session) -> None:
         record_date=date(2026, 4, 2),
         payload={"isin": "INE009A01021", "ex_date": "2026-04-02", "record_date": "2026-04-02"},
     )
-    rec.fetched_at = datetime.utcnow() - timedelta(days=3)
+    rec.fetched_at = datetime.now(UTC) - timedelta(days=3)
 
     svc.run_daily_confirmation(db_session, as_of=date(2026, 4, 8))
     review = db_session.scalar(

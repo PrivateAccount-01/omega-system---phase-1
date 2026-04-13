@@ -14,8 +14,10 @@ from omegadata.domain import Exchange, InstrumentType
 from omegadata.track_b.isin_master import ISINMasterService
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 
-SEED_PACK_PATH = Path(__file__).resolve().parents[1] / "fixtures" / "pit_universe_seed_pack.json"
-PROJECT_ROOT = SEED_PACK_PATH.parents[2]
+SEED_PACK_PATH = (
+    Path(__file__).resolve().parents[1] / "fixtures" / "synthetic_seed" / "pit_universe_seed_pack.json"
+)
+PROJECT_ROOT = SEED_PACK_PATH.parents[3]
 
 
 def test_effective_date_membership_logic(db_session) -> None:

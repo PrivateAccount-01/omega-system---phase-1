@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -9,9 +9,18 @@ from omegadata.config import settings
 
 
 @dataclass(frozen=True)
+class CalendarMaintenance:
+    owner_role: str = "Unassigned"
+    renewal_window_days: int = 60
+    runbook: str = ""
+    supported_exchanges: tuple[str, ...] = ("NSE", "BSE")
+
+
+@dataclass(frozen=True)
 class TradingCalendar:
     holidays_by_exchange: dict[str, set[date]]
     coverage_years_by_exchange: dict[str, set[int]]
+    maintenance: CalendarMaintenance = field(default_factory=CalendarMaintenance)
 
     @classmethod
     def from_config(cls) -> TradingCalendar:
@@ -21,6 +30,34 @@ class TradingCalendar:
         payload = json.loads(path.read_text(encoding="utf-8"))
         holidays_by_exchange: dict[str, set[date]] = {}
         coverage_years_by_exchange: dict[str, set[int]] = {}
+        raw_maintenance = payload.get("maintenance", {})
+        maintenance = CalendarMaintenance()
+        if isinstance(raw_maintenance, dict):
+            owner_role = raw_maintenance.get("owner_role", maintenance.owner_role)
+            renewal_window_days = raw_maintenance.get(
+                "renewal_window_days",
+                maintenance.renewal_window_days,
+            )
+            runbook = raw_maintenance.get("runbook", maintenance.runbook)
+            supported_exchanges = raw_maintenance.get(
+                "supported_exchanges",
+                list(maintenance.supported_exchanges),
+            )
+            maintenance = CalendarMaintenance(
+                owner_role=str(owner_role).strip() or maintenance.owner_role,
+                renewal_window_days=(
+                    int(renewal_window_days)
+                    if isinstance(renewal_window_days, int)
+                    else maintenance.renewal_window_days
+                ),
+                runbook=str(runbook).strip(),
+                supported_exchanges=tuple(
+                    str(value).strip()
+                    for value in supported_exchanges
+                    if isinstance(value, str) and str(value).strip()
+                )
+                or maintenance.supported_exchanges,
+            )
         raw = payload.get("holidays", {})
         if isinstance(raw, dict):
             for exchange, values in raw.items():
@@ -43,6 +80,7 @@ class TradingCalendar:
         return cls(
             holidays_by_exchange=holidays_by_exchange,
             coverage_years_by_exchange=coverage_years_by_exchange,
+            maintenance=maintenance,
         )
 
     def year_is_covered(self, exchange: str, year: int) -> bool:
@@ -80,6 +118,40 @@ class TradingCalendar:
             if self.is_trading_day(exchange, candidate, strict=strict):
                 values.append(candidate)
         return values
+
+    def add_business_days(
+        self,
+        exchange: str,
+        *,
+        anchor_date: date,
+        business_days: int,
+        strict: bool = False,
+    ) -> date:
+        candidate = anchor_date
+        remaining = business_days
+        while remaining > 0:
+            candidate += timedelta(days=1)
+            if self.is_trading_day(exchange, candidate, strict=strict):
+                remaining -= 1
+        return candidate
+
+    def business_days_between(
+        self,
+        exchange: str,
+        *,
+        start_date: date,
+        end_date: date,
+        strict: bool = False,
+    ) -> int:
+        if end_date <= start_date:
+            return 0
+        candidate = start_date
+        count = 0
+        while candidate < end_date:
+            candidate += timedelta(days=1)
+            if self.is_trading_day(exchange, candidate, strict=strict):
+                count += 1
+        return count
 
     def coverage_status(
         self,

@@ -12,7 +12,7 @@ from omegadata.track_b.corporate_action_parser import CorporateActionParser
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RAW_ROOT = PROJECT_ROOT / "data" / "raw"
-OUTPUT_PATH = PROJECT_ROOT / "tests" / "fixtures" / "adjustment_reference_corpus.json"
+OUTPUT_PATH = PROJECT_ROOT / "tests" / "fixtures" / "official_source" / "adjustment_reference_corpus.json"
 PRICE_MONTH_DIR = RAW_ROOT / "nse_equity_bhavcopy" / "year=2026" / "month=04"
 ACTION_GLOB = RAW_ROOT / "nse_corporate_actions" / "year=2026"
 ASSERTION_DATES = ("2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07")

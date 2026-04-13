@@ -1,18 +1,29 @@
 {
-  "case_count": 12,
+  "case_count": 14,
   "cases": [
     {
       "label": "MANUAL_BONUS_1_FOR_1",
       "isin": "MANUAL000001",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "50", "volume": "200"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "50",
+          "volume": "200"
+        }
       ],
       "actions": [
         {
           "action_type": "BONUS",
           "ex_date": "2026-01-02",
-          "parameters": {"bonus_ratio_numerator": "1", "bonus_ratio_denominator": "1"}
+          "parameters": {
+            "bonus_ratio_numerator": "1",
+            "bonus_ratio_denominator": "1"
+          }
         }
       ],
       "assertions": [
@@ -29,14 +40,25 @@
       "label": "MANUAL_SPLIT_10_TO_5",
       "isin": "MANUAL000002",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "50", "volume": "200"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "50",
+          "volume": "200"
+        }
       ],
       "actions": [
         {
           "action_type": "SPLIT",
           "ex_date": "2026-01-02",
-          "parameters": {"old_face_value": "10", "new_face_value": "5"}
+          "parameters": {
+            "old_face_value": "10",
+            "new_face_value": "5"
+          }
         }
       ],
       "assertions": [
@@ -53,14 +75,25 @@
       "label": "MANUAL_REVERSE_SPLIT_5_TO_10",
       "isin": "MANUAL000003",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "200", "volume": "50"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "200",
+          "volume": "50"
+        }
       ],
       "actions": [
         {
           "action_type": "SPLIT_REVERSE",
           "ex_date": "2026-01-02",
-          "parameters": {"old_face_value": "5", "new_face_value": "10"}
+          "parameters": {
+            "old_face_value": "5",
+            "new_face_value": "10"
+          }
         }
       ],
       "assertions": [
@@ -77,8 +110,16 @@
       "label": "MANUAL_RIGHTS_DISCOUNT",
       "isin": "MANUAL000004",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "96", "volume": "100"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "96",
+          "volume": "100"
+        }
       ],
       "actions": [
         {
@@ -105,8 +146,16 @@
       "label": "MANUAL_RIGHTS_FALLBACK_ZERO",
       "isin": "MANUAL000005",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "80", "volume": "100"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "80",
+          "volume": "100"
+        }
       ],
       "actions": [
         {
@@ -132,8 +181,16 @@
       "label": "MANUAL_DEMERGER_PRELIMINARY",
       "isin": "MANUAL000006",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "80", "volume": "100"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "80",
+          "volume": "100"
+        }
       ],
       "actions": [
         {
@@ -160,11 +217,24 @@
       "label": "MANUAL_DEMERGER_FINAL",
       "isin": "MANUAL000007",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "70", "volume": "100"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "70",
+          "volume": "100"
+        }
       ],
       "aux_prices": [
-        {"isin": "MANSPIN0007", "trade_date": "2026-01-02", "close": "30", "volume": "100"}
+        {
+          "isin": "MANSPIN0007",
+          "trade_date": "2026-01-02",
+          "close": "30",
+          "volume": "100"
+        }
       ],
       "actions": [
         {
@@ -191,20 +261,38 @@
       "label": "MANUAL_SEQUENTIAL_BONUS_SPLIT",
       "isin": "MANUAL000008",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "50", "volume": "200"},
-        {"trade_date": "2026-01-03", "close": "25", "volume": "400"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "50",
+          "volume": "200"
+        },
+        {
+          "trade_date": "2026-01-03",
+          "close": "25",
+          "volume": "400"
+        }
       ],
       "actions": [
         {
           "action_type": "BONUS",
           "ex_date": "2026-01-02",
-          "parameters": {"bonus_ratio_numerator": "1", "bonus_ratio_denominator": "1"}
+          "parameters": {
+            "bonus_ratio_numerator": "1",
+            "bonus_ratio_denominator": "1"
+          }
         },
         {
           "action_type": "SPLIT",
           "ex_date": "2026-01-03",
-          "parameters": {"old_face_value": "10", "new_face_value": "5"}
+          "parameters": {
+            "old_face_value": "10",
+            "new_face_value": "5"
+          }
         }
       ],
       "assertions": [
@@ -221,15 +309,30 @@
       "label": "MANUAL_SEQUENTIAL_SPLIT_RIGHTS",
       "isin": "MANUAL000009",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "50", "volume": "200"},
-        {"trade_date": "2026-01-03", "close": "48", "volume": "200"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "50",
+          "volume": "200"
+        },
+        {
+          "trade_date": "2026-01-03",
+          "close": "48",
+          "volume": "200"
+        }
       ],
       "actions": [
         {
           "action_type": "SPLIT",
           "ex_date": "2026-01-02",
-          "parameters": {"old_face_value": "10", "new_face_value": "5"}
+          "parameters": {
+            "old_face_value": "10",
+            "new_face_value": "5"
+          }
         },
         {
           "action_type": "RIGHTS",
@@ -262,14 +365,26 @@
       "label": "MANUAL_MERGER_TARGET_NO_ADJUSTMENT",
       "isin": "MANUAL000010",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "100", "volume": "100"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "100",
+          "volume": "100"
+        }
       ],
       "actions": [
         {
           "action_type": "MERGER_TARGET",
           "ex_date": "2026-01-02",
-          "parameters": {"acquirer_isin": "ACQ000001", "swap_ratio": "2", "cash_component": "0"}
+          "parameters": {
+            "acquirer_isin": "ACQ000001",
+            "swap_ratio": "2",
+            "cash_component": "0"
+          }
         }
       ],
       "assertions": [
@@ -286,14 +401,24 @@
       "label": "MANUAL_DIVIDEND_NO_ADJUSTMENT",
       "isin": "MANUAL000011",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "100", "volume": "100"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "100",
+          "volume": "100"
+        }
       ],
       "actions": [
         {
           "action_type": "DIVIDEND_CASH",
           "ex_date": "2026-01-02",
-          "parameters": {"dividend_per_share": "5"}
+          "parameters": {
+            "dividend_per_share": "5"
+          }
         }
       ],
       "assertions": [
@@ -310,8 +435,16 @@
       "label": "MANUAL_BUYBACK_NO_ADJUSTMENT",
       "isin": "MANUAL000012",
       "prices": [
-        {"trade_date": "2026-01-01", "close": "100", "volume": "100"},
-        {"trade_date": "2026-01-02", "close": "100", "volume": "100"}
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "100",
+          "volume": "100"
+        }
       ],
       "actions": [
         {
@@ -327,6 +460,107 @@
           "expected_adjusted_volume": "100.0000",
           "expected_cumulative_price_factor": "1",
           "expected_cumulative_volume_factor": "1"
+        }
+      ]
+    },
+    {
+      "label": "MANUAL_RIGHTS_RENOUNCE_DISCOUNT",
+      "isin": "MANUAL000013",
+      "prices": [
+        {
+          "trade_date": "2026-01-01",
+          "close": "120",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "100",
+          "volume": "100"
+        }
+      ],
+      "actions": [
+        {
+          "action_type": "RIGHTS_RENOUNCE",
+          "ex_date": "2026-01-02",
+          "parameters": {
+            "rights_ratio_numerator": "1",
+            "rights_ratio_denominator": "2",
+            "issue_price": "60"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-01-01",
+          "expected_adjusted_close": "100.000000",
+          "expected_adjusted_volume": "100.0000",
+          "expected_cumulative_price_factor": "0.833333333333",
+          "expected_cumulative_volume_factor": "1"
+        }
+      ]
+    },
+    {
+      "label": "MANUAL_SEQUENTIAL_DEMERGER_BONUS",
+      "isin": "MANUAL000014",
+      "prices": [
+        {
+          "trade_date": "2026-01-01",
+          "close": "100",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "close": "70",
+          "volume": "100"
+        },
+        {
+          "trade_date": "2026-01-03",
+          "close": "35",
+          "volume": "200"
+        }
+      ],
+      "aux_prices": [
+        {
+          "isin": "MANSPIN0014",
+          "trade_date": "2026-01-02",
+          "close": "30",
+          "volume": "100"
+        }
+      ],
+      "actions": [
+        {
+          "action_type": "DEMERGER_PARENT",
+          "ex_date": "2026-01-02",
+          "parameters": {
+            "parent_value_pre_demerger": "100",
+            "spinoff_value": "20",
+            "spinoff_isin": "MANSPIN0014",
+            "actual_spinoff_listing_price": "30"
+          }
+        },
+        {
+          "action_type": "BONUS",
+          "ex_date": "2026-01-03",
+          "parameters": {
+            "bonus_ratio_numerator": "1",
+            "bonus_ratio_denominator": "1"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "trade_date": "2026-01-01",
+          "expected_adjusted_close": "35.000000",
+          "expected_adjusted_volume": "200.0000",
+          "expected_cumulative_price_factor": "0.35",
+          "expected_cumulative_volume_factor": "2"
+        },
+        {
+          "trade_date": "2026-01-02",
+          "expected_adjusted_close": "35.000000",
+          "expected_adjusted_volume": "200.0000",
+          "expected_cumulative_price_factor": "0.5",
+          "expected_cumulative_volume_factor": "2"
         }
       ]
     }

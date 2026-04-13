@@ -66,6 +66,13 @@ docker compose up -d
 - `alembic`: PostgreSQL schema migrations.
 - `infra/monitoring`: Prometheus, Alertmanager, and Grafana provisioning.
 
+## Data Provenance
+
+- Runtime verification artifacts in `artifacts/verification/` are derived from real observed data, live probes, or bundled official raw market artifacts.
+- Published result paths are not allowed to use synthetic market data.
+- Synthetic/manual data still exists in the repo only for isolated unit-test coverage under `tests/fixtures/synthetic_manual/` and `tests/fixtures/synthetic_seed/`.
+- Official-source-backed verification fixtures live under `tests/fixtures/official_source/`.
+
 ## Maturity
 
 - This repo is in pre-production hardening, not claimed production-grade trust infrastructure.
@@ -94,9 +101,9 @@ python scripts/run_monthly_quality_report.py --as-of 2026-04-07
 
 ## Calendar Maintenance
 
-- Source probing and trading-day selection fail closed outside the configured `coverage_years` in [trading_holidays_india.json](/mnt/e/omega system - phase 1/config/trading_holidays_india.json).
-- Runtime probing no longer hard-stops on stale calendar coverage; it degrades to weekday fallback and records the stale-coverage warning in verification artifacts so the system stays available while the issue remains visible.
-- Before a new calendar year begins, update both the holiday dates and `coverage_years` for each supported exchange; otherwise verification intentionally raises instead of degrading to weekend-only behavior.
+- Runtime probing and trading-day selection degrade to weekday fallback when calendar coverage is missing or stale, and the verification artifacts record that degraded mode explicitly so the system stays available without hiding the issue.
+- Strict maintenance checks still fail CI for supported exchanges with missing or expired calendar coverage.
+- Before a new calendar year begins, update both the holiday dates and `coverage_years` for each supported exchange; otherwise the maintenance guard will fail and probe artifacts will show fallback calendar mode.
 - NSE and BSE holiday lists are stored separately on purpose, even when the current equity-market schedule is identical, so exchange-specific divergences can be recorded explicitly.
-- Ownership sits with `OmegaData data operations`; the maintenance metadata and renewal window live in [trading_holidays_india.json](/mnt/e/omega system - phase 1/config/trading_holidays_india.json).
-- Run [check_trading_calendar_coverage.py](/mnt/e/omega system - phase 1/scripts/check_trading_calendar_coverage.py) in CI or before year-end rollover; the repo also includes a scheduled GitHub Actions guard in [.github/workflows/trading-calendar-guard.yml](/mnt/e/omega system - phase 1/.github/workflows/trading-calendar-guard.yml).
+- Ownership sits with `OmegaData data operations`; the maintenance metadata and renewal window live in [config/trading_holidays_india.json](config/trading_holidays_india.json).
+- Run [scripts/check_trading_calendar_coverage.py](scripts/check_trading_calendar_coverage.py) in CI or before year-end rollover; the repo also includes a scheduled GitHub Actions guard in [.github/workflows/trading-calendar-guard.yml](.github/workflows/trading-calendar-guard.yml).

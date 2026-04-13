@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from decimal import Decimal
 
 from omegadata.config import settings
@@ -37,7 +37,7 @@ def test_alert_router_suppressed_without_webhook() -> None:
                 title="info",
                 message="suppressed",
                 source="test",
-                created_at=datetime.utcnow(),
+                created_at=datetime.now(UTC),
             )
         )
         assert sent is False

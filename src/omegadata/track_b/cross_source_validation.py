@@ -26,6 +26,15 @@ class ValidationOutcome:
     difference_pct: Decimal
 
 
+@dataclass(frozen=True)
+class PriceToleranceContext:
+    tolerance: Decimal
+    effective_notional: Decimal
+    liquidity_bucket: str
+    synthetic_bse: bool
+    field: str
+
+
 class CrossSourceValidator:
     def __init__(self) -> None:
         self.matcher = CorporateActionMatcher()
@@ -98,7 +107,7 @@ class CrossSourceValidator:
         return outcomes
 
     @staticmethod
-    def _price_tolerance(*, nse: PriceRecord, bse: PriceRecord, field: str) -> Decimal:
+    def _price_tolerance_context(*, nse: PriceRecord, bse: PriceRecord, field: str) -> PriceToleranceContext:
         tolerance = Decimal("0.0010")
         synthetic_bse = str(bse.raw_source).lower().startswith("bse_stockreach_graph")
         nse_notional = Decimal(str(nse.close_price)) * Decimal(str(nse.volume))
@@ -110,12 +119,18 @@ class CrossSourceValidator:
 
         if effective_notional < Decimal("250000"):
             tolerance = Decimal("0.0045")
+            liquidity_bucket = "micro"
         elif effective_notional < Decimal("1000000"):
             tolerance = Decimal("0.0030")
+            liquidity_bucket = "small"
         elif effective_notional < Decimal("5000000"):
             tolerance = Decimal("0.0020")
+            liquidity_bucket = "mid"
         elif effective_notional < Decimal("20000000"):
             tolerance = Decimal("0.0015")
+            liquidity_bucket = "large"
+        else:
+            liquidity_bucket = "mega"
 
         if synthetic_bse:
             tolerance = max(tolerance, Decimal("0.0040"))
@@ -123,7 +138,17 @@ class CrossSourceValidator:
             tolerance += Decimal("0.0005")
         if nse.is_imputed or bse.is_imputed:
             tolerance = max(tolerance, Decimal("0.0035"))
-        return tolerance
+        return PriceToleranceContext(
+            tolerance=tolerance,
+            effective_notional=effective_notional,
+            liquidity_bucket=liquidity_bucket,
+            synthetic_bse=synthetic_bse,
+            field=field,
+        )
+
+    @staticmethod
+    def _price_tolerance(*, nse: PriceRecord, bse: PriceRecord, field: str) -> Decimal:
+        return CrossSourceValidator._price_tolerance_context(nse=nse, bse=bse, field=field).tolerance
 
     def validate_monthly_flow_consistency(
         self,

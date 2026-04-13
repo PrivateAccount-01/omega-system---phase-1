@@ -363,6 +363,35 @@ def test_bse_bhavcopy_loader_preserves_official_ohlc(tmp_path: Path, db_session)
     assert row.raw_source == "bse_bhavcopy"
 
 
+def test_bse_bhavcopy_loader_supports_current_bse_primary_schema(tmp_path: Path, db_session) -> None:
+    csv_payload = (
+        "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,FinInstrmNm,OpnPric,HghPric,"
+        "LwPric,ClsPric,TtlTradgVol\n"
+        "2026-04-10,2026-04-10,CM,BSE,STK,500002,INE117A01022,ABB,A,ABB INDIA LIMITED,6665.25,6902.20,"
+        "6615.00,6865.95,18932\n"
+    )
+    path = tmp_path / "bse_current.csv"
+    path.write_text(csv_payload, encoding="utf-8")
+
+    loaded = OmegaDataSequentialPipeline()._load_bse_bhavcopy_prices(
+        db_session,
+        path,
+        date(2026, 4, 10),
+    )
+    row = db_session.scalar(
+        select(PriceRecord)
+        .where(PriceRecord.exchange == Exchange.BSE)
+        .where(PriceRecord.isin == "INE117A01022")
+    )
+    assert loaded == 1
+    assert row is not None
+    assert Decimal(str(row.open_price)) == Decimal("6665.25")
+    assert Decimal(str(row.high_price)) == Decimal("6902.20")
+    assert Decimal(str(row.low_price)) == Decimal("6615.00")
+    assert Decimal(str(row.close_price)) == Decimal("6865.95")
+    assert Decimal(str(row.volume)) == Decimal("18932")
+
+
 def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, monkeypatch) -> None:
     settings.raw_root = str(tmp_path)
     manager = DownloadManager()
@@ -471,6 +500,50 @@ def test_prices_endpoint_does_not_mix_exchanges_and_defaults_to_primary_exchange
         assert payload["exchange"] == "NSE"
         assert len(payload["records"]) == 1
         assert payload["records"][0]["close_price"] == "100.000000"
+
+
+def test_prices_endpoint_excludes_synthetic_market_data_from_non_audit_contexts(tmp_path: Path) -> None:
+    db_path = tmp_path / "api_synthetic_block.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    with get_session() as session:
+        session.execute(delete(PriceRecord))
+        session.execute(delete(InstrumentMaster))
+        session.add(
+            InstrumentMaster(
+                isin="INE555A01010",
+                instrument_type=InstrumentType.EQUITY,
+                primary_exchange=Exchange.BSE,
+                company_name="Legacy Synthetic Co",
+                listed_date=date(2020, 1, 1),
+                active=True,
+            )
+        )
+        session.add(
+            PriceRecord(
+                isin="INE555A01010",
+                exchange=Exchange.BSE,
+                trade_date=date(2024, 1, 1),
+                open_price=Decimal("200"),
+                high_price=Decimal("200"),
+                low_price=Decimal("200"),
+                close_price=Decimal("200"),
+                volume=Decimal("100"),
+                raw_source="bse_stockreach_graph",
+                confidence_score=Decimal("1.00"),
+            )
+        )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        blocked = client.get("/prices/INE555A01010?exchange=BSE&context=BACKTEST")
+        assert blocked.status_code == 200
+        assert blocked.json()["records"] == []
+        assert blocked.json()["excluded_records"] == 1
+
+        audit = client.get("/audit/prices/INE555A01010?exchange=BSE", headers=headers)
+        assert audit.status_code == 200
+        assert len(audit.json()["records"]) == 1
 
 
 def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_path: Path) -> None:
@@ -874,3 +947,60 @@ def test_trading_calendar_coverage_status_warns_near_expiry() -> None:
     assert status["status"] == "warning"
     assert status["warning"] is True
     assert status["latest_covered_year"] == 2026
+
+
+def test_trading_calendar_loads_maintenance_metadata_from_config(tmp_path: Path, monkeypatch) -> None:
+    holiday_path = tmp_path / "holidays.json"
+    holiday_path.write_text(
+        json.dumps(
+            {
+                "coverage_years": {"BSE": [2026]},
+                "maintenance": {
+                    "owner_role": "Market Ops",
+                    "renewal_window_days": 45,
+                    "runbook": "update annually",
+                    "supported_exchanges": ["BSE"],
+                },
+                "holidays": {"BSE": ["2026-04-10"]},
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(settings, "trading_holiday_path", str(holiday_path))
+
+    calendar = TradingCalendar.from_config()
+    assert calendar.maintenance.owner_role == "Market Ops"
+    assert calendar.maintenance.renewal_window_days == 45
+    assert calendar.maintenance.supported_exchanges == ("BSE",)
+
+
+def test_manual_review_open_listing_marks_sla_breach(tmp_path: Path) -> None:
+    db_path = tmp_path / "review_sla.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    with get_session() as session:
+        session.execute(delete(ManualReviewQueue))
+        session.add(
+            ManualReviewQueue(
+                category="CORPORATE_ACTION_FALSE_NEGATIVE_RISK",
+                isin="INESLA000001",
+                event_date=date(2026, 4, 10),
+                reason="Potential unmatched nearby event",
+                payload={
+                    "sla_due_date": "2026-04-10",
+                    "sla_business_days": 1,
+                    "sla_exchange": "NSE",
+                    "triage_instructions": "Triage within one business day.",
+                },
+                resolved=False,
+            )
+        )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        response = client.get("/reviews/open", headers=headers)
+        assert response.status_code == 200
+        review = response.json()[0]
+        assert review["payload"]["sla_status"] == "OVERDUE"
+        assert review["payload"]["sla_breached"] is True
+        assert review["payload"]["escalation_status"] == "ESCALATED"

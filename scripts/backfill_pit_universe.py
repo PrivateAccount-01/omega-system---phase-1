@@ -9,7 +9,7 @@ from omegadata.db.session import get_session, init_db
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-SEED_PACK_PATH = PROJECT_ROOT / "tests" / "fixtures" / "pit_universe_seed_pack.json"
+SEED_PACK_PATH = PROJECT_ROOT / "tests" / "fixtures" / "synthetic_seed" / "pit_universe_seed_pack.json"
 ARTIFACT_PATH = PROJECT_ROOT / "artifacts" / "verification" / "pit_universe_backfill_report.json"
 
 

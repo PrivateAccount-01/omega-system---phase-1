@@ -4,7 +4,6 @@ import json
 from datetime import UTC, date, datetime
 from pathlib import Path
 
-from omegadata.config import settings
 from omegadata.track_a.trading_calendar import TradingCalendar
 
 
@@ -12,30 +11,36 @@ def main() -> None:
     calendar = TradingCalendar.from_config()
     statuses = calendar.all_coverage_statuses(
         anchor_date=date.today(),
-        warning_window_days=settings.trading_calendar_warning_window_days,
+        warning_window_days=calendar.maintenance.renewal_window_days,
     )
 
     out_dir = Path("artifacts/verification")
     out_dir.mkdir(parents=True, exist_ok=True)
     artifact = {
         "generated_at": datetime.now(UTC).isoformat(),
-        "warning_window_days": settings.trading_calendar_warning_window_days,
-        "owner_role": "OmegaData data operations",
+        "warning_window_days": calendar.maintenance.renewal_window_days,
+        "owner_role": calendar.maintenance.owner_role,
+        "runbook": calendar.maintenance.runbook,
+        "supported_exchanges": list(calendar.maintenance.supported_exchanges),
         "statuses": statuses,
     }
     out_path = out_dir / "trading_calendar_coverage.json"
     out_path.write_text(json.dumps(artifact, indent=2), encoding="utf-8")
 
+    fail = False
     for status in statuses:
         level = status["status"]
         message = str(status["message"])
         exchange = str(status["exchange"])
-        if level == "expired":
+        if level in {"expired", "missing"} and exchange in calendar.maintenance.supported_exchanges:
+            fail = True
             print(f"::error::{exchange}: {message}")
-        elif level in {"warning", "missing"}:
+        elif level == "warning":
             print(f"::warning::{exchange}: {message}")
 
     print(f"Wrote {out_path}")
+    if fail:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

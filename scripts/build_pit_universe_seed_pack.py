@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-OUTPUT_PATH = PROJECT_ROOT / "tests" / "fixtures" / "pit_universe_seed_pack.json"
+OUTPUT_PATH = PROJECT_ROOT / "tests" / "fixtures" / "synthetic_seed" / "pit_universe_seed_pack.json"
 
 
 SYMBOL_ISIN_OVERRIDES = {

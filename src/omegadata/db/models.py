@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from decimal import Decimal
 
 from sqlalchemy import (
@@ -30,6 +30,10 @@ from omegadata.domain import (
 )
 
 
+def _utc_now() -> datetime:
+    return datetime.now(UTC)
+
+
 class InstrumentMaster(Base):
     __tablename__ = "instrument_master"
 
@@ -41,11 +45,11 @@ class InstrumentMaster(Base):
     listed_date: Mapped[date | None] = mapped_column(Date)
     delisted_date: Mapped[date | None] = mapped_column(Date)
     active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow,
+        default=_utc_now,
+        onupdate=_utc_now,
         nullable=False,
     )
 
@@ -76,7 +80,7 @@ class SymbolChangeLog(Base):
     reason: Mapped[str] = mapped_column(String(255), nullable=False)
     circular_reference: Mapped[str] = mapped_column(String(255), nullable=False)
     discrepancy_found: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
 
 
 class DelistingRecord(Base):
@@ -88,7 +92,7 @@ class DelistingRecord(Base):
     delisting_type: Mapped[str] = mapped_column(String(64), nullable=False)
     last_trading_date: Mapped[date] = mapped_column(Date, nullable=False)
     last_recorded_price: Mapped[Decimal] = mapped_column(Numeric(20, 6), nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
 
 
 class IPORegistry(Base):
@@ -126,7 +130,7 @@ class CorporateActionStaging(Base):
     ex_date: Mapped[date | None] = mapped_column(Date)
     record_date: Mapped[date | None] = mapped_column(Date)
     payload: Mapped[dict[str, str | int | float | None]] = mapped_column(JSON, default=dict)
-    fetched_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    fetched_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
     matched: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
 
@@ -147,7 +151,7 @@ class ConfirmedCorporateAction(Base):
     source_preference: Mapped[Exchange] = mapped_column(Enum(Exchange), nullable=False)
     superseded: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     supersedes_id: Mapped[int | None] = mapped_column(ForeignKey("confirmed_corporate_action.id"))
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
 
 
 class ManualReviewQueue(Base):
@@ -159,7 +163,7 @@ class ManualReviewQueue(Base):
     event_date: Mapped[date | None] = mapped_column(Date)
     reason: Mapped[str] = mapped_column(Text, nullable=False)
     payload: Mapped[dict[str, str | int | float | None]] = mapped_column(JSON, default=dict)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
     resolved: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
 
@@ -215,7 +219,7 @@ class DiscontinuityEvent(Base):
     )
     auto_adjust_queued: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     review_required: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
 
 
 class UniverseMembership(Base):
@@ -242,7 +246,7 @@ class ValidationAuditLog(Base):
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    validation_date: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    validation_date: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
     source_1: Mapped[str] = mapped_column(String(64), nullable=False)
     source_2: Mapped[str] = mapped_column(String(64), nullable=False)
     isin: Mapped[str | None] = mapped_column(String(12))
