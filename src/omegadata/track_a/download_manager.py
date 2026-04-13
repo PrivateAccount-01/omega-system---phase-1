@@ -9,6 +9,7 @@ import re
 import ssl
 import time
 import zipfile
+from contextlib import suppress
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from html.parser import HTMLParser
@@ -40,6 +41,14 @@ class DownloadArtifact:
     bytes_downloaded: int
     used_url: str
     attempts: int
+
+
+@dataclass(frozen=True)
+class FetchResult:
+    payload: bytes
+    status_code: int | None
+    content_type: str
+    transport: str
 
 
 @dataclass(frozen=True)
@@ -177,14 +186,19 @@ class DownloadManager:
         stop=stop_after_attempt(5),
         reraise=True,
     )
-    def _request(self, client: httpx.Client, url: str) -> bytes:
+    def _request(self, client: httpx.Client, url: str) -> FetchResult:
         response = client.get(url, timeout=60.0)
         if response.status_code in {403, 429}:
             raise DownloadError(f"Blocked by remote source ({response.status_code}): {url}")
         response.raise_for_status()
         if not response.content:
             raise DownloadError(f"Empty payload: {url}")
-        return response.content
+        return FetchResult(
+            payload=response.content,
+            status_code=response.status_code,
+            content_type=response.headers.get("content-type", ""),
+            transport="httpx",
+        )
 
     def _bootstrap_nse_session(self, client: httpx.Client) -> None:
         # NSE APIs require a warmed session with cookies set by the landing page.
@@ -207,13 +221,14 @@ class DownloadManager:
                 continue
         raise DownloadError(f"Unable to bootstrap NSE session: {last_error}")
 
-    def _request_via_urllib(self, url: str, headers: dict[str, str]) -> bytes:
+    def _request_via_urllib(self, url: str, headers: dict[str, str]) -> FetchResult:
         context = ssl.create_default_context()
         context.minimum_version = ssl.TLSVersion.TLSv1_2
         req = Request(url=url, headers=headers, method="GET")
         try:
             with urlopen(req, timeout=60.0, context=context) as response:
                 payload = bytes(response.read())
+                content_type = response.headers.get("content-type", "")
         except HTTPError as exc:
             raise DownloadError(f"HTTP {exc.code} via urllib for {url}") from exc
         except URLError as exc:
@@ -221,14 +236,19 @@ class DownloadManager:
 
         if not payload:
             raise DownloadError(f"Empty payload via urllib: {url}")
-        return payload
+        return FetchResult(
+            payload=payload,
+            status_code=200,
+            content_type=content_type,
+            transport="urllib",
+        )
 
     def _request_with_workarounds(
         self,
         client: httpx.Client,
         url: str,
         request_headers: dict[str, str],
-    ) -> bytes:
+    ) -> FetchResult:
         try:
             return self._request(client, url)
         except Exception as exc:  # noqa: BLE001
@@ -388,16 +408,34 @@ class DownloadManager:
             ).lower().startswith("missing index"):
                 raise DownloadError("NSE corporate actions payload indicates missing index")
 
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+    ) -> FetchResult:
+        request_headers = self._profile_for_url(profile, url)
+        with httpx.Client(headers=request_headers, follow_redirects=True) as client:
+            if self._is_nse_url(url):
+                self._bootstrap_nse_session(client)
+            result = self._request_with_workarounds(client, url, request_headers)
+        self._validate_payload(source_key, result.payload, as_of=as_of)
+        return result
+
     def probe_source_candidates(
         self,
         source_key: str,
         as_of: date,
         *,
         limit: int | None = None,
+        profiles: list[dict[str, str]] | None = None,
     ) -> list[SourceProbeResult]:
         candidate_urls = self._candidate_urls(source_key, as_of)
         if limit is not None:
             candidate_urls = candidate_urls[:limit]
+        probe_profiles = profiles or self._header_profiles()
 
         results: list[SourceProbeResult] = []
         for idx, url in enumerate(candidate_urls):
@@ -411,35 +449,26 @@ class DownloadManager:
             validated = False
             attempts = 0
 
-            for profile in self._header_profiles():
+            for profile in probe_profiles:
                 attempts += 1
-                request_headers = self._profile_for_url(profile, url)
                 try:
-                    with httpx.Client(headers=request_headers, follow_redirects=True, timeout=60.0) as client:
-                        if self._is_nse_url(url):
-                            self._bootstrap_nse_session(client)
-                        response = client.get(url, timeout=60.0)
-                    last_status_code = response.status_code
-                    last_content_type = response.headers.get("content-type", "")
-                    payload = response.content
-                    last_bytes = len(payload)
-                    last_preview = response.text[:220].replace("\n", " ")
-                    if response.status_code >= 400:
-                        last_error = f"HTTP {response.status_code}"
-                        continue
-                    try:
-                        self._validate_payload(source_key, payload, as_of=as_of)
-                        validated = True
-                        last_error = None
-                        last_validation_error = None
-                        break
-                    except Exception as exc:  # noqa: BLE001
-                        last_validation_error = str(exc)
-                        last_error = str(exc)
-                        continue
+                    result = self._fetch_candidate(source_key, as_of, url=url, profile=profile)
+                    last_status_code = result.status_code
+                    last_content_type = result.content_type
+                    last_bytes = len(result.payload)
+                    last_preview = result.payload[:220].decode("utf-8", errors="ignore").replace("\n", " ")
+                    validated = True
+                    last_error = None
+                    last_validation_error = None
+                    break
                 except Exception as exc:  # noqa: BLE001
                     last_error = str(exc)
                     last_preview = ""
+                    if "HTTP " in last_error:
+                        with suppress(Exception):
+                            last_status_code = int(last_error.split("HTTP ", 1)[1].split()[0])
+                    if "payload" in last_error.lower() or "html" in last_error.lower() or "csv" in last_error.lower():
+                        last_validation_error = last_error
                     continue
 
             results.append(
@@ -476,16 +505,12 @@ class DownloadManager:
                 for idx, url in enumerate(candidate_urls):
                     attempts += 1
                     try:
-                        request_headers = self._profile_for_url(profile, url)
-                        with httpx.Client(headers=request_headers, follow_redirects=True) as client:
-                            if self._is_nse_url(url):
-                                self._bootstrap_nse_session(client)
-                            payload = self._request_with_workarounds(client, url, request_headers)
-                            self._validate_payload(source_key, payload, as_of=as_of)
-                            used_url = url
-                            if idx > 0:
-                                FAILOVER_COUNTER.labels(source=source_key).inc()
-                            break
+                        result = self._fetch_candidate(source_key, as_of, url=url, profile=profile)
+                        payload = result.payload
+                        used_url = url
+                        if idx > 0:
+                            FAILOVER_COUNTER.labels(source=source_key).inc()
+                        break
                     except Exception as exc:  # noqa: BLE001
                         last_error = exc
                         consecutive_failures += 1
@@ -598,9 +623,9 @@ class DownloadManager:
             url = f"{base}?{query}"
             try:
                 with httpx.Client(headers=headers, follow_redirects=True) as client:
-                    payload = self._request(client, url)
-                    self._validate_payload("BSE_CORPORATE_ACTIONS", payload)
-                parsed = json.loads(payload.decode("utf-8", errors="ignore"))
+                    result = self._request(client, url)
+                    self._validate_payload("BSE_CORPORATE_ACTIONS", result.payload)
+                parsed = json.loads(result.payload.decode("utf-8", errors="ignore"))
                 if not isinstance(parsed, dict):
                     raise DownloadError("Unexpected StockReachGraph payload type")
                 return parsed

@@ -15,6 +15,7 @@ class ReviewPolicy:
     blocks_publication: bool
     scope: ReviewBlockScope
     requires_reprocess: bool
+    triage_instructions: str = ""
 
 
 @dataclass(frozen=True)
@@ -30,6 +31,7 @@ class ReviewPolicySet:
                 blocks_publication=True,
                 scope=ReviewBlockScope.RECORD,
                 requires_reprocess=False,
+                triage_instructions="Review the evidence, record a clear disposition, and close the review explicitly.",
             ),
         )
 
@@ -48,6 +50,7 @@ def _read_policy_set(path: Path) -> ReviewPolicySet:
                 blocks_publication=bool(raw.get("blocks_publication", True)),
                 scope=ReviewBlockScope(str(raw.get("scope", ReviewBlockScope.RECORD.value))),
                 requires_reprocess=bool(raw.get("requires_reprocess", False)),
+                triage_instructions=str(raw.get("triage_instructions", "")),
             )
     return ReviewPolicySet(version=version, policies=policies)
 

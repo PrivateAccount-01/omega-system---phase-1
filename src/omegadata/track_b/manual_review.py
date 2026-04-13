@@ -81,6 +81,7 @@ class ManualReviewService:
         enriched_payload["block_scope"] = policy.scope.value
         enriched_payload["blocks_publication"] = policy.blocks_publication
         enriched_payload["requires_reprocess"] = policy.requires_reprocess
+        enriched_payload["triage_instructions"] = policy.triage_instructions
         enriched_payload.setdefault(
             "reprocess_status",
             "NOT_REQUIRED" if not policy.requires_reprocess else "REVIEW_PENDING",

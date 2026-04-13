@@ -4,47 +4,56 @@
     "CROSS_SOURCE_VALIDATION_FAIL": {
       "blocks_publication": true,
       "scope": "RECORD",
-      "requires_reprocess": false
+      "requires_reprocess": false,
+      "triage_instructions": "Confirm the conflicting source values, document the authoritative source, and either mark false positive or remediate the bad record."
     },
     "SYSTEMATIC_DISAGREEMENT": {
       "blocks_publication": true,
       "scope": "INSTRUMENT",
-      "requires_reprocess": false
+      "requires_reprocess": false,
+      "triage_instructions": "Investigate sustained cross-source divergence, identify the venue or parser issue, and leave a resolution note before unblocking."
     },
     "CORPORATE_ACTION_REQUIRED_FIELDS": {
       "blocks_publication": true,
       "scope": "FORWARD_SERIES",
-      "requires_reprocess": true
+      "requires_reprocess": true,
+      "triage_instructions": "Backfill the missing economic fields, confirm the authoritative corporate action payload, then resolve as remediated to trigger reprocess."
     },
     "CORPORATE_ACTION_UNMATCHED": {
       "blocks_publication": true,
       "scope": "FORWARD_SERIES",
-      "requires_reprocess": true
+      "requires_reprocess": true,
+      "triage_instructions": "Check both exchange feeds for the missing action, confirm whether the event is real, and remediate or mark false positive with evidence."
     },
     "CORPORATE_ACTION_SOURCE_GAP": {
       "blocks_publication": true,
       "scope": "FORWARD_SERIES",
-      "requires_reprocess": true
+      "requires_reprocess": true,
+      "triage_instructions": "Investigate source coverage gaps, verify the canonical event details, and queue replay only after the source gap is resolved."
     },
     "CORPORATE_ACTION_TYPE_FAIL": {
       "blocks_publication": true,
       "scope": "FORWARD_SERIES",
-      "requires_reprocess": true
+      "requires_reprocess": true,
+      "triage_instructions": "Compare both exchange announcements, identify the correct action type, and remediate the wrong event mapping before reprocessing."
     },
     "CORPORATE_ACTION_TYPE_MISMATCH": {
       "blocks_publication": true,
       "scope": "FORWARD_SERIES",
-      "requires_reprocess": true
+      "requires_reprocess": true,
+      "triage_instructions": "Resolve the authoritative action type across sources and document the rationale prior to replay."
     },
     "CORPORATE_ACTION_PARAMETER_MISMATCH": {
       "blocks_publication": true,
       "scope": "FORWARD_SERIES",
-      "requires_reprocess": true
+      "requires_reprocess": true,
+      "triage_instructions": "Validate the economic parameters against the exchange notices and remediate the adjustment inputs before replay."
     },
     "CORPORATE_ACTION_FALSE_NEGATIVE_RISK": {
       "blocks_publication": false,
       "scope": "RECORD",
-      "requires_reprocess": false
+      "requires_reprocess": false,
+      "triage_instructions": "Triage within one business day. Confirm whether the nearby candidate represents the same event, then resolve as false positive or escalate into a blocking corporate-action review."
     }
   }
 }

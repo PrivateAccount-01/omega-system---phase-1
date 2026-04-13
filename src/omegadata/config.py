@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     market_proxy_isin: str = ""
     quarterly_validation_pack: str = "./artifacts/verification/quarterly_validation_input.json"
     review_policy_path: str = "./config/review_policies.json"
+    trading_holiday_path: str = "./config/trading_holidays_india.json"
     reprocess_root: str = "./artifacts/reprocess_queue"
 
 

@@ -1,6 +1,8 @@
 {
-  "generated_at": "2026-04-13T03:38:46.478979+00:00",
+  "generated_at": "2026-04-13T04:01:02.593647+00:00",
   "probe_date": "2026-04-10",
+  "calendar_mode": "configured_trading_calendar",
+  "probe_profile_count": 1,
   "nse_corporate_actions": [
     {
       "source_key": "NSE_CORPORATE_ACTIONS",
@@ -58,7 +60,7 @@
       "attempts": 1,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\ufffdm\ufffd\\$t\ufffd\"\ufffd\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_10042026_T0.csvM\ufffdAn\ufffd0\u0010E\ufffdH\ufffd\ufffd, \ufffd\u0002(\ufffd\u001a)\ufffd(v\ufffd\ufffd8\ufffdDq\ufffd5\u001e%\ufffd\ufffd5\ufffd\u0014\ufffdz\u007f\ufffdh4\ufffd\ufffde\rB\ufffd\ufffd\ufffd\ufffd \ufffd\u0395.\u0010\u000ee\ufffd\ufffd\ufffd\u0000\\\ufffd\ufffd1\u0000\ufffd\ue31d\ufffdosO\ufffd\ufffd\ufffd\u0086<\ufffd@)\ufffdq\f\ufffd4i\u0010d\u0005\ufffd\ufffd\\\u001e6g}\ufffd1\ufffdjO\ufffd\ufffd\ufffd2-\ufffd\ufffd\ufffdT\ufffd\ufffd\ufffd\ufffd\ufffdV\ufffdx\ufffd\ufffd)r\ufffd\ufffd\ufffdT\ufffd\u027c\ufffd\ufffdqs3\ufffd\ufffdqp\ufffdIx\ufffd\u06b8^\ufffd\u0017\ufffdYL\ufffd}4^r5\ufffd\ufffd"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000m\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_10042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
@@ -66,13 +68,13 @@
       "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ100426_CSV.ZIP",
       "role": "fallback",
       "validated": false,
-      "status_code": 404,
-      "content_type": "text/html; charset=utf-8",
-      "bytes_downloaded": 8392,
-      "attempts": 3,
-      "error": "HTTP 404",
-      "validation_error": null,
-      "body_preview": "\r \r <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r \r <html xmlns=\"http://www.w3.org/1999/xhtml\">\r <head><meta http-equiv=\"Content-Type\" content="
+      "status_code": null,
+      "content_type": "",
+      "bytes_downloaded": 0,
+      "attempts": 1,
+      "error": "Client error '404 Not Found' for url 'https://www.bseindia.com/download/BhavCopy/Equity/EQ100426_CSV.ZIP'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+      "validation_error": "Client error '404 Not Found' for url 'https://www.bseindia.com/download/BhavCopy/Equity/EQ100426_CSV.ZIP'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+      "body_preview": ""
     }
   ],
   "bse_recent_history": [
@@ -80,27 +82,34 @@
       "date": "2026-04-10",
       "primary_validated": true,
       "primary_status_code": 200,
-      "fallback_validated": true,
+      "any_fallback_validated": true,
+      "all_fallbacks_healthy": false,
       "overall_validated": true
     },
     {
       "date": "2026-04-09",
       "primary_validated": true,
       "primary_status_code": 200,
-      "fallback_validated": true,
+      "any_fallback_validated": true,
+      "all_fallbacks_healthy": false,
       "overall_validated": true
     },
     {
       "date": "2026-04-08",
       "primary_validated": true,
       "primary_status_code": 200,
-      "fallback_validated": true,
+      "any_fallback_validated": true,
+      "all_fallbacks_healthy": false,
       "overall_validated": true
     }
   ],
   "summary": {
     "bse_primary_validated": true,
-    "bse_fallback_validated": true,
-    "bse_any_candidate_validated": true
+    "bse_any_fallback_validated": true,
+    "bse_all_fallbacks_healthy": false,
+    "bse_any_candidate_validated": true,
+    "bse_failed_candidates": [
+      "https://www.bseindia.com/download/BhavCopy/Equity/EQ100426_CSV.ZIP"
+    ]
   }
 }

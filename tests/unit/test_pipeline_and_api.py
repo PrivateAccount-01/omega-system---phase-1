@@ -25,7 +25,8 @@ from omegadata.db.models import (
 from omegadata.db.session import get_session, init_db
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
-from omegadata.track_a.download_manager import DownloadError, DownloadManager
+from omegadata.track_a.download_manager import DownloadError, DownloadManager, FetchResult
+from omegadata.track_a.trading_calendar import TradingCalendar
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.isin_master import ISINMasterService
 from omegadata.track_b.review_policy import invalidate_review_policy_cache, load_review_policies
@@ -368,7 +369,12 @@ def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, m
     payloads = [b"first-payload", b"second-payload"]
 
     def fake_request(*args, **kwargs):
-        return payloads.pop(0)
+        return FetchResult(
+            payload=payloads.pop(0),
+            status_code=200,
+            content_type="application/octet-stream",
+            transport="test",
+        )
 
     monkeypatch.setattr(manager, "_bootstrap_nse_session", lambda client: None)
     monkeypatch.setattr(manager, "_request_with_workarounds", fake_request)
@@ -817,3 +823,13 @@ def test_review_policy_cache_reloads_on_file_change(tmp_path: Path, monkeypatch)
     second = load_review_policies()
     assert second.version == "v2"
     assert second.for_category("CROSS_SOURCE_VALIDATION_FAIL").scope.value == "INSTRUMENT"
+
+
+def test_trading_calendar_skips_configured_holidays() -> None:
+    calendar = TradingCalendar(
+        holidays_by_exchange={
+            "BSE": {date(2026, 4, 10)},
+        }
+    )
+    days = calendar.recent_trading_days("BSE", anchor_date=date(2026, 4, 13), limit=2)
+    assert days == [date(2026, 4, 9), date(2026, 4, 8)]

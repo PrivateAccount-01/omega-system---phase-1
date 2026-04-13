@@ -85,3 +85,9 @@ docker compose up -d
 ```bash
 python scripts/run_monthly_quality_report.py --as-of 2026-04-07
 ```
+
+## Review Handling
+
+- `CORPORATE_ACTION_FALSE_NEGATIVE_RISK` is a non-blocking triage queue, not a passive metric.
+- Reviewers should inspect the nearby candidate within one business day, decide whether it is the same economic event, and either close it as `FALSE_POSITIVE` or escalate it into a blocking corporate-action review category with notes.
+- The review payload carries `triage_instructions` from governed policy so operators can see the expected handling steps directly in the queue item.
