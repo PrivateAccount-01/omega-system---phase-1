@@ -63,6 +63,32 @@ class CorporateActionMatcher:
                 score -= 5
         return score
 
+    def economic_overlap_count(self, left: CorporateActionStaging, right: CorporateActionStaging) -> int:
+        left_payload = left.payload or {}
+        right_payload = right.payload or {}
+        return len(ECONOMIC_KEYS & set(left_payload) & set(right_payload))
+
+    def relatedness_score(self, left: CorporateActionStaging, right: CorporateActionStaging) -> int:
+        left_date = self.event_date(left)
+        right_date = self.event_date(right)
+        if left_date is None or right_date is None:
+            return -5_000
+        gap_days = abs((left_date - right_date).days)
+        if gap_days > 10:
+            return -2_000
+
+        score = 50 - (gap_days * 4)
+        if left.action_type == right.action_type:
+            score += 35
+        if left.ex_date and right.ex_date and left.ex_date == right.ex_date:
+            score += 20
+        if left.record_date and right.record_date and left.record_date == right.record_date:
+            score += 10
+        if left.announcement_date and right.announcement_date and left.announcement_date == right.announcement_date:
+            score += 6
+        score += self._payload_score(left, right)
+        return score
+
     def score_pair(self, left: CorporateActionStaging, right: CorporateActionStaging) -> int:
         if left.action_type != right.action_type:
             return -10_000

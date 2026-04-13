@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 
 from omegadata.config import settings
@@ -33,8 +34,9 @@ class ReviewPolicySet:
         )
 
 
-def load_review_policies() -> ReviewPolicySet:
-    path = Path(settings.review_policy_path)
+@lru_cache(maxsize=4)
+def _load_review_policies_cached(path_str: str) -> ReviewPolicySet:
+    path = Path(path_str)
     payload = json.loads(path.read_text(encoding="utf-8"))
     version = str(payload.get("version", "unknown"))
     raw_policies = payload.get("policies", {})
@@ -50,3 +52,8 @@ def load_review_policies() -> ReviewPolicySet:
                 requires_reprocess=bool(raw.get("requires_reprocess", False)),
             )
     return ReviewPolicySet(version=version, policies=policies)
+
+
+def load_review_policies() -> ReviewPolicySet:
+    path = Path(settings.review_policy_path)
+    return _load_review_policies_cached(str(path.resolve()))

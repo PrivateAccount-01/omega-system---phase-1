@@ -262,3 +262,34 @@ def test_validator_treats_bse_only_as_valid_bse_candidate(db_session) -> None:
         select(ValidationAuditLog).where(ValidationAuditLog.field_compared == "corporate_action_coverage")
     )
     assert coverage_warn is None
+
+
+def test_unmatched_validation_requires_high_similarity_before_type_fail(db_session) -> None:
+    db_session.add_all(
+        [
+            CorporateActionStaging(
+                source=Exchange.NSE,
+                isin="INE009A01021",
+                action_type=CorporateActionType.BONUS,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 2),
+                record_date=date(2026, 4, 2),
+                payload={"isin": "INE009A01021", "bonus_ratio_numerator": "1", "bonus_ratio_denominator": "1"},
+                matched=False,
+            ),
+            CorporateActionStaging(
+                source=Exchange.BSE,
+                isin="INE009A01021",
+                action_type=CorporateActionType.SPLIT,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 2),
+                record_date=date(2026, 4, 2),
+                payload={"isin": "INE009A01021", "old_face_value": "10", "new_face_value": "5"},
+                matched=False,
+            ),
+        ]
+    )
+
+    outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
+    assert any(outcome.result == ValidationResult.WARN for outcome in outcomes)
+    assert not any(outcome.result == ValidationResult.FAIL for outcome in outcomes)

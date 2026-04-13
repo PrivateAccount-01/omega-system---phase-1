@@ -176,6 +176,22 @@ class ManualReviewService:
             raise LookupError(f"No manual review with id {review_id}")
 
         payload: dict[str, Any] = dict(review.payload or {})
+        requires_reprocess = bool(payload.get("requires_reprocess", False))
+        if not requires_reprocess:
+            raise ValueError(f"Manual review {review_id} does not require reprocess")
+        if not review.resolved:
+            raise ValueError(f"Manual review {review_id} must be resolved before reprocess completion")
+        resolution = payload.get("resolution")
+        decision = resolution.get("decision") if isinstance(resolution, dict) else None
+        if decision != ReviewDecision.REMEDIATED.value:
+            raise ValueError(f"Manual review {review_id} is not in a remediated state")
+        if payload.get("reprocess_status") != "PENDING":
+            raise ValueError(f"Manual review {review_id} is not awaiting reprocess completion")
+
+        request_path = self._reprocess_request_path(review.id)
+        if not request_path.exists():
+            raise ValueError(f"Manual review {review_id} has no pending reprocess request artifact")
+
         payload["reprocess_status"] = "COMPLETED"
         payload["reprocess_completed"] = {
             "completed_by": completed_by,
@@ -183,8 +199,6 @@ class ManualReviewService:
             "completed_at": datetime.now(UTC).isoformat(),
         }
         review.payload = payload
-        request_path = self._reprocess_request_path(review.id)
-        if request_path.exists():
-            request_path.unlink()
+        request_path.unlink()
         session.flush()
         return payload

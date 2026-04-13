@@ -6,6 +6,7 @@ from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import delete, select
 
@@ -23,7 +24,7 @@ from omegadata.db.models import (
 from omegadata.db.session import get_session, init_db
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
-from omegadata.track_a.download_manager import DownloadManager
+from omegadata.track_a.download_manager import DownloadError, DownloadManager
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.isin_master import ISINMasterService
 
@@ -538,6 +539,7 @@ def test_publication_status_blocks_forward_series_and_reprocess_workflow(tmp_pat
         assert status.status_code == 200
         assert status.json()["state"] == PublicationState.BLOCKED.value
         assert status.json()["blocked_records"] == 2
+        assert status.json()["blocked_dates"] == 2
 
         open_reviews = client.get("/reviews/open", headers=headers)
         assert open_reviews.status_code == 200
@@ -632,3 +634,73 @@ def test_false_positive_resolution_unblocks_without_reprocess(tmp_path: Path) ->
 
         after = client.get("/publication/status/INE333A01010?exchange=NSE", headers=headers)
         assert after.json()["state"] == PublicationState.PUBLISHABLE.value
+
+        rejected = client.post(
+            f"/reviews/{review_id}/reprocess-complete",
+            headers=headers,
+            json={"completed_by": "ops", "notes": "should not be allowed"},
+        )
+        assert rejected.status_code == 400
+
+
+def test_complete_reprocess_requires_pending_request_artifact(tmp_path: Path) -> None:
+    db_path = tmp_path / "api_reprocess_validation.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    settings.reprocess_root = str(tmp_path / "reprocess_queue")
+    init_db()
+    with get_session() as session:
+        session.execute(delete(ManualReviewQueue))
+        session.execute(delete(InstrumentMaster))
+        session.add(
+            InstrumentMaster(
+                isin="INE444A01010",
+                instrument_type=InstrumentType.EQUITY,
+                primary_exchange=Exchange.NSE,
+                company_name="Reprocess Guard Co",
+                listed_date=date(2020, 1, 1),
+                active=True,
+            )
+        )
+        session.add(
+            ManualReviewQueue(
+                category="CORPORATE_ACTION_REQUIRED_FIELDS",
+                isin="INE444A01010",
+                event_date=date(2024, 1, 1),
+                reason="Missing required fields in corporate action payload",
+                payload={
+                    "requires_reprocess": True,
+                    "block_scope": "FORWARD_SERIES",
+                    "reprocess_status": "PENDING",
+                    "resolution": {
+                        "decision": "REMEDIATED",
+                        "reviewer": "ops",
+                        "notes": "fixed",
+                        "resolved_at": "2026-04-13T00:00:00+00:00",
+                    },
+                },
+                resolved=True,
+            )
+        )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        rejected = client.post(
+            "/reviews/1/reprocess-complete",
+            headers=headers,
+            json={"completed_by": "ops", "notes": "missing request artifact"},
+        )
+        assert rejected.status_code == 400
+
+
+def test_run_track_a_requires_bse_bhavcopy(monkeypatch, tmp_path: Path) -> None:
+    pipeline = OmegaDataSequentialPipeline()
+
+    def fake_ingest(source: str, as_of: date) -> str:
+        if source == "BSE_EQUITY_BHAVCOPY":
+            raise DownloadError(f"{source} unavailable for {as_of.isoformat()}")
+        return str(tmp_path / f"{source}.bin")
+
+    monkeypatch.setattr(pipeline.ingestor, "ingest_raw_source", fake_ingest)
+
+    with pytest.raises(DownloadError):
+        pipeline.run_track_a(date(2026, 4, 13))

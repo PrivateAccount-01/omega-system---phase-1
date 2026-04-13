@@ -552,7 +552,7 @@ class OmegaDataSequentialPipeline:
             "NSE_FII_DII",
             "INDIA_VIX",
         ]
-        required_sources = {"NSE_EQUITY_BHAVCOPY"}
+        required_sources = {"NSE_EQUITY_BHAVCOPY", "BSE_EQUITY_BHAVCOPY"}
         paths: dict[str, str] = {}
         for source in sources:
             try:

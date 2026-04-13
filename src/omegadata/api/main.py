@@ -105,6 +105,7 @@ class PublicationStatusOut(BaseModel):
     isin: str
     exchange: Exchange
     blocked_records: int
+    blocked_dates: int
     blocked_date_range: tuple[date, date] | None
     state: PublicationState
     blocks: list[PublicationBlockOut]
@@ -356,13 +357,16 @@ def resolve_review(
     session: SessionDep,
     _auth: InternalAuthDep,
 ) -> dict[str, object]:
-    result = reviews.resolve_review(
-        session,
-        review_id=review_id,
-        decision=body.decision,
-        reviewer=body.reviewer,
-        notes=body.notes,
-    )
+    try:
+        result = reviews.resolve_review(
+            session,
+            review_id=review_id,
+            decision=body.decision,
+            reviewer=body.reviewer,
+            notes=body.notes,
+        )
+    except LookupError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
     return {
         "review_id": result.review_id,
         "decision": result.decision.value,
@@ -378,12 +382,17 @@ def complete_reprocess(
     session: SessionDep,
     _auth: InternalAuthDep,
 ) -> dict[str, object]:
-    payload = reviews.complete_reprocess(
-        session,
-        review_id=review_id,
-        completed_by=body.completed_by,
-        notes=body.notes,
-    )
+    try:
+        payload = reviews.complete_reprocess(
+            session,
+            review_id=review_id,
+            completed_by=body.completed_by,
+            notes=body.notes,
+        )
+    except LookupError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     return {"review_id": review_id, "reprocess_status": payload.get("reprocess_status", "UNKNOWN")}
 
 
@@ -428,7 +437,8 @@ def publication_status(
     return PublicationStatusOut(
         isin=isin,
         exchange=resolved_exchange,
-        blocked_records=len(blocked_dates),
+        blocked_records=len(blocked_rows),
+        blocked_dates=len(blocked_dates),
         blocked_date_range=blocked_range,
         state=state,
         blocks=blocks,

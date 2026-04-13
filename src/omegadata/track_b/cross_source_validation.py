@@ -60,16 +60,18 @@ class CrossSourceValidator:
             select(PriceRecord)
             .where(PriceRecord.isin == isin)
             .where(PriceRecord.exchange == Exchange.NSE)
+            .order_by(PriceRecord.trade_date.asc())
         ).all()
         bse_rows = session.scalars(
             select(PriceRecord)
             .where(PriceRecord.isin == isin)
             .where(PriceRecord.exchange == Exchange.BSE)
+            .order_by(PriceRecord.trade_date.asc())
         ).all()
         bse_by_date = {r.trade_date: r for r in bse_rows}
 
         outcomes: list[ValidationOutcome] = []
-        signed_diffs: list[Decimal] = []
+        signed_diffs: list[tuple[date, Decimal]] = []
         for nse in nse_rows:
             bse = bse_by_date.get(nse.trade_date)
             if bse is None:
@@ -86,13 +88,34 @@ class CrossSourceValidator:
                     field=field,
                     left=Decimal(str(getattr(nse, field))),
                     right=Decimal(str(getattr(bse, field))),
-                    tolerance=Decimal("0.0010"),
+                    tolerance=self._price_tolerance(nse=nse, bse=bse, field=field),
                 )
                 outcomes.append(outcome)
-            signed_diffs.append(Decimal(str(nse.close_price)) - Decimal(str(bse.close_price)))
+            signed_diffs.append((nse.trade_date, Decimal(str(nse.close_price)) - Decimal(str(bse.close_price))))
 
         self._detect_systematic_disagreement(session, isin, signed_diffs)
         return outcomes
+
+    @staticmethod
+    def _price_tolerance(*, nse: PriceRecord, bse: PriceRecord, field: str) -> Decimal:
+        tolerance = Decimal("0.0010")
+        synthetic_bse = str(bse.raw_source).lower().startswith("bse_stockreach_graph")
+        if synthetic_bse:
+            tolerance = Decimal("0.0040")
+
+        max_close = max(Decimal(str(nse.close_price)), Decimal(str(bse.close_price)))
+        max_volume = max(Decimal(str(nse.volume)), Decimal(str(bse.volume)))
+        traded_notional = max_close * max_volume
+        if traded_notional < Decimal("250000"):
+            tolerance = max(tolerance, Decimal("0.0050"))
+        elif traded_notional < Decimal("1000000"):
+            tolerance = max(tolerance, Decimal("0.0025"))
+
+        if field != "close_price":
+            tolerance = max(tolerance, tolerance + Decimal("0.0005"))
+        if nse.is_imputed or bse.is_imputed:
+            tolerance = max(tolerance, Decimal("0.0030"))
+        return tolerance
 
     def validate_monthly_flow_consistency(
         self,
@@ -185,21 +208,22 @@ class CrossSourceValidator:
             if nse_date is None:
                 continue
             anchor_date = nse_date
-            nearby_candidates = [
-                candidate
+            scored_candidates = [
+                (candidate, self.matcher.relatedness_score(staged_row, candidate))
                 for candidate in bse_rows
                 if self._event_date(candidate) is not None
-                and self._date_gap_days(anchor_date, self._event_date(candidate)) <= 5
+                and self._date_gap_days(anchor_date, self._event_date(candidate)) <= 10
             ]
-            if nearby_candidates:
-                nearest = min(
-                    nearby_candidates,
-                    key=lambda candidate: self._date_gap_days(
-                        anchor_date,
-                        self._event_date(candidate) or anchor_date,
-                    ),
-                )
-                if nearest.action_type != staged_row.action_type:
+            best_candidate: CorporateActionStaging | None = None
+            best_score = -10_000
+            if scored_candidates:
+                best_candidate, best_score = max(scored_candidates, key=lambda item: item[1])
+            if (
+                best_candidate is not None
+                and best_score >= 60
+                and self.matcher.economic_overlap_count(staged_row, best_candidate) > 0
+                and best_candidate.action_type != staged_row.action_type
+            ):
                     outcomes.append(
                         self._persist_categorical_result(
                             session=session,
@@ -209,11 +233,14 @@ class CrossSourceValidator:
                             data_date=anchor_date,
                             field="action_type",
                             left=staged_row.action_type.value,
-                            right=nearest.action_type.value,
+                            right=best_candidate.action_type.value,
                             result=ValidationResult.FAIL,
                             diff_pct=Decimal("1"),
                             tolerance=Decimal("0"),
-                            notes="Corporate action type mismatch across nearby source candidates",
+                            notes=(
+                                "Corporate action type mismatch across high-similarity "
+                                f"source candidates (score={best_score})"
+                            ),
                         )
                     )
                     continue
@@ -230,7 +257,11 @@ class CrossSourceValidator:
                     result=ValidationResult.WARN,
                     diff_pct=Decimal("1"),
                     tolerance=Decimal("0"),
-                    notes="No BSE corporate action candidate for NSE action",
+                    notes=(
+                        "No high-confidence BSE corporate action candidate for NSE action"
+                        if best_candidate is not None
+                        else "No BSE corporate action candidate for NSE action"
+                    ),
                 )
             )
 
@@ -448,12 +479,14 @@ class CrossSourceValidator:
         self,
         session: Session,
         isin: str,
-        signed_diffs: list[Decimal],
+        signed_diffs: list[tuple[date, Decimal]],
     ) -> None:
         if len(signed_diffs) < 5:
             return
-        last_five = signed_diffs[-5:]
-        same_sign = all(x > 0 for x in last_five) or all(x < 0 for x in last_five)
+        ordered = sorted(signed_diffs, key=lambda item: item[0])
+        last_five = ordered[-5:]
+        values = [diff for _trade_date, diff in last_five]
+        same_sign = all(x > 0 for x in values) or all(x < 0 for x in values)
         if same_sign:
             self.review_service.queue_review(
                 session,
@@ -461,5 +494,10 @@ class CrossSourceValidator:
                 isin=isin,
                 event_date=None,
                 reason="Consecutive directional disagreement across five observations",
-                payload={"last_five": [str(x) for x in last_five]},
+                payload={
+                    "last_five": [
+                        {"trade_date": trade_date.isoformat(), "signed_diff": str(diff)}
+                        for trade_date, diff in last_five
+                    ]
+                },
             )

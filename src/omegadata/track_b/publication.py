@@ -29,6 +29,12 @@ class PublicationStatus:
 
 
 class PublicationService:
+    def __init__(self) -> None:
+        self._policy_set = load_review_policies()
+
+    def _policy_for_category(self, category: str) -> ReviewPolicy:
+        return self._policy_set.for_category(category)
+
     @staticmethod
     def _resolution_decision(review: ManualReviewQueue) -> str | None:
         payload = dict(review.payload or {})
@@ -39,7 +45,7 @@ class PublicationService:
         return None if decision is None else str(decision)
 
     def _applies(self, review: ManualReviewQueue, trade_date: date) -> bool:
-        policy = load_review_policies().for_category(review.category)
+        policy = self._policy_for_category(review.category)
         event_date = review.event_date
         if event_date is None:
             return policy.scope == ReviewBlockScope.INSTRUMENT
@@ -73,7 +79,7 @@ class PublicationService:
         for review in reviews:
             if not self._is_active(review):
                 continue
-            policy = load_review_policies().for_category(review.category)
+            policy = self._policy_for_category(review.category)
             if not policy.blocks_publication:
                 continue
             active.append((review, policy))
@@ -84,25 +90,51 @@ class PublicationService:
         rows: list[PriceRecord],
         reviews_with_policy: list[tuple[ManualReviewQueue, ReviewPolicy]],
     ) -> tuple[set[date], dict[date, list[PublicationBlock]]]:
+        if not rows or not reviews_with_policy:
+            return set(), {}
+
+        rows_by_date = {row.trade_date: row for row in rows}
+        ordered_dates = sorted(rows_by_date)
         blocked: set[date] = set()
         blocks_by_date: dict[date, list[PublicationBlock]] = {}
-        for row in rows:
-            row_blocks: list[PublicationBlock] = []
-            for review, policy in reviews_with_policy:
-                if not self._applies(review, row.trade_date):
-                    continue
-                row_blocks.append(
-                    PublicationBlock(
-                        review_id=review.id,
-                        category=review.category,
-                        scope=policy.scope,
-                        reason=review.reason,
-                        requires_reprocess=policy.requires_reprocess,
-                    )
-                )
+        instrument_blocks: list[PublicationBlock] = []
+        record_blocks: dict[date, list[PublicationBlock]] = {}
+        forward_blocks: list[tuple[date, PublicationBlock]] = []
+
+        for review, policy in reviews_with_policy:
+            block = PublicationBlock(
+                review_id=review.id,
+                category=review.category,
+                scope=policy.scope,
+                reason=review.reason,
+                requires_reprocess=policy.requires_reprocess,
+            )
+            if policy.scope == ReviewBlockScope.INSTRUMENT:
+                instrument_blocks.append(block)
+                continue
+            if review.event_date is None:
+                continue
+            if policy.scope == ReviewBlockScope.RECORD:
+                record_blocks.setdefault(review.event_date, []).append(block)
+                continue
+            if policy.scope == ReviewBlockScope.FORWARD_SERIES:
+                forward_blocks.append((review.event_date, block))
+
+        forward_blocks.sort(key=lambda item: item[0])
+        active_forward: list[PublicationBlock] = []
+        forward_index = 0
+        for trade_date in ordered_dates:
+            while forward_index < len(forward_blocks) and forward_blocks[forward_index][0] <= trade_date:
+                active_forward.append(forward_blocks[forward_index][1])
+                forward_index += 1
+            row_blocks = [
+                *instrument_blocks,
+                *record_blocks.get(trade_date, []),
+                *active_forward,
+            ]
             if row_blocks:
-                blocked.add(row.trade_date)
-                blocks_by_date[row.trade_date] = row_blocks
+                blocked.add(trade_date)
+                blocks_by_date[trade_date] = row_blocks
         return blocked, blocks_by_date
 
     def status_for_row(self, session: Session, row: PriceRecord) -> PublicationStatus:
