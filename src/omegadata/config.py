@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     quarterly_validation_pack: str = "./artifacts/verification/quarterly_validation_input.json"
     review_policy_path: str = "./config/review_policies.json"
     trading_holiday_path: str = "./config/trading_holidays_india.json"
+    source_probe_profile_mode: str = "deterministic"
+    source_probe_timeout_seconds: float = 8.0
     reprocess_root: str = "./artifacts/reprocess_queue"
 
 

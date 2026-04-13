@@ -4,6 +4,7 @@ import json
 from datetime import UTC, date, datetime
 from pathlib import Path
 
+from omegadata.config import settings
 from omegadata.track_a.download_manager import DownloadManager
 from omegadata.track_a.trading_calendar import TradingCalendar
 
@@ -18,9 +19,15 @@ def _probe_dict(result: object) -> dict[str, object]:
 def main() -> None:
     manager = DownloadManager()
     calendar = TradingCalendar.from_config()
-    business_days = calendar.recent_trading_days("BSE", anchor_date=date.today(), limit=3)
+    business_days = calendar.recent_trading_days("BSE", anchor_date=date.today(), limit=2)
     probe_date = business_days[0]
-    probe_profiles = manager._header_profiles()[:1]
+    probe_mode = settings.source_probe_profile_mode.lower().strip()
+    all_profiles = manager._header_profiles()
+    if probe_mode == "full":
+        probe_profiles = all_profiles
+    else:
+        probe_mode = "deterministic"
+        probe_profiles = all_profiles[:1]
     nse_probes = [
         _probe_dict(probe)
         for probe in manager.probe_source_candidates(
@@ -28,6 +35,7 @@ def main() -> None:
             date.today(),
             limit=1,
             profiles=probe_profiles,
+            request_timeout_seconds=settings.source_probe_timeout_seconds,
         )
     ]
     bse_page_probes = [
@@ -35,8 +43,9 @@ def main() -> None:
         for probe in manager.probe_source_candidates(
             "BSE_EQUITY_BHAVCOPY",
             probe_date,
-            limit=4,
+            limit=3,
             profiles=probe_profiles,
+            request_timeout_seconds=settings.source_probe_timeout_seconds,
         )
     ]
     bse_recent_history = []
@@ -44,8 +53,9 @@ def main() -> None:
         candidate_results = manager.probe_source_candidates(
             "BSE_EQUITY_BHAVCOPY",
             candidate_date,
-            limit=4,
+            limit=3,
             profiles=probe_profiles,
+            request_timeout_seconds=settings.source_probe_timeout_seconds,
         )
         primary = next((item for item in candidate_results if item.role == "primary"), None)
         fallbacks = [item for item in candidate_results if item.role == "fallback"]
@@ -66,7 +76,9 @@ def main() -> None:
         "generated_at": datetime.now(UTC).isoformat(),
         "probe_date": probe_date.isoformat(),
         "calendar_mode": "configured_trading_calendar",
+        "probe_profile_mode": probe_mode,
         "probe_profile_count": len(probe_profiles),
+        "probe_timeout_seconds": settings.source_probe_timeout_seconds,
         "nse_corporate_actions": nse_probes,
         "bse_equity_candidates": bse_page_probes,
         "bse_recent_history": bse_recent_history,

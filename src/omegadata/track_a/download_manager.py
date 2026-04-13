@@ -9,7 +9,6 @@ import re
 import ssl
 import time
 import zipfile
-from contextlib import suppress
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from html.parser import HTMLParser
@@ -28,7 +27,16 @@ from omegadata.track_a.source_registry import SOURCE_REGISTRY, resolve_era
 
 
 class DownloadError(RuntimeError):
-    pass
+    def __init__(
+        self,
+        message: str,
+        *,
+        status_code: int | None = None,
+        stage: str = "request",
+    ) -> None:
+        super().__init__(message)
+        self.status_code = status_code
+        self.stage = stage
 
 
 @dataclass(frozen=True)
@@ -186,13 +194,22 @@ class DownloadManager:
         stop=stop_after_attempt(5),
         reraise=True,
     )
-    def _request(self, client: httpx.Client, url: str) -> FetchResult:
-        response = client.get(url, timeout=60.0)
+    def _request(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
+        response = client.get(url, timeout=timeout_seconds)
         if response.status_code in {403, 429}:
-            raise DownloadError(f"Blocked by remote source ({response.status_code}): {url}")
-        response.raise_for_status()
+            raise DownloadError(
+                f"Blocked by remote source ({response.status_code}): {url}",
+                status_code=response.status_code,
+                stage="request",
+            )
+        if response.status_code >= 400:
+            raise DownloadError(
+                f"HTTP {response.status_code} for {url}",
+                status_code=response.status_code,
+                stage="request",
+            )
         if not response.content:
-            raise DownloadError(f"Empty payload: {url}")
+            raise DownloadError(f"Empty payload: {url}", stage="request")
         return FetchResult(
             payload=response.content,
             status_code=response.status_code,
@@ -221,21 +238,31 @@ class DownloadManager:
                 continue
         raise DownloadError(f"Unable to bootstrap NSE session: {last_error}")
 
-    def _request_via_urllib(self, url: str, headers: dict[str, str]) -> FetchResult:
+    def _request_via_urllib(
+        self,
+        url: str,
+        headers: dict[str, str],
+        *,
+        timeout_seconds: float = 60.0,
+    ) -> FetchResult:
         context = ssl.create_default_context()
         context.minimum_version = ssl.TLSVersion.TLSv1_2
         req = Request(url=url, headers=headers, method="GET")
         try:
-            with urlopen(req, timeout=60.0, context=context) as response:
+            with urlopen(req, timeout=timeout_seconds, context=context) as response:
                 payload = bytes(response.read())
                 content_type = response.headers.get("content-type", "")
         except HTTPError as exc:
-            raise DownloadError(f"HTTP {exc.code} via urllib for {url}") from exc
+            raise DownloadError(
+                f"HTTP {exc.code} via urllib for {url}",
+                status_code=exc.code,
+                stage="request",
+            ) from exc
         except URLError as exc:
-            raise DownloadError(f"URL error via urllib for {url}: {exc}") from exc
+            raise DownloadError(f"URL error via urllib for {url}: {exc}", stage="request") from exc
 
         if not payload:
-            raise DownloadError(f"Empty payload via urllib: {url}")
+            raise DownloadError(f"Empty payload via urllib: {url}", stage="request")
         return FetchResult(
             payload=payload,
             status_code=200,
@@ -248,13 +275,15 @@ class DownloadManager:
         client: httpx.Client,
         url: str,
         request_headers: dict[str, str],
+        *,
+        timeout_seconds: float = 60.0,
     ) -> FetchResult:
         try:
-            return self._request(client, url)
+            return self._request(client, url, timeout_seconds=timeout_seconds)
         except Exception as exc:  # noqa: BLE001
             if not self._is_nse_url(url) or not self._is_tls_error(exc):
                 raise
-        return self._request_via_urllib(url=url, headers=request_headers)
+        return self._request_via_urllib(url=url, headers=request_headers, timeout_seconds=timeout_seconds)
 
     def _render_url(self, source_key: str, as_of: date) -> str:
         era = resolve_era(source_key, as_of)
@@ -314,18 +343,18 @@ class DownloadManager:
     @staticmethod
     def _validate_csv_header(header_line: str, expected_columns: tuple[str, ...], *, source_key: str) -> None:
         if "html" in header_line.lower():
-            raise DownloadError(f"{source_key} returned HTML instead of market data")
+            raise DownloadError(f"{source_key} returned HTML instead of market data", stage="validation")
         reader = csv.reader([header_line])
         row = next(reader, [])
         normalized = {column.strip().lower() for column in row}
         if not any(column.lower() in normalized for column in expected_columns):
-            raise DownloadError(f"{source_key} payload is missing expected columns")
+            raise DownloadError(f"{source_key} payload is missing expected columns", stage="validation")
 
     @staticmethod
     def _select_bse_equity_zip_member(zf: zipfile.ZipFile, as_of: date | None) -> str:
         names = [name for name in zf.namelist() if name.lower().endswith(".csv")]
         if not names:
-            raise DownloadError("BSE equity bhavcopy zip contains no CSV files")
+            raise DownloadError("BSE equity bhavcopy zip contains no CSV files", stage="validation")
 
         marker_scores: list[tuple[int, str]] = []
         expected_markers = set()
@@ -350,7 +379,7 @@ class DownloadManager:
         marker_scores.sort(key=lambda item: (-item[0], item[1].lower()))
         best_score, best_name = marker_scores[0]
         if best_score <= 0:
-            raise DownloadError("BSE equity bhavcopy zip contains no expected CSV member")
+            raise DownloadError("BSE equity bhavcopy zip contains no expected CSV member", stage="validation")
         return best_name
 
     @staticmethod
@@ -360,10 +389,10 @@ class DownloadManager:
                 chosen_name = DownloadManager._select_bse_equity_zip_member(zf, as_of)
                 lines = zf.read(chosen_name).decode("utf-8", errors="ignore").splitlines()
         except zipfile.BadZipFile as exc:
-            raise DownloadError("BSE equity bhavcopy zip payload is invalid") from exc
+            raise DownloadError("BSE equity bhavcopy zip payload is invalid", stage="validation") from exc
 
         if not lines:
-            raise DownloadError("BSE equity bhavcopy zip CSV is empty")
+            raise DownloadError("BSE equity bhavcopy zip CSV is empty", stage="validation")
         DownloadManager._validate_csv_header(
             lines[0],
             ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb"),
@@ -378,7 +407,7 @@ class DownloadManager:
                 return
             text = payload.decode("utf-8", errors="ignore").strip()
             if not text:
-                raise DownloadError(f"Empty payload for {source_key}")
+                raise DownloadError(f"Empty payload for {source_key}", stage="validation")
             header = text.splitlines()[0] if text.splitlines() else ""
             DownloadManager._validate_csv_header(
                 header,
@@ -389,7 +418,7 @@ class DownloadManager:
 
         text = payload.decode("utf-8", errors="ignore").strip()
         if not text:
-            raise DownloadError(f"Empty payload for {source_key}")
+            raise DownloadError(f"Empty payload for {source_key}", stage="validation")
 
         json_sources = {
             "NSE_CORPORATE_ACTIONS",
@@ -401,12 +430,12 @@ class DownloadManager:
             try:
                 parsed = json.loads(text)
             except Exception as exc:  # noqa: BLE001
-                raise DownloadError(f"Non-JSON payload for {source_key}") from exc
+                raise DownloadError(f"Non-JSON payload for {source_key}", stage="validation") from exc
 
             if source_key == "NSE_CORPORATE_ACTIONS" and isinstance(parsed, dict) and str(
                 parsed.get("message", "")
             ).lower().startswith("missing index"):
-                raise DownloadError("NSE corporate actions payload indicates missing index")
+                raise DownloadError("NSE corporate actions payload indicates missing index", stage="validation")
 
     def _fetch_candidate(
         self,
@@ -415,12 +444,18 @@ class DownloadManager:
         *,
         url: str,
         profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
     ) -> FetchResult:
         request_headers = self._profile_for_url(profile, url)
         with httpx.Client(headers=request_headers, follow_redirects=True) as client:
             if self._is_nse_url(url):
                 self._bootstrap_nse_session(client)
-            result = self._request_with_workarounds(client, url, request_headers)
+            result = self._request_with_workarounds(
+                client,
+                url,
+                request_headers,
+                timeout_seconds=request_timeout_seconds,
+            )
         self._validate_payload(source_key, result.payload, as_of=as_of)
         return result
 
@@ -431,6 +466,7 @@ class DownloadManager:
         *,
         limit: int | None = None,
         profiles: list[dict[str, str]] | None = None,
+        request_timeout_seconds: float = 15.0,
     ) -> list[SourceProbeResult]:
         candidate_urls = self._candidate_urls(source_key, as_of)
         if limit is not None:
@@ -452,7 +488,13 @@ class DownloadManager:
             for profile in probe_profiles:
                 attempts += 1
                 try:
-                    result = self._fetch_candidate(source_key, as_of, url=url, profile=profile)
+                    result = self._fetch_candidate(
+                        source_key,
+                        as_of,
+                        url=url,
+                        profile=profile,
+                        request_timeout_seconds=request_timeout_seconds,
+                    )
                     last_status_code = result.status_code
                     last_content_type = result.content_type
                     last_bytes = len(result.payload)
@@ -464,10 +506,11 @@ class DownloadManager:
                 except Exception as exc:  # noqa: BLE001
                     last_error = str(exc)
                     last_preview = ""
-                    if "HTTP " in last_error:
-                        with suppress(Exception):
-                            last_status_code = int(last_error.split("HTTP ", 1)[1].split()[0])
-                    if "payload" in last_error.lower() or "html" in last_error.lower() or "csv" in last_error.lower():
+                    if isinstance(exc, DownloadError):
+                        last_status_code = exc.status_code
+                        if exc.stage == "validation":
+                            last_validation_error = last_error
+                    elif "payload" in last_error.lower() or "html" in last_error.lower() or "csv" in last_error.lower():
                         last_validation_error = last_error
                     continue
 
@@ -505,7 +548,12 @@ class DownloadManager:
                 for idx, url in enumerate(candidate_urls):
                     attempts += 1
                     try:
-                        result = self._fetch_candidate(source_key, as_of, url=url, profile=profile)
+                        result = self._fetch_candidate(
+                            source_key,
+                            as_of,
+                            url=url,
+                            profile=profile,
+                        )
                         payload = result.payload
                         used_url = url
                         if idx > 0:
