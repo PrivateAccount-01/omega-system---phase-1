@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-04-13T16:08:01.124618+00:00",
-  "ready": false,
+  "generated_at": "2026-04-14T05:35:20.795032+00:00",
+  "ready": true,
   "checks": [
     {
       "name": "blocking_reviews",
-      "passed": false,
-      "details": "open_blocking_reviews=213"
+      "passed": true,
+      "details": "open_blocking_reviews=0"
     },
     {
       "name": "overdue_blocking_reviews",
@@ -20,32 +20,32 @@
     {
       "name": "source_probe_fresh",
       "passed": true,
-      "details": "artifact_age_hours=16.13"
+      "details": "artifact_age_hours=0.00"
     },
     {
       "name": "tolerance_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.07"
+      "details": "artifact_age_hours=29.59"
     },
     {
       "name": "matching_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=16.13"
+      "details": "artifact_age_hours=29.59"
     },
     {
       "name": "calendar_loaded",
       "passed": true,
-      "details": "calendar_config_state=loaded"
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report_full.json, calendar_config_state=loaded"
     },
     {
       "name": "probe_primary_healthy",
       "passed": true,
-      "details": "bse_primary_validated=True"
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report_full.json, bse_primary_validated=True"
     },
     {
       "name": "probe_fallback_health",
       "passed": true,
-      "details": "healthy_fallback_count=1, failed_fallback_count=0"
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report_full.json, healthy_fallback_count=2, failed_fallback_count=0"
     },
     {
       "name": "tolerance_status",
@@ -59,7 +59,7 @@
     },
     {
       "name": "official_adjustment_corpus",
-      "passed": false,
+      "passed": true,
       "details": "official_case_count=10, official_transformational_case_count=2"
     },
     {

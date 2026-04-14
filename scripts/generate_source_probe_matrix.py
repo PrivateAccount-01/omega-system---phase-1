@@ -2,10 +2,11 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-PYTHON = REPO_ROOT / ".venv/Scripts/python.exe"
+PYTHON = Path(sys.executable)
 
 
 def _run(mode: str) -> dict[str, object]:
@@ -28,8 +29,14 @@ def _run(mode: str) -> dict[str, object]:
 
 
 def main() -> None:
+    canonical = REPO_ROOT / "artifacts/verification/source_probe_report.json"
+    original_canonical = canonical.read_text(encoding="utf-8") if canonical.exists() else None
     deterministic = _run("deterministic")
     full = _run("full")
+    if original_canonical is not None:
+        canonical.write_text(original_canonical, encoding="utf-8")
+    else:
+        canonical.write_text(json.dumps(deterministic, indent=2), encoding="utf-8")
     comparison = {
         "generated_at": deterministic["generated_at"],
         "deterministic_primary_validated": deterministic["summary"]["bse_primary_validated"],

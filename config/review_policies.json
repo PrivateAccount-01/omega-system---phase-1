@@ -90,6 +90,16 @@
       "assignment_team": "corporate-actions-triage",
       "escalation_severity": "WARN",
       "blocks_release_when_overdue": false
+    },
+    "DISCONTINUITY_REVIEW": {
+      "blocks_publication": false,
+      "scope": "RECORD",
+      "requires_reprocess": false,
+      "triage_instructions": "Review the discontinuity context, confirm whether a corporate action or data issue explains the move, and escalate only when the move indicates a broader publication risk.",
+      "sla_business_days": 2,
+      "assignment_team": "market-data-ops",
+      "escalation_severity": "WARN",
+      "blocks_release_when_overdue": false
     }
   }
 }

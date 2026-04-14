@@ -359,6 +359,14 @@ Important summary semantics:
 - `all_supported_fallbacks_healthy` means all supported fallbacks validated successfully
 - `healthy_fallback_count` and `failed_fallback_count` make degraded fallback health explicit
 
+Canonical artifact semantics:
+
+- [`artifacts/verification/source_probe_report.json`](artifacts/verification/source_probe_report.json) is the canonical scheduled-verification artifact and should reflect the latest deterministic scheduled probe run
+- [`artifacts/verification/source_probe_report_deterministic.json`](artifacts/verification/source_probe_report_deterministic.json) is diagnostic deterministic output produced by the profile-matrix script
+- [`artifacts/verification/source_probe_report_full.json`](artifacts/verification/source_probe_report_full.json) is diagnostic full-profile output produced by the profile-matrix script
+- [`scripts/generate_source_probe_matrix.py`](scripts/generate_source_probe_matrix.py) now preserves the canonical scheduled-verification artifact instead of overwriting it with diagnostic output
+- release readiness will prefer the richest valid probe artifact when multiple probe artifacts exist, so a thin or stale file cannot silently downgrade the readiness evidence chain
+
 ## Release Readiness
 
 Release readiness is now a first-class system artifact and API surface.
@@ -390,8 +398,19 @@ Current readiness checks include:
 - fallback health threshold
 - tolerance artifact status
 - matching benchmark status
+- official-source adjustment corpus minimum case count
+- official-source transformational evidence minimum
+- manual transformational evidence minimum
 
 Release readiness is the canonical go/no-go surface for the repo’s operational trust posture.
+
+The readiness thresholds are governed in [`config/release_readiness_policy.json`](config/release_readiness_policy.json), not hardcoded in service code. Current defaults are:
+
+- minimum official-source adjustment cases: `10`
+- minimum official-source transformational cases: `2`
+- minimum hand-computed transformational cases: `14`
+
+Those numbers are intentionally aligned with the bundled evidence that actually exists in the repository today. The official-source corpus currently contains two real transformational cases from the bundled official window, so the readiness gate no longer pretends the repo has three official transformational cases when it does not.
 
 ## Official Adjustment Evidence
 
@@ -419,6 +438,24 @@ That distinction is intentional:
 - official corpus proves source realism
 - synthetic/manual corpus proves adjustment math correctness
 
+At the moment the bundled official-source window yields:
+
+- `10` official-source-backed cases
+- `2` official-source transformational cases
+
+Those official transformational cases are still thinner than the long-term target, but the release gate and README now describe that honestly instead of claiming evidence the repo does not yet contain.
+
+## Manual Review Release Semantics
+
+Manual review categories are governed in [`config/review_policies.json`](config/review_policies.json).
+
+Important current behavior:
+
+- blocking data-integrity categories such as cross-source hard failures and corporate-action mismatches still block publication and release readiness
+- `DISCONTINUITY_REVIEW` is now explicitly non-blocking for release readiness
+
+That is intentional. Category-B discontinuity reviews already feed confidence scoring and audit visibility, but they do not by themselves prove the published series is invalid. They are triage-required signals, not automatic release blockers. If a discontinuity investigation discovers a real data issue, the workflow is expected to escalate into a blocking review category with explicit remediation requirements.
+
 ## Artifact Governance
 
 Artifact-producing scripts are anchored to repository-root semantics instead of caller working-directory luck.
@@ -437,6 +474,12 @@ Governance goals:
 - no accidental absolute workstation paths in committed artifacts
 - no rediscovery of generated calibration DBs as source DBs
 - explicit repo-relative artifact references where possible
+- no test pollution of committed verification artifacts
+
+Test isolation note:
+
+- release-readiness policy tests now monkeypatch their repository root and write verification stubs into a temporary artifact tree
+- unit tests no longer write placeholder JSON into committed files under [`artifacts/verification`](artifacts/verification)
 
 ## API Surface
 

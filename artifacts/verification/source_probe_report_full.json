@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-13T15:55:07.616668+00:00",
+  "generated_at": "2026-04-14T05:35:06.345377+00:00",
   "workflow": "diagnostic",
-  "probe_date": "2026-04-10",
+  "probe_date": "2026-04-13",
   "calendar_mode": "configured_trading_calendar",
   "calendar_config_state": "loaded",
   "calendar_config_path": "config/trading_holidays_india.json",
@@ -19,7 +19,7 @@
         2026
       ],
       "latest_covered_year": 2026,
-      "days_until_expiry": 262,
+      "days_until_expiry": 261,
       "config_error": null
     },
     {
@@ -31,7 +31,7 @@
         2026
       ],
       "latest_covered_year": 2026,
-      "days_until_expiry": 262,
+      "days_until_expiry": 261,
       "config_error": null
     }
   ],
@@ -43,7 +43,7 @@
   "nse_corporate_actions": [
     {
       "source_key": "NSE_CORPORATE_ACTIONS",
-      "as_of": "2026-04-13",
+      "as_of": "2026-04-14",
       "url": "https://www.nseindia.com/api/corporates-corporateActions?index=equities",
       "role": "primary",
       "validated": true,
@@ -54,7 +54,7 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.44867140002315864,
+      "elapsed_seconds": 0.4901367000420578,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -64,18 +64,18 @@
   "bse_equity_candidates": [
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-10",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260410_F_0000.CSV",
+      "as_of": "2026-04-13",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260413_F_0000.CSV",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/octet-stream",
-      "bytes_downloaded": 836825,
+      "bytes_downloaded": 854046,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.13685449998592958,
+      "elapsed_seconds": 0.10894229996483773,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -83,8 +83,8 @@
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-10",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_100426_T0.CSV",
+      "as_of": "2026-04-13",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_130426_T0.CSV",
       "role": "fallback",
       "validated": true,
       "status_code": 200,
@@ -94,7 +94,7 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.13195390003966168,
+      "elapsed_seconds": 0.06380579998949543,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -102,25 +102,35 @@
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-10",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_10042026_T0.ZIP",
+      "as_of": "2026-04-13",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_13042026_T0.ZIP",
       "role": "fallback",
       "validated": true,
       "status_code": 200,
       "content_type": "application/x-zip-compressed",
       "bytes_downloaded": 360,
       "attempts": 1,
-      "request_attempts": 5,
+      "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 15.3043570999871,
+      "elapsed_seconds": 0.07794889999786392,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000m\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_10042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000!o\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_13042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
     }
   ],
   "bse_recent_history": [
+    {
+      "date": "2026-04-13",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "all_supported_fallbacks_probed": true,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
+      "all_supported_fallbacks_healthy": true,
+      "overall_validated": true
+    },
     {
       "date": "2026-04-10",
       "primary_validated": true,
@@ -133,16 +143,6 @@
     },
     {
       "date": "2026-04-09",
-      "primary_validated": true,
-      "primary_status_code": 200,
-      "all_supported_fallbacks_probed": true,
-      "healthy_fallback_count": 2,
-      "failed_fallback_count": 0,
-      "all_supported_fallbacks_healthy": true,
-      "overall_validated": true
-    },
-    {
-      "date": "2026-04-08",
       "primary_validated": true,
       "primary_status_code": 200,
       "all_supported_fallbacks_probed": true,

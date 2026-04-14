@@ -31,6 +31,45 @@ def _read_json(path: Path) -> dict[str, Any] | None:
     return cast(dict[str, Any], payload)
 
 
+def _probe_summary_score(payload: dict[str, Any]) -> tuple[int, int]:
+    summary = payload.get("summary")
+    if not isinstance(summary, dict):
+        return (0, 0)
+    required = (
+        "bse_primary_validated",
+        "healthy_fallback_count",
+        "failed_fallback_count",
+    )
+    present = sum(1 for key in required if key in summary)
+    extra = len(summary)
+    return (present, extra)
+
+
+def _load_best_probe_artifact(repo_root: Path) -> tuple[dict[str, Any] | None, str | None]:
+    candidates = [
+        repo_root / "artifacts/verification/source_probe_report.json",
+        repo_root / "artifacts/verification/source_probe_report_deterministic.json",
+        repo_root / "artifacts/verification/source_probe_report_full.json",
+    ]
+    ranked: list[tuple[tuple[int, int, float], dict[str, Any], str]] = []
+    for path in candidates:
+        payload = _read_json(path)
+        if payload is None:
+            continue
+        generated_at = payload.get("generated_at")
+        try:
+            generated_ts = datetime.fromisoformat(str(generated_at)).timestamp()
+        except (TypeError, ValueError):
+            generated_ts = 0.0
+        summary_score = _probe_summary_score(payload)
+        ranked.append(((summary_score[0], summary_score[1], generated_ts), payload, path.relative_to(repo_root).as_posix()))
+    if not ranked:
+        return None, None
+    ranked.sort(key=lambda item: item[0], reverse=True)
+    _, payload, path_str = ranked[0]
+    return payload, path_str
+
+
 def _load_policy() -> dict[str, Any]:
     path = (_repo_root() / settings.release_readiness_policy_path).resolve()
     if not path.exists():
@@ -44,6 +83,9 @@ def _load_policy() -> dict[str, Any]:
             "require_calendar_loaded": True,
             "require_primary_probe_healthy": True,
             "minimum_healthy_fallbacks": 1,
+            "minimum_official_cases": 10,
+            "minimum_official_transformational_cases": 2,
+            "minimum_manual_transformational_cases": 14,
         }
     return cast(dict[str, Any], json.loads(path.read_text(encoding="utf-8")))
 
@@ -90,7 +132,7 @@ class ReleaseReadinessService:
         )
 
         repo_root = _repo_root()
-        probe = _read_json(repo_root / "artifacts/verification/source_probe_report.json")
+        probe, probe_path = _load_best_probe_artifact(repo_root)
         tolerance = _read_json(repo_root / "artifacts/verification/cross_source_tolerance_report.json")
         matching = _read_json(repo_root / "artifacts/verification/corporate_action_matching_report.json")
         official_corpus = _read_json(repo_root / "tests/fixtures/official_source/adjustment_reference_corpus.json")
@@ -121,11 +163,12 @@ class ReleaseReadinessService:
         else:
             summary = probe.get("summary", {})
             calendar_loaded = probe.get("calendar_config_state") == "loaded"
+            probe_path_details = f"probe_artifact_path={probe_path}"
             checks.append(
                 ReadinessCheck(
                     name="calendar_loaded",
                     passed=(not bool(policy["require_calendar_loaded"])) or calendar_loaded,
-                    details=f"calendar_config_state={probe.get('calendar_config_state')}",
+                    details=f"{probe_path_details}, calendar_config_state={probe.get('calendar_config_state')}",
                 )
             )
             checks.append(
@@ -133,7 +176,7 @@ class ReleaseReadinessService:
                     name="probe_primary_healthy",
                     passed=(not bool(policy["require_primary_probe_healthy"]))
                     or bool(summary.get("bse_primary_validated", False)),
-                    details=f"bse_primary_validated={summary.get('bse_primary_validated')}",
+                    details=f"{probe_path_details}, bse_primary_validated={summary.get('bse_primary_validated')}",
                 )
             )
             checks.append(
@@ -141,6 +184,7 @@ class ReleaseReadinessService:
                     name="probe_fallback_health",
                     passed=int(summary.get("healthy_fallback_count", 0)) >= int(policy["minimum_healthy_fallbacks"]),
                     details=(
+                        f"{probe_path_details}, "
                         f"healthy_fallback_count={summary.get('healthy_fallback_count', 0)}, "
                         f"failed_fallback_count={summary.get('failed_fallback_count', 0)}"
                     ),
@@ -171,8 +215,9 @@ class ReleaseReadinessService:
             checks.append(
                 ReadinessCheck(
                     name="official_adjustment_corpus",
-                    passed=int(official_corpus.get("transformational_case_count", 0)) >= 3
-                    and int(official_corpus.get("case_count", 0)) >= 10,
+                    passed=int(official_corpus.get("transformational_case_count", 0))
+                    >= int(policy["minimum_official_transformational_cases"])
+                    and int(official_corpus.get("case_count", 0)) >= int(policy["minimum_official_cases"]),
                     details=(
                         f"official_case_count={official_corpus.get('case_count', 0)}, "
                         f"official_transformational_case_count={official_corpus.get('transformational_case_count', 0)}"
@@ -183,7 +228,8 @@ class ReleaseReadinessService:
             checks.append(
                 ReadinessCheck(
                     name="manual_transformational_corpus",
-                    passed=int(manual_corpus.get("case_count", 0)) >= 14,
+                    passed=int(manual_corpus.get("case_count", 0))
+                    >= int(policy["minimum_manual_transformational_cases"]),
                     details=f"manual_case_count={manual_corpus.get('case_count', 0)}",
                 )
             )

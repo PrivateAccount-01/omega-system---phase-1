@@ -14,6 +14,7 @@ from omegadata.config import settings
 from omegadata.db.models import InstrumentMaster, ManualReviewQueue, PriceRecord, ReprocessJob
 from omegadata.db.session import get_session, init_db
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType
+from omegadata.track_b import release_readiness
 from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
 from omegadata.track_b.cross_source_validation import CrossSourceValidator
 from omegadata.track_b.matching_policy import invalidate_matching_policy_cache
@@ -113,12 +114,16 @@ def test_corporate_action_matcher_uses_policy_thresholds(tmp_path: Path, monkeyp
     assert matcher.relatedness_score(left, right) < 0
 
 
-def test_release_readiness_blocks_on_overdue_review(tmp_path: Path) -> None:
+def test_release_readiness_blocks_on_overdue_review(tmp_path: Path, monkeypatch) -> None:
     db_path = tmp_path / "readiness.db"
     settings.db_url = f"sqlite:///{db_path}"
     init_db()
-    artifacts_dir = Path("artifacts/verification")
+    repo_root = tmp_path / "repo"
+    artifacts_dir = repo_root / "artifacts/verification"
     artifacts_dir.mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/official_source").mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/synthetic_manual").mkdir(parents=True, exist_ok=True)
+    monkeypatch.setattr(release_readiness, "_repo_root", lambda: repo_root)
     artifacts_dir.joinpath("source_probe_report.json").write_text(
         json.dumps(
             {
@@ -129,6 +134,22 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path) -> None:
                     "healthy_fallback_count": 1,
                     "failed_fallback_count": 0,
                 },
+            }
+        ),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("source_probe_report_full.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "calendar_config_state": "loaded",
+                "summary": {
+                    "bse_primary_validated": True,
+                    "healthy_fallback_count": 2,
+                    "failed_fallback_count": 0,
+                    "all_supported_fallbacks_healthy": True,
+                },
+                "bse_recent_history": [],
             }
         ),
         encoding="utf-8",
@@ -145,6 +166,14 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path) -> None:
                 "metrics": {"benchmark_passed": True, "precision": 1.0, "recall": 1.0},
             }
         ),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/official_source/adjustment_reference_corpus.json").write_text(
+        json.dumps({"case_count": 10, "transformational_case_count": 2}),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json").write_text(
+        json.dumps({"case_count": 14}),
         encoding="utf-8",
     )
 
