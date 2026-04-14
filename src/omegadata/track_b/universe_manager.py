@@ -35,6 +35,7 @@ class UniverseValidationResult:
     actual_isins: list[str]
     matched: bool
     source: str
+    errors: list[str]
 
 
 class PointInTimeUniverseManager:
@@ -188,6 +189,19 @@ class PointInTimeUniverseManager:
         return dict(json.loads(path.read_text(encoding="utf-8")))
 
     @staticmethod
+    def _snapshot_symbols(snapshot: dict[str, object]) -> list[str]:
+        constituents = snapshot.get("constituents", [])
+        if not isinstance(constituents, list):
+            return []
+        return sorted(
+            {
+                str(item.get("symbol", "")).strip().upper()
+                for item in constituents
+                if isinstance(item, dict) and str(item.get("symbol", "")).strip()
+            }
+        )
+
+    @staticmethod
     def _scan_symbol_isin_map(raw_root: Path) -> dict[str, str]:
         symbol_to_isin: dict[str, str] = {}
         bhavcopy_root = raw_root / "nse_equity_bhavcopy"
@@ -293,6 +307,18 @@ class PointInTimeUniverseManager:
         raw_path = Path(raw_root)
         symbol_to_isin = self._seed_symbol_map(pack, raw_path)
         security_master = self._seed_security_map(pack)
+        validation = self.validate_seed_pack(
+            session,
+            pack,
+            raw_root=raw_path,
+            preview_only=True,
+        )
+        validation_errors = [error for result in validation for error in result.errors]
+        if validation_errors:
+            raise ValueError(
+                "Universe seed pack validation failed before applying destructive changes: "
+                + "; ".join(validation_errors)
+            )
 
         index_names = sorted(
             {
@@ -393,6 +419,7 @@ class PointInTimeUniverseManager:
         seed_pack: dict[str, object] | str | Path,
         *,
         raw_root: str | Path = "data/raw",
+        preview_only: bool = False,
     ) -> list[UniverseValidationResult]:
         pack = self._coerce_seed_pack(seed_pack)
         raw_path = Path(raw_root)
@@ -413,17 +440,36 @@ class PointInTimeUniverseManager:
             as_of_date = date.fromisoformat(effective_date_raw)
             constituents = snapshot.get("constituents", [])
             if not isinstance(constituents, list):
+                results.append(
+                    UniverseValidationResult(
+                        index_name=index_name,
+                        as_of_date=as_of_date,
+                        expected_isins=[],
+                        actual_isins=[],
+                        matched=False,
+                        source=str(snapshot.get("source", "SEED_PACK")),
+                        errors=[f"{index_name} {as_of_date.isoformat()} has malformed constituents payload"],
+                    )
+                )
                 continue
 
-            expected_isins = sorted(
-                {
-                    symbol_to_isin[str(item.get("symbol", "")).strip().upper()]
-                    for item in constituents
-                    if isinstance(item, dict) and str(item.get("symbol", "")).strip()
-                }
-            )
-            actual_isins = sorted(
-                entry.isin for entry in self.get_universe(session, index_name=index_name, as_of_date=as_of_date)
+            errors: list[str] = []
+            expected_isins: list[str] = []
+            for symbol in self._snapshot_symbols(snapshot):
+                mapped_isin = symbol_to_isin.get(symbol)
+                if mapped_isin is None:
+                    errors.append(
+                        f"{index_name} {as_of_date.isoformat()} missing symbol→ISIN mapping for {symbol}"
+                    )
+                    continue
+                expected_isins.append(mapped_isin)
+            expected_isins = sorted(set(expected_isins))
+            actual_isins = (
+                []
+                if preview_only
+                else sorted(
+                    entry.isin for entry in self.get_universe(session, index_name=index_name, as_of_date=as_of_date)
+                )
             )
             results.append(
                 UniverseValidationResult(
@@ -431,8 +477,9 @@ class PointInTimeUniverseManager:
                     as_of_date=as_of_date,
                     expected_isins=expected_isins,
                     actual_isins=actual_isins,
-                    matched=(expected_isins == actual_isins),
+                    matched=(not errors and (preview_only or expected_isins == actual_isins)),
                     source=str(snapshot.get("source", "SEED_PACK")),
+                    errors=errors,
                 )
             )
 

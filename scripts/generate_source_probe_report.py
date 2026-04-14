@@ -28,6 +28,23 @@ def _is_calendar_current(statuses: list[dict[str, object]], exchange: str) -> bo
     return False
 
 
+def _summarize_candidate_history(
+    *,
+    candidate_date: date,
+    results: list[dict[str, object]],
+) -> dict[str, object]:
+    primary = next((item for item in results if item["role"] == "primary"), None)
+    fallbacks = [item for item in results if item["role"] == "fallback"]
+    return {
+        "date": candidate_date.isoformat(),
+        "primary_validated": bool(primary and primary["validated"]),
+        "primary_status_code": None if primary is None else primary["status_code"],
+        "healthy_fallback_count": sum(1 for item in fallbacks if item["validated"]),
+        "failed_fallback_count": sum(1 for item in fallbacks if not item["validated"]),
+        "overall_validated": any(item["validated"] for item in results),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--profile-mode", choices=["deterministic", "full"], default=settings.source_probe_profile_mode)
@@ -44,16 +61,26 @@ def main() -> None:
         anchor_date=date.today(),
         warning_window_days=calendar.maintenance.renewal_window_days,
     )
-    calendar_loaded_and_current = calendar.config_state == "loaded" and _is_calendar_current(
+    bse_calendar_current = calendar.config_state == "loaded" and _is_calendar_current(
         calendar_maintenance,
         "BSE",
     )
-    business_days = calendar.recent_trading_days(
+    nse_calendar_current = calendar.config_state == "loaded" and _is_calendar_current(
+        calendar_maintenance,
+        "NSE",
+    )
+    bse_business_days = calendar.recent_trading_days(
         "BSE",
         anchor_date=date.today(),
         limit=settings.probe_history_days,
     )
-    probe_date = business_days[0]
+    nse_business_days = calendar.recent_trading_days(
+        "NSE",
+        anchor_date=date.today(),
+        limit=settings.probe_history_days,
+    )
+    probe_date = bse_business_days[0]
+    nse_probe_date = nse_business_days[0]
     bse_source = SOURCE_REGISTRY["BSE_EQUITY_BHAVCOPY"]
     expected_primary_url = manager._render_url("BSE_EQUITY_BHAVCOPY", probe_date)
     expected_fallback_urls = {
@@ -78,6 +105,16 @@ def main() -> None:
             request_timeout_seconds=settings.source_probe_timeout_seconds,
         )
     ]
+    nse_equity_probes = [
+        _probe_dict(probe)
+        for probe in manager.probe_source_candidates(
+            "NSE_EQUITY_BHAVCOPY",
+            nse_probe_date,
+            limit=1,
+            profiles=probe_profiles,
+            request_timeout_seconds=settings.source_probe_timeout_seconds,
+        )
+    ]
     bse_page_probes = [
         _probe_dict(probe)
         for probe in manager.probe_source_candidates(
@@ -90,7 +127,7 @@ def main() -> None:
     ]
 
     bse_recent_history = []
-    for candidate_date in business_days:
+    for candidate_date in bse_business_days:
         candidate_results = [
             _probe_dict(probe)
             for probe in manager.probe_source_candidates(
@@ -101,19 +138,26 @@ def main() -> None:
                 request_timeout_seconds=settings.source_probe_timeout_seconds,
             )
         ]
-        primary = next((item for item in candidate_results if item["role"] == "primary"), None)
+        entry = _summarize_candidate_history(candidate_date=candidate_date, results=candidate_results)
         fallbacks = [item for item in candidate_results if item["role"] == "fallback"]
-        bse_recent_history.append(
-            {
-                "date": candidate_date.isoformat(),
-                "primary_validated": bool(primary and primary["validated"]),
-                "primary_status_code": None if primary is None else primary["status_code"],
-                "all_supported_fallbacks_probed": len(fallbacks) == len(expected_fallback_urls),
-                "healthy_fallback_count": sum(1 for item in fallbacks if item["validated"]),
-                "failed_fallback_count": sum(1 for item in fallbacks if not item["validated"]),
-                "all_supported_fallbacks_healthy": bool(fallbacks) and all(item["validated"] for item in fallbacks),
-                "overall_validated": any(item["validated"] for item in candidate_results),
-            }
+        entry["all_supported_fallbacks_probed"] = len(fallbacks) == len(expected_fallback_urls)
+        entry["all_supported_fallbacks_healthy"] = bool(fallbacks) and all(item["validated"] for item in fallbacks)
+        bse_recent_history.append(entry)
+
+    nse_equity_recent_history = []
+    for candidate_date in nse_business_days:
+        candidate_results = [
+            _probe_dict(probe)
+            for probe in manager.probe_source_candidates(
+                "NSE_EQUITY_BHAVCOPY",
+                candidate_date,
+                limit=1,
+                profiles=probe_profiles,
+                request_timeout_seconds=settings.source_probe_timeout_seconds,
+            )
+        ]
+        nse_equity_recent_history.append(
+            _summarize_candidate_history(candidate_date=candidate_date, results=candidate_results)
         )
 
     out_dir = REPO_ROOT / "artifacts/verification"
@@ -130,9 +174,10 @@ def main() -> None:
         "generated_at": datetime.now(UTC).isoformat(),
         "workflow": args.workflow,
         "probe_date": probe_date.isoformat(),
+        "nse_equity_probe_date": nse_probe_date.isoformat(),
         "calendar_mode": (
             "configured_trading_calendar"
-            if calendar_loaded_and_current
+            if bse_calendar_current and nse_calendar_current
             else "weekday_fallback_due_to_missing_invalid_or_expired_calendar_coverage"
         ),
         "calendar_config_state": calendar.config_state,
@@ -148,11 +193,16 @@ def main() -> None:
         "bse_probed_fallback_count": len(probed_fallback_urls),
         "bse_probe_scope": "full_supported_registry_candidates",
         "nse_corporate_actions": nse_probes,
+        "nse_equity_bhavcopy": nse_equity_probes,
+        "nse_equity_recent_history": nse_equity_recent_history,
         "bse_equity_candidates": bse_page_probes,
         "bse_recent_history": bse_recent_history,
         "summary": {
             "all_supported_candidates_probed": expected_supported_candidate_urls.issubset(probed_urls),
             "all_supported_fallbacks_probed": expected_fallback_urls.issubset(probed_fallback_urls),
+            "nse_equity_primary_validated": any(
+                item["role"] == "primary" and item["validated"] for item in nse_equity_probes
+            ),
             "bse_primary_validated": any(item["role"] == "primary" and item["validated"] for item in bse_page_probes),
             "bse_any_fallback_validated": healthy_fallback_count > 0,
             "all_supported_fallbacks_healthy": healthy_fallback_count == len(expected_fallback_urls),
@@ -165,8 +215,18 @@ def main() -> None:
     out_path = out_dir / "source_probe_report.json"
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"Wrote {out_path}")
-    if args.workflow == "scheduled_verification" and not calendar_loaded_and_current:
-        raise SystemExit("Scheduled verification requires loaded and current trading-calendar configuration.")
+    if args.workflow == "scheduled_verification":
+        summary = report["summary"]
+        if not (bse_calendar_current and nse_calendar_current):
+            raise SystemExit("Scheduled verification requires loaded and current trading-calendar configuration.")
+        if not bool(summary["nse_equity_primary_validated"]):
+            raise SystemExit("Scheduled verification failed: NSE equity bhavcopy primary probe is unhealthy.")
+        if not bool(summary["bse_primary_validated"]):
+            raise SystemExit("Scheduled verification failed: BSE equity bhavcopy primary probe is unhealthy.")
+        if not bool(summary["all_supported_fallbacks_healthy"]):
+            raise SystemExit(
+                "Scheduled verification failed: not all supported BSE fallbacks are healthy."
+            )
 
 
 if __name__ == "__main__":

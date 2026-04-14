@@ -1,7 +1,8 @@
 {
-  "generated_at": "2026-04-14T06:51:18.323696+00:00",
+  "generated_at": "2026-04-14T12:03:07.801080+00:00",
   "workflow": "scheduled_verification",
   "probe_date": "2026-04-13",
+  "nse_equity_probe_date": "2026-04-13",
   "calendar_mode": "configured_trading_calendar",
   "calendar_config_state": "loaded",
   "calendar_config_path": "config/trading_holidays_india.json",
@@ -54,11 +55,58 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.5715095000341535,
+      "elapsed_seconds": 0.9571138999890536,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
       "body_preview": "[{\"symbol\":\"AUROPHARMA\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"1\",\"subject\":\"Buy Back\",\"exDate\":\"17-Apr-2026\",\"recDate\":\"17-Apr-2026\",\"bcStartDate\":\"-\",\"bcEndDate\":\"-\",\"ndStartDate\":\"-\",\"comp\":\"Aurobindo Pharma Limited\",\"isi"
+    }
+  ],
+  "nse_equity_bhavcopy": [
+    {
+      "source_key": "NSE_EQUITY_BHAVCOPY",
+      "as_of": "2026-04-13",
+      "url": "https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20260413_F_0000.csv.zip",
+      "role": "primary",
+      "validated": true,
+      "status_code": 200,
+      "content_type": "application/zip",
+      "bytes_downloaded": 187396,
+      "attempts": 1,
+      "request_attempts": 1,
+      "transport": "httpx",
+      "header_profile": "chrome_desktop",
+      "elapsed_seconds": 0.39168569998582825,
+      "failure_stage": null,
+      "error": null,
+      "validation_error": null,
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\\d=\u0017\u001c\u0002\u0000\b\u0000)\u0000\u001c\u0000BhavCopy_NSE_CM_0_0_0_20260413_F_0000.csvUT\t\u0000\u0003aiaiux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\\v\u001c\u01f1\u077f\u07aa'aY=\u0000(\u0007\u0001\u4cec#\u0001ql_nDd\r\r\u0000ZteF6\u001bb\u0011\u001fO'|<o~\u007fi\u007fhSo\u007f{<//"
+    }
+  ],
+  "nse_equity_recent_history": [
+    {
+      "date": "2026-04-13",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "healthy_fallback_count": 0,
+      "failed_fallback_count": 0,
+      "overall_validated": true
+    },
+    {
+      "date": "2026-04-10",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "healthy_fallback_count": 0,
+      "failed_fallback_count": 0,
+      "overall_validated": true
+    },
+    {
+      "date": "2026-04-09",
+      "primary_validated": true,
+      "primary_status_code": 200,
+      "healthy_fallback_count": 0,
+      "failed_fallback_count": 0,
+      "overall_validated": true
     }
   ],
   "bse_equity_candidates": [
@@ -75,7 +123,7 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.4275015000021085,
+      "elapsed_seconds": 0.11693860002560541,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -94,7 +142,7 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.36593680002260953,
+      "elapsed_seconds": 0.09830220002913848,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -113,7 +161,7 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.2896851999685168,
+      "elapsed_seconds": 0.13671270001213998,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -125,36 +173,37 @@
       "date": "2026-04-13",
       "primary_validated": true,
       "primary_status_code": 200,
-      "all_supported_fallbacks_probed": true,
       "healthy_fallback_count": 2,
       "failed_fallback_count": 0,
-      "all_supported_fallbacks_healthy": true,
-      "overall_validated": true
+      "overall_validated": true,
+      "all_supported_fallbacks_probed": true,
+      "all_supported_fallbacks_healthy": true
     },
     {
       "date": "2026-04-10",
       "primary_validated": true,
       "primary_status_code": 200,
-      "all_supported_fallbacks_probed": true,
       "healthy_fallback_count": 2,
       "failed_fallback_count": 0,
-      "all_supported_fallbacks_healthy": true,
-      "overall_validated": true
+      "overall_validated": true,
+      "all_supported_fallbacks_probed": true,
+      "all_supported_fallbacks_healthy": true
     },
     {
       "date": "2026-04-09",
       "primary_validated": true,
       "primary_status_code": 200,
-      "all_supported_fallbacks_probed": true,
       "healthy_fallback_count": 2,
       "failed_fallback_count": 0,
-      "all_supported_fallbacks_healthy": true,
-      "overall_validated": true
+      "overall_validated": true,
+      "all_supported_fallbacks_probed": true,
+      "all_supported_fallbacks_healthy": true
     }
   ],
   "summary": {
     "all_supported_candidates_probed": true,
     "all_supported_fallbacks_probed": true,
+    "nse_equity_primary_validated": true,
     "bse_primary_validated": true,
     "bse_any_fallback_validated": true,
     "all_supported_fallbacks_healthy": true,

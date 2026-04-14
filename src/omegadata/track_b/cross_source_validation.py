@@ -15,6 +15,7 @@ from omegadata.db.models import (
 from omegadata.domain import Exchange, ValidationResult
 from omegadata.track_a.monitoring import CORPORATE_ACTION_UNMATCHED_COUNTER
 from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
+from omegadata.track_b.corporate_actions import CorporateActionService
 from omegadata.track_b.manual_review import ManualReviewService
 from omegadata.track_b.tolerance_policy import load_tolerance_policy
 
@@ -85,6 +86,7 @@ class CrossSourceValidator:
 
         outcomes: list[ValidationOutcome] = []
         signed_diffs: list[tuple[date, Decimal]] = []
+        failed_by_date: dict[date, list[tuple[str, Decimal, Decimal, Decimal]]] = {}
         for nse in nse_rows:
             bse = bse_by_date.get(nse.trade_date)
             if bse is None:
@@ -104,7 +106,39 @@ class CrossSourceValidator:
                     tolerance=self._price_tolerance(nse=nse, bse=bse, field=field),
                 )
                 outcomes.append(outcome)
+                if outcome.result == ValidationResult.FAIL:
+                    failed_by_date.setdefault(nse.trade_date, []).append(
+                        (
+                            field,
+                            Decimal(str(getattr(nse, field))),
+                            Decimal(str(getattr(bse, field))),
+                            outcome.difference_pct,
+                        )
+                    )
             signed_diffs.append((nse.trade_date, Decimal(str(nse.close_price)) - Decimal(str(bse.close_price))))
+
+        for data_date, failures in failed_by_date.items():
+            max_diff = max(item[3] for item in failures)
+            self.review_service.queue_review(
+                session,
+                category="CROSS_SOURCE_VALIDATION_FAIL",
+                isin=isin,
+                event_date=data_date,
+                reason="cross-source price validation exceeded 2x tolerance",
+                payload={
+                    "failed_fields": [item[0] for item in failures],
+                    "max_diff_pct": str(max_diff),
+                    "field_differences": [
+                        {
+                            "field": field,
+                            "left": str(left),
+                            "right": str(right),
+                            "diff_pct": str(diff_pct),
+                        }
+                        for field, left, right, diff_pct in failures
+                    ],
+                },
+            )
 
         self._detect_systematic_disagreement(session, isin, signed_diffs)
         return outcomes
@@ -393,14 +427,14 @@ class CrossSourceValidator:
                 result = ValidationResult.FAIL
 
             outcomes.append(
-                    self._persist_categorical_result(
-                        session=session,
-                        source_1="NSE",
-                        source_2="BSE",
-                        isin=staged_row.isin,
-                        data_date=nse_date,
-                        field="action_date_alignment_days",
-                        left=nse_date.isoformat(),
+                self._persist_categorical_result(
+                    session=session,
+                    source_1="NSE",
+                    source_2="BSE",
+                    isin=staged_row.isin,
+                    data_date=nse_date,
+                    field="action_date_alignment_days",
+                    left=nse_date.isoformat(),
                     right=pair_date.isoformat(),
                     result=result,
                     diff_pct=Decimal(str(gap_days)),
@@ -409,14 +443,55 @@ class CrossSourceValidator:
                 )
             )
 
-            for key, left_val in staged_row.payload.items():
+            compared_keys = set(staged_row.payload) | set(staging_pair.payload)
+            required_keys = set(CorporateActionService._validate_required_fields(staged_row.action_type, staged_row.payload))
+            required_keys |= set(CorporateActionService._validate_required_fields(staging_pair.action_type, staging_pair.payload))
+            for key in sorted(compared_keys | required_keys):
                 right_val = staging_pair.payload.get(key)
+                left_val = staged_row.payload.get(key)
+                if left_val in (None, "") and right_val in (None, ""):
+                    continue
+                if left_val in (None, "") or right_val in (None, ""):
+                    outcomes.append(
+                        self._persist_categorical_result(
+                            session=session,
+                            source_1="NSE",
+                            source_2="BSE",
+                            isin=staged_row.isin,
+                            data_date=staged_row.ex_date or nse_date,
+                            field=key,
+                            left="missing" if left_val in (None, "") else str(left_val),
+                            right="missing" if right_val in (None, "") else str(right_val),
+                            result=ValidationResult.FAIL,
+                            diff_pct=Decimal("1"),
+                            tolerance=Decimal("0"),
+                            notes="Corporate action parameter missing on one side of a matched pair",
+                        )
+                    )
+                    continue
                 if right_val in (None, "") or left_val in (None, ""):
                     continue
                 try:
                     left = Decimal(str(left_val))
                     right = Decimal(str(right_val))
                 except Exception:
+                    if str(left_val) != str(right_val):
+                        outcomes.append(
+                            self._persist_categorical_result(
+                                session=session,
+                                source_1="NSE",
+                                source_2="BSE",
+                                isin=staged_row.isin,
+                                data_date=staged_row.ex_date or nse_date,
+                                field=key,
+                                left=str(left_val),
+                                right=str(right_val),
+                                result=ValidationResult.FAIL,
+                                diff_pct=Decimal("1"),
+                                tolerance=Decimal("0"),
+                                notes="Corporate action categorical parameter mismatch across matched pair",
+                            )
+                        )
                     continue
                 data_date = staged_row.ex_date or nse_date
                 outcomes.append(
@@ -498,15 +573,6 @@ class CrossSourceValidator:
 
         session.add(audit)
 
-        if result == ValidationResult.FAIL:
-            self.review_service.queue_review(
-                session,
-                category="CROSS_SOURCE_VALIDATION_FAIL",
-                isin=isin,
-                event_date=data_date,
-                reason=f"{field} exceeds 2x tolerance",
-                payload={"left": str(left), "right": str(right), "diff_pct": str(diff_pct), "field": field},
-            )
         return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
     def _persist_categorical_result(

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import UTC, datetime
 from importlib import import_module
 from pathlib import Path
 
@@ -22,7 +22,7 @@ def run_quarterly_validation() -> None:
         )
 
     report = run_validation_pack_file(pack_path)
-    report_path = out_dir / f"quarterly_validation_{datetime.utcnow():%Y%m%d}.json"
+    report_path = out_dir / f"quarterly_validation_{datetime.now(UTC):%Y%m%d}.json"
     report_path.write_text(
         json.dumps(report, indent=2),
         encoding="utf-8",

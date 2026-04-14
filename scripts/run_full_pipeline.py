@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import date
+from datetime import UTC, date, datetime
 from pathlib import Path
+from urllib.parse import urlparse
 
 from omegadata.config import settings
 from omegadata.db.session import init_db
@@ -16,8 +17,19 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run OmegaData full pipeline across recent days.")
     parser.add_argument("--days", type=int, default=10, help="Number of recent days to attempt.")
+    parser.add_argument(
+        "--dates",
+        nargs="*",
+        default=None,
+        help="Explicit ISO dates to run instead of deriving a recent window.",
+    )
     parser.add_argument("--market-isin", default=settings.market_proxy_isin or None, help="Explicit market benchmark ISIN")
     parser.add_argument("--db-url", default=None, help="Optional database URL override for the run")
+    parser.add_argument(
+        "--reset-sqlite-db",
+        action="store_true",
+        help="Delete the target SQLite file before initializing the run.",
+    )
     parser.add_argument(
         "--calendar-mode",
         choices=["trading", "calendar"],
@@ -29,12 +41,22 @@ def main() -> None:
     if args.db_url:
         settings.db_url = str(args.db_url)
 
+    if args.reset_sqlite_db:
+        parsed = urlparse(settings.db_url)
+        if parsed.scheme != "sqlite":
+            raise ValueError("--reset-sqlite-db is only supported for sqlite db URLs")
+        db_path = Path(parsed.path.lstrip("/"))
+        if db_path.exists():
+            db_path.unlink()
+
     init_db()
     pipe = OmegaDataSequentialPipeline()
     runs: list[dict[str, object]] = []
     errors: list[dict[str, str]] = []
 
-    if args.calendar_mode == "trading":
+    if args.dates:
+        as_of_dates = [date.fromisoformat(value) for value in args.dates]
+    elif args.calendar_mode == "trading":
         as_of_dates = list(
             reversed(
                 TradingCalendar.from_config().recent_trading_days(
@@ -66,9 +88,13 @@ def main() -> None:
             errors.append({"as_of": as_of.isoformat(), "error": str(exc)})
 
     output = {
+        "generated_at": datetime.now(UTC).isoformat(),
+        "db_url": settings.db_url,
+        "market_isin": args.market_isin,
         "runs": runs,
         "summary": {
             "calendar_mode": args.calendar_mode,
+            "explicit_dates": [item.isoformat() for item in as_of_dates],
             "successful_days": len(runs),
             "failed_days": len(errors),
             "total_confirmed_actions": sum(int(r["confirmed_actions"]) for r in runs),

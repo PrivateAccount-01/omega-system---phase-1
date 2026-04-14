@@ -22,6 +22,10 @@ from omegadata.track_a.trading_calendar import TradingCalendar
 from omegadata.track_b.review_policy import ReviewPolicy, load_review_policies
 
 
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[3]
+
+
 @dataclass(frozen=True)
 class ReviewResolution:
     review_id: int
@@ -63,14 +67,17 @@ class ManualReviewService:
         calendar = TradingCalendar.from_config()
         exchange = self._calendar_exchange(payload)
         created_date = created_at.date()
+        strict_calendar = policy.blocks_publication and policy.blocks_release_when_overdue
         due_date = calendar.add_business_days(
             exchange,
             anchor_date=created_date,
             business_days=policy.sla_business_days,
-            strict=False,
+            strict=strict_calendar,
         )
         payload["sla_business_days"] = policy.sla_business_days
         payload["sla_exchange"] = exchange
+        payload["sla_calendar_mode"] = "strict" if strict_calendar else "fallback_allowed"
+        payload["sla_calendar_config_state"] = calendar.config_state
         payload.setdefault("sla_due_date", due_date.isoformat())
         if resolved:
             payload["sla_status"] = "RESOLVED"
@@ -84,7 +91,7 @@ class ManualReviewService:
             exchange,
             start_date=due_date_value,
             end_date=today,
-            strict=False,
+            strict=strict_calendar,
         )
         if today > due_date_value and overdue_business_days > 0:
             payload["sla_status"] = "OVERDUE"
@@ -398,7 +405,7 @@ class ManualReviewService:
         for raw_path in evidence_paths:
             candidate = Path(raw_path)
             if not candidate.is_absolute():
-                candidate = Path.cwd() / candidate
+                candidate = _repo_root() / candidate
             normalized_paths.append(candidate.resolve().as_posix())
 
         payload["reprocess_status"] = "COMPLETED"

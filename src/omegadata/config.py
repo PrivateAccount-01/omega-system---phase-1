@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     source_probe_timeout_seconds: float = 8.0
     reprocess_root: str = "./artifacts/reprocess_queue"
     probe_history_days: int = 3
+    verification_db_url: str = "sqlite:///artifacts/verification/pipeline_run_work.sqlite"
 
 
 settings = Settings()

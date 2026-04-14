@@ -2,10 +2,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import sqlite3
 from collections import defaultdict
-from datetime import UTC, date, datetime
+from datetime import UTC, datetime
 from decimal import Decimal
 from pathlib import Path
 
@@ -15,7 +14,6 @@ from omegadata.config import settings
 from omegadata.db.models import PriceRecord
 from omegadata.db.session import get_session, init_db
 from omegadata.domain import Exchange
-from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 from omegadata.track_b.cross_source_validation import CrossSourceValidator
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -83,76 +81,6 @@ def _count_matches_sqlite(path: Path) -> dict[str, int]:
         return {"nse": nse, "bse": bse, "matched": matched}
     finally:
         con.close()
-
-
-def _discover_sqlite_candidates() -> list[Path]:
-    excluded_parts = {".venv", ".git", ".mypy_cache", "__pycache__", "node_modules"}
-    excluded_paths = {
-        (REPO_ROOT / "artifacts/verification/tolerance_calibration.sqlite").resolve(),
-    }
-    candidates: list[Path] = []
-    for path in REPO_ROOT.rglob("*.db"):
-        if any(part in excluded_parts for part in path.parts):
-            continue
-        if path.resolve() in excluded_paths:
-            continue
-        candidates.append(path)
-    for path in REPO_ROOT.rglob("*.sqlite"):
-        if any(part in excluded_parts for part in path.parts):
-            continue
-        if path.resolve() in excluded_paths:
-            continue
-        candidates.append(path)
-    for path in REPO_ROOT.rglob("*.sqlite3"):
-        if any(part in excluded_parts for part in path.parts):
-            continue
-        if path.resolve() in excluded_paths:
-            continue
-        candidates.append(path)
-    return sorted(set(candidates))
-
-
-def _best_sqlite_candidate() -> tuple[Path | None, dict[str, int] | None]:
-    ranked: list[tuple[int, int, Path, dict[str, int]]] = []
-    for path in _discover_sqlite_candidates():
-        try:
-            counts = _count_matches_sqlite(path)
-        except Exception:
-            continue
-        ranked.append((counts["matched"], counts["nse"], path, counts))
-    if not ranked:
-        return None, None
-    ranked.sort(key=lambda item: (item[0], item[1], str(item[2])), reverse=True)
-    _, _, best_path, counts = ranked[0]
-    return best_path, counts
-
-
-def _local_bse_artifacts() -> list[tuple[date, Path]]:
-    latest_files = sorted((REPO_ROOT / "data/raw/bse_equity_bhavcopy").rglob("*.latest.json"))
-    artifacts: list[tuple[date, Path]] = []
-    for latest in latest_files:
-        payload = json.loads(latest.read_text(encoding="utf-8"))
-        as_of = date.fromisoformat(str(payload["as_of"]))
-        artifact_path = Path(str(payload["artifact_path"]).replace("\\", "/"))
-        if artifact_path.exists():
-            artifacts.append((as_of, artifact_path))
-    return artifacts
-
-
-def _build_calibration_sqlite(base_db: Path) -> tuple[Path, int]:
-    out_dir = REPO_ROOT / "artifacts/verification"
-    out_dir.mkdir(parents=True, exist_ok=True)
-    target = out_dir / "tolerance_calibration.sqlite"
-    shutil.copyfile(base_db, target)
-
-    settings.db_url = f"sqlite:///{target.as_posix()}"
-    init_db()
-    pipeline = OmegaDataSequentialPipeline()
-    loaded = 0
-    with get_session() as session:
-        for trade_date, artifact_path in _local_bse_artifacts():
-            loaded += pipeline._load_bse_bhavcopy_prices(session, artifact_path, trade_date)
-    return target, loaded
 
 
 def _normalize_path(value: Path) -> str:
@@ -240,7 +168,7 @@ def _build_summary() -> list[dict[str, object]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--db-url", dest="db_url", default=None)
+    parser.add_argument("--db-url", dest="db_url", required=True)
     args = parser.parse_args()
 
     out_dir = REPO_ROOT / "artifacts/verification"
@@ -248,51 +176,38 @@ def main() -> None:
     out_path = out_dir / "cross_source_tolerance_report.json"
     policy_path = (REPO_ROOT / settings.cross_source_tolerance_policy_path).resolve()
 
-    selected_db_url = settings.db_url
-    artifact_db_url = settings.db_url
-    source_db_description = "configured_db_url"
-    enrichment: dict[str, object] | None = None
+    selected_db_url = str(args.db_url)
+    artifact_db_url = str(args.db_url)
+    source_db_description = str(args.db_url)
 
     try:
-        if args.db_url:
-            selected_db_url = str(args.db_url)
-            artifact_db_url = str(args.db_url)
-        else:
-            best_path, best_counts = _best_sqlite_candidate()
-            if best_path is not None:
-                if best_counts is not None and best_counts["matched"] > 0:
-                    selected_db_url = f"sqlite:///{best_path.resolve().as_posix()}"
-                    artifact_db_url = _sqlite_display_url(best_path)
-                    source_db_description = _normalize_path(best_path)
-                elif best_counts is not None and best_counts["nse"] > 0:
-                    calibration_db, loaded = _build_calibration_sqlite(best_path)
-                    calibration_counts = _count_matches_sqlite(calibration_db)
-                    selected_db_url = f"sqlite:///{calibration_db.resolve().as_posix()}"
-                    artifact_db_url = _sqlite_display_url(calibration_db)
-                    source_db_description = _normalize_path(calibration_db)
-                    enrichment = {
-                        "base_db": _normalize_path(best_path),
-                        "bse_rows_loaded": loaded,
-                        "matched_after_enrichment": calibration_counts["matched"],
-                    }
-
         settings.db_url = selected_db_url
         init_db()
         summary = _build_summary()
+        warning_limit = Decimal("0.08")
+        fail_limit = Decimal("0.02")
+        benchmark_passed = all(
+            Decimal(str(row["warning_breach_rate"])) <= warning_limit
+            and Decimal(str(row["fail_breach_rate"])) <= fail_limit
+            for row in summary
+        )
 
         artifact: dict[str, object] = {
             "generated_at": datetime.now(UTC).isoformat(),
             "db_url": artifact_db_url,
             "source_db": source_db_description,
-            "status": "ok" if summary else "no_observations",
+            "status": (
+                "no_observations"
+                if not summary
+                else ("ok" if benchmark_passed else "warning")
+            ),
             "acceptance_criteria": {
-                "warning_breach_rate_limit": 0.08,
-                "fail_breach_rate_limit": 0.02,
+                "warning_breach_rate_limit": float(warning_limit),
+                "fail_breach_rate_limit": float(fail_limit),
             },
+            "benchmark_passed": benchmark_passed,
             "groups": summary,
         }
-        if enrichment is not None:
-            artifact["enrichment"] = enrichment
         if summary:
             policy_payload = {
                 "version": datetime.now(UTC).date().isoformat(),

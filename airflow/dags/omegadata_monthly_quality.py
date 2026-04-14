@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from importlib import import_module
 
 DAG = import_module("airflow").DAG
@@ -12,7 +12,7 @@ PythonOperator = import_module("airflow.operators.python").PythonOperator
 def run_monthly() -> None:
     from omegadata.pipelines.monthly_quality_pipeline import run_monthly_quality_report
 
-    result = run_monthly_quality_report(datetime.utcnow().date())
+    result = run_monthly_quality_report(datetime.now(UTC).date())
     print(f"Monthly quality report generated: {result.path}")
 
 

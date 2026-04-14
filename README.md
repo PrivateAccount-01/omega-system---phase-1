@@ -440,7 +440,7 @@ That distinction is intentional:
 
 At the moment the bundled official-source window yields:
 
-- `13` official-source-backed cases
+- `14` official-source-backed cases
 - `5` official-source transformational cases
 
 Current official transformational labels:
@@ -457,10 +457,12 @@ That is still not the final long-term target for official-source realism. The mo
 
 The repository should be read from the generated artifacts, not from optimistic prose. In the current branch state:
 
-- [`artifacts/verification/release_readiness.json`](artifacts/verification/release_readiness.json) is currently `ready: true`
-- [`tests/fixtures/official_source/adjustment_reference_corpus.json`](tests/fixtures/official_source/adjustment_reference_corpus.json) currently reports `case_count: 13` and `transformational_case_count: 5`
+- [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json) is a fresh clean-db pipeline replay over `2026-04-08`, `2026-04-09`, and `2026-04-10`
+- [`artifacts/verification/release_readiness.json`](artifacts/verification/release_readiness.json) is currently `ready: false`
+- [`tests/fixtures/official_source/adjustment_reference_corpus.json`](tests/fixtures/official_source/adjustment_reference_corpus.json) currently reports `case_count: 14` and `transformational_case_count: 5`
 - [`artifacts/verification/source_probe_report.json`](artifacts/verification/source_probe_report.json) is the canonical scheduled-verification probe artifact
 - [`artifacts/verification/source_probe_report_full.json`](artifacts/verification/source_probe_report_full.json) is the richer diagnostic full-profile probe artifact that release readiness may prefer when it contains better evidence
+- [`artifacts/verification/nse_historical_backfill_report.json`](artifacts/verification/nse_historical_backfill_report.json) records a real historical NSE bhavcopy backfill sample instead of claiming historical robustness without evidence
 - [`artifacts/verification/discontinuity_spike_report.json`](artifacts/verification/discontinuity_spike_report.json) now explains the historical discontinuity jump instead of leaving it as an unexplained count spike
 - [`artifacts/verification/extreme_test_report.json`](artifacts/verification/extreme_test_report.json) is refreshed from current test and verification outputs rather than carrying obsolete warning text
 
@@ -468,6 +470,15 @@ Important nuance:
 
 - a fresh full-pipeline replay artifact is treated as heavier operational evidence than a quick unit/probe rebuild
 - if [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json) is absent, the downstream verification reports now say so explicitly instead of silently reusing stale numbers
+- the current release gate is intentionally honest: it is red because the current verification DB still contains open cross-source blocking reviews and the latest tolerance benchmark is outside policy, not because of stale artifacts
+
+Current replay numbers from [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json):
+
+- `3/3` successful replay days
+- `0` failed replay days
+- `14,707` adjusted rows recomputed
+- `53,488` validation outcomes recorded
+- `3` total persisted discontinuity events after the clean replay window
 
 ## Discontinuity Re-Audit
 
@@ -505,6 +516,7 @@ Important current behavior:
 
 - blocking data-integrity categories such as cross-source hard failures and corporate-action mismatches still block publication and release readiness
 - `DISCONTINUITY_REVIEW` is now explicitly non-blocking for release readiness
+- `CROSS_SOURCE_VALIDATION_FAIL` reviews are now aggregated per `isin/date` with full field-level evidence in the payload instead of opening one blocking review row per failed OHLC field
 
 That is intentional. Category-B discontinuity reviews already feed confidence scoring and audit visibility, but they do not by themselves prove the published series is invalid. They are triage-required signals, not automatic release blockers. If a discontinuity investigation discovers a real data issue, the workflow is expected to escalate into a blocking review category with explicit remediation requirements.
 
@@ -622,18 +634,53 @@ python scripts/generate_source_probe_matrix.py
 ### Calibration and Benchmark Artifacts
 
 ```bash
-python scripts/build_cross_source_tolerance_report.py
+python scripts/build_cross_source_tolerance_report.py --db-url sqlite:///artifacts/verification/pipeline_run_work.sqlite
 python scripts/build_corporate_action_matching_report.py
 python scripts/check_trading_calendar_coverage.py
-python scripts/build_release_readiness_report.py
+python scripts/build_release_readiness_report.py --db-url sqlite:///artifacts/verification/pipeline_run_work.sqlite
 python scripts/generate_implementation_audit.py
 ```
 
 ### Full Pipeline Smoke
 
 ```bash
-python scripts/run_full_pipeline.py --days 5 --calendar-mode trading --db-url sqlite:///artifacts/verification/pipeline_execution.sqlite --market-isin <ISIN>
+python scripts/run_full_pipeline.py --dates 2026-04-08 2026-04-09 2026-04-10 --db-url sqlite:///artifacts/verification/pipeline_run_work.sqlite --reset-sqlite-db --market-isin <ISIN>
 ```
+
+### Historical NSE Backfill Sample
+
+```bash
+python scripts/backfill_nse_equity_history.py --start-date 2024-01-02 --end-date 2024-01-08
+```
+
+The historical backfill script writes [`artifacts/verification/nse_historical_backfill_report.json`](artifacts/verification/nse_historical_backfill_report.json). The current committed sample covers a real 2024 historical window and shows:
+
+- `5/5` successful trading-day downloads
+- `0` failures
+- `browser_fallback_required: false` for that measured archive-host sample
+
+That report is intentionally evidence-based. It does not claim legacy-host robustness that has not been re-proven.
+
+## Scheduled Verification Workflows
+
+Airflow DAGs now cover scheduled verification, not just ad hoc scripts:
+
+- [`airflow/dags/omegadata_verification.py`](airflow/dags/omegadata_verification.py)
+- [`airflow/dags/omegadata_track_b_reaudit.py`](airflow/dags/omegadata_track_b_reaudit.py)
+- [`airflow/dags/omegadata_corporate_actions_windows.py`](airflow/dags/omegadata_corporate_actions_windows.py)
+
+The daily verification DAG runs:
+
+- deterministic source probe with scheduled-verification failure semantics
+- replay pipeline integration on the configured verification DB
+- release-readiness build from the same verification DB
+
+The weekly verification DAG runs:
+
+- discontinuity re-audit
+- tolerance recalibration report generation
+
+The verification DB URL used by those jobs is governed through [`src/omegadata/config.py`](src/omegadata/config.py) as `verification_db_url`, not hardcoded separately inside each DAG.
 
 ## Current Operational Truth
 
@@ -656,7 +703,7 @@ OmegaData is materially stronger than a prototype, but it is still pre-productio
 
 Important honest boundaries:
 
-- release readiness can still be red if the current DB contains unresolved blocking reviews
+- release readiness is currently red because the replay DB still has unresolved blocking price-validation reviews and the latest tolerance benchmark is outside the configured acceptance band
 - official-source-backed transformational adjustment evidence is materially better than before but still limited by the bundled raw-source window
 - reprocess orchestration is now evidence-backed and stateful, but it is still internal orchestration rather than a full external workflow engine
 - live-source stability must continue to be monitored over time, not inferred forever from one green artifact run

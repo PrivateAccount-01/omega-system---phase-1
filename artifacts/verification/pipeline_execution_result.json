@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-04-14T11:52:25.337728+00:00",
+  "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+  "market_isin": "INF204KB14I2",
+  "runs": [
+    {
+      "as_of": "2026-04-08",
+      "ingest_paths": [
+        "data\\raw\\nse_equity_bhavcopy\\year=2026\\month=04\\20260408__034873408c01.zip",
+        "data\\raw\\bse_equity_bhavcopy\\year=2026\\month=04\\20260408__e68d5b697cd3.bin",
+        "data\\raw\\nse_corporate_actions\\year=2026\\month=04\\20260408__1db09e5a682b.bin",
+        "data\\raw\\bse_corporate_actions\\year=2026\\month=04\\20260408__d0ca0d6ded30.bin",
+        "data\\raw\\nse_fii_dii\\year=2026\\month=04\\20260408__eea1384a7f94.bin",
+        "data\\raw\\india_vix\\year=2026\\month=04\\20260408__cb8ef906a7d7.bin"
+      ],
+      "confirmed_actions": 0,
+      "adjusted_rows": 2451,
+      "new_discontinuities": 0,
+      "total_discontinuity_events": 0,
+      "validations": 8944
+    },
+    {
+      "as_of": "2026-04-09",
+      "ingest_paths": [
+        "data\\raw\\nse_equity_bhavcopy\\year=2026\\month=04\\20260409__9082c3e4cbbd.zip",
+        "data\\raw\\bse_equity_bhavcopy\\year=2026\\month=04\\20260409__6f8a99e32b70.bin",
+        "data\\raw\\nse_corporate_actions\\year=2026\\month=04\\20260409__1db09e5a682b.bin",
+        "data\\raw\\bse_corporate_actions\\year=2026\\month=04\\20260409__d0ca0d6ded30.bin",
+        "data\\raw\\nse_fii_dii\\year=2026\\month=04\\20260409__eea1384a7f94.bin",
+        "data\\raw\\india_vix\\year=2026\\month=04\\20260409__cb8ef906a7d7.bin"
+      ],
+      "confirmed_actions": 0,
+      "adjusted_rows": 4902,
+      "new_discontinuities": 1,
+      "total_discontinuity_events": 1,
+      "validations": 17832
+    },
+    {
+      "as_of": "2026-04-10",
+      "ingest_paths": [
+        "data\\raw\\nse_equity_bhavcopy\\year=2026\\month=04\\20260410__85e27e7c9338.zip",
+        "data\\raw\\bse_equity_bhavcopy\\year=2026\\month=04\\20260410__23c3c6fe027e.bin",
+        "data\\raw\\nse_corporate_actions\\year=2026\\month=04\\20260410__1db09e5a682b.bin",
+        "data\\raw\\bse_corporate_actions\\year=2026\\month=04\\20260410__d0ca0d6ded30.bin",
+        "data\\raw\\nse_fii_dii\\year=2026\\month=04\\20260410__eea1384a7f94.bin",
+        "data\\raw\\india_vix\\year=2026\\month=04\\20260410__cb8ef906a7d7.bin"
+      ],
+      "confirmed_actions": 0,
+      "adjusted_rows": 7354,
+      "new_discontinuities": 2,
+      "total_discontinuity_events": 3,
+      "validations": 26712
+    }
+  ],
+  "summary": {
+    "calendar_mode": "explicit_dates",
+    "explicit_dates": [
+      "2026-04-08",
+      "2026-04-09",
+      "2026-04-10"
+    ],
+    "successful_days": 3,
+    "failed_days": 0,
+    "total_confirmed_actions": 0,
+    "total_adjusted_rows": 14707,
+    "total_new_discontinuities": 3,
+    "latest_total_discontinuity_events": 3,
+    "total_validations": 53488
+  },
+  "errors": []
+}

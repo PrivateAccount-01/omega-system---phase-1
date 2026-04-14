@@ -258,6 +258,50 @@ def test_validator_treats_bse_only_as_valid_bse_candidate(db_session) -> None:
 
     outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
     assert any(outcome.result == ValidationResult.PASS for outcome in outcomes)
+
+
+def test_validator_flags_missing_parameter_on_one_side_of_matched_pair(db_session) -> None:
+    db_session.add_all(
+        [
+            CorporateActionStaging(
+                source=Exchange.NSE,
+                isin="INE009A01021",
+                action_type=CorporateActionType.RIGHTS_RENOUNCE,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 2),
+                record_date=date(2026, 4, 2),
+                payload={
+                    "isin": "INE009A01021",
+                    "issue_price": "100",
+                    "rights_ratio_numerator": "1",
+                    "rights_ratio_denominator": "4",
+                },
+                matched=False,
+            ),
+            CorporateActionStaging(
+                source=Exchange.BSE,
+                isin="INE009A01021",
+                action_type=CorporateActionType.RIGHTS_RENOUNCE,
+                announcement_date=date(2026, 4, 1),
+                ex_date=date(2026, 4, 2),
+                record_date=date(2026, 4, 2),
+                payload={
+                    "isin": "INE009A01021",
+                    "issue_price": "100",
+                    "rights_ratio_numerator": "1",
+                    "rights_ratio_denominator": "4",
+                    "subscription_close_date": "2026-04-20",
+                },
+                matched=False,
+            ),
+        ]
+    )
+
+    outcomes = CrossSourceValidator().validate_corporate_actions(db_session, "INE009A01021")
+    assert any(
+        outcome.field == "subscription_close_date" and outcome.result == ValidationResult.FAIL
+        for outcome in outcomes
+    )
     coverage_warn = db_session.scalar(
         select(ValidationAuditLog).where(ValidationAuditLog.field_compared == "corporate_action_coverage")
     )

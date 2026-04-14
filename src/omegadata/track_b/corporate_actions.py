@@ -23,7 +23,18 @@ REQUIRED_FIELDS: dict[CorporateActionType, tuple[str, ...]] = {
         "board_meeting_date",
     ),
     CorporateActionType.SPLIT: ("isin", "ex_date", "old_face_value", "new_face_value"),
+    CorporateActionType.SPLIT_REVERSE: ("isin", "ex_date", "old_face_value", "new_face_value"),
     CorporateActionType.RIGHTS: (
+        "isin",
+        "ex_date",
+        "record_date",
+        "rights_ratio_numerator",
+        "rights_ratio_denominator",
+        "issue_price",
+        "issue_type",
+        "subscription_close_date",
+    ),
+    CorporateActionType.RIGHTS_RENOUNCE: (
         "isin",
         "ex_date",
         "record_date",
@@ -40,7 +51,6 @@ REQUIRED_FIELDS: dict[CorporateActionType, tuple[str, ...]] = {
         "swap_ratio",
         "cash_component",
     ),
-    CorporateActionType.DEMERGER_PARENT: ("isin", "ex_date", "spinoff_isin", "demerger_ratio"),
 }
 
 
@@ -57,9 +67,37 @@ class CorporateActionService:
 
     @staticmethod
     def _validate_required_fields(action_type: CorporateActionType, payload: Mapping[str, object]) -> list[str]:
+        if action_type == CorporateActionType.DEMERGER_PARENT:
+            missing = [
+                field
+                for field in ("isin", "ex_date", "spinoff_isin", "parent_value_pre_demerger")
+                if payload.get(field) in (None, "")
+            ]
+            if payload.get("spinoff_value") in (None, "") and payload.get("actual_spinoff_listing_price") in (None, ""):
+                missing.append("spinoff_value|actual_spinoff_listing_price")
+            return missing
         required = REQUIRED_FIELDS.get(action_type, ("isin", "ex_date"))
         missing = [field for field in required if payload.get(field) in (None, "")]
         return missing
+
+    @staticmethod
+    def _merged_payload(
+        *,
+        preferred: Mapping[str, object],
+        secondary: Mapping[str, object],
+    ) -> dict[str, str | int | float | None]:
+        merged: dict[str, str | int | float | None] = {}
+        for key, value in preferred.items():
+            merged[str(key)] = (
+                value if value is None or isinstance(value, (str, int, float)) else str(value)
+            )
+        for key, value in secondary.items():
+            current = merged.get(str(key))
+            if current in (None, "") and value not in (None, ""):
+                merged[str(key)] = (
+                    value if value is None or isinstance(value, (str, int, float)) else str(value)
+                )
+        return merged
 
     @staticmethod
     def _review_exists(
@@ -124,6 +162,27 @@ class CorporateActionService:
             event_date=row.ex_date,
             reason="Missing required fields in corporate action payload",
             payload={"missing_fields": ",".join(errors), "source": row.source.value},
+        )
+        return False
+
+    def _required_fields_complete_payload(
+        self,
+        session: Session,
+        *,
+        row: CorporateActionStaging,
+        payload: Mapping[str, object],
+        source_label: str,
+    ) -> bool:
+        errors = self._validate_required_fields(row.action_type, payload)
+        if not errors:
+            return True
+        self._queue_review(
+            session,
+            category="CORPORATE_ACTION_REQUIRED_FIELDS",
+            isin=row.isin,
+            event_date=row.ex_date,
+            reason="Missing required fields in corporate action payload",
+            payload={"missing_fields": ",".join(errors), "source": source_label},
         )
         return False
 
@@ -241,7 +300,13 @@ class CorporateActionService:
                     payload={"differences": ",".join(mismatch)},
                 )
 
-        if not self._required_fields_complete(session, row=nse):
+        merged_parameters = self._merged_payload(preferred=nse.payload, secondary=bse.payload)
+        if not self._required_fields_complete_payload(
+            session,
+            row=nse,
+            payload=merged_parameters,
+            source_label="NSE+BSE_MERGED",
+        ):
             return None
 
         confirmed = ConfirmedCorporateAction(
@@ -251,7 +316,7 @@ class CorporateActionService:
             announcement_date=nse.announcement_date or bse.announcement_date,
             ex_date=nse.ex_date or bse.ex_date,
             record_date=nse.record_date or bse.record_date,
-            parameters=nse.payload,
+            parameters=merged_parameters,
             source_preference=Exchange.NSE,
             superseded=False,
         )
@@ -296,10 +361,15 @@ class CorporateActionService:
     @staticmethod
     def _payload_mismatch(nse_payload: Mapping[str, object], bse_payload: Mapping[str, object]) -> list[str]:
         mismatches: list[str] = []
-        shared_keys = set(nse_payload) & set(bse_payload)
-        for key in sorted(shared_keys):
+        candidate_keys = set(nse_payload) | set(bse_payload)
+        for key in sorted(candidate_keys):
             left = nse_payload.get(key)
             right = bse_payload.get(key)
+            if left in (None, "") and right in (None, ""):
+                continue
+            if left in (None, "") or right in (None, ""):
+                mismatches.append(f"{key}:missing_on_{'nse' if left in (None, '') else 'bse'}")
+                continue
             if left == right:
                 continue
 

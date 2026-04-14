@@ -11,32 +11,18 @@ from omegadata.track_b.release_readiness import ReleaseReadinessService
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
-def _discover_sqlite_candidates() -> list[Path]:
-    excluded_parts = {".venv", ".git", ".mypy_cache", "__pycache__", "node_modules"}
-    candidates: list[Path] = []
-    for pattern in ("*.db", "*.sqlite", "*.sqlite3"):
-        for path in REPO_ROOT.rglob(pattern):
-            if any(part in excluded_parts for part in path.parts):
-                continue
-            candidates.append(path)
-    preferred = sorted(
-        set(candidates),
-        key=lambda path: (path.name != "system_test_april_local.db", str(path)),
-    )
-    return preferred
-
-
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--db-url", default=None)
+    parser.add_argument("--db-url", default=None, help="Explicit database URL for readiness evaluation")
     args = parser.parse_args()
 
     if args.db_url:
         settings.db_url = str(args.db_url)
     elif settings.db_url.startswith("postgresql"):
-        candidates = _discover_sqlite_candidates()
-        if candidates:
-            settings.db_url = f"sqlite:///{candidates[0].resolve().as_posix()}"
+        raise SystemExit(
+            "build_release_readiness_report.py requires an explicit --db-url when the configured runtime DB is PostgreSQL. "
+            "Auto-discovery is disabled for verification reproducibility."
+        )
 
     init_db()
     service = ReleaseReadinessService()

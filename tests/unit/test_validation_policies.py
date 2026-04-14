@@ -144,6 +144,7 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path, monkeypatch)
                 "generated_at": "2026-04-13T00:00:00+00:00",
                 "calendar_config_state": "loaded",
                 "summary": {
+                    "nse_equity_primary_validated": True,
                     "bse_primary_validated": True,
                     "healthy_fallback_count": 2,
                     "failed_fallback_count": 0,
@@ -156,6 +157,18 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path, monkeypatch)
     )
     artifacts_dir.joinpath("cross_source_tolerance_report.json").write_text(
         json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "status": "ok"}),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("pipeline_execution_result.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "summary": {
+                    "successful_days": 5,
+                    "failed_days": 0,
+                },
+            }
+        ),
         encoding="utf-8",
     )
     artifacts_dir.joinpath("corporate_action_matching_report.json").write_text(
@@ -210,3 +223,74 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path, monkeypatch)
         payload = response.json()
         assert payload["ready"] is False
         assert any(check["name"] == "overdue_blocking_reviews" and not check["passed"] for check in payload["checks"])
+
+
+def test_release_readiness_requires_pipeline_success_and_nse_equity_probe(tmp_path: Path, monkeypatch) -> None:
+    db_path = tmp_path / "readiness_pipeline.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    repo_root = tmp_path / "repo"
+    artifacts_dir = repo_root / "artifacts/verification"
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/official_source").mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/synthetic_manual").mkdir(parents=True, exist_ok=True)
+    monkeypatch.setattr(release_readiness, "_repo_root", lambda: repo_root)
+
+    artifacts_dir.joinpath("source_probe_report_full.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "calendar_config_state": "loaded",
+                "summary": {
+                    "nse_equity_primary_validated": False,
+                    "bse_primary_validated": True,
+                    "healthy_fallback_count": 2,
+                    "failed_fallback_count": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("cross_source_tolerance_report.json").write_text(
+        json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "status": "ok"}),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("corporate_action_matching_report.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "status": "ok",
+                "metrics": {"benchmark_passed": True, "precision": 1.0, "recall": 1.0},
+            }
+        ),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("pipeline_execution_result.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "summary": {
+                    "successful_days": 0,
+                    "failed_days": 2,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/official_source/adjustment_reference_corpus.json").write_text(
+        json.dumps({"case_count": 10, "transformational_case_count": 3}),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json").write_text(
+        json.dumps({"case_count": 14}),
+        encoding="utf-8",
+    )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        response = client.get("/release/readiness", headers=headers)
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["ready"] is False
+        assert any(check["name"] == "probe_nse_equity_healthy" and not check["passed"] for check in payload["checks"])
+        assert any(check["name"] == "pipeline_success" and not check["passed"] for check in payload["checks"])

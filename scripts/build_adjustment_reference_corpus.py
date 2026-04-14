@@ -75,6 +75,25 @@ def _price_history() -> dict[str, list[dict[str, str]]]:
     }
 
 
+def _artifact_price_path(trade_date: str) -> str:
+    year = trade_date[:4]
+    month = trade_date[5:7]
+    compact = trade_date.replace("-", "")
+    folder = RAW_ROOT / "nse_equity_bhavcopy" / f"year={year}" / f"month={month}"
+    plain = folder / f"{compact}.zip"
+    if plain.exists():
+        return plain.relative_to(PROJECT_ROOT).as_posix()
+    latest = folder / f"{compact}.latest.json"
+    if latest.exists():
+        payload = json.loads(latest.read_text(encoding="utf-8"))
+        artifact_path = Path(str(payload.get("artifact_path", "")).replace("\\", "/"))
+        if not artifact_path.is_absolute():
+            artifact_path = PROJECT_ROOT / artifact_path
+        if artifact_path.exists():
+            return artifact_path.relative_to(PROJECT_ROOT).as_posix()
+    return plain.relative_to(PROJECT_ROOT).as_posix()
+
+
 def _adjustment_factors(action_type: str, parameters: dict[str, str]) -> tuple[Decimal, Decimal]:
     if action_type == "BONUS":
         numerator = Decimal(parameters["bonus_ratio_numerator"])
@@ -207,10 +226,7 @@ def build_reference_corpus() -> dict[str, object]:
                 "snapshot_path": raw["snapshot_path"],
                 "price_paths": list(
                     dict.fromkeys(
-                        (
-                            f"data/raw/nse_equity_bhavcopy/year={row['trade_date'][:4]}"
-                            f"/month={row['trade_date'][5:7]}/{row['trade_date'].replace('-', '')}.zip"
-                        )
+                        _artifact_price_path(row["trade_date"])
                         for row in prices
                     )
                 ),
@@ -257,7 +273,7 @@ def build_reference_corpus() -> dict[str, object]:
                     if isinstance(spec.get("price_paths"), list)
                     else list(
                         dict.fromkeys(
-                            f"data/raw/nse_equity_bhavcopy/year={trade_date[:4]}/month={trade_date[5:7]}/{trade_date.replace('-', '')}.zip"
+                            _artifact_price_path(trade_date)
                             for trade_date in price_dates
                         )
                     )

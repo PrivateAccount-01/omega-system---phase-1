@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-04-14T07:18:54.136129+00:00",
-  "pipeline_summary": null,
-  "pipeline_failed_days": null,
+  "generated_at": "2026-04-14T12:02:34.302969+00:00",
+  "pipeline_summary": {
+    "calendar_mode": "explicit_dates",
+    "explicit_dates": [
+      "2026-04-08",
+      "2026-04-09",
+      "2026-04-10"
+    ],
+    "successful_days": 3,
+    "failed_days": 0,
+    "total_confirmed_actions": 0,
+    "total_adjusted_rows": 14707,
+    "total_new_discontinuities": 3,
+    "latest_total_discontinuity_events": 3,
+    "total_validations": 53488
+  },
+  "pipeline_failed_days": 0,
   "pipeline_failure_examples": [],
-  "pipeline_artifact_status": "missing",
+  "pipeline_artifact_status": "present",
   "idempotency": {
     "delta_first": {
       "price_records": 0,
@@ -46,21 +60,32 @@
     }
   },
   "release_readiness": {
-    "ready": true,
-    "failed_checks": []
+    "ready": false,
+    "failed_checks": [
+      {
+        "name": "blocking_reviews",
+        "passed": false,
+        "details": "open_blocking_reviews=386"
+      },
+      {
+        "name": "tolerance_status",
+        "passed": false,
+        "details": "status=warning, benchmark_passed=False"
+      }
+    ]
   },
   "discontinuity_reaudit": {
-    "source_existing_total_event_count": 213,
-    "source_existing_duplicate_event_count": 145,
-    "persisted_event_count_after_reaudit": 19,
-    "top_spike_date": "2026-04-08",
-    "top_spike_market_return": 0.039048,
+    "source_existing_total_event_count": 3,
+    "source_existing_duplicate_event_count": 0,
+    "persisted_event_count_after_reaudit": 3,
+    "top_spike_date": "2026-04-10",
+    "top_spike_market_return": 0.009128,
     "analysis": {
-      "duplicate_persistence_detected_in_source": true,
+      "duplicate_persistence_detected_in_source": false,
       "top_spike_has_extreme_market_move": false,
       "note": "The re-audit clears existing discontinuity rows and recomputes from price history using an explicit market proxy. If the source DB shows duplicates but the re-audit does not, the historical spike was partly persistence inflation."
     }
   },
-  "realdata_tests": "....                                                                     [100%]\r\n4 passed in 3.57s\r\n",
-  "unit_tests": "........................................................................ [ 77%]\r\n.....................                                                    [100%]\r\n93 passed in 30.90s\r\n"
+  "realdata_tests": "....                                                                     [100%]\r\n4 passed in 0.71s\r\n",
+  "unit_tests": "........................................................................ [ 71%]\r\n.............................                                            [100%]\r\n101 passed in 54.69s\r\n"
 }

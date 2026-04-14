@@ -33,10 +33,16 @@ class CorporateActionParser:
     @staticmethod
     def map_action_type(text: str) -> CorporateActionType:
         value = text.upper()
+        if "RIGHT" in value and ("RENOUN" in value or "ENTITLEMENT" in value):
+            return CorporateActionType.RIGHTS_RENOUNCE
         if "BONUS" in value:
             return CorporateActionType.BONUS
         if "BUY BACK" in value or "BUYBACK" in value:
+            if "TENDER" in value:
+                return CorporateActionType.BUYBACK_TENDER
             return CorporateActionType.BUYBACK_OPEN_MARKET
+        if ("CONSOLIDATION" in value or "CONSOLIDATE" in value) and "SHARE" in value:
+            return CorporateActionType.SPLIT_REVERSE
         if "SPLIT" in value and "REVERSE" in value:
             return CorporateActionType.SPLIT_REVERSE
         if "SPLIT" in value:
@@ -46,6 +52,8 @@ class CorporateActionParser:
         if "DEMERGER" in value:
             return CorporateActionType.DEMERGER_PARENT
         if "MERGER" in value or "AMALGAMATION" in value:
+            if any(token in value for token in ("TRANSFEREE", "ACQUIRER", "AMALGAMATED INTO", "ACQUIRING")):
+                return CorporateActionType.MERGER_ACQUIRER
             return CorporateActionType.MERGER_TARGET
         if "DIVIDEND" in value and "SPECIAL" in value:
             return CorporateActionType.DIVIDEND_SPECIAL

@@ -78,11 +78,15 @@ def _load_policy() -> dict[str, Any]:
             "max_overdue_blocking_reviews": 0,
             "max_pending_reprocess_jobs": 0,
             "probe_max_age_hours": 24,
+            "pipeline_max_age_hours": 24,
             "tolerance_report_max_age_hours": 168,
             "matching_report_max_age_hours": 168,
+            "require_pipeline_success": True,
+            "max_failed_pipeline_days": 0,
             "require_calendar_loaded": True,
             "require_primary_probe_healthy": True,
-            "minimum_healthy_fallbacks": 1,
+            "require_nse_equity_probe_healthy": True,
+            "minimum_healthy_fallbacks": 2,
             "minimum_official_cases": 10,
             "minimum_official_transformational_cases": 3,
             "minimum_manual_transformational_cases": 14,
@@ -133,6 +137,7 @@ class ReleaseReadinessService:
 
         repo_root = _repo_root()
         probe, probe_path = _load_best_probe_artifact(repo_root)
+        pipeline = _read_json(repo_root / "artifacts/verification/pipeline_execution_result.json")
         tolerance = _read_json(repo_root / "artifacts/verification/cross_source_tolerance_report.json")
         matching = _read_json(repo_root / "artifacts/verification/corporate_action_matching_report.json")
         official_corpus = _read_json(repo_root / "tests/fixtures/official_source/adjustment_reference_corpus.json")
@@ -144,6 +149,11 @@ class ReleaseReadinessService:
                     name="source_probe_fresh",
                     artifact=probe,
                     max_age_hours=int(policy["probe_max_age_hours"]),
+                ),
+                self._artifact_check(
+                    name="pipeline_fresh",
+                    artifact=pipeline,
+                    max_age_hours=int(policy["pipeline_max_age_hours"]),
                 ),
                 self._artifact_check(
                     name="tolerance_report_fresh",
@@ -190,13 +200,45 @@ class ReleaseReadinessService:
                     ),
                 )
             )
+            checks.append(
+                ReadinessCheck(
+                    name="probe_nse_equity_healthy",
+                    passed=(not bool(policy["require_nse_equity_probe_healthy"]))
+                    or bool(summary.get("nse_equity_primary_validated", False)),
+                    details=(
+                        f"{probe_path_details}, "
+                        f"nse_equity_primary_validated={summary.get('nse_equity_primary_validated')}"
+                    ),
+                )
+            )
+
+        if pipeline is None:
+            checks.append(ReadinessCheck("pipeline_success", False, "pipeline_execution_result.json missing"))
+        else:
+            summary = cast(dict[str, Any], pipeline.get("summary", {}))
+            failed_days = int(summary.get("failed_days", 0))
+            successful_days = int(summary.get("successful_days", 0))
+            checks.append(
+                ReadinessCheck(
+                    name="pipeline_success",
+                    passed=(not bool(policy["require_pipeline_success"]))
+                    or (successful_days > 0 and failed_days <= int(policy["max_failed_pipeline_days"])),
+                    details=(
+                        f"successful_days={successful_days}, "
+                        f"failed_days={failed_days}"
+                    ),
+                )
+            )
 
         if tolerance is not None:
             checks.append(
                 ReadinessCheck(
                     name="tolerance_status",
-                    passed=tolerance.get("status") == "ok",
-                    details=f"status={tolerance.get('status')}",
+                    passed=tolerance.get("status") == "ok" and bool(tolerance.get("benchmark_passed", False)),
+                    details=(
+                        f"status={tolerance.get('status')}, "
+                        f"benchmark_passed={tolerance.get('benchmark_passed')}"
+                    ),
                 )
             )
         if matching is not None:

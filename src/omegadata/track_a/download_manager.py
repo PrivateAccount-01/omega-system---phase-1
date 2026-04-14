@@ -134,8 +134,6 @@ class DownloadManager:
             f"BhavCopy_BSE_CM_0_0_0_{as_of:%Y%m%d}_F_0000.CSV".lower(),
             f"EQ_ISINCODE_{as_of:%d%m%y}_T0.CSV".lower(),
             f"BSE_EQ_BHAVCOPY_{as_of:%d%m%Y}_T0.ZIP".lower(),
-            f"EQ{as_of:%d%m%y}_CSV.ZIP".lower(),
-            f"eq{as_of:%d%m%y}_csv.zip".lower(),
         )
 
     @staticmethod

@@ -119,6 +119,7 @@ def test_seed_pack_backfill_reproduces_reference_snapshots(db_session) -> None:
     )
     assert len(results) == 5
     assert all(result.matched for result in results)
+    assert all(not result.errors for result in results)
 
 
 def test_seed_pack_preserves_knowledge_vs_effective_date_semantics(db_session) -> None:
@@ -169,9 +170,79 @@ def test_seed_pack_backfill_works_with_production_autoflush_setting(tmp_path: Pa
         assert loaded > 50
         assert len(results) == 5
         assert all(result.matched for result in results)
+        assert all(not result.errors for result in results)
     finally:
         session.close()
         engine.dispose()
+
+
+def test_seed_pack_validation_handles_missing_symbol_mapping_without_crashing(db_session) -> None:
+    manager = PointInTimeUniverseManager()
+    pack = {
+        "snapshots": [
+            {
+                "index_name": "NIFTY50",
+                "effective_date": "2020-01-01",
+                "constituents": [{"symbol": "UNKNOWNCO"}],
+            }
+        ]
+    }
+
+    results = manager.validate_seed_pack(
+        db_session,
+        pack,
+        raw_root=PROJECT_ROOT / "data" / "raw",
+    )
+
+    assert len(results) == 1
+    assert results[0].matched is False
+    assert "missing symbol" in results[0].errors[0].lower()
+
+
+def test_seed_pack_backfill_is_non_destructive_until_validation_passes(db_session) -> None:
+    manager = PointInTimeUniverseManager()
+    ISINMasterService().create_instrument(
+        db_session,
+        isin="INE009A01021",
+        company_name="Infosys Limited",
+        instrument_type=InstrumentType.EQUITY,
+        primary_exchange=Exchange.NSE,
+        listed_date=date(1993, 2, 8),
+        symbol="INFY",
+    )
+    manager.add_membership(
+        db_session,
+        isin="INE009A01021",
+        index_name="NIFTY50",
+        added_date=date(2019, 1, 1),
+        effective_date=date(2019, 1, 1),
+        source="LEGACY",
+    )
+    db_session.flush()
+
+    bad_pack = {
+        "snapshots": [
+            {
+                "index_name": "NIFTY50",
+                "effective_date": "2020-01-01",
+                "constituents": [{"symbol": "UNKNOWNCO"}],
+            }
+        ]
+    }
+
+    try:
+        manager.backfill_from_seed_pack(
+            db_session,
+            bad_pack,
+            raw_root=PROJECT_ROOT / "data" / "raw",
+        )
+    except ValueError as exc:
+        assert "validation failed" in str(exc).lower()
+    else:
+        raise AssertionError("Expected seed-pack backfill to block destructive apply on invalid pack")
+
+    existing = manager.get_universe(db_session, "NIFTY50", date(2019, 1, 2))
+    assert {entry.isin for entry in existing} == {"INE009A01021"}
 
 
 def test_remove_membership_raises_for_missing_active_row(db_session) -> None:

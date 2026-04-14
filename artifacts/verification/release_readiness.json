@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-04-14T06:52:48.049233+00:00",
-  "ready": true,
+  "generated_at": "2026-04-14T12:03:27.414249+00:00",
+  "ready": false,
   "checks": [
     {
       "name": "blocking_reviews",
-      "passed": true,
-      "details": "open_blocking_reviews=0"
+      "passed": false,
+      "details": "open_blocking_reviews=386"
     },
     {
       "name": "overdue_blocking_reviews",
@@ -20,37 +20,52 @@
     {
       "name": "source_probe_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.02"
+      "details": "artifact_age_hours=0.01"
+    },
+    {
+      "name": "pipeline_fresh",
+      "passed": true,
+      "details": "artifact_age_hours=0.18"
     },
     {
       "name": "tolerance_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.01"
+      "details": "artifact_age_hours=0.08"
     },
     {
       "name": "matching_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=30.88"
+      "details": "artifact_age_hours=36.06"
     },
     {
       "name": "calendar_loaded",
       "passed": true,
-      "details": "probe_artifact_path=artifacts/verification/source_probe_report_full.json, calendar_config_state=loaded"
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, calendar_config_state=loaded"
     },
     {
       "name": "probe_primary_healthy",
       "passed": true,
-      "details": "probe_artifact_path=artifacts/verification/source_probe_report_full.json, bse_primary_validated=True"
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, bse_primary_validated=True"
     },
     {
       "name": "probe_fallback_health",
       "passed": true,
-      "details": "probe_artifact_path=artifacts/verification/source_probe_report_full.json, healthy_fallback_count=2, failed_fallback_count=0"
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, healthy_fallback_count=2, failed_fallback_count=0"
+    },
+    {
+      "name": "probe_nse_equity_healthy",
+      "passed": true,
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, nse_equity_primary_validated=True"
+    },
+    {
+      "name": "pipeline_success",
+      "passed": true,
+      "details": "successful_days=3, failed_days=0"
     },
     {
       "name": "tolerance_status",
-      "passed": true,
-      "details": "status=ok"
+      "passed": false,
+      "details": "status=warning, benchmark_passed=False"
     },
     {
       "name": "matching_benchmark_status",

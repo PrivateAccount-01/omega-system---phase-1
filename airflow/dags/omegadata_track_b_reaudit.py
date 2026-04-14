@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from importlib import import_module
 
 DAG = import_module("airflow").DAG
@@ -12,7 +12,7 @@ def run_weekly_reaudit() -> None:
     from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 
     pipeline = OmegaDataSequentialPipeline()
-    pipeline.run_track_b(as_of=datetime.utcnow().date(), market_isin=settings.market_proxy_isin or None)
+    pipeline.run_track_b(as_of=datetime.now(UTC).date(), market_isin=settings.market_proxy_isin or None)
 
 
 with DAG(
