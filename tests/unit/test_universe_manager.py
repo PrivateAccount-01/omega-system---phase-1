@@ -172,3 +172,42 @@ def test_seed_pack_backfill_works_with_production_autoflush_setting(tmp_path: Pa
     finally:
         session.close()
         engine.dispose()
+
+
+def test_remove_membership_raises_for_missing_active_row(db_session) -> None:
+    manager = PointInTimeUniverseManager()
+    try:
+        manager.remove_membership(
+            db_session,
+            isin="INE404040404",
+            index_name="NIFTY50",
+            removed_date=date(2024, 1, 1),
+            removal_effective=date(2024, 1, 2),
+        )
+    except LookupError as exc:
+        assert "No active membership row" in str(exc)
+    else:
+        raise AssertionError("Expected remove_membership to raise for missing row")
+
+
+def test_reconstruct_pre2010_validates_required_columns(db_session) -> None:
+    manager = PointInTimeUniverseManager()
+    frame = pd.DataFrame(
+        {
+            "isin": ["INE009A01021"],
+            "market_cap": [1000],
+        }
+    )
+    try:
+        manager.reconstruct_pre2010(
+            db_session,
+            index_name="NIFTY500",
+            as_of_date=date(2009, 12, 31),
+            bhavcopy_universe=frame,
+            min_avg_volume=500000,
+            top_n=1,
+        )
+    except ValueError as exc:
+        assert "Missing reconstruction columns" in str(exc)
+    else:
+        raise AssertionError("Expected reconstruct_pre2010 to validate required columns")

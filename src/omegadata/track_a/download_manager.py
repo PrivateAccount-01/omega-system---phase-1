@@ -7,9 +7,10 @@ import json
 import re
 import ssl
 import subprocess
-import time
 import tempfile
+import time
 import zipfile
+from contextlib import suppress
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from html.parser import HTMLParser
@@ -87,6 +88,46 @@ class DownloadManager:
         self.raw_root.mkdir(parents=True, exist_ok=True)
         self.alert_router = AlertRouter()
 
+    def _load_cached_artifact(self, source_key: str, as_of: date) -> DownloadArtifact | None:
+        out_dir = self.raw_root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+        latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+        if not latest_pointer.exists():
+            return None
+        try:
+            manifest_payload = json.loads(latest_pointer.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            return None
+
+        artifact_path = self._path_from_manifest(str(manifest_payload.get("artifact_path", "")))
+        manifest_path = self._path_from_manifest(str(manifest_payload.get("manifest_path", latest_pointer)))
+        if not artifact_path.exists():
+            return None
+        if not manifest_path.is_absolute():
+            manifest_path = out_dir / manifest_path.name
+        checksum = str(manifest_payload.get("checksum", "")).strip()
+        if not checksum:
+            return None
+        actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+        if actual_checksum != checksum:
+            return None
+        return DownloadArtifact(
+            source_key=source_key,
+            as_of=as_of,
+            path=artifact_path,
+            manifest_path=manifest_path if manifest_path.exists() else latest_pointer,
+            checksum=checksum,
+            bytes_downloaded=int(manifest_payload.get("bytes_downloaded", artifact_path.stat().st_size)),
+            used_url=str(manifest_payload.get("used_url", "")),
+            attempts=int(manifest_payload.get("attempts", 0)),
+        )
+
+    @staticmethod
+    def _path_from_manifest(raw_path: str) -> Path:
+        normalized = raw_path.replace("\\", "/").strip()
+        if not normalized:
+            return Path(raw_path)
+        return Path(normalized)
+
     @staticmethod
     def _expected_bse_equity_markers(as_of: date) -> tuple[str, ...]:
         return (
@@ -152,9 +193,7 @@ class DownloadManager:
         if isinstance(exc, DownloadError):
             if exc.stage != "request":
                 return False
-            if exc.status_code in {403, 404, 429}:
-                return False
-            return True
+            return exc.status_code not in {403, 404, 429}
         return isinstance(exc, httpx.HTTPError)
 
     @staticmethod
@@ -314,6 +353,20 @@ class DownloadManager:
             request_attempts=1,
         )
 
+    @staticmethod
+    def _attach_cookie_header(
+        headers: dict[str, str],
+        client: httpx.Client | None,
+    ) -> dict[str, str]:
+        if client is None or not client.cookies:
+            return headers
+        cookie_header = "; ".join(f"{name}={value}" for name, value in client.cookies.items())
+        if not cookie_header:
+            return headers
+        enriched = dict(headers)
+        enriched["Cookie"] = cookie_header
+        return enriched
+
     def _request_via_curl(
         self,
         url: str,
@@ -411,12 +464,13 @@ class DownloadManager:
         except Exception as exc:  # noqa: BLE001
             if not self._is_nse_url(url) or not self._is_retryable_nse_request_error(exc):
                 raise
+        fallback_headers = self._attach_cookie_header(request_headers, client)
         try:
-            return self._request_via_urllib(url=url, headers=request_headers, timeout_seconds=timeout_seconds)
+            return self._request_via_urllib(url=url, headers=fallback_headers, timeout_seconds=timeout_seconds)
         except Exception as urllib_exc:  # noqa: BLE001
             if not self._is_retryable_nse_request_error(urllib_exc) and not self._is_tls_error(urllib_exc):
                 raise
-        return self._request_via_curl(url=url, headers=request_headers, timeout_seconds=timeout_seconds)
+        return self._request_via_curl(url=url, headers=fallback_headers, timeout_seconds=timeout_seconds)
 
     def _render_url(self, source_key: str, as_of: date) -> str:
         era = resolve_era(source_key, as_of)
@@ -582,7 +636,8 @@ class DownloadManager:
         request_headers = self._profile_for_url(profile, url)
         with httpx.Client(headers=request_headers, follow_redirects=True) as client:
             if self._is_nse_url(url):
-                self._bootstrap_nse_session(client)
+                with suppress(Exception):
+                    self._bootstrap_nse_session(client)
             result = self._request_with_workarounds(
                 client,
                 url,
@@ -686,6 +741,10 @@ class DownloadManager:
     def download(self, source_key: str, as_of: date) -> DownloadArtifact:
         if source_key not in SOURCE_REGISTRY:
             raise KeyError(f"Unknown source key: {source_key}")
+        cached = self._load_cached_artifact(source_key, as_of)
+        if cached is not None:
+            DOWNLOAD_COUNTER.labels(source=source_key, status="cached").inc()
+            return cached
         source = SOURCE_REGISTRY[source_key]
         candidate_urls = self._candidate_urls(source_key, as_of)
         attempts = 0

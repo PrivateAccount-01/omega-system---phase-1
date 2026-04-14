@@ -4,7 +4,7 @@ import csv
 import io
 import json
 import zipfile
-from datetime import datetime
+from datetime import date, datetime
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
@@ -95,8 +95,21 @@ def _assertions(
     parameters: dict[str, str],
     prices_by_date: dict[str, dict[str, str]],
     assertion_dates: tuple[str, ...] | list[str],
+    ex_date: str,
 ) -> list[dict[str, str]]:
     price_factor, volume_factor = _adjustment_factors(action_type, parameters)
+    if action_type in {"RIGHTS", "RIGHTS_RENOUNCE"}:
+        ex = date.fromisoformat(ex_date)
+        prior_key = ex.fromordinal(ex.toordinal() - 1).isoformat()
+        prior_row = prices_by_date.get(prior_key)
+        if prior_row is not None:
+            p = _parse_decimal(prior_row["close"])
+            n = Decimal(parameters["rights_ratio_denominator"])
+            r = Decimal(parameters["rights_ratio_numerator"])
+            s = Decimal(parameters.get("issue_price", "0"))
+            terp = ((n * p) + (r * s)) / (n + r)
+            price_factor = terp / p
+            volume_factor = Decimal("1")
     return [
         {
             "trade_date": trade_date,
@@ -164,7 +177,11 @@ def build_reference_corpus() -> dict[str, object]:
     cases: list[dict[str, object]] = []
 
     for raw in _raw_action_rows():
-        prices = price_history.get(raw["symbol"])
+        prices = [
+            row
+            for row in price_history.get(raw["symbol"], [])
+            if row["trade_date"].startswith("2026-")
+        ]
         if not prices:
             continue
         prices_by_date = {row["trade_date"]: row for row in prices}
@@ -190,7 +207,10 @@ def build_reference_corpus() -> dict[str, object]:
                 "snapshot_path": raw["snapshot_path"],
                 "price_paths": list(
                     dict.fromkeys(
-                        f"data/raw/nse_equity_bhavcopy/year=2026/month=04/{row['trade_date'].replace('-', '')}.zip"
+                        (
+                            f"data/raw/nse_equity_bhavcopy/year={row['trade_date'][:4]}"
+                            f"/month={row['trade_date'][5:7]}/{row['trade_date'].replace('-', '')}.zip"
+                        )
                         for row in prices
                     )
                 ),
@@ -200,6 +220,7 @@ def build_reference_corpus() -> dict[str, object]:
                     parameters=normalized_parameters,
                     prices_by_date=prices_by_date,
                     assertion_dates=ASSERTION_DATES,
+                    ex_date=raw["ex_date"],
                 ),
             }
         )
@@ -247,6 +268,7 @@ def build_reference_corpus() -> dict[str, object]:
                     parameters=parameters,
                     prices_by_date=history_rows,
                     assertion_dates=assertion_dates,
+                    ex_date=str(spec["ex_date"]),
                 ),
             }
         )

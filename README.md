@@ -407,10 +407,10 @@ Release readiness is the canonical go/no-go surface for the repo’s operational
 The readiness thresholds are governed in [`config/release_readiness_policy.json`](config/release_readiness_policy.json), not hardcoded in service code. Current defaults are:
 
 - minimum official-source adjustment cases: `10`
-- minimum official-source transformational cases: `2`
+- minimum official-source transformational cases: `3`
 - minimum hand-computed transformational cases: `14`
 
-Those numbers are intentionally aligned with the bundled evidence that actually exists in the repository today. The official-source corpus currently contains two real transformational cases from the bundled official window, so the readiness gate no longer pretends the repo has three official transformational cases when it does not.
+Those numbers are intentionally aligned with the bundled evidence that actually exists in the repository today. The official-source corpus now clears the governed transformational threshold with real official-source-backed cases instead of relying on README narrative.
 
 ## Official Adjustment Evidence
 
@@ -440,10 +440,62 @@ That distinction is intentional:
 
 At the moment the bundled official-source window yields:
 
-- `10` official-source-backed cases
-- `2` official-source transformational cases
+- `13` official-source-backed cases
+- `5` official-source transformational cases
 
-Those official transformational cases are still thinner than the long-term target, but the release gate and README now describe that honestly instead of claiming evidence the repo does not yet contain.
+Current official transformational labels:
+
+- `NESTLEIND_2024-01-05_SPLIT`
+- `NMDC_2024-12-27_BONUS`
+- `PASHUPATI_2026-04-17_SPLIT`
+- `RMDRIP_2026-04-10_BONUS`
+- `TATACONSUM_2024-07-26_RIGHTS`
+
+That is still not the final long-term target for official-source realism. The more awkward transformational classes such as demergers, merger targets, reverse splits, supersessions, and multi-action chains are still more deeply covered in the synthetic/manual corpus than in the official-source corpus. What changed is that the official corpus is no longer stuck at a token two-case proof point.
+
+## Current Verification Snapshot
+
+The repository should be read from the generated artifacts, not from optimistic prose. In the current branch state:
+
+- [`artifacts/verification/release_readiness.json`](artifacts/verification/release_readiness.json) is currently `ready: true`
+- [`tests/fixtures/official_source/adjustment_reference_corpus.json`](tests/fixtures/official_source/adjustment_reference_corpus.json) currently reports `case_count: 13` and `transformational_case_count: 5`
+- [`artifacts/verification/source_probe_report.json`](artifacts/verification/source_probe_report.json) is the canonical scheduled-verification probe artifact
+- [`artifacts/verification/source_probe_report_full.json`](artifacts/verification/source_probe_report_full.json) is the richer diagnostic full-profile probe artifact that release readiness may prefer when it contains better evidence
+- [`artifacts/verification/discontinuity_spike_report.json`](artifacts/verification/discontinuity_spike_report.json) now explains the historical discontinuity jump instead of leaving it as an unexplained count spike
+- [`artifacts/verification/extreme_test_report.json`](artifacts/verification/extreme_test_report.json) is refreshed from current test and verification outputs rather than carrying obsolete warning text
+
+Important nuance:
+
+- a fresh full-pipeline replay artifact is treated as heavier operational evidence than a quick unit/probe rebuild
+- if [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json) is absent, the downstream verification reports now say so explicitly instead of silently reusing stale numbers
+
+## Discontinuity Re-Audit
+
+The discontinuity spike around `2026-04-08` is no longer just a suspicious shape in an old artifact.
+
+Builder:
+
+- [`scripts/build_discontinuity_spike_report.py`](scripts/build_discontinuity_spike_report.py)
+
+Artifact:
+
+- [`artifacts/verification/discontinuity_spike_report.json`](artifacts/verification/discontinuity_spike_report.json)
+
+What the re-audit currently shows:
+
+- the source DB previously contained `213` persisted discontinuity rows but only `68` unique event identities
+- that means `145` rows were duplicate persistence, not unique discontinuity evidence
+- after clearing the existing discontinuity rows and recomputing from history with an explicit ETF market proxy, the persisted count drops to `19`
+- the top spike date remains `2026-04-08`, but it re-audits to `7` events rather than `150`
+- the explicit benchmark move on that date is about `3.90%`, which is material but not the earlier inflated market-proxy story
+
+Operational meaning:
+
+- the old spike was partly a real cluster and partly persistence inflation
+- discontinuity reporting should now be interpreted as:
+  - new events detected in the current run
+  - total persisted unique events in the DB
+- those two concepts are intentionally separated in pipeline code now
 
 ## Manual Review Release Semantics
 
@@ -475,6 +527,14 @@ Governance goals:
 - no rediscovery of generated calibration DBs as source DBs
 - explicit repo-relative artifact references where possible
 - no test pollution of committed verification artifacts
+- missing pipeline artifacts are surfaced as missing evidence, not backfilled from stale summaries
+
+Artifact quality is treated as part of trust quality. The repo now tries to ensure that:
+
+- readiness records which probe artifact it actually used
+- source-probe artifacts distinguish coverage from health
+- tolerance artifacts record normalized DB provenance
+- discontinuity re-audits record duplicate counts separately from recomputed counts
 
 Test isolation note:
 
@@ -572,7 +632,7 @@ python scripts/generate_implementation_audit.py
 ### Full Pipeline Smoke
 
 ```bash
-python scripts/run_full_pipeline.py --days 10 --market-isin <ISIN>
+python scripts/run_full_pipeline.py --days 5 --calendar-mode trading --db-url sqlite:///artifacts/verification/pipeline_execution.sqlite --market-isin <ISIN>
 ```
 
 ## Current Operational Truth
@@ -586,6 +646,7 @@ The repo now includes enough instrumentation to answer these questions with arti
 - Is the corporate-action matcher benchmark passing?
 - Are blocking reviews or reprocess jobs still open?
 - Is release readiness currently green?
+- Is a fresh full-pipeline replay artifact present, or is that evidence currently missing?
 
 That is a much stronger position than “the tests passed once.”
 
@@ -596,8 +657,9 @@ OmegaData is materially stronger than a prototype, but it is still pre-productio
 Important honest boundaries:
 
 - release readiness can still be red if the current DB contains unresolved blocking reviews
-- official-source-backed transformational adjustment evidence is better than before but still limited by the bundled raw-source window
+- official-source-backed transformational adjustment evidence is materially better than before but still limited by the bundled raw-source window
 - reprocess orchestration is now evidence-backed and stateful, but it is still internal orchestration rather than a full external workflow engine
 - live-source stability must continue to be monitored over time, not inferred forever from one green artifact run
+- a missing full-pipeline replay artifact should be treated as missing operational evidence, not as implicit success
 
 That honesty is deliberate. The target is a trustworthy system, not a flattering README.

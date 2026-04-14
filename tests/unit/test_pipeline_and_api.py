@@ -22,6 +22,7 @@ from omegadata.db.models import (
     ManualReviewQueue,
     PriceRecord,
     ReprocessJob,
+    SymbolMap,
 )
 from omegadata.db.session import get_session, init_db
 from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState
@@ -171,6 +172,27 @@ def test_bse_empty_meeting_rows_are_not_promoted_to_corporate_actions(db_session
     assert db_session.scalar(select(CorporateActionStaging)) is None
 
 
+def test_ensure_instrument_is_idempotent_before_flush(db_session) -> None:
+    pipe = OmegaDataSequentialPipeline()
+    pipe._ensure_instrument(
+        db_session,
+        isin="INEIDEM00001",
+        symbol="IDEMCO",
+        trade_date=date(2026, 4, 10),
+        exchange=Exchange.NSE,
+    )
+    pipe._ensure_instrument(
+        db_session,
+        isin="INEIDEM00001",
+        symbol="IDEMCO",
+        trade_date=date(2026, 4, 10),
+        exchange=Exchange.NSE,
+    )
+    db_session.flush()
+    assert db_session.scalar(select(InstrumentMaster).where(InstrumentMaster.isin == "INEIDEM00001")) is not None
+    assert len(db_session.scalars(select(SymbolMap).where(SymbolMap.isin == "INEIDEM00001")).all()) == 1
+
+
 def test_nse_request_workaround_can_fall_back_to_curl(monkeypatch) -> None:
     manager = DownloadManager()
 
@@ -200,6 +222,78 @@ def test_nse_request_workaround_can_fall_back_to_curl(monkeypatch) -> None:
         timeout_seconds=1.0,
     )
     assert result.transport == "curl"
+
+
+def test_nse_request_workaround_passes_bootstrapped_cookies_to_fallbacks(monkeypatch) -> None:
+    manager = DownloadManager()
+    seen_headers: dict[str, str] = {}
+
+    def fail_httpx(*args, **kwargs):  # noqa: ANN002, ANN003
+        raise DownloadError("tls issue", stage="request")
+
+    def capture_urllib(*args, **kwargs):  # noqa: ANN002, ANN003
+        seen_headers.update(kwargs["headers"])
+        raise DownloadError("urllib issue", stage="request")
+
+    def succeed_curl(*args, **kwargs):  # noqa: ANN002, ANN003
+        seen_headers.update(kwargs["headers"])
+        return FetchResult(
+            payload=b'{"ok": true}',
+            status_code=200,
+            content_type="application/json",
+            transport="curl",
+            request_attempts=1,
+        )
+
+    monkeypatch.setattr(manager, "_request", fail_httpx)
+    monkeypatch.setattr(manager, "_request_via_urllib", capture_urllib)
+    monkeypatch.setattr(manager, "_request_via_curl", succeed_curl)
+
+    class DummyClient:
+        def __init__(self) -> None:
+            self.cookies = {"bm_sv": "cookie123", "nsit": "cookie456"}
+
+    result = manager._request_with_workarounds(
+        client=DummyClient(),  # type: ignore[arg-type]
+        url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+        request_headers={"User-Agent": "test"},
+        timeout_seconds=1.0,
+    )
+    assert result.transport == "curl"
+    assert "Cookie" in seen_headers
+    assert "bm_sv=cookie123" in seen_headers["Cookie"]
+
+
+def test_download_manager_reuses_cached_immutable_artifact(tmp_path: Path, monkeypatch) -> None:
+    raw_root = tmp_path / "raw"
+    monkeypatch.setattr(settings, "raw_root", str(raw_root))
+    manager = DownloadManager()
+    as_of = date(2026, 4, 13)
+    out_dir = raw_root / "nse_corporate_actions" / "year=2026" / "month=04"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    artifact = out_dir / "20260413__cached.bin"
+    artifact.write_bytes(b'{"ok": true}')
+    checksum = manager._hash_content(artifact.read_bytes(), "sha256")
+    manifest = {
+        "source_key": "NSE_CORPORATE_ACTIONS",
+        "as_of": as_of.isoformat(),
+        "checksum": checksum,
+        "artifact_path": artifact.as_posix().replace("/", "\\"),
+        "bytes_downloaded": artifact.stat().st_size,
+        "used_url": "https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+        "attempts": 1,
+        "manifest_path": "20260413__cached.manifest.json",
+    }
+    latest = out_dir / "20260413.latest.json"
+    latest.write_text(json.dumps(manifest), encoding="utf-8")
+
+    def fail_fetch(*args, **kwargs):  # noqa: ANN002, ANN003
+        raise AssertionError("network fetch should not be used when cache is valid")
+
+    monkeypatch.setattr(manager, "_fetch_candidate", fail_fetch)
+    cached = manager.download("NSE_CORPORATE_ACTIONS", as_of)
+    assert cached.path == artifact
+    assert cached.checksum == checksum
 
 
 def test_nse_buyback_is_classified_without_unclassified_fallback(db_session, tmp_path: Path) -> None:
@@ -427,7 +521,7 @@ def test_bse_bhavcopy_loader_supports_current_bse_primary_schema(tmp_path: Path,
 def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, monkeypatch) -> None:
     settings.raw_root = str(tmp_path)
     manager = DownloadManager()
-    payloads = [b"first-payload", b"second-payload"]
+    payloads = [b"first-payload"]
 
     def fake_request(*args, **kwargs):
         return FetchResult(
@@ -445,11 +539,12 @@ def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, m
     first = manager.download("NSE_EQUITY_BHAVCOPY", date(2024, 1, 2))
     second = manager.download("NSE_EQUITY_BHAVCOPY", date(2024, 1, 2))
 
-    assert first.path != second.path
+    assert first.path == second.path
     assert first.path.exists()
     assert second.path.exists()
     assert first.manifest_path.exists()
     assert second.manifest_path.exists()
+    assert payloads == []
 
 
 def test_prices_endpoint_requires_canonical_exchange_when_primary_missing(tmp_path: Path) -> None:

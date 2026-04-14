@@ -111,8 +111,12 @@ class OmegaDataSequentialPipeline:
         *,
         exchange: Exchange = Exchange.NSE,
     ) -> None:
+        pending_instrument = any(
+            isinstance(obj, InstrumentMaster) and obj.isin == isin
+            for obj in session.new
+        )
         inst = session.get(InstrumentMaster, isin)
-        if inst is None:
+        if inst is None and not pending_instrument:
             session.add(
                 InstrumentMaster(
                     isin=isin,
@@ -124,6 +128,14 @@ class OmegaDataSequentialPipeline:
                 )
             )
 
+        pending_symbol_map = any(
+            isinstance(obj, SymbolMap)
+            and obj.isin == isin
+            and obj.exchange == exchange
+            and obj.symbol == symbol
+            and obj.valid_to is None
+            for obj in session.new
+        )
         existing_symbol = session.scalar(
             select(SymbolMap)
             .where(SymbolMap.isin == isin)
@@ -131,7 +143,7 @@ class OmegaDataSequentialPipeline:
             .where(SymbolMap.symbol == symbol)
             .where(SymbolMap.valid_to.is_(None))
         )
-        if existing_symbol is None:
+        if existing_symbol is None and not pending_symbol_map:
             session.add(
                 SymbolMap(
                     isin=isin,
@@ -623,7 +635,7 @@ class OmegaDataSequentialPipeline:
         self,
         run_at: datetime,
         market_isin: str | None = None,
-    ) -> tuple[int, int, int, int]:
+    ) -> tuple[int, int, int, int, int]:
         require_confirmation_window(run_at)
         aware_run_at = run_at if run_at.tzinfo is not None else run_at.replace(tzinfo=UTC)
         return self.run_track_b(as_of=aware_run_at.astimezone(UTC).date(), market_isin=market_isin)

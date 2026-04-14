@@ -166,3 +166,84 @@ def test_multiple_actions_same_date_are_paired_by_event_identity(db_session) -> 
 
     results = svc.run_daily_confirmation(db_session, as_of=date(2018, 6, 14))
     assert len(results) == 2
+
+
+def test_parameter_mismatch_queues_review_but_confirms_pair(db_session) -> None:
+    svc = CorporateActionService()
+    nse_payload = {
+        "isin": "INE009A01021",
+        "ex_date": "2018-06-14",
+        "record_date": "2018-06-16",
+        "bonus_ratio_numerator": "1",
+        "bonus_ratio_denominator": "1",
+        "board_meeting_date": "2018-04-13",
+    }
+    bse_payload = {
+        **nse_payload,
+        "bonus_ratio_denominator": "2",
+    }
+    svc.add_staging_record(
+        db_session,
+        Exchange.NSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        nse_payload,
+    )
+    svc.add_staging_record(
+        db_session,
+        Exchange.BSE,
+        "INE009A01021",
+        CorporateActionType.BONUS,
+        date(2018, 4, 13),
+        date(2018, 6, 14),
+        date(2018, 6, 16),
+        bse_payload,
+    )
+
+    results = svc.run_daily_confirmation(db_session, as_of=date(2018, 6, 14))
+    review = db_session.scalar(
+        select(ManualReviewQueue).where(ManualReviewQueue.category == "CORPORATE_ACTION_PARAMETER_MISMATCH")
+    )
+
+    assert len(results) == 1
+    assert results[0].confidence.value == "MEDIUM"
+    assert review is not None
+
+
+def test_missing_required_fields_block_confirmation_for_matched_pair(db_session) -> None:
+    svc = CorporateActionService()
+    bad_payload = {
+        "isin": "INE009A01021",
+        "ex_date": "2020-02-01",
+    }
+    svc.add_staging_record(
+        db_session,
+        Exchange.NSE,
+        "INE009A01021",
+        CorporateActionType.RIGHTS,
+        date(2020, 1, 1),
+        date(2020, 2, 1),
+        date(2020, 2, 2),
+        bad_payload,
+    )
+    svc.add_staging_record(
+        db_session,
+        Exchange.BSE,
+        "INE009A01021",
+        CorporateActionType.RIGHTS,
+        date(2020, 1, 1),
+        date(2020, 2, 1),
+        date(2020, 2, 2),
+        bad_payload,
+    )
+
+    results = svc.run_daily_confirmation(db_session, as_of=date(2020, 2, 3))
+    review = db_session.scalar(
+        select(ManualReviewQueue).where(ManualReviewQueue.category == "CORPORATE_ACTION_REQUIRED_FIELDS")
+    )
+
+    assert results == []
+    assert review is not None

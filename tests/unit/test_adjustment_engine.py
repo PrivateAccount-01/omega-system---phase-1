@@ -112,3 +112,70 @@ def test_cumulative_multiple_actions(db_session) -> None:
     engine.recompute_adjusted_series(db_session, isin="INE009A01021")
     row = next(r for r in db_session.query(PriceRecord).all() if r.trade_date == date(2021, 1, 1))
     assert Decimal(str(row.cumulative_price_factor)) == Decimal("0.25")
+
+
+def test_demerger_actuals_finalize_from_preferred_exchange(db_session) -> None:
+    db_session.add_all(
+        [
+            PriceRecord(
+                isin="PARENT000001",
+                exchange=Exchange.NSE,
+                trade_date=date(2025, 4, 4),
+                open_price=Decimal("100"),
+                high_price=Decimal("100"),
+                low_price=Decimal("100"),
+                close_price=Decimal("100"),
+                volume=Decimal("100"),
+                raw_source="nse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            ),
+            PriceRecord(
+                isin="SPINOFF00001",
+                exchange=Exchange.BSE,
+                trade_date=date(2025, 4, 7),
+                open_price=Decimal("21"),
+                high_price=Decimal("21"),
+                low_price=Decimal("21"),
+                close_price=Decimal("21"),
+                volume=Decimal("100"),
+                raw_source="bse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            ),
+            PriceRecord(
+                isin="SPINOFF00001",
+                exchange=Exchange.NSE,
+                trade_date=date(2025, 4, 7),
+                open_price=Decimal("20"),
+                high_price=Decimal("20"),
+                low_price=Decimal("20"),
+                close_price=Decimal("20"),
+                volume=Decimal("100"),
+                raw_source="nse_bhavcopy",
+                confidence_score=Decimal("1.00"),
+            ),
+            ConfirmedCorporateAction(
+                isin="PARENT000001",
+                action_type=CorporateActionType.DEMERGER_PARENT,
+                confidence=ConfidenceLevel.MEDIUM,
+                announcement_date=date(2025, 4, 1),
+                ex_date=date(2025, 4, 7),
+                record_date=date(2025, 4, 7),
+                parameters={
+                    "parent_value_pre_demerger": "100",
+                    "spinoff_isin": "SPINOFF00001",
+                    "spinoff_value": "18",
+                },
+                source_preference=Exchange.NSE,
+                superseded=False,
+            ),
+        ]
+    )
+
+    engine = PriceAdjustmentEngine()
+    refreshed = engine.refresh_demerger_actuals(db_session, isin="PARENT000001", exchange=Exchange.NSE)
+    assert refreshed == 1
+
+    action = next(a for a in db_session.query(ConfirmedCorporateAction).all() if a.isin == "PARENT000001")
+    assert action.parameters["actual_spinoff_listing_price"] == "20.000000"
+    assert action.parameters["actual_spinoff_exchange"] == "NSE"
+    assert action.parameters["demerger_adjustment_stage"] == "FINAL"

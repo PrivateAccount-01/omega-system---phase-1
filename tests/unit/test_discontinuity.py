@@ -5,7 +5,12 @@ from decimal import Decimal
 
 from sqlalchemy import select
 
-from omegadata.db.models import ConfirmedCorporateAction, ExclusionDate, ManualReviewQueue, PriceRecord
+from omegadata.db.models import (
+    ConfirmedCorporateAction,
+    ExclusionDate,
+    ManualReviewQueue,
+    PriceRecord,
+)
 from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
 from omegadata.track_b.discontinuity import DiscontinuityDetector
 

@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import date, timedelta
+from datetime import date
 from pathlib import Path
 
 from omegadata.config import settings
 from omegadata.db.session import init_db
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+from omegadata.track_a.trading_calendar import TradingCalendar
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -16,15 +17,40 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run OmegaData full pipeline across recent days.")
     parser.add_argument("--days", type=int, default=10, help="Number of recent days to attempt.")
     parser.add_argument("--market-isin", default=settings.market_proxy_isin or None, help="Explicit market benchmark ISIN")
+    parser.add_argument("--db-url", default=None, help="Optional database URL override for the run")
+    parser.add_argument(
+        "--calendar-mode",
+        choices=["trading", "calendar"],
+        default="trading",
+        help="Use recent trading days or raw calendar days when building the run window.",
+    )
     args = parser.parse_args()
+
+    if args.db_url:
+        settings.db_url = str(args.db_url)
 
     init_db()
     pipe = OmegaDataSequentialPipeline()
     runs: list[dict[str, object]] = []
     errors: list[dict[str, str]] = []
 
-    for offset in range(args.days, 0, -1):
-        as_of = date.today() - timedelta(days=offset)
+    if args.calendar_mode == "trading":
+        as_of_dates = list(
+            reversed(
+                TradingCalendar.from_config().recent_trading_days(
+                    "NSE",
+                    anchor_date=date.today(),
+                    limit=args.days,
+                    strict=False,
+                )
+            )
+        )
+    else:
+        from datetime import timedelta
+
+        as_of_dates = [date.today() - timedelta(days=offset) for offset in range(args.days, 0, -1)]
+
+    for as_of in as_of_dates:
         try:
             summary = pipe.run_full_day(as_of=as_of, market_isin=args.market_isin)
             runs.append({
@@ -42,6 +68,7 @@ def main() -> None:
     output = {
         "runs": runs,
         "summary": {
+            "calendar_mode": args.calendar_mode,
             "successful_days": len(runs),
             "failed_days": len(errors),
             "total_confirmed_actions": sum(int(r["confirmed_actions"]) for r in runs),
