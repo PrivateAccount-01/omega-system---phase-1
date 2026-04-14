@@ -156,7 +156,13 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path, monkeypatch)
         encoding="utf-8",
     )
     artifacts_dir.joinpath("cross_source_tolerance_report.json").write_text(
-        json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "status": "ok"}),
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "status": "ok",
+                "benchmark_passed": True,
+            }
+        ),
         encoding="utf-8",
     )
     artifacts_dir.joinpath("pipeline_execution_result.json").write_text(
@@ -207,7 +213,7 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path, monkeypatch)
         )
         session.add(
             ManualReviewQueue(
-                category="CROSS_SOURCE_VALIDATION_FAIL",
+                category="CORPORATE_ACTION_REQUIRED_FIELDS",
                 isin="INEREADY0001",
                 event_date=date(2026, 4, 10),
                 reason="Mismatch",
@@ -252,7 +258,13 @@ def test_release_readiness_requires_pipeline_success_and_nse_equity_probe(tmp_pa
         encoding="utf-8",
     )
     artifacts_dir.joinpath("cross_source_tolerance_report.json").write_text(
-        json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "status": "ok"}),
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "status": "ok",
+                "benchmark_passed": True,
+            }
+        ),
         encoding="utf-8",
     )
     artifacts_dir.joinpath("corporate_action_matching_report.json").write_text(

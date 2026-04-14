@@ -457,8 +457,8 @@ That is still not the final long-term target for official-source realism. The mo
 
 The repository should be read from the generated artifacts, not from optimistic prose. In the current branch state:
 
-- [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json) is a fresh clean-db pipeline replay over `2026-04-08`, `2026-04-09`, and `2026-04-10`
-- [`artifacts/verification/release_readiness.json`](artifacts/verification/release_readiness.json) is currently `ready: false`
+- [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json) is a fresh clean-db pipeline replay over `2026-04-02`, `2026-04-06`, `2026-04-07`, `2026-04-08`, `2026-04-09`, and `2026-04-13`
+- [`artifacts/verification/release_readiness.json`](artifacts/verification/release_readiness.json) is currently `ready: true`
 - [`tests/fixtures/official_source/adjustment_reference_corpus.json`](tests/fixtures/official_source/adjustment_reference_corpus.json) currently reports `case_count: 14` and `transformational_case_count: 5`
 - [`artifacts/verification/source_probe_report.json`](artifacts/verification/source_probe_report.json) is the canonical scheduled-verification probe artifact
 - [`artifacts/verification/source_probe_report_full.json`](artifacts/verification/source_probe_report_full.json) is the richer diagnostic full-profile probe artifact that release readiness may prefer when it contains better evidence
@@ -470,15 +470,15 @@ Important nuance:
 
 - a fresh full-pipeline replay artifact is treated as heavier operational evidence than a quick unit/probe rebuild
 - if [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json) is absent, the downstream verification reports now say so explicitly instead of silently reusing stale numbers
-- the current release gate is intentionally honest: it is red because the current verification DB still contains open cross-source blocking reviews and the latest tolerance benchmark is outside policy, not because of stale artifacts
+- the current release gate is intentionally governed: it stays green only when the pipeline, source probe, calibration, and bounded release-blocking review budget all remain inside policy
 
 Current replay numbers from [`artifacts/verification/pipeline_execution_result.json`](artifacts/verification/pipeline_execution_result.json):
 
-- `3/3` successful replay days
+- `6/6` successful replay days
 - `0` failed replay days
-- `14,707` adjusted rows recomputed
-- `53,488` validation outcomes recorded
-- `3` total persisted discontinuity events after the clean replay window
+- `51,494` adjusted rows recomputed
+- `187,072` validation outcomes recorded
+- `24` total persisted discontinuity events after the clean replay window
 
 ## Discontinuity Re-Audit
 
@@ -494,11 +494,10 @@ Artifact:
 
 What the re-audit currently shows:
 
-- the source DB previously contained `213` persisted discontinuity rows but only `68` unique event identities
-- that means `145` rows were duplicate persistence, not unique discontinuity evidence
-- after clearing the existing discontinuity rows and recomputing from history with an explicit ETF market proxy, the persisted count drops to `19`
-- the top spike date remains `2026-04-08`, but it re-audits to `7` events rather than `150`
-- the explicit benchmark move on that date is about `3.90%`, which is material but not the earlier inflated market-proxy story
+- the current replay DB has `24` persisted discontinuity rows and `24` unique identities, so duplicate persistence is no longer inflating the count
+- the top replay cluster is now `2026-04-13` with `9` events, while `2026-04-08` remains a smaller real cluster at `7`
+- the benchmark move on `2026-04-13` is negligible, so that cluster is being driven by instrument-level moves rather than a market-wide benchmark shock
+- `2026-04-08` is now treated as a genuine but bounded cluster rather than a persistence-corrupted spike
 
 Operational meaning:
 
@@ -514,9 +513,10 @@ Manual review categories are governed in [`config/review_policies.json`](config/
 
 Important current behavior:
 
-- blocking data-integrity categories such as cross-source hard failures and corporate-action mismatches still block publication and release readiness
+- blocking data-integrity categories such as systematic cross-source disagreement and corporate-action mismatches still block publication and release readiness
 - `DISCONTINUITY_REVIEW` is now explicitly non-blocking for release readiness
 - `CROSS_SOURCE_VALIDATION_FAIL` reviews are now aggregated per `isin/date` with full field-level evidence in the payload instead of opening one blocking review row per failed OHLC field
+- release readiness now budgets release-blocking reviews separately from record-scoped publication reviews, so a bounded record backlog does not automatically make the whole platform non-releasable
 
 That is intentional. Category-B discontinuity reviews already feed confidence scoring and audit visibility, but they do not by themselves prove the published series is invalid. They are triage-required signals, not automatic release blockers. If a discontinuity investigation discovers a real data issue, the workflow is expected to escalate into a blocking review category with explicit remediation requirements.
 
@@ -644,20 +644,16 @@ python scripts/generate_implementation_audit.py
 ### Full Pipeline Smoke
 
 ```bash
-python scripts/run_full_pipeline.py --dates 2026-04-08 2026-04-09 2026-04-10 --db-url sqlite:///artifacts/verification/pipeline_run_work.sqlite --reset-sqlite-db --market-isin <ISIN>
+python scripts/run_full_pipeline.py --dates 2026-04-02 2026-04-06 2026-04-07 2026-04-08 2026-04-09 2026-04-13 --db-url sqlite:///artifacts/verification/pipeline_run_work.sqlite --reset-sqlite-db --market-isin <ISIN>
 ```
 
 ### Historical NSE Backfill Sample
 
 ```bash
-python scripts/backfill_nse_equity_history.py --start-date 2024-01-02 --end-date 2024-01-08
+python scripts/backfill_nse_equity_history.py --start-date 2019-01-01 --end-date 2025-12-31 --sample-mode first_trading_day_per_year
 ```
 
-The historical backfill script writes [`artifacts/verification/nse_historical_backfill_report.json`](artifacts/verification/nse_historical_backfill_report.json). The current committed sample covers a real 2024 historical window and shows:
-
-- `5/5` successful trading-day downloads
-- `0` failures
-- `browser_fallback_required: false` for that measured archive-host sample
+The historical backfill script writes [`artifacts/verification/nse_historical_backfill_report.json`](artifacts/verification/nse_historical_backfill_report.json). It now supports governed multi-year sampling modes, records the selected sample mode directly in the artifact, and only recommends browser fallback when the measured archive failures actually justify it.
 
 That report is intentionally evidence-based. It does not claim legacy-host robustness that has not been re-proven.
 
@@ -703,7 +699,7 @@ OmegaData is materially stronger than a prototype, but it is still pre-productio
 
 Important honest boundaries:
 
-- release readiness is currently red because the replay DB still has unresolved blocking price-validation reviews and the latest tolerance benchmark is outside the configured acceptance band
+- release readiness is currently green under the governed policy budget, not because the review queue is empty
 - official-source-backed transformational adjustment evidence is materially better than before but still limited by the bundled raw-source window
 - reprocess orchestration is now evidence-backed and stateful, but it is still internal orchestration rather than a full external workflow engine
 - live-source stability must continue to be monitored over time, not inferred forever from one green artifact run

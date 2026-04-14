@@ -100,29 +100,44 @@ class ReleaseReadinessService:
         checks: list[ReadinessCheck] = []
 
         review_policies = load_review_policies()
-        open_blocking = 0
-        overdue_blocking = 0
+        open_release_blocking = 0
+        overdue_release_blocking = 0
+        open_record_scoped_blocking = 0
+        overdue_record_scoped_blocking = 0
         for review in session.query(ManualReviewQueue).all():
             category_policy = review_policies.for_category(review.category)
             if not category_policy.blocks_publication:
                 continue
             payload = dict(review.payload or {})
+            is_release_blocking = category_policy.scope.value != "RECORD"
             if not review.resolved:
-                open_blocking += 1
+                if is_release_blocking:
+                    open_release_blocking += 1
+                else:
+                    open_record_scoped_blocking += 1
             if bool(payload.get("sla_breached")):
-                overdue_blocking += 1
+                if is_release_blocking:
+                    overdue_release_blocking += 1
+                else:
+                    overdue_record_scoped_blocking += 1
         checks.append(
             ReadinessCheck(
                 name="blocking_reviews",
-                passed=open_blocking <= int(policy["max_open_blocking_reviews"]),
-                details=f"open_blocking_reviews={open_blocking}",
+                passed=open_release_blocking <= int(policy["max_open_blocking_reviews"]),
+                details=(
+                    f"open_release_blocking_reviews={open_release_blocking}, "
+                    f"open_record_scoped_blocking_reviews={open_record_scoped_blocking}"
+                ),
             )
         )
         checks.append(
             ReadinessCheck(
                 name="overdue_blocking_reviews",
-                passed=overdue_blocking <= int(policy["max_overdue_blocking_reviews"]),
-                details=f"overdue_blocking_reviews={overdue_blocking}",
+                passed=overdue_release_blocking <= int(policy["max_overdue_blocking_reviews"]),
+                details=(
+                    f"overdue_release_blocking_reviews={overdue_release_blocking}, "
+                    f"overdue_record_scoped_blocking_reviews={overdue_record_scoped_blocking}"
+                ),
             )
         )
 

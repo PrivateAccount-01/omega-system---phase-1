@@ -110,13 +110,16 @@ class OmegaDataSequentialPipeline:
         trade_date: date,
         *,
         exchange: Exchange = Exchange.NSE,
+        existing_instruments: set[str] | None = None,
+        existing_symbol_maps: set[tuple[str, Exchange, str]] | None = None,
     ) -> None:
-        pending_instrument = any(
-            isinstance(obj, InstrumentMaster) and obj.isin == isin
-            for obj in session.new
+        instrument_known = (
+            isin in existing_instruments
+            if existing_instruments is not None
+            else session.get(InstrumentMaster, isin) is not None
+            or any(isinstance(obj, InstrumentMaster) and obj.isin == isin for obj in session.new)
         )
-        inst = session.get(InstrumentMaster, isin)
-        if inst is None and not pending_instrument:
+        if not instrument_known:
             session.add(
                 InstrumentMaster(
                     isin=isin,
@@ -127,23 +130,31 @@ class OmegaDataSequentialPipeline:
                     active=True,
                 )
             )
+            if existing_instruments is not None:
+                existing_instruments.add(isin)
 
-        pending_symbol_map = any(
-            isinstance(obj, SymbolMap)
-            and obj.isin == isin
-            and obj.exchange == exchange
-            and obj.symbol == symbol
-            and obj.valid_to is None
-            for obj in session.new
+        symbol_key = (isin, exchange, symbol)
+        symbol_known = (
+            symbol_key in existing_symbol_maps
+            if existing_symbol_maps is not None
+            else session.scalar(
+                select(SymbolMap)
+                .where(SymbolMap.isin == isin)
+                .where(SymbolMap.exchange == exchange)
+                .where(SymbolMap.symbol == symbol)
+                .where(SymbolMap.valid_to.is_(None))
+            )
+            is not None
+            or any(
+                isinstance(obj, SymbolMap)
+                and obj.isin == isin
+                and obj.exchange == exchange
+                and obj.symbol == symbol
+                and obj.valid_to is None
+                for obj in session.new
+            )
         )
-        existing_symbol = session.scalar(
-            select(SymbolMap)
-            .where(SymbolMap.isin == isin)
-            .where(SymbolMap.exchange == exchange)
-            .where(SymbolMap.symbol == symbol)
-            .where(SymbolMap.valid_to.is_(None))
-        )
-        if existing_symbol is None and not pending_symbol_map:
+        if not symbol_known:
             session.add(
                 SymbolMap(
                     isin=isin,
@@ -153,6 +164,8 @@ class OmegaDataSequentialPipeline:
                     valid_to=None,
                 )
             )
+            if existing_symbol_maps is not None:
+                existing_symbol_maps.add(symbol_key)
 
     def _load_bhavcopy_prices(self, session: Session, path: Path, trade_date: date) -> int:
         if not path.exists():
@@ -169,6 +182,31 @@ class OmegaDataSequentialPipeline:
         text = payload.decode("utf-8", errors="ignore")
         reader = csv.DictReader(io.StringIO(text))
         loaded = 0
+        existing_instruments = {
+            row[0] for row in session.execute(select(InstrumentMaster.isin)).all()
+        }
+        existing_instruments.update(
+            obj.isin for obj in session.new if isinstance(obj, InstrumentMaster)
+        )
+        existing_symbol_maps = {
+            (row[0], row[1], row[2])
+            for row in session.execute(
+                select(SymbolMap.isin, SymbolMap.exchange, SymbolMap.symbol).where(SymbolMap.valid_to.is_(None))
+            ).all()
+        }
+        existing_symbol_maps.update(
+            (obj.isin, obj.exchange, obj.symbol)
+            for obj in session.new
+            if isinstance(obj, SymbolMap) and obj.valid_to is None
+        )
+        existing_prices = {
+            row.isin: row
+            for row in session.scalars(
+                select(PriceRecord)
+                .where(PriceRecord.exchange == Exchange.NSE)
+                .where(PriceRecord.trade_date == trade_date)
+            ).all()
+        }
 
         for raw in reader:
             row = self._normalize_row(raw)
@@ -205,13 +243,15 @@ class OmegaDataSequentialPipeline:
             assert close_p is not None
             assert volume is not None
 
-            self._ensure_instrument(session, isin=isin, symbol=symbol, trade_date=trade_date)
-            existing = session.scalar(
-                select(PriceRecord)
-                .where(PriceRecord.isin == isin)
-                .where(PriceRecord.exchange == Exchange.NSE)
-                .where(PriceRecord.trade_date == trade_date)
+            self._ensure_instrument(
+                session,
+                isin=isin,
+                symbol=symbol,
+                trade_date=trade_date,
+                existing_instruments=existing_instruments,
+                existing_symbol_maps=existing_symbol_maps,
             )
+            existing = existing_prices.get(isin)
             if existing is None:
                 existing = PriceRecord(
                     isin=isin,
@@ -225,6 +265,7 @@ class OmegaDataSequentialPipeline:
                     raw_source="nse_bhavcopy",
                 )
                 session.add(existing)
+                existing_prices[isin] = existing
             else:
                 existing.open_price = open_p
                 existing.high_price = high_p
@@ -251,6 +292,31 @@ class OmegaDataSequentialPipeline:
         text = payload.decode("utf-8", errors="ignore")
         reader = csv.DictReader(io.StringIO(text))
         loaded = 0
+        existing_instruments = {
+            row[0] for row in session.execute(select(InstrumentMaster.isin)).all()
+        }
+        existing_instruments.update(
+            obj.isin for obj in session.new if isinstance(obj, InstrumentMaster)
+        )
+        existing_symbol_maps = {
+            (row[0], row[1], row[2])
+            for row in session.execute(
+                select(SymbolMap.isin, SymbolMap.exchange, SymbolMap.symbol).where(SymbolMap.valid_to.is_(None))
+            ).all()
+        }
+        existing_symbol_maps.update(
+            (obj.isin, obj.exchange, obj.symbol)
+            for obj in session.new
+            if isinstance(obj, SymbolMap) and obj.valid_to is None
+        )
+        existing_prices = {
+            row.isin: row
+            for row in session.scalars(
+                select(PriceRecord)
+                .where(PriceRecord.exchange == Exchange.BSE)
+                .where(PriceRecord.trade_date == trade_date)
+            ).all()
+        }
 
         for raw in reader:
             row = self._normalize_row(raw)
@@ -281,13 +347,10 @@ class OmegaDataSequentialPipeline:
                 symbol=symbol,
                 trade_date=trade_date,
                 exchange=Exchange.BSE,
+                existing_instruments=existing_instruments,
+                existing_symbol_maps=existing_symbol_maps,
             )
-            existing = session.scalar(
-                select(PriceRecord)
-                .where(PriceRecord.isin == isin)
-                .where(PriceRecord.exchange == Exchange.BSE)
-                .where(PriceRecord.trade_date == trade_date)
-            )
+            existing = existing_prices.get(isin)
             if existing is None:
                 existing = PriceRecord(
                     isin=isin,
@@ -301,6 +364,7 @@ class OmegaDataSequentialPipeline:
                     raw_source="bse_bhavcopy",
                 )
                 session.add(existing)
+                existing_prices[isin] = existing
             else:
                 existing.open_price = open_p
                 existing.high_price = high_p

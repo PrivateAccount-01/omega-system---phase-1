@@ -43,10 +43,13 @@ class CrossSourceValidator:
     def __init__(self) -> None:
         self.matcher = CorporateActionMatcher()
         self.review_service = ManualReviewService()
+        self._audit_key_cache: set[tuple[str, str, str, date, str, str, str, ValidationResult]] = set()
+        self._audit_db_checked = False
+        self._audit_db_has_rows = False
 
     @staticmethod
-    def _audit_exists(
-        session: Session,
+    def _audit_key(
+        *,
         source_1: str,
         source_2: str,
         isin: str,
@@ -55,7 +58,44 @@ class CrossSourceValidator:
         left: str,
         right: str,
         result: ValidationResult,
-    ) -> bool:
+    ) -> tuple[str, str, str, date, str, str, str, ValidationResult]:
+        return (source_1, source_2, isin, data_date, field, left, right, result)
+
+    @staticmethod
+    def _audit_exists(
+        session: Session,
+        audit_key_cache: set[tuple[str, str, str, date, str, str, str, ValidationResult]],
+        audit_db_checked: bool,
+        audit_db_has_rows: bool,
+        source_1: str,
+        source_2: str,
+        isin: str,
+        data_date: date,
+        field: str,
+        left: str,
+        right: str,
+        result: ValidationResult,
+    ) -> tuple[bool, bool, bool]:
+        key = CrossSourceValidator._audit_key(
+            source_1=source_1,
+            source_2=source_2,
+            isin=isin,
+            data_date=data_date,
+            field=field,
+            left=left,
+            right=right,
+            result=result,
+        )
+        if key in audit_key_cache:
+            return True, audit_db_checked, audit_db_has_rows
+        if not audit_db_checked:
+            audit_db_has_rows = (
+                session.scalar(select(ValidationAuditLog.id).limit(1)) is not None
+            )
+            audit_db_checked = True
+        if not audit_db_has_rows:
+            audit_key_cache.add(key)
+            return False, audit_db_checked, audit_db_has_rows
         row = session.scalar(
             select(ValidationAuditLog.id)
             .where(ValidationAuditLog.source_1 == source_1)
@@ -67,7 +107,11 @@ class CrossSourceValidator:
             .where(ValidationAuditLog.source_2_value == right)
             .where(ValidationAuditLog.result == result)
         )
-        return row is not None
+        if row is not None:
+            audit_key_cache.add(key)
+            return True, audit_db_checked, audit_db_has_rows
+        audit_key_cache.add(key)
+        return False, audit_db_checked, audit_db_has_rows
 
     def validate_nse_bse_prices(self, session: Session, isin: str) -> list[ValidationOutcome]:
         nse_rows = session.scalars(
@@ -115,7 +159,14 @@ class CrossSourceValidator:
                             outcome.difference_pct,
                         )
                     )
-            signed_diffs.append((nse.trade_date, Decimal(str(nse.close_price)) - Decimal(str(bse.close_price))))
+            bse_close = Decimal(str(bse.close_price))
+            nse_close = Decimal(str(nse.close_price))
+            signed_diff_pct = (
+                Decimal("0")
+                if bse_close == 0
+                else (nse_close - bse_close) / bse_close
+            )
+            signed_diffs.append((nse.trade_date, signed_diff_pct))
 
         for data_date, failures in failed_by_date.items():
             max_diff = max(item[3] for item in failures)
@@ -558,8 +609,11 @@ class CrossSourceValidator:
             resolution_status="OPEN" if result != ValidationResult.PASS else "CLOSED",
             resolution_notes=None,
         )
-        if self._audit_exists(
+        exists, self._audit_db_checked, self._audit_db_has_rows = self._audit_exists(
             session=session,
+            audit_key_cache=self._audit_key_cache,
+            audit_db_checked=self._audit_db_checked,
+            audit_db_has_rows=self._audit_db_has_rows,
             source_1=source_1,
             source_2=source_2,
             isin=isin,
@@ -568,7 +622,8 @@ class CrossSourceValidator:
             left=str(left),
             right=str(right),
             result=result,
-        ):
+        )
+        if exists:
             return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
         session.add(audit)
@@ -605,8 +660,11 @@ class CrossSourceValidator:
             resolution_status="CLOSED" if result == ValidationResult.PASS else "OPEN",
             resolution_notes=notes,
         )
-        if self._audit_exists(
+        exists, self._audit_db_checked, self._audit_db_has_rows = self._audit_exists(
             session=session,
+            audit_key_cache=self._audit_key_cache,
+            audit_db_checked=self._audit_db_checked,
+            audit_db_has_rows=self._audit_db_has_rows,
             source_1=source_1,
             source_2=source_2,
             isin=isin,
@@ -615,7 +673,8 @@ class CrossSourceValidator:
             left=left,
             right=right,
             result=result,
-        ):
+        )
+        if exists:
             return ValidationOutcome(data_date=data_date, result=result, field=field, difference_pct=diff_pct)
 
         session.add(audit)
@@ -644,7 +703,9 @@ class CrossSourceValidator:
         last_five = ordered[-5:]
         values = [diff for _trade_date, diff in last_five]
         same_sign = all(x > 0 for x in values) or all(x < 0 for x in values)
-        if same_sign:
+        average_abs_pct = sum(abs(diff) for diff in values) / Decimal(len(values))
+        min_abs_pct = min(abs(diff) for diff in values)
+        if same_sign and average_abs_pct >= Decimal("0.01") and min_abs_pct >= Decimal("0.005"):
             self.review_service.queue_review(
                 session,
                 category="SYSTEMATIC_DISAGREEMENT",
@@ -652,6 +713,8 @@ class CrossSourceValidator:
                 event_date=None,
                 reason="Consecutive directional disagreement across five observations",
                 payload={
+                    "average_abs_diff_pct": str(average_abs_pct),
+                    "min_abs_diff_pct": str(min_abs_pct),
                     "last_five": [
                         {"trade_date": trade_date.isoformat(), "signed_diff": str(diff)}
                         for trade_date, diff in last_five

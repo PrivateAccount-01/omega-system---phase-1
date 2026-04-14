@@ -23,16 +23,45 @@ def _iter_candidate_days(start_date: date, end_date: date) -> list[date]:
     return values
 
 
+def _apply_sample_mode(candidate_days: list[date], sample_mode: str) -> list[date]:
+    if sample_mode == "all":
+        return candidate_days
+    if sample_mode == "first_trading_day_per_year":
+        sampled: list[date] = []
+        by_year: dict[int, list[date]] = {}
+        for value in candidate_days:
+            by_year.setdefault(value.year, []).append(value)
+        for year in sorted(by_year):
+            if by_year[year]:
+                sampled.append(by_year[year][0])
+        return sampled
+    if sample_mode == "first_week_per_year":
+        sampled: list[date] = []
+        by_year: dict[int, list[date]] = {}
+        for value in candidate_days:
+            by_year.setdefault(value.year, []).append(value)
+        for year in sorted(by_year):
+            sampled.extend(by_year[year][:5])
+        return sampled
+    raise ValueError(f"Unsupported sample_mode: {sample_mode}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Backfill and measure NSE historical bhavcopy downloads.")
     parser.add_argument("--start-date", required=True)
     parser.add_argument("--end-date", required=True)
+    parser.add_argument(
+        "--sample-mode",
+        choices=["all", "first_trading_day_per_year", "first_week_per_year"],
+        default="all",
+        help="Sample strategy for the requested range.",
+    )
     args = parser.parse_args()
 
     start_date = date.fromisoformat(args.start_date)
     end_date = date.fromisoformat(args.end_date)
     manager = DownloadManager()
-    candidate_days = _iter_candidate_days(start_date, end_date)
+    candidate_days = _apply_sample_mode(_iter_candidate_days(start_date, end_date), args.sample_mode)
 
     rows: list[dict[str, object]] = []
     successes = 0
@@ -74,6 +103,8 @@ def main() -> None:
     artifact = {
         "generated_at": datetime.now(UTC).isoformat(),
         "range": {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
+        "sample_mode": args.sample_mode,
+        "years_covered": sorted({value.year for value in candidate_days}),
         "candidate_trading_days": len(candidate_days),
         "successful_downloads": successes,
         "failed_downloads": failure_count,

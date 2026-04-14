@@ -1,55 +1,94 @@
 {
-  "generated_at": "2026-04-14T11:52:58.952624+00:00",
+  "generated_at": "2026-04-14T17:21:23.744303+00:00",
   "source_db": "pipeline_run_work.sqlite",
   "work_db": "artifacts/verification/discontinuity_spike_reaudit.sqlite",
   "market_proxy_isin": "INF204KB14I2",
   "source_summary": {
-    "existing_total_event_count": 3,
-    "existing_unique_event_count": 3,
+    "existing_total_event_count": 24,
+    "existing_unique_event_count": 24,
     "existing_duplicate_event_count": 0,
     "existing_counts_by_date": [
+      {
+        "event_date": "2026-04-06",
+        "count": 3
+      },
+      {
+        "event_date": "2026-04-07",
+        "count": 4
+      },
+      {
+        "event_date": "2026-04-08",
+        "count": 7
+      },
       {
         "event_date": "2026-04-09",
         "count": 1
       },
       {
-        "event_date": "2026-04-10",
-        "count": 2
+        "event_date": "2026-04-13",
+        "count": 9
       }
     ]
   },
-  "new_events_detected": 3,
-  "persisted_event_count": 3,
+  "new_events_detected": 24,
+  "persisted_event_count": 24,
   "counts_by_date": [
+    {
+      "event_date": "2026-04-06",
+      "count": 3
+    },
+    {
+      "event_date": "2026-04-07",
+      "count": 4
+    },
+    {
+      "event_date": "2026-04-08",
+      "count": 7
+    },
     {
       "event_date": "2026-04-09",
       "count": 1
     },
     {
-      "event_date": "2026-04-10",
-      "count": 2
+      "event_date": "2026-04-13",
+      "count": 9
     }
   ],
   "counts_by_date_category": [
     {
+      "event_date": "2026-04-06",
+      "category": "B",
+      "count": 3
+    },
+    {
+      "event_date": "2026-04-07",
+      "category": "B",
+      "count": 4
+    },
+    {
+      "event_date": "2026-04-08",
+      "category": "B",
+      "count": 7
+    },
+    {
       "event_date": "2026-04-09",
       "category": "B",
       "count": 1
     },
     {
-      "event_date": "2026-04-10",
+      "event_date": "2026-04-13",
       "category": "A",
       "count": 1
     },
     {
-      "event_date": "2026-04-10",
+      "event_date": "2026-04-13",
       "category": "B",
-      "count": 1
+      "count": 8
     }
   ],
-  "top_spike_date": "2026-04-10",
-  "top_spike_market_return": 0.009128,
-  "top_spike_average_abs_idiosyncratic_return": 0.285627,
+  "top_spike_date": "2026-04-13",
+  "top_spike_market_return": 0.000111,
+  "top_spike_average_abs_idiosyncratic_return": 0.28398533333333337,
   "analysis": {
     "duplicate_persistence_detected_in_source": false,
     "top_spike_has_extreme_market_move": false,
@@ -58,21 +97,84 @@
   "top_spike_events": [
     {
       "isin": "INE219Y01026",
-      "event_date": "2026-04-10",
+      "event_date": "2026-04-13",
       "category": "A",
-      "overnight_return": -0.406208,
-      "market_return": 0.009128,
+      "overnight_return": -0.428381,
+      "market_return": 0.000111,
       "beta_used": 1.0,
-      "idiosyncratic_return": -0.415337
+      "idiosyncratic_return": -0.428493
+    },
+    {
+      "isin": "INE446A01025",
+      "event_date": "2026-04-13",
+      "category": "B",
+      "overnight_return": 0.390732,
+      "market_return": 0.000111,
+      "beta_used": 1.0,
+      "idiosyncratic_return": 0.390621
+    },
+    {
+      "isin": "INE561H01026",
+      "event_date": "2026-04-13",
+      "category": "B",
+      "overnight_return": 0.347181,
+      "market_return": 0.000111,
+      "beta_used": 1.0,
+      "idiosyncratic_return": 0.34707
+    },
+    {
+      "isin": "INE470Y01017",
+      "event_date": "2026-04-13",
+      "category": "B",
+      "overnight_return": 0.321148,
+      "market_return": 0.000111,
+      "beta_used": 1.0,
+      "idiosyncratic_return": 0.321037
+    },
+    {
+      "isin": "INE864X01013",
+      "event_date": "2026-04-13",
+      "category": "B",
+      "overnight_return": 0.289546,
+      "market_return": 0.000111,
+      "beta_used": 1.0,
+      "idiosyncratic_return": 0.289435
+    },
+    {
+      "isin": "INE505A01010",
+      "event_date": "2026-04-13",
+      "category": "B",
+      "overnight_return": 0.254342,
+      "market_return": 0.000111,
+      "beta_used": 1.0,
+      "idiosyncratic_return": 0.25423
+    },
+    {
+      "isin": "INE126M01010",
+      "event_date": "2026-04-13",
+      "category": "B",
+      "overnight_return": 0.252294,
+      "market_return": 0.000111,
+      "beta_used": 1.0,
+      "idiosyncratic_return": 0.252182
     },
     {
       "isin": "INE878H01024",
-      "event_date": "2026-04-10",
+      "event_date": "2026-04-13",
       "category": "B",
-      "overnight_return": -0.146789,
-      "market_return": 0.009128,
+      "overnight_return": -0.137615,
+      "market_return": 0.000111,
       "beta_used": 1.0,
-      "idiosyncratic_return": -0.155917
+      "idiosyncratic_return": -0.137726
+    },
+    {
+      "isin": "INE980O01024",
+      "event_date": "2026-04-13",
+      "category": "B",
+      "overnight_return": -0.134963,
+      "market_return": 0.000111,
+      "beta_used": 1.0,
+      "idiosyncratic_return": -0.135074
     }
   ]
 }

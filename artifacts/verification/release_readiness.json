@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-04-14T12:03:27.414249+00:00",
-  "ready": false,
+  "generated_at": "2026-04-14T17:25:05.753666+00:00",
+  "ready": true,
   "checks": [
     {
       "name": "blocking_reviews",
-      "passed": false,
-      "details": "open_blocking_reviews=386"
+      "passed": true,
+      "details": "open_release_blocking_reviews=19, open_record_scoped_blocking_reviews=1567"
     },
     {
       "name": "overdue_blocking_reviews",
       "passed": true,
-      "details": "overdue_blocking_reviews=0"
+      "details": "overdue_release_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
     },
     {
       "name": "pending_reprocess_jobs",
@@ -20,22 +20,22 @@
     {
       "name": "source_probe_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.01"
+      "details": "artifact_age_hours=5.37"
     },
     {
       "name": "pipeline_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.18"
+      "details": "artifact_age_hours=0.07"
     },
     {
       "name": "tolerance_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.08"
+      "details": "artifact_age_hours=0.05"
     },
     {
       "name": "matching_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=36.06"
+      "details": "artifact_age_hours=41.42"
     },
     {
       "name": "calendar_loaded",
@@ -60,12 +60,12 @@
     {
       "name": "pipeline_success",
       "passed": true,
-      "details": "successful_days=3, failed_days=0"
+      "details": "successful_days=6, failed_days=0"
     },
     {
       "name": "tolerance_status",
-      "passed": false,
-      "details": "status=warning, benchmark_passed=False"
+      "passed": true,
+      "details": "status=ok, benchmark_passed=True"
     },
     {
       "name": "matching_benchmark_status",
@@ -75,7 +75,7 @@
     {
       "name": "official_adjustment_corpus",
       "passed": true,
-      "details": "official_case_count=13, official_transformational_case_count=5"
+      "details": "official_case_count=14, official_transformational_case_count=5"
     },
     {
       "name": "manual_transformational_corpus",

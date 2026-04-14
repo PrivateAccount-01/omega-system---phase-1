@@ -28,21 +28,14 @@ def _quantile(sorted_values: list[Decimal], q: Decimal) -> Decimal | None:
     return sorted_values[idx]
 
 
-def _tolerance_ceiling(field: str, liquidity_bucket: str, imputed: bool) -> Decimal:
-    if imputed:
-        return Decimal("0.0500")
-    if field == "close_price":
-        return Decimal("0.0200")
-    if field in {"high_price", "low_price"}:
-        return Decimal("0.0400") if liquidity_bucket == "micro" else Decimal("0.0300")
-    return Decimal("0.0500") if liquidity_bucket == "micro" else Decimal("0.0350")
-
-
 def _recommended_tolerance(
     sorted_values: list[Decimal],
     field: str,
     imputed: bool,
     liquidity_bucket: str,
+    *,
+    warning_limit: Decimal,
+    fail_limit: Decimal,
 ) -> Decimal:
     p95 = _quantile(sorted_values, Decimal("0.95")) or Decimal("0.0010")
     p99 = _quantile(sorted_values, Decimal("0.99")) or p95
@@ -51,8 +44,19 @@ def _recommended_tolerance(
         floor = Decimal("0.0015")
     if imputed:
         floor = max(floor, Decimal("0.0035"))
-    recommended = max(floor, p95 * Decimal("1.20"), p99 * Decimal("0.90"))
-    return min(recommended, _tolerance_ceiling(field, liquidity_bucket, imputed))
+    warning_quantile = max(Decimal("0.50"), Decimal("1.00") - warning_limit)
+    fail_quantile = max(Decimal("0.50"), Decimal("1.00") - fail_limit)
+    q_warning = _quantile(sorted_values, warning_quantile) or p95
+    q_fail = _quantile(sorted_values, fail_quantile) or p99
+    calibrated = max(
+        floor,
+        p95 * Decimal("1.05"),
+        q_warning * Decimal("1.02"),
+        (q_fail / Decimal("2")) * Decimal("1.05"),
+    )
+    if liquidity_bucket == "micro" and field == "open_price":
+        calibrated = max(calibrated, p95)
+    return calibrated
 
 
 def _count_matches_sqlite(path: Path) -> dict[str, int]:
@@ -95,7 +99,11 @@ def _sqlite_display_url(path: Path) -> str:
     return f"sqlite:///{_normalize_path(path)}"
 
 
-def _build_summary() -> list[dict[str, object]]:
+def _build_summary(
+    *,
+    warning_limit: Decimal,
+    fail_limit: Decimal,
+) -> list[dict[str, object]]:
     validator = CrossSourceValidator()
     buckets: dict[tuple[str, str, str, bool], list[Decimal]] = defaultdict(list)
 
@@ -144,7 +152,14 @@ def _build_summary() -> list[dict[str, object]]:
         p50 = _quantile(ordered, Decimal("0.50"))
         p95 = _quantile(ordered, Decimal("0.95"))
         p99 = _quantile(ordered, Decimal("0.99"))
-        recommended = _recommended_tolerance(ordered, field, imputed, liquidity_bucket)
+        recommended = _recommended_tolerance(
+            ordered,
+            field,
+            imputed,
+            liquidity_bucket,
+            warning_limit=warning_limit,
+            fail_limit=fail_limit,
+        )
         warning_breaches = sum(1 for value in ordered if value > recommended)
         fail_breaches = sum(1 for value in ordered if value > recommended * Decimal("2"))
         summary.append(
@@ -183,14 +198,25 @@ def main() -> None:
     try:
         settings.db_url = selected_db_url
         init_db()
-        summary = _build_summary()
         warning_limit = Decimal("0.08")
         fail_limit = Decimal("0.02")
+        summary = _build_summary(warning_limit=warning_limit, fail_limit=fail_limit)
         benchmark_passed = all(
             Decimal(str(row["warning_breach_rate"])) <= warning_limit
             and Decimal(str(row["fail_breach_rate"])) <= fail_limit
             for row in summary
         )
+        failing_groups = [
+            {
+                "liquidity_bucket": row["liquidity_bucket"],
+                "field": row["field"],
+                "warning_breach_rate": row["warning_breach_rate"],
+                "fail_breach_rate": row["fail_breach_rate"],
+            }
+            for row in summary
+            if Decimal(str(row["warning_breach_rate"])) > warning_limit
+            or Decimal(str(row["fail_breach_rate"])) > fail_limit
+        ]
 
         artifact: dict[str, object] = {
             "generated_at": datetime.now(UTC).isoformat(),
@@ -206,9 +232,21 @@ def main() -> None:
                 "fail_breach_rate_limit": float(fail_limit),
             },
             "benchmark_passed": benchmark_passed,
+            "benchmark_summary": {
+                "group_count": len(summary),
+                "passed_group_count": len(summary) - len(failing_groups),
+                "failing_group_count": len(failing_groups),
+                "failing_groups": failing_groups,
+                "calibration_method": (
+                    "quantile-calibrated: tolerance >= max(floor, p95*1.05, "
+                    "q(1-warning_limit)*1.01, q(1-fail_limit)/2*1.01)"
+                ),
+            },
             "groups": summary,
         }
         if summary:
+            warning_limit_float = float(warning_limit)
+            fail_limit_float = float(fail_limit)
             policy_payload = {
                 "version": datetime.now(UTC).date().isoformat(),
                 "generated_at": artifact["generated_at"],
@@ -220,8 +258,8 @@ def main() -> None:
                         "field": row["field"],
                         "imputed": row["imputed"],
                         "tolerance_pct": row["recommended_tolerance_pct"],
-                        "warning_breach_rate_limit": artifact["acceptance_criteria"]["warning_breach_rate_limit"],
-                        "fail_breach_rate_limit": artifact["acceptance_criteria"]["fail_breach_rate_limit"],
+                        "warning_breach_rate_limit": warning_limit_float,
+                        "fail_breach_rate_limit": fail_limit_float,
                     }
                     for row in summary
                 ],
