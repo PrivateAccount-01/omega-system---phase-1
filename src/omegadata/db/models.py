@@ -223,6 +223,7 @@ class DiscontinuityEvent(Base):
     __tablename__ = "discontinuity_event"
     __table_args__ = (
         Index("ix_disc_isin_date", "isin", "event_date"),
+        UniqueConstraint("isin", "event_date", "category", name="uq_disc_isin_date_category"),
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)

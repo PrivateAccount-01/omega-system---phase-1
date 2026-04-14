@@ -13,9 +13,15 @@ from omegadata.track_b.corporate_action_parser import CorporateActionParser
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RAW_ROOT = PROJECT_ROOT / "data" / "raw"
 OUTPUT_PATH = PROJECT_ROOT / "tests" / "fixtures" / "official_source" / "adjustment_reference_corpus.json"
-PRICE_MONTH_DIR = RAW_ROOT / "nse_equity_bhavcopy" / "year=2026" / "month=04"
 ACTION_GLOB = RAW_ROOT / "nse_corporate_actions" / "year=2026"
 ASSERTION_DATES = ("2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07")
+SUPPLEMENTAL_CASES_PATH = (
+    PROJECT_ROOT
+    / "tests"
+    / "fixtures"
+    / "official_source"
+    / "official_transformational_case_specs.json"
+)
 PARSER = CorporateActionParser()
 
 
@@ -54,7 +60,7 @@ def _load_bhavcopy_rows(zip_path: Path) -> dict[str, dict[str, str]]:
 
 def _price_history() -> dict[str, list[dict[str, str]]]:
     history: dict[str, dict[str, dict[str, str]]] = {}
-    for zip_path in sorted(PRICE_MONTH_DIR.glob("*.zip")):
+    for zip_path in sorted((RAW_ROOT / "nse_equity_bhavcopy").glob("year=*/month=*/*.zip")):
         rows = _load_bhavcopy_rows(zip_path)
         trade_date = f"{zip_path.stem[:4]}-{zip_path.stem[4:6]}-{zip_path.stem[6:8]}"
         for symbol, row in rows.items():
@@ -88,6 +94,7 @@ def _assertions(
     action_type: str,
     parameters: dict[str, str],
     prices_by_date: dict[str, dict[str, str]],
+    assertion_dates: tuple[str, ...] | list[str],
 ) -> list[dict[str, str]]:
     price_factor, volume_factor = _adjustment_factors(action_type, parameters)
     return [
@@ -104,7 +111,7 @@ def _assertions(
             "expected_cumulative_price_factor": _quantize_factor(price_factor),
             "expected_cumulative_volume_factor": _quantize_factor(volume_factor),
         }
-        for trade_date in ASSERTION_DATES
+        for trade_date in assertion_dates
         if trade_date in prices_by_date
     ]
 
@@ -141,6 +148,15 @@ def _raw_action_rows() -> list[dict[str, str]]:
                 }
             )
     return rows
+
+
+def _supplemental_case_specs() -> list[dict[str, object]]:
+    if not SUPPLEMENTAL_CASES_PATH.exists():
+        return []
+    payload = json.loads(SUPPLEMENTAL_CASES_PATH.read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        return []
+    return [item for item in payload if isinstance(item, dict)]
 
 
 def build_reference_corpus() -> dict[str, object]:
@@ -183,11 +199,60 @@ def build_reference_corpus() -> dict[str, object]:
                     action_type=action_type.value,
                     parameters=normalized_parameters,
                     prices_by_date=prices_by_date,
+                    assertion_dates=ASSERTION_DATES,
+                ),
+            }
+        )
+
+    for spec in _supplemental_case_specs():
+        symbol = str(spec.get("symbol", "")).strip()
+        if not symbol:
+            continue
+        history_rows = {row["trade_date"]: row for row in price_history.get(symbol, [])}
+        price_dates = tuple(str(value) for value in spec.get("price_dates", []) if str(value).strip())
+        assertion_dates = tuple(str(value) for value in spec.get("assertion_dates", price_dates) if str(value).strip())
+        selected_prices = [history_rows[trade_date] for trade_date in price_dates if trade_date in history_rows]
+        if not selected_prices:
+            continue
+        parameters = {
+            str(key): str(value)
+            for key, value in dict(spec.get("parameters", {})).items()
+        }
+        action_type = str(spec["action_type"])
+        cases.append(
+            {
+                "label": str(spec["label"]),
+                "isin": str(spec["isin"]),
+                "symbol": symbol,
+                "company_name": str(spec["company_name"]),
+                "action_type": action_type,
+                "ex_date": str(spec["ex_date"]),
+                "record_date": str(spec.get("record_date", spec["ex_date"])),
+                "subject": str(spec["subject"]),
+                "parameters": parameters,
+                "snapshot_path": str(spec["snapshot_path"]),
+                "price_paths": (
+                    [str(path) for path in spec["price_paths"]]
+                    if isinstance(spec.get("price_paths"), list)
+                    else list(
+                        dict.fromkeys(
+                            f"data/raw/nse_equity_bhavcopy/year={trade_date[:4]}/month={trade_date[5:7]}/{trade_date.replace('-', '')}.zip"
+                            for trade_date in price_dates
+                        )
+                    )
+                ),
+                "prices": selected_prices,
+                "assertions": _assertions(
+                    action_type=action_type,
+                    parameters=parameters,
+                    prices_by_date=history_rows,
+                    assertion_dates=assertion_dates,
                 ),
             }
         )
 
     transformational_types = {"BONUS", "SPLIT", "SPLIT_REVERSE", "RIGHTS", "RIGHTS_RENOUNCE", "MERGER_TARGET", "DEMERGER_PARENT"}
+    cases.sort(key=lambda case: str(case["label"]))
     transformational_cases = [case for case in cases if case["action_type"] in transformational_types]
     return {
         "case_count": len(cases),

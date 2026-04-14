@@ -6,7 +6,9 @@ import io
 import json
 import re
 import ssl
+import subprocess
 import time
+import tempfile
 import zipfile
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
@@ -144,6 +146,16 @@ class DownloadManager:
             "certificate",
         )
         return any(marker in text for marker in markers)
+
+    @staticmethod
+    def _is_retryable_nse_request_error(exc: Exception) -> bool:
+        if isinstance(exc, DownloadError):
+            if exc.stage != "request":
+                return False
+            if exc.status_code in {403, 404, 429}:
+                return False
+            return True
+        return isinstance(exc, httpx.HTTPError)
 
     @staticmethod
     def _header_profiles() -> list[dict[str, str]]:
@@ -302,6 +314,90 @@ class DownloadManager:
             request_attempts=1,
         )
 
+    def _request_via_curl(
+        self,
+        url: str,
+        headers: dict[str, str],
+        *,
+        timeout_seconds: float = 60.0,
+    ) -> FetchResult:
+        with tempfile.NamedTemporaryFile() as body_handle, tempfile.NamedTemporaryFile(mode="w+", encoding="utf-8") as header_handle:
+            cmd = [
+                "curl",
+                "--http1.1",
+                "--location",
+                "--silent",
+                "--show-error",
+                "--fail",
+                "--retry",
+                "2",
+                "--retry-all-errors",
+                "--connect-timeout",
+                str(int(timeout_seconds)),
+                "--max-time",
+                str(int(timeout_seconds)),
+                "--dump-header",
+                header_handle.name,
+                "--output",
+                body_handle.name,
+            ]
+            for name, value in headers.items():
+                cmd.extend(["-H", f"{name}: {value}"])
+            cmd.append(url)
+
+            try:
+                completed = subprocess.run(
+                    cmd,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                    timeout=timeout_seconds + 10.0,
+                )
+            except subprocess.TimeoutExpired as exc:
+                raise DownloadError(
+                    f"curl timeout for {url}",
+                    stage="request",
+                ) from exc
+
+            if completed.returncode != 0:
+                message = completed.stderr.strip() or completed.stdout.strip() or f"curl exited {completed.returncode}"
+                raise DownloadError(
+                    f"curl failed for {url}: {message}",
+                    stage="request",
+                )
+
+            payload = Path(body_handle.name).read_bytes()
+            if not payload:
+                raise DownloadError(f"Empty payload via curl: {url}", stage="request")
+
+            status_code: int | None = None
+            content_type = ""
+            for raw_line in Path(header_handle.name).read_text(encoding="utf-8", errors="ignore").splitlines():
+                line = raw_line.strip()
+                if line.startswith("HTTP/"):
+                    parts = line.split()
+                    if len(parts) >= 2 and parts[1].isdigit():
+                        status_code = int(parts[1])
+                elif ":" in line:
+                    name, value = line.split(":", 1)
+                    if name.lower().strip() == "content-type":
+                        content_type = value.strip()
+
+            if status_code is not None and status_code >= 400:
+                raise DownloadError(
+                    f"HTTP {status_code} via curl for {url}",
+                    status_code=status_code,
+                    stage="request",
+                )
+
+            return FetchResult(
+                payload=payload,
+                status_code=status_code or 200,
+                content_type=content_type,
+                transport="curl",
+                request_attempts=1,
+            )
+
     def _request_with_workarounds(
         self,
         client: httpx.Client,
@@ -313,9 +409,14 @@ class DownloadManager:
         try:
             return self._request(client, url, timeout_seconds=timeout_seconds)
         except Exception as exc:  # noqa: BLE001
-            if not self._is_nse_url(url) or not self._is_tls_error(exc):
+            if not self._is_nse_url(url) or not self._is_retryable_nse_request_error(exc):
                 raise
-        return self._request_via_urllib(url=url, headers=request_headers, timeout_seconds=timeout_seconds)
+        try:
+            return self._request_via_urllib(url=url, headers=request_headers, timeout_seconds=timeout_seconds)
+        except Exception as urllib_exc:  # noqa: BLE001
+            if not self._is_retryable_nse_request_error(urllib_exc) and not self._is_tls_error(urllib_exc):
+                raise
+        return self._request_via_curl(url=url, headers=request_headers, timeout_seconds=timeout_seconds)
 
     def _render_url(self, source_key: str, as_of: date) -> str:
         era = resolve_era(source_key, as_of)

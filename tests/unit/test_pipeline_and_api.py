@@ -171,6 +171,37 @@ def test_bse_empty_meeting_rows_are_not_promoted_to_corporate_actions(db_session
     assert db_session.scalar(select(CorporateActionStaging)) is None
 
 
+def test_nse_request_workaround_can_fall_back_to_curl(monkeypatch) -> None:
+    manager = DownloadManager()
+
+    def fail_httpx(*args, **kwargs):  # noqa: ANN002, ANN003
+        raise DownloadError("tls issue", stage="request")
+
+    def fail_urllib(*args, **kwargs):  # noqa: ANN002, ANN003
+        raise DownloadError("urllib issue", stage="request")
+
+    def succeed_curl(*args, **kwargs):  # noqa: ANN002, ANN003
+        return FetchResult(
+            payload=b'{"ok": true}',
+            status_code=200,
+            content_type="application/json",
+            transport="curl",
+            request_attempts=1,
+        )
+
+    monkeypatch.setattr(manager, "_request", fail_httpx)
+    monkeypatch.setattr(manager, "_request_via_urllib", fail_urllib)
+    monkeypatch.setattr(manager, "_request_via_curl", succeed_curl)
+
+    result = manager._request_with_workarounds(
+        client=None,  # type: ignore[arg-type]
+        url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+        request_headers={"User-Agent": "test"},
+        timeout_seconds=1.0,
+    )
+    assert result.transport == "curl"
+
+
 def test_nse_buyback_is_classified_without_unclassified_fallback(db_session, tmp_path: Path) -> None:
     payload = [
         {

@@ -84,7 +84,7 @@ def _load_policy() -> dict[str, Any]:
             "require_primary_probe_healthy": True,
             "minimum_healthy_fallbacks": 1,
             "minimum_official_cases": 10,
-            "minimum_official_transformational_cases": 2,
+            "minimum_official_transformational_cases": 3,
             "minimum_manual_transformational_cases": 14,
         }
     return cast(dict[str, Any], json.loads(path.read_text(encoding="utf-8")))

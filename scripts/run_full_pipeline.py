@@ -32,7 +32,8 @@ def main() -> None:
                 "ingest_paths": summary.ingest_paths,
                 "confirmed_actions": summary.confirmed_actions,
                 "adjusted_rows": summary.adjusted_rows,
-                "discontinuities": summary.discontinuities,
+                "new_discontinuities": summary.discontinuities,
+                "total_discontinuity_events": summary.total_discontinuity_events,
                 "validations": summary.validations,
             })
         except Exception as exc:  # noqa: BLE001
@@ -45,7 +46,10 @@ def main() -> None:
             "failed_days": len(errors),
             "total_confirmed_actions": sum(int(r["confirmed_actions"]) for r in runs),
             "total_adjusted_rows": sum(int(r["adjusted_rows"]) for r in runs),
-            "total_discontinuities": sum(int(r["discontinuities"]) for r in runs),
+            "total_new_discontinuities": sum(int(r["new_discontinuities"]) for r in runs),
+            "latest_total_discontinuity_events": (
+                int(runs[-1]["total_discontinuity_events"]) if runs else 0
+            ),
             "total_validations": sum(int(r["validations"]) for r in runs),
         },
         "errors": errors,

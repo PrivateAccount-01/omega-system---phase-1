@@ -90,7 +90,7 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
     corpus = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
     assert corpus["case_count"] == len(corpus["cases"])
     assert corpus["case_count"] >= 10
-    assert corpus["transformational_case_count"] >= 2
+    assert corpus["transformational_case_count"] >= 3
 
     for case in corpus["cases"]:
         assert case["label"]
@@ -149,9 +149,11 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
         .where(PriceRecord.isin == "INE219Y01018")
         .where(PriceRecord.trade_date == date(2026, 4, 7))
     )
+    official_action_types = {case["action_type"] for case in corpus["cases"]}
     assert bonus_pre_row is not None
     assert bonus_pre_row.adjustment_chain[0]["action_type"] == "BONUS"
     assert bonus_pre_row.adjustment_chain[0]["ca_confidence"] == "HIGH"
+    assert {"BONUS", "SPLIT", "RIGHTS"}.issubset(official_action_types)
 
 
 def test_reference_corpus_hand_computed_transformational_cases(db_session) -> None:

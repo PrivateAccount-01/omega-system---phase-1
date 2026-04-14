@@ -169,7 +169,7 @@ def test_release_readiness_blocks_on_overdue_review(tmp_path: Path, monkeypatch)
         encoding="utf-8",
     )
     (repo_root / "tests/fixtures/official_source/adjustment_reference_corpus.json").write_text(
-        json.dumps({"case_count": 10, "transformational_case_count": 2}),
+        json.dumps({"case_count": 10, "transformational_case_count": 3}),
         encoding="utf-8",
     )
     (repo_root / "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json").write_text(

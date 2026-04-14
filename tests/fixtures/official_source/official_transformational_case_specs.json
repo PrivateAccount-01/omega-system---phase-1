@@ -1,0 +1,105 @@
+[
+  {
+    "label": "NESTLEIND_2024-01-05_SPLIT",
+    "isin": "INE239A01024",
+    "symbol": "NESTLEIND",
+    "company_name": "Nestle India Limited",
+    "action_type": "SPLIT",
+    "ex_date": "2024-01-05",
+    "record_date": "2024-01-05",
+    "subject": "Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share",
+    "parameters": {
+      "old_face_value": "10",
+      "new_face_value": "1"
+    },
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/nestleind_split_2024-01-04.json",
+    "price_paths": [
+      "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240102__e0a70f754665.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240103__f72177415825.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240104__4d390e055258.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240105__d5490c9c352b.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240108__46afeb3c1a51.zip"
+    ],
+    "price_dates": [
+      "2024-01-02",
+      "2024-01-03",
+      "2024-01-04",
+      "2024-01-05",
+      "2024-01-08"
+    ],
+    "assertion_dates": [
+      "2024-01-02",
+      "2024-01-03",
+      "2024-01-04",
+      "2024-01-05"
+    ]
+  },
+  {
+    "label": "TATACONSUM_2024-07-26_RIGHTS",
+    "isin": "INE192A01025",
+    "symbol": "TATACONSUM",
+    "company_name": "Tata Consumer Products Limited",
+    "action_type": "RIGHTS",
+    "ex_date": "2024-07-26",
+    "record_date": "2024-07-26",
+    "subject": "Rights issue 1:26 at Rs 818 per share",
+    "parameters": {
+      "rights_ratio_numerator": "1",
+      "rights_ratio_denominator": "26",
+      "issue_price": "818"
+    },
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/tataconsum_rights_2024-07-25.json",
+    "price_paths": [
+      "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240723__6e7b99b88b17.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240724__f122b216dc1f.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240725__0436e50418b5.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240726__d2efcdc5c292.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240729__68685c0f743e.zip"
+    ],
+    "price_dates": [
+      "2024-07-23",
+      "2024-07-24",
+      "2024-07-25",
+      "2024-07-26",
+      "2024-07-29"
+    ],
+    "assertion_dates": [
+      "2024-07-23",
+      "2024-07-24",
+      "2024-07-25",
+      "2024-07-26"
+    ]
+  },
+  {
+    "label": "NMDC_2024-12-27_BONUS",
+    "isin": "INE584A01023",
+    "symbol": "NMDC",
+    "company_name": "NMDC Limited",
+    "action_type": "BONUS",
+    "ex_date": "2024-12-27",
+    "record_date": "2024-12-27",
+    "subject": "Bonus 2:1",
+    "parameters": {
+      "bonus_ratio_numerator": "2",
+      "bonus_ratio_denominator": "1"
+    },
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/nmdc_bonus_2024-12-26.json",
+    "price_paths": [
+      "data/raw/nse_equity_bhavcopy/year=2024/month=12/20241224__636ac0c3f8a2.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=12/20241226__35555bc03b03.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=12/20241227__518879909b57.zip",
+      "data/raw/nse_equity_bhavcopy/year=2024/month=12/20241230__d0ef4f2ed0a9.zip"
+    ],
+    "price_dates": [
+      "2024-12-24",
+      "2024-12-26",
+      "2024-12-27",
+      "2024-12-30"
+    ],
+    "assertion_dates": [
+      "2024-12-24",
+      "2024-12-26",
+      "2024-12-27"
+    ]
+  }
+]

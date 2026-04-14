@@ -25,9 +25,30 @@ class DetectionOutcome:
     event_date: date
     category: DiscontinuityCategory
     idiosyncratic_return: Decimal
+    is_new: bool
 
 
 class DiscontinuityDetector:
+    @staticmethod
+    def _review_exists(
+        session: Session,
+        *,
+        isin: str,
+        event_date: date,
+        reason: str,
+    ) -> bool:
+        return (
+            session.scalar(
+                select(ManualReviewQueue.id)
+                .where(ManualReviewQueue.category == "DISCONTINUITY_REVIEW")
+                .where(ManualReviewQueue.isin == isin)
+                .where(ManualReviewQueue.event_date == event_date)
+                .where(ManualReviewQueue.reason == reason)
+                .limit(1)
+            )
+            is not None
+        )
+
     def _estimate_beta(self, stock_returns: list[float], market_returns: list[float]) -> Decimal | None:
         obs = min(len(stock_returns), len(market_returns))
         if obs >= 60:
@@ -277,35 +298,54 @@ class DiscontinuityDetector:
         review: bool,
         auto_adjust: bool,
     ) -> DetectionOutcome:
-        event = DiscontinuityEvent(
-            isin=isin,
-            event_date=event_date,
-            overnight_return=overnight,
-            market_return=market_ret,
-            beta_used=beta,
-            idiosyncratic_return=idio,
-            category=category,
-            review_required=review,
-            auto_adjust_queued=auto_adjust,
+        existing = session.scalar(
+            select(DiscontinuityEvent)
+            .where(DiscontinuityEvent.isin == isin)
+            .where(DiscontinuityEvent.event_date == event_date)
+            .where(DiscontinuityEvent.category == category)
+            .limit(1)
         )
-        session.add(event)
+        is_new = existing is None
+        if existing is None:
+            event = DiscontinuityEvent(
+                isin=isin,
+                event_date=event_date,
+                overnight_return=overnight,
+                market_return=market_ret,
+                beta_used=beta,
+                idiosyncratic_return=idio,
+                category=category,
+                review_required=review,
+                auto_adjust_queued=auto_adjust,
+            )
+            session.add(event)
+        else:
+            existing.overnight_return = overnight
+            existing.market_return = market_ret
+            existing.beta_used = beta
+            existing.idiosyncratic_return = idio
+            existing.review_required = review
+            existing.auto_adjust_queued = auto_adjust
 
         if review:
-            session.add(
-                ManualReviewQueue(
-                    category="DISCONTINUITY_REVIEW",
-                    isin=isin,
-                    event_date=event_date,
-                    reason=f"Discontinuity category {category.value}",
-                    payload={
-                        "idiosyncratic_return": str(idio),
-                        "overnight_return": str(overnight),
-                    },
+            reason = f"Discontinuity category {category.value}"
+            if not self._review_exists(session, isin=isin, event_date=event_date, reason=reason):
+                session.add(
+                    ManualReviewQueue(
+                        category="DISCONTINUITY_REVIEW",
+                        isin=isin,
+                        event_date=event_date,
+                        reason=reason,
+                        payload={
+                            "idiosyncratic_return": str(idio),
+                            "overnight_return": str(overnight),
+                        },
+                    )
                 )
-            )
         return DetectionOutcome(
             isin=isin,
             event_date=event_date,
             category=category,
             idiosyncratic_return=idio,
+            is_new=is_new,
         )

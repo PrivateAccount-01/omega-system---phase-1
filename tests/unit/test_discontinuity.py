@@ -3,7 +3,9 @@ from __future__ import annotations
 from datetime import date
 from decimal import Decimal
 
-from omegadata.db.models import ConfirmedCorporateAction, ExclusionDate, PriceRecord
+from sqlalchemy import select
+
+from omegadata.db.models import ConfirmedCorporateAction, ExclusionDate, ManualReviewQueue, PriceRecord
 from omegadata.domain import ConfidenceLevel, CorporateActionType, Exchange
 from omegadata.track_b.discontinuity import DiscontinuityDetector
 
@@ -74,3 +76,24 @@ def test_exclusion_date_relaxes_thresholds(db_session) -> None:
     outcomes = DiscontinuityDetector().detect(db_session, market_isin="MARKET")
     # Because threshold relaxes to -50%, this -40% move should not be category A.
     assert not any(o.category.value == "A" and o.event_date == date(2024, 3, 21) for o in outcomes)
+
+
+def test_discontinuity_detection_is_idempotent_on_repeat(db_session) -> None:
+    db_session.add_all(
+        [
+            _price("MARKET", date(2024, 1, 1), "100"),
+            _price("MARKET", date(2024, 1, 2), "100"),
+            _price("INE009A01021", date(2024, 1, 1), "1000"),
+            _price("INE009A01021", date(2024, 1, 2), "600"),
+        ]
+    )
+    detector = DiscontinuityDetector()
+
+    first = detector.detect(db_session, market_isin="MARKET")
+    second = detector.detect(db_session, market_isin="MARKET")
+
+    assert len(first) == 1
+    assert first[0].is_new is True
+    assert len(second) == 1
+    assert second[0].is_new is False
+    assert len(db_session.scalars(select(ManualReviewQueue)).all()) == 1

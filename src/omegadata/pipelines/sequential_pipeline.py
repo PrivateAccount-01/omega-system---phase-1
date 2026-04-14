@@ -42,6 +42,7 @@ class PipelineSummary:
     confirmed_actions: int
     adjusted_rows: int
     discontinuities: int
+    total_discontinuity_events: int
     validations: int
 
 
@@ -526,7 +527,7 @@ class OmegaDataSequentialPipeline:
             return None
         raise ValueError("market_isin is required; pass it explicitly or set OMEGA_MARKET_PROXY_ISIN")
 
-    def run_track_b(self, as_of: date, market_isin: str | None = None) -> tuple[int, int, int, int]:
+    def run_track_b(self, as_of: date, market_isin: str | None = None) -> tuple[int, int, int, int, int]:
         with get_session() as session:
             confirmations = self.ca_service.run_daily_confirmation(session, as_of=as_of)
 
@@ -611,7 +612,12 @@ class OmegaDataSequentialPipeline:
                 )
                 row.confidence_score = self.confidence_scorer.compute_score(inputs)
 
-            return len(confirmations), adjusted_rows, len(discontinuities), validation_count
+            new_discontinuities = sum(1 for event in discontinuities if event.is_new)
+            total_discontinuity_events = int(
+                session.query(DiscontinuityEvent).count()
+            )
+
+            return len(confirmations), adjusted_rows, new_discontinuities, total_discontinuity_events, validation_count
 
     def run_scheduled_track_b_confirmation(
         self,
@@ -624,7 +630,7 @@ class OmegaDataSequentialPipeline:
 
     def run_full_day(self, as_of: date, market_isin: str | None = None) -> PipelineSummary:
         paths = self.run_track_a(as_of)
-        confirmed, adjusted, discontinuities, validations = self.run_track_b(
+        confirmed, adjusted, discontinuities, total_discontinuity_events, validations = self.run_track_b(
             as_of=as_of,
             market_isin=market_isin,
         )
@@ -633,5 +639,6 @@ class OmegaDataSequentialPipeline:
             confirmed_actions=confirmed,
             adjusted_rows=adjusted,
             discontinuities=discontinuities,
+            total_discontinuity_events=total_discontinuity_events,
             validations=validations,
         )
