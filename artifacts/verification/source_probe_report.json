@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-14T12:03:07.801080+00:00",
+  "generated_at": "2026-04-19T08:25:57.727090+00:00",
   "workflow": "scheduled_verification",
-  "probe_date": "2026-04-13",
-  "nse_equity_probe_date": "2026-04-13",
+  "probe_date": "2026-04-17",
+  "nse_equity_probe_date": "2026-04-17",
   "calendar_mode": "configured_trading_calendar",
   "calendar_config_state": "loaded",
   "calendar_config_path": "config/trading_holidays_india.json",
@@ -20,7 +20,7 @@
         2026
       ],
       "latest_covered_year": 2026,
-      "days_until_expiry": 261,
+      "days_until_expiry": 256,
       "config_error": null
     },
     {
@@ -32,7 +32,7 @@
         2026
       ],
       "latest_covered_year": 2026,
-      "days_until_expiry": 261,
+      "days_until_expiry": 256,
       "config_error": null
     }
   ],
@@ -44,48 +44,69 @@
   "nse_corporate_actions": [
     {
       "source_key": "NSE_CORPORATE_ACTIONS",
-      "as_of": "2026-04-14",
+      "as_of": "2026-04-19",
       "url": "https://www.nseindia.com/api/corporates-corporateActions?index=equities",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/json; charset=utf-8",
-      "bytes_downloaded": 2100,
+      "bytes_downloaded": 2367,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.9571138999890536,
+      "elapsed_seconds": 0.6493693999946117,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "[{\"symbol\":\"AUROPHARMA\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"1\",\"subject\":\"Buy Back\",\"exDate\":\"17-Apr-2026\",\"recDate\":\"17-Apr-2026\",\"bcStartDate\":\"-\",\"bcEndDate\":\"-\",\"ndStartDate\":\"-\",\"comp\":\"Aurobindo Pharma Limited\",\"isi"
+      "body_preview": "[{\"symbol\":\"SANOFI\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"10\",\"subject\":\"Dividend - Rs 48 Per Share\",\"exDate\":\"22-Apr-2026\",\"recDate\":\"22-Apr-2026\",\"bcStartDate\":\"-\",\"bcEndDate\":\"-\",\"ndStartDate\":\"-\",\"comp\":\"Sanofi India Li"
     }
   ],
   "nse_equity_bhavcopy": [
     {
       "source_key": "NSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-13",
-      "url": "https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20260413_F_0000.csv.zip",
+      "as_of": "2026-04-17",
+      "url": "https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20260417_F_0000.csv.zip",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/zip",
-      "bytes_downloaded": 187396,
+      "bytes_downloaded": 189094,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.39168569998582825,
+      "elapsed_seconds": 0.5515788999618962,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\\d=\u0017\u001c\u0002\u0000\b\u0000)\u0000\u001c\u0000BhavCopy_NSE_CM_0_0_0_20260413_F_0000.csvUT\t\u0000\u0003aiaiux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\\v\u001c\u01f1\u077f\u07aa'aY=\u0000(\u0007\u0001\u4cec#\u0001ql_nDd\r\r\u0000ZteF6\u001bb\u0011\u001fO'|<o~\u007fi\u007fhSo\u007f{<//"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\\\u0018H\u05be\u0002\u0000A\b\u0000)\u0000\u001c\u0000BhavCopy_NSE_CM_0_0_0_20260417_F_0000.csvUT\t\u0000\u0003\u0014i\u0014iux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\\v\u001bGW`Y0~,\u000b H\u0004\u0000\u0221sKn\u001fj\u001f=_?7\"2 H*g\u000bTfd\t\u01cd,\u001f\u001f~t\u062d~o|\u001e~\r\u001f\u000f\u001f_\f_>>v}\u001a\u000f0l_\u001f\u000e\u007f"
+    }
+  ],
+  "nse_fo_bhavcopy": [
+    {
+      "source_key": "NSE_FO_BHAVCOPY",
+      "as_of": "2026-04-17",
+      "url": "https://nsearchives.nseindia.com/content/fo/NSE_FO_bhavcopy_20260417.csv",
+      "role": "primary",
+      "validated": false,
+      "status_code": 404,
+      "content_type": "",
+      "bytes_downloaded": 0,
+      "attempts": 1,
+      "request_attempts": 0,
+      "transport": null,
+      "header_profile": "chrome_desktop",
+      "elapsed_seconds": 15.58151910000015,
+      "failure_stage": "request",
+      "error": "HTTP 404 for https://nsearchives.nseindia.com/content/fo/NSE_FO_bhavcopy_20260417.csv",
+      "validation_error": null,
+      "body_preview": ""
     }
   ],
   "nse_equity_recent_history": [
     {
-      "date": "2026-04-13",
+      "date": "2026-04-17",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
@@ -93,7 +114,7 @@
       "overall_validated": true
     },
     {
-      "date": "2026-04-10",
+      "date": "2026-04-16",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
@@ -101,7 +122,7 @@
       "overall_validated": true
     },
     {
-      "date": "2026-04-09",
+      "date": "2026-04-15",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
@@ -112,18 +133,18 @@
   "bse_equity_candidates": [
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-13",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260413_F_0000.CSV",
+      "as_of": "2026-04-17",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260417_F_0000.CSV",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/octet-stream",
-      "bytes_downloaded": 854046,
+      "bytes_downloaded": 845991,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.11693860002560541,
+      "elapsed_seconds": 0.5232574000256136,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -131,8 +152,8 @@
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-13",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_130426_T0.CSV",
+      "as_of": "2026-04-17",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_170426_T0.CSV",
       "role": "fallback",
       "validated": true,
       "status_code": 200,
@@ -142,7 +163,7 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.09830220002913848,
+      "elapsed_seconds": 0.28375870001036674,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -150,8 +171,8 @@
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-13",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_13042026_T0.ZIP",
+      "as_of": "2026-04-17",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_17042026_T0.ZIP",
       "role": "fallback",
       "validated": true,
       "status_code": 200,
@@ -161,16 +182,16 @@
       "request_attempts": 1,
       "transport": "httpx",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.13671270001213998,
+      "elapsed_seconds": 0.19963249994907528,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000!o\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_13042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000+p\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_17042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
     }
   ],
   "bse_recent_history": [
     {
-      "date": "2026-04-13",
+      "date": "2026-04-17",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 2,
@@ -180,7 +201,7 @@
       "all_supported_fallbacks_healthy": true
     },
     {
-      "date": "2026-04-10",
+      "date": "2026-04-16",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 2,
@@ -190,7 +211,7 @@
       "all_supported_fallbacks_healthy": true
     },
     {
-      "date": "2026-04-09",
+      "date": "2026-04-15",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 2,
@@ -204,6 +225,7 @@
     "all_supported_candidates_probed": true,
     "all_supported_fallbacks_probed": true,
     "nse_equity_primary_validated": true,
+    "nse_fo_primary_validated": false,
     "bse_primary_validated": true,
     "bse_any_fallback_validated": true,
     "all_supported_fallbacks_healthy": true,

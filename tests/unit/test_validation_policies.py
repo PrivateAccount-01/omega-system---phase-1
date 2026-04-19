@@ -11,14 +11,60 @@ from sqlalchemy import delete
 
 from omegadata.api.main import app
 from omegadata.config import settings
-from omegadata.db.models import InstrumentMaster, ManualReviewQueue, PriceRecord, ReprocessJob
+from omegadata.db.models import (
+    InstrumentMaster,
+    ManualReviewQueue,
+    PriceRecord,
+    ReleaseRecord,
+    ReprocessJob,
+)
 from omegadata.db.session import get_session, init_db
-from omegadata.domain import CorporateActionType, Exchange, InstrumentType
+from omegadata.domain import CorporateActionType, Exchange, InstrumentType, ReleaseProfile
 from omegadata.track_b import release_readiness
 from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
 from omegadata.track_b.cross_source_validation import CrossSourceValidator
 from omegadata.track_b.matching_policy import invalidate_matching_policy_cache
 from omegadata.track_b.tolerance_policy import invalidate_tolerance_policy_cache
+
+
+def _write_release_artifacts(repo_root: Path, *, release_id: str, profile: str, adjusted_rows: list[dict[str, object]]) -> None:
+    release_dir = repo_root / "artifacts/releases" / release_id
+    dataset_dir = release_dir / "adjusted_equity_bars"
+    dataset_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        import pandas as pd
+    except Exception as exc:  # pragma: no cover - test env should have pandas
+        raise AssertionError(f"pandas missing in test environment: {exc}") from exc
+    dataset_path = dataset_dir / "part-00000.parquet"
+    pd.DataFrame(adjusted_rows).to_parquet(dataset_path, index=False)
+    manifest = {
+        "generated_at": "2026-04-13T00:00:00+00:00",
+        "release_id": release_id,
+        "release_profile": profile,
+        "dataset_entries": [
+            {
+                "dataset_name": "adjusted_equity_bars",
+                "row_count": len(adjusted_rows),
+                "storage_path": dataset_path.relative_to(repo_root).as_posix(),
+                "checksum": "abc123",
+            },
+            {
+                "dataset_name": "pit_universe_snapshot",
+                "row_count": 1,
+                "storage_path": (release_dir / "pit_universe_snapshot" / "part-00000.parquet").relative_to(repo_root).as_posix(),
+                "checksum": "def456",
+            },
+        ],
+    }
+    (release_dir / "pit_universe_snapshot").mkdir(parents=True, exist_ok=True)
+    pd.DataFrame([{"isin": "INEREADY0001", "index_name": "NIFTY 50"}]).to_parquet(
+        release_dir / "pit_universe_snapshot" / "part-00000.parquet",
+        index=False,
+    )
+    (release_dir / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    (release_dir / "manifest.json.asc").write_text("test-signature", encoding="utf-8")
+    (release_dir / "quality_report.json").write_text(json.dumps({"generated_at": "2026-04-13T00:00:00+00:00"}), encoding="utf-8")
+    (release_dir / "lineage_report.json").write_text(json.dumps({"generated_at": "2026-04-13T00:00:00+00:00"}), encoding="utf-8")
 
 
 def test_cross_source_validator_uses_loaded_tolerance_policy(tmp_path: Path, monkeypatch) -> None:
@@ -306,3 +352,103 @@ def test_release_readiness_requires_pipeline_success_and_nse_equity_probe(tmp_pa
         assert payload["ready"] is False
         assert any(check["name"] == "probe_nse_equity_healthy" and not check["passed"] for check in payload["checks"])
         assert any(check["name"] == "pipeline_success" and not check["passed"] for check in payload["checks"])
+
+
+def test_release_readiness_checks_adjusted_ohlcv_and_release_bundle(tmp_path: Path, monkeypatch) -> None:
+    db_path = tmp_path / "readiness_release.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    repo_root = tmp_path / "repo"
+    artifacts_dir = repo_root / "artifacts/verification"
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/official_source").mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/synthetic_manual").mkdir(parents=True, exist_ok=True)
+    monkeypatch.setattr(release_readiness, "_repo_root", lambda: repo_root)
+    monkeypatch.setattr(
+        "omegadata.track_b.release_manager.ReleaseManager.verify_signature",
+        lambda self, manifest_path, signature_path: (True, "signature verified"),
+    )
+
+    artifacts_dir.joinpath("source_probe_report_full.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "calendar_config_state": "loaded",
+                "summary": {
+                    "nse_equity_primary_validated": True,
+                    "bse_primary_validated": True,
+                    "healthy_fallback_count": 2,
+                    "failed_fallback_count": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("cross_source_tolerance_report.json").write_text(
+        json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "status": "ok", "benchmark_passed": True}),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("corporate_action_matching_report.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "status": "ok",
+                "metrics": {"benchmark_passed": True, "precision": 1.0, "recall": 1.0},
+            }
+        ),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("pipeline_execution_result.json").write_text(
+        json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "summary": {"successful_days": 1, "failed_days": 0}}),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/official_source/adjustment_reference_corpus.json").write_text(
+        json.dumps({"case_count": 10, "transformational_case_count": 3}),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json").write_text(
+        json.dumps({"case_count": 14}),
+        encoding="utf-8",
+    )
+    _write_release_artifacts(
+        repo_root,
+        release_id="20260413_equity_core",
+        profile="equity_core",
+        adjusted_rows=[
+            {
+                "adjusted_open_price": None,
+                "adjusted_high_price": "1.0",
+                "adjusted_low_price": "1.0",
+                "adjusted_close_price": "1.0",
+                "adjusted_volume": "10",
+            }
+        ],
+    )
+
+    with get_session() as session:
+        session.add(
+            ReleaseRecord(
+                release_id="20260413_equity_core",
+                release_profile=ReleaseProfile.EQUITY_CORE,
+                as_of_date=date(2026, 4, 13),
+                manifest_path="artifacts/releases/20260413_equity_core/manifest.json",
+                signature_path="artifacts/releases/20260413_equity_core/manifest.json.asc",
+                quality_report_path="artifacts/releases/20260413_equity_core/quality_report.json",
+                lineage_report_path="artifacts/releases/20260413_equity_core/lineage_report.json",
+                warehouse_sync_status="SYNCED",
+                ready_state="GENERATED",
+                dataset_entries=[],
+                consumer_matrix={
+                    "allowed_consumer_classes": ["equity_research"],
+                    "allowed_signal_families": ["cross_sectional_equity"],
+                },
+            )
+        )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        response = client.get("/release/readiness?profile=equity_core", headers=headers)
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["release_id"] == "20260413_equity_core"
+        assert any(check["name"] == "adjusted_ohlcv_complete" and not check["passed"] for check in payload["checks"])

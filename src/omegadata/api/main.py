@@ -551,8 +551,14 @@ def complete_reprocess(
 
 
 @app.get("/release/readiness")
-def get_release_readiness(session: SessionDep, _auth: InternalAuthDep) -> dict[str, object]:
-    return release_readiness.evaluate(session)
+def get_release_readiness(
+    session: SessionDep,
+    _auth: InternalAuthDep,
+    profile: ReleaseProfile | None = None,
+    release_id: str | None = None,
+) -> dict[str, object]:
+    selected_profile = profile or ReleaseProfile(settings.release_default_profile)
+    return release_readiness.evaluate(session, profile=selected_profile, release_id=release_id)
 
 
 @app.get("/releases/latest", response_model=ReleaseOut)

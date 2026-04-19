@@ -6,6 +6,7 @@ from pathlib import Path
 
 from omegadata.config import settings
 from omegadata.db.session import get_session, init_db
+from omegadata.domain import ReleaseProfile
 from omegadata.track_b.release_readiness import ReleaseReadinessService
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--db-url", default=None, help="Explicit database URL for readiness evaluation")
+    parser.add_argument(
+        "--profile",
+        choices=[profile.value for profile in ReleaseProfile],
+        default=settings.release_default_profile,
+        help="Release profile to evaluate",
+    )
+    parser.add_argument("--release-id", default=None, help="Optional explicit release id to evaluate")
     args = parser.parse_args()
 
     if args.db_url:
@@ -27,7 +35,11 @@ def main() -> None:
     init_db()
     service = ReleaseReadinessService()
     with get_session() as session:
-        report = service.evaluate(session)
+        report = service.evaluate(
+            session,
+            profile=ReleaseProfile(args.profile),
+            release_id=args.release_id,
+        )
     out_path = REPO_ROOT / "artifacts/verification/release_readiness.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")

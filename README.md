@@ -808,8 +808,9 @@ The daily verification DAG runs:
 
 - deterministic source probe with scheduled-verification failure semantics
 - replay pipeline integration on the configured verification DB
-- release-readiness build from the same verification DB
+- profile-aware release-readiness build from the same verification DB
 - release bundle generation for the governed daily profile
+- release-evidence index generation so proof artifacts and pinned releases stay linked
 
 The weekly verification DAG runs:
 
@@ -829,9 +830,18 @@ The repo now includes enough instrumentation to answer these questions with arti
 - Is the corporate-action matcher benchmark passing?
 - Are blocking reviews or reprocess jobs still open?
 - Is release readiness currently green?
+- Which pinned release and proof artifacts support that readiness verdict?
 - Is a fresh full-pipeline replay artifact present, or is that evidence currently missing?
 
 That is a much stronger position than “the tests passed once.”
+
+The canonical proof index is [`artifacts/verification/release_evidence_index.json`](artifacts/verification/release_evidence_index.json). It enumerates:
+
+- the latest known release per profile
+- manifest/signature/quality/lineage paths for those releases
+- the proof artifacts currently on disk that support the release story
+
+Release readiness is now profile-aware and release-aware. It checks the chosen release record, verifies signed bundle presence, inspects required datasets for that profile, and fails when adjusted OHLCV completeness or warehouse-sync requirements are not satisfied.
 
 ## Honest Limits
 

@@ -6,10 +6,13 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any, cast
 
+import pandas as pd
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from omegadata.config import settings
-from omegadata.db.models import ManualReviewQueue, ReprocessJob
+from omegadata.db.models import ManualReviewQueue, ReleaseRecord, ReprocessJob
+from omegadata.domain import ReleaseProfile
 from omegadata.track_b.review_policy import load_review_policies
 
 
@@ -90,14 +93,87 @@ def _load_policy() -> dict[str, Any]:
             "minimum_official_cases": 10,
             "minimum_official_transformational_cases": 3,
             "minimum_manual_transformational_cases": 14,
+            "release_max_age_hours": 24,
+            "require_signature_verification": True,
+            "profiles": {
+                "equity_core": {
+                    "required_datasets": ["adjusted_equity_bars", "pit_universe_snapshot"],
+                    "require_warehouse_sync": True,
+                    "require_non_empty_datasets": ["adjusted_equity_bars", "pit_universe_snapshot"],
+                },
+                "equity_plus_sidefeeds": {
+                    "required_datasets": [
+                        "adjusted_equity_bars",
+                        "pit_universe_snapshot",
+                        "fii_dii_daily",
+                        "india_vix",
+                        "benchmark_series",
+                        "sector_series",
+                    ],
+                    "require_warehouse_sync": True,
+                    "require_non_empty_datasets": [
+                        "adjusted_equity_bars",
+                        "pit_universe_snapshot",
+                        "fii_dii_daily",
+                        "india_vix",
+                        "benchmark_series",
+                        "sector_series",
+                    ],
+                },
+                "full_derivatives": {
+                    "required_datasets": [
+                        "adjusted_equity_bars",
+                        "pit_universe_snapshot",
+                        "fii_dii_daily",
+                        "india_vix",
+                        "benchmark_series",
+                        "sector_series",
+                        "futures_contract_master",
+                        "futures_eod",
+                        "continuous_futures",
+                        "options_contract_master",
+                        "options_eod",
+                    ],
+                    "require_warehouse_sync": True,
+                    "require_non_empty_datasets": [
+                        "adjusted_equity_bars",
+                        "pit_universe_snapshot",
+                        "fii_dii_daily",
+                        "india_vix",
+                        "benchmark_series",
+                        "sector_series",
+                        "futures_contract_master",
+                        "futures_eod",
+                        "continuous_futures",
+                        "options_contract_master",
+                        "options_eod",
+                    ],
+                },
+            },
         }
     return cast(dict[str, Any], json.loads(path.read_text(encoding="utf-8")))
 
 
 class ReleaseReadinessService:
-    def evaluate(self, session: Session) -> dict[str, object]:
+    def evaluate(
+        self,
+        session: Session,
+        *,
+        profile: ReleaseProfile | None = None,
+        release_id: str | None = None,
+    ) -> dict[str, object]:
         policy = _load_policy()
         checks: list[ReadinessCheck] = []
+        release_profile = profile or ReleaseProfile(settings.release_default_profile)
+        release_record = self._resolve_release_record(session, profile=release_profile, release_id=release_id)
+        checks.extend(
+            self._release_checks(
+                session,
+                release_record=release_record,
+                profile=release_profile,
+                policy=policy,
+            )
+        )
 
         review_policies = load_review_policies()
         open_release_blocking = 0
@@ -293,12 +369,158 @@ class ReleaseReadinessService:
 
         return {
             "generated_at": datetime.now(UTC).isoformat(),
+            "release_profile": release_profile.value,
+            "release_id": None if release_record is None else release_record.release_id,
             "ready": all(check.passed for check in checks),
             "checks": [
                 {"name": check.name, "passed": check.passed, "details": check.details}
                 for check in checks
             ],
         }
+
+    def _resolve_release_record(
+        self,
+        session: Session,
+        *,
+        profile: ReleaseProfile,
+        release_id: str | None,
+    ) -> ReleaseRecord | None:
+        if release_id:
+            return session.scalar(select(ReleaseRecord).where(ReleaseRecord.release_id == release_id))
+        return session.scalar(
+            select(ReleaseRecord)
+            .where(ReleaseRecord.release_profile == profile)
+            .order_by(ReleaseRecord.generated_at.desc())
+        )
+
+    def _release_checks(
+        self,
+        session: Session,
+        *,
+        release_record: ReleaseRecord | None,
+        profile: ReleaseProfile,
+        policy: dict[str, Any],
+    ) -> list[ReadinessCheck]:
+        checks: list[ReadinessCheck] = []
+        profiles = cast(dict[str, Any], policy.get("profiles", {}))
+        profile_policy = cast(dict[str, Any], profiles.get(profile.value, {}))
+        if release_record is None:
+            return [ReadinessCheck("release_record_present", False, f"no release found for profile {profile.value}")]
+
+        checks.append(
+            ReadinessCheck(
+                name="release_record_present",
+                passed=True,
+                details=f"release_id={release_record.release_id}",
+            )
+        )
+
+        repo_root = _repo_root()
+        manifest_path = repo_root / release_record.manifest_path
+        signature_path = None if release_record.signature_path is None else repo_root / release_record.signature_path
+        quality_path = repo_root / release_record.quality_report_path
+        lineage_path = repo_root / release_record.lineage_report_path
+        checks.append(
+            ReadinessCheck(
+                name="release_artifacts_present",
+                passed=manifest_path.exists() and quality_path.exists() and lineage_path.exists(),
+                details=(
+                    f"manifest_exists={manifest_path.exists()}, "
+                    f"quality_exists={quality_path.exists()}, "
+                    f"lineage_exists={lineage_path.exists()}"
+                ),
+            )
+        )
+        checks.append(
+            ReadinessCheck(
+                name="release_signature_present",
+                passed=signature_path is not None and signature_path.exists(),
+                details=f"signature_exists={False if signature_path is None else signature_path.exists()}",
+            )
+        )
+        checks.append(
+            self._artifact_check(
+                name="release_manifest_fresh",
+                artifact=_read_json(manifest_path),
+                max_age_hours=int(policy["release_max_age_hours"]),
+            )
+        )
+
+        if bool(policy.get("require_signature_verification", False)) and signature_path is not None and signature_path.exists():
+            from omegadata.track_b.release_manager import ReleaseManager
+
+            verified, details = ReleaseManager().verify_signature(manifest_path, signature_path)
+            checks.append(ReadinessCheck("release_signature_verified", verified, details))
+
+        manifest = _read_json(manifest_path) or {}
+        dataset_entries = cast(list[dict[str, Any]], manifest.get("dataset_entries", []))
+        datasets = {str(entry.get("dataset_name", "")): entry for entry in dataset_entries}
+        required_datasets = [str(item) for item in profile_policy.get("required_datasets", [])]
+        missing = [name for name in required_datasets if name not in datasets]
+        checks.append(
+            ReadinessCheck(
+                name="release_required_datasets_present",
+                passed=not missing,
+                details=f"missing_datasets={missing}",
+            )
+        )
+        non_empty_datasets = [str(item) for item in profile_policy.get("require_non_empty_datasets", [])]
+        empty = [name for name in non_empty_datasets if int(datasets.get(name, {}).get("row_count", 0)) <= 0]
+        checks.append(
+            ReadinessCheck(
+                name="release_required_datasets_non_empty",
+                passed=not empty,
+                details=f"empty_datasets={empty}",
+            )
+        )
+
+        require_warehouse_sync = bool(profile_policy.get("require_warehouse_sync", False))
+        checks.append(
+            ReadinessCheck(
+                name="warehouse_sync_status",
+                passed=(not require_warehouse_sync) or release_record.warehouse_sync_status == "SYNCED",
+                details=f"warehouse_sync_status={release_record.warehouse_sync_status}",
+            )
+        )
+
+        matrix = release_record.consumer_matrix or {}
+        checks.append(
+            ReadinessCheck(
+                name="consumer_matrix_present",
+                passed=bool(matrix.get("allowed_consumer_classes")) and bool(matrix.get("allowed_signal_families")),
+                details=f"consumer_classes={len(cast(list[object], matrix.get('allowed_consumer_classes', [])))}, signal_families={len(cast(list[object], matrix.get('allowed_signal_families', [])))}",
+            )
+        )
+
+        if "adjusted_equity_bars" in datasets:
+            checks.append(self._adjusted_ohlcv_check(repo_root, datasets["adjusted_equity_bars"]))
+        return checks
+
+    @staticmethod
+    def _adjusted_ohlcv_check(repo_root: Path, dataset_entry: dict[str, Any]) -> ReadinessCheck:
+        storage_path = repo_root / str(dataset_entry.get("storage_path", ""))
+        if not storage_path.exists():
+            return ReadinessCheck("adjusted_ohlcv_complete", False, f"dataset_missing={storage_path.as_posix()}")
+        frame = pd.read_parquet(storage_path)
+        if frame.empty:
+            return ReadinessCheck("adjusted_ohlcv_complete", False, "adjusted_equity_bars empty")
+        required_cols = [
+            "adjusted_open_price",
+            "adjusted_high_price",
+            "adjusted_low_price",
+            "adjusted_close_price",
+            "adjusted_volume",
+        ]
+        missing_cols = [column for column in required_cols if column not in frame.columns]
+        if missing_cols:
+            return ReadinessCheck("adjusted_ohlcv_complete", False, f"missing_columns={missing_cols}")
+        null_counts = {column: int(frame[column].isna().sum()) for column in required_cols}
+        passed = all(count == 0 for count in null_counts.values())
+        return ReadinessCheck(
+            "adjusted_ohlcv_complete",
+            passed,
+            ", ".join(f"{column}_nulls={count}" for column, count in null_counts.items()),
+        )
 
     @staticmethod
     def _artifact_check(*, name: str, artifact: dict[str, object] | None, max_age_hours: int) -> ReadinessCheck:

@@ -215,6 +215,26 @@ class ReleaseManager:
         )
         return signature_path
 
+    def verify_signature(self, manifest_path: Path, signature_path: Path) -> tuple[bool, str]:
+        try:
+            subprocess.run(
+                self._gpg_args(
+                    "--batch",
+                    "--verify",
+                    path_args=[signature_path, manifest_path],
+                ),
+                check=True,
+                env=self._gpg_env(),
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as exc:
+            details = exc.stderr.strip() or exc.stdout.strip() or str(exc)
+            return (False, details)
+        except Exception as exc:  # noqa: BLE001
+            return (False, str(exc))
+        return (True, "signature verified")
+
     @staticmethod
     def _frame_from_rows(rows: list[dict[str, Any]]) -> pd.DataFrame:
         return pd.DataFrame(rows) if rows else pd.DataFrame()

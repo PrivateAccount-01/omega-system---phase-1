@@ -19,16 +19,22 @@ from omegadata.config import settings
 from omegadata.db.models import (
     CorporateActionStaging,
     InstrumentMaster,
-    MarketIndexDaily,
     ManualReviewQueue,
+    MarketIndexDaily,
     ParticipantFlowDaily,
     PriceRecord,
-    ReprocessJob,
     ReleaseRecord,
+    ReprocessJob,
     SymbolMap,
 )
 from omegadata.db.session import get_session, init_db
-from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState, ReleaseProfile
+from omegadata.domain import (
+    CorporateActionType,
+    Exchange,
+    InstrumentType,
+    PublicationState,
+    ReleaseProfile,
+)
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 from omegadata.track_a.download_manager import DownloadError, DownloadManager, FetchResult
 from omegadata.track_a.trading_calendar import CalendarMaintenance, TradingCalendar

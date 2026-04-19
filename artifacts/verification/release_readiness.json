@@ -1,11 +1,63 @@
 {
-  "generated_at": "2026-04-14T17:25:05.753666+00:00",
-  "ready": true,
+  "generated_at": "2026-04-19T08:26:46.303908+00:00",
+  "release_profile": "equity_plus_sidefeeds",
+  "release_id": "20260413_equity_plus_sidefeeds",
+  "ready": false,
   "checks": [
     {
-      "name": "blocking_reviews",
+      "name": "release_record_present",
       "passed": true,
-      "details": "open_release_blocking_reviews=19, open_record_scoped_blocking_reviews=1567"
+      "details": "release_id=20260413_equity_plus_sidefeeds"
+    },
+    {
+      "name": "release_artifacts_present",
+      "passed": true,
+      "details": "manifest_exists=True, quality_exists=True, lineage_exists=True"
+    },
+    {
+      "name": "release_signature_present",
+      "passed": true,
+      "details": "signature_exists=True"
+    },
+    {
+      "name": "release_manifest_fresh",
+      "passed": true,
+      "details": "artifact_age_hours=0.74"
+    },
+    {
+      "name": "release_signature_verified",
+      "passed": true,
+      "details": "signature verified"
+    },
+    {
+      "name": "release_required_datasets_present",
+      "passed": true,
+      "details": "missing_datasets=[]"
+    },
+    {
+      "name": "release_required_datasets_non_empty",
+      "passed": false,
+      "details": "empty_datasets=['adjusted_equity_bars', 'pit_universe_snapshot']"
+    },
+    {
+      "name": "warehouse_sync_status",
+      "passed": false,
+      "details": "warehouse_sync_status=FAILED"
+    },
+    {
+      "name": "consumer_matrix_present",
+      "passed": true,
+      "details": "consumer_classes=3, signal_families=3"
+    },
+    {
+      "name": "adjusted_ohlcv_complete",
+      "passed": false,
+      "details": "adjusted_equity_bars empty"
+    },
+    {
+      "name": "blocking_reviews",
+      "passed": false,
+      "details": "open_release_blocking_reviews=29, open_record_scoped_blocking_reviews=2012"
     },
     {
       "name": "overdue_blocking_reviews",
@@ -20,22 +72,22 @@
     {
       "name": "source_probe_fresh",
       "passed": true,
-      "details": "artifact_age_hours=5.37"
+      "details": "artifact_age_hours=0.01"
     },
     {
       "name": "pipeline_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.07"
+      "details": "artifact_age_hours=1.05"
     },
     {
       "name": "tolerance_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.05"
+      "details": "artifact_age_hours=111.08"
     },
     {
       "name": "matching_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=41.42"
+      "details": "artifact_age_hours=152.45"
     },
     {
       "name": "calendar_loaded",
@@ -60,7 +112,7 @@
     {
       "name": "pipeline_success",
       "passed": true,
-      "details": "successful_days=6, failed_days=0"
+      "details": "successful_days=1, failed_days=0"
     },
     {
       "name": "tolerance_status",

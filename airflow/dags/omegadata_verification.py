@@ -51,6 +51,10 @@ def run_release_bundle() -> None:
     )
 
 
+def run_release_evidence_index() -> None:
+    _run_script("scripts/build_release_evidence_index.py")
+
+
 def run_pipeline_integration() -> None:
     from omegadata.config import settings
 
@@ -90,8 +94,12 @@ with DAG(
     pipeline_integration = PythonOperator(task_id="pipeline_integration", python_callable=run_pipeline_integration)
     release_readiness = PythonOperator(task_id="release_readiness", python_callable=run_release_readiness)
     release_bundle = PythonOperator(task_id="release_bundle", python_callable=run_release_bundle)
+    release_evidence_index = PythonOperator(
+        task_id="release_evidence_index",
+        python_callable=run_release_evidence_index,
+    )
 
-    source_probe >> pipeline_integration >> release_readiness >> release_bundle
+    source_probe >> pipeline_integration >> release_readiness >> release_bundle >> release_evidence_index
 
 
 with DAG(

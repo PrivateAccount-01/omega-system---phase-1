@@ -14,5 +14,68 @@
   "minimum_healthy_fallbacks": 2,
   "minimum_official_cases": 10,
   "minimum_official_transformational_cases": 3,
-  "minimum_manual_transformational_cases": 14
+  "minimum_manual_transformational_cases": 14,
+  "release_max_age_hours": 24,
+  "require_signature_verification": true,
+  "profiles": {
+    "equity_core": {
+      "required_datasets": [
+        "adjusted_equity_bars",
+        "pit_universe_snapshot"
+      ],
+      "require_non_empty_datasets": [
+        "adjusted_equity_bars",
+        "pit_universe_snapshot"
+      ],
+      "require_warehouse_sync": true
+    },
+    "equity_plus_sidefeeds": {
+      "required_datasets": [
+        "adjusted_equity_bars",
+        "pit_universe_snapshot",
+        "fii_dii_daily",
+        "india_vix",
+        "benchmark_series",
+        "sector_series"
+      ],
+      "require_non_empty_datasets": [
+        "adjusted_equity_bars",
+        "pit_universe_snapshot",
+        "fii_dii_daily",
+        "india_vix",
+        "benchmark_series",
+        "sector_series"
+      ],
+      "require_warehouse_sync": true
+    },
+    "full_derivatives": {
+      "required_datasets": [
+        "adjusted_equity_bars",
+        "pit_universe_snapshot",
+        "fii_dii_daily",
+        "india_vix",
+        "benchmark_series",
+        "sector_series",
+        "futures_contract_master",
+        "futures_eod",
+        "continuous_futures",
+        "options_contract_master",
+        "options_eod"
+      ],
+      "require_non_empty_datasets": [
+        "adjusted_equity_bars",
+        "pit_universe_snapshot",
+        "fii_dii_daily",
+        "india_vix",
+        "benchmark_series",
+        "sector_series",
+        "futures_contract_master",
+        "futures_eod",
+        "continuous_futures",
+        "options_contract_master",
+        "options_eod"
+      ],
+      "require_warehouse_sync": true
+    }
+  }
 }
