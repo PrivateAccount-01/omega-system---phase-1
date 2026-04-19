@@ -15,9 +15,16 @@ from sqlalchemy.orm import Session
 
 from omegadata.config import settings
 from omegadata.db.models import (
+    ContinuousFutureDaily,
     CorporateActionStaging,
     DiscontinuityEvent,
+    FuturesContractMaster,
+    FuturesEOD,
     InstrumentMaster,
+    MarketIndexDaily,
+    OptionsContractMaster,
+    OptionsEOD,
+    ParticipantFlowDaily,
     PriceRecord,
     SymbolMap,
 )
@@ -93,6 +100,295 @@ class OmegaDataSequentialPipeline:
             k = str(key).strip().upper().replace(" ", "_")
             out[k] = "" if value is None else str(value).strip()
         return out
+
+    def _load_fii_dii(self, session: Session, path: Path) -> int:
+        if not path.exists():
+            return 0
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(payload, list):
+            return 0
+        loaded = 0
+        for item in payload:
+            if not isinstance(item, Mapping):
+                continue
+            trade_date = self._parse_date(str(item.get("date", "")))
+            category = str(item.get("category", "")).strip()
+            buy_value = self._to_decimal(str(item.get("buyValue", "")))
+            sell_value = self._to_decimal(str(item.get("sellValue", "")))
+            net_value = self._to_decimal(str(item.get("netValue", "")))
+            if trade_date is None or not category or None in (buy_value, sell_value, net_value):
+                continue
+            assert buy_value is not None
+            assert sell_value is not None
+            assert net_value is not None
+            existing = session.scalar(
+                select(ParticipantFlowDaily)
+                .where(ParticipantFlowDaily.trade_date == trade_date)
+                .where(ParticipantFlowDaily.participant_category == category)
+            )
+            if existing is None:
+                existing = ParticipantFlowDaily(
+                    trade_date=trade_date,
+                    participant_category=category,
+                    buy_value=buy_value,
+                    sell_value=sell_value,
+                    net_value=net_value,
+                    raw_source="nse_fii_dii",
+                    source_artifact_path=path.as_posix(),
+                )
+                session.add(existing)
+            else:
+                existing.buy_value = buy_value
+                existing.sell_value = sell_value
+                existing.net_value = net_value
+                existing.source_artifact_path = path.as_posix()
+            loaded += 1
+        return loaded
+
+    def _index_kind(self, row: Mapping[str, object]) -> str:
+        key = str(row.get("key", "")).upper()
+        symbol = str(row.get("indexSymbol", "")).upper()
+        name = str(row.get("index", "")).upper()
+        if "VIX" in symbol or "VIX" in name:
+            return "VIX"
+        if "SECTOR" in key:
+            return "SECTOR"
+        return "BENCHMARK"
+
+    def _load_market_indices(self, session: Session, path: Path, as_of: date) -> int:
+        if not path.exists():
+            return 0
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(payload, Mapping):
+            return 0
+        rows = payload.get("data", [])
+        if not isinstance(rows, list):
+            return 0
+        loaded = 0
+        for item in rows:
+            if not isinstance(item, Mapping):
+                continue
+            index_name = str(item.get("index", "")).strip()
+            index_symbol = str(item.get("indexSymbol", index_name)).strip()
+            close_price = self._to_decimal(str(item.get("last", "")))
+            if not index_name or not index_symbol or close_price is None:
+                continue
+            open_price = self._to_decimal(str(item.get("open", "")))
+            high_price = self._to_decimal(str(item.get("high", "")))
+            low_price = self._to_decimal(str(item.get("low", "")))
+            previous_close = self._to_decimal(str(item.get("previousClose", "")))
+            change_pct = self._to_decimal(str(item.get("percentChange", "")))
+            existing = session.scalar(
+                select(MarketIndexDaily)
+                .where(MarketIndexDaily.trade_date == as_of)
+                .where(MarketIndexDaily.index_symbol == index_symbol)
+            )
+            if existing is None:
+                existing = MarketIndexDaily(
+                    trade_date=as_of,
+                    index_name=index_name,
+                    index_symbol=index_symbol,
+                    index_kind=self._index_kind(item),
+                    open_price=open_price,
+                    high_price=high_price,
+                    low_price=low_price,
+                    close_price=close_price,
+                    previous_close=previous_close,
+                    change_pct=change_pct,
+                    raw_source="india_vix_all_indices",
+                    source_artifact_path=path.as_posix(),
+                )
+                session.add(existing)
+            else:
+                existing.index_name = index_name
+                existing.index_kind = self._index_kind(item)
+                existing.open_price = open_price
+                existing.high_price = high_price
+                existing.low_price = low_price
+                existing.close_price = close_price
+                existing.previous_close = previous_close
+                existing.change_pct = change_pct
+                existing.source_artifact_path = path.as_posix()
+            loaded += 1
+        return loaded
+
+    @staticmethod
+    def _canonical_contract_symbol(
+        underlying_symbol: str,
+        expiry_date: date,
+        instrument_kind: str,
+        strike_price: Decimal | None,
+        option_type: str | None,
+    ) -> str:
+        strike_part = "" if strike_price is None else f"_{strike_price.normalize()}"
+        option_part = "" if not option_type else f"_{option_type}"
+        return f"{underlying_symbol}_{expiry_date.isoformat()}_{instrument_kind}{strike_part}{option_part}"
+
+    def _lookup_underlying_isin(self, session: Session, symbol: str) -> str | None:
+        normalized = symbol.strip().upper()
+        if not normalized:
+            return None
+        row = session.scalar(
+            select(SymbolMap)
+            .where(SymbolMap.exchange == Exchange.NSE)
+            .where(SymbolMap.symbol == normalized)
+            .where(SymbolMap.valid_to.is_(None))
+        )
+        return None if row is None else row.isin
+
+    def _rebuild_continuous_futures(self, session: Session, trade_date: date) -> int:
+        rows = session.execute(
+            select(FuturesContractMaster, FuturesEOD)
+            .join(FuturesEOD, FuturesEOD.contract_id == FuturesContractMaster.id)
+            .where(FuturesEOD.trade_date == trade_date)
+            .order_by(FuturesContractMaster.underlying_symbol.asc(), FuturesContractMaster.expiry_date.asc())
+        ).all()
+        existing = session.scalars(
+            select(ContinuousFutureDaily).where(ContinuousFutureDaily.trade_date == trade_date)
+        ).all()
+        for row in existing:
+            session.delete(row)
+        loaded = 0
+        seen_underlyings: set[str] = set()
+        for contract, eod in rows:
+            if contract.underlying_symbol in seen_underlyings:
+                continue
+            seen_underlyings.add(contract.underlying_symbol)
+            session.add(
+                ContinuousFutureDaily(
+                    trade_date=trade_date,
+                    underlying_symbol=contract.underlying_symbol,
+                    underlying_isin=contract.underlying_isin,
+                    roll_rule="front_month",
+                    contract_symbol=contract.contract_symbol,
+                    expiry_date=contract.expiry_date,
+                    open_price=eod.open_price,
+                    high_price=eod.high_price,
+                    low_price=eod.low_price,
+                    close_price=eod.close_price,
+                    settle_price=eod.settle_price,
+                    volume=eod.volume,
+                    open_interest=eod.open_interest,
+                )
+            )
+            loaded += 1
+        return loaded
+
+    def _load_nse_fo(self, session: Session, path: Path, trade_date: date) -> int:
+        if not path.exists():
+            return 0
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        reader = csv.DictReader(io.StringIO(text))
+        loaded = 0
+        for raw in reader:
+            row = self._normalize_row(raw)
+            instrument = self._first_present(row, ("FH_INSTRUMENT", "INSTRUMENT"))
+            underlying_symbol = self._first_present(row, ("FH_SYMBOL", "SYMBOL"))
+            expiry_date = self._parse_date(self._first_present(row, ("FH_EXPIRY_DT", "EXPIRY_DT")))
+            if not instrument or not underlying_symbol or expiry_date is None:
+                continue
+            strike_price = self._to_decimal(self._first_present(row, ("FH_STRIKE_PR", "STRIKE_PR")))
+            option_type = self._first_present(row, ("FH_OPTION_TYP", "OPTION_TYP")) or None
+            open_price = self._to_decimal(self._first_present(row, ("FH_OPENING_PRICE", "OPEN")))
+            high_price = self._to_decimal(self._first_present(row, ("FH_TRADE_HIGH_PRICE", "HIGH")))
+            low_price = self._to_decimal(self._first_present(row, ("FH_TRADE_LOW_PRICE", "LOW")))
+            close_price = self._to_decimal(self._first_present(row, ("FH_CLOSING_PRICE", "CLOSE")))
+            settle_price = self._to_decimal(self._first_present(row, ("FH_SETTLE_PRICE", "SETTLE_PR")))
+            volume = self._to_decimal(self._first_present(row, ("FH_TOT_TRADED_QTY", "CONTRACTS")))
+            open_interest = self._to_decimal(self._first_present(row, ("FH_OPEN_INT", "OPEN_INT")))
+            lot_size_text = self._first_present(row, ("FH_MARKET_LOT", "LOT_SIZE"))
+            lot_size = int(Decimal(lot_size_text)) if lot_size_text else None
+            underlying_isin = self._lookup_underlying_isin(session, underlying_symbol)
+            contract_symbol = self._canonical_contract_symbol(
+                underlying_symbol=underlying_symbol,
+                expiry_date=expiry_date,
+                instrument_kind=instrument,
+                strike_price=strike_price,
+                option_type=option_type,
+            )
+            if instrument.startswith("FUT"):
+                contract = session.scalar(
+                    select(FuturesContractMaster)
+                    .where(FuturesContractMaster.exchange == Exchange.NSE)
+                    .where(FuturesContractMaster.contract_symbol == contract_symbol)
+                )
+                if contract is None:
+                    contract = FuturesContractMaster(
+                        exchange=Exchange.NSE,
+                        contract_symbol=contract_symbol,
+                        underlying_symbol=underlying_symbol,
+                        underlying_isin=underlying_isin,
+                        instrument_kind=instrument,
+                        expiry_date=expiry_date,
+                        lot_size=lot_size,
+                    )
+                    session.add(contract)
+                    session.flush()
+                eod = session.scalar(
+                    select(FuturesEOD)
+                    .where(FuturesEOD.contract_id == contract.id)
+                    .where(FuturesEOD.trade_date == trade_date)
+                )
+                if eod is None:
+                    eod = FuturesEOD(
+                        contract_id=contract.id,
+                        trade_date=trade_date,
+                        raw_source="nse_fo_bhavcopy",
+                        source_artifact_path=path.as_posix(),
+                    )
+                    session.add(eod)
+                eod.open_price = open_price
+                eod.high_price = high_price
+                eod.low_price = low_price
+                eod.close_price = close_price
+                eod.settle_price = settle_price
+                eod.volume = volume
+                eod.open_interest = open_interest
+                loaded += 1
+            elif instrument.startswith("OPT"):
+                if strike_price is None or option_type is None:
+                    continue
+                option_contract = session.scalar(
+                    select(OptionsContractMaster)
+                    .where(OptionsContractMaster.exchange == Exchange.NSE)
+                    .where(OptionsContractMaster.contract_symbol == contract_symbol)
+                )
+                if option_contract is None:
+                    option_contract = OptionsContractMaster(
+                        exchange=Exchange.NSE,
+                        contract_symbol=contract_symbol,
+                        underlying_symbol=underlying_symbol,
+                        underlying_isin=underlying_isin,
+                        expiry_date=expiry_date,
+                        strike_price=strike_price,
+                        option_type=option_type,
+                        lot_size=lot_size,
+                    )
+                    session.add(option_contract)
+                    session.flush()
+                option_eod = session.scalar(
+                    select(OptionsEOD)
+                    .where(OptionsEOD.contract_id == option_contract.id)
+                    .where(OptionsEOD.trade_date == trade_date)
+                )
+                if option_eod is None:
+                    option_eod = OptionsEOD(
+                        contract_id=option_contract.id,
+                        trade_date=trade_date,
+                        raw_source="nse_fo_bhavcopy",
+                        source_artifact_path=path.as_posix(),
+                    )
+                    session.add(option_eod)
+                option_eod.open_price = open_price
+                option_eod.high_price = high_price
+                option_eod.low_price = low_price
+                option_eod.close_price = close_price
+                option_eod.settle_price = settle_price
+                option_eod.volume = volume
+                option_eod.open_interest = open_interest
+                loaded += 1
+        self._rebuild_continuous_futures(session, trade_date)
+        return loaded
 
     @staticmethod
     def _first_present(row: dict[str, str], keys: tuple[str, ...]) -> str:
@@ -534,6 +830,7 @@ class OmegaDataSequentialPipeline:
         sources = [
             "NSE_EQUITY_BHAVCOPY",
             "BSE_EQUITY_BHAVCOPY",
+            "NSE_FO_BHAVCOPY",
             "NSE_CORPORATE_ACTIONS",
             "BSE_CORPORATE_ACTIONS",
             "NSE_FII_DII",
@@ -553,6 +850,8 @@ class OmegaDataSequentialPipeline:
             self._load_bhavcopy_prices(session, Path(paths["NSE_EQUITY_BHAVCOPY"]), as_of)
             if paths.get("BSE_EQUITY_BHAVCOPY"):
                 self._load_bse_bhavcopy_prices(session, Path(paths["BSE_EQUITY_BHAVCOPY"]), as_of)
+            if paths.get("NSE_FO_BHAVCOPY"):
+                self._load_nse_fo(session, Path(paths["NSE_FO_BHAVCOPY"]), as_of)
             if paths.get("NSE_CORPORATE_ACTIONS"):
                 self._load_corporate_actions(
                     session,
@@ -565,6 +864,10 @@ class OmegaDataSequentialPipeline:
                     Exchange.BSE,
                     Path(paths["BSE_CORPORATE_ACTIONS"]),
                 )
+            if paths.get("NSE_FII_DII"):
+                self._load_fii_dii(session, Path(paths["NSE_FII_DII"]))
+            if paths.get("INDIA_VIX"):
+                self._load_market_indices(session, Path(paths["INDIA_VIX"]), as_of)
         return paths
 
     def run_scheduled_corporate_action_collection(self, run_at: datetime) -> dict[str, str]:

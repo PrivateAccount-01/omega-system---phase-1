@@ -37,6 +37,20 @@ def run_release_readiness() -> None:
     )
 
 
+def run_release_bundle() -> None:
+    from omegadata.config import settings
+
+    _run_script(
+        "scripts/build_release_bundle.py",
+        "--as-of",
+        datetime.now(UTC).date().isoformat(),
+        "--profile",
+        "equity_plus_sidefeeds",
+        "--db-url",
+        settings.verification_db_url,
+    )
+
+
 def run_pipeline_integration() -> None:
     from omegadata.config import settings
 
@@ -75,8 +89,9 @@ with DAG(
     source_probe = PythonOperator(task_id="source_probe", python_callable=run_source_probe)
     pipeline_integration = PythonOperator(task_id="pipeline_integration", python_callable=run_pipeline_integration)
     release_readiness = PythonOperator(task_id="release_readiness", python_callable=run_release_readiness)
+    release_bundle = PythonOperator(task_id="release_bundle", python_callable=run_release_bundle)
 
-    source_probe >> pipeline_integration >> release_readiness
+    source_probe >> pipeline_integration >> release_readiness >> release_bundle
 
 
 with DAG(

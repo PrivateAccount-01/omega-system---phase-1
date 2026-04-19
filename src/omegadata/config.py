@@ -34,6 +34,14 @@ class Settings(BaseSettings):
     reprocess_root: str = "./artifacts/reprocess_queue"
     probe_history_days: int = 3
     verification_db_url: str = "sqlite:///artifacts/verification/pipeline_run_work.sqlite"
+    release_root: str = "./artifacts/releases"
+    release_profile_matrix_path: str = "./config/release_profile_matrix.json"
+    release_gpg_home: str = "./artifacts/gnupg"
+    release_gpg_key_id: str = ""
+    release_default_profile: str = "equity_core"
+    clickhouse_database: str = "default"
+    clickhouse_secure: bool = False
+    strict_release_calendar: bool = True
 
 
 settings = Settings()

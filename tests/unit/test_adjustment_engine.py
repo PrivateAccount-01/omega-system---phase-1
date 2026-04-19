@@ -47,6 +47,9 @@ def test_bonus_adjustment_real_case(db_session) -> None:
     updated = engine.recompute_adjusted_series(db_session, isin="INE009A01021")
     assert updated == 2
     row = next(r for r in db_session.query(PriceRecord).all() if r.trade_date == date(2018, 6, 13))
+    assert Decimal(str(row.adjusted_open_price)) == Decimal("635.225000")
+    assert Decimal(str(row.adjusted_high_price)) == Decimal("635.225000")
+    assert Decimal(str(row.adjusted_low_price)) == Decimal("635.225000")
     assert Decimal(str(row.adjusted_close_price)) == Decimal("635.225000")
     assert Decimal(str(row.adjusted_volume)) == Decimal("200.0000")
 

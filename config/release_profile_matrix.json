@@ -1,0 +1,45 @@
+{
+  "version": "2026-04-19",
+  "profiles": {
+    "equity_core": {
+      "allowed_consumer_classes": [
+        "equity_backtests",
+        "equity_research",
+        "cash_equity_signal_factory"
+      ],
+      "allowed_signal_families": [
+        "price_momentum",
+        "cross_sectional_equity",
+        "corporate_action_adjusted_equity"
+      ]
+    },
+    "equity_plus_sidefeeds": {
+      "allowed_consumer_classes": [
+        "equity_macro_overlay",
+        "equity_flow_models",
+        "equity_volatility_models"
+      ],
+      "allowed_signal_families": [
+        "flow_overlay",
+        "volatility_overlay",
+        "benchmark_relative_equity"
+      ]
+    },
+    "full_derivatives": {
+      "allowed_consumer_classes": [
+        "derivatives_research",
+        "options_signal_factory",
+        "futures_basis_models",
+        "vrp_skew_tail_hedge_models"
+      ],
+      "allowed_signal_families": [
+        "futures_curve",
+        "vrp",
+        "pcr",
+        "skew",
+        "theta",
+        "tail_hedge"
+      ]
+    }
+  }
+}

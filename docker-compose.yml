@@ -3,6 +3,7 @@ version: '3.9'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.4
+    profiles: ["full-integration-release"]
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -11,6 +12,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:7.4.4
+    profiles: ["full-integration-release"]
     depends_on:
       - zookeeper
     ports:
@@ -24,11 +26,13 @@ services:
 
   redis:
     image: redis:7.4-alpine
+    profiles: ["local-test", "warehouse", "full-integration-release"]
     ports:
       - "6379:6379"
 
   clickhouse:
     image: clickhouse/clickhouse-server:24.8
+    profiles: ["warehouse", "full-integration-release"]
     ports:
       - "8123:8123"
       - "9000:9000"
@@ -37,6 +41,7 @@ services:
 
   postgres:
     image: postgres:16-alpine
+    profiles: ["local-test", "warehouse", "full-integration-release"]
     ports:
       - "5432:5432"
     environment:
@@ -48,6 +53,7 @@ services:
 
   prometheus:
     image: prom/prometheus:v2.55.1
+    profiles: ["full-integration-release"]
     ports:
       - "9090:9090"
     volumes:
@@ -58,6 +64,7 @@ services:
 
   alertmanager:
     image: prom/alertmanager:v0.27.0
+    profiles: ["full-integration-release"]
     ports:
       - "9093:9093"
     volumes:
@@ -65,6 +72,7 @@ services:
 
   grafana:
     image: grafana/grafana:11.3.0
+    profiles: ["full-integration-release"]
     ports:
       - "3000:3000"
     volumes:

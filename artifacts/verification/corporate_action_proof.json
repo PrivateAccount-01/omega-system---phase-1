@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-04-19T07:41:14.695460+00:00",
+  "case_label": "CIEINDIA_DIVIDEND_MATCH",
+  "official_snapshot_paths": {
+    "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+    "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+  },
+  "staged_records": [
+    {
+      "id": 1,
+      "source": "NSE",
+      "isin": "INE536H01010",
+      "action_type": "DIVIDEND_CASH",
+      "ex_date": "2026-04-22",
+      "matched": true
+    },
+    {
+      "id": 2,
+      "source": "BSE",
+      "isin": "INE536H01010",
+      "action_type": "DIVIDEND_CASH",
+      "ex_date": "2026-04-23",
+      "matched": true
+    }
+  ],
+  "expected_outcome": "match",
+  "confirmation_results": [
+    {
+      "confirmed_id": 1,
+      "confidence": "MEDIUM"
+    }
+  ],
+  "confirmed_action": {
+    "id": 1,
+    "isin": "INE536H01010",
+    "action_type": "DIVIDEND_CASH",
+    "confidence": "MEDIUM",
+    "announcement_date": "2026-03-19",
+    "ex_date": "2026-04-22",
+    "record_date": null,
+    "parameters": {
+      "isin": "INE536H01010",
+      "ex_date": "2026-04-22",
+      "announcement_date": "2026-03-19",
+      "symbol": "CIEINDIA",
+      "dividend_per_share": "7"
+    },
+    "source_preference": "NSE"
+  },
+  "adjusted_rows_written": 2,
+  "price_rows": [
+    {
+      "trade_date": "2026-04-10",
+      "raw_close": "485.750000",
+      "adjusted_close": "485.750000",
+      "adjusted_open": "488.000000",
+      "adjusted_high": "489.000000",
+      "adjusted_low": "481.600000",
+      "adjusted_volume": "198186.0000"
+    },
+    {
+      "trade_date": "2026-04-13",
+      "raw_close": "483.600000",
+      "adjusted_close": "483.600000",
+      "adjusted_open": "483.050000",
+      "adjusted_high": "488.000000",
+      "adjusted_low": "471.150000",
+      "adjusted_volume": "260329.0000"
+    }
+  ],
+  "source_price_paths": [
+    "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260410__85e27e7c9338.zip",
+    "data/raw/nse_equity_bhavcopy/year=2026/month=04/20260413__23a7d04ecaac.zip"
+  ],
+  "release": {
+    "release_id": "20260413_equity_core",
+    "profile": "equity_core",
+    "manifest_path": "artifacts/releases/20260413_equity_core/manifest.json",
+    "signature_path": "artifacts/releases/20260413_equity_core/manifest.json.asc",
+    "quality_report_path": "artifacts/releases/20260413_equity_core/quality_report.json",
+    "lineage_report_path": "artifacts/releases/20260413_equity_core/lineage_report.json",
+    "warehouse_sync_status": "FAILED"
+  }
+}

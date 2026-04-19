@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 from contextlib import contextmanager
 
-from sqlalchemy import Engine, create_engine
+from sqlalchemy import Engine, create_engine, inspect, text
 from sqlalchemy.orm import Session, sessionmaker
 
 from omegadata.config import settings
@@ -46,7 +46,26 @@ def get_sessionmaker() -> sessionmaker[Session]:
 def init_db() -> None:
     from omegadata.db import models  # noqa: F401
 
-    Base.metadata.create_all(bind=get_engine())
+    engine = get_engine()
+    Base.metadata.create_all(bind=engine)
+    _reconcile_schema(engine)
+
+
+def _ensure_column(engine: Engine, table_name: str, column_name: str, ddl: str) -> None:
+    inspector = inspect(engine)
+    columns = {column["name"] for column in inspector.get_columns(table_name)}
+    if column_name in columns:
+        return
+    with engine.begin() as conn:
+        conn.execute(text(f"ALTER TABLE {table_name} ADD COLUMN {column_name} {ddl}"))
+
+
+def _reconcile_schema(engine: Engine) -> None:
+    inspector = inspect(engine)
+    if "price_record" in inspector.get_table_names():
+        _ensure_column(engine, "price_record", "adjusted_open_price", "NUMERIC(20, 6)")
+        _ensure_column(engine, "price_record", "adjusted_high_price", "NUMERIC(20, 6)")
+        _ensure_column(engine, "price_record", "adjusted_low_price", "NUMERIC(20, 6)")
 
 
 @contextmanager

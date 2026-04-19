@@ -564,6 +564,17 @@ Primary endpoints:
 - `GET /prices/{isin}`
 - `GET /audit/prices/{isin}`
 - `GET /universe/{index_name}`
+- `GET /releases/latest?profile=...`
+- `GET /releases/{release_id}`
+- `GET /releases/{release_id}/manifest`
+- `GET /releases/{release_id}/quality`
+- `GET /releases/{release_id}/lineage`
+- `GET /quality/releases/{release_id}`
+- `GET /fii-dii`
+- `GET /india-vix`
+- `GET /benchmarks/{series}`
+- `GET /futures`
+- `GET /options`
 - `GET /reviews/open`
 - `POST /reviews/{review_id}/resolve`
 - `POST /reviews/{review_id}/reprocess-complete`
@@ -573,6 +584,131 @@ Primary endpoints:
 - `GET /implementation/test-results`
 
 Internal endpoints should be protected with the configured API key and should not be treated as internet-facing by default.
+
+Release-aware consumer contract:
+
+- consumer-facing dataset endpoints now accept `release_id`
+- `latest` is only a convenience alias to a specific immutable release
+- Phase 2 should consume pinned release IDs, not mutable warehouse or API state
+
+## Signed Release Bundles
+
+Phase 1 now includes a first-class release bundle flow instead of treating verification artifacts as the final handoff contract.
+
+Release characteristics:
+
+- immutable `release_id`
+- governed `release_profile`
+- signed manifest
+- dataset parquet exports
+- release quality report
+- release lineage report
+- warehouse sync status
+- consumer matrix for allowed downstream usage
+
+Implemented release profiles:
+
+- `equity_core`
+- `equity_plus_sidefeeds`
+- `full_derivatives`
+
+Current implementation path:
+
+- release builder: [`scripts/build_release_bundle.py`](scripts/build_release_bundle.py)
+- release service: [`src/omegadata/track_b/release_manager.py`](src/omegadata/track_b/release_manager.py)
+- consumer matrix config: [`config/release_profile_matrix.json`](config/release_profile_matrix.json)
+
+Generated bundle layout:
+
+- [`artifacts/releases/`](artifacts/releases/)
+- one subdirectory per `release_id`
+- `manifest.json`
+- `manifest.json.asc`
+- `quality_report.json`
+- `lineage_report.json`
+- one parquet dataset directory per exported dataset
+
+Current release export coverage:
+
+- adjusted equity bars with adjusted OHLCV and adjustment chain
+- PIT universe snapshot
+- FII/DII daily structured dataset
+- India VIX structured series
+- benchmark index series
+- sector index series
+- futures contract master
+- futures EOD
+- continuous futures
+- options contract master
+- options EOD
+
+Important detail:
+
+- the adjustment recompute path now writes adjusted open, high, low, close, and volume, not just adjusted close/volume
+- release bundles are signed with detached GPG signatures using a repo-local signing home
+
+## Structured Side Feeds
+
+Phase 1 side feeds are no longer just archived payloads.
+
+Structured tables now exist for:
+
+- FII/DII participant flows
+- India VIX daily rows
+- benchmark index series
+- sector index series
+
+Implementation paths:
+
+- parser/load path in [`src/omegadata/pipelines/sequential_pipeline.py`](src/omegadata/pipelines/sequential_pipeline.py)
+- source definitions in [`src/omegadata/track_a/source_registry.py`](src/omegadata/track_a/source_registry.py)
+- database tables in [`src/omegadata/db/models.py`](src/omegadata/db/models.py)
+
+These datasets are now:
+
+- persisted relationally
+- exportable in signed releases
+- queryable through release-scoped APIs
+- available for quality and lineage reporting
+
+## Derivatives Foundation
+
+Phase 1 now includes the core derivatives data model and ingestion foundation from NSE F&O bhavcopy.
+
+Implemented structures:
+
+- futures contract master
+- futures EOD
+- front-month continuous futures series
+- options contract master
+- options EOD
+
+Important current rule:
+
+- derivatives are linked to underlying identity through underlying symbol plus ISIN lookup where available
+- continuous futures currently use a documented `front_month` roll rule
+
+Implementation paths:
+
+- load/normalize path in [`src/omegadata/pipelines/sequential_pipeline.py`](src/omegadata/pipelines/sequential_pipeline.py)
+- database tables in [`src/omegadata/db/models.py`](src/omegadata/db/models.py)
+- release exports in [`src/omegadata/track_b/release_manager.py`](src/omegadata/track_b/release_manager.py)
+
+## Compose Profiles
+
+The compose setup now supports explicit environment profiles instead of one giant “everything or nothing” local stack.
+
+Profiles:
+
+- `local-test`
+- `warehouse`
+- `full-integration-release`
+
+Current intent:
+
+- `local-test` for API/unit/integration work against the default stack
+- `warehouse` for ClickHouse-focused work and release-sync validation
+- `full-integration-release` for end-to-end release-generation and monitoring flows
 
 ## Setup
 
@@ -638,6 +774,7 @@ python scripts/build_cross_source_tolerance_report.py --db-url sqlite:///artifac
 python scripts/build_corporate_action_matching_report.py
 python scripts/check_trading_calendar_coverage.py
 python scripts/build_release_readiness_report.py --db-url sqlite:///artifacts/verification/pipeline_run_work.sqlite
+python scripts/build_release_bundle.py --db-url sqlite:///artifacts/verification/pipeline_run_work.sqlite --as-of 2026-04-13 --profile equity_plus_sidefeeds
 python scripts/generate_implementation_audit.py
 ```
 
@@ -655,6 +792,8 @@ python scripts/backfill_nse_equity_history.py --start-date 2019-01-01 --end-date
 
 The historical backfill script writes [`artifacts/verification/nse_historical_backfill_report.json`](artifacts/verification/nse_historical_backfill_report.json). It now supports governed multi-year sampling modes, records the selected sample mode directly in the artifact, and only recommends browser fallback when the measured archive failures actually justify it.
 
+It also records explicit NSE trading-calendar coverage for the requested historical range and fails proof generation if required calendar years are not covered.
+
 That report is intentionally evidence-based. It does not claim legacy-host robustness that has not been re-proven.
 
 ## Scheduled Verification Workflows
@@ -670,6 +809,7 @@ The daily verification DAG runs:
 - deterministic source probe with scheduled-verification failure semantics
 - replay pipeline integration on the configured verification DB
 - release-readiness build from the same verification DB
+- release bundle generation for the governed daily profile
 
 The weekly verification DAG runs:
 
@@ -703,6 +843,7 @@ Important honest boundaries:
 - official-source-backed transformational adjustment evidence is materially better than before but still limited by the bundled raw-source window
 - reprocess orchestration is now evidence-backed and stateful, but it is still internal orchestration rather than a full external workflow engine
 - live-source stability must continue to be monitored over time, not inferred forever from one green artifact run
+- release bundles can be generated and signed now, but warehouse sync still depends on an available ClickHouse instance and should be treated as a real operational dependency, not assumed success
 - a missing full-pipeline replay artifact should be treated as missing operational evidence, not as implicit success
 
 That honesty is deliberate. The target is a trustworthy system, not a flattering README.

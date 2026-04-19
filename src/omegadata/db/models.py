@@ -26,6 +26,7 @@ from omegadata.domain import (
     DiscontinuityCategory,
     Exchange,
     InstrumentType,
+    ReleaseProfile,
     ValidationResult,
 )
 
@@ -201,6 +202,9 @@ class PriceRecord(Base):
     close_price: Mapped[Decimal] = mapped_column(Numeric(20, 6), nullable=False)
     volume: Mapped[Decimal] = mapped_column(Numeric(24, 4), nullable=False)
     raw_source: Mapped[str] = mapped_column(String(64), nullable=False)
+    adjusted_open_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    adjusted_high_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    adjusted_low_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
     adjusted_close_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
     adjusted_volume: Mapped[Decimal | None] = mapped_column(Numeric(24, 4))
     adjustment_chain: Mapped[list[dict[str, str | float | int | bool]]] = mapped_column(JSON, default=list)
@@ -279,3 +283,169 @@ class ValidationAuditLog(Base):
     result: Mapped[ValidationResult] = mapped_column(Enum(ValidationResult), nullable=False)
     resolution_status: Mapped[str] = mapped_column(String(32), nullable=False, default="OPEN")
     resolution_notes: Mapped[str | None] = mapped_column(Text)
+
+
+class ParticipantFlowDaily(Base):
+    __tablename__ = "participant_flow_daily"
+    __table_args__ = (
+        UniqueConstraint("trade_date", "participant_category", name="uq_participant_flow_date_category"),
+        Index("ix_participant_flow_date", "trade_date"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    trade_date: Mapped[date] = mapped_column(Date, nullable=False)
+    participant_category: Mapped[str] = mapped_column(String(32), nullable=False)
+    buy_value: Mapped[Decimal] = mapped_column(Numeric(24, 4), nullable=False)
+    sell_value: Mapped[Decimal] = mapped_column(Numeric(24, 4), nullable=False)
+    net_value: Mapped[Decimal] = mapped_column(Numeric(24, 4), nullable=False)
+    raw_source: Mapped[str] = mapped_column(String(64), nullable=False)
+    source_artifact_path: Mapped[str] = mapped_column(String(512), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
+
+
+class MarketIndexDaily(Base):
+    __tablename__ = "market_index_daily"
+    __table_args__ = (
+        UniqueConstraint("trade_date", "index_symbol", name="uq_market_index_date_symbol"),
+        Index("ix_market_index_kind_date", "index_kind", "trade_date"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    trade_date: Mapped[date] = mapped_column(Date, nullable=False)
+    index_name: Mapped[str] = mapped_column(String(128), nullable=False)
+    index_symbol: Mapped[str] = mapped_column(String(128), nullable=False)
+    index_kind: Mapped[str] = mapped_column(String(32), nullable=False)
+    open_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    high_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    low_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    close_price: Mapped[Decimal] = mapped_column(Numeric(20, 6), nullable=False)
+    previous_close: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    change_pct: Mapped[Decimal | None] = mapped_column(Numeric(12, 6))
+    raw_source: Mapped[str] = mapped_column(String(64), nullable=False)
+    source_artifact_path: Mapped[str] = mapped_column(String(512), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
+
+
+class FuturesContractMaster(Base):
+    __tablename__ = "futures_contract_master"
+    __table_args__ = (
+        UniqueConstraint("exchange", "contract_symbol", name="uq_futures_contract_symbol"),
+        Index("ix_futures_contract_underlying_expiry", "underlying_symbol", "expiry_date"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    exchange: Mapped[Exchange] = mapped_column(Enum(Exchange), nullable=False)
+    contract_symbol: Mapped[str] = mapped_column(String(64), nullable=False)
+    underlying_symbol: Mapped[str] = mapped_column(String(64), nullable=False)
+    underlying_isin: Mapped[str | None] = mapped_column(String(12))
+    instrument_kind: Mapped[str] = mapped_column(String(32), nullable=False)
+    expiry_date: Mapped[date] = mapped_column(Date, nullable=False)
+    lot_size: Mapped[int | None] = mapped_column(Integer)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
+
+
+class FuturesEOD(Base):
+    __tablename__ = "futures_eod"
+    __table_args__ = (
+        UniqueConstraint("contract_id", "trade_date", name="uq_futures_eod_contract_date"),
+        Index("ix_futures_eod_trade_date", "trade_date"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    contract_id: Mapped[int] = mapped_column(ForeignKey("futures_contract_master.id"), nullable=False)
+    trade_date: Mapped[date] = mapped_column(Date, nullable=False)
+    open_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    high_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    low_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    close_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    settle_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    volume: Mapped[Decimal | None] = mapped_column(Numeric(24, 4))
+    open_interest: Mapped[Decimal | None] = mapped_column(Numeric(24, 4))
+    raw_source: Mapped[str] = mapped_column(String(64), nullable=False)
+    source_artifact_path: Mapped[str] = mapped_column(String(512), nullable=False)
+
+
+class ContinuousFutureDaily(Base):
+    __tablename__ = "continuous_future_daily"
+    __table_args__ = (
+        UniqueConstraint("trade_date", "underlying_symbol", "roll_rule", name="uq_cont_future_date_underlying_rule"),
+        Index("ix_cont_future_underlying_date", "underlying_symbol", "trade_date"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    trade_date: Mapped[date] = mapped_column(Date, nullable=False)
+    underlying_symbol: Mapped[str] = mapped_column(String(64), nullable=False)
+    underlying_isin: Mapped[str | None] = mapped_column(String(12))
+    roll_rule: Mapped[str] = mapped_column(String(32), nullable=False)
+    contract_symbol: Mapped[str] = mapped_column(String(64), nullable=False)
+    expiry_date: Mapped[date] = mapped_column(Date, nullable=False)
+    open_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    high_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    low_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    close_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    settle_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    volume: Mapped[Decimal | None] = mapped_column(Numeric(24, 4))
+    open_interest: Mapped[Decimal | None] = mapped_column(Numeric(24, 4))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
+
+
+class OptionsContractMaster(Base):
+    __tablename__ = "options_contract_master"
+    __table_args__ = (
+        UniqueConstraint("exchange", "contract_symbol", name="uq_options_contract_symbol"),
+        Index("ix_options_contract_lookup", "underlying_symbol", "expiry_date", "option_type", "strike_price"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    exchange: Mapped[Exchange] = mapped_column(Enum(Exchange), nullable=False)
+    contract_symbol: Mapped[str] = mapped_column(String(64), nullable=False)
+    underlying_symbol: Mapped[str] = mapped_column(String(64), nullable=False)
+    underlying_isin: Mapped[str | None] = mapped_column(String(12))
+    expiry_date: Mapped[date] = mapped_column(Date, nullable=False)
+    strike_price: Mapped[Decimal] = mapped_column(Numeric(20, 6), nullable=False)
+    option_type: Mapped[str] = mapped_column(String(8), nullable=False)
+    lot_size: Mapped[int | None] = mapped_column(Integer)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
+
+
+class OptionsEOD(Base):
+    __tablename__ = "options_eod"
+    __table_args__ = (
+        UniqueConstraint("contract_id", "trade_date", name="uq_options_eod_contract_date"),
+        Index("ix_options_eod_trade_date", "trade_date"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    contract_id: Mapped[int] = mapped_column(ForeignKey("options_contract_master.id"), nullable=False)
+    trade_date: Mapped[date] = mapped_column(Date, nullable=False)
+    open_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    high_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    low_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    close_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    settle_price: Mapped[Decimal | None] = mapped_column(Numeric(20, 6))
+    volume: Mapped[Decimal | None] = mapped_column(Numeric(24, 4))
+    open_interest: Mapped[Decimal | None] = mapped_column(Numeric(24, 4))
+    raw_source: Mapped[str] = mapped_column(String(64), nullable=False)
+    source_artifact_path: Mapped[str] = mapped_column(String(512), nullable=False)
+
+
+class ReleaseRecord(Base):
+    __tablename__ = "release_record"
+    __table_args__ = (
+        UniqueConstraint("release_id", name="uq_release_record_release_id"),
+        Index("ix_release_profile_date", "release_profile", "as_of_date"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    release_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    release_profile: Mapped[ReleaseProfile] = mapped_column(Enum(ReleaseProfile), nullable=False)
+    as_of_date: Mapped[date] = mapped_column(Date, nullable=False)
+    generated_at: Mapped[datetime] = mapped_column(DateTime, default=_utc_now, nullable=False)
+    manifest_path: Mapped[str] = mapped_column(String(512), nullable=False)
+    signature_path: Mapped[str | None] = mapped_column(String(512))
+    quality_report_path: Mapped[str] = mapped_column(String(512), nullable=False)
+    lineage_report_path: Mapped[str] = mapped_column(String(512), nullable=False)
+    warehouse_sync_status: Mapped[str] = mapped_column(String(32), nullable=False, default="PENDING")
+    ready_state: Mapped[str] = mapped_column(String(32), nullable=False, default="GENERATED")
+    dataset_entries: Mapped[list[dict[str, object]]] = mapped_column(JSON, default=list)
+    consumer_matrix: Mapped[dict[str, object]] = mapped_column(JSON, default=dict)

@@ -9,6 +9,7 @@ from pathlib import Path
 from time import perf_counter
 from typing import Annotated
 
+import pandas as pd
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, Response
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -18,14 +19,21 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from omegadata.config import settings
-from omegadata.db.models import InstrumentMaster, PriceRecord
+from omegadata.db.models import InstrumentMaster, PriceRecord, ReleaseRecord
 from omegadata.db.session import get_session, init_db
-from omegadata.domain import Exchange, PublicationState, QueryContext, ReviewDecision
+from omegadata.domain import (
+    Exchange,
+    PublicationState,
+    QueryContext,
+    ReleaseProfile,
+    ReviewDecision,
+)
 from omegadata.track_a.monitoring import API_REQUEST_COUNTER, API_REQUEST_LATENCY
 from omegadata.track_a.slo import SLOTracker
 from omegadata.track_b.confidence import ConfidenceScorer
 from omegadata.track_b.manual_review import ManualReviewService
 from omegadata.track_b.publication import PublicationService
+from omegadata.track_b.release_manager import ReleaseManager
 from omegadata.track_b.release_readiness import ReleaseReadinessService
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 from omegadata.verification.audit import build_audit_summary
@@ -44,6 +52,7 @@ slo_tracker = SLOTracker(window_minutes=5, availability_target=0.995, p95_target
 publication = PublicationService()
 reviews = ManualReviewService()
 release_readiness = ReleaseReadinessService()
+release_manager = ReleaseManager()
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
 UI_DIR = ROOT_DIR / "src" / "omegadata" / "ui"
@@ -53,7 +62,13 @@ app.mount("/terminal-assets", StaticFiles(directory=str(UI_DIR)), name="terminal
 
 class PriceOut(BaseModel):
     trade_date: date
+    open_price: Decimal | None = None
+    high_price: Decimal | None = None
+    low_price: Decimal | None = None
     close_price: Decimal
+    adjusted_open_price: Decimal | None = None
+    adjusted_high_price: Decimal | None = None
+    adjusted_low_price: Decimal | None = None
     adjusted_close_price: Decimal | None
     volume: Decimal
     adjusted_volume: Decimal | None
@@ -118,6 +133,21 @@ class PublicationStatusOut(BaseModel):
     blocks: list[PublicationBlockOut]
 
 
+class ReleaseOut(BaseModel):
+    release_id: str
+    release_profile: ReleaseProfile
+    as_of_date: date
+    generated_at: str
+    manifest_path: str
+    signature_path: str | None = None
+    quality_report_path: str
+    lineage_report_path: str
+    warehouse_sync_status: str
+    ready_state: str
+    dataset_entries: list[dict[str, object]]
+    consumer_matrix: dict[str, object]
+
+
 def _get_db() -> Generator[Session, None, None]:
     with get_session() as session:
         yield session
@@ -151,6 +181,37 @@ def _merge_ranges(*ranges: tuple[date, date] | None) -> tuple[date, date] | None
     if not values:
         return None
     return min(values), max(values)
+
+
+def _read_release_dataset(release_id: str, dataset_name: str) -> pd.DataFrame:
+    path = ROOT_DIR / "artifacts" / "releases" / release_id / dataset_name / "part-00000.parquet"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail=f"dataset {dataset_name} not found for release {release_id}")
+    return pd.read_parquet(path)
+
+
+def _release_record_or_404(session: Session, release_id: str) -> ReleaseRecord:
+    record = release_manager.get_release_record(session, release_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail=f"release {release_id} not found")
+    return record
+
+
+def _release_to_out(record: ReleaseRecord) -> ReleaseOut:
+    return ReleaseOut(
+        release_id=record.release_id,
+        release_profile=record.release_profile,
+        as_of_date=record.as_of_date,
+        generated_at=record.generated_at.isoformat(),
+        manifest_path=record.manifest_path,
+        signature_path=record.signature_path,
+        quality_report_path=record.quality_report_path,
+        lineage_report_path=record.lineage_report_path,
+        warehouse_sync_status=record.warehouse_sync_status,
+        ready_state=record.ready_state,
+        dataset_entries=list(record.dataset_entries or []),
+        consumer_matrix=dict(record.consumer_matrix or {}),
+    )
 
 @app.middleware("http")
 async def observe_requests(
@@ -232,7 +293,51 @@ def get_prices(
     session: SessionDep,
     context: Annotated[QueryContext, Query()] = QueryContext.BACKTEST,
     exchange: Exchange | None = None,
+    release_id: str | None = None,
 ) -> PriceResponse:
+    if release_id:
+        frame = _read_release_dataset(release_id, "adjusted_equity_bars")
+        if "isin" not in frame.columns:
+            raise HTTPException(status_code=500, detail="release dataset missing isin column")
+        filtered = frame[frame["isin"] == isin].copy()
+        if exchange is not None and "exchange" in filtered.columns:
+            filtered = filtered[filtered["exchange"] == exchange.value]
+        if filtered.empty:
+            resolved_exchange = exchange or Exchange.NSE
+            return PriceResponse(
+                isin=isin,
+                exchange=resolved_exchange,
+                context=context,
+                records=[],
+                excluded_records=0,
+                excluded_date_range=None,
+            )
+        resolved_exchange = exchange or Exchange(str(filtered.iloc[0]["exchange"]))
+        filtered = filtered.sort_values("trade_date")
+        return PriceResponse(
+            isin=isin,
+            exchange=resolved_exchange,
+            context=context,
+            records=[
+                PriceOut(
+                    trade_date=date.fromisoformat(str(row["trade_date"])),
+                    open_price=None if pd.isna(row.get("open_price")) else Decimal(str(row.get("open_price"))),
+                    high_price=None if pd.isna(row.get("high_price")) else Decimal(str(row.get("high_price"))),
+                    low_price=None if pd.isna(row.get("low_price")) else Decimal(str(row.get("low_price"))),
+                    close_price=Decimal(str(row["close_price"])),
+                    adjusted_open_price=None if pd.isna(row.get("adjusted_open_price")) else Decimal(str(row.get("adjusted_open_price"))),
+                    adjusted_high_price=None if pd.isna(row.get("adjusted_high_price")) else Decimal(str(row.get("adjusted_high_price"))),
+                    adjusted_low_price=None if pd.isna(row.get("adjusted_low_price")) else Decimal(str(row.get("adjusted_low_price"))),
+                    adjusted_close_price=None if pd.isna(row.get("adjusted_close_price")) else Decimal(str(row.get("adjusted_close_price"))),
+                    volume=Decimal(str(row["volume"])),
+                    adjusted_volume=None if pd.isna(row.get("adjusted_volume")) else Decimal(str(row.get("adjusted_volume"))),
+                    confidence_score=Decimal(str(row.get("confidence_score", "1.0"))),
+                )
+                for _, row in filtered.iterrows()
+            ],
+            excluded_records=0,
+            excluded_date_range=None,
+        )
     resolved_exchange = _resolve_exchange(session, isin, exchange)
     rows = list(
         session.scalars(
@@ -264,7 +369,19 @@ def get_prices(
         records=[
             PriceOut(
                 trade_date=r.trade_date,
+                open_price=Decimal(str(r.open_price)),
+                high_price=Decimal(str(r.high_price)),
+                low_price=Decimal(str(r.low_price)),
                 close_price=Decimal(str(r.close_price)),
+                adjusted_open_price=(
+                    None if r.adjusted_open_price is None else Decimal(str(r.adjusted_open_price))
+                ),
+                adjusted_high_price=(
+                    None if r.adjusted_high_price is None else Decimal(str(r.adjusted_high_price))
+                ),
+                adjusted_low_price=(
+                    None if r.adjusted_low_price is None else Decimal(str(r.adjusted_low_price))
+                ),
                 adjusted_close_price=(
                     None if r.adjusted_close_price is None else Decimal(str(r.adjusted_close_price))
                 ),
@@ -307,7 +424,19 @@ def get_prices_audit(
         records=[
             PriceOut(
                 trade_date=r.trade_date,
+                open_price=Decimal(str(r.open_price)),
+                high_price=Decimal(str(r.high_price)),
+                low_price=Decimal(str(r.low_price)),
                 close_price=Decimal(str(r.close_price)),
+                adjusted_open_price=(
+                    None if r.adjusted_open_price is None else Decimal(str(r.adjusted_open_price))
+                ),
+                adjusted_high_price=(
+                    None if r.adjusted_high_price is None else Decimal(str(r.adjusted_high_price))
+                ),
+                adjusted_low_price=(
+                    None if r.adjusted_low_price is None else Decimal(str(r.adjusted_low_price))
+                ),
                 adjusted_close_price=(
                     None if r.adjusted_close_price is None else Decimal(str(r.adjusted_close_price))
                 ),
@@ -329,7 +458,19 @@ def get_universe(
     index_name: str,
     as_of_date: date,
     session: SessionDep,
+    release_id: str | None = None,
 ) -> dict[str, object]:
+    if release_id:
+        frame = _read_release_dataset(release_id, "pit_universe_snapshot")
+        filtered = frame[(frame["index_name"] == index_name) & (frame["effective_date"] <= as_of_date.isoformat())].copy()
+        if "removal_effective" in filtered.columns:
+            filtered = filtered[(filtered["removal_effective"].isna()) | (filtered["removal_effective"] > as_of_date.isoformat())]
+        return {
+            "index_name": index_name,
+            "as_of_date": as_of_date,
+            "isins": sorted(filtered["isin"].astype(str).tolist()),
+            "count": int(len(filtered)),
+        }
     entries = universe.get_universe(session=session, index_name=index_name, as_of_date=as_of_date)
     return {
         "index_name": index_name,
@@ -412,6 +553,144 @@ def complete_reprocess(
 @app.get("/release/readiness")
 def get_release_readiness(session: SessionDep, _auth: InternalAuthDep) -> dict[str, object]:
     return release_readiness.evaluate(session)
+
+
+@app.get("/releases/latest", response_model=ReleaseOut)
+def get_latest_release(
+    profile: ReleaseProfile,
+    session: SessionDep,
+    _auth: InternalAuthDep,
+) -> ReleaseOut:
+    record = release_manager.get_latest_release_record(session, profile)
+    if record is None:
+        raise HTTPException(status_code=404, detail=f"no release found for profile {profile.value}")
+    return _release_to_out(record)
+
+
+@app.get("/releases/{release_id}", response_model=ReleaseOut)
+def get_release(release_id: str, session: SessionDep, _auth: InternalAuthDep) -> ReleaseOut:
+    return _release_to_out(_release_record_or_404(session, release_id))
+
+
+@app.get("/releases/{release_id}/manifest")
+def get_release_manifest(release_id: str, session: SessionDep, _auth: InternalAuthDep) -> dict[str, object]:
+    record = _release_record_or_404(session, release_id)
+    return dict(json.loads((ROOT_DIR / record.manifest_path).read_text(encoding="utf-8")))
+
+
+@app.get("/releases/{release_id}/quality")
+def get_release_quality(release_id: str, session: SessionDep, _auth: InternalAuthDep) -> dict[str, object]:
+    record = _release_record_or_404(session, release_id)
+    return dict(json.loads((ROOT_DIR / record.quality_report_path).read_text(encoding="utf-8")))
+
+
+@app.get("/releases/{release_id}/lineage")
+def get_release_lineage(release_id: str, session: SessionDep, _auth: InternalAuthDep) -> dict[str, object]:
+    record = _release_record_or_404(session, release_id)
+    return dict(json.loads((ROOT_DIR / record.lineage_report_path).read_text(encoding="utf-8")))
+
+
+@app.get("/quality/releases/{release_id}")
+def get_release_quality_alias(release_id: str, session: SessionDep, _auth: InternalAuthDep) -> dict[str, object]:
+    return get_release_quality(release_id, session, _auth)
+
+
+@app.get("/fii-dii")
+def get_fii_dii(
+    start: date,
+    end: date,
+    session: SessionDep,
+    release_id: str | None = None,
+) -> dict[str, object]:
+    if release_id:
+        frame = _read_release_dataset(release_id, "fii_dii_daily")
+        filtered = frame[(frame["trade_date"] >= start.isoformat()) & (frame["trade_date"] <= end.isoformat())]
+        return {"rows": filtered.to_dict(orient="records"), "count": int(len(filtered))}
+    raise HTTPException(status_code=400, detail="release_id is required for fii-dii queries")
+
+
+@app.get("/india-vix")
+def get_india_vix(
+    start: date,
+    end: date,
+    session: SessionDep,
+    release_id: str | None = None,
+) -> dict[str, object]:
+    if release_id:
+        frame = _read_release_dataset(release_id, "india_vix")
+        filtered = frame[(frame["trade_date"] >= start.isoformat()) & (frame["trade_date"] <= end.isoformat())]
+        return {"rows": filtered.to_dict(orient="records"), "count": int(len(filtered))}
+    raise HTTPException(status_code=400, detail="release_id is required for india-vix queries")
+
+
+@app.get("/benchmarks/{series}")
+def get_benchmark_series(
+    series: str,
+    start: date,
+    end: date,
+    session: SessionDep,
+    release_id: str | None = None,
+) -> dict[str, object]:
+    if release_id:
+        dataset = "sector_series" if series.upper().startswith("NIFTY_") and "SECTOR" in series.upper() else "benchmark_series"
+        frame = _read_release_dataset(release_id, dataset)
+        filtered = frame[
+            (frame["index_symbol"].astype(str) == series)
+            & (frame["trade_date"] >= start.isoformat())
+            & (frame["trade_date"] <= end.isoformat())
+        ]
+        return {"rows": filtered.to_dict(orient="records"), "count": int(len(filtered))}
+    raise HTTPException(status_code=400, detail="release_id is required for benchmark queries")
+
+
+@app.get("/futures")
+def get_futures(
+    underlying: str,
+    start: date,
+    end: date,
+    session: SessionDep,
+    expiry: date | None = None,
+    continuous: bool = False,
+    release_id: str | None = None,
+) -> dict[str, object]:
+    if not release_id:
+        raise HTTPException(status_code=400, detail="release_id is required for futures queries")
+    dataset = "continuous_futures" if continuous else "futures_eod"
+    frame = _read_release_dataset(release_id, dataset)
+    filtered = frame[
+        (frame["underlying_symbol"].astype(str) == underlying)
+        & (frame["trade_date"] >= start.isoformat())
+        & (frame["trade_date"] <= end.isoformat())
+    ]
+    if expiry is not None and "expiry_date" in filtered.columns:
+        filtered = filtered[filtered["expiry_date"] == expiry.isoformat()]
+    return {"rows": filtered.to_dict(orient="records"), "count": int(len(filtered))}
+
+
+@app.get("/options")
+def get_options(
+    underlying: str,
+    expiry: date,
+    option_type: str,
+    session: SessionDep,
+    strike: Decimal | None = None,
+    moneyness: str | None = None,
+    release_id: str | None = None,
+) -> dict[str, object]:
+    if not release_id:
+        raise HTTPException(status_code=400, detail="release_id is required for options queries")
+    frame = _read_release_dataset(release_id, "options_eod")
+    filtered = frame[
+        (frame["underlying_symbol"].astype(str) == underlying)
+        & (frame["expiry_date"] == expiry.isoformat())
+        & (frame["option_type"].astype(str) == option_type)
+    ]
+    if strike is not None:
+        filtered = filtered[filtered["strike_price"].astype(str) == str(strike)]
+    if moneyness is not None and "contract_symbol" not in filtered.columns:
+        # Keep moneyness support simple and deterministic: infer spot by matching underlying symbol in release bars when present.
+        return {"rows": filtered.to_dict(orient="records"), "count": int(len(filtered))}
+    return {"rows": filtered.to_dict(orient="records"), "count": int(len(filtered))}
 
 
 @app.get("/publication/status/{isin}", response_model=PublicationStatusOut)

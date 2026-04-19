@@ -70,8 +70,23 @@ class PriceAdjustmentEngine:
                     }
                 )
 
+            raw_open = Decimal(str(row.open_price))
+            raw_high = Decimal(str(row.high_price))
+            raw_low = Decimal(str(row.low_price))
             raw_close = Decimal(str(row.close_price))
             raw_volume = Decimal(str(row.volume))
+            row.adjusted_open_price = (raw_open * cumulative_price).quantize(
+                Decimal("0.000001"),
+                rounding=ROUND_HALF_UP,
+            )
+            row.adjusted_high_price = (raw_high * cumulative_price).quantize(
+                Decimal("0.000001"),
+                rounding=ROUND_HALF_UP,
+            )
+            row.adjusted_low_price = (raw_low * cumulative_price).quantize(
+                Decimal("0.000001"),
+                rounding=ROUND_HALF_UP,
+            )
             row.adjusted_close_price = (raw_close * cumulative_price).quantize(
                 Decimal("0.000001"),
                 rounding=ROUND_HALF_UP,

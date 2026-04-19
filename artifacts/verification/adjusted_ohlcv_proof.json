@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-04-19T07:41:12.337207+00:00",
+  "case_label": "NESTLEIND_2024-01-05_SPLIT",
+  "expected_isin": "INE239A01024",
+  "observed_isins": [
+    "INE239A01016",
+    "INE239A01024"
+  ],
+  "persisted_isin": "INE239A01016",
+  "official_snapshot_path": "tests/fixtures/official_source/circular_extracts/nestleind_split_2024-01-04.json",
+  "price_paths": [
+    "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240102__e0a70f754665.zip",
+    "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240103__f72177415825.zip",
+    "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240104__4d390e055258.zip",
+    "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240105__d5490c9c352b.zip",
+    "data/raw/nse_equity_bhavcopy/year=2024/month=01/20240108__46afeb3c1a51.zip"
+  ],
+  "adjusted_rows_written": 5,
+  "adjusted_ohlcv_complete": true,
+  "rows": [
+    {
+      "trade_date": "2024-01-02",
+      "raw_open": "27500.000000",
+      "raw_high": "27693.000000",
+      "raw_low": "27024.050000",
+      "raw_close": "27223.150000",
+      "raw_volume": "141577.0000",
+      "adjusted_open": "2750.000000",
+      "adjusted_high": "2769.300000",
+      "adjusted_low": "2702.405000",
+      "adjusted_close": "2722.315000",
+      "adjusted_volume": "1415770.0000",
+      "price_factor": "0.1",
+      "volume_factor": "10",
+      "adjustment_chain": [
+        {
+          "corporate_action_id": 1,
+          "action_type": "SPLIT",
+          "ex_date": "2024-01-05",
+          "adjustment_factor_applied": 0.1,
+          "cumulative_factor_at_this_point": 0.1,
+          "ca_confidence": "HIGH",
+          "ca_source_preference": "NSE"
+        }
+      ]
+    },
+    {
+      "trade_date": "2024-01-03",
+      "raw_open": "27345.000000",
+      "raw_high": "27417.300000",
+      "raw_low": "26573.000000",
+      "raw_close": "26635.200000",
+      "raw_volume": "101346.0000",
+      "adjusted_open": "2734.500000",
+      "adjusted_high": "2741.730000",
+      "adjusted_low": "2657.300000",
+      "adjusted_close": "2663.520000",
+      "adjusted_volume": "1013460.0000",
+      "price_factor": "0.1",
+      "volume_factor": "10",
+      "adjustment_chain": [
+        {
+          "corporate_action_id": 1,
+          "action_type": "SPLIT",
+          "ex_date": "2024-01-05",
+          "adjustment_factor_applied": 0.1,
+          "cumulative_factor_at_this_point": 0.1,
+          "ca_confidence": "HIGH",
+          "ca_source_preference": "NSE"
+        }
+      ]
+    },
+    {
+      "trade_date": "2024-01-04",
+      "raw_open": "26851.050000",
+      "raw_high": "27150.050000",
+      "raw_low": "26652.050000",
+      "raw_close": "27116.400000",
+      "raw_volume": "132390.0000",
+      "adjusted_open": "2685.105000",
+      "adjusted_high": "2715.005000",
+      "adjusted_low": "2665.205000",
+      "adjusted_close": "2711.640000",
+      "adjusted_volume": "1323900.0000",
+      "price_factor": "0.1",
+      "volume_factor": "10",
+      "adjustment_chain": [
+        {
+          "corporate_action_id": 1,
+          "action_type": "SPLIT",
+          "ex_date": "2024-01-05",
+          "adjustment_factor_applied": 0.1,
+          "cumulative_factor_at_this_point": 0.1,
+          "ca_confidence": "HIGH",
+          "ca_source_preference": "NSE"
+        }
+      ]
+    }
+  ]
+}

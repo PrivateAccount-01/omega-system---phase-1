@@ -115,6 +115,16 @@ def main() -> None:
             request_timeout_seconds=settings.source_probe_timeout_seconds,
         )
     ]
+    nse_fo_probes = [
+        _probe_dict(probe)
+        for probe in manager.probe_source_candidates(
+            "NSE_FO_BHAVCOPY",
+            nse_probe_date,
+            limit=1,
+            profiles=probe_profiles,
+            request_timeout_seconds=settings.source_probe_timeout_seconds,
+        )
+    ]
     bse_page_probes = [
         _probe_dict(probe)
         for probe in manager.probe_source_candidates(
@@ -194,6 +204,7 @@ def main() -> None:
         "bse_probe_scope": "full_supported_registry_candidates",
         "nse_corporate_actions": nse_probes,
         "nse_equity_bhavcopy": nse_equity_probes,
+        "nse_fo_bhavcopy": nse_fo_probes,
         "nse_equity_recent_history": nse_equity_recent_history,
         "bse_equity_candidates": bse_page_probes,
         "bse_recent_history": bse_recent_history,
@@ -202,6 +213,9 @@ def main() -> None:
             "all_supported_fallbacks_probed": expected_fallback_urls.issubset(probed_fallback_urls),
             "nse_equity_primary_validated": any(
                 item["role"] == "primary" and item["validated"] for item in nse_equity_probes
+            ),
+            "nse_fo_primary_validated": any(
+                item["role"] == "primary" and item["validated"] for item in nse_fo_probes
             ),
             "bse_primary_validated": any(item["role"] == "primary" and item["validated"] for item in bse_page_probes),
             "bse_any_fallback_validated": healthy_fallback_count > 0,
@@ -221,6 +235,8 @@ def main() -> None:
             raise SystemExit("Scheduled verification requires loaded and current trading-calendar configuration.")
         if not bool(summary["nse_equity_primary_validated"]):
             raise SystemExit("Scheduled verification failed: NSE equity bhavcopy primary probe is unhealthy.")
+        if not bool(summary["nse_fo_primary_validated"]):
+            raise SystemExit("Scheduled verification failed: NSE F&O bhavcopy primary probe is unhealthy.")
         if not bool(summary["bse_primary_validated"]):
             raise SystemExit("Scheduled verification failed: BSE equity bhavcopy primary probe is unhealthy.")
         if not bool(summary["all_supported_fallbacks_healthy"]):

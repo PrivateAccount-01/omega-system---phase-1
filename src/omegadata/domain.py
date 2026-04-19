@@ -90,3 +90,9 @@ class ReviewDecision(StrEnum):
 class PublicationState(StrEnum):
     PUBLISHABLE = "PUBLISHABLE"
     BLOCKED = "BLOCKED"
+
+
+class ReleaseProfile(StrEnum):
+    EQUITY_CORE = "equity_core"
+    EQUITY_PLUS_SIDEFEEDS = "equity_plus_sidefeeds"
+    FULL_DERIVATIVES = "full_derivatives"

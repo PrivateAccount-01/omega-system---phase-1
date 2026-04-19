@@ -23,6 +23,21 @@ def _iter_candidate_days(start_date: date, end_date: date) -> list[date]:
     return values
 
 
+def _calendar_range_coverage(calendar: TradingCalendar, start_date: date, end_date: date) -> dict[str, object]:
+    years = sorted(set(range(start_date.year, end_date.year + 1)))
+    missing = [year for year in years if not calendar.year_is_covered("NSE", year)]
+    return {
+        "exchange": "NSE",
+        "required_years": years,
+        "covered_years": sorted(calendar.coverage_years_by_exchange.get("NSE", set())),
+        "missing_years": missing,
+        "complete": not missing and calendar.config_state == "loaded",
+        "config_state": calendar.config_state,
+        "config_path": calendar.config_path,
+        "config_error": calendar.config_error,
+    }
+
+
 def _apply_sample_mode(candidate_days: list[date], sample_mode: str) -> list[date]:
     if sample_mode == "all":
         return candidate_days
@@ -61,6 +76,8 @@ def main() -> None:
     start_date = date.fromisoformat(args.start_date)
     end_date = date.fromisoformat(args.end_date)
     manager = DownloadManager()
+    calendar = TradingCalendar.from_config()
+    coverage = _calendar_range_coverage(calendar, start_date, end_date)
     candidate_days = _apply_sample_mode(_iter_candidate_days(start_date, end_date), args.sample_mode)
 
     rows: list[dict[str, object]] = []
@@ -103,6 +120,7 @@ def main() -> None:
     artifact = {
         "generated_at": datetime.now(UTC).isoformat(),
         "range": {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
+        "calendar_coverage": coverage,
         "sample_mode": args.sample_mode,
         "years_covered": sorted({value.year for value in candidate_days}),
         "candidate_trading_days": len(candidate_days),
@@ -120,6 +138,8 @@ def main() -> None:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(artifact, indent=2), encoding="utf-8")
     print(f"Wrote {OUTPUT_PATH}")
+    if not bool(coverage["complete"]):
+        raise SystemExit("Historical backfill proof requires complete NSE trading-calendar coverage for the requested range.")
 
 
 if __name__ == "__main__":

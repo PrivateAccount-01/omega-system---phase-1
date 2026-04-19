@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-04-19T07:41:13.360437+00:00",
+  "as_of_date": "2026-04-13",
+  "release_profile": "equity_core",
+  "release_readiness_snapshot": {
+    "generated_at": "2026-04-19T07:41:13.360304+00:00",
+    "ready": false,
+    "checks": [
+      {
+        "name": "blocking_reviews",
+        "passed": true,
+        "details": "open_release_blocking_reviews=1, open_record_scoped_blocking_reviews=0"
+      },
+      {
+        "name": "overdue_blocking_reviews",
+        "passed": true,
+        "details": "overdue_release_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
+      },
+      {
+        "name": "pending_reprocess_jobs",
+        "passed": true,
+        "details": "pending_reprocess_jobs=0"
+      },
+      {
+        "name": "source_probe_fresh",
+        "passed": false,
+        "details": "artifact_age_hours=115.63"
+      },
+      {
+        "name": "pipeline_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=0.29"
+      },
+      {
+        "name": "tolerance_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=110.32"
+      },
+      {
+        "name": "matching_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=151.69"
+      },
+      {
+        "name": "calendar_loaded",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, calendar_config_state=loaded"
+      },
+      {
+        "name": "probe_primary_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, bse_primary_validated=True"
+      },
+      {
+        "name": "probe_fallback_health",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, healthy_fallback_count=2, failed_fallback_count=0"
+      },
+      {
+        "name": "probe_nse_equity_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, nse_equity_primary_validated=True"
+      },
+      {
+        "name": "pipeline_success",
+        "passed": true,
+        "details": "successful_days=1, failed_days=0"
+      },
+      {
+        "name": "tolerance_status",
+        "passed": true,
+        "details": "status=ok, benchmark_passed=True"
+      },
+      {
+        "name": "matching_benchmark_status",
+        "passed": true,
+        "details": "status=ok, precision=1.0, recall=1.0"
+      },
+      {
+        "name": "official_adjustment_corpus",
+        "passed": true,
+        "details": "official_case_count=14, official_transformational_case_count=5"
+      },
+      {
+        "name": "manual_transformational_corpus",
+        "passed": true,
+        "details": "manual_case_count=14"
+      }
+    ]
+  }
+}

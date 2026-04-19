@@ -19,18 +19,22 @@ from omegadata.config import settings
 from omegadata.db.models import (
     CorporateActionStaging,
     InstrumentMaster,
+    MarketIndexDaily,
     ManualReviewQueue,
+    ParticipantFlowDaily,
     PriceRecord,
     ReprocessJob,
+    ReleaseRecord,
     SymbolMap,
 )
 from omegadata.db.session import get_session, init_db
-from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState
+from omegadata.domain import CorporateActionType, Exchange, InstrumentType, PublicationState, ReleaseProfile
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
 from omegadata.track_a.download_manager import DownloadError, DownloadManager, FetchResult
 from omegadata.track_a.trading_calendar import CalendarMaintenance, TradingCalendar
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.isin_master import ISINMasterService
+from omegadata.track_b.release_manager import ReleaseManager
 from omegadata.track_b.review_policy import invalidate_review_policy_cache, load_review_policies
 
 
@@ -369,6 +373,126 @@ def test_nse_subject_parsing_extracts_core_corporate_action_parameters(
 
     assert dividend.action_type == CorporateActionType.DIVIDEND_CASH
     assert dividend.payload["dividend_per_share"] == "0.60"
+
+
+def test_side_feed_loaders_persist_structured_rows(db_session, tmp_path: Path) -> None:
+    fii_payload = [
+        {
+            "category": "FII/FPI",
+            "date": "10-Apr-2026",
+            "buyValue": "18303.96",
+            "sellValue": "17631.87",
+            "netValue": "672.09",
+        }
+    ]
+    index_payload = {
+        "data": [
+            {
+                "key": "SECTORAL INDICES",
+                "index": "NIFTY IT",
+                "indexSymbol": "NIFTY IT",
+                "last": 37500.25,
+                "open": 37110.00,
+                "high": 37610.00,
+                "low": 37050.00,
+                "previousClose": 37000.00,
+                "percentChange": 1.35,
+            },
+            {
+                "key": "INDICES ELIGIBLE IN DERIVATIVES",
+                "index": "INDIA VIX",
+                "indexSymbol": "INDIA VIX",
+                "last": 12.55,
+                "open": 12.10,
+                "high": 12.80,
+                "low": 12.00,
+                "previousClose": 12.00,
+                "percentChange": 4.58,
+            },
+        ]
+    }
+    fii_path = tmp_path / "fii.json"
+    vix_path = tmp_path / "vix.json"
+    fii_path.write_text(json.dumps(fii_payload), encoding="utf-8")
+    vix_path.write_text(json.dumps(index_payload), encoding="utf-8")
+
+    pipe = OmegaDataSequentialPipeline()
+    assert pipe._load_fii_dii(db_session, fii_path) == 1
+    assert pipe._load_market_indices(db_session, vix_path, date(2026, 4, 10)) == 2
+
+    flow = db_session.scalar(select(ParticipantFlowDaily))
+    assert flow is not None
+    assert flow.participant_category == "FII/FPI"
+    index_rows = db_session.scalars(select(MarketIndexDaily).order_by(MarketIndexDaily.index_symbol)).all()
+    assert [row.index_kind for row in index_rows] == ["VIX", "SECTOR"]
+
+
+def test_release_manager_builds_signed_release_artifact(db_session, tmp_path: Path, monkeypatch) -> None:
+    db_session.add_all(
+        [
+            PriceRecord(
+                isin="INE009A01021",
+                exchange=Exchange.NSE,
+                trade_date=date(2026, 4, 10),
+                open_price=Decimal("100"),
+                high_price=Decimal("105"),
+                low_price=Decimal("95"),
+                close_price=Decimal("102"),
+                volume=Decimal("1000"),
+                raw_source="nse_bhavcopy",
+                adjusted_open_price=Decimal("90"),
+                adjusted_high_price=Decimal("94.5"),
+                adjusted_low_price=Decimal("85.5"),
+                adjusted_close_price=Decimal("91.8"),
+                adjusted_volume=Decimal("1100"),
+                confidence_score=Decimal("1.00"),
+                adjustment_chain=[],
+            ),
+            ParticipantFlowDaily(
+                trade_date=date(2026, 4, 10),
+                participant_category="FII/FPI",
+                buy_value=Decimal("10"),
+                sell_value=Decimal("8"),
+                net_value=Decimal("2"),
+                raw_source="nse_fii_dii",
+                source_artifact_path="data/raw/nse_fii_dii/example.bin",
+            ),
+            MarketIndexDaily(
+                trade_date=date(2026, 4, 10),
+                index_name="INDIA VIX",
+                index_symbol="INDIA VIX",
+                index_kind="VIX",
+                open_price=Decimal("10"),
+                high_price=Decimal("11"),
+                low_price=Decimal("9"),
+                close_price=Decimal("10.5"),
+                previous_close=Decimal("10"),
+                change_pct=Decimal("5"),
+                raw_source="india_vix_all_indices",
+                source_artifact_path="data/raw/india_vix/example.bin",
+            ),
+        ]
+    )
+    monkeypatch.setattr(settings, "release_root", str(tmp_path / "releases"))
+
+    def fake_sign(self, manifest_path: Path) -> Path:  # noqa: ANN001
+        signature_path = manifest_path.with_suffix(".asc")
+        signature_path.write_text("signed", encoding="utf-8")
+        return signature_path
+
+    monkeypatch.setattr(ReleaseManager, "_sign_manifest", fake_sign)
+    monkeypatch.setattr(
+        "omegadata.track_a.warehouse.ClickHouseWarehouseSync.sync_release_manifest",
+        lambda *args, **kwargs: type("Result", (), {"status": "SYNCED", "details": "ok"})(),
+    )
+
+    manager = ReleaseManager()
+    result = manager.build_release(db_session, as_of=date(2026, 4, 10), profile=ReleaseProfile.EQUITY_PLUS_SIDEFEEDS)
+    assert result.manifest_path.exists()
+    assert result.signature_path is not None and result.signature_path.exists()
+    record = db_session.scalar(select(ReleaseRecord).where(ReleaseRecord.release_id == result.release_id))
+    assert record is not None
+    assert record.release_profile == ReleaseProfile.EQUITY_PLUS_SIDEFEEDS
 
 
 def test_run_track_b_preserves_failed_cross_source_validation_penalty(tmp_path: Path) -> None:
