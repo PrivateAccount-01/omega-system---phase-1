@@ -20,6 +20,7 @@ class CalendarMaintenance:
 class TradingCalendar:
     holidays_by_exchange: dict[str, set[date]]
     coverage_years_by_exchange: dict[str, set[int]]
+    special_sessions_by_exchange: dict[str, dict[date, str]] = field(default_factory=dict)
     maintenance: CalendarMaintenance = field(default_factory=CalendarMaintenance)
     config_state: str = "loaded"
     config_path: str | None = None
@@ -32,6 +33,7 @@ class TradingCalendar:
             return cls(
                 holidays_by_exchange={},
                 coverage_years_by_exchange={},
+                special_sessions_by_exchange={},
                 config_state="missing",
                 config_path=path.as_posix(),
             )
@@ -41,12 +43,14 @@ class TradingCalendar:
             return cls(
                 holidays_by_exchange={},
                 coverage_years_by_exchange={},
+                special_sessions_by_exchange={},
                 config_state="invalid",
                 config_path=path.as_posix(),
                 config_error=str(exc),
             )
         holidays_by_exchange: dict[str, set[date]] = {}
         coverage_years_by_exchange: dict[str, set[int]] = {}
+        special_sessions_by_exchange: dict[str, dict[date, str]] = {}
         raw_maintenance = payload.get("maintenance", {})
         maintenance = CalendarMaintenance()
         if isinstance(raw_maintenance, dict):
@@ -91,12 +95,33 @@ class TradingCalendar:
                 coverage_years_by_exchange[str(exchange)] = {
                     int(value) for value in values if isinstance(value, int)
                 }
+        raw_special_sessions = payload.get("special_sessions", {})
+        if isinstance(raw_special_sessions, dict):
+            for exchange, values in raw_special_sessions.items():
+                if not isinstance(values, list):
+                    continue
+                parsed: dict[date, str] = {}
+                for value in values:
+                    if not isinstance(value, dict):
+                        continue
+                    raw_date = value.get("date")
+                    if not isinstance(raw_date, str):
+                        continue
+                    try:
+                        session_date = date.fromisoformat(raw_date)
+                    except ValueError:
+                        continue
+                    session_kind = str(value.get("kind", "special_session")).strip() or "special_session"
+                    parsed[session_date] = session_kind
+                if parsed:
+                    special_sessions_by_exchange[str(exchange)] = parsed
         if not coverage_years_by_exchange:
             for exchange, holidays in holidays_by_exchange.items():
                 coverage_years_by_exchange[exchange] = {item.year for item in holidays}
         return cls(
             holidays_by_exchange=holidays_by_exchange,
             coverage_years_by_exchange=coverage_years_by_exchange,
+            special_sessions_by_exchange=special_sessions_by_exchange,
             maintenance=maintenance,
             config_state="loaded",
             config_path=path.as_posix(),
@@ -117,10 +142,19 @@ class TradingCalendar:
     def is_trading_day(self, exchange: str, candidate: date, *, strict: bool = False) -> bool:
         if strict:
             self.ensure_year_covered(exchange, candidate.year)
+        if candidate in self.special_sessions_by_exchange.get(exchange, {}):
+            return True
         if candidate.weekday() >= 5:
             return False
         holidays = self.holidays_by_exchange.get(exchange, set())
         return candidate not in holidays
+
+    def special_sessions_for_year(self, exchange: str, year: int) -> dict[date, str]:
+        return {
+            session_date: session_kind
+            for session_date, session_kind in self.special_sessions_by_exchange.get(exchange, {}).items()
+            if session_date.year == year
+        }
 
     def recent_trading_days(
         self,

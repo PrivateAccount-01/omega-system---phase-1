@@ -178,22 +178,30 @@ class ReleaseReadinessService:
         review_policies = load_review_policies()
         open_release_blocking = 0
         overdue_release_blocking = 0
+        open_instrument_scoped_blocking = 0
         open_record_scoped_blocking = 0
+        overdue_instrument_scoped_blocking = 0
         overdue_record_scoped_blocking = 0
         for review in session.query(ManualReviewQueue).all():
             category_policy = review_policies.for_category(review.category)
             if not category_policy.blocks_publication:
                 continue
             payload = dict(review.payload or {})
-            is_release_blocking = category_policy.scope.value != "RECORD"
+            scope = category_policy.scope.value
+            blocks_release_while_open = scope in {"FORWARD_SERIES", "RELEASE"}
+            blocks_release_when_overdue = bool(payload.get("release_gate_impact") == "BLOCK_RELEASE")
             if not review.resolved:
-                if is_release_blocking:
+                if blocks_release_while_open:
                     open_release_blocking += 1
+                elif scope == "INSTRUMENT":
+                    open_instrument_scoped_blocking += 1
                 else:
                     open_record_scoped_blocking += 1
             if bool(payload.get("sla_breached")):
-                if is_release_blocking:
+                if blocks_release_while_open or blocks_release_when_overdue:
                     overdue_release_blocking += 1
+                elif scope == "INSTRUMENT":
+                    overdue_instrument_scoped_blocking += 1
                 else:
                     overdue_record_scoped_blocking += 1
         checks.append(
@@ -202,6 +210,7 @@ class ReleaseReadinessService:
                 passed=open_release_blocking <= int(policy["max_open_blocking_reviews"]),
                 details=(
                     f"open_release_blocking_reviews={open_release_blocking}, "
+                    f"open_instrument_scoped_blocking_reviews={open_instrument_scoped_blocking}, "
                     f"open_record_scoped_blocking_reviews={open_record_scoped_blocking}"
                 ),
             )
@@ -212,6 +221,7 @@ class ReleaseReadinessService:
                 passed=overdue_release_blocking <= int(policy["max_overdue_blocking_reviews"]),
                 details=(
                     f"overdue_release_blocking_reviews={overdue_release_blocking}, "
+                    f"overdue_instrument_scoped_blocking_reviews={overdue_instrument_scoped_blocking}, "
                     f"overdue_record_scoped_blocking_reviews={overdue_record_scoped_blocking}"
                 ),
             )

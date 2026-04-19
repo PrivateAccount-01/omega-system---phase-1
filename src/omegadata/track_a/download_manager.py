@@ -275,10 +275,17 @@ class DownloadManager:
             request_attempts=1,
         )
 
-    def _request(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
+    def _request(
+        self,
+        client: httpx.Client,
+        url: str,
+        *,
+        timeout_seconds: float = 60.0,
+        max_attempts: int = 5,
+    ) -> FetchResult:
         attempts = 0
         last_error: Exception | None = None
-        while attempts < 5:
+        while attempts < max_attempts:
             attempts += 1
             try:
                 result = self._request_once(client, url, timeout_seconds=timeout_seconds)
@@ -291,7 +298,7 @@ class DownloadManager:
                 )
             except (httpx.HTTPError, DownloadError) as exc:
                 last_error = exc
-                if attempts >= 5:
+                if attempts >= max_attempts:
                     raise
                 delay = min(30.0, 2 ** (attempts - 1))
                 time.sleep(delay)
@@ -372,7 +379,12 @@ class DownloadManager:
         *,
         timeout_seconds: float = 60.0,
     ) -> FetchResult:
-        with tempfile.NamedTemporaryFile() as body_handle, tempfile.NamedTemporaryFile(mode="w+", encoding="utf-8") as header_handle:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            body_path = temp_root / "curl_body.bin"
+            header_path = temp_root / "curl_headers.txt"
+            body_output = str(body_path)
+            header_output = str(header_path)
             cmd = [
                 "curl",
                 "--http1.1",
@@ -388,9 +400,9 @@ class DownloadManager:
                 "--max-time",
                 str(int(timeout_seconds)),
                 "--dump-header",
-                header_handle.name,
+                header_output,
                 "--output",
-                body_handle.name,
+                body_output,
             ]
             for name, value in headers.items():
                 cmd.extend(["-H", f"{name}: {value}"])
@@ -417,13 +429,13 @@ class DownloadManager:
                     stage="request",
                 )
 
-            payload = Path(body_handle.name).read_bytes()
+            payload = body_path.read_bytes()
             if not payload:
                 raise DownloadError(f"Empty payload via curl: {url}", stage="request")
 
             status_code: int | None = None
             content_type = ""
-            for raw_line in Path(header_handle.name).read_text(encoding="utf-8", errors="ignore").splitlines():
+            for raw_line in header_path.read_text(encoding="utf-8", errors="ignore").splitlines():
                 line = raw_line.strip()
                 if line.startswith("HTTP/"):
                     parts = line.split()
@@ -456,15 +468,25 @@ class DownloadManager:
         request_headers: dict[str, str],
         *,
         timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
     ) -> FetchResult:
         try:
-            return self._request(client, url, timeout_seconds=timeout_seconds)
+            return self._request(
+                client,
+                url,
+                timeout_seconds=timeout_seconds,
+                max_attempts=max_request_attempts,
+            )
         except Exception as exc:  # noqa: BLE001
             if not self._is_nse_url(url) or not self._is_retryable_nse_request_error(exc):
                 raise
         fallback_headers = self._attach_cookie_header(request_headers, client)
         try:
-            return self._request_via_urllib(url=url, headers=fallback_headers, timeout_seconds=timeout_seconds)
+            return self._request_via_urllib(
+                url=url,
+                headers=fallback_headers,
+                timeout_seconds=timeout_seconds,
+            )
         except Exception as urllib_exc:  # noqa: BLE001
             if not self._is_retryable_nse_request_error(urllib_exc) and not self._is_tls_error(urllib_exc):
                 raise
@@ -515,11 +537,62 @@ class DownloadManager:
             return []
         return self._extract_bse_equity_urls(response.text, as_of)
 
+    def _discover_nse_fo_urls(self, as_of: date) -> list[str]:
+        api_url = "https://www.nseindia.com/api/daily-reports?key=FO"
+        base_profile = self._header_profiles()[0]
+        headers = self._profile_for_url(base_profile, api_url)
+        try:
+            with httpx.Client(headers=headers, follow_redirects=True) as client:
+                self._bootstrap_nse_session(client)
+                response = self._request_with_workarounds(
+                    client,
+                    api_url,
+                    request_headers=headers,
+                    timeout_seconds=settings.source_probe_timeout_seconds,
+                )
+        except Exception:
+            return []
+
+        try:
+            payload = json.loads(response.payload.decode("utf-8", errors="ignore"))
+        except json.JSONDecodeError:
+            return []
+        if not isinstance(payload, dict):
+            return []
+
+        target_dates = {
+            as_of.strftime("%d-%b-%Y"),
+            as_of.strftime("%d-%b-%y"),
+            as_of.isoformat(),
+        }
+        urls: list[str] = []
+        for bucket in ("CurrentDay", "PreviousDay", "FutureDay"):
+            entries = payload.get(bucket, [])
+            if not isinstance(entries, list):
+                continue
+            for item in entries:
+                if not isinstance(item, dict):
+                    continue
+                trading_date = str(item.get("tradingDate", ""))
+                if trading_date not in target_dates:
+                    continue
+                file_name = str(item.get("fileActlName", ""))
+                file_path = str(item.get("filePath", ""))
+                display_name = str(item.get("displayName", ""))
+                if not file_name or not file_path:
+                    continue
+                if "Bhavcopy" not in display_name and "Bhavcopy" not in file_name:
+                    continue
+                urls.append(urljoin(file_path, file_name))
+        return list(dict.fromkeys(urls))
+
     def _candidate_urls(self, source_key: str, as_of: date) -> list[str]:
         source = SOURCE_REGISTRY[source_key]
         urls: list[str] = []
         if source_key == "BSE_EQUITY_BHAVCOPY":
             urls.extend(self._discover_bse_equity_urls(as_of))
+        if source_key == "NSE_FO_BHAVCOPY":
+            urls.extend(self._discover_nse_fo_urls(as_of))
         urls.append(self._render_url(source_key, as_of))
         urls.extend(self._render_pattern(pattern, as_of) for pattern in source.failover_url_patterns)
         # Preserve order while deduplicating.
@@ -585,6 +658,25 @@ class DownloadManager:
         )
 
     @staticmethod
+    def _validate_nse_fo_zip_payload(payload: bytes) -> None:
+        try:
+            with zipfile.ZipFile(io.BytesIO(payload)) as zf:
+                names = [name for name in zf.namelist() if name.lower().endswith(".csv")]
+                if not names:
+                    raise DownloadError("NSE F&O bhavcopy zip contains no CSV files", stage="validation")
+                lines = zf.read(sorted(names)[0]).decode("utf-8", errors="ignore").splitlines()
+        except zipfile.BadZipFile as exc:
+            raise DownloadError("NSE F&O bhavcopy zip payload is invalid", stage="validation") from exc
+
+        if not lines:
+            raise DownloadError("NSE F&O bhavcopy zip CSV is empty", stage="validation")
+        DownloadManager._validate_csv_header(
+            lines[0],
+            ("FH_INSTRUMENT", "INSTRUMENT", "FH_SYMBOL", "SYMBOL"),
+            source_key="NSE_FO_BHAVCOPY",
+        )
+
+    @staticmethod
     def _validate_payload(source_key: str, payload: bytes, *, as_of: date | None = None) -> None:
         if source_key == "BSE_EQUITY_BHAVCOPY":
             if payload.startswith(b"PK\x03\x04"):
@@ -597,6 +689,21 @@ class DownloadManager:
             DownloadManager._validate_csv_header(
                 header,
                 ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb"),
+                source_key=source_key,
+            )
+            return
+
+        if source_key == "NSE_FO_BHAVCOPY":
+            if payload.startswith(b"PK\x03\x04"):
+                DownloadManager._validate_nse_fo_zip_payload(payload)
+                return
+            text = payload.decode("utf-8", errors="ignore").strip()
+            if not text:
+                raise DownloadError(f"Empty payload for {source_key}", stage="validation")
+            header = text.splitlines()[0] if text.splitlines() else ""
+            DownloadManager._validate_csv_header(
+                header,
+                ("FH_INSTRUMENT", "INSTRUMENT", "FH_SYMBOL", "SYMBOL"),
                 source_key=source_key,
             )
             return
@@ -630,6 +737,7 @@ class DownloadManager:
         url: str,
         profile: dict[str, str],
         request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
     ) -> FetchResult:
         request_headers = self._profile_for_url(profile, url)
         with httpx.Client(headers=request_headers, follow_redirects=True) as client:
@@ -641,6 +749,7 @@ class DownloadManager:
                 url,
                 request_headers,
                 timeout_seconds=request_timeout_seconds,
+                max_request_attempts=max_request_attempts,
             )
         self._validate_payload(source_key, result.payload, as_of=as_of)
         return result
@@ -653,6 +762,7 @@ class DownloadManager:
         limit: int | None = None,
         profiles: list[dict[str, str]] | None = None,
         request_timeout_seconds: float = 15.0,
+        max_request_attempts: int = 5,
     ) -> list[SourceProbeResult]:
         candidate_urls = self._candidate_urls(source_key, as_of)
         if limit is not None:
@@ -687,6 +797,7 @@ class DownloadManager:
                         url=url,
                         profile=profile,
                         request_timeout_seconds=request_timeout_seconds,
+                        max_request_attempts=max_request_attempts,
                     )
                     last_status_code = result.status_code
                     last_content_type = result.content_type
@@ -736,7 +847,14 @@ class DownloadManager:
             )
         return results
 
-    def download(self, source_key: str, as_of: date) -> DownloadArtifact:
+    def download(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        request_timeout_seconds: float | None = None,
+        max_request_attempts: int | None = None,
+    ) -> DownloadArtifact:
         if source_key not in SOURCE_REGISTRY:
             raise KeyError(f"Unknown source key: {source_key}")
         cached = self._load_cached_artifact(source_key, as_of)
@@ -761,6 +879,8 @@ class DownloadManager:
                             as_of,
                             url=url,
                             profile=profile,
+                            request_timeout_seconds=request_timeout_seconds or 60.0,
+                            max_request_attempts=max_request_attempts or 5,
                         )
                         payload = result.payload
                         used_url = url

@@ -191,6 +191,29 @@ class ManualReviewService:
                 return True
         return False
 
+    def _find_existing_scope_review(
+        self,
+        session: Session,
+        *,
+        policy: ReviewPolicy,
+        category: str,
+        isin: str | None,
+        event_date: date | None,
+        reason: str,
+    ) -> ManualReviewQueue | None:
+        if policy.scope.value == "RECORD":
+            return None
+        stmt = (
+            select(ManualReviewQueue)
+            .where(ManualReviewQueue.category == category)
+            .where(ManualReviewQueue.isin == isin)
+            .where(ManualReviewQueue.event_date == event_date)
+            .where(ManualReviewQueue.reason == reason)
+            .where(ManualReviewQueue.resolved.is_(False))
+            .order_by(ManualReviewQueue.created_at.desc(), ManualReviewQueue.id.desc())
+        )
+        return session.scalar(stmt)
+
     def queue_review(
         self,
         session: Session,
@@ -218,6 +241,27 @@ class ManualReviewService:
             "reprocess_status",
             "NOT_REQUIRED" if not policy.requires_reprocess else "REVIEW_PENDING",
         )
+        existing_scope_review = self._find_existing_scope_review(
+            session,
+            policy=policy,
+            category=category,
+            isin=isin,
+            event_date=event_date,
+            reason=reason,
+        )
+        if existing_scope_review is not None:
+            merged_payload: dict[str, Any] = dict(existing_scope_review.payload or {})
+            merged_payload.update(enriched_payload)
+            merged_payload["payload_fingerprint"] = self._fingerprint(payload)
+            self._apply_sla_metadata(
+                merged_payload,
+                policy=policy,
+                created_at=existing_scope_review.created_at,
+                resolved=False,
+            )
+            existing_scope_review.payload = merged_payload
+            session.flush()
+            return existing_scope_review
         if self.review_exists(
             session,
             category=category,

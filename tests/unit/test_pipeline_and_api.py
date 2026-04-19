@@ -648,6 +648,55 @@ def test_bse_bhavcopy_loader_supports_current_bse_primary_schema(tmp_path: Path,
     assert Decimal(str(row.volume)) == Decimal("18932")
 
 
+def test_bhavcopy_loaders_populate_identity_adjusted_fields(tmp_path: Path, db_session) -> None:
+    nse_payload = (
+        "SYMBOL,ISIN,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY\n"
+        "ABB,INE117A01022,6665.25,6902.20,6615.00,6865.95,18932\n"
+    )
+    nse_path = tmp_path / "nse.csv"
+    nse_path.write_text(nse_payload, encoding="utf-8")
+
+    bse_payload = (
+        "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,FinInstrmNm,OpnPric,HghPric,"
+        "LwPric,ClsPric,TtlTradgVol\n"
+        "2026-04-10,2026-04-10,CM,BSE,STK,500002,INE117A01022,ABB,A,ABB INDIA LIMITED,6665.25,6902.20,"
+        "6615.00,6865.95,18932\n"
+    )
+    bse_path = tmp_path / "bse.csv"
+    bse_path.write_text(bse_payload, encoding="utf-8")
+
+    pipeline = OmegaDataSequentialPipeline()
+    assert pipeline._load_bhavcopy_prices(db_session, nse_path, date(2026, 4, 10)) == 1
+    assert pipeline._load_bse_bhavcopy_prices(db_session, bse_path, date(2026, 4, 10)) == 1
+
+    rows = db_session.scalars(select(PriceRecord).order_by(PriceRecord.exchange.asc())).all()
+    assert len(rows) == 2
+    for row in rows:
+        assert Decimal(str(row.adjusted_open_price)) == Decimal(str(row.open_price))
+        assert Decimal(str(row.adjusted_high_price)) == Decimal(str(row.high_price))
+        assert Decimal(str(row.adjusted_low_price)) == Decimal(str(row.low_price))
+        assert Decimal(str(row.adjusted_close_price)) == Decimal(str(row.close_price))
+        assert Decimal(str(row.adjusted_volume)) == Decimal(str(row.volume))
+
+
+def test_nse_fo_loader_supports_udiff_zip_payload(tmp_path: Path, db_session) -> None:
+    csv_payload = (
+        "FH_INSTRUMENT,FH_SYMBOL,FH_EXPIRY_DT,FH_STRIKE_PR,FH_OPTION_TYP,FH_OPENING_PRICE,FH_TRADE_HIGH_PRICE,"
+        "FH_TRADE_LOW_PRICE,FH_CLOSING_PRICE,FH_SETTLE_PRICE,FH_TOT_TRADED_QTY,FH_OPEN_INT,FH_MARKET_LOT\n"
+        "FUTSTK,ABB,30-Apr-2026,,,6665.25,6902.20,6615.00,6865.95,6864.10,18932,12500,125\n"
+        "OPTSTK,ABB,30-Apr-2026,6800,CE,10.25,13.40,9.80,12.15,12.05,4200,8100,125\n"
+    )
+    zip_path = tmp_path / "nse_fo.zip"
+    import zipfile
+
+    with zipfile.ZipFile(zip_path, "w") as zf:
+        zf.writestr("BhavCopy_NSE_FO_0_0_0_20260410_F_0000.csv", csv_payload)
+
+    pipeline = OmegaDataSequentialPipeline()
+    loaded = pipeline._load_nse_fo(db_session, zip_path, date(2026, 4, 10))
+    assert loaded == 2
+
+
 def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, monkeypatch) -> None:
     settings.raw_root = str(tmp_path)
     manager = DownloadManager()
@@ -1201,6 +1250,27 @@ def test_trading_calendar_skips_configured_holidays() -> None:
     )
     days = calendar.recent_trading_days("BSE", anchor_date=date(2026, 4, 13), limit=2)
     assert days == [date(2026, 4, 9), date(2026, 4, 8)]
+
+
+def test_trading_calendar_treats_special_session_as_trading_day() -> None:
+    calendar = TradingCalendar(
+        holidays_by_exchange={"NSE": {date(2025, 10, 21)}},
+        coverage_years_by_exchange={"NSE": {2025}},
+        special_sessions_by_exchange={"NSE": {date(2025, 10, 21): "muhurat_trading"}},
+    )
+
+    assert calendar.is_trading_day("NSE", date(2025, 10, 21), strict=True) is True
+
+
+def test_trading_calendar_treats_weekend_special_session_as_trading_day() -> None:
+    calendar = TradingCalendar(
+        holidays_by_exchange={"NSE": set()},
+        coverage_years_by_exchange={"NSE": {2020}},
+        special_sessions_by_exchange={"NSE": {date(2020, 11, 14): "muhurat_trading"}},
+    )
+
+    assert date(2020, 11, 14).weekday() >= 5
+    assert calendar.is_trading_day("NSE", date(2020, 11, 14), strict=True) is True
 
 
 def test_trading_calendar_degrades_without_explicit_year_coverage() -> None:

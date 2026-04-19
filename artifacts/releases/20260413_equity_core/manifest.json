@@ -2,12 +2,12 @@
   "release_id": "20260413_equity_core",
   "release_profile": "equity_core",
   "as_of_date": "2026-04-13",
-  "generated_at": "2026-04-19T07:41:13.807927+00:00",
+  "generated_at": "2026-04-19T13:01:33.858969+00:00",
   "manifest_path": "artifacts/releases/20260413_equity_core/manifest.json",
   "quality_report_path": "artifacts/releases/20260413_equity_core/quality_report.json",
   "lineage_report_path": "artifacts/releases/20260413_equity_core/lineage_report.json",
-  "warehouse_sync_status": "FAILED",
-  "warehouse_sync_details": "Received ClickHouse exception, code: 516, server response: Code: 516. DB::Exception: default: Authentication failed: password is incorrect, or there is no user with such name.\n\nIf you have installed ClickHouse and forgot password you can reset it in the configuration file.\nThe password for default user is typically located at /etc/clickhouse-server/users.d/default-password.xml\nand deleting this file will reset the password.\nSee also /etc/clickhouse-server/users.xml on the server where ClickHouse is installed.\n\n. (AUTHENTICATION_FAILED) (version 24.12.6.70 (official build)) (for url http://localhost:8123)",
+  "warehouse_sync_status": "SYNCED",
+  "warehouse_sync_details": "rows_inserted=2",
   "consumer_matrix": {
     "allowed_consumer_classes": [
       "equity_backtests",
@@ -23,15 +23,15 @@
   "dataset_entries": [
     {
       "dataset_name": "adjusted_equity_bars",
-      "row_count": 2,
+      "row_count": 44219,
       "storage_path": "artifacts/releases/20260413_equity_core/adjusted_equity_bars/part-00000.parquet",
-      "checksum": "827a061a0b7f9a93ca6a3e0415590605f96bf34a67be53b84b2f4f7166f3d68c"
+      "checksum": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1"
     },
     {
       "dataset_name": "pit_universe_snapshot",
-      "row_count": 0,
+      "row_count": 70,
       "storage_path": "artifacts/releases/20260413_equity_core/pit_universe_snapshot/part-00000.parquet",
-      "checksum": "16f9ad8442d63dfdb4a3f3079b9b6e7c367bdad3a63fdf957fb086493d5e3d95"
+      "checksum": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5"
     }
   ]
 }

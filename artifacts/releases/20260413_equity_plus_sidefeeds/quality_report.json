@@ -1,20 +1,72 @@
 {
-  "generated_at": "2026-04-19T07:42:17.821775+00:00",
+  "generated_at": "2026-04-19T13:01:38.762265+00:00",
   "as_of_date": "2026-04-13",
   "release_profile": "equity_plus_sidefeeds",
   "release_readiness_snapshot": {
-    "generated_at": "2026-04-19T07:42:17.821663+00:00",
-    "ready": false,
+    "generated_at": "2026-04-19T13:01:38.762131+00:00",
+    "release_profile": "equity_core",
+    "release_id": "20260413_equity_core",
+    "ready": true,
     "checks": [
+      {
+        "name": "release_record_present",
+        "passed": true,
+        "details": "release_id=20260413_equity_core"
+      },
+      {
+        "name": "release_artifacts_present",
+        "passed": true,
+        "details": "manifest_exists=True, quality_exists=True, lineage_exists=True"
+      },
+      {
+        "name": "release_signature_present",
+        "passed": true,
+        "details": "signature_exists=True"
+      },
+      {
+        "name": "release_manifest_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=0.00"
+      },
+      {
+        "name": "release_signature_verified",
+        "passed": true,
+        "details": "signature verified"
+      },
+      {
+        "name": "release_required_datasets_present",
+        "passed": true,
+        "details": "missing_datasets=[]"
+      },
+      {
+        "name": "release_required_datasets_non_empty",
+        "passed": true,
+        "details": "empty_datasets=[]"
+      },
+      {
+        "name": "warehouse_sync_status",
+        "passed": true,
+        "details": "warehouse_sync_status=SYNCED"
+      },
+      {
+        "name": "consumer_matrix_present",
+        "passed": true,
+        "details": "consumer_classes=3, signal_families=3"
+      },
+      {
+        "name": "adjusted_ohlcv_complete",
+        "passed": true,
+        "details": "adjusted_open_price_nulls=0, adjusted_high_price_nulls=0, adjusted_low_price_nulls=0, adjusted_close_price_nulls=0, adjusted_volume_nulls=0"
+      },
       {
         "name": "blocking_reviews",
         "passed": true,
-        "details": "open_release_blocking_reviews=0, open_record_scoped_blocking_reviews=0"
+        "details": "open_release_blocking_reviews=0, open_instrument_scoped_blocking_reviews=29, open_record_scoped_blocking_reviews=2012"
       },
       {
         "name": "overdue_blocking_reviews",
         "passed": true,
-        "details": "overdue_release_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
+        "details": "overdue_release_blocking_reviews=0, overdue_instrument_scoped_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
       },
       {
         "name": "pending_reprocess_jobs",
@@ -23,23 +75,23 @@
       },
       {
         "name": "source_probe_fresh",
-        "passed": false,
-        "details": "artifact_age_hours=115.65"
+        "passed": true,
+        "details": "artifact_age_hours=4.59"
       },
       {
         "name": "pipeline_fresh",
         "passed": true,
-        "details": "artifact_age_hours=0.30"
+        "details": "artifact_age_hours=5.63"
       },
       {
         "name": "tolerance_report_fresh",
         "passed": true,
-        "details": "artifact_age_hours=110.34"
+        "details": "artifact_age_hours=115.66"
       },
       {
         "name": "matching_report_fresh",
         "passed": true,
-        "details": "artifact_age_hours=151.70"
+        "details": "artifact_age_hours=157.03"
       },
       {
         "name": "calendar_loaded",

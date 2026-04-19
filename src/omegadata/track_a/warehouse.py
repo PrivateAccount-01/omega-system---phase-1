@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import date
 from typing import Any
 
 from omegadata.config import settings
@@ -18,7 +19,7 @@ class ClickHouseWarehouseSync:
         *,
         release_id: str,
         release_profile: str,
-        as_of_date: str,
+        as_of_date: date,
         dataset_entries: list[dict[str, Any]],
     ) -> WarehouseSyncResult:
         try:

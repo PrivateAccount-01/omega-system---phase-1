@@ -9,8 +9,15 @@ from omegadata.db.session import get_session, init_db
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-SEED_PACK_PATH = PROJECT_ROOT / "tests" / "fixtures" / "synthetic_seed" / "pit_universe_seed_pack.json"
+SEED_PACK_PATH = PROJECT_ROOT / "tests" / "fixtures" / "official_source" / "pit_universe_reference_pack.json"
 ARTIFACT_PATH = PROJECT_ROOT / "artifacts" / "verification" / "pit_universe_backfill_report.json"
+
+
+def _relative_repo_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(PROJECT_ROOT.resolve()).as_posix()
+    except Exception:  # noqa: BLE001
+        return path.as_posix().replace("\\", "/")
 
 
 def parse_args() -> argparse.Namespace:
@@ -48,8 +55,9 @@ def main() -> None:
         )
 
     report = {
-        "seed_pack": str(args.seed_pack.relative_to(PROJECT_ROOT)),
+        "seed_pack": _relative_repo_path(args.seed_pack),
         "db_url": settings.db_url,
+        "official_backed": "official_source" in args.seed_pack.as_posix(),
         "loaded_rows": loaded,
         "snapshot_validations": [
             {
@@ -62,6 +70,7 @@ def main() -> None:
             }
             for item in validation
         ],
+        "matched_validation_count": sum(1 for item in validation if item.matched),
     }
     args.artifact_path.parent.mkdir(parents=True, exist_ok=True)
     args.artifact_path.write_text(json.dumps(report, indent=2), encoding="utf-8")

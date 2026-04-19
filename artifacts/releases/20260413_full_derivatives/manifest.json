@@ -1,0 +1,95 @@
+{
+  "release_id": "20260413_full_derivatives",
+  "release_profile": "full_derivatives",
+  "as_of_date": "2026-04-13",
+  "generated_at": "2026-04-19T13:18:22.734570+00:00",
+  "manifest_path": "artifacts/releases/20260413_full_derivatives/manifest.json",
+  "quality_report_path": "artifacts/releases/20260413_full_derivatives/quality_report.json",
+  "lineage_report_path": "artifacts/releases/20260413_full_derivatives/lineage_report.json",
+  "warehouse_sync_status": "SYNCED",
+  "warehouse_sync_details": "rows_inserted=11",
+  "consumer_matrix": {
+    "allowed_consumer_classes": [
+      "derivatives_research",
+      "options_signal_factory",
+      "futures_basis_models",
+      "vrp_skew_tail_hedge_models"
+    ],
+    "allowed_signal_families": [
+      "futures_curve",
+      "vrp",
+      "pcr",
+      "skew",
+      "theta",
+      "tail_hedge"
+    ]
+  },
+  "dataset_entries": [
+    {
+      "dataset_name": "adjusted_equity_bars",
+      "row_count": 44219,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/adjusted_equity_bars/part-00000.parquet",
+      "checksum": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1"
+    },
+    {
+      "dataset_name": "pit_universe_snapshot",
+      "row_count": 70,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/pit_universe_snapshot/part-00000.parquet",
+      "checksum": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5"
+    },
+    {
+      "dataset_name": "fii_dii_daily",
+      "row_count": 2,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/fii_dii_daily/part-00000.parquet",
+      "checksum": "f9368bd1df81e42b53120f63cf0d91ed2ccc1e53babc90891b070414df41cb5c"
+    },
+    {
+      "dataset_name": "india_vix",
+      "row_count": 7,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/india_vix/part-00000.parquet",
+      "checksum": "e5b302ca4dcb1cffdf24acab24528aaf238406d57cf1a2f4cfb2abfd8ede1f41"
+    },
+    {
+      "dataset_name": "benchmark_series",
+      "row_count": 805,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/benchmark_series/part-00000.parquet",
+      "checksum": "ad9210d8769e0c777b8a8f749ed1932aaaa25ab465a6d2d6546f72307d1de54c"
+    },
+    {
+      "dataset_name": "sector_series",
+      "row_count": 133,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/sector_series/part-00000.parquet",
+      "checksum": "fe90a2d9f51fcfcdfecf4132ac5be3872c345bda769b87bb7e873d7095eb87c7"
+    },
+    {
+      "dataset_name": "futures_contract_master",
+      "row_count": 646,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/futures_contract_master/part-00000.parquet",
+      "checksum": "095a164992653100630ef9a3b6a81f55e4999a98dbce0a255ecfb388118a990a"
+    },
+    {
+      "dataset_name": "futures_eod",
+      "row_count": 646,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/futures_eod/part-00000.parquet",
+      "checksum": "3ddab9a95ede86b6f548d82df7f1da21fa9070aa4495d11ff48db8513fa42ea5"
+    },
+    {
+      "dataset_name": "continuous_futures",
+      "row_count": 218,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/continuous_futures/part-00000.parquet",
+      "checksum": "f59d3a9e35ab2d21c19a98233242ffd8e100132706b1f4a69d51c940c6d7f85d"
+    },
+    {
+      "dataset_name": "options_contract_master",
+      "row_count": 45020,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/options_contract_master/part-00000.parquet",
+      "checksum": "f5f0d1e4c04d8b43b3c1f0808e1b1220703a3ea6f76d3e1868a0f50fb0f82f0f"
+    },
+    {
+      "dataset_name": "options_eod",
+      "row_count": 45020,
+      "storage_path": "artifacts/releases/20260413_full_derivatives/options_eod/part-00000.parquet",
+      "checksum": "f0d0f4e0e71d094acb6376221f8b9f1cc240c5bd52c6509b87d187820e73cdee"
+    }
+  ]
+}

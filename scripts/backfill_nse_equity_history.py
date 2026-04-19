@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 import argparse
+import csv
+import io
 import json
+import time
+import zipfile
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 from omegadata.track_a.download_manager import DownloadError, DownloadManager
+from omegadata.track_a.source_registry import resolve_era
 from omegadata.track_a.trading_calendar import TradingCalendar
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +41,41 @@ def _calendar_range_coverage(calendar: TradingCalendar, start_date: date, end_da
         "config_path": calendar.config_path,
         "config_error": calendar.config_error,
     }
+
+
+def _relative_repo_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+    except Exception:  # noqa: BLE001
+        return path.as_posix().replace("\\", "/")
+
+
+def _read_columns(path: Path) -> tuple[list[str], list[str]]:
+    payload = path.read_bytes()
+    anomalies: list[str] = []
+    csv_name = path.name
+    if path.suffix.lower() == ".zip":
+        with zipfile.ZipFile(io.BytesIO(payload)) as archive:
+            names = [name for name in archive.namelist() if name.lower().endswith(".csv")]
+            if not names:
+                return [], ["missing_csv_member"]
+            csv_name = names[0]
+            payload = archive.read(names[0])
+    try:
+        text = payload.decode("utf-8", errors="ignore")
+        reader = csv.DictReader(io.StringIO(text))
+        columns = list(reader.fieldnames or [])
+    except Exception as exc:  # noqa: BLE001
+        return [], [f"csv_parse_error:{exc}"]
+    normalized = {column.strip().upper().replace(" ", "_") for column in columns}
+    required_any = (
+        {"SYMBOL", "SERIES", "OPEN", "HIGH", "LOW", "CLOSE", "TOTTRDQTY", "ISIN"},
+        {"SYMBOL", "SERIES", "OPEN_PRICE", "HIGH_PRICE", "LOW_PRICE", "CLOSE_PRICE", "TOT_TRD_QTY", "ISIN_NUMBER"},
+        {"TCKRSYMB", "SCTYSRS", "OPNPRIC", "HGHPRIC", "LWPRIC", "CLSPRIC", "TTLTRADGVOL", "ISIN"},
+    )
+    if not any(required.issubset(normalized) for required in required_any):
+        anomalies.append("unexpected_columns")
+    return columns + [f"__csv_member__:{csv_name}"], anomalies
 
 
 def _apply_sample_mode(candidate_days: list[date], sample_mode: str) -> list[date]:
@@ -71,6 +111,18 @@ def main() -> None:
         default="all",
         help="Sample strategy for the requested range.",
     )
+    parser.add_argument(
+        "--request-timeout-seconds",
+        type=float,
+        default=15.0,
+        help="Per-request timeout for historical proof downloads.",
+    )
+    parser.add_argument(
+        "--max-request-attempts",
+        type=int,
+        default=1,
+        help="Per-transport retry count for historical proof downloads.",
+    )
     args = parser.parse_args()
 
     start_date = date.fromisoformat(args.start_date)
@@ -83,40 +135,83 @@ def main() -> None:
     rows: list[dict[str, object]] = []
     successes = 0
     legacy_failures = 0
+    failure_classes: dict[str, int] = {}
+    anomaly_counts: dict[str, int] = {}
+    era_stats: dict[str, dict[str, int]] = {}
+    started = time.perf_counter()
     for as_of in candidate_days:
+        era = resolve_era("NSE_EQUITY_BHAVCOPY", as_of)
+        stats = era_stats.setdefault(
+            era.name,
+            {
+                "attempted_days": 0,
+                "successful_downloads": 0,
+                "failed_downloads": 0,
+                "anomaly_count": 0,
+            },
+        )
+        stats["attempted_days"] += 1
         try:
-            artifact = manager.download("NSE_EQUITY_BHAVCOPY", as_of)
+            artifact = manager.download(
+                "NSE_EQUITY_BHAVCOPY",
+                as_of,
+                request_timeout_seconds=args.request_timeout_seconds,
+                max_request_attempts=args.max_request_attempts,
+            )
             used_url = artifact.used_url
+            columns, anomalies = _read_columns(artifact.path)
+            csv_member = next(
+                (column.split(":", 1)[1] for column in columns if column.startswith("__csv_member__:")),
+                artifact.path.name,
+            )
+            columns = [column for column in columns if not column.startswith("__csv_member__:")]
+            for anomaly in anomalies:
+                anomaly_counts[anomaly] = anomaly_counts.get(anomaly, 0) + 1
+            if anomalies:
+                stats["anomaly_count"] += len(anomalies)
             rows.append(
                 {
                     "date": as_of.isoformat(),
                     "status": "ok",
+                    "era": era.name,
+                    "era_schema_note": era.schema_note,
                     "bytes_downloaded": artifact.bytes_downloaded,
                     "used_url": used_url,
                     "used_legacy_host": "historical/EQUITIES" in used_url,
                     "attempts": artifact.attempts,
+                    "artifact_path": _relative_repo_path(artifact.path),
+                    "csv_member": csv_member,
+                    "columns": columns,
+                    "anomalies": anomalies,
                 }
             )
             successes += 1
+            stats["successful_downloads"] += 1
         except Exception as exc:  # noqa: BLE001
             legacy_host = "historical/EQUITIES" in str(exc) or "www1.nseindia.com" in str(exc)
             if legacy_host:
                 legacy_failures += 1
             status_code = exc.status_code if isinstance(exc, DownloadError) else None
             stage = exc.stage if isinstance(exc, DownloadError) else None
+            failure_class = stage or "unknown"
+            failure_classes[failure_class] = failure_classes.get(failure_class, 0) + 1
             rows.append(
                 {
                     "date": as_of.isoformat(),
                     "status": "failed",
+                    "era": era.name,
+                    "era_schema_note": era.schema_note,
                     "status_code": status_code,
                     "stage": stage,
                     "error": str(exc),
                     "legacy_host_path": legacy_host,
                 }
             )
+            stats["failed_downloads"] += 1
 
     failure_count = len(rows) - successes
     failure_rate = 0.0 if not rows else failure_count / len(rows)
+    elapsed_seconds = time.perf_counter() - started
     artifact = {
         "generated_at": datetime.now(UTC).isoformat(),
         "range": {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
@@ -129,6 +224,13 @@ def main() -> None:
         "failure_rate": failure_rate,
         "legacy_host_failures": legacy_failures,
         "browser_fallback_required": legacy_failures > 0 and failure_rate > 0.0,
+        "throughput_seconds": round(elapsed_seconds, 3),
+        "average_seconds_per_day": round(elapsed_seconds / len(candidate_days), 3) if candidate_days else 0.0,
+        "failure_classes": failure_classes,
+        "anomaly_counts": anomaly_counts,
+        "per_era_coverage": era_stats,
+        "request_timeout_seconds": args.request_timeout_seconds,
+        "max_request_attempts": args.max_request_attempts,
         "note": (
             "Browser/session fallback is only recommended when the measured historical failure set remains on the "
             "legacy NSE archive host after the direct transport stack is exhausted."

@@ -511,7 +511,7 @@ class ReleaseManager:
         warehouse_result = self.warehouse.sync_release_manifest(
             release_id=release_id,
             release_profile=profile.value,
-            as_of_date=as_of.isoformat(),
+            as_of_date=as_of,
             dataset_entries=dataset_entries,
         )
         manifest = {
@@ -548,6 +548,7 @@ class ReleaseManager:
             )
             session.add(existing)
         else:
+            existing.generated_at = datetime.now(UTC)
             existing.manifest_path = _relative_repo_path(manifest_path)
             existing.signature_path = _relative_repo_path(signature_path)
             existing.quality_report_path = _relative_repo_path(quality_report_path)

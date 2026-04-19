@@ -23,6 +23,7 @@ from omegadata.domain import CorporateActionType, Exchange, InstrumentType, Rele
 from omegadata.track_b import release_readiness
 from omegadata.track_b.corporate_action_matching import CorporateActionMatcher
 from omegadata.track_b.cross_source_validation import CrossSourceValidator
+from omegadata.track_b.manual_review import ManualReviewService
 from omegadata.track_b.matching_policy import invalidate_matching_policy_cache
 from omegadata.track_b.tolerance_policy import invalidate_tolerance_policy_cache
 
@@ -452,3 +453,136 @@ def test_release_readiness_checks_adjusted_ohlcv_and_release_bundle(tmp_path: Pa
         payload = response.json()
         assert payload["release_id"] == "20260413_equity_core"
         assert any(check["name"] == "adjusted_ohlcv_complete" and not check["passed"] for check in payload["checks"])
+
+
+def test_release_readiness_does_not_treat_instrument_scope_reviews_as_open_release_blockers(tmp_path: Path, monkeypatch) -> None:
+    db_path = tmp_path / "readiness_reviews.db"
+    settings.db_url = f"sqlite:///{db_path}"
+    init_db()
+    repo_root = tmp_path / "repo"
+    artifacts_dir = repo_root / "artifacts/verification"
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/official_source").mkdir(parents=True, exist_ok=True)
+    (repo_root / "tests/fixtures/synthetic_manual").mkdir(parents=True, exist_ok=True)
+    monkeypatch.setattr(release_readiness, "_repo_root", lambda: repo_root)
+    monkeypatch.setattr(
+        "omegadata.track_b.release_manager.ReleaseManager.verify_signature",
+        lambda self, manifest_path, signature_path: (True, "signature verified"),
+    )
+    artifacts_dir.joinpath("source_probe_report.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "calendar_config_state": "loaded",
+                "summary": {
+                    "nse_equity_primary_validated": True,
+                    "bse_primary_validated": True,
+                    "healthy_fallback_count": 2,
+                    "failed_fallback_count": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("cross_source_tolerance_report.json").write_text(
+        json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "status": "ok", "benchmark_passed": True}),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("corporate_action_matching_report.json").write_text(
+        json.dumps(
+            {
+                "generated_at": "2026-04-13T00:00:00+00:00",
+                "status": "ok",
+                "metrics": {"benchmark_passed": True, "precision": 1.0, "recall": 1.0},
+            }
+        ),
+        encoding="utf-8",
+    )
+    artifacts_dir.joinpath("pipeline_execution_result.json").write_text(
+        json.dumps({"generated_at": "2026-04-13T00:00:00+00:00", "summary": {"successful_days": 1, "failed_days": 0}}),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/official_source/adjustment_reference_corpus.json").write_text(
+        json.dumps({"case_count": 10, "transformational_case_count": 3}),
+        encoding="utf-8",
+    )
+    (repo_root / "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json").write_text(
+        json.dumps({"case_count": 14}),
+        encoding="utf-8",
+    )
+    _write_release_artifacts(
+        repo_root,
+        release_id="20260413_equity_core",
+        profile="equity_core",
+        adjusted_rows=[
+            {
+                "adjusted_open_price": "1.0",
+                "adjusted_high_price": "1.0",
+                "adjusted_low_price": "1.0",
+                "adjusted_close_price": "1.0",
+                "adjusted_volume": "10",
+            }
+        ],
+    )
+
+    with get_session() as session:
+        session.add(
+            ReleaseRecord(
+                release_id="20260413_equity_core",
+                release_profile=ReleaseProfile.EQUITY_CORE,
+                as_of_date=date(2026, 4, 13),
+                manifest_path="artifacts/releases/20260413_equity_core/manifest.json",
+                signature_path="artifacts/releases/20260413_equity_core/manifest.json.asc",
+                quality_report_path="artifacts/releases/20260413_equity_core/quality_report.json",
+                lineage_report_path="artifacts/releases/20260413_equity_core/lineage_report.json",
+                warehouse_sync_status="SYNCED",
+                ready_state="GENERATED",
+                dataset_entries=[],
+                consumer_matrix={
+                    "allowed_consumer_classes": ["equity_research"],
+                    "allowed_signal_families": ["cross_sectional_equity"],
+                },
+            )
+        )
+        ManualReviewService().queue_review(
+            session,
+            category="SYSTEMATIC_DISAGREEMENT",
+            isin="INEOPEN000001",
+            event_date=None,
+            reason="Consecutive directional disagreement across five observations",
+            payload={"last_five": [1, 2, 3, 4, 5]},
+        )
+
+    headers = {"x-api-key": settings.api_key}
+    with TestClient(app) as client:
+        response = client.get("/release/readiness?profile=equity_core", headers=headers)
+        assert response.status_code == 200
+        payload = response.json()
+        blocking_check = next(check for check in payload["checks"] if check["name"] == "blocking_reviews")
+        assert blocking_check["passed"] is True
+        assert "open_instrument_scoped_blocking_reviews=1" in blocking_check["details"]
+
+
+def test_manual_review_service_refreshes_existing_instrument_scope_review(db_session) -> None:
+    service = ManualReviewService()
+    first = service.queue_review(
+        db_session,
+        category="SYSTEMATIC_DISAGREEMENT",
+        isin="INEDUPE000001",
+        event_date=None,
+        reason="Consecutive directional disagreement across five observations",
+        payload={"last_five": [1, 2, 3, 4, 5]},
+    )
+    second = service.queue_review(
+        db_session,
+        category="SYSTEMATIC_DISAGREEMENT",
+        isin="INEDUPE000001",
+        event_date=None,
+        reason="Consecutive directional disagreement across five observations",
+        payload={"last_five": [2, 3, 4, 5, 6]},
+    )
+    assert first is not None
+    assert second is not None
+    assert first.id == second.id
+    rows = db_session.query(ManualReviewQueue).filter(ManualReviewQueue.isin == "INEDUPE000001").all()
+    assert len(rows) == 1

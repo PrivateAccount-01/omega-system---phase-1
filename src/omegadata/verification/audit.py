@@ -218,7 +218,7 @@ def build_audit_items() -> list[AuditItem]:
             evidence=[
                 "src/omegadata/track_b/universe_manager.py",
                 "tests/unit/test_universe_manager.py",
-                "scripts/build_pit_universe_seed_pack.py",
+                "tests/fixtures/official_source/pit_universe_reference_pack.json",
                 "scripts/backfill_pit_universe.py",
                 "artifacts/verification/pit_universe_backfill_report.json",
             ],

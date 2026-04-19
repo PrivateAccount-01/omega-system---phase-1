@@ -1,6 +1,7 @@
 {
-  "seed_pack": "tests\\fixtures\\pit_universe_seed_pack.json",
-  "db_url": "sqlite:///./pit_universe_test_clean.db",
+  "seed_pack": "tests/fixtures/official_source/pit_universe_reference_pack.json",
+  "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+  "official_backed": true,
   "loaded_rows": 70,
   "snapshot_validations": [
     {
@@ -43,5 +44,6 @@
       "actual_count": 50,
       "source": "SEBI Bulletin Annexure Tables March 2025 Table 25"
     }
-  ]
+  ],
+  "matched_validation_count": 5
 }

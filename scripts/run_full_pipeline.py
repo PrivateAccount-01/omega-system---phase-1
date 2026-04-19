@@ -26,6 +26,11 @@ def main() -> None:
     parser.add_argument("--market-isin", default=settings.market_proxy_isin or None, help="Explicit market benchmark ISIN")
     parser.add_argument("--db-url", default=None, help="Optional database URL override for the run")
     parser.add_argument(
+        "--artifact-path",
+        default="artifacts/verification/pipeline_execution_result.json",
+        help="Output artifact path",
+    )
+    parser.add_argument(
         "--reset-sqlite-db",
         action="store_true",
         help="Delete the target SQLite file before initializing the run.",
@@ -107,7 +112,7 @@ def main() -> None:
         },
         "errors": errors,
     }
-    out_path = REPO_ROOT / "artifacts/verification/pipeline_execution_result.json"
+    out_path = REPO_ROOT / args.artifact_path
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as handle:
         json.dump(output, handle, indent=2)

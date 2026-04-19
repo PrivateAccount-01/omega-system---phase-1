@@ -101,6 +101,29 @@ class OmegaDataSequentialPipeline:
             out[k] = "" if value is None else str(value).strip()
         return out
 
+    @staticmethod
+    def _ensure_identity_adjusted_fields(price_record: PriceRecord) -> None:
+        """Populate adjusted fields with identity values until a real CA recompute overrides them."""
+        if all(
+            value is not None
+            for value in (
+                price_record.adjusted_open_price,
+                price_record.adjusted_high_price,
+                price_record.adjusted_low_price,
+                price_record.adjusted_close_price,
+                price_record.adjusted_volume,
+            )
+        ):
+            return
+        price_record.adjusted_open_price = price_record.open_price
+        price_record.adjusted_high_price = price_record.high_price
+        price_record.adjusted_low_price = price_record.low_price
+        price_record.adjusted_close_price = price_record.close_price
+        price_record.adjusted_volume = price_record.volume
+        price_record.cumulative_price_factor = Decimal("1")
+        price_record.cumulative_volume_factor = Decimal("1")
+        price_record.adjustment_chain = price_record.adjustment_chain or []
+
     def _load_fii_dii(self, session: Session, path: Path) -> int:
         if not path.exists():
             return 0
@@ -277,28 +300,42 @@ class OmegaDataSequentialPipeline:
     def _load_nse_fo(self, session: Session, path: Path, trade_date: date) -> int:
         if not path.exists():
             return 0
-        text = path.read_text(encoding="utf-8", errors="ignore")
+        payload = path.read_bytes()
+        if path.suffix.lower() == ".zip":
+            with zipfile.ZipFile(io.BytesIO(payload)) as zf:
+                names = [name for name in zf.namelist() if name.lower().endswith(".csv")]
+                if not names:
+                    return 0
+                payload = zf.read(sorted(names)[0])
+        text = payload.decode("utf-8", errors="ignore")
         reader = csv.DictReader(io.StringIO(text))
         loaded = 0
+        instrument_map = {
+            "STF": "FUTSTK",
+            "IDF": "FUTIDX",
+            "STO": "OPTSTK",
+            "IDO": "OPTIDX",
+        }
         for raw in reader:
             row = self._normalize_row(raw)
-            instrument = self._first_present(row, ("FH_INSTRUMENT", "INSTRUMENT"))
-            underlying_symbol = self._first_present(row, ("FH_SYMBOL", "SYMBOL"))
-            expiry_date = self._parse_date(self._first_present(row, ("FH_EXPIRY_DT", "EXPIRY_DT")))
+            raw_instrument = self._first_present(row, ("FH_INSTRUMENT", "INSTRUMENT", "FININSTRMTP"))
+            instrument = instrument_map.get(raw_instrument, raw_instrument)
+            underlying_symbol = self._first_present(row, ("FH_SYMBOL", "SYMBOL", "TCKRSYMB"))
+            expiry_date = self._parse_date(self._first_present(row, ("FH_EXPIRY_DT", "EXPIRY_DT", "XPRYDT")))
             if not instrument or not underlying_symbol or expiry_date is None:
                 continue
-            strike_price = self._to_decimal(self._first_present(row, ("FH_STRIKE_PR", "STRIKE_PR")))
-            option_type = self._first_present(row, ("FH_OPTION_TYP", "OPTION_TYP")) or None
-            open_price = self._to_decimal(self._first_present(row, ("FH_OPENING_PRICE", "OPEN")))
-            high_price = self._to_decimal(self._first_present(row, ("FH_TRADE_HIGH_PRICE", "HIGH")))
-            low_price = self._to_decimal(self._first_present(row, ("FH_TRADE_LOW_PRICE", "LOW")))
-            close_price = self._to_decimal(self._first_present(row, ("FH_CLOSING_PRICE", "CLOSE")))
-            settle_price = self._to_decimal(self._first_present(row, ("FH_SETTLE_PRICE", "SETTLE_PR")))
-            volume = self._to_decimal(self._first_present(row, ("FH_TOT_TRADED_QTY", "CONTRACTS")))
-            open_interest = self._to_decimal(self._first_present(row, ("FH_OPEN_INT", "OPEN_INT")))
-            lot_size_text = self._first_present(row, ("FH_MARKET_LOT", "LOT_SIZE"))
+            strike_price = self._to_decimal(self._first_present(row, ("FH_STRIKE_PR", "STRIKE_PR", "STRKPRIC")))
+            option_type = self._first_present(row, ("FH_OPTION_TYP", "OPTION_TYP", "OPTNTP")) or None
+            open_price = self._to_decimal(self._first_present(row, ("FH_OPENING_PRICE", "OPEN", "OPNPRIC")))
+            high_price = self._to_decimal(self._first_present(row, ("FH_TRADE_HIGH_PRICE", "HIGH", "HGHPRIC")))
+            low_price = self._to_decimal(self._first_present(row, ("FH_TRADE_LOW_PRICE", "LOW", "LWPRIC")))
+            close_price = self._to_decimal(self._first_present(row, ("FH_CLOSING_PRICE", "CLOSE", "CLSPRIC")))
+            settle_price = self._to_decimal(self._first_present(row, ("FH_SETTLE_PRICE", "SETTLE_PR", "STTLMPRIC")))
+            volume = self._to_decimal(self._first_present(row, ("FH_TOT_TRADED_QTY", "CONTRACTS", "TTLTRADGVOL")))
+            open_interest = self._to_decimal(self._first_present(row, ("FH_OPEN_INT", "OPEN_INT", "OPNINTRST")))
+            lot_size_text = self._first_present(row, ("FH_MARKET_LOT", "LOT_SIZE", "NEWBRDLOTQTY"))
             lot_size = int(Decimal(lot_size_text)) if lot_size_text else None
-            underlying_isin = self._lookup_underlying_isin(session, underlying_symbol)
+            underlying_isin = self._first_present(row, ("ISIN",)) or self._lookup_underlying_isin(session, underlying_symbol)
             contract_symbol = self._canonical_contract_symbol(
                 underlying_symbol=underlying_symbol,
                 expiry_date=expiry_date,
@@ -560,6 +597,7 @@ class OmegaDataSequentialPipeline:
                     volume=volume,
                     raw_source="nse_bhavcopy",
                 )
+                self._ensure_identity_adjusted_fields(existing)
                 session.add(existing)
                 existing_prices[isin] = existing
             else:
@@ -569,6 +607,7 @@ class OmegaDataSequentialPipeline:
                 existing.close_price = close_p
                 existing.volume = volume
                 existing.raw_source = "nse_bhavcopy"
+                self._ensure_identity_adjusted_fields(existing)
             loaded += 1
 
         return loaded
@@ -659,6 +698,7 @@ class OmegaDataSequentialPipeline:
                     volume=volume,
                     raw_source="bse_bhavcopy",
                 )
+                self._ensure_identity_adjusted_fields(existing)
                 session.add(existing)
                 existing_prices[isin] = existing
             else:
@@ -668,6 +708,7 @@ class OmegaDataSequentialPipeline:
                 existing.close_price = close_p
                 existing.volume = volume
                 existing.raw_source = "bse_bhavcopy"
+                self._ensure_identity_adjusted_fields(existing)
             loaded += 1
 
         return loaded
