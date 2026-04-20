@@ -277,6 +277,7 @@ def test_nse_request_workaround_passes_bootstrapped_cookies_to_fallbacks(monkeyp
 def test_download_manager_reuses_cached_immutable_artifact(tmp_path: Path, monkeypatch) -> None:
     raw_root = tmp_path / "raw"
     monkeypatch.setattr(settings, "raw_root", str(raw_root))
+    monkeypatch.setattr(settings, "seed_raw_root", str(tmp_path / "seed_raw"))
     manager = DownloadManager()
     as_of = date(2026, 4, 13)
     out_dir = raw_root / "nse_corporate_actions" / "year=2026" / "month=04"
@@ -302,6 +303,47 @@ def test_download_manager_reuses_cached_immutable_artifact(tmp_path: Path, monke
 
     monkeypatch.setattr(manager, "_fetch_candidate", fail_fetch)
     cached = manager.download("NSE_CORPORATE_ACTIONS", as_of)
+    assert cached.path == artifact
+    assert cached.checksum == checksum
+
+
+def test_download_manager_falls_back_to_seed_cache_when_canonical_missing(tmp_path: Path, monkeypatch) -> None:
+    raw_root = tmp_path / "raw"
+    seed_root = tmp_path / "seed_raw"
+    monkeypatch.setattr(settings, "raw_root", str(raw_root))
+    monkeypatch.setattr(settings, "seed_raw_root", str(seed_root))
+    manager = DownloadManager()
+    as_of = date(2024, 1, 2)
+    out_dir = seed_root / "nse_equity_bhavcopy" / "year=2024" / "month=01"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    artifact = out_dir / "20240102__seedcache.zip"
+    import zipfile
+
+    with zipfile.ZipFile(artifact, "w") as zf:
+        zf.writestr(
+            "BhavCopy_NSE_CM_0_0_0_20240102_F_0000.csv",
+            "TradDt,BizDt,ISIN,TckrSymb,SctySrs,OpnPric,HghPric,LwPric,ClsPric,TtlTradgVol\n"
+            "02-Jan-2024,2024-01-02,INE000A01010,ABC,EQ,10,11,9,10.5,1000\n",
+        )
+    checksum = manager._hash_content(artifact.read_bytes(), "sha256")
+    manifest = {
+        "source_key": "NSE_EQUITY_BHAVCOPY",
+        "as_of": as_of.isoformat(),
+        "checksum": checksum,
+        "artifact_path": artifact.as_posix(),
+        "bytes_downloaded": artifact.stat().st_size,
+        "used_url": "seed://omega_phase2_repo/data/raw/bhavcopy/cm02JAN2024bhav.csv.zip",
+        "attempts": 0,
+        "manifest_path": (out_dir / "20240102__seedcache.manifest.json").as_posix(),
+    }
+    latest = out_dir / "20240102.latest.json"
+    latest.write_text(json.dumps(manifest), encoding="utf-8")
+
+    def fail_fetch(*args, **kwargs):  # noqa: ANN002, ANN003
+        raise AssertionError("network fetch should not be used when seed cache is valid")
+
+    monkeypatch.setattr(manager, "_fetch_candidate", fail_fetch)
+    cached = manager.download("NSE_EQUITY_BHAVCOPY", as_of)
     assert cached.path == artifact
     assert cached.checksum == checksum
 

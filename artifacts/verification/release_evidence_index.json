@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T15:12:46.179663+00:00",
+  "generated_at": "2026-04-20T17:12:07.556908+00:00",
   "default_release_profile": "equity_core",
   "releases": {
     "equity_core": {
@@ -142,7 +142,19 @@
     "nse_historical_backfill": {
       "path": "artifacts/verification/nse_historical_backfill_report.json",
       "exists": true,
-      "generated_at": "2026-04-20T15:11:10.022571+00:00",
+      "generated_at": "2026-04-20T17:08:54.055526+00:00",
+      "supporting_release_id": null
+    },
+    "seed_import_audit": {
+      "path": "artifacts/verification/seed_import_audit.json",
+      "exists": true,
+      "generated_at": "2026-04-20T17:08:43.702668+00:00",
+      "supporting_release_id": null
+    },
+    "pipeline_replay_30day_proof": {
+      "path": "artifacts/verification/pipeline_replay_30day_proof.json",
+      "exists": true,
+      "generated_at": "2026-04-20T17:11:35.384263+00:00",
       "supporting_release_id": null
     },
     "trading_calendar_coverage": {

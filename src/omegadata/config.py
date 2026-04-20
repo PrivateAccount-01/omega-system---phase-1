@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     db_url: str = "postgresql+psycopg://omega:omega@localhost:5432/omegadata"
     parquet_root: str = "./data/parquet"
     raw_root: str = "./data/raw"
+    seed_raw_root: str = "./data/seed_raw/omega_phase2_repo"
     report_root: str = "./data/reports"
     clickhouse_host: str = "localhost"
     clickhouse_port: int = 8123

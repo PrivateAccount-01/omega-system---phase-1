@@ -1,0 +1,290 @@
+{
+  "generated_at": "2026-04-20T17:11:35.384263+00:00",
+  "replay_mode": "historical_archive_replay",
+  "range": {
+    "start_date": "2024-03-27",
+    "end_date": "2024-08-07"
+  },
+  "trading_day_count": 30,
+  "minimum_required_days": 30,
+  "window_span_days": 90,
+  "missing_days_within_window": 60,
+  "all_archives_valid": true,
+  "canonical_cache_days": 5,
+  "seed_cache_days": 25,
+  "quiet_day_count": 7,
+  "volatile_day_count": 7,
+  "note": "This proof demonstrates that a 30+ trading day historical replay window is now available from immutable raw archive coverage using the canonical cache plus the separated omega_phase2_repo seed cache. It proves replayable archive breadth; it does not treat seed payloads as source-of-truth or bypass official-source validation.",
+  "results": [
+    {
+      "date": "2024-04-01",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=04/20240401__02d639ef0ab6.zip",
+      "csv_member": "cm01APR2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.010413529716645917,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-04-02",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=04/20240402__55073dfd16b0.zip",
+      "csv_member": "cm02APR2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.006665109103214308,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-04-03",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=04/20240403__77a959342add.zip",
+      "csv_member": "cm03APR2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.007420709790408308,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-04-04",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=04/20240404__d17b4587e8c9.zip",
+      "csv_member": "cm04APR2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.006196048281886493,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-04-05",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=04/20240405__231c99ab8ef7.zip",
+      "csv_member": "cm05APR2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.004853043741317169,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-04-08",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=04/20240408__2c4c9eefe773.zip",
+      "csv_member": "cm08APR2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.008278292385961419,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-05-02",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=05/20240502__967975751552.zip",
+      "csv_member": "cm02MAY2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.005245485222679572,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-05-03",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=05/20240503__09729b3a7796.zip",
+      "csv_member": "cm03MAY2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.0066842136569117295,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-05-06",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=05/20240506__dfec81d6c286.zip",
+      "csv_member": "cm06MAY2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.0018338919297329257,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-05-07",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=05/20240507__ae00f1a3956b.zip",
+      "csv_member": "cm07MAY2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.000870396925576749,
+      "regime": "quiet"
+    },
+    {
+      "date": "2024-06-03",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=06/20240603__11e0532056f9.zip",
+      "csv_member": "cm03JUN2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.0002031595064316715,
+      "regime": "quiet"
+    },
+    {
+      "date": "2024-06-04",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=06/20240604__436b60d00d22.zip",
+      "csv_member": "cm04JUN2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.001165318961075275,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-06-05",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=06/20240605__a66e85b5856b.zip",
+      "csv_member": "cm05JUN2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.000998057612814566,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-06-06",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=06/20240606__5bf31f33202c.zip",
+      "csv_member": "cm06JUN2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.0018629205504302475,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-06-07",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=06/20240607__ad4f7f014bb0.zip",
+      "csv_member": "cm07JUN2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.0008163992869875223,
+      "regime": "quiet"
+    },
+    {
+      "date": "2024-07-01",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=07/20240701__ace03cc54849.zip",
+      "csv_member": "cm01JUL2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.0006842868604579399,
+      "regime": "quiet"
+    },
+    {
+      "date": "2024-07-02",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=07/20240702__663758fcddd6.zip",
+      "csv_member": "cm02JUL2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.000990589643701734,
+      "regime": "quiet"
+    },
+    {
+      "date": "2024-07-03",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=07/20240703__e791fff7ecee.zip",
+      "csv_member": "cm03JUL2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.00015531800009589933,
+      "regime": "quiet"
+    },
+    {
+      "date": "2024-07-04",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=07/20240704__0091cb686404.zip",
+      "csv_member": "cm04JUL2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.00040705425702472367,
+      "regime": "quiet"
+    },
+    {
+      "date": "2024-07-05",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=07/20240705__e08c8c0650e6.zip",
+      "csv_member": "cm05JUL2024bhav.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.000992111336938923,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-07-23",
+      "archive_layer": "canonical_cached",
+      "artifact_path": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240723__6e7b99b88b17.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240723_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.013286488837043964,
+      "regime": "volatile"
+    },
+    {
+      "date": "2024-07-24",
+      "archive_layer": "canonical_cached",
+      "artifact_path": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240724__f122b216dc1f.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240724_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.014244951871639367,
+      "regime": "volatile"
+    },
+    {
+      "date": "2024-07-25",
+      "archive_layer": "canonical_cached",
+      "artifact_path": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240725__0436e50418b5.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240725_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.01125143464758304,
+      "regime": "volatile"
+    },
+    {
+      "date": "2024-07-26",
+      "archive_layer": "canonical_cached",
+      "artifact_path": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240726__d2efcdc5c292.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240726_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.012069298135232148,
+      "regime": "volatile"
+    },
+    {
+      "date": "2024-07-29",
+      "archive_layer": "canonical_cached",
+      "artifact_path": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240729__68685c0f743e.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240729_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.010811525267317802,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-08-01",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=08/20240801__5021dabff197.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240801_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.014586462691886327,
+      "regime": "volatile"
+    },
+    {
+      "date": "2024-08-02",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=08/20240802__3edd242d6ade.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240802_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.010704076326209074,
+      "regime": "neutral"
+    },
+    {
+      "date": "2024-08-05",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=08/20240805__1a0bf2364ca8.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240805_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.016484162309321117,
+      "regime": "volatile"
+    },
+    {
+      "date": "2024-08-06",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=08/20240806__dd92b5bd414c.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240806_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.017808557502809994,
+      "regime": "volatile"
+    },
+    {
+      "date": "2024-08-07",
+      "archive_layer": "seed_cached",
+      "artifact_path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2024/month=08/20240807__74f5be6991a7.zip",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240807_F_0000.csv",
+      "archive_valid": true,
+      "median_abs_open_close_move": 0.010224153571347174,
+      "regime": "neutral"
+    }
+  ]
+}

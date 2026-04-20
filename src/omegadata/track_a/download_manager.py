@@ -86,10 +86,17 @@ class DownloadManager:
     def __init__(self) -> None:
         self.raw_root = Path(settings.raw_root)
         self.raw_root.mkdir(parents=True, exist_ok=True)
+        self.seed_raw_root = Path(settings.seed_raw_root)
+        self.seed_raw_root.mkdir(parents=True, exist_ok=True)
         self.alert_router = AlertRouter()
 
-    def _load_cached_artifact(self, source_key: str, as_of: date) -> DownloadArtifact | None:
-        out_dir = self.raw_root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+    def _load_cached_artifact_from_root(
+        self,
+        root: Path,
+        source_key: str,
+        as_of: date,
+    ) -> DownloadArtifact | None:
+        out_dir = root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
         latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
         if not latest_pointer.exists():
             return None
@@ -120,6 +127,12 @@ class DownloadManager:
             used_url=str(manifest_payload.get("used_url", "")),
             attempts=int(manifest_payload.get("attempts", 0)),
         )
+
+    def _load_cached_artifact(self, source_key: str, as_of: date) -> DownloadArtifact | None:
+        cached = self._load_cached_artifact_from_root(self.raw_root, source_key, as_of)
+        if cached is not None:
+            return cached
+        return self._load_cached_artifact_from_root(self.seed_raw_root, source_key, as_of)
 
     @staticmethod
     def _path_from_manifest(raw_path: str) -> Path:

@@ -102,6 +102,8 @@ def main() -> None:
         "matching_report": REPO_ROOT / "artifacts/verification/corporate_action_matching_report.json",
         "discontinuity_spike_report": REPO_ROOT / "artifacts/verification/discontinuity_spike_report.json",
         "nse_historical_backfill": REPO_ROOT / "artifacts/verification/nse_historical_backfill_report.json",
+        "seed_import_audit": REPO_ROOT / "artifacts/verification/seed_import_audit.json",
+        "pipeline_replay_30day_proof": REPO_ROOT / "artifacts/verification/pipeline_replay_30day_proof.json",
         "trading_calendar_coverage": REPO_ROOT / "artifacts/verification/trading_calendar_coverage.json",
         "nse_fo_load_report": REPO_ROOT / "artifacts/verification/nse_fo_load_report.json",
         "futures_continuation_proof": REPO_ROOT / "artifacts/verification/futures_continuation_proof.json",
