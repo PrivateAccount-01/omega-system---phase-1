@@ -1,0 +1,138 @@
+{
+  "generated_at": "2026-04-20T15:12:30.142609+00:00",
+  "release_profile": "equity_core",
+  "release_id": "20260413_equity_core",
+  "ready": true,
+  "checks": [
+    {
+      "name": "release_record_present",
+      "passed": true,
+      "details": "release_id=20260413_equity_core"
+    },
+    {
+      "name": "release_artifacts_present",
+      "passed": true,
+      "details": "manifest_exists=True, quality_exists=True, lineage_exists=True"
+    },
+    {
+      "name": "release_signature_present",
+      "passed": true,
+      "details": "signature_exists=True"
+    },
+    {
+      "name": "release_manifest_fresh",
+      "passed": true,
+      "details": "artifact_age_hours=0.01"
+    },
+    {
+      "name": "release_signature_verified",
+      "passed": true,
+      "details": "signature verified"
+    },
+    {
+      "name": "release_required_datasets_present",
+      "passed": true,
+      "details": "missing_datasets=[]"
+    },
+    {
+      "name": "release_required_datasets_non_empty",
+      "passed": true,
+      "details": "empty_datasets=[]"
+    },
+    {
+      "name": "warehouse_sync_status",
+      "passed": true,
+      "details": "warehouse_sync_status=SYNCED"
+    },
+    {
+      "name": "consumer_matrix_present",
+      "passed": true,
+      "details": "consumer_classes=3, signal_families=3"
+    },
+    {
+      "name": "adjusted_ohlcv_complete",
+      "passed": true,
+      "details": "adjusted_open_price_nulls=0, adjusted_high_price_nulls=0, adjusted_low_price_nulls=0, adjusted_close_price_nulls=0, adjusted_volume_nulls=0"
+    },
+    {
+      "name": "blocking_reviews",
+      "passed": true,
+      "details": "open_release_blocking_reviews=0, open_instrument_scoped_blocking_reviews=29, open_record_scoped_blocking_reviews=2012"
+    },
+    {
+      "name": "overdue_blocking_reviews",
+      "passed": true,
+      "details": "overdue_release_blocking_reviews=0, overdue_instrument_scoped_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
+    },
+    {
+      "name": "pending_reprocess_jobs",
+      "passed": true,
+      "details": "pending_reprocess_jobs=0"
+    },
+    {
+      "name": "source_probe_fresh",
+      "passed": true,
+      "details": "artifact_age_hours=0.07"
+    },
+    {
+      "name": "pipeline_fresh",
+      "passed": true,
+      "details": "artifact_age_hours=0.00"
+    },
+    {
+      "name": "tolerance_report_fresh",
+      "passed": true,
+      "details": "artifact_age_hours=141.84"
+    },
+    {
+      "name": "matching_report_fresh",
+      "passed": true,
+      "details": "artifact_age_hours=0.15"
+    },
+    {
+      "name": "calendar_loaded",
+      "passed": true,
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, calendar_config_state=loaded"
+    },
+    {
+      "name": "probe_primary_healthy",
+      "passed": true,
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, bse_primary_validated=True"
+    },
+    {
+      "name": "probe_fallback_health",
+      "passed": true,
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, healthy_fallback_count=2, failed_fallback_count=0"
+    },
+    {
+      "name": "probe_nse_equity_healthy",
+      "passed": true,
+      "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, nse_equity_primary_validated=True"
+    },
+    {
+      "name": "pipeline_success",
+      "passed": true,
+      "details": "successful_days=1, failed_days=0"
+    },
+    {
+      "name": "tolerance_status",
+      "passed": true,
+      "details": "status=ok, benchmark_passed=True"
+    },
+    {
+      "name": "matching_benchmark_status",
+      "passed": true,
+      "details": "status=ok, precision=1.0, recall=1.0"
+    },
+    {
+      "name": "official_adjustment_corpus",
+      "passed": true,
+      "details": "official_case_count=14, official_transformational_case_count=5"
+    },
+    {
+      "name": "manual_transformational_corpus",
+      "passed": true,
+      "details": "manual_case_count=14"
+    }
+  ]
+}

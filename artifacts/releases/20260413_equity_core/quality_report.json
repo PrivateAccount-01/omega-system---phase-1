@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-19T13:01:33.081074+00:00",
+  "generated_at": "2026-04-20T15:12:30.156299+00:00",
   "as_of_date": "2026-04-13",
   "release_profile": "equity_core",
   "release_readiness_snapshot": {
-    "generated_at": "2026-04-19T13:01:33.080910+00:00",
+    "generated_at": "2026-04-20T15:12:30.142609+00:00",
     "release_profile": "equity_core",
     "release_id": "20260413_equity_core",
-    "ready": false,
+    "ready": true,
     "checks": [
       {
         "name": "release_record_present",
@@ -26,7 +26,7 @@
       {
         "name": "release_manifest_fresh",
         "passed": true,
-        "details": "artifact_age_hours=0.02"
+        "details": "artifact_age_hours=0.01"
       },
       {
         "name": "release_signature_verified",
@@ -45,8 +45,8 @@
       },
       {
         "name": "warehouse_sync_status",
-        "passed": false,
-        "details": "warehouse_sync_status=FAILED"
+        "passed": true,
+        "details": "warehouse_sync_status=SYNCED"
       },
       {
         "name": "consumer_matrix_present",
@@ -76,22 +76,22 @@
       {
         "name": "source_probe_fresh",
         "passed": true,
-        "details": "artifact_age_hours=4.59"
+        "details": "artifact_age_hours=0.07"
       },
       {
         "name": "pipeline_fresh",
         "passed": true,
-        "details": "artifact_age_hours=5.63"
+        "details": "artifact_age_hours=0.00"
       },
       {
         "name": "tolerance_report_fresh",
         "passed": true,
-        "details": "artifact_age_hours=115.66"
+        "details": "artifact_age_hours=141.84"
       },
       {
         "name": "matching_report_fresh",
         "passed": true,
-        "details": "artifact_age_hours=157.03"
+        "details": "artifact_age_hours=0.15"
       },
       {
         "name": "calendar_loaded",

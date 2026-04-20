@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-19T13:23:27.634832+00:00",
+  "generated_at": "2026-04-20T15:12:46.179663+00:00",
   "default_release_profile": "equity_core",
   "releases": {
     "equity_core": {
@@ -9,7 +9,7 @@
       "quality_report_path": "artifacts/releases/20260413_equity_core/quality_report.json",
       "lineage_report_path": "artifacts/releases/20260413_equity_core/lineage_report.json",
       "warehouse_sync_status": "SYNCED",
-      "generated_at": "2026-04-19T13:01:35.050302"
+      "generated_at": "2026-04-20T14:52:58.662873+00:00"
     },
     "equity_plus_sidefeeds": {
       "release_id": "20260413_equity_plus_sidefeeds",
@@ -18,7 +18,7 @@
       "quality_report_path": "artifacts/releases/20260413_equity_plus_sidefeeds/quality_report.json",
       "lineage_report_path": "artifacts/releases/20260413_equity_plus_sidefeeds/lineage_report.json",
       "warehouse_sync_status": "SYNCED",
-      "generated_at": "2026-04-19T13:01:40.640117"
+      "generated_at": "2026-04-20T14:53:05.699706+00:00"
     },
     "full_derivatives": {
       "release_id": "20260413_full_derivatives",
@@ -27,26 +27,62 @@
       "quality_report_path": "artifacts/releases/20260413_full_derivatives/quality_report.json",
       "lineage_report_path": "artifacts/releases/20260413_full_derivatives/lineage_report.json",
       "warehouse_sync_status": "SYNCED",
-      "generated_at": "2026-04-19T13:18:23.747261"
+      "generated_at": "2026-04-20T14:53:21.921442+00:00"
     }
   },
   "proof_artifacts": {
     "source_probe": {
       "path": "artifacts/verification/source_probe_report.json",
       "exists": true,
-      "generated_at": "2026-04-19T08:25:57.727090+00:00",
+      "generated_at": "2026-04-20T15:08:35.208746+00:00",
       "supporting_release_id": null
     },
     "pipeline_execution": {
       "path": "artifacts/verification/pipeline_execution_result.json",
       "exists": true,
-      "generated_at": "2026-04-19T07:24:02.013280+00:00",
+      "generated_at": "2026-04-20T15:12:29.951903+00:00",
       "supporting_release_id": null
     },
     "release_readiness": {
       "path": "artifacts/verification/release_readiness.json",
       "exists": true,
-      "generated_at": "2026-04-19T13:19:39.771804+00:00",
+      "generated_at": "2026-04-20T15:12:30.295976+00:00",
+      "supporting_release_id": "20260413_full_derivatives"
+    },
+    "release_readiness_equity_core": {
+      "path": "artifacts/verification/release_readiness_equity_core.json",
+      "exists": true,
+      "generated_at": "2026-04-20T15:12:30.142609+00:00",
+      "supporting_release_id": "20260413_equity_core"
+    },
+    "release_readiness_equity_plus_sidefeeds": {
+      "path": "artifacts/verification/release_readiness_equity_plus_sidefeeds.json",
+      "exists": true,
+      "generated_at": "2026-04-20T15:12:30.193170+00:00",
+      "supporting_release_id": "20260413_equity_plus_sidefeeds"
+    },
+    "release_readiness_full_derivatives": {
+      "path": "artifacts/verification/release_readiness_full_derivatives.json",
+      "exists": true,
+      "generated_at": "2026-04-20T15:12:30.295976+00:00",
+      "supporting_release_id": "20260413_full_derivatives"
+    },
+    "release_build_equity_core": {
+      "path": "artifacts/verification/release_build_equity_core.json",
+      "exists": true,
+      "generated_at": null,
+      "supporting_release_id": "20260413_equity_core"
+    },
+    "release_build_equity_plus_sidefeeds": {
+      "path": "artifacts/verification/release_build_equity_plus_sidefeeds.json",
+      "exists": true,
+      "generated_at": null,
+      "supporting_release_id": "20260413_equity_plus_sidefeeds"
+    },
+    "release_build_full_derivatives": {
+      "path": "artifacts/verification/release_build_full_derivatives.json",
+      "exists": true,
+      "generated_at": null,
       "supporting_release_id": "20260413_full_derivatives"
     },
     "adjusted_ohlcv_proof": {
@@ -61,6 +97,12 @@
       "generated_at": "2026-04-19T07:41:14.695460+00:00",
       "supporting_release_id": "20260413_equity_core"
     },
+    "corporate_action_corpus_coverage": {
+      "path": "artifacts/verification/corporate_action_corpus_coverage.json",
+      "exists": true,
+      "generated_at": "2026-04-20T15:01:19.718173+00:00",
+      "supporting_release_id": null
+    },
     "sidefeed_proof": {
       "path": "artifacts/verification/sidefeed_proof.json",
       "exists": true,
@@ -70,7 +112,7 @@
     "pit_universe_proof": {
       "path": "artifacts/verification/pit_universe_proof.json",
       "exists": true,
-      "generated_at": "2026-04-19T12:32:05.417655+00:00",
+      "generated_at": "2026-04-20T14:53:31.281713+00:00",
       "supporting_release_id": "20260413_equity_core"
     },
     "historical_trading_calendar_proof": {
@@ -88,7 +130,7 @@
     "matching_report": {
       "path": "artifacts/verification/corporate_action_matching_report.json",
       "exists": true,
-      "generated_at": "2026-04-13T00:00:00+00:00",
+      "generated_at": "2026-04-20T15:03:41.476593+00:00",
       "supporting_release_id": null
     },
     "discontinuity_spike_report": {
@@ -100,7 +142,7 @@
     "nse_historical_backfill": {
       "path": "artifacts/verification/nse_historical_backfill_report.json",
       "exists": true,
-      "generated_at": "2026-04-19T12:27:44.821879+00:00",
+      "generated_at": "2026-04-20T15:11:10.022571+00:00",
       "supporting_release_id": null
     },
     "trading_calendar_coverage": {

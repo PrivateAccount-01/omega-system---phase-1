@@ -22,6 +22,11 @@ def main() -> None:
         help="Release profile to evaluate",
     )
     parser.add_argument("--release-id", default=None, help="Optional explicit release id to evaluate")
+    parser.add_argument(
+        "--artifact-path",
+        default="artifacts/verification/release_readiness.json",
+        help="Primary output artifact path",
+    )
     args = parser.parse_args()
 
     if args.db_url:
@@ -40,9 +45,11 @@ def main() -> None:
             profile=ReleaseProfile(args.profile),
             release_id=args.release_id,
         )
-    out_path = REPO_ROOT / "artifacts/verification/release_readiness.json"
+    out_path = REPO_ROOT / args.artifact_path
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    profile_path = REPO_ROOT / "artifacts/verification" / f"release_readiness_{args.profile}.json"
+    profile_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"Wrote {out_path}")
 
 

@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-04-20T15:01:19.718173+00:00",
+  "official_corpus_path": "tests/fixtures/official_source/adjustment_reference_corpus.json",
+  "synthetic_corpus_path": "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json",
+  "official_case_count": 14,
+  "official_transformational_case_count": 5,
+  "official_transformational_types_present": [
+    "BONUS",
+    "RIGHTS",
+    "SPLIT"
+  ],
+  "synthetic_transformational_types_present": [
+    "BONUS",
+    "DEMERGER_PARENT",
+    "MERGER_TARGET",
+    "RIGHTS",
+    "RIGHTS_RENOUNCE",
+    "SPLIT",
+    "SPLIT_REVERSE"
+  ],
+  "required_transformational_types": [
+    "SPLIT",
+    "BONUS",
+    "RIGHTS",
+    "SPLIT_REVERSE",
+    "DEMERGER_PARENT",
+    "RIGHTS_RENOUNCE",
+    "MERGER_TARGET"
+  ],
+  "strict_required_official_case_labels": [
+    "reverse_split",
+    "demerger_parent_final_stage",
+    "sequential_multi_action_chain",
+    "correction_or_supersession",
+    "later_delisted_post_action_case"
+  ],
+  "strict_required_official_case_closure": {
+    "reverse_split": false,
+    "demerger_parent_final_stage": false,
+    "sequential_multi_action_chain": false,
+    "correction_or_supersession": false,
+    "later_delisted_post_action_case": false
+  },
+  "strict_required_official_cases_complete": false,
+  "strict_required_official_cases_missing": [
+    "reverse_split",
+    "demerger_parent_final_stage",
+    "sequential_multi_action_chain",
+    "correction_or_supersession",
+    "later_delisted_post_action_case"
+  ],
+  "notes": "This artifact makes the official-vs-synthetic coverage boundary explicit. Synthetic/manual coverage is useful for adjustment math, but only official-source-backed coverage closes the frozen transformational proof requirement."
+}

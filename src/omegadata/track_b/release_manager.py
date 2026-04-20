@@ -449,8 +449,16 @@ class ReleaseManager:
         ]
         return self._write_dataset(release_dir, "options_eod", self._frame_from_rows(payload))
 
-    def _build_quality_report(self, session: Session, *, as_of: date, profile: ReleaseProfile, out_path: Path) -> None:
-        readiness = self.readiness.evaluate(session)
+    def _build_quality_report(
+        self,
+        session: Session,
+        *,
+        as_of: date,
+        profile: ReleaseProfile,
+        release_id: str,
+        out_path: Path,
+    ) -> None:
+        readiness = self.readiness.evaluate(session, profile=profile, release_id=release_id)
         payload = {
             "generated_at": datetime.now(UTC).isoformat(),
             "as_of_date": as_of.isoformat(),
@@ -505,7 +513,6 @@ class ReleaseManager:
         matrix = _load_profile_matrix()
         quality_report_path = release_dir / "quality_report.json"
         lineage_report_path = release_dir / "lineage_report.json"
-        self._build_quality_report(session, as_of=as_of, profile=profile, out_path=quality_report_path)
         self._build_lineage_report(session, as_of=as_of, profile=profile, out_path=lineage_report_path)
 
         warehouse_result = self.warehouse.sync_release_manifest(
@@ -556,6 +563,14 @@ class ReleaseManager:
             existing.warehouse_sync_status = warehouse_result.status
             existing.dataset_entries = dataset_entries
             existing.consumer_matrix = manifest["consumer_matrix"]
+        session.flush()
+        self._build_quality_report(
+            session,
+            as_of=as_of,
+            profile=profile,
+            release_id=release_id,
+            out_path=quality_report_path,
+        )
         latest = self.release_root / f"latest_{profile.value}.json"
         latest.write_text(json.dumps({"release_id": release_id, "manifest_path": _relative_repo_path(manifest_path)}, indent=2), encoding="utf-8")
         return ReleaseBuildResult(

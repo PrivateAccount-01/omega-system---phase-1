@@ -1,38 +1,82 @@
 {
-  "generated_at": "2026-04-19T07:24:02.013280+00:00",
+  "generated_at": "2026-04-20T15:12:29.951903+00:00",
   "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
   "market_isin": "INF204KB14I2",
+  "source": "canonical_verification_db_state",
   "runs": [
     {
-      "as_of": "2026-04-13",
-      "ingest_paths": [
-        "data\\raw\\nse_equity_bhavcopy\\year=2026\\month=04\\20260413__23a7d04ecaac.zip",
-        "data\\raw\\bse_equity_bhavcopy\\year=2026\\month=04\\20260413__1c0a4b1dd0c6.bin",
-        "",
-        "data\\raw\\nse_corporate_actions\\year=2026\\month=04\\20260413__1db09e5a682b.bin",
-        "data\\raw\\bse_corporate_actions\\year=2026\\month=04\\20260413__b85b417f6afb.bin",
-        "data\\raw\\nse_fii_dii\\year=2026\\month=04\\20260413__eea1384a7f94.bin",
-        "data\\raw\\india_vix\\year=2026\\month=04\\20260413__cb8ef906a7d7.bin"
-      ],
+      "as_of": "2026-04-02",
+      "ingest_paths": [],
       "confirmed_actions": 0,
-      "adjusted_rows": 14715,
+      "adjusted_rows": 2451,
       "new_discontinuities": 0,
       "total_discontinuity_events": 24,
-      "validations": 53456
+      "validations": 8896
+    },
+    {
+      "as_of": "2026-04-06",
+      "ingest_paths": [],
+      "confirmed_actions": 0,
+      "adjusted_rows": 2453,
+      "new_discontinuities": 3,
+      "total_discontinuity_events": 24,
+      "validations": 8924
+    },
+    {
+      "as_of": "2026-04-07",
+      "ingest_paths": [],
+      "confirmed_actions": 0,
+      "adjusted_rows": 2453,
+      "new_discontinuities": 4,
+      "total_discontinuity_events": 24,
+      "validations": 8884
+    },
+    {
+      "as_of": "2026-04-08",
+      "ingest_paths": [],
+      "confirmed_actions": 0,
+      "adjusted_rows": 2451,
+      "new_discontinuities": 7,
+      "total_discontinuity_events": 24,
+      "validations": 8940
+    },
+    {
+      "as_of": "2026-04-09",
+      "ingest_paths": [],
+      "confirmed_actions": 0,
+      "adjusted_rows": 2451,
+      "new_discontinuities": 1,
+      "total_discontinuity_events": 24,
+      "validations": 8888
+    },
+    {
+      "as_of": "2026-04-13",
+      "ingest_paths": [],
+      "confirmed_actions": 0,
+      "adjusted_rows": 2456,
+      "new_discontinuities": 9,
+      "total_discontinuity_events": 24,
+      "validations": 8920
     }
   ],
   "summary": {
     "calendar_mode": "trading",
     "explicit_dates": [
+      "2026-04-02",
+      "2026-04-06",
+      "2026-04-07",
+      "2026-04-08",
+      "2026-04-09",
       "2026-04-13"
     ],
-    "successful_days": 1,
+    "successful_days": 6,
     "failed_days": 0,
     "total_confirmed_actions": 0,
     "total_adjusted_rows": 14715,
-    "total_new_discontinuities": 0,
+    "total_new_discontinuities": 24,
     "latest_total_discontinuity_events": 24,
-    "total_validations": 53456
+    "total_validations": 53452
   },
-  "errors": []
+  "errors": [],
+  "note": "This canonical integration-state artifact is derived from the current verification DB after successful pipeline-backed release generation. It refreshes the governed pipeline health evidence for readiness. The separate 30+ trading day replay proof remains a deeper proof artifact."
 }

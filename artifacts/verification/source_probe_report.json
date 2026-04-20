@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-19T08:25:57.727090+00:00",
+  "generated_at": "2026-04-20T15:08:35.208746+00:00",
   "workflow": "scheduled_verification",
   "probe_date": "2026-04-17",
   "nse_equity_probe_date": "2026-04-17",
@@ -12,28 +12,42 @@
   "probe_timeout_seconds": 8.0,
   "calendar_maintenance": [
     {
-      "exchange": "BSE",
-      "status": "healthy",
-      "warning": false,
-      "message": "Trading-calendar coverage for BSE is current.",
-      "covered_years": [
-        2026
-      ],
-      "latest_covered_year": 2026,
-      "days_until_expiry": 256,
-      "config_error": null
-    },
-    {
       "exchange": "NSE",
       "status": "healthy",
-      "warning": false,
-      "message": "Trading-calendar coverage for NSE is current.",
+      "required_year": 2026,
       "covered_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
         2026
       ],
-      "latest_covered_year": 2026,
-      "days_until_expiry": 256,
-      "config_error": null
+      "missing_years": [],
+      "owner_role": "OmegaData data operations",
+      "renewal_window_days": 60,
+      "runbook": "Maintain historical and upcoming trading-calendar coverage for NSE and BSE, including holiday closures and special trading sessions, then rerun scripts/check_trading_calendar_coverage.py, scripts/build_historical_trading_calendar_proof.py, and scripts/generate_source_probe_report.py."
+    },
+    {
+      "exchange": "BSE",
+      "status": "healthy",
+      "required_year": 2026,
+      "covered_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "missing_years": [],
+      "owner_role": "OmegaData data operations",
+      "renewal_window_days": 60,
+      "runbook": "Maintain historical and upcoming trading-calendar coverage for NSE and BSE, including holiday closures and special trading sessions, then rerun scripts/check_trading_calendar_coverage.py, scripts/build_historical_trading_calendar_proof.py, and scripts/generate_source_probe_report.py."
     }
   ],
   "bse_supported_candidate_count": 3,
@@ -50,16 +64,16 @@
       "validated": true,
       "status_code": 200,
       "content_type": "application/json; charset=utf-8",
-      "bytes_downloaded": 2367,
+      "bytes_downloaded": 3512,
       "attempts": 1,
       "request_attempts": 1,
-      "transport": "httpx",
+      "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.6493693999946117,
+      "elapsed_seconds": 0.189,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "[{\"symbol\":\"SANOFI\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"10\",\"subject\":\"Dividend - Rs 48 Per Share\",\"exDate\":\"22-Apr-2026\",\"recDate\":\"22-Apr-2026\",\"bcStartDate\":\"-\",\"bcEndDate\":\"-\",\"ndStartDate\":\"-\",\"comp\":\"Sanofi India Li"
+      "body_preview": "[{\"symbol\":\"SANOFI\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"10\",\"subject\":\"Dividend - Rs 48 Per Share\",\"exDate\":\"22-Apr-2026\""
     }
   ],
   "nse_equity_bhavcopy": [
@@ -74,34 +88,34 @@
       "bytes_downloaded": 189094,
       "attempts": 1,
       "request_attempts": 1,
-      "transport": "httpx",
+      "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.5515788999618962,
+      "elapsed_seconds": 0.175,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\\\u0018H\u05be\u0002\u0000A\b\u0000)\u0000\u001c\u0000BhavCopy_NSE_CM_0_0_0_20260417_F_0000.csvUT\t\u0000\u0003\u0014i\u0014iux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\\v\u001bGW`Y0~,\u000b H\u0004\u0000\u0221sKn\u001fj\u001f=_?7\"2 H*g\u000bTfd\t\u01cd,\u001f\u001f~t\u062d~o|\u001e~\r\u001f\u000f\u001f_\f_>>v}\u001a\u000f0l_\u001f\u000e\u007f"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\\\u0018H\u05be\u0002\u0000A\b\u0000)\u0000\u001c\u0000BhavCopy_NSE_CM_0_0_0_20260417_F_0000.csvUT\t\u0000\u0003\u0014i\u0014iux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\\v\u001bGW`Y0~,\u000b H"
     }
   ],
   "nse_fo_bhavcopy": [
     {
       "source_key": "NSE_FO_BHAVCOPY",
       "as_of": "2026-04-17",
-      "url": "https://nsearchives.nseindia.com/content/fo/NSE_FO_bhavcopy_20260417.csv",
+      "url": "https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20260417_F_0000.csv.zip",
       "role": "primary",
-      "validated": false,
-      "status_code": 404,
-      "content_type": "",
-      "bytes_downloaded": 0,
+      "validated": true,
+      "status_code": 200,
+      "content_type": "application/zip",
+      "bytes_downloaded": 1481954,
       "attempts": 1,
-      "request_attempts": 0,
-      "transport": null,
+      "request_attempts": 1,
+      "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 15.58151910000015,
-      "failure_stage": "request",
-      "error": "HTTP 404 for https://nsearchives.nseindia.com/content/fo/NSE_FO_bhavcopy_20260417.csv",
+      "elapsed_seconds": 0.503,
+      "failure_stage": null,
+      "error": null,
       "validation_error": null,
-      "body_preview": ""
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\u0310\\4y\u0016\u0000\u0000)\u0000\u001c\u0000BhavCopy_NSE_FO_0_0_0_20260417_F_0000.csvUT\t\u0000\u0003H)iH)iux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\u067649r%\u0006\u0012[bv"
     }
   ],
   "nse_equity_recent_history": [
@@ -111,7 +125,9 @@
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
       "failed_fallback_count": 0,
-      "overall_validated": true
+      "overall_validated": true,
+      "all_supported_fallbacks_probed": false,
+      "all_supported_fallbacks_healthy": false
     },
     {
       "date": "2026-04-16",
@@ -119,7 +135,9 @@
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
       "failed_fallback_count": 0,
-      "overall_validated": true
+      "overall_validated": true,
+      "all_supported_fallbacks_probed": false,
+      "all_supported_fallbacks_healthy": false
     },
     {
       "date": "2026-04-15",
@@ -127,7 +145,9 @@
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
       "failed_fallback_count": 0,
-      "overall_validated": true
+      "overall_validated": true,
+      "all_supported_fallbacks_probed": false,
+      "all_supported_fallbacks_healthy": false
     }
   ],
   "bse_equity_candidates": [
@@ -142,13 +162,13 @@
       "bytes_downloaded": 845991,
       "attempts": 1,
       "request_attempts": 1,
-      "transport": "httpx",
+      "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.5232574000256136,
+      "elapsed_seconds": 0.334,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,FininstrmActlXpryDt,StrkPric,OptnTp,FinInstrmNm,OpnPric,HghPric,LwPric,ClsPric,LastPric,PrvsClsgPric,UndrlygPric,SttlmPric,OpnIntrst,ChngInOpnInt"
+      "body_preview": "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,FininstrmActlXpryDt,StrkPric,OptnTp,FinInstrm"
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
@@ -161,13 +181,13 @@
       "bytes_downloaded": 150,
       "attempts": 1,
       "request_attempts": 1,
-      "transport": "httpx",
+      "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.28375870001036674,
+      "elapsed_seconds": 0.161,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "SC_CODE,SC_NAME,SC_GROUP,SC_TYPE,OPEN,HIGH,LOW,CLOSE,LAST,PREVCLOSE,NO_TRADES,NO_OF_SHRS,NET_TURNOV,TDCLOINDI,ISIN_CODE,TRADING_DATE,FILLER2,FILLER3\r "
+      "body_preview": "SC_CODE,SC_NAME,SC_GROUP,SC_TYPE,OPEN,HIGH,LOW,CLOSE,LAST,PREVCLOSE,NO_TRADES,NO_OF_SHRS,NET_TURNOV,TDCLOINDI,ISIN_CODE,"
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
@@ -180,13 +200,13 @@
       "bytes_downloaded": 360,
       "attempts": 1,
       "request_attempts": 1,
-      "transport": "httpx",
+      "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.19963249994907528,
+      "elapsed_seconds": 0.264,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000+p\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_17042026_T0.csvMAn0\u0010EH, \u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB \u0395.\u0010\u000ee\u0000\\1\u0000\ue31dosO\u0086<@)q\f4i\u0010d\u0005\\\u001e6g}1jO2-TVx)rT\u027cqs3qpIx\u06b8^\u0017Y"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000+p\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_17042026_T0.csvMAn0\u0010EH,\n\u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB\n\u0395.\u0010"
     }
   ],
   "bse_recent_history": [
@@ -214,18 +234,18 @@
       "date": "2026-04-15",
       "primary_validated": true,
       "primary_status_code": 200,
-      "healthy_fallback_count": 2,
-      "failed_fallback_count": 0,
+      "healthy_fallback_count": 1,
+      "failed_fallback_count": 1,
       "overall_validated": true,
       "all_supported_fallbacks_probed": true,
-      "all_supported_fallbacks_healthy": true
+      "all_supported_fallbacks_healthy": false
     }
   ],
   "summary": {
     "all_supported_candidates_probed": true,
     "all_supported_fallbacks_probed": true,
     "nse_equity_primary_validated": true,
-    "nse_fo_primary_validated": false,
+    "nse_fo_primary_validated": true,
     "bse_primary_validated": true,
     "bse_any_fallback_validated": true,
     "all_supported_fallbacks_healthy": true,

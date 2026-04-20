@@ -1,1 +1,59 @@
-{"generated_at": "2026-04-13T00:00:00+00:00", "status": "ok", "metrics": {"benchmark_passed": true, "precision": 1.0, "recall": 1.0}}
+{
+  "generated_at": "2026-04-20T15:03:41.476593+00:00",
+  "status": "ok",
+  "policy_version": "2026-04-13",
+  "fixture_version": "2026-04-13",
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "benchmark_passed": true,
+    "case_count": 4
+  },
+  "results": [
+    {
+      "label": "CIEINDIA_DIVIDEND_MATCH",
+      "expected": "match",
+      "predicted": "match",
+      "pair_score": 105,
+      "related_score": 87,
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      }
+    },
+    {
+      "label": "CIEINDIA_TYPE_MISMATCH",
+      "expected": "type_mismatch",
+      "predicted": "type_mismatch",
+      "pair_score": -10000,
+      "related_score": 52,
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      }
+    },
+    {
+      "label": "CIEINDIA_AMBIGUOUS_NEARBY",
+      "expected": "ambiguous",
+      "predicted": "ambiguous",
+      "pair_score": 75,
+      "related_score": 63,
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      }
+    },
+    {
+      "label": "CIEINDIA_NO_MATCH_FAR_GAP",
+      "expected": "no_match",
+      "predicted": "no_match",
+      "pair_score": -30,
+      "related_score": -2000,
+      "snapshot_paths": {
+        "nse": "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+        "bse": "data/raw/bse_corporate_actions/year=2026/month=03/20260319.bin"
+      }
+    }
+  ]
+}

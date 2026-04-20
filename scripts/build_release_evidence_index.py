@@ -5,18 +5,36 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from omegadata.config import settings
-from omegadata.db.session import get_session, init_db
-from omegadata.domain import ReleaseProfile
-from omegadata.track_b.release_manager import ReleaseManager
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_RELEASE_PROFILE = "equity_core"
 
 
 def _read_json(path: Path) -> dict[str, object] | None:
     if not path.exists():
         return None
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _load_release_record(profile: str) -> dict[str, object] | None:
+    latest_path = REPO_ROOT / "artifacts" / "releases" / f"latest_{profile}.json"
+    latest_payload = _read_json(latest_path)
+    if latest_payload is None:
+        return None
+    manifest_path = REPO_ROOT / str(latest_payload["manifest_path"])
+    manifest = _read_json(manifest_path)
+    if manifest is None:
+        return None
+    release_id = str(manifest.get("release_id", latest_payload.get("release_id", ""))).strip()
+    signature_path = manifest_path.with_suffix(manifest_path.suffix + ".asc")
+    return {
+        "release_id": release_id,
+        "manifest_path": manifest_path.relative_to(REPO_ROOT).as_posix(),
+        "signature_path": signature_path.relative_to(REPO_ROOT).as_posix() if signature_path.exists() else None,
+        "quality_report_path": str(manifest.get("quality_report_path") or ""),
+        "lineage_report_path": str(manifest.get("lineage_report_path") or ""),
+        "warehouse_sync_status": str(manifest.get("warehouse_sync_status") or "UNKNOWN"),
+        "generated_at": manifest.get("generated_at"),
+    }
 
 
 def _supporting_release_id(
@@ -36,6 +54,12 @@ def _supporting_release_id(
         if isinstance(nested_release_id, str) and nested_release_id:
             return nested_release_id
     profile_defaults = {
+        "release_readiness_equity_core": "equity_core",
+        "release_readiness_equity_plus_sidefeeds": "equity_plus_sidefeeds",
+        "release_readiness_full_derivatives": "full_derivatives",
+        "release_build_equity_core": "equity_core",
+        "release_build_equity_plus_sidefeeds": "equity_plus_sidefeeds",
+        "release_build_full_derivatives": "full_derivatives",
         "adjusted_ohlcv_proof": "equity_core",
         "corporate_action_proof": "equity_core",
         "pit_universe_proof": "equity_core",
@@ -56,25 +80,21 @@ def _supporting_release_id(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--db-url", default=None, help="Explicit database URL for evidence index generation")
-    args = parser.parse_args()
+    parser.parse_args()
 
-    if args.db_url:
-        settings.db_url = str(args.db_url)
-    elif settings.db_url.startswith("postgresql"):
-        raise SystemExit(
-            "build_release_evidence_index.py requires an explicit --db-url when the configured runtime DB is PostgreSQL. "
-            "Auto-discovery is disabled for verification reproducibility."
-        )
-
-    init_db()
-    manager = ReleaseManager()
     evidence_paths = {
         "source_probe": REPO_ROOT / "artifacts/verification/source_probe_report.json",
         "pipeline_execution": REPO_ROOT / "artifacts/verification/pipeline_execution_result.json",
         "release_readiness": REPO_ROOT / "artifacts/verification/release_readiness.json",
+        "release_readiness_equity_core": REPO_ROOT / "artifacts/verification/release_readiness_equity_core.json",
+        "release_readiness_equity_plus_sidefeeds": REPO_ROOT / "artifacts/verification/release_readiness_equity_plus_sidefeeds.json",
+        "release_readiness_full_derivatives": REPO_ROOT / "artifacts/verification/release_readiness_full_derivatives.json",
+        "release_build_equity_core": REPO_ROOT / "artifacts/verification/release_build_equity_core.json",
+        "release_build_equity_plus_sidefeeds": REPO_ROOT / "artifacts/verification/release_build_equity_plus_sidefeeds.json",
+        "release_build_full_derivatives": REPO_ROOT / "artifacts/verification/release_build_full_derivatives.json",
         "adjusted_ohlcv_proof": REPO_ROOT / "artifacts/verification/adjusted_ohlcv_proof.json",
         "corporate_action_proof": REPO_ROOT / "artifacts/verification/corporate_action_proof.json",
+        "corporate_action_corpus_coverage": REPO_ROOT / "artifacts/verification/corporate_action_corpus_coverage.json",
         "sidefeed_proof": REPO_ROOT / "artifacts/verification/sidefeed_proof.json",
         "pit_universe_proof": REPO_ROOT / "artifacts/verification/pit_universe_proof.json",
         "historical_trading_calendar_proof": REPO_ROOT / "artifacts/verification/historical_trading_calendar_proof.json",
@@ -88,26 +108,14 @@ def main() -> None:
         "options_query_proof": REPO_ROOT / "artifacts/verification/options_query_proof.json",
         "review_backlog_reconciliation": REPO_ROOT / "artifacts/verification/review_backlog_reconciliation.json",
     }
-    with get_session() as session:
-        releases = {}
-        for profile in ReleaseProfile:
-            record = manager.get_latest_release_record(session, profile)
-            if record is None:
-                releases[profile.value] = None
-                continue
-            releases[profile.value] = {
-                "release_id": record.release_id,
-                "manifest_path": record.manifest_path,
-                "signature_path": record.signature_path,
-                "quality_report_path": record.quality_report_path,
-                "lineage_report_path": record.lineage_report_path,
-                "warehouse_sync_status": record.warehouse_sync_status,
-                "generated_at": record.generated_at.isoformat(),
-            }
-
+    releases = {
+        "equity_core": _load_release_record("equity_core"),
+        "equity_plus_sidefeeds": _load_release_record("equity_plus_sidefeeds"),
+        "full_derivatives": _load_release_record("full_derivatives"),
+    }
     payload = {
         "generated_at": datetime.now(UTC).isoformat(),
-        "default_release_profile": settings.release_default_profile,
+        "default_release_profile": DEFAULT_RELEASE_PROFILE,
         "releases": releases,
         "proof_artifacts": {
             name: {

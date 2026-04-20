@@ -15,7 +15,7 @@ from omegadata.track_b.release_manager import ReleaseManager, _relative_repo_pat
 from omegadata.track_b.universe_manager import PointInTimeUniverseManager
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SEED_PACK = PROJECT_ROOT / "tests" / "fixtures" / "official_source" / "pit_universe_reference_pack.json"
+DEFAULT_SEED_PACK = PROJECT_ROOT / "data" / "reference" / "official" / "pit_universe_reference_pack.json"
 OUTPUT_PATH = PROJECT_ROOT / "artifacts" / "verification" / "pit_universe_proof.json"
 
 
@@ -59,7 +59,7 @@ def main() -> None:
     artifact = {
         "generated_at": datetime.now(UTC).isoformat(),
         "seed_pack": _relative_repo_path(args.seed_pack),
-        "official_backed": "official_source" in args.seed_pack.as_posix(),
+        "official_backed": "reference/official" in args.seed_pack.as_posix() or "official_source" in args.seed_pack.as_posix(),
         "db_url": args.db_url,
         "loaded_rows": loaded,
         "persisted_membership_rows": int(persisted_rows or 0),
