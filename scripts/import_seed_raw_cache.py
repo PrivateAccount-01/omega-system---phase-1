@@ -107,7 +107,10 @@ def _write_seed_artifact(
     artifact_stem = f"{as_of:%Y%m%d}__{checksum[:12]}"
     output = out_dir / f"{artifact_stem}.zip"
     if not output.exists():
-        shutil.copy2(source_path, output)
+        try:
+            output.hardlink_to(source_path)
+        except OSError:
+            shutil.copy2(source_path, output)
     imported_at = datetime.now(UTC).isoformat()
     manifest_payload: dict[str, object] = {
         "source_key": "NSE_EQUITY_BHAVCOPY",

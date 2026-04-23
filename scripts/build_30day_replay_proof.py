@@ -31,9 +31,18 @@ def _special_sessions(payload: dict[str, object], exchange: str) -> set[str]:
     return {str(item.get("date")) for item in sessions if isinstance(item, dict)}
 
 
+def _standard_bhavcopy_special_sessions(payload: dict[str, object], exchange: str) -> set[str]:
+    sessions = payload.get("special_sessions", {}).get(exchange, [])
+    return {
+        str(item.get("date"))
+        for item in sessions
+        if isinstance(item, dict) and str(item.get("kind", "")).strip().lower() != "muhurat_trading"
+    }
+
+
 def _is_trading_day(payload: dict[str, object], exchange: str, value: date) -> bool:
     iso = value.isoformat()
-    if iso in _special_sessions(payload, exchange):
+    if iso in _standard_bhavcopy_special_sessions(payload, exchange):
         return True
     if value.weekday() >= 5:
         return False

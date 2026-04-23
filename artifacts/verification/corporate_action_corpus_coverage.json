@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T15:01:19.718173+00:00",
+  "generated_at": "2026-04-23T10:00:55.502498+00:00",
   "official_corpus_path": "tests/fixtures/official_source/adjustment_reference_corpus.json",
   "synthetic_corpus_path": "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json",
   "official_case_count": 14,
@@ -8,6 +8,15 @@
     "BONUS",
     "RIGHTS",
     "SPLIT"
+  ],
+  "official_snapshot_count": 6,
+  "official_snapshot_paths": [
+    "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
+    "data/raw/nse_corporate_actions/year=2026/month=03/20260330.bin",
+    "data/raw/nse_corporate_actions/year=2026/month=04/20260402__1db09e5a682b.bin",
+    "tests/fixtures/official_source/circular_extracts/nestleind_split_2024-01-04.json",
+    "tests/fixtures/official_source/circular_extracts/nmdc_bonus_2024-12-26.json",
+    "tests/fixtures/official_source/circular_extracts/tataconsum_rights_2024-07-25.json"
   ],
   "synthetic_transformational_types_present": [
     "BONUS",

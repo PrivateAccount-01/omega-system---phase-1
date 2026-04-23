@@ -50,9 +50,15 @@ def main() -> None:
         for action in case.get("actions", [])
         if isinstance(action, dict)
     }
-    synthetic_labels = {str(case.get("label", "")).strip() for case in synthetic_cases}
 
     official_labels = {str(item.get("label", "")).strip() for item in official_cases}
+    official_snapshot_paths = sorted(
+        {
+            str(item.get("snapshot_path", "")).strip()
+            for item in official_cases
+            if str(item.get("snapshot_path", "")).strip()
+        }
+    )
     sequential_official_labels = sorted(label for label in official_labels if "SEQUENTIAL" in label.upper())
 
     strict_official_closure = {
@@ -74,6 +80,8 @@ def main() -> None:
         "official_transformational_types_present": sorted(
             value for value in official_types if value in REQUIRED_TRANSFORMATIONAL_TYPES
         ),
+        "official_snapshot_count": len(official_snapshot_paths),
+        "official_snapshot_paths": official_snapshot_paths,
         "synthetic_transformational_types_present": sorted(
             value for value in synthetic_types if value in REQUIRED_TRANSFORMATIONAL_TYPES
         ),

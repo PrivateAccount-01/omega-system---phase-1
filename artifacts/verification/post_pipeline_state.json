@@ -1,63 +1,22 @@
-﻿{
-    "captured_at":  "2026-04-07T19:45:47",
-    "api":  {
-                "health":  {
-                               "status":  "ok"
-                           },
-                "slo":  {
-                            "window_minutes":  5,
-                            "total_requests":  21,
-                            "availability":  1.0,
-                            "p95_latency_ms":  8.968190001905896,
-                            "availability_target":  0.995,
-                            "p95_target_ms":  750.0,
-                            "availability_breach":  false,
-                            "latency_breach":  false
-                        },
-                "audit_counts":  {
-                                     "implemented":  13,
-                                     "partial":  1,
-                                     "missing":  0
-                                 },
-                "audit_severity":  {
-                                       "critical":  1,
-                                       "high":  3,
-                                       "medium":  2,
-                                       "low":  0,
-                                       "none":  8
-                                   }
-            },
-    "db":  {
-               "counts":  {
-                              "price_records":  2453,
-                              "confirmed_corporate_actions":  0,
-                              "discontinuity_events":  0,
-                              "validation_logs":  0
-                          },
-               "sample_isins":  [
-                                    "IN9175A01010",
-                                    "INE001B01026",
-                                    "INE002A01018",
-                                    "INE002L01015",
-                                    "INE002S01010"
-                                ]
-           },
-    "sample_backtest":  {
-                            "isin":  "=BACKTEST",
-                            "context":  "BACKTEST",
-                            "records":  [
-
-                                        ],
-                            "excluded_records":  0,
-                            "excluded_date_range":  null
-                        },
-    "sample_live":  {
-                        "isin":  "=LIVE_SIGNAL",
-                        "context":  "BACKTEST",
-                        "records":  [
-
-                                    ],
-                        "excluded_records":  0,
-                        "excluded_date_range":  null
-                    }
+{
+  "captured_at": "2026-04-23T09:53:26.881309+00:00",
+  "db": {
+    "counts": {
+      "price_records": 44219,
+      "confirmed_corporate_actions": 1,
+      "future_confirmed_corporate_actions": 1,
+      "discontinuity_events": 24,
+      "validation_logs": 53456,
+      "adjusted_price_rows": 44219
+    },
+    "latest_trade_date": "2026-04-13",
+    "sample_isins": [
+      "IN9175A01010",
+      "INE001B01026",
+      "INE002A01018",
+      "INE002L01015",
+      "INE002S01010"
+    ]
+  },
+  "note": "This replaces the stale early-April post-pipeline snapshot with the current canonical verification DB state. Future-dated confirmed corporate actions are tracked explicitly so the current pipeline state remains truthful."
 }

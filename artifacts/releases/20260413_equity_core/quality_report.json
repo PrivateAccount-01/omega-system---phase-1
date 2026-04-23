@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-20T15:12:30.156299+00:00",
+  "generated_at": "2026-04-23T09:53:45.892010+00:00",
   "as_of_date": "2026-04-13",
   "release_profile": "equity_core",
   "release_readiness_snapshot": {
-    "generated_at": "2026-04-20T15:12:30.142609+00:00",
+    "generated_at": "2026-04-23T09:53:45.891921+00:00",
     "release_profile": "equity_core",
     "release_id": "20260413_equity_core",
-    "ready": true,
+    "ready": false,
     "checks": [
       {
         "name": "release_record_present",
@@ -26,7 +26,7 @@
       {
         "name": "release_manifest_fresh",
         "passed": true,
-        "details": "artifact_age_hours=0.01"
+        "details": "artifact_age_hours=0.00"
       },
       {
         "name": "release_signature_verified",
@@ -45,8 +45,8 @@
       },
       {
         "name": "warehouse_sync_status",
-        "passed": true,
-        "details": "warehouse_sync_status=SYNCED"
+        "passed": false,
+        "details": "warehouse_sync_status=FAILED"
       },
       {
         "name": "consumer_matrix_present",
@@ -75,23 +75,23 @@
       },
       {
         "name": "source_probe_fresh",
-        "passed": true,
-        "details": "artifact_age_hours=0.07"
+        "passed": false,
+        "details": "artifact_age_hours=66.75"
       },
       {
         "name": "pipeline_fresh",
         "passed": true,
-        "details": "artifact_age_hours=0.00"
+        "details": "artifact_age_hours=0.01"
       },
       {
         "name": "tolerance_report_fresh",
-        "passed": true,
-        "details": "artifact_age_hours=141.84"
+        "passed": false,
+        "details": "artifact_age_hours=208.53"
       },
       {
         "name": "matching_report_fresh",
         "passed": true,
-        "details": "artifact_age_hours=0.15"
+        "details": "artifact_age_hours=66.83"
       },
       {
         "name": "calendar_loaded",
@@ -116,7 +116,7 @@
       {
         "name": "pipeline_success",
         "passed": true,
-        "details": "successful_days=1, failed_days=0"
+        "details": "successful_days=6, failed_days=0"
       },
       {
         "name": "tolerance_status",

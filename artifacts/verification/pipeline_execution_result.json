@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T15:12:29.951903+00:00",
+  "generated_at": "2026-04-23T09:53:26.989650+00:00",
   "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
   "market_isin": "INF204KB14I2",
   "source": "canonical_verification_db_state",
@@ -71,12 +71,15 @@
     ],
     "successful_days": 6,
     "failed_days": 0,
-    "total_confirmed_actions": 0,
+    "total_confirmed_actions": 1,
+    "confirmed_actions_with_ex_date_in_run_window": 0,
+    "current_confirmed_corporate_actions": 1,
+    "future_confirmed_actions_outside_run_window": 1,
     "total_adjusted_rows": 14715,
     "total_new_discontinuities": 24,
     "latest_total_discontinuity_events": 24,
     "total_validations": 53452
   },
   "errors": [],
-  "note": "This canonical integration-state artifact is derived from the current verification DB after successful pipeline-backed release generation. It refreshes the governed pipeline health evidence for readiness. The separate 30+ trading day replay proof remains a deeper proof artifact."
+  "note": "This canonical integration-state artifact is derived from the current verification DB after successful pipeline-backed release generation. It refreshes the governed pipeline health evidence for readiness. Confirmed corporate actions are reported both as total current DB state and as ex-date matches inside the run window, so future-dated confirmed actions do not disappear from the artifact."
 }

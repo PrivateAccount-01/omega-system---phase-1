@@ -21,6 +21,7 @@ def main() -> None:
 
     nse_dates = [row[0] for row in cur.execute("select distinct trade_date from price_record where exchange='NSE' order by trade_date")]
     runs = []
+    current_confirmed_total = _count(cur, "select count(*) from confirmed_corporate_action")
     for trade_date in nse_dates:
         confirmed = _count(
             cur,
@@ -66,7 +67,13 @@ def main() -> None:
             "explicit_dates": [item["as_of"] for item in runs],
             "successful_days": len(runs),
             "failed_days": 0,
-            "total_confirmed_actions": sum(int(item["confirmed_actions"]) for item in runs),
+            "total_confirmed_actions": current_confirmed_total,
+            "confirmed_actions_with_ex_date_in_run_window": sum(int(item["confirmed_actions"]) for item in runs),
+            "current_confirmed_corporate_actions": current_confirmed_total,
+            "future_confirmed_actions_outside_run_window": max(
+                0,
+                current_confirmed_total - sum(int(item["confirmed_actions"]) for item in runs),
+            ),
             "total_adjusted_rows": sum(int(item["adjusted_rows"]) for item in runs),
             "total_new_discontinuities": sum(int(item["new_discontinuities"]) for item in runs),
             "latest_total_discontinuity_events": int(runs[-1]["total_discontinuity_events"]) if runs else 0,
@@ -75,7 +82,9 @@ def main() -> None:
         "errors": [],
         "note": (
             "This canonical integration-state artifact is derived from the current verification DB after successful pipeline-backed release generation. "
-            "It refreshes the governed pipeline health evidence for readiness. The separate 30+ trading day replay proof remains a deeper proof artifact."
+            "It refreshes the governed pipeline health evidence for readiness. "
+            "Confirmed corporate actions are reported both as total current DB state and as ex-date matches inside the run window, "
+            "so future-dated confirmed actions do not disappear from the artifact."
         ),
     }
     OUTPUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")

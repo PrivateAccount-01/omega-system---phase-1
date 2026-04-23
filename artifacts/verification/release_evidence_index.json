@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T17:12:07.556908+00:00",
+  "generated_at": "2026-04-23T10:00:55.676903+00:00",
   "default_release_profile": "equity_core",
   "releases": {
     "equity_core": {
@@ -8,8 +8,8 @@
       "signature_path": "artifacts/releases/20260413_equity_core/manifest.json.asc",
       "quality_report_path": "artifacts/releases/20260413_equity_core/quality_report.json",
       "lineage_report_path": "artifacts/releases/20260413_equity_core/lineage_report.json",
-      "warehouse_sync_status": "SYNCED",
-      "generated_at": "2026-04-20T14:52:58.662873+00:00"
+      "warehouse_sync_status": "FAILED",
+      "generated_at": "2026-04-23T09:53:44.546140+00:00"
     },
     "equity_plus_sidefeeds": {
       "release_id": "20260413_equity_plus_sidefeeds",
@@ -40,7 +40,7 @@
     "pipeline_execution": {
       "path": "artifacts/verification/pipeline_execution_result.json",
       "exists": true,
-      "generated_at": "2026-04-20T15:12:29.951903+00:00",
+      "generated_at": "2026-04-23T09:53:26.989650+00:00",
       "supporting_release_id": null
     },
     "release_readiness": {
@@ -100,7 +100,7 @@
     "corporate_action_corpus_coverage": {
       "path": "artifacts/verification/corporate_action_corpus_coverage.json",
       "exists": true,
-      "generated_at": "2026-04-20T15:01:19.718173+00:00",
+      "generated_at": "2026-04-23T10:00:55.502498+00:00",
       "supporting_release_id": null
     },
     "sidefeed_proof": {
@@ -112,7 +112,7 @@
     "pit_universe_proof": {
       "path": "artifacts/verification/pit_universe_proof.json",
       "exists": true,
-      "generated_at": "2026-04-20T14:53:31.281713+00:00",
+      "generated_at": "2026-04-23T09:58:18.069551+00:00",
       "supporting_release_id": "20260413_equity_core"
     },
     "historical_trading_calendar_proof": {
@@ -142,19 +142,19 @@
     "nse_historical_backfill": {
       "path": "artifacts/verification/nse_historical_backfill_report.json",
       "exists": true,
-      "generated_at": "2026-04-20T17:08:54.055526+00:00",
+      "generated_at": "2026-04-23T10:00:05.032663+00:00",
       "supporting_release_id": null
     },
     "seed_import_audit": {
       "path": "artifacts/verification/seed_import_audit.json",
       "exists": true,
-      "generated_at": "2026-04-20T17:08:43.702668+00:00",
+      "generated_at": "2026-04-23T09:51:59.201681+00:00",
       "supporting_release_id": null
     },
     "pipeline_replay_30day_proof": {
       "path": "artifacts/verification/pipeline_replay_30day_proof.json",
       "exists": true,
-      "generated_at": "2026-04-20T17:11:35.384263+00:00",
+      "generated_at": "2026-04-23T10:00:02.375887+00:00",
       "supporting_release_id": null
     },
     "trading_calendar_coverage": {
