@@ -72,6 +72,7 @@ def _action(
     ex_date: date,
     parameters: dict[str, object],
     confidence: ConfidenceLevel = ConfidenceLevel.HIGH,
+    superseded: bool = False,
 ) -> ConfirmedCorporateAction:
     return ConfirmedCorporateAction(
         isin=isin,
@@ -82,7 +83,7 @@ def _action(
         record_date=ex_date,
         parameters=parameters,
         source_preference=Exchange.NSE,
-        superseded=False,
+        superseded=superseded,
     )
 
 
@@ -114,14 +115,32 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
                 close=row["close"],
                 volume=row["volume"],
             )
-        db_session.add(
-            _action(
-                isin=case["isin"],
-                action_type=CorporateActionType(case["action_type"]),
-                ex_date=date.fromisoformat(case["ex_date"]),
-                parameters=dict(case["parameters"]),
+        for row in case.get("aux_prices", []):
+            _price(
+                db_session,
+                isin=row["isin"],
+                trade_date=date.fromisoformat(row["trade_date"]),
+                close=row["close"],
+                volume=row["volume"],
             )
-        )
+        actions = case.get("actions") or [
+            {
+                "action_type": case["action_type"],
+                "ex_date": case["ex_date"],
+                "parameters": dict(case["parameters"]),
+                "superseded": False,
+            }
+        ]
+        for action in actions:
+            db_session.add(
+                _action(
+                    isin=case["isin"],
+                    action_type=CorporateActionType(action["action_type"]),
+                    ex_date=date.fromisoformat(action["ex_date"]),
+                    parameters=dict(action["parameters"]),
+                    superseded=bool(action.get("superseded", False)),
+                )
+            )
 
     db_session.flush()
 
@@ -149,11 +168,24 @@ def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:
         .where(PriceRecord.isin == "INE219Y01018")
         .where(PriceRecord.trade_date == date(2026, 4, 7))
     )
-    official_action_types = {case["action_type"] for case in corpus["cases"]}
+    official_action_types = {
+        action["action_type"]
+        for case in corpus["cases"]
+        for action in (
+            case.get("actions")
+            or [{"action_type": case["action_type"]}]
+        )
+    }
     assert bonus_pre_row is not None
     assert bonus_pre_row.adjustment_chain[0]["action_type"] == "BONUS"
     assert bonus_pre_row.adjustment_chain[0]["ca_confidence"] == "HIGH"
-    assert {"BONUS", "SPLIT", "RIGHTS"}.issubset(official_action_types)
+    assert {
+        "BONUS",
+        "SPLIT",
+        "RIGHTS",
+        "SPLIT_REVERSE",
+        "DEMERGER_PARENT",
+    }.issubset(official_action_types)
 
 
 def test_reference_corpus_hand_computed_transformational_cases(db_session) -> None:

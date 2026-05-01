@@ -43,7 +43,25 @@ def main() -> None:
     official_cases = [item for item in official.get("cases", []) if isinstance(item, dict)]
     synthetic_cases = [item for item in synthetic.get("cases", []) if isinstance(item, dict)]
 
-    official_types = {str(item.get("action_type", "")).strip() for item in official_cases}
+    official_actions = [
+        action
+        for item in official_cases
+        for action in (
+            item.get("actions")
+            if isinstance(item.get("actions"), list)
+            else [
+                {
+                    "action_type": item.get("action_type", ""),
+                    "parameters": item.get("parameters", {}),
+                }
+            ]
+        )
+        if isinstance(action, dict)
+    ]
+    official_types = {
+        str(action.get("action_type", "")).strip()
+        for action in official_actions
+    }
     synthetic_types = {
         str(action.get("action_type", "")).strip()
         for case in synthetic_cases
@@ -59,14 +77,32 @@ def main() -> None:
             if str(item.get("snapshot_path", "")).strip()
         }
     )
-    sequential_official_labels = sorted(label for label in official_labels if "SEQUENTIAL" in label.upper())
+    sequential_official_labels = sorted(
+        label
+        for item in official_cases
+        if len(item.get("actions", [])) > 1
+        for label in [str(item.get("label", "")).strip()]
+    )
 
     strict_official_closure = {
         "reverse_split": "SPLIT_REVERSE" in official_types,
-        "demerger_parent_final_stage": "DEMERGER_PARENT" in official_types,
+        "demerger_parent_final_stage": any(
+            str(action.get("action_type", "")).strip() == "DEMERGER_PARENT"
+            and str(dict(action.get("parameters", {})).get("actual_spinoff_listing_price", "")).strip()
+            for action in official_actions
+        ),
         "sequential_multi_action_chain": len(sequential_official_labels) > 0,
-        "correction_or_supersession": any("CORRECTION" in label.upper() or "SUPERSESSION" in label.upper() for label in official_labels),
-        "later_delisted_post_action_case": any("DELIST" in label.upper() for label in official_labels),
+        "correction_or_supersession": any(
+            bool(action.get("superseded", False))
+            or str(action.get("correction_of", "")).strip()
+            for action in official_actions
+        )
+        or any("CORRECTION" in label.upper() or "SUPERSESSION" in label.upper() for label in official_labels),
+        "later_delisted_post_action_case": any(
+            str(action.get("action_type", "")).strip().startswith("DELISTING")
+            for action in official_actions
+        )
+        and any("DELIST" in label.upper() for label in official_labels),
     }
 
     artifact = {

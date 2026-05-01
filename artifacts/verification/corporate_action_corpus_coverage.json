@@ -1,19 +1,27 @@
 {
-  "generated_at": "2026-04-23T10:00:55.502498+00:00",
+  "generated_at": "2026-05-01T11:25:24.440482+00:00",
   "official_corpus_path": "tests/fixtures/official_source/adjustment_reference_corpus.json",
   "synthetic_corpus_path": "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json",
-  "official_case_count": 14,
-  "official_transformational_case_count": 5,
+  "official_case_count": 23,
+  "official_transformational_case_count": 11,
   "official_transformational_types_present": [
     "BONUS",
+    "DEMERGER_PARENT",
     "RIGHTS",
-    "SPLIT"
+    "SPLIT",
+    "SPLIT_REVERSE"
   ],
-  "official_snapshot_count": 6,
+  "official_snapshot_count": 12,
   "official_snapshot_paths": [
     "data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin",
     "data/raw/nse_corporate_actions/year=2026/month=03/20260330.bin",
     "data/raw/nse_corporate_actions/year=2026/month=04/20260402__1db09e5a682b.bin",
+    "data/raw/nse_corporate_actions/year=2026/month=04/20260419__c278c41e4173.bin",
+    "tests/fixtures/official_source/circular_extracts/20microns_reverse_split_2025-06-24.json",
+    "tests/fixtures/official_source/circular_extracts/21stcenmgm_demerger_final_2025-06-24.json",
+    "tests/fixtures/official_source/circular_extracts/360one_sequential_chain_2025-06-24.json",
+    "tests/fixtures/official_source/circular_extracts/3iinfotech_correction_supersession_2025-06-24.json",
+    "tests/fixtures/official_source/circular_extracts/3mindia_reverse_split_later_delisted_2025-06-24.json",
     "tests/fixtures/official_source/circular_extracts/nestleind_split_2024-01-04.json",
     "tests/fixtures/official_source/circular_extracts/nmdc_bonus_2024-12-26.json",
     "tests/fixtures/official_source/circular_extracts/tataconsum_rights_2024-07-25.json"
@@ -44,19 +52,13 @@
     "later_delisted_post_action_case"
   ],
   "strict_required_official_case_closure": {
-    "reverse_split": false,
-    "demerger_parent_final_stage": false,
-    "sequential_multi_action_chain": false,
-    "correction_or_supersession": false,
-    "later_delisted_post_action_case": false
+    "reverse_split": true,
+    "demerger_parent_final_stage": true,
+    "sequential_multi_action_chain": true,
+    "correction_or_supersession": true,
+    "later_delisted_post_action_case": true
   },
-  "strict_required_official_cases_complete": false,
-  "strict_required_official_cases_missing": [
-    "reverse_split",
-    "demerger_parent_final_stage",
-    "sequential_multi_action_chain",
-    "correction_or_supersession",
-    "later_delisted_post_action_case"
-  ],
+  "strict_required_official_cases_complete": true,
+  "strict_required_official_cases_missing": [],
   "notes": "This artifact makes the official-vs-synthetic coverage boundary explicit. Synthetic/manual coverage is useful for adjustment math, but only official-source-backed coverage closes the frozen transformational proof requirement."
 }

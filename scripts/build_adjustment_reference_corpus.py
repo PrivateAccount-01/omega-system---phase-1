@@ -101,10 +101,17 @@ def _adjustment_factors(action_type: str, parameters: dict[str, str]) -> tuple[D
         ratio = numerator / denominator
         price_factor = Decimal("1") / (Decimal("1") + ratio)
         return price_factor, Decimal("1") / price_factor
-    if action_type == "SPLIT":
+    if action_type in {"SPLIT", "SPLIT_REVERSE"}:
         old_face_value = Decimal(parameters["old_face_value"])
         new_face_value = Decimal(parameters["new_face_value"])
         return new_face_value / old_face_value, old_face_value / new_face_value
+    if action_type == "DEMERGER_PARENT":
+        parent_pre = Decimal(parameters["parent_value_pre_demerger"])
+        spinoff_value = Decimal(
+            parameters.get("actual_spinoff_listing_price")
+            or parameters.get("spinoff_value", "0")
+        )
+        return Decimal("1") - (spinoff_value / parent_pre), Decimal("1")
     return Decimal("1"), Decimal("1")
 
 
@@ -146,6 +153,67 @@ def _assertions(
         for trade_date in assertion_dates
         if trade_date in prices_by_date
     ]
+
+
+def _assertions_for_actions(
+    *,
+    actions: list[dict[str, object]],
+    prices_by_date: dict[str, dict[str, str]],
+    assertion_dates: tuple[str, ...] | list[str],
+) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    active_actions = [
+        action
+        for action in actions
+        if not bool(action.get("superseded", False))
+    ]
+    for trade_date in assertion_dates:
+        if trade_date not in prices_by_date:
+            continue
+        cumulative_price = Decimal("1")
+        cumulative_volume = Decimal("1")
+        for action in active_actions:
+            action_type = str(action["action_type"])
+            ex_date = str(action["ex_date"])
+            if trade_date >= ex_date:
+                continue
+            parameters = {
+                str(key): str(value)
+                for key, value in dict(action.get("parameters", {})).items()
+            }
+            if action_type in {"RIGHTS", "RIGHTS_RENOUNCE"}:
+                factors = _assertions(
+                    action_type=action_type,
+                    parameters=parameters,
+                    prices_by_date=prices_by_date,
+                    assertion_dates=[trade_date],
+                    ex_date=ex_date,
+                )
+                if not factors:
+                    continue
+                price_factor = Decimal(factors[0]["expected_cumulative_price_factor"])
+                volume_factor = Decimal(factors[0]["expected_cumulative_volume_factor"])
+            else:
+                price_factor, volume_factor = _adjustment_factors(action_type, parameters)
+            cumulative_price *= price_factor
+            cumulative_volume *= volume_factor
+        price_row = prices_by_date[trade_date]
+        rows.append(
+            {
+                "trade_date": trade_date,
+                "raw_close": price_row["close"],
+                "raw_volume": price_row["volume"],
+                "expected_adjusted_close": _quantize_price(
+                    _parse_decimal(price_row["close"]) * cumulative_price
+                ),
+                "expected_adjusted_volume": _quantize_volume(
+                    _parse_decimal(price_row["volume"]) * cumulative_volume
+                ),
+                "expected_cumulative_price_factor": _quantize_factor(cumulative_price),
+                "expected_cumulative_volume_factor": _quantize_factor(cumulative_volume),
+            }
+        )
+    return rows
 
 
 def _raw_action_rows() -> list[dict[str, str]]:
@@ -256,37 +324,71 @@ def build_reference_corpus() -> dict[str, object]:
             for key, value in dict(spec.get("parameters", {})).items()
         }
         action_type = str(spec["action_type"])
-        cases.append(
+        actions = [
             {
-                "label": str(spec["label"]),
-                "isin": str(spec["isin"]),
-                "symbol": symbol,
-                "company_name": str(spec["company_name"]),
-                "action_type": action_type,
-                "ex_date": str(spec["ex_date"]),
-                "record_date": str(spec.get("record_date", spec["ex_date"])),
-                "subject": str(spec["subject"]),
-                "parameters": parameters,
-                "snapshot_path": str(spec["snapshot_path"]),
-                "price_paths": (
-                    [str(path) for path in spec["price_paths"]]
-                    if isinstance(spec.get("price_paths"), list)
-                    else list(
-                        dict.fromkeys(
-                            _artifact_price_path(trade_date)
-                            for trade_date in price_dates
-                        )
-                    )
-                ),
-                "prices": selected_prices,
-                "assertions": _assertions(
-                    action_type=action_type,
-                    parameters=parameters,
-                    prices_by_date=history_rows,
-                    assertion_dates=assertion_dates,
-                    ex_date=str(spec["ex_date"]),
-                ),
+                **action,
+                "action_type": str(action["action_type"]),
+                "ex_date": str(action["ex_date"]),
+                "parameters": {
+                    str(key): str(value)
+                    for key, value in dict(action.get("parameters", {})).items()
+                },
             }
+            for action in spec.get("actions", [])
+            if isinstance(action, dict)
+        ]
+        if not actions:
+            actions = [
+                {
+                    "action_type": action_type,
+                    "ex_date": str(spec["ex_date"]),
+                    "parameters": parameters,
+                }
+            ]
+        case = {
+            "label": str(spec["label"]),
+            "isin": str(spec["isin"]),
+            "symbol": symbol,
+            "company_name": str(spec["company_name"]),
+            "action_type": action_type,
+            "ex_date": str(spec["ex_date"]),
+            "record_date": str(spec.get("record_date", spec["ex_date"])),
+            "subject": str(spec["subject"]),
+            "parameters": parameters,
+            "snapshot_path": str(spec["snapshot_path"]),
+            "price_paths": (
+                [str(path) for path in spec["price_paths"]]
+                if isinstance(spec.get("price_paths"), list)
+                else list(
+                    dict.fromkeys(
+                        _artifact_price_path(trade_date)
+                        for trade_date in price_dates
+                    )
+                )
+            ),
+            "prices": selected_prices,
+            "assertions": _assertions_for_actions(
+                actions=actions,
+                prices_by_date=history_rows,
+                assertion_dates=assertion_dates,
+            ),
+        }
+        if len(actions) > 1 or any(action.get("superseded") for action in actions):
+            case["actions"] = actions
+        aux_prices = [
+            {
+                "isin": str(row["isin"]),
+                "trade_date": str(row["trade_date"]),
+                "close": str(row["close"]),
+                "volume": str(row.get("volume", "100")),
+            }
+            for row in spec.get("aux_prices", [])
+            if isinstance(row, dict)
+        ]
+        if aux_prices:
+            case["aux_prices"] = aux_prices
+        cases.append(
+            case
         )
 
     transformational_types = {"BONUS", "SPLIT", "SPLIT_REVERSE", "RIGHTS", "RIGHTS_RENOUNCE", "MERGER_TARGET", "DEMERGER_PARENT"}

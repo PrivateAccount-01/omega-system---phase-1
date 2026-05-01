@@ -98,5 +98,205 @@
       "2024-12-24",
       "2024-12-26"
     ]
+  },
+  {
+    "label": "OFFICIAL_REVERSE_SPLIT_20MICRONS_2025-06-25",
+    "isin": "INE144J01027",
+    "symbol": "20MICRONS",
+    "company_name": "20 Microns Limited",
+    "action_type": "SPLIT_REVERSE",
+    "ex_date": "2025-06-25",
+    "record_date": "2025-06-25",
+    "subject": "Face Value Consolidation - From Rs 5/- Per Share To Rs 10/- Per Share",
+    "parameters": {
+      "old_face_value": "5",
+      "new_face_value": "10"
+    },
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/20microns_reverse_split_2025-06-24.json",
+    "price_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-25",
+      "2025-06-26",
+      "2025-06-27"
+    ],
+    "assertion_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-25"
+    ]
+  },
+  {
+    "label": "OFFICIAL_DEMERGER_PARENT_FINAL_STAGE_21STCENMGM_2025-06-25",
+    "isin": "INE253B01015",
+    "symbol": "21STCENMGM",
+    "company_name": "Twentyfirst Century Management Services Limited",
+    "action_type": "DEMERGER_PARENT",
+    "ex_date": "2025-06-25",
+    "record_date": "2025-06-25",
+    "subject": "Scheme of Arrangement - Demerger parent final listing value applied",
+    "parameters": {
+      "parent_value_pre_demerger": "100",
+      "spinoff_value": "20",
+      "spinoff_isin": "OFFSPIN00021",
+      "actual_spinoff_listing_price": "12.5",
+      "actual_spinoff_listing_date": "2025-06-25",
+      "demerger_adjustment_stage": "FINAL"
+    },
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/21stcenmgm_demerger_final_2025-06-24.json",
+    "aux_prices": [
+      {
+        "isin": "OFFSPIN00021",
+        "trade_date": "2025-06-25",
+        "close": "12.5",
+        "volume": "1000"
+      }
+    ],
+    "price_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-25",
+      "2025-06-26",
+      "2025-06-27"
+    ],
+    "assertion_dates": [
+      "2025-06-23",
+      "2025-06-24"
+    ]
+  },
+  {
+    "label": "OFFICIAL_SEQUENTIAL_MULTI_ACTION_CHAIN_360ONE_2025-06-25_TO_2025-06-26",
+    "isin": "INE466L01038",
+    "symbol": "360ONE",
+    "company_name": "360 One Wam Limited",
+    "action_type": "BONUS",
+    "ex_date": "2025-06-25",
+    "record_date": "2025-06-25",
+    "subject": "Bonus followed by face value split",
+    "parameters": {
+      "bonus_ratio_numerator": "1",
+      "bonus_ratio_denominator": "1"
+    },
+    "actions": [
+      {
+        "action_type": "BONUS",
+        "ex_date": "2025-06-25",
+        "parameters": {
+          "bonus_ratio_numerator": "1",
+          "bonus_ratio_denominator": "1"
+        }
+      },
+      {
+        "action_type": "SPLIT",
+        "ex_date": "2025-06-26",
+        "parameters": {
+          "old_face_value": "10",
+          "new_face_value": "5"
+        }
+      }
+    ],
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/360one_sequential_chain_2025-06-24.json",
+    "price_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-25",
+      "2025-06-26",
+      "2025-06-27"
+    ],
+    "assertion_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-25"
+    ]
+  },
+  {
+    "label": "OFFICIAL_CORRECTION_SUPERSESSION_3IINFOLTD_2025-06-25",
+    "isin": "INE748C01038",
+    "symbol": "3IINFOLTD",
+    "company_name": "3i Infotech Limited",
+    "action_type": "SPLIT",
+    "ex_date": "2025-06-25",
+    "record_date": "2025-06-25",
+    "subject": "Correction notice superseding prior split ratio",
+    "parameters": {
+      "old_face_value": "10",
+      "new_face_value": "2"
+    },
+    "actions": [
+      {
+        "action_type": "SPLIT",
+        "ex_date": "2025-06-25",
+        "superseded": true,
+        "parameters": {
+          "old_face_value": "10",
+          "new_face_value": "5"
+        }
+      },
+      {
+        "action_type": "SPLIT",
+        "ex_date": "2025-06-25",
+        "correction_of": "prior_notice_ratio_10_to_5",
+        "parameters": {
+          "old_face_value": "10",
+          "new_face_value": "2"
+        }
+      }
+    ],
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/3iinfotech_correction_supersession_2025-06-24.json",
+    "price_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-25",
+      "2025-06-26",
+      "2025-06-27"
+    ],
+    "assertion_dates": [
+      "2025-06-23",
+      "2025-06-24"
+    ]
+  },
+  {
+    "label": "OFFICIAL_LATER_DELISTED_POST_ACTION_CASE_3MINDIA_2025-06-25_TO_2025-06-27",
+    "isin": "INE470A01017",
+    "symbol": "3MINDIA",
+    "company_name": "3M India Limited",
+    "action_type": "SPLIT_REVERSE",
+    "ex_date": "2025-06-25",
+    "record_date": "2025-06-25",
+    "subject": "Reverse split followed by voluntary delisting marker",
+    "parameters": {
+      "old_face_value": "5",
+      "new_face_value": "10"
+    },
+    "actions": [
+      {
+        "action_type": "SPLIT_REVERSE",
+        "ex_date": "2025-06-25",
+        "parameters": {
+          "old_face_value": "5",
+          "new_face_value": "10"
+        }
+      },
+      {
+        "action_type": "DELISTING_VOLUNTARY",
+        "ex_date": "2025-06-27",
+        "parameters": {
+          "delisting_reason": "post_action_exit_marker"
+        }
+      }
+    ],
+    "snapshot_path": "tests/fixtures/official_source/circular_extracts/3mindia_reverse_split_later_delisted_2025-06-24.json",
+    "price_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-25",
+      "2025-06-26",
+      "2025-06-27"
+    ],
+    "assertion_dates": [
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-26"
+    ]
   }
 ]
