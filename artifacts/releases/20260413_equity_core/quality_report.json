@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-23T09:53:45.892010+00:00",
+  "generated_at": "2026-05-01T11:41:43.267248+00:00",
   "as_of_date": "2026-04-13",
   "release_profile": "equity_core",
   "release_readiness_snapshot": {
-    "generated_at": "2026-04-23T09:53:45.891921+00:00",
+    "generated_at": "2026-05-01T11:41:43.247924+00:00",
     "release_profile": "equity_core",
     "release_id": "20260413_equity_core",
     "ready": false,
@@ -25,8 +25,8 @@
       },
       {
         "name": "release_manifest_fresh",
-        "passed": true,
-        "details": "artifact_age_hours=0.00"
+        "passed": false,
+        "details": "artifact_age_hours=193.80"
       },
       {
         "name": "release_signature_verified",
@@ -75,23 +75,23 @@
       },
       {
         "name": "source_probe_fresh",
-        "passed": false,
-        "details": "artifact_age_hours=66.75"
+        "passed": true,
+        "details": "artifact_age_hours=0.04"
       },
       {
         "name": "pipeline_fresh",
         "passed": true,
-        "details": "artifact_age_hours=0.01"
+        "details": "artifact_age_hours=0.04"
       },
       {
         "name": "tolerance_report_fresh",
-        "passed": false,
-        "details": "artifact_age_hours=208.53"
+        "passed": true,
+        "details": "artifact_age_hours=0.01"
       },
       {
         "name": "matching_report_fresh",
         "passed": true,
-        "details": "artifact_age_hours=66.83"
+        "details": "artifact_age_hours=0.04"
       },
       {
         "name": "calendar_loaded",
@@ -131,7 +131,7 @@
       {
         "name": "official_adjustment_corpus",
         "passed": true,
-        "details": "official_case_count=14, official_transformational_case_count=5"
+        "details": "official_case_count=23, official_transformational_case_count=11"
       },
       {
         "name": "manual_transformational_corpus",

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-20T15:08:35.208746+00:00",
-  "workflow": "scheduled_verification",
-  "probe_date": "2026-04-17",
-  "nse_equity_probe_date": "2026-04-17",
+  "generated_at": "2026-05-01T11:39:27.448679+00:00",
+  "workflow": "diagnostic",
+  "probe_date": "2026-04-30",
+  "nse_equity_probe_date": "2026-04-30",
   "calendar_mode": "configured_trading_calendar",
   "calendar_config_state": "loaded",
   "calendar_config_path": "config/trading_holidays_india.json",
@@ -58,69 +58,69 @@
   "nse_corporate_actions": [
     {
       "source_key": "NSE_CORPORATE_ACTIONS",
-      "as_of": "2026-04-19",
+      "as_of": "2026-04-30",
       "url": "https://www.nseindia.com/api/corporates-corporateActions?index=equities",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/json; charset=utf-8",
-      "bytes_downloaded": 3512,
+      "bytes_downloaded": 5846,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.189,
+      "elapsed_seconds": 1.492,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "[{\"symbol\":\"SANOFI\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"10\",\"subject\":\"Dividend - Rs 48 Per Share\",\"exDate\":\"22-Apr-2026\""
+      "body_preview": "[{\"symbol\":\"UCOBANK\",\"series\":\"EQ\",\"ind\":\"-\",\"faceVal\":\"10\",\"subject\":\"Dividend - Re 0.44 Per Share\",\"exDate\":\"04-May-20"
     }
   ],
   "nse_equity_bhavcopy": [
     {
       "source_key": "NSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-17",
-      "url": "https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20260417_F_0000.csv.zip",
+      "as_of": "2026-04-30",
+      "url": "https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20260430_F_0000.csv.zip",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/zip",
-      "bytes_downloaded": 189094,
+      "bytes_downloaded": 189870,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.175,
+      "elapsed_seconds": 0.789,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\\\u0018H\u05be\u0002\u0000A\b\u0000)\u0000\u001c\u0000BhavCopy_NSE_CM_0_0_0_20260417_F_0000.csvUT\t\u0000\u0003\u0014i\u0014iux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\\v\u001bGW`Y0~,\u000b H"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\uc11e\\m\u0002\u0000\u0014\b\u0000)\u0000\u001c\u0000BhavCopy_NSE_CM_0_0_0_20260430_F_0000.csvUT\t\u0000\u0003c8ic8iux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\\v\u001bGW\u01b3*cY\u0000A"
     }
   ],
   "nse_fo_bhavcopy": [
     {
       "source_key": "NSE_FO_BHAVCOPY",
-      "as_of": "2026-04-17",
-      "url": "https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20260417_F_0000.csv.zip",
+      "as_of": "2026-04-30",
+      "url": "https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20260430_F_0000.csv.zip",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/zip",
-      "bytes_downloaded": 1481954,
+      "bytes_downloaded": 1117966,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.503,
+      "elapsed_seconds": 1.418,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\u0310\\4y\u0016\u0000\u0000)\u0000\u001c\u0000BhavCopy_NSE_FO_0_0_0_20260417_F_0000.csvUT\t\u0000\u0003H)iH)iux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000\u067649r%\u0006\u0012[bv"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\u0004\\E\u0011V&\u000e\u0011\u0000;d\u0000)\u0000\u001c\u0000BhavCopy_NSE_FO_0_0_0_20260430_F_0000.csvUT\t\u0000\u0003\u000fOi\u000fOiux\u000b\u0000\u0001\u0004\u0013\u0000\u0000\u0004\u0000\u0000\u0000[49r%\u07d2_-/b"
     }
   ],
   "nse_equity_recent_history": [
     {
-      "date": "2026-04-17",
+      "date": "2026-04-30",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
@@ -130,7 +130,7 @@
       "all_supported_fallbacks_healthy": false
     },
     {
-      "date": "2026-04-16",
+      "date": "2026-04-29",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
@@ -140,7 +140,7 @@
       "all_supported_fallbacks_healthy": false
     },
     {
-      "date": "2026-04-15",
+      "date": "2026-04-28",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 0,
@@ -153,18 +153,18 @@
   "bse_equity_candidates": [
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-17",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260417_F_0000.CSV",
+      "as_of": "2026-04-30",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20260430_F_0000.CSV",
       "role": "primary",
       "validated": true,
       "status_code": 200,
       "content_type": "application/octet-stream",
-      "bytes_downloaded": 845991,
+      "bytes_downloaded": 813922,
       "attempts": 1,
       "request_attempts": 1,
       "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.334,
+      "elapsed_seconds": 0.814,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -172,8 +172,8 @@
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-17",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_170426_T0.CSV",
+      "as_of": "2026-04-30",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_300426_T0.CSV",
       "role": "fallback",
       "validated": true,
       "status_code": 200,
@@ -183,7 +183,7 @@
       "request_attempts": 1,
       "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.161,
+      "elapsed_seconds": 0.252,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
@@ -191,8 +191,8 @@
     },
     {
       "source_key": "BSE_EQUITY_BHAVCOPY",
-      "as_of": "2026-04-17",
-      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_17042026_T0.ZIP",
+      "as_of": "2026-04-30",
+      "url": "https://www.bseindia.com/download/BhavCopy/Equity/BSE_EQ_BHAVCOPY_30042026_T0.ZIP",
       "role": "fallback",
       "validated": true,
       "status_code": 200,
@@ -202,16 +202,16 @@
       "request_attempts": 1,
       "transport": "curl",
       "header_profile": "chrome_desktop",
-      "elapsed_seconds": 0.264,
+      "elapsed_seconds": 0.215,
       "failure_stage": null,
       "error": null,
       "validation_error": null,
-      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000+p\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_17042026_T0.csvMAn0\u0010EH,\n\u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB\n\u0395.\u0010"
+      "body_preview": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000dn\\$t\"\u0000\u0000\u00007\u0001\u0000\u0000\u001f\u0000\u0000\u0000BSE_EQ_BHAVCOPY_30042026_T0.csvMAn0\u0010EH,\n\u0002(\u001a)(v8Dq5\u001e%5\u0014z\u007fh4e\rB\n\u0395.\u0010"
     }
   ],
   "bse_recent_history": [
     {
-      "date": "2026-04-17",
+      "date": "2026-04-30",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 2,
@@ -221,7 +221,7 @@
       "all_supported_fallbacks_healthy": true
     },
     {
-      "date": "2026-04-16",
+      "date": "2026-04-29",
       "primary_validated": true,
       "primary_status_code": 200,
       "healthy_fallback_count": 2,
@@ -231,14 +231,14 @@
       "all_supported_fallbacks_healthy": true
     },
     {
-      "date": "2026-04-15",
+      "date": "2026-04-28",
       "primary_validated": true,
       "primary_status_code": 200,
-      "healthy_fallback_count": 1,
-      "failed_fallback_count": 1,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
       "overall_validated": true,
       "all_supported_fallbacks_probed": true,
-      "all_supported_fallbacks_healthy": false
+      "all_supported_fallbacks_healthy": true
     }
   ],
   "summary": {

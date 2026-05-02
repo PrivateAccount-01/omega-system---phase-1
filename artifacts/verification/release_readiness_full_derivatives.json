@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-20T15:12:30.295976+00:00",
+  "generated_at": "2026-05-01T11:41:43.285807+00:00",
   "release_profile": "full_derivatives",
   "release_id": "20260413_full_derivatives",
-  "ready": true,
+  "ready": false,
   "checks": [
     {
       "name": "release_record_present",
@@ -21,8 +21,8 @@
     },
     {
       "name": "release_manifest_fresh",
-      "passed": true,
-      "details": "artifact_age_hours=0.00"
+      "passed": false,
+      "details": "artifact_age_hours=260.80"
     },
     {
       "name": "release_signature_verified",
@@ -72,22 +72,22 @@
     {
       "name": "source_probe_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.07"
+      "details": "artifact_age_hours=0.04"
     },
     {
       "name": "pipeline_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.00"
+      "details": "artifact_age_hours=0.04"
     },
     {
       "name": "tolerance_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=141.84"
+      "details": "artifact_age_hours=0.01"
     },
     {
       "name": "matching_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.15"
+      "details": "artifact_age_hours=0.04"
     },
     {
       "name": "calendar_loaded",
@@ -112,7 +112,7 @@
     {
       "name": "pipeline_success",
       "passed": true,
-      "details": "successful_days=1, failed_days=0"
+      "details": "successful_days=6, failed_days=0"
     },
     {
       "name": "tolerance_status",
@@ -127,7 +127,7 @@
     {
       "name": "official_adjustment_corpus",
       "passed": true,
-      "details": "official_case_count=14, official_transformational_case_count=5"
+      "details": "official_case_count=23, official_transformational_case_count=11"
     },
     {
       "name": "manual_transformational_corpus",

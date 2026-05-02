@@ -9,7 +9,6 @@ import tempfile
 import zipfile
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
-from urllib.parse import urlparse
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CALENDAR_PATH = REPO_ROOT / "config/trading_holidays_india.json"
@@ -56,9 +55,7 @@ def _is_trading_day(payload: dict[str, object], exchange: str, value: date) -> b
         return True
     if value.weekday() >= 5:
         return False
-    if iso in _holiday_set(payload, exchange):
-        return False
-    return True
+    return iso not in _holiday_set(payload, exchange)
 
 
 def _recent_trading_days(payload: dict[str, object], exchange: str, anchor_date: date, limit: int) -> list[date]:
@@ -267,7 +264,6 @@ def main() -> None:
     args = parser.parse_args()
 
     calendar = _load_calendar()
-    maintenance = calendar.get("maintenance", {})
     timeout_seconds = 8.0
     probe_history_days = 3
     today = date.today()
