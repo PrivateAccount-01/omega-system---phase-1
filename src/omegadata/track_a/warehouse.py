@@ -14,6 +14,11 @@ class WarehouseSyncResult:
 
 
 class ClickHouseWarehouseSync:
+    @staticmethod
+    def _sql_string(value: object) -> str:
+        text = str(value)
+        return "'" + text.replace("\\", "\\\\").replace("'", "''") + "'"
+
     def sync_release_manifest(
         self,
         *,
@@ -66,18 +71,28 @@ class ClickHouseWarehouseSync:
                 for entry in dataset_entries
             ]
             if rows:
-                client.insert(
-                    "omegadata_release_manifest",
-                    rows,
-                    column_names=[
-                        "release_id",
-                        "release_profile",
-                        "as_of_date",
-                        "dataset_name",
-                        "row_count",
-                        "checksum",
-                        "storage_path",
-                    ],
+                values_sql = ", ".join(
+                    (
+                        "("
+                        + ", ".join(
+                            [
+                                self._sql_string(row[0]),
+                                self._sql_string(row[1]),
+                                self._sql_string(row[2]),
+                                self._sql_string(row[3]),
+                                str(row[4]),
+                                self._sql_string(row[5]),
+                                self._sql_string(row[6]),
+                            ]
+                        )
+                        + ")"
+                    )
+                    for row in rows
+                )
+                client.command(
+                    "INSERT INTO omegadata_release_manifest "
+                    "(release_id, release_profile, as_of_date, dataset_name, row_count, checksum, storage_path) "
+                    f"VALUES {values_sql}"
                 )
             return WarehouseSyncResult(status="SYNCED", details=f"rows_inserted={len(rows)}")
         except Exception as exc:  # noqa: BLE001

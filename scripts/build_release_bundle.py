@@ -17,6 +17,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build a signed OmegaData release bundle.")
     parser.add_argument("--as-of", required=True, help="Release as-of date in YYYY-MM-DD")
     parser.add_argument("--db-url", default=None, help="Explicit database URL override")
+    parser.add_argument("--clickhouse-host", default=None, help="Explicit ClickHouse host override")
+    parser.add_argument("--clickhouse-port", type=int, default=None, help="Explicit ClickHouse HTTP port override")
+    parser.add_argument("--clickhouse-user", default=None, help="Explicit ClickHouse user override")
+    parser.add_argument("--clickhouse-password", default=None, help="Explicit ClickHouse password override")
+    parser.add_argument("--clickhouse-database", default=None, help="Explicit ClickHouse database override")
+    parser.add_argument("--clickhouse-secure", action="store_true", help="Use HTTPS/TLS for ClickHouse")
     parser.add_argument(
         "--profile",
         choices=[profile.value for profile in ReleaseProfile],
@@ -27,6 +33,17 @@ def main() -> None:
 
     if args.db_url:
         settings.db_url = str(args.db_url)
+    if args.clickhouse_host:
+        settings.clickhouse_host = str(args.clickhouse_host)
+    if args.clickhouse_port is not None:
+        settings.clickhouse_port = int(args.clickhouse_port)
+    if args.clickhouse_user is not None:
+        settings.clickhouse_user = str(args.clickhouse_user)
+    if args.clickhouse_password is not None:
+        settings.clickhouse_password = str(args.clickhouse_password)
+    if args.clickhouse_database is not None:
+        settings.clickhouse_database = str(args.clickhouse_database)
+    settings.clickhouse_secure = bool(args.clickhouse_secure)
     init_db()
     manager = ReleaseManager()
     as_of = date.fromisoformat(args.as_of)

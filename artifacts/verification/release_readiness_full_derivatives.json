@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-01T11:41:43.285807+00:00",
+  "generated_at": "2026-05-02T08:21:15.593894+00:00",
   "release_profile": "full_derivatives",
   "release_id": "20260413_full_derivatives",
-  "ready": false,
+  "ready": true,
   "checks": [
     {
       "name": "release_record_present",
@@ -21,8 +21,8 @@
     },
     {
       "name": "release_manifest_fresh",
-      "passed": false,
-      "details": "artifact_age_hours=260.80"
+      "passed": true,
+      "details": "artifact_age_hours=0.00"
     },
     {
       "name": "release_signature_verified",
@@ -72,22 +72,22 @@
     {
       "name": "source_probe_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.04"
+      "details": "artifact_age_hours=20.19"
     },
     {
       "name": "pipeline_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.04"
+      "details": "artifact_age_hours=20.19"
     },
     {
       "name": "tolerance_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.01"
+      "details": "artifact_age_hours=20.16"
     },
     {
       "name": "matching_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.04"
+      "details": "artifact_age_hours=20.19"
     },
     {
       "name": "calendar_loaded",

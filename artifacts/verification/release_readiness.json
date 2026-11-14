@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-05-01T11:41:43.285807+00:00",
-  "release_profile": "full_derivatives",
-  "release_id": "20260413_full_derivatives",
-  "ready": false,
+  "generated_at": "2026-05-02T08:26:58.747543+00:00",
+  "release_profile": "equity_core",
+  "release_id": "20260413_equity_core",
+  "ready": true,
   "checks": [
     {
       "name": "release_record_present",
       "passed": true,
-      "details": "release_id=20260413_full_derivatives"
+      "details": "release_id=20260413_equity_core"
     },
     {
       "name": "release_artifacts_present",
@@ -21,8 +21,8 @@
     },
     {
       "name": "release_manifest_fresh",
-      "passed": false,
-      "details": "artifact_age_hours=260.80"
+      "passed": true,
+      "details": "artifact_age_hours=0.48"
     },
     {
       "name": "release_signature_verified",
@@ -47,7 +47,7 @@
     {
       "name": "consumer_matrix_present",
       "passed": true,
-      "details": "consumer_classes=4, signal_families=6"
+      "details": "consumer_classes=3, signal_families=3"
     },
     {
       "name": "adjusted_ohlcv_complete",
@@ -72,22 +72,22 @@
     {
       "name": "source_probe_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.04"
+      "details": "artifact_age_hours=20.79"
     },
     {
       "name": "pipeline_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.04"
+      "details": "artifact_age_hours=20.79"
     },
     {
       "name": "tolerance_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.01"
+      "details": "artifact_age_hours=20.77"
     },
     {
       "name": "matching_report_fresh",
       "passed": true,
-      "details": "artifact_age_hours=0.04"
+      "details": "artifact_age_hours=20.79"
     },
     {
       "name": "calendar_loaded",
