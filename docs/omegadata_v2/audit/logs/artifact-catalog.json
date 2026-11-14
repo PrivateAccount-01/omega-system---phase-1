@@ -1,0 +1,1258 @@
+[
+  {
+    "file": "artifacts/verification/adjusted_ohlcv_proof.json",
+    "sha256": "1c39cb16d54fdc755f350e89aef51a21945bc4a5f93b164a897109593666a606",
+    "generated_at": "2026-04-19T07:41:12.337207+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "case_label",
+      "expected_isin",
+      "observed_isins",
+      "persisted_isin",
+      "official_snapshot_path",
+      "price_paths",
+      "adjusted_rows_written",
+      "adjusted_ohlcv_complete",
+      "rows"
+    ]
+  },
+  {
+    "file": "artifacts\\verification\\api_stress_results.json",
+    "error": "'utf-8' codec can't decode byte 0xff in position 0: invalid start byte"
+  },
+  {
+    "file": "artifacts/verification/corporate_action_corpus_coverage.json",
+    "sha256": "fcdc915fa6b619c61740192c626d5a2599fc7453c2d0e9cd8f9608876f48907d",
+    "generated_at": "2026-05-01T11:39:17.920421+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "official_corpus_path",
+      "synthetic_corpus_path",
+      "official_case_count",
+      "official_transformational_case_count",
+      "official_transformational_types_present",
+      "official_snapshot_count",
+      "official_snapshot_paths",
+      "synthetic_transformational_types_present",
+      "required_transformational_types",
+      "strict_required_official_case_labels",
+      "strict_required_official_case_closure",
+      "strict_required_official_cases_complete",
+      "strict_required_official_cases_missing",
+      "notes"
+    ]
+  },
+  {
+    "file": "artifacts/verification/corporate_action_matching_report.json",
+    "sha256": "b9a0bcb12c077dc5a55a4bf6683b1f99ef0f744706590f6f1b8cc46f4ab69f4a",
+    "generated_at": "2026-05-01T11:39:17.993813+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "status",
+      "policy_version",
+      "fixture_version",
+      "metrics",
+      "results"
+    ]
+  },
+  {
+    "file": "artifacts/verification/corporate_action_proof.json",
+    "sha256": "3832f7efdf968a6971051487fd9fbca8500a82f4925e70f8b9101b84c3e9a6ae",
+    "generated_at": "2026-04-19T07:41:14.695460+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "case_label",
+      "official_snapshot_paths",
+      "staged_records",
+      "expected_outcome",
+      "confirmation_results",
+      "confirmed_action",
+      "adjusted_rows_written",
+      "price_rows",
+      "source_price_paths",
+      "release"
+    ]
+  },
+  {
+    "file": "artifacts/verification/coverage_trackb.json",
+    "sha256": "1b441a5d861fbdbdd7922088bf3aa772700cdbd785f8d2625c4c7f396f2f645e",
+    "top_level_keys": [
+      "meta",
+      "files",
+      "totals"
+    ]
+  },
+  {
+    "file": "artifacts/verification/cross_source_tolerance_report.json",
+    "sha256": "a2565e5efd17f08bebf03c36b68c9f51e5b153e7cc7b6b2b416000eeeea0969f",
+    "generated_at": "2026-05-01T11:40:52.258989+00:00",
+    "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+    "top_level_keys": [
+      "generated_at",
+      "db_url",
+      "source_db",
+      "status",
+      "acceptance_criteria",
+      "benchmark_passed",
+      "benchmark_summary",
+      "groups"
+    ]
+  },
+  {
+    "file": "artifacts/verification/discontinuity_spike_report.json",
+    "sha256": "54ca2855e24fa7c3448885656238f2de3d599a2d8ad84cf73f66f10af7541dac",
+    "generated_at": "2026-04-14T17:21:23.744303+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "source_db",
+      "work_db",
+      "market_proxy_isin",
+      "source_summary",
+      "new_events_detected",
+      "persisted_event_count",
+      "counts_by_date",
+      "counts_by_date_category",
+      "top_spike_date",
+      "top_spike_market_return",
+      "top_spike_average_abs_idiosyncratic_return",
+      "analysis",
+      "top_spike_events"
+    ]
+  },
+  {
+    "file": "artifacts/verification/extreme_test_report.json",
+    "sha256": "882c471303f01ea366f515f26d21bb0a66c62f691deeb152e8b34bc2f950a8eb",
+    "generated_at": "2026-04-14T12:02:34.302969+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "pipeline_summary",
+      "pipeline_failed_days",
+      "pipeline_failure_examples",
+      "pipeline_artifact_status",
+      "idempotency",
+      "trackb_coverage",
+      "api_stress",
+      "release_readiness",
+      "discontinuity_reaudit",
+      "realdata_tests",
+      "unit_tests"
+    ]
+  },
+  {
+    "file": "artifacts/verification/futures_continuation_proof.json",
+    "sha256": "13c97a2dff959fe4064a3062c61f2f0299b001b977273089016bd82bad1070ba",
+    "generated_at": "2026-04-19T13:23:22.098187+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "release_id",
+      "status",
+      "row_count",
+      "sample"
+    ]
+  },
+  {
+    "file": "artifacts/verification/historical_trading_calendar_proof.json",
+    "sha256": "4e778c9c19e97a3cdee7a18f18ecee37e1c1b8cca26d2603ad466e79f08fd5b3",
+    "generated_at": "2026-04-19T12:16:06.570294+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "range",
+      "calendar_config_state",
+      "calendar_config_path",
+      "calendar_config_error",
+      "supported_exchanges",
+      "coverage_complete",
+      "special_sessions_complete",
+      "proofs"
+    ]
+  },
+  {
+    "file": "artifacts/verification/idempotency_check.json",
+    "sha256": "28b4c5a8ca7b9c79fe9e610f8b5f4101433bca2b2f11efd3a0395763dc596d39",
+    "top_level_keys": [
+      "as_of",
+      "before",
+      "after_first",
+      "after_second",
+      "delta_first",
+      "delta_second",
+      "run1",
+      "run2"
+    ]
+  },
+  {
+    "file": "artifacts/verification/implementation_audit.json",
+    "sha256": "a750b52270f2c2f7b0d45f86951c8988b7a3bb41e2d1cb55d4d760de6dc4b8dc",
+    "generated_at": "2026-04-13T15:55:31.705485+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "counts",
+      "severity_counts",
+      "items"
+    ]
+  },
+  {
+    "file": "artifacts/verification/nse_fo_load_report.json",
+    "sha256": "ba09268a4fa080b56558f5242e0915ae00c56d3a817aedd4c071c5809e324c7d",
+    "generated_at": "2026-04-19T13:17:21.323714+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "trade_date",
+      "used_url",
+      "artifact_path",
+      "artifact_manifest_path",
+      "bytes_downloaded",
+      "checksum",
+      "rows_loaded",
+      "futures_contracts",
+      "futures_eod_rows",
+      "continuous_futures_rows",
+      "options_contracts",
+      "options_eod_rows"
+    ]
+  },
+  {
+    "file": "artifacts/verification/nse_historical_backfill_report.json",
+    "sha256": "fd67b52b2fc554306add36aa04872af16b0a1203b61a9a4e62c53f535607b8c0",
+    "generated_at": "2026-04-23T10:00:05.032663+00:00",
+    "cache_only": true,
+    "seed_cache_hits": 1703,
+    "canonical_cache_hits": 21,
+    "network_successes": 0,
+    "successful_downloads": 1724,
+    "top_level_keys": [
+      "generated_at",
+      "range",
+      "calendar_coverage",
+      "sample_mode",
+      "cache_only",
+      "years_covered",
+      "research_window_trading_days",
+      "candidate_trading_days",
+      "successful_downloads",
+      "cached_successes",
+      "canonical_cache_hits",
+      "seed_cache_hits",
+      "network_successes",
+      "live_download_hits",
+      "failed_downloads",
+      "missing_archive_days",
+      "still_missing_days",
+      "coverage_ratio",
+      "failure_rate",
+      "legacy_host_failures",
+      "browser_fallback_required",
+      "throughput_seconds",
+      "average_seconds_per_day",
+      "failure_classes",
+      "anomaly_counts",
+      "per_era_coverage",
+      "request_timeout_seconds",
+      "max_request_attempts",
+      "seed_import_audit",
+      "note",
+      "results"
+    ]
+  },
+  {
+    "file": "artifacts/verification/options_query_proof.json",
+    "sha256": "f89a08aaf51cfb68eb6ebe5be668832b9b7614caf71ad4ca7dc2dea1e9143d7e",
+    "generated_at": "2026-04-19T13:23:24.318694+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "release_id",
+      "underlying_symbol",
+      "status",
+      "contract_count",
+      "eod_row_count",
+      "sample_contracts",
+      "sample_eod"
+    ]
+  },
+  {
+    "file": "artifacts/verification/pipeline_corporate_action_confirmation.json",
+    "sha256": "345fabb98738c61b473290dcc5ac794f7459ecd91b4066cd1a9ca27d58de5967",
+    "generated_at": "2026-04-19T12:36:12.690960+00:00",
+    "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+    "top_level_keys": [
+      "generated_at",
+      "db_url",
+      "seeded_rows",
+      "seeded_cases",
+      "confirmations_created",
+      "confirmed_total",
+      "confirmed_isins",
+      "adjusted_rows_recomputed",
+      "release"
+    ]
+  },
+  {
+    "file": "artifacts/verification/pipeline_delta.json",
+    "sha256": "d5278d25fcfb25239cae2dac5040b77ac7df78b2255d5245bd469dcda074d060",
+    "top_level_keys": [
+      "sample_isin",
+      "price_records_before",
+      "price_records_after",
+      "price_records_delta",
+      "sample_backtest_records",
+      "sample_live_records",
+      "sample_first_backtest_close",
+      "sample_first_backtest_confidence"
+    ]
+  },
+  {
+    "file": "artifacts/verification/pipeline_execution_result.json",
+    "sha256": "81f8c018eb4980db7bef1a8c2754110fc80c9c6d5703314483cf2ae4de02973f",
+    "generated_at": "2026-05-01T11:39:18.200212+00:00",
+    "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+    "summary": {
+      "calendar_mode": "trading",
+      "explicit_dates": [
+        "2026-04-02",
+        "2026-04-06",
+        "2026-04-07",
+        "2026-04-08",
+        "2026-04-09",
+        "2026-04-13"
+      ],
+      "successful_days": 6,
+      "failed_days": 0,
+      "total_confirmed_actions": 1,
+      "confirmed_actions_with_ex_date_in_run_window": 0,
+      "current_confirmed_corporate_actions": 1,
+      "future_confirmed_actions_outside_run_window": 1,
+      "total_adjusted_rows": 14715,
+      "total_new_discontinuities": 24,
+      "latest_total_discontinuity_events": 24,
+      "total_validations": 53452
+    },
+    "top_level_keys": [
+      "generated_at",
+      "db_url",
+      "market_isin",
+      "source",
+      "runs",
+      "summary",
+      "errors",
+      "note"
+    ]
+  },
+  {
+    "file": "artifacts/verification/pipeline_replay_30day_proof.json",
+    "sha256": "0b34a70cbb1c283c60a4aabbd41c905989db7780329f323770ca563fe6a1b4cf",
+    "generated_at": "2026-04-23T10:00:02.375887+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "replay_mode",
+      "range",
+      "trading_day_count",
+      "minimum_required_days",
+      "window_span_days",
+      "missing_days_within_window",
+      "all_archives_valid",
+      "canonical_cache_days",
+      "seed_cache_days",
+      "quiet_day_count",
+      "volatile_day_count",
+      "note",
+      "results"
+    ]
+  },
+  {
+    "file": "artifacts/verification/pit_universe_backfill_report.json",
+    "sha256": "09ff98de1080206a0e199d76aa9386aca5368f7bd5e0ead5de823a4f71deb8af",
+    "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+    "top_level_keys": [
+      "seed_pack",
+      "db_url",
+      "official_backed",
+      "loaded_rows",
+      "snapshot_validations",
+      "matched_validation_count"
+    ]
+  },
+  {
+    "file": "artifacts/verification/pit_universe_proof.json",
+    "sha256": "21167c7283c2775acb8da44ae2b8d7fe33cb99db79fed623badf3fc729b2d5f3",
+    "generated_at": "2026-04-23T09:58:18.069551+00:00",
+    "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+    "top_level_keys": [
+      "generated_at",
+      "seed_pack",
+      "official_backed",
+      "snapshot_count",
+      "security_master_count",
+      "expected_membership_rows_across_snapshots",
+      "db_url",
+      "loaded_rows",
+      "persisted_membership_rows",
+      "validation_count",
+      "matched_validation_count",
+      "latest_snapshot_date",
+      "latest_snapshot_count",
+      "previous_snapshot_date",
+      "snapshot_diff",
+      "release"
+    ]
+  },
+  {
+    "file": "artifacts/verification/post_pipeline_state.json",
+    "sha256": "94e83a2c0e080daf0c45f823fce4c4c25ad2c75c619cddfa7b7bea5734501484",
+    "top_level_keys": [
+      "captured_at",
+      "db",
+      "note"
+    ]
+  },
+  {
+    "file": "artifacts/verification/pre_pipeline_state.json",
+    "sha256": "3872f545696f95f640508d8eb18d7820bca8c016afffa6cc0144f31892a7b7e2",
+    "top_level_keys": [
+      "captured_at",
+      "api",
+      "db"
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_build_equity_core.json",
+    "sha256": "a38b43207a276e0fb0c7d4cd0e945a43d0504893ba7b84db5a24ab301fa5b49a",
+    "top_level_keys": [
+      "release_id",
+      "profile",
+      "manifest_path",
+      "signature_path",
+      "quality_report_path",
+      "lineage_report_path",
+      "warehouse_sync_status"
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_build_equity_plus_sidefeeds.json",
+    "sha256": "6bcbfdca3bbfc9e9e4ac0d4ad437e95fb53734821ef2073c637a5b2aead1d50d",
+    "top_level_keys": [
+      "release_id",
+      "profile",
+      "manifest_path",
+      "signature_path",
+      "quality_report_path",
+      "lineage_report_path",
+      "warehouse_sync_status"
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_build_full_derivatives.json",
+    "sha256": "e5fcc1b17fbaab84ade3da58889e2c9fda3f4a029b222aa776bf6bff13a9f2da",
+    "top_level_keys": [
+      "release_id",
+      "profile",
+      "manifest_path",
+      "signature_path",
+      "quality_report_path",
+      "lineage_report_path",
+      "warehouse_sync_status"
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_evidence_index.json",
+    "sha256": "0dc819f8f031cf52e8a237d1a15e4017277ed3f5fac1e0b3ecd76a02f5d01397",
+    "generated_at": "2026-05-02T08:21:15.593894+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "default_release_profile",
+      "releases",
+      "proof_artifacts"
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_readiness.json",
+    "sha256": "3cb2df9d1361a80e557b1a3c424984d5890b5bd2c7fe67651dea71d4e25cf2d5",
+    "generated_at": "2026-05-02T08:26:58.747543+00:00",
+    "ready": true,
+    "top_level_keys": [
+      "generated_at",
+      "release_profile",
+      "release_id",
+      "ready",
+      "checks"
+    ],
+    "checks": [
+      {
+        "name": "release_record_present",
+        "passed": true,
+        "details": "release_id=20260413_equity_core"
+      },
+      {
+        "name": "release_artifacts_present",
+        "passed": true,
+        "details": "manifest_exists=True, quality_exists=True, lineage_exists=True"
+      },
+      {
+        "name": "release_signature_present",
+        "passed": true,
+        "details": "signature_exists=True"
+      },
+      {
+        "name": "release_manifest_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=0.48"
+      },
+      {
+        "name": "release_signature_verified",
+        "passed": true,
+        "details": "signature verified"
+      },
+      {
+        "name": "release_required_datasets_present",
+        "passed": true,
+        "details": "missing_datasets=[]"
+      },
+      {
+        "name": "release_required_datasets_non_empty",
+        "passed": true,
+        "details": "empty_datasets=[]"
+      },
+      {
+        "name": "warehouse_sync_status",
+        "passed": true,
+        "details": "warehouse_sync_status=SYNCED"
+      },
+      {
+        "name": "consumer_matrix_present",
+        "passed": true,
+        "details": "consumer_classes=3, signal_families=3"
+      },
+      {
+        "name": "adjusted_ohlcv_complete",
+        "passed": true,
+        "details": "adjusted_open_price_nulls=0, adjusted_high_price_nulls=0, adjusted_low_price_nulls=0, adjusted_close_price_nulls=0, adjusted_volume_nulls=0"
+      },
+      {
+        "name": "blocking_reviews",
+        "passed": true,
+        "details": "open_release_blocking_reviews=0, open_instrument_scoped_blocking_reviews=29, open_record_scoped_blocking_reviews=2012"
+      },
+      {
+        "name": "overdue_blocking_reviews",
+        "passed": true,
+        "details": "overdue_release_blocking_reviews=0, overdue_instrument_scoped_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
+      },
+      {
+        "name": "pending_reprocess_jobs",
+        "passed": true,
+        "details": "pending_reprocess_jobs=0"
+      },
+      {
+        "name": "source_probe_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.79"
+      },
+      {
+        "name": "pipeline_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.79"
+      },
+      {
+        "name": "tolerance_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.77"
+      },
+      {
+        "name": "matching_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.79"
+      },
+      {
+        "name": "calendar_loaded",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, calendar_config_state=loaded"
+      },
+      {
+        "name": "probe_primary_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, bse_primary_validated=True"
+      },
+      {
+        "name": "probe_fallback_health",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, healthy_fallback_count=2, failed_fallback_count=0"
+      },
+      {
+        "name": "probe_nse_equity_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, nse_equity_primary_validated=True"
+      },
+      {
+        "name": "pipeline_success",
+        "passed": true,
+        "details": "successful_days=6, failed_days=0"
+      },
+      {
+        "name": "tolerance_status",
+        "passed": true,
+        "details": "status=ok, benchmark_passed=True"
+      },
+      {
+        "name": "matching_benchmark_status",
+        "passed": true,
+        "details": "status=ok, precision=1.0, recall=1.0"
+      },
+      {
+        "name": "official_adjustment_corpus",
+        "passed": true,
+        "details": "official_case_count=23, official_transformational_case_count=11"
+      },
+      {
+        "name": "manual_transformational_corpus",
+        "passed": true,
+        "details": "manual_case_count=14"
+      }
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_readiness_equity_core.json",
+    "sha256": "3cb2df9d1361a80e557b1a3c424984d5890b5bd2c7fe67651dea71d4e25cf2d5",
+    "generated_at": "2026-05-02T08:26:58.747543+00:00",
+    "ready": true,
+    "top_level_keys": [
+      "generated_at",
+      "release_profile",
+      "release_id",
+      "ready",
+      "checks"
+    ],
+    "checks": [
+      {
+        "name": "release_record_present",
+        "passed": true,
+        "details": "release_id=20260413_equity_core"
+      },
+      {
+        "name": "release_artifacts_present",
+        "passed": true,
+        "details": "manifest_exists=True, quality_exists=True, lineage_exists=True"
+      },
+      {
+        "name": "release_signature_present",
+        "passed": true,
+        "details": "signature_exists=True"
+      },
+      {
+        "name": "release_manifest_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=0.48"
+      },
+      {
+        "name": "release_signature_verified",
+        "passed": true,
+        "details": "signature verified"
+      },
+      {
+        "name": "release_required_datasets_present",
+        "passed": true,
+        "details": "missing_datasets=[]"
+      },
+      {
+        "name": "release_required_datasets_non_empty",
+        "passed": true,
+        "details": "empty_datasets=[]"
+      },
+      {
+        "name": "warehouse_sync_status",
+        "passed": true,
+        "details": "warehouse_sync_status=SYNCED"
+      },
+      {
+        "name": "consumer_matrix_present",
+        "passed": true,
+        "details": "consumer_classes=3, signal_families=3"
+      },
+      {
+        "name": "adjusted_ohlcv_complete",
+        "passed": true,
+        "details": "adjusted_open_price_nulls=0, adjusted_high_price_nulls=0, adjusted_low_price_nulls=0, adjusted_close_price_nulls=0, adjusted_volume_nulls=0"
+      },
+      {
+        "name": "blocking_reviews",
+        "passed": true,
+        "details": "open_release_blocking_reviews=0, open_instrument_scoped_blocking_reviews=29, open_record_scoped_blocking_reviews=2012"
+      },
+      {
+        "name": "overdue_blocking_reviews",
+        "passed": true,
+        "details": "overdue_release_blocking_reviews=0, overdue_instrument_scoped_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
+      },
+      {
+        "name": "pending_reprocess_jobs",
+        "passed": true,
+        "details": "pending_reprocess_jobs=0"
+      },
+      {
+        "name": "source_probe_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.79"
+      },
+      {
+        "name": "pipeline_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.79"
+      },
+      {
+        "name": "tolerance_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.77"
+      },
+      {
+        "name": "matching_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.79"
+      },
+      {
+        "name": "calendar_loaded",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, calendar_config_state=loaded"
+      },
+      {
+        "name": "probe_primary_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, bse_primary_validated=True"
+      },
+      {
+        "name": "probe_fallback_health",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, healthy_fallback_count=2, failed_fallback_count=0"
+      },
+      {
+        "name": "probe_nse_equity_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, nse_equity_primary_validated=True"
+      },
+      {
+        "name": "pipeline_success",
+        "passed": true,
+        "details": "successful_days=6, failed_days=0"
+      },
+      {
+        "name": "tolerance_status",
+        "passed": true,
+        "details": "status=ok, benchmark_passed=True"
+      },
+      {
+        "name": "matching_benchmark_status",
+        "passed": true,
+        "details": "status=ok, precision=1.0, recall=1.0"
+      },
+      {
+        "name": "official_adjustment_corpus",
+        "passed": true,
+        "details": "official_case_count=23, official_transformational_case_count=11"
+      },
+      {
+        "name": "manual_transformational_corpus",
+        "passed": true,
+        "details": "manual_case_count=14"
+      }
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_readiness_equity_plus_sidefeeds.json",
+    "sha256": "9dc32da9fc4c558c5c0361f0e3ef87c31befe68ca64ae21c1c05021054cff916",
+    "generated_at": "2026-05-02T08:21:15.593894+00:00",
+    "ready": true,
+    "top_level_keys": [
+      "generated_at",
+      "release_profile",
+      "release_id",
+      "ready",
+      "checks"
+    ],
+    "checks": [
+      {
+        "name": "release_record_present",
+        "passed": true,
+        "details": "release_id=20260413_equity_plus_sidefeeds"
+      },
+      {
+        "name": "release_artifacts_present",
+        "passed": true,
+        "details": "manifest_exists=True, quality_exists=True, lineage_exists=True"
+      },
+      {
+        "name": "release_signature_present",
+        "passed": true,
+        "details": "signature_exists=True"
+      },
+      {
+        "name": "release_manifest_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=0.00"
+      },
+      {
+        "name": "release_signature_verified",
+        "passed": true,
+        "details": "signature verified"
+      },
+      {
+        "name": "release_required_datasets_present",
+        "passed": true,
+        "details": "missing_datasets=[]"
+      },
+      {
+        "name": "release_required_datasets_non_empty",
+        "passed": true,
+        "details": "empty_datasets=[]"
+      },
+      {
+        "name": "warehouse_sync_status",
+        "passed": true,
+        "details": "warehouse_sync_status=SYNCED"
+      },
+      {
+        "name": "consumer_matrix_present",
+        "passed": true,
+        "details": "consumer_classes=3, signal_families=3"
+      },
+      {
+        "name": "adjusted_ohlcv_complete",
+        "passed": true,
+        "details": "adjusted_open_price_nulls=0, adjusted_high_price_nulls=0, adjusted_low_price_nulls=0, adjusted_close_price_nulls=0, adjusted_volume_nulls=0"
+      },
+      {
+        "name": "blocking_reviews",
+        "passed": true,
+        "details": "open_release_blocking_reviews=0, open_instrument_scoped_blocking_reviews=29, open_record_scoped_blocking_reviews=2012"
+      },
+      {
+        "name": "overdue_blocking_reviews",
+        "passed": true,
+        "details": "overdue_release_blocking_reviews=0, overdue_instrument_scoped_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
+      },
+      {
+        "name": "pending_reprocess_jobs",
+        "passed": true,
+        "details": "pending_reprocess_jobs=0"
+      },
+      {
+        "name": "source_probe_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.32"
+      },
+      {
+        "name": "pipeline_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.32"
+      },
+      {
+        "name": "tolerance_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.29"
+      },
+      {
+        "name": "matching_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.32"
+      },
+      {
+        "name": "calendar_loaded",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, calendar_config_state=loaded"
+      },
+      {
+        "name": "probe_primary_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, bse_primary_validated=True"
+      },
+      {
+        "name": "probe_fallback_health",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, healthy_fallback_count=2, failed_fallback_count=0"
+      },
+      {
+        "name": "probe_nse_equity_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, nse_equity_primary_validated=True"
+      },
+      {
+        "name": "pipeline_success",
+        "passed": true,
+        "details": "successful_days=6, failed_days=0"
+      },
+      {
+        "name": "tolerance_status",
+        "passed": true,
+        "details": "status=ok, benchmark_passed=True"
+      },
+      {
+        "name": "matching_benchmark_status",
+        "passed": true,
+        "details": "status=ok, precision=1.0, recall=1.0"
+      },
+      {
+        "name": "official_adjustment_corpus",
+        "passed": true,
+        "details": "official_case_count=23, official_transformational_case_count=11"
+      },
+      {
+        "name": "manual_transformational_corpus",
+        "passed": true,
+        "details": "manual_case_count=14"
+      }
+    ]
+  },
+  {
+    "file": "artifacts/verification/release_readiness_full_derivatives.json",
+    "sha256": "68ce85f4e933c50822048be23372e7038468fc96910f0174510d21245ede7253",
+    "generated_at": "2026-05-02T08:21:15.593894+00:00",
+    "ready": true,
+    "top_level_keys": [
+      "generated_at",
+      "release_profile",
+      "release_id",
+      "ready",
+      "checks"
+    ],
+    "checks": [
+      {
+        "name": "release_record_present",
+        "passed": true,
+        "details": "release_id=20260413_full_derivatives"
+      },
+      {
+        "name": "release_artifacts_present",
+        "passed": true,
+        "details": "manifest_exists=True, quality_exists=True, lineage_exists=True"
+      },
+      {
+        "name": "release_signature_present",
+        "passed": true,
+        "details": "signature_exists=True"
+      },
+      {
+        "name": "release_manifest_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=0.00"
+      },
+      {
+        "name": "release_signature_verified",
+        "passed": true,
+        "details": "signature verified"
+      },
+      {
+        "name": "release_required_datasets_present",
+        "passed": true,
+        "details": "missing_datasets=[]"
+      },
+      {
+        "name": "release_required_datasets_non_empty",
+        "passed": true,
+        "details": "empty_datasets=[]"
+      },
+      {
+        "name": "warehouse_sync_status",
+        "passed": true,
+        "details": "warehouse_sync_status=SYNCED"
+      },
+      {
+        "name": "consumer_matrix_present",
+        "passed": true,
+        "details": "consumer_classes=4, signal_families=6"
+      },
+      {
+        "name": "adjusted_ohlcv_complete",
+        "passed": true,
+        "details": "adjusted_open_price_nulls=0, adjusted_high_price_nulls=0, adjusted_low_price_nulls=0, adjusted_close_price_nulls=0, adjusted_volume_nulls=0"
+      },
+      {
+        "name": "blocking_reviews",
+        "passed": true,
+        "details": "open_release_blocking_reviews=0, open_instrument_scoped_blocking_reviews=29, open_record_scoped_blocking_reviews=2012"
+      },
+      {
+        "name": "overdue_blocking_reviews",
+        "passed": true,
+        "details": "overdue_release_blocking_reviews=0, overdue_instrument_scoped_blocking_reviews=0, overdue_record_scoped_blocking_reviews=0"
+      },
+      {
+        "name": "pending_reprocess_jobs",
+        "passed": true,
+        "details": "pending_reprocess_jobs=0"
+      },
+      {
+        "name": "source_probe_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.19"
+      },
+      {
+        "name": "pipeline_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.19"
+      },
+      {
+        "name": "tolerance_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.16"
+      },
+      {
+        "name": "matching_report_fresh",
+        "passed": true,
+        "details": "artifact_age_hours=20.19"
+      },
+      {
+        "name": "calendar_loaded",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, calendar_config_state=loaded"
+      },
+      {
+        "name": "probe_primary_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, bse_primary_validated=True"
+      },
+      {
+        "name": "probe_fallback_health",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, healthy_fallback_count=2, failed_fallback_count=0"
+      },
+      {
+        "name": "probe_nse_equity_healthy",
+        "passed": true,
+        "details": "probe_artifact_path=artifacts/verification/source_probe_report.json, nse_equity_primary_validated=True"
+      },
+      {
+        "name": "pipeline_success",
+        "passed": true,
+        "details": "successful_days=6, failed_days=0"
+      },
+      {
+        "name": "tolerance_status",
+        "passed": true,
+        "details": "status=ok, benchmark_passed=True"
+      },
+      {
+        "name": "matching_benchmark_status",
+        "passed": true,
+        "details": "status=ok, precision=1.0, recall=1.0"
+      },
+      {
+        "name": "official_adjustment_corpus",
+        "passed": true,
+        "details": "official_case_count=23, official_transformational_case_count=11"
+      },
+      {
+        "name": "manual_transformational_corpus",
+        "passed": true,
+        "details": "manual_case_count=14"
+      }
+    ]
+  },
+  {
+    "file": "artifacts/verification/review_backlog_reconciliation.json",
+    "sha256": "8ccdf50a65466a0edda025864350fb42f7c7d65784c26d39d9395aac27452333",
+    "generated_at": "2026-04-19T12:59:33.119930+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "resolved_review_ids",
+      "resolved_count",
+      "remaining_unresolved_release_blockers"
+    ]
+  },
+  {
+    "file": "artifacts/verification/seed_import_audit.json",
+    "sha256": "6427e71b0276f7cf65076ace0df88c098a4e0702959f5b8b27f0560e38e769be",
+    "generated_at": "2026-04-23T09:51:59.201681+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "seed_repo_url",
+      "seed_repo_root",
+      "seed_source_tag",
+      "safe_raw_directories",
+      "ambiguous_or_absent_raw_directories_not_imported",
+      "forbidden_directories_observed",
+      "accepted_count",
+      "rejected_count",
+      "duplicate_count",
+      "accepted_files",
+      "rejected_files",
+      "duplicate_files",
+      "note"
+    ]
+  },
+  {
+    "file": "artifacts/verification/sidefeed_proof.json",
+    "sha256": "ebcb73678a76f6bcb625af54dde5168936795b01b8c845c72e617012b12b36c2",
+    "generated_at": "2026-04-19T07:42:18.971239+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "source_payloads",
+      "observed_trade_dates",
+      "rows_loaded",
+      "participant_flow_sample",
+      "market_index_sample",
+      "release"
+    ]
+  },
+  {
+    "file": "artifacts/verification/source_probe_profile_comparison.json",
+    "sha256": "a09b8012175cfae7e821b301d9c1cab792de23555716bab912e8ca65deb864e8",
+    "generated_at": "2026-04-14T12:02:52.405172+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "deterministic_primary_validated",
+      "full_primary_validated",
+      "deterministic_healthy_fallback_count",
+      "full_healthy_fallback_count"
+    ]
+  },
+  {
+    "file": "artifacts/verification/source_probe_report.json",
+    "sha256": "1acbfa3660cbda6e2a2f194b53213b817fd47209fb87f019df776e733b7da860",
+    "generated_at": "2026-05-01T11:39:27.448679+00:00",
+    "summary": {
+      "all_supported_candidates_probed": true,
+      "all_supported_fallbacks_probed": true,
+      "nse_equity_primary_validated": true,
+      "nse_fo_primary_validated": true,
+      "bse_primary_validated": true,
+      "bse_any_fallback_validated": true,
+      "all_supported_fallbacks_healthy": true,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
+      "bse_any_candidate_validated": true,
+      "bse_failed_candidates": []
+    },
+    "top_level_keys": [
+      "generated_at",
+      "workflow",
+      "probe_date",
+      "nse_equity_probe_date",
+      "calendar_mode",
+      "calendar_config_state",
+      "calendar_config_path",
+      "calendar_config_error",
+      "probe_profile_mode",
+      "probe_profile_count",
+      "probe_timeout_seconds",
+      "calendar_maintenance",
+      "bse_supported_candidate_count",
+      "bse_probed_candidate_count",
+      "bse_supported_fallback_count",
+      "bse_probed_fallback_count",
+      "bse_probe_scope",
+      "nse_corporate_actions",
+      "nse_equity_bhavcopy",
+      "nse_fo_bhavcopy",
+      "nse_equity_recent_history",
+      "bse_equity_candidates",
+      "bse_recent_history",
+      "summary"
+    ]
+  },
+  {
+    "file": "artifacts/verification/source_probe_report_deterministic.json",
+    "sha256": "81c79ba17da1ee7ed953abe2188d811d7abd96e02d6204441dadd806a739441a",
+    "generated_at": "2026-04-14T12:02:52.405172+00:00",
+    "summary": {
+      "all_supported_candidates_probed": true,
+      "all_supported_fallbacks_probed": true,
+      "nse_equity_primary_validated": true,
+      "bse_primary_validated": true,
+      "bse_any_fallback_validated": true,
+      "all_supported_fallbacks_healthy": true,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
+      "bse_any_candidate_validated": true,
+      "bse_failed_candidates": []
+    },
+    "top_level_keys": [
+      "generated_at",
+      "workflow",
+      "probe_date",
+      "nse_equity_probe_date",
+      "calendar_mode",
+      "calendar_config_state",
+      "calendar_config_path",
+      "calendar_config_error",
+      "probe_profile_mode",
+      "probe_profile_count",
+      "probe_timeout_seconds",
+      "calendar_maintenance",
+      "bse_supported_candidate_count",
+      "bse_probed_candidate_count",
+      "bse_supported_fallback_count",
+      "bse_probed_fallback_count",
+      "bse_probe_scope",
+      "nse_corporate_actions",
+      "nse_equity_bhavcopy",
+      "nse_equity_recent_history",
+      "bse_equity_candidates",
+      "bse_recent_history",
+      "summary"
+    ]
+  },
+  {
+    "file": "artifacts/verification/source_probe_report_full.json",
+    "sha256": "0038e5cf809b8a1b2e511dd91d3d200699feff7663069a1fc0b904e6fc7f2a40",
+    "generated_at": "2026-04-14T12:03:00.696132+00:00",
+    "summary": {
+      "all_supported_candidates_probed": true,
+      "all_supported_fallbacks_probed": true,
+      "nse_equity_primary_validated": true,
+      "bse_primary_validated": true,
+      "bse_any_fallback_validated": true,
+      "all_supported_fallbacks_healthy": true,
+      "healthy_fallback_count": 2,
+      "failed_fallback_count": 0,
+      "bse_any_candidate_validated": true,
+      "bse_failed_candidates": []
+    },
+    "top_level_keys": [
+      "generated_at",
+      "workflow",
+      "probe_date",
+      "nse_equity_probe_date",
+      "calendar_mode",
+      "calendar_config_state",
+      "calendar_config_path",
+      "calendar_config_error",
+      "probe_profile_mode",
+      "probe_profile_count",
+      "probe_timeout_seconds",
+      "calendar_maintenance",
+      "bse_supported_candidate_count",
+      "bse_probed_candidate_count",
+      "bse_supported_fallback_count",
+      "bse_probed_fallback_count",
+      "bse_probe_scope",
+      "nse_corporate_actions",
+      "nse_equity_bhavcopy",
+      "nse_equity_recent_history",
+      "bse_equity_candidates",
+      "bse_recent_history",
+      "summary"
+    ]
+  },
+  {
+    "file": "artifacts/verification/trackb_verification_snapshot.json",
+    "sha256": "b4806ac07187a2f965ff36b3556c18f4182065d3532b7c16b2b301f2e3db127c",
+    "top_level_keys": [
+      "captured_at",
+      "pipeline_summary",
+      "bse_paths_present",
+      "db"
+    ]
+  },
+  {
+    "file": "artifacts/verification/trading_calendar_coverage.json",
+    "sha256": "3a0c070a287e41b02d0c9b3398ba8b21225853105f52367f5e48156b0ec3e1db",
+    "generated_at": "2026-04-19T12:16:06.569204+00:00",
+    "top_level_keys": [
+      "generated_at",
+      "calendar_config_state",
+      "calendar_config_path",
+      "calendar_config_error",
+      "warning_window_days",
+      "owner_role",
+      "runbook",
+      "supported_exchanges",
+      "statuses"
+    ]
+  }
+]

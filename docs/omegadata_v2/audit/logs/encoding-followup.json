@@ -1,0 +1,30 @@
+{
+  "utc": "2026-11-14T11:27:32.959952+00:00",
+  "file": "artifacts/verification/api_stress_results.json",
+  "sha256": "078e85436c1f965beace3c1e12872aed6e11ecc3e95db340e4b5a4ce6d1bb395",
+  "encoding": "UTF-16",
+  "valid_json": true,
+  "generated_at": null,
+  "run_id": null,
+  "code_commit": null,
+  "archived_result": {
+    "elapsed_ms": 12910.05549998954,
+    "results": {
+      "http://127.0.0.1:8000/health": {
+        "ok": 500,
+        "fail": 0,
+        "max_ms": 159.5204000477679
+      },
+      "http://127.0.0.1:8000/slo/status": {
+        "ok": 500,
+        "fail": 0,
+        "max_ms": 61.533300031442195
+      },
+      "http://127.0.0.1:8000/implementation/audit": {
+        "ok": 500,
+        "fail": 0,
+        "max_ms": 138.18690000334755
+      }
+    }
+  }
+}

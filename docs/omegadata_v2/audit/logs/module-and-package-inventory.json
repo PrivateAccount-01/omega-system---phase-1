@@ -1,0 +1,2670 @@
+{
+  "utc": "2026-11-14T11:12:57.303695+00:00",
+  "modules": [
+    {
+      "file": "src/omegadata/__init__.py",
+      "lines": 5,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/api/__init__.py",
+      "lines": 1,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/api/main.py",
+      "lines": 748,
+      "definitions": [
+        {
+          "name": "lifespan",
+          "line": 43
+        },
+        {
+          "name": "PriceOut",
+          "line": 63
+        },
+        {
+          "name": "PriceResponse",
+          "line": 78
+        },
+        {
+          "name": "ReviewOut",
+          "line": 91
+        },
+        {
+          "name": "ReviewResolutionIn",
+          "line": 102
+        },
+        {
+          "name": "ReprocessCompletionIn",
+          "line": 108
+        },
+        {
+          "name": "PublicationBlockOut",
+          "line": 118
+        },
+        {
+          "name": "PublicationStatusOut",
+          "line": 126
+        },
+        {
+          "name": "ReleaseOut",
+          "line": 136
+        },
+        {
+          "name": "_get_db",
+          "line": 151
+        },
+        {
+          "name": "_require_api_key",
+          "line": 159
+        },
+        {
+          "name": "_resolve_exchange",
+          "line": 167
+        },
+        {
+          "name": "_merge_ranges",
+          "line": 179
+        },
+        {
+          "name": "_read_release_dataset",
+          "line": 186
+        },
+        {
+          "name": "_release_record_or_404",
+          "line": 193
+        },
+        {
+          "name": "_release_to_out",
+          "line": 200
+        },
+        {
+          "name": "observe_requests",
+          "line": 217
+        },
+        {
+          "name": "health",
+          "line": 236
+        },
+        {
+          "name": "terminal_ui",
+          "line": 241
+        },
+        {
+          "name": "metrics",
+          "line": 249
+        },
+        {
+          "name": "slo_status",
+          "line": 254
+        },
+        {
+          "name": "implementation_audit",
+          "line": 269
+        },
+        {
+          "name": "implementation_test_results",
+          "line": 277
+        },
+        {
+          "name": "get_prices",
+          "line": 291
+        },
+        {
+          "name": "get_prices_audit",
+          "line": 404
+        },
+        {
+          "name": "get_universe",
+          "line": 457
+        },
+        {
+          "name": "get_open_reviews",
+          "line": 484
+        },
+        {
+          "name": "resolve_review",
+          "line": 502
+        },
+        {
+          "name": "complete_reprocess",
+          "line": 528
+        },
+        {
+          "name": "get_release_readiness",
+          "line": 554
+        },
+        {
+          "name": "get_latest_release",
+          "line": 565
+        },
+        {
+          "name": "get_release",
+          "line": 577
+        },
+        {
+          "name": "get_release_manifest",
+          "line": 582
+        },
+        {
+          "name": "get_release_quality",
+          "line": 588
+        },
+        {
+          "name": "get_release_lineage",
+          "line": 594
+        },
+        {
+          "name": "get_release_quality_alias",
+          "line": 600
+        },
+        {
+          "name": "get_fii_dii",
+          "line": 605
+        },
+        {
+          "name": "get_india_vix",
+          "line": 619
+        },
+        {
+          "name": "get_benchmark_series",
+          "line": 633
+        },
+        {
+          "name": "get_futures",
+          "line": 653
+        },
+        {
+          "name": "get_options",
+          "line": 677
+        },
+        {
+          "name": "publication_status",
+          "line": 703
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/config.py",
+      "lines": 48,
+      "definitions": [
+        {
+          "name": "Settings",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/db/__init__.py",
+      "lines": 1,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/db/base.py",
+      "lines": 7,
+      "definitions": [
+        {
+          "name": "Base",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/db/models.py",
+      "lines": 451,
+      "definitions": [
+        {
+          "name": "_utc_now",
+          "line": 34
+        },
+        {
+          "name": "InstrumentMaster",
+          "line": 38
+        },
+        {
+          "name": "SymbolMap",
+          "line": 58
+        },
+        {
+          "name": "SymbolChangeLog",
+          "line": 72
+        },
+        {
+          "name": "DelistingRecord",
+          "line": 87
+        },
+        {
+          "name": "IPORegistry",
+          "line": 99
+        },
+        {
+          "name": "CrossListingMap",
+          "line": 109
+        },
+        {
+          "name": "CorporateActionStaging",
+          "line": 120
+        },
+        {
+          "name": "ConfirmedCorporateAction",
+          "line": 138
+        },
+        {
+          "name": "ManualReviewQueue",
+          "line": 158
+        },
+        {
+          "name": "ReprocessJob",
+          "line": 171
+        },
+        {
+          "name": "PriceRecord",
+          "line": 189
+        },
+        {
+          "name": "ExclusionDate",
+          "line": 217
+        },
+        {
+          "name": "DiscontinuityEvent",
+          "line": 226
+        },
+        {
+          "name": "UniverseMembership",
+          "line": 248
+        },
+        {
+          "name": "ValidationAuditLog",
+          "line": 265
+        },
+        {
+          "name": "ParticipantFlowDaily",
+          "line": 288
+        },
+        {
+          "name": "MarketIndexDaily",
+          "line": 306
+        },
+        {
+          "name": "FuturesContractMaster",
+          "line": 329
+        },
+        {
+          "name": "FuturesEOD",
+          "line": 347
+        },
+        {
+          "name": "ContinuousFutureDaily",
+          "line": 368
+        },
+        {
+          "name": "OptionsContractMaster",
+          "line": 392
+        },
+        {
+          "name": "OptionsEOD",
+          "line": 411
+        },
+        {
+          "name": "ReleaseRecord",
+          "line": 432
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/db/session.py",
+      "lines": 81,
+      "definitions": [
+        {
+          "name": "_build_engine",
+          "line": 13
+        },
+        {
+          "name": "get_engine",
+          "line": 31
+        },
+        {
+          "name": "get_sessionmaker",
+          "line": 40
+        },
+        {
+          "name": "init_db",
+          "line": 46
+        },
+        {
+          "name": "_ensure_column",
+          "line": 54
+        },
+        {
+          "name": "_reconcile_schema",
+          "line": 63
+        },
+        {
+          "name": "get_session",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/domain.py",
+      "lines": 98,
+      "definitions": [
+        {
+          "name": "InstrumentType",
+          "line": 6
+        },
+        {
+          "name": "Exchange",
+          "line": 22
+        },
+        {
+          "name": "CorporateActionType",
+          "line": 28
+        },
+        {
+          "name": "ConfidenceLevel",
+          "line": 51
+        },
+        {
+          "name": "DiscontinuityCategory",
+          "line": 57
+        },
+        {
+          "name": "ValidationResult",
+          "line": 63
+        },
+        {
+          "name": "QueryContext",
+          "line": 69
+        },
+        {
+          "name": "ReviewBlockScope",
+          "line": 78
+        },
+        {
+          "name": "ReviewDecision",
+          "line": 84
+        },
+        {
+          "name": "PublicationState",
+          "line": 90
+        },
+        {
+          "name": "ReleaseProfile",
+          "line": 95
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/pipelines/__init__.py",
+      "lines": 1,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/pipelines/monthly_quality_pipeline.py",
+      "lines": 12,
+      "definitions": [
+        {
+          "name": "run_monthly_quality_report",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/pipelines/sequential_pipeline.py",
+      "lines": 1064,
+      "definitions": [
+        {
+          "name": "PipelineSummary",
+          "line": 47
+        },
+        {
+          "name": "OmegaDataSequentialPipeline",
+          "line": 56
+        },
+        {
+          "name": "__init__",
+          "line": 57
+        },
+        {
+          "name": "_to_decimal",
+          "line": 67
+        },
+        {
+          "name": "_parse_date",
+          "line": 71
+        },
+        {
+          "name": "_normalize_row",
+          "line": 97
+        },
+        {
+          "name": "_ensure_identity_adjusted_fields",
+          "line": 105
+        },
+        {
+          "name": "_load_fii_dii",
+          "line": 127
+        },
+        {
+          "name": "_index_kind",
+          "line": 171
+        },
+        {
+          "name": "_load_market_indices",
+          "line": 181
+        },
+        {
+          "name": "_canonical_contract_symbol",
+          "line": 239
+        },
+        {
+          "name": "_lookup_underlying_isin",
+          "line": 250
+        },
+        {
+          "name": "_rebuild_continuous_futures",
+          "line": 262
+        },
+        {
+          "name": "_load_nse_fo",
+          "line": 300
+        },
+        {
+          "name": "_first_present",
+          "line": 431
+        },
+        {
+          "name": "_ensure_instrument",
+          "line": 438
+        },
+        {
+          "name": "_load_bhavcopy_prices",
+          "line": 503
+        },
+        {
+          "name": "_load_bse_bhavcopy_prices",
+          "line": 615
+        },
+        {
+          "name": "_parse_bse_graph_trade_date",
+          "line": 717
+        },
+        {
+          "name": "_load_bse_prices_from_stockreach",
+          "line": 730
+        },
+        {
+          "name": "_load_corporate_actions",
+          "line": 735
+        },
+        {
+          "name": "run_track_a",
+          "line": 870
+        },
+        {
+          "name": "run_scheduled_corporate_action_collection",
+          "line": 914
+        },
+        {
+          "name": "_resolve_market_isin",
+          "line": 940
+        },
+        {
+          "name": "run_track_b",
+          "line": 950
+        },
+        {
+          "name": "run_scheduled_track_b_confirmation",
+          "line": 1042
+        },
+        {
+          "name": "run_full_day",
+          "line": 1051
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/__init__.py",
+      "lines": 1,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/track_a/alerting.py",
+      "lines": 54,
+      "definitions": [
+        {
+          "name": "AlertEvent",
+          "line": 13
+        },
+        {
+          "name": "AlertRouter",
+          "line": 21
+        },
+        {
+          "name": "__init__",
+          "line": 22
+        },
+        {
+          "name": "_should_send",
+          "line": 27
+        },
+        {
+          "name": "route",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/collection_schedule.py",
+      "lines": 101,
+      "definitions": [
+        {
+          "name": "CollectionWindow",
+          "line": 11
+        },
+        {
+          "name": "_ensure_aware_utc",
+          "line": 43
+        },
+        {
+          "name": "_target_for",
+          "line": 49
+        },
+        {
+          "name": "_within_grace",
+          "line": 58
+        },
+        {
+          "name": "due_corporate_action_sources",
+          "line": 63
+        },
+        {
+          "name": "should_run_corporate_action_confirmation",
+          "line": 75
+        },
+        {
+          "name": "require_corporate_action_window",
+          "line": 83
+        },
+        {
+          "name": "require_confirmation_window",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "lines": 1025,
+      "definitions": [
+        {
+          "name": "DownloadError",
+          "line": 30
+        },
+        {
+          "name": "DownloadArtifact",
+          "line": 44
+        },
+        {
+          "name": "FetchResult",
+          "line": 56
+        },
+        {
+          "name": "SourceProbeResult",
+          "line": 65
+        },
+        {
+          "name": "DownloadManager",
+          "line": 85
+        },
+        {
+          "name": "__init__",
+          "line": 31
+        },
+        {
+          "name": "__init__",
+          "line": 86
+        },
+        {
+          "name": "_load_cached_artifact_from_root",
+          "line": 93
+        },
+        {
+          "name": "_load_cached_artifact",
+          "line": 131
+        },
+        {
+          "name": "_path_from_manifest",
+          "line": 138
+        },
+        {
+          "name": "_expected_bse_equity_markers",
+          "line": 145
+        },
+        {
+          "name": "_looks_like_bse_equity_url",
+          "line": 153
+        },
+        {
+          "name": "_extract_bse_links_from_html",
+          "line": 165
+        },
+        {
+          "name": "_is_nse_url",
+          "line": 182
+        },
+        {
+          "name": "_is_bse_url",
+          "line": 186
+        },
+        {
+          "name": "_is_tls_error",
+          "line": 190
+        },
+        {
+          "name": "_is_retryable_nse_request_error",
+          "line": 203
+        },
+        {
+          "name": "_header_profiles",
+          "line": 211
+        },
+        {
+          "name": "_profile_for_url",
+          "line": 239
+        },
+        {
+          "name": "_profile_name",
+          "line": 251
+        },
+        {
+          "name": "_hash_content",
+          "line": 262
+        },
+        {
+          "name": "_request_once",
+          "line": 267
+        },
+        {
+          "name": "_request",
+          "line": 291
+        },
+        {
+          "name": "_bootstrap_nse_session",
+          "line": 320
+        },
+        {
+          "name": "_request_via_urllib",
+          "line": 341
+        },
+        {
+          "name": "_attach_cookie_header",
+          "line": 375
+        },
+        {
+          "name": "_request_via_curl",
+          "line": 388
+        },
+        {
+          "name": "_request_with_workarounds",
+          "line": 477
+        },
+        {
+          "name": "_render_url",
+          "line": 508
+        },
+        {
+          "name": "_render_pattern",
+          "line": 513
+        },
+        {
+          "name": "_extract_bse_equity_urls",
+          "line": 527
+        },
+        {
+          "name": "_discover_bse_equity_urls",
+          "line": 541
+        },
+        {
+          "name": "_discover_nse_fo_urls",
+          "line": 553
+        },
+        {
+          "name": "_candidate_urls",
+          "line": 602
+        },
+        {
+          "name": "_validate_csv_header",
+          "line": 615
+        },
+        {
+          "name": "_select_bse_equity_zip_member",
+          "line": 625
+        },
+        {
+          "name": "_validate_bse_equity_zip_payload",
+          "line": 657
+        },
+        {
+          "name": "_validate_nse_fo_zip_payload",
+          "line": 674
+        },
+        {
+          "name": "_validate_payload",
+          "line": 693
+        },
+        {
+          "name": "_fetch_candidate",
+          "line": 745
+        },
+        {
+          "name": "probe_source_candidates",
+          "line": 770
+        },
+        {
+          "name": "download",
+          "line": 863
+        },
+        {
+          "name": "fetch_bse_stockreach_graph",
+          "line": 990
+        },
+        {
+          "name": "_LinkExtractor",
+          "line": 166
+        },
+        {
+          "name": "__init__",
+          "line": 167
+        },
+        {
+          "name": "handle_starttag",
+          "line": 171
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/kafka_bus.py",
+      "lines": 25,
+      "definitions": [
+        {
+          "name": "KafkaBus",
+          "line": 8
+        },
+        {
+          "name": "__init__",
+          "line": 9
+        },
+        {
+          "name": "producer",
+          "line": 12
+        },
+        {
+          "name": "consumer",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/monitoring.py",
+      "lines": 81,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/track_a/news_pipeline.py",
+      "lines": 171,
+      "definitions": [
+        {
+          "name": "NewsEvent",
+          "line": 40
+        },
+        {
+          "name": "EventImpact",
+          "line": 53
+        },
+        {
+          "name": "EventImpactEngine",
+          "line": 63
+        },
+        {
+          "name": "__init__",
+          "line": 64
+        },
+        {
+          "name": "processing_deadline_minutes",
+          "line": 68
+        },
+        {
+          "name": "relevance_score",
+          "line": 78
+        },
+        {
+          "name": "recency_weight",
+          "line": 93
+        },
+        {
+          "name": "compute_impact",
+          "line": 101
+        },
+        {
+          "name": "build_current_impact",
+          "line": 116
+        },
+        {
+          "name": "cache_current_impact",
+          "line": 147
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/orchestration.py",
+      "lines": 22,
+      "definitions": [
+        {
+          "name": "IngestionOrchestrator",
+          "line": 11
+        },
+        {
+          "name": "__init__",
+          "line": 12
+        },
+        {
+          "name": "ingest_raw_source",
+          "line": 16
+        },
+        {
+          "name": "ingest_tabular_frame",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/quality_reporting.py",
+      "lines": 140,
+      "definitions": [
+        {
+          "name": "ReportResult",
+          "line": 19
+        },
+        {
+          "name": "MonthlyDataQualityReporter",
+          "line": 25
+        },
+        {
+          "name": "__init__",
+          "line": 26
+        },
+        {
+          "name": "_as_int",
+          "line": 33
+        },
+        {
+          "name": "generate",
+          "line": 40
+        },
+        {
+          "name": "_prev_month",
+          "line": 91
+        },
+        {
+          "name": "_validation_summary",
+          "line": 97
+        },
+        {
+          "name": "_corporate_action_coverage",
+          "line": 114
+        },
+        {
+          "name": "run_for_previous_month",
+          "line": 138
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/redis_cache.py",
+      "lines": 24,
+      "definitions": [
+        {
+          "name": "RedisCache",
+          "line": 12
+        },
+        {
+          "name": "__init__",
+          "line": 13
+        },
+        {
+          "name": "set_json",
+          "line": 16
+        },
+        {
+          "name": "get_json",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/slo.py",
+      "lines": 68,
+      "definitions": [
+        {
+          "name": "SLOSnapshot",
+          "line": 10
+        },
+        {
+          "name": "SLOTracker",
+          "line": 21
+        },
+        {
+          "name": "__init__",
+          "line": 22
+        },
+        {
+          "name": "record",
+          "line": 28
+        },
+        {
+          "name": "snapshot",
+          "line": 33
+        },
+        {
+          "name": "_evict_old",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/source_registry.py",
+      "lines": 329,
+      "definitions": [
+        {
+          "name": "SourceEra",
+          "line": 8
+        },
+        {
+          "name": "DataSource",
+          "line": 18
+        },
+        {
+          "name": "resolve_era",
+          "line": 322
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/storage.py",
+      "lines": 38,
+      "definitions": [
+        {
+          "name": "StoredDataset",
+          "line": 13
+        },
+        {
+          "name": "ParquetStorage",
+          "line": 20
+        },
+        {
+          "name": "__init__",
+          "line": 21
+        },
+        {
+          "name": "store_daily",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/trading_calendar.py",
+      "lines": 292,
+      "definitions": [
+        {
+          "name": "CalendarMaintenance",
+          "line": 12
+        },
+        {
+          "name": "TradingCalendar",
+          "line": 20
+        },
+        {
+          "name": "from_config",
+          "line": 30
+        },
+        {
+          "name": "year_is_covered",
+          "line": 131
+        },
+        {
+          "name": "ensure_year_covered",
+          "line": 135
+        },
+        {
+          "name": "is_trading_day",
+          "line": 142
+        },
+        {
+          "name": "special_sessions_for_year",
+          "line": 152
+        },
+        {
+          "name": "recent_trading_days",
+          "line": 159
+        },
+        {
+          "name": "add_business_days",
+          "line": 176
+        },
+        {
+          "name": "business_days_between",
+          "line": 192
+        },
+        {
+          "name": "coverage_status",
+          "line": 210
+        },
+        {
+          "name": "all_coverage_statuses",
+          "line": 274
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_a/warehouse.py",
+      "lines": 99,
+      "definitions": [
+        {
+          "name": "WarehouseSyncResult",
+          "line": 11
+        },
+        {
+          "name": "ClickHouseWarehouseSync",
+          "line": 16
+        },
+        {
+          "name": "_sql_string",
+          "line": 18
+        },
+        {
+          "name": "sync_release_manifest",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/__init__.py",
+      "lines": 1,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/track_b/adjustment_engine.py",
+      "lines": 263,
+      "definitions": [
+        {
+          "name": "AdjustmentFactor",
+          "line": 17
+        },
+        {
+          "name": "PriceAdjustmentEngine",
+          "line": 23
+        },
+        {
+          "name": "recompute_adjusted_series",
+          "line": 24
+        },
+        {
+          "name": "refresh_demerger_actuals",
+          "line": 104
+        },
+        {
+          "name": "_compute_factor",
+          "line": 150
+        },
+        {
+          "name": "_base_metadata",
+          "line": 259
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/confidence.py",
+      "lines": 131,
+      "definitions": [
+        {
+          "name": "ConfidenceInputs",
+          "line": 15
+        },
+        {
+          "name": "ConfidenceScorer",
+          "line": 28
+        },
+        {
+          "name": "_is_non_publishable_synthetic_row",
+          "line": 39
+        },
+        {
+          "name": "compute_score",
+          "line": 42
+        },
+        {
+          "name": "enforce_context",
+          "line": 74
+        },
+        {
+          "name": "filter_records",
+          "line": 77
+        },
+        {
+          "name": "monthly_report",
+          "line": 98
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/corporate_action_matching.py",
+      "lines": 179,
+      "definitions": [
+        {
+          "name": "MatchedCorporateActionPair",
+          "line": 34
+        },
+        {
+          "name": "CorporateActionMatcher",
+          "line": 40
+        },
+        {
+          "name": "__init__",
+          "line": 41
+        },
+        {
+          "name": "event_date",
+          "line": 45
+        },
+        {
+          "name": "_numeric_close",
+          "line": 49
+        },
+        {
+          "name": "_payload_score",
+          "line": 59
+        },
+        {
+          "name": "economic_overlap_count",
+          "line": 77
+        },
+        {
+          "name": "has_economic_signal",
+          "line": 84
+        },
+        {
+          "name": "relatedness_score",
+          "line": 87
+        },
+        {
+          "name": "score_pair",
+          "line": 108
+        },
+        {
+          "name": "match_pairs",
+          "line": 128
+        },
+        {
+          "name": "best_total",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/corporate_action_parser.py",
+      "lines": 100,
+      "definitions": [
+        {
+          "name": "CorporateActionParser",
+          "line": 9
+        },
+        {
+          "name": "to_decimal",
+          "line": 22
+        },
+        {
+          "name": "map_action_type",
+          "line": 34
+        },
+        {
+          "name": "enrich_payload_from_subject",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/corporate_actions.py",
+      "lines": 443,
+      "definitions": [
+        {
+          "name": "ConfirmationResult",
+          "line": 58
+        },
+        {
+          "name": "CorporateActionService",
+          "line": 63
+        },
+        {
+          "name": "__init__",
+          "line": 64
+        },
+        {
+          "name": "_validate_required_fields",
+          "line": 69
+        },
+        {
+          "name": "_merged_payload",
+          "line": 84
+        },
+        {
+          "name": "_review_exists",
+          "line": 103
+        },
+        {
+          "name": "_queue_review",
+          "line": 121
+        },
+        {
+          "name": "_required_fields_complete",
+          "line": 149
+        },
+        {
+          "name": "_required_fields_complete_payload",
+          "line": 168
+        },
+        {
+          "name": "add_staging_record",
+          "line": 189
+        },
+        {
+          "name": "run_daily_confirmation",
+          "line": 212
+        },
+        {
+          "name": "_is_stale_unmatched",
+          "line": 258
+        },
+        {
+          "name": "_confirm_pair",
+          "line": 274
+        },
+        {
+          "name": "_confirm_single",
+          "line": 329
+        },
+        {
+          "name": "_payload_mismatch",
+          "line": 362
+        },
+        {
+          "name": "_numerically_close",
+          "line": 382
+        },
+        {
+          "name": "apply_correction",
+          "line": 394
+        },
+        {
+          "name": "get_active_actions",
+          "line": 420
+        },
+        {
+          "name": "get_action_on_date",
+          "line": 430
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/cross_source_validation.py",
+      "lines": 723,
+      "definitions": [
+        {
+          "name": "ValidationOutcome",
+          "line": 24
+        },
+        {
+          "name": "PriceToleranceContext",
+          "line": 32
+        },
+        {
+          "name": "CrossSourceValidator",
+          "line": 42
+        },
+        {
+          "name": "__init__",
+          "line": 43
+        },
+        {
+          "name": "_audit_key",
+          "line": 51
+        },
+        {
+          "name": "_audit_exists",
+          "line": 65
+        },
+        {
+          "name": "validate_nse_bse_prices",
+          "line": 116
+        },
+        {
+          "name": "_price_tolerance_context",
+          "line": 198
+        },
+        {
+          "name": "_price_tolerance",
+          "line": 252
+        },
+        {
+          "name": "validate_monthly_flow_consistency",
+          "line": 255
+        },
+        {
+          "name": "validate_implied_volatility_spot_check",
+          "line": 276
+        },
+        {
+          "name": "validate_secondary_adjusted_price",
+          "line": 298
+        },
+        {
+          "name": "validate_corporate_actions",
+          "line": 320
+        },
+        {
+          "name": "_event_date",
+          "line": 564
+        },
+        {
+          "name": "_date_gap_days",
+          "line": 568
+        },
+        {
+          "name": "_compare_numeric",
+          "line": 573
+        },
+        {
+          "name": "_persist_categorical_result",
+          "line": 633
+        },
+        {
+          "name": "_detect_systematic_disagreement",
+          "line": 694
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/discontinuity.py",
+      "lines": 351,
+      "definitions": [
+        {
+          "name": "DetectionOutcome",
+          "line": 23
+        },
+        {
+          "name": "DiscontinuityDetector",
+          "line": 31
+        },
+        {
+          "name": "_review_exists",
+          "line": 33
+        },
+        {
+          "name": "_estimate_beta",
+          "line": 52
+        },
+        {
+          "name": "_compute_beta",
+          "line": 68
+        },
+        {
+          "name": "_median",
+          "line": 80
+        },
+        {
+          "name": "_integrity_fail",
+          "line": 90
+        },
+        {
+          "name": "_build_fallback_betas",
+          "line": 97
+        },
+        {
+          "name": "detect",
+          "line": 153
+        },
+        {
+          "name": "_persist_event",
+          "line": 288
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/isin_master.py",
+      "lines": 220,
+      "definitions": [
+        {
+          "name": "ISINValidationError",
+          "line": 21
+        },
+        {
+          "name": "SymbolResolution",
+          "line": 26
+        },
+        {
+          "name": "ISINMasterService",
+          "line": 33
+        },
+        {
+          "name": "validate_isin",
+          "line": 35
+        },
+        {
+          "name": "create_instrument",
+          "line": 57
+        },
+        {
+          "name": "add_ipo_record",
+          "line": 96
+        },
+        {
+          "name": "add_cross_listing",
+          "line": 113
+        },
+        {
+          "name": "apply_symbol_change",
+          "line": 132
+        },
+        {
+          "name": "resolve_symbol",
+          "line": 178
+        },
+        {
+          "name": "mark_delisted",
+          "line": 190
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/manual_review.py",
+      "lines": 472,
+      "definitions": [
+        {
+          "name": "_repo_root",
+          "line": 25
+        },
+        {
+          "name": "ReviewResolution",
+          "line": 30
+        },
+        {
+          "name": "ManualReviewService",
+          "line": 38
+        },
+        {
+          "name": "__init__",
+          "line": 39
+        },
+        {
+          "name": "_fingerprint",
+          "line": 43
+        },
+        {
+          "name": "_policy",
+          "line": 47
+        },
+        {
+          "name": "_calendar_exchange",
+          "line": 51
+        },
+        {
+          "name": "_apply_sla_metadata",
+          "line": 57
+        },
+        {
+          "name": "_refresh_review_payload",
+          "line": 131
+        },
+        {
+          "name": "_update_review_metrics",
+          "line": 148
+        },
+        {
+          "name": "_update_reprocess_metrics",
+          "line": 161
+        },
+        {
+          "name": "review_exists",
+          "line": 169
+        },
+        {
+          "name": "_find_existing_scope_review",
+          "line": 194
+        },
+        {
+          "name": "queue_review",
+          "line": 217
+        },
+        {
+          "name": "list_open_reviews",
+          "line": 293
+        },
+        {
+          "name": "_queue_reprocess_job",
+          "line": 310
+        },
+        {
+          "name": "resolve_review",
+          "line": 345
+        },
+        {
+          "name": "complete_reprocess",
+          "line": 406
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/matching_policy.py",
+      "lines": 56,
+      "definitions": [
+        {
+          "name": "MatchingPolicy",
+          "line": 11
+        },
+        {
+          "name": "invalidate_matching_policy_cache",
+          "line": 24
+        },
+        {
+          "name": "_read_policy",
+          "line": 29
+        },
+        {
+          "name": "load_matching_policy",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/publication.py",
+      "lines": 166,
+      "definitions": [
+        {
+          "name": "PublicationBlock",
+          "line": 15
+        },
+        {
+          "name": "PublicationStatus",
+          "line": 24
+        },
+        {
+          "name": "PublicationService",
+          "line": 31
+        },
+        {
+          "name": "_policy_for_category",
+          "line": 32
+        },
+        {
+          "name": "_resolution_decision",
+          "line": 36
+        },
+        {
+          "name": "_applies",
+          "line": 44
+        },
+        {
+          "name": "_is_active",
+          "line": 57
+        },
+        {
+          "name": "active_reviews_for_isin",
+          "line": 67
+        },
+        {
+          "name": "blocked_dates",
+          "line": 85
+        },
+        {
+          "name": "status_for_row",
+          "line": 137
+        },
+        {
+          "name": "evaluate_records",
+          "line": 144
+        },
+        {
+          "name": "filter_records",
+          "line": 157
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "lines": 595,
+      "definitions": [
+        {
+          "name": "ReleaseBuildResult",
+          "line": 36
+        },
+        {
+          "name": "_repo_root",
+          "line": 47
+        },
+        {
+          "name": "_relative_repo_path",
+          "line": 51
+        },
+        {
+          "name": "_load_profile_matrix",
+          "line": 58
+        },
+        {
+          "name": "ReleaseManager",
+          "line": 66
+        },
+        {
+          "name": "__init__",
+          "line": 67
+        },
+        {
+          "name": "_sha256",
+          "line": 74
+        },
+        {
+          "name": "_dataset_path",
+          "line": 77
+        },
+        {
+          "name": "_write_dataset",
+          "line": 82
+        },
+        {
+          "name": "_build_release_id",
+          "line": 92
+        },
+        {
+          "name": "_gpg_command",
+          "line": 96
+        },
+        {
+          "name": "_to_wsl_path",
+          "line": 111
+        },
+        {
+          "name": "_gpg_home",
+          "line": 119
+        },
+        {
+          "name": "_gpg_args",
+          "line": 124
+        },
+        {
+          "name": "_gpg_env",
+          "line": 136
+        },
+        {
+          "name": "_ensure_gpg_key",
+          "line": 142
+        },
+        {
+          "name": "_sign_manifest",
+          "line": 191
+        },
+        {
+          "name": "verify_signature",
+          "line": 218
+        },
+        {
+          "name": "_frame_from_rows",
+          "line": 239
+        },
+        {
+          "name": "_export_adjusted_equity",
+          "line": 242
+        },
+        {
+          "name": "_export_universe",
+          "line": 268
+        },
+        {
+          "name": "_export_participant_flows",
+          "line": 289
+        },
+        {
+          "name": "_export_indices",
+          "line": 307
+        },
+        {
+          "name": "_export_futures_contracts",
+          "line": 333
+        },
+        {
+          "name": "_export_futures_eod",
+          "line": 350
+        },
+        {
+          "name": "_export_continuous_futures",
+          "line": 378
+        },
+        {
+          "name": "_export_options_contracts",
+          "line": 404
+        },
+        {
+          "name": "_export_options_eod",
+          "line": 422
+        },
+        {
+          "name": "_build_quality_report",
+          "line": 452
+        },
+        {
+          "name": "_build_lineage_report",
+          "line": 470
+        },
+        {
+          "name": "build_release",
+          "line": 494
+        },
+        {
+          "name": "get_release_record",
+          "line": 587
+        },
+        {
+          "name": "get_latest_release_record",
+          "line": 590
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/release_readiness.py",
+      "lines": 549,
+      "definitions": [
+        {
+          "name": "ReadinessCheck",
+          "line": 20
+        },
+        {
+          "name": "_repo_root",
+          "line": 26
+        },
+        {
+          "name": "_read_json",
+          "line": 30
+        },
+        {
+          "name": "_probe_summary_score",
+          "line": 37
+        },
+        {
+          "name": "_load_best_probe_artifact",
+          "line": 51
+        },
+        {
+          "name": "_load_policy",
+          "line": 76
+        },
+        {
+          "name": "ReleaseReadinessService",
+          "line": 157
+        },
+        {
+          "name": "evaluate",
+          "line": 158
+        },
+        {
+          "name": "_resolve_release_record",
+          "line": 391
+        },
+        {
+          "name": "_release_checks",
+          "line": 406
+        },
+        {
+          "name": "_adjusted_ohlcv_check",
+          "line": 510
+        },
+        {
+          "name": "_artifact_check",
+          "line": 536
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/review_policy.py",
+      "lines": 103,
+      "definitions": [
+        {
+          "name": "ReviewPolicy",
+          "line": 13
+        },
+        {
+          "name": "ReviewPolicySet",
+          "line": 26
+        },
+        {
+          "name": "_read_policy_set",
+          "line": 47
+        },
+        {
+          "name": "invalidate_review_policy_cache",
+          "line": 77
+        },
+        {
+          "name": "load_review_policies",
+          "line": 83
+        },
+        {
+          "name": "for_category",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/tolerance_policy.py",
+      "lines": 111,
+      "definitions": [
+        {
+          "name": "TolerancePolicyEntry",
+          "line": 11
+        },
+        {
+          "name": "TolerancePolicySet",
+          "line": 22
+        },
+        {
+          "name": "invalidate_tolerance_policy_cache",
+          "line": 64
+        },
+        {
+          "name": "_read_policy",
+          "line": 69
+        },
+        {
+          "name": "load_tolerance_policy",
+          "line": 95
+        },
+        {
+          "name": "match",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/track_b/universe_manager.py",
+      "lines": 486,
+      "definitions": [
+        {
+          "name": "UniverseEntry",
+          "line": 22
+        },
+        {
+          "name": "UniverseValidationResult",
+          "line": 31
+        },
+        {
+          "name": "PointInTimeUniverseManager",
+          "line": 41
+        },
+        {
+          "name": "add_membership",
+          "line": 42
+        },
+        {
+          "name": "get_universe",
+          "line": 67
+        },
+        {
+          "name": "get_upcoming_additions",
+          "line": 98
+        },
+        {
+          "name": "reconstruct_pre2010",
+          "line": 124
+        },
+        {
+          "name": "remove_membership",
+          "line": 160
+        },
+        {
+          "name": "_coerce_seed_pack",
+          "line": 185
+        },
+        {
+          "name": "_snapshot_symbols",
+          "line": 192
+        },
+        {
+          "name": "_scan_symbol_isin_map",
+          "line": 205
+        },
+        {
+          "name": "_seed_symbol_map",
+          "line": 226
+        },
+        {
+          "name": "_seed_security_map",
+          "line": 235
+        },
+        {
+          "name": "_ensure_instrument",
+          "line": 250
+        },
+        {
+          "name": "backfill_from_seed_pack",
+          "line": 295
+        },
+        {
+          "name": "validate_seed_pack",
+          "line": 416
+        }
+      ]
+    },
+    {
+      "file": "src/omegadata/verification/__init__.py",
+      "lines": 1,
+      "definitions": []
+    },
+    {
+      "file": "src/omegadata/verification/audit.py",
+      "lines": 278,
+      "definitions": [
+        {
+          "name": "AuditItem",
+          "line": 13
+        },
+        {
+          "name": "_existing_paths",
+          "line": 26
+        },
+        {
+          "name": "_missing_paths",
+          "line": 30
+        },
+        {
+          "name": "_read_json",
+          "line": 34
+        },
+        {
+          "name": "_reference_corpus_gaps",
+          "line": 41
+        },
+        {
+          "name": "_pit_backfill_gaps",
+          "line": 64
+        },
+        {
+          "name": "_build_item",
+          "line": 80
+        },
+        {
+          "name": "build_audit_items",
+          "line": 105
+        },
+        {
+          "name": "build_audit_summary",
+          "line": 264
+        }
+      ]
+    }
+  ],
+  "installed_package_metadata": [
+    {
+      "name": "alembic",
+      "version": "1.18.4",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.4",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "license_expression": null,
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "anyio",
+      "version": "4.13.0",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "certifi",
+      "version": "2026.2.25",
+      "license_expression": null,
+      "license": "MPL-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "click",
+      "version": "8.3.2",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "clickhouse-connect",
+      "version": "0.15.1",
+      "license_expression": null,
+      "license": "Apache License 2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "license_expression": null,
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "confluent-kafka",
+      "version": "2.14.0",
+      "license_expression": null,
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "coverage",
+      "version": "7.13.5",
+      "license_expression": null,
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "et_xmlfile",
+      "version": "2.0.0",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENCE.python",
+        "LICENCE.rst",
+        "AUTHORS.txt"
+      ]
+    },
+    {
+      "name": "fastapi",
+      "version": "0.135.3",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "greenlet",
+      "version": "3.3.2",
+      "license_expression": "MIT AND PSF-2.0",
+      "license": "",
+      "license_files": [
+        "LICENSE",
+        "LICENSE.PSF"
+      ]
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "httptools",
+      "version": "0.7.1",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "license_expression": null,
+      "license": "BSD-3-Clause",
+      "license_files": []
+    },
+    {
+      "name": "idna",
+      "version": "3.11",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.0",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "librt",
+      "version": "0.8.1",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "lz4",
+      "version": "4.4.5",
+      "license_expression": null,
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "Mako",
+      "version": "1.3.10",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "mypy",
+      "version": "1.20.0",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE",
+        "mypy/typeshed/LICENSE"
+      ]
+    },
+    {
+      "name": "mypy_extensions",
+      "version": "1.1.0",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.4",
+      "license_expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt",
+        "numpy/_core/include/numpy/libdivide/LICENSE.txt",
+        "numpy/_core/src/common/pythoncapi-compat/COPYING",
+        "numpy/_core/src/highway/LICENSE",
+        "numpy/_core/src/multiarray/dragon4_LICENSE.txt",
+        "numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
+        "numpy/_core/src/umath/svml/LICENSE",
+        "numpy/fft/pocketfft/LICENSE.md",
+        "numpy/linalg/lapack_lite/LICENSE.txt",
+        "numpy/ma/LICENSE",
+        "numpy/random/LICENSE.md",
+        "numpy/random/src/distributions/LICENSE.md",
+        "numpy/random/src/mt19937/LICENSE.md",
+        "numpy/random/src/pcg64/LICENSE.md",
+        "numpy/random/src/philox/LICENSE.md",
+        "numpy/random/src/sfc64/LICENSE.md",
+        "numpy/random/src/splitmix64/LICENSE.md"
+      ]
+    },
+    {
+      "name": "omegadata",
+      "version": "0.1.0",
+      "license_expression": null,
+      "license": "",
+      "license_files": []
+    },
+    {
+      "name": "omegadata",
+      "version": "0.1.0",
+      "license_expression": null,
+      "license": "",
+      "license_files": []
+    },
+    {
+      "name": "openpyxl",
+      "version": "3.1.5",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENCE.rst"
+      ]
+    },
+    {
+      "name": "orjson",
+      "version": "3.11.8",
+      "license_expression": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+      "license": "",
+      "license_files": [
+        "LICENSE-APACHE",
+        "LICENSE-MIT",
+        "LICENSE-MPL-2.0"
+      ]
+    },
+    {
+      "name": "packaging",
+      "version": "26.0",
+      "license_expression": "Apache-2.0 OR BSD-2-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE",
+        "LICENSE.APACHE",
+        "LICENSE.BSD"
+      ]
+    },
+    {
+      "name": "pandas",
+      "version": "3.0.2",
+      "license_expression": null,
+      "license": "BSD 3-Clause License\n\n Copyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team\n All rights reserved.\n\n Copyright (c) 2011-2026, Open source contributors.\n\n Redistribution and use in source and binary for",
+      "license_files": []
+    },
+    {
+      "name": "pandas-stubs",
+      "version": "3.0.0.260204",
+      "license_expression": null,
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pathspec",
+      "version": "1.0.4",
+      "license_expression": null,
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pendulum",
+      "version": "3.2.0",
+      "license_expression": null,
+      "license": "MIT License",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pip",
+      "version": "26.0.1",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "AUTHORS.txt",
+        "LICENSE.txt",
+        "src/pip/_vendor/cachecontrol/LICENSE.txt",
+        "src/pip/_vendor/certifi/LICENSE",
+        "src/pip/_vendor/dependency_groups/LICENSE.txt",
+        "src/pip/_vendor/distlib/LICENSE.txt",
+        "src/pip/_vendor/distro/LICENSE",
+        "src/pip/_vendor/idna/LICENSE.md",
+        "src/pip/_vendor/msgpack/COPYING",
+        "src/pip/_vendor/packaging/LICENSE",
+        "src/pip/_vendor/packaging/LICENSE.APACHE",
+        "src/pip/_vendor/packaging/LICENSE.BSD",
+        "src/pip/_vendor/pkg_resources/LICENSE",
+        "src/pip/_vendor/platformdirs/LICENSE",
+        "src/pip/_vendor/pygments/LICENSE",
+        "src/pip/_vendor/pyproject_hooks/LICENSE",
+        "src/pip/_vendor/requests/LICENSE",
+        "src/pip/_vendor/resolvelib/LICENSE",
+        "src/pip/_vendor/rich/LICENSE",
+        "src/pip/_vendor/tomli/LICENSE",
+        "src/pip/_vendor/tomli_w/LICENSE",
+        "src/pip/_vendor/truststore/LICENSE",
+        "src/pip/_vendor/urllib3/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "pluggy",
+      "version": "1.6.0",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "prometheus_client",
+      "version": "0.24.1",
+      "license_expression": "Apache-2.0 AND BSD-2-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ]
+    },
+    {
+      "name": "psycopg",
+      "version": "3.3.3",
+      "license_expression": "LGPL-3.0-only",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "psycopg-binary",
+      "version": "3.3.3",
+      "license_expression": "LGPL-3.0-only",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "pyarrow",
+      "version": "23.0.1",
+      "license_expression": "Apache-2.0",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt",
+        "NOTICE.txt"
+      ]
+    },
+    {
+      "name": "pydantic",
+      "version": "2.12.5",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.13.1",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.41.5",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "Pygments",
+      "version": "2.20.0",
+      "license_expression": "BSD-2-Clause",
+      "license": "",
+      "license_files": [
+        "AUTHORS",
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pytest",
+      "version": "9.0.2",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pytest-asyncio",
+      "version": "1.3.0",
+      "license_expression": "Apache-2.0",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pytest-cov",
+      "version": "7.1.0",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "AUTHORS.rst",
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "license_expression": null,
+      "license": "Dual License",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.2",
+      "license_expression": null,
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "python-multipart",
+      "version": "0.0.24",
+      "license_expression": "Apache-2.0",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "pytz",
+      "version": "2026.1.post1",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "redis",
+      "version": "7.4.0",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "ruff",
+      "version": "0.15.9",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "SQLAlchemy",
+      "version": "2.0.49",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "starlette",
+      "version": "1.0.0",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "tenacity",
+      "version": "9.1.4",
+      "license_expression": null,
+      "license": "Apache 2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "types-python-dateutil",
+      "version": "2.9.0.20260402",
+      "license_expression": "Apache-2.0",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.15.0",
+      "license_expression": "PSF-2.0",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.1",
+      "license_expression": null,
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE",
+        "licenses/LICENSE_APACHE"
+      ]
+    },
+    {
+      "name": "urllib3",
+      "version": "2.6.3",
+      "license_expression": "MIT",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.44.0",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "watchfiles",
+      "version": "1.1.1",
+      "license_expression": null,
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "websockets",
+      "version": "16.0",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0",
+      "license_expression": "BSD-3-Clause",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    }
+  ]
+}

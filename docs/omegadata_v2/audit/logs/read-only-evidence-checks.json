@@ -1,0 +1,404 @@
+{
+  "evaluated_at": "2026-11-14T11:11:19.151894+00:00",
+  "release_hashes": [
+    {
+      "manifest": "artifacts/releases/20260413_equity_core/manifest.json",
+      "dataset": "adjusted_equity_bars",
+      "reference": "artifacts/releases/20260413_equity_core/adjusted_equity_bars/part-00000.parquet",
+      "expected": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1",
+      "exists": true,
+      "actual": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_equity_core/manifest.json",
+      "dataset": "pit_universe_snapshot",
+      "reference": "artifacts/releases/20260413_equity_core/pit_universe_snapshot/part-00000.parquet",
+      "expected": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5",
+      "exists": true,
+      "actual": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_equity_plus_sidefeeds/manifest.json",
+      "dataset": "adjusted_equity_bars",
+      "reference": "artifacts/releases/20260413_equity_plus_sidefeeds/adjusted_equity_bars/part-00000.parquet",
+      "expected": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1",
+      "exists": true,
+      "actual": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_equity_plus_sidefeeds/manifest.json",
+      "dataset": "pit_universe_snapshot",
+      "reference": "artifacts/releases/20260413_equity_plus_sidefeeds/pit_universe_snapshot/part-00000.parquet",
+      "expected": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5",
+      "exists": true,
+      "actual": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_equity_plus_sidefeeds/manifest.json",
+      "dataset": "fii_dii_daily",
+      "reference": "artifacts/releases/20260413_equity_plus_sidefeeds/fii_dii_daily/part-00000.parquet",
+      "expected": "f9368bd1df81e42b53120f63cf0d91ed2ccc1e53babc90891b070414df41cb5c",
+      "exists": true,
+      "actual": "f9368bd1df81e42b53120f63cf0d91ed2ccc1e53babc90891b070414df41cb5c",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_equity_plus_sidefeeds/manifest.json",
+      "dataset": "india_vix",
+      "reference": "artifacts/releases/20260413_equity_plus_sidefeeds/india_vix/part-00000.parquet",
+      "expected": "e5b302ca4dcb1cffdf24acab24528aaf238406d57cf1a2f4cfb2abfd8ede1f41",
+      "exists": true,
+      "actual": "e5b302ca4dcb1cffdf24acab24528aaf238406d57cf1a2f4cfb2abfd8ede1f41",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_equity_plus_sidefeeds/manifest.json",
+      "dataset": "benchmark_series",
+      "reference": "artifacts/releases/20260413_equity_plus_sidefeeds/benchmark_series/part-00000.parquet",
+      "expected": "ad9210d8769e0c777b8a8f749ed1932aaaa25ab465a6d2d6546f72307d1de54c",
+      "exists": true,
+      "actual": "ad9210d8769e0c777b8a8f749ed1932aaaa25ab465a6d2d6546f72307d1de54c",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_equity_plus_sidefeeds/manifest.json",
+      "dataset": "sector_series",
+      "reference": "artifacts/releases/20260413_equity_plus_sidefeeds/sector_series/part-00000.parquet",
+      "expected": "fe90a2d9f51fcfcdfecf4132ac5be3872c345bda769b87bb7e873d7095eb87c7",
+      "exists": true,
+      "actual": "fe90a2d9f51fcfcdfecf4132ac5be3872c345bda769b87bb7e873d7095eb87c7",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "adjusted_equity_bars",
+      "reference": "artifacts/releases/20260413_full_derivatives/adjusted_equity_bars/part-00000.parquet",
+      "expected": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1",
+      "exists": true,
+      "actual": "060e8e65b29d74113594ac639bee6696766eba5a53d1d4649741fddbfa0258c1",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "pit_universe_snapshot",
+      "reference": "artifacts/releases/20260413_full_derivatives/pit_universe_snapshot/part-00000.parquet",
+      "expected": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5",
+      "exists": true,
+      "actual": "43a34680e1a86aa9618aa5e5ac319634011d50ea2ce8bcae5b3436e3fd8209d5",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "fii_dii_daily",
+      "reference": "artifacts/releases/20260413_full_derivatives/fii_dii_daily/part-00000.parquet",
+      "expected": "f9368bd1df81e42b53120f63cf0d91ed2ccc1e53babc90891b070414df41cb5c",
+      "exists": true,
+      "actual": "f9368bd1df81e42b53120f63cf0d91ed2ccc1e53babc90891b070414df41cb5c",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "india_vix",
+      "reference": "artifacts/releases/20260413_full_derivatives/india_vix/part-00000.parquet",
+      "expected": "e5b302ca4dcb1cffdf24acab24528aaf238406d57cf1a2f4cfb2abfd8ede1f41",
+      "exists": true,
+      "actual": "e5b302ca4dcb1cffdf24acab24528aaf238406d57cf1a2f4cfb2abfd8ede1f41",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "benchmark_series",
+      "reference": "artifacts/releases/20260413_full_derivatives/benchmark_series/part-00000.parquet",
+      "expected": "ad9210d8769e0c777b8a8f749ed1932aaaa25ab465a6d2d6546f72307d1de54c",
+      "exists": true,
+      "actual": "ad9210d8769e0c777b8a8f749ed1932aaaa25ab465a6d2d6546f72307d1de54c",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "sector_series",
+      "reference": "artifacts/releases/20260413_full_derivatives/sector_series/part-00000.parquet",
+      "expected": "fe90a2d9f51fcfcdfecf4132ac5be3872c345bda769b87bb7e873d7095eb87c7",
+      "exists": true,
+      "actual": "fe90a2d9f51fcfcdfecf4132ac5be3872c345bda769b87bb7e873d7095eb87c7",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "futures_contract_master",
+      "reference": "artifacts/releases/20260413_full_derivatives/futures_contract_master/part-00000.parquet",
+      "expected": "095a164992653100630ef9a3b6a81f55e4999a98dbce0a255ecfb388118a990a",
+      "exists": true,
+      "actual": "095a164992653100630ef9a3b6a81f55e4999a98dbce0a255ecfb388118a990a",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "futures_eod",
+      "reference": "artifacts/releases/20260413_full_derivatives/futures_eod/part-00000.parquet",
+      "expected": "3ddab9a95ede86b6f548d82df7f1da21fa9070aa4495d11ff48db8513fa42ea5",
+      "exists": true,
+      "actual": "3ddab9a95ede86b6f548d82df7f1da21fa9070aa4495d11ff48db8513fa42ea5",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "continuous_futures",
+      "reference": "artifacts/releases/20260413_full_derivatives/continuous_futures/part-00000.parquet",
+      "expected": "f59d3a9e35ab2d21c19a98233242ffd8e100132706b1f4a69d51c940c6d7f85d",
+      "exists": true,
+      "actual": "f59d3a9e35ab2d21c19a98233242ffd8e100132706b1f4a69d51c940c6d7f85d",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "options_contract_master",
+      "reference": "artifacts/releases/20260413_full_derivatives/options_contract_master/part-00000.parquet",
+      "expected": "f5f0d1e4c04d8b43b3c1f0808e1b1220703a3ea6f76d3e1868a0f50fb0f82f0f",
+      "exists": true,
+      "actual": "f5f0d1e4c04d8b43b3c1f0808e1b1220703a3ea6f76d3e1868a0f50fb0f82f0f",
+      "match": true
+    },
+    {
+      "manifest": "artifacts/releases/20260413_full_derivatives/manifest.json",
+      "dataset": "options_eod",
+      "reference": "artifacts/releases/20260413_full_derivatives/options_eod/part-00000.parquet",
+      "expected": "f0d0f4e0e71d094acb6376221f8b9f1cc240c5bd52c6509b87d187820e73cdee",
+      "exists": true,
+      "actual": "f0d0f4e0e71d094acb6376221f8b9f1cc240c5bd52c6509b87d187820e73cdee",
+      "match": true
+    }
+  ],
+  "freshness": [
+    {
+      "file": "artifacts/verification/release_readiness.json",
+      "generated_at": "2026-05-02T08:26:58.747543+00:00",
+      "age_hours": 4706.739001208611,
+      "policy_limit_hours": 24,
+      "fresh": false
+    },
+    {
+      "file": "artifacts/verification/source_probe_report.json",
+      "generated_at": "2026-05-01T11:39:27.448679+00:00",
+      "age_hours": 4727.531028670833,
+      "policy_limit_hours": 24,
+      "fresh": false
+    },
+    {
+      "file": "artifacts/verification/pipeline_execution_result.json",
+      "generated_at": "2026-05-01T11:39:18.200212+00:00",
+      "age_hours": 4727.533597689445,
+      "policy_limit_hours": 24,
+      "fresh": false
+    },
+    {
+      "file": "artifacts/verification/cross_source_tolerance_report.json",
+      "generated_at": "2026-05-01T11:40:52.258989+00:00",
+      "age_hours": 4727.507470251389,
+      "policy_limit_hours": 168,
+      "fresh": false
+    },
+    {
+      "file": "artifacts/verification/corporate_action_matching_report.json",
+      "generated_at": "2026-05-01T11:39:17.993813+00:00",
+      "age_hours": 4727.533655022499,
+      "policy_limit_hours": 168,
+      "fresh": false
+    }
+  ],
+  "databases": [
+    {
+      "file": "artifacts/verification/pipeline_run_work.sqlite",
+      "mode": "SQLite URI mode=ro + query_only; no ORM startup",
+      "tables": [
+        "confirmed_corporate_action",
+        "continuous_future_daily",
+        "corporate_action_staging",
+        "cross_listing_map",
+        "delisting_record",
+        "discontinuity_event",
+        "exclusion_date",
+        "futures_contract_master",
+        "futures_eod",
+        "instrument_master",
+        "ipo_registry",
+        "manual_review_queue",
+        "market_index_daily",
+        "options_contract_master",
+        "options_eod",
+        "participant_flow_daily",
+        "price_record",
+        "release_record",
+        "reprocess_job",
+        "symbol_change_log",
+        "symbol_map",
+        "universe_membership",
+        "validation_audit_log"
+      ],
+      "counts": {
+        "confirmed_corporate_action": 1,
+        "manual_review_queue": 2066,
+        "price_record": 44219,
+        "release_record": 3,
+        "universe_membership": 70
+      },
+      "price_sources": [
+        [
+          "bse_bhavcopy",
+          29504
+        ],
+        [
+          "nse_bhavcopy",
+          14715
+        ]
+      ],
+      "releases": [
+        [
+          "20260413_equity_plus_sidefeeds",
+          "GENERATED",
+          "SYNCED"
+        ],
+        [
+          "20260413_equity_core",
+          "GENERATED",
+          "SYNCED"
+        ],
+        [
+          "20260413_full_derivatives",
+          "GENERATED",
+          "SYNCED"
+        ]
+      ]
+    },
+    {
+      "file": "omegadata.db",
+      "mode": "SQLite URI mode=ro + query_only; no ORM startup",
+      "tables": [
+        "confirmed_corporate_action",
+        "corporate_action_staging",
+        "cross_listing_map",
+        "delisting_record",
+        "discontinuity_event",
+        "exclusion_date",
+        "instrument_master",
+        "ipo_registry",
+        "manual_review_queue",
+        "price_record",
+        "symbol_change_log",
+        "symbol_map",
+        "universe_membership",
+        "validation_audit_log"
+      ],
+      "counts": {
+        "confirmed_corporate_action": 0,
+        "manual_review_queue": 0,
+        "price_record": 2,
+        "universe_membership": 0
+      },
+      "price_sources": [
+        [
+          "nse_bhavcopy",
+          1
+        ],
+        [
+          "secondary_source",
+          1
+        ]
+      ]
+    }
+  ],
+  "fixture_summary": [
+    {
+      "file": "tests\\fixtures\\official_source\\adjustment_reference_corpus.json",
+      "summary": {
+        "case_count": 23,
+        "transformational_case_count": 11,
+        "transformational_case_labels": [
+          "AHCL_2026-04-24_SPLIT",
+          "NESTLEIND_2024-01-05_SPLIT",
+          "NMDC_2024-12-27_BONUS",
+          "OFFICIAL_CORRECTION_SUPERSESSION_3IINFOLTD_2025-06-25",
+          "OFFICIAL_DEMERGER_PARENT_FINAL_STAGE_21STCENMGM_2025-06-25",
+          "OFFICIAL_LATER_DELISTED_POST_ACTION_CASE_3MINDIA_2025-06-25_TO_2025-06-27",
+          "OFFICIAL_REVERSE_SPLIT_20MICRONS_2025-06-25",
+          "OFFICIAL_SEQUENTIAL_MULTI_ACTION_CHAIN_360ONE_2025-06-25_TO_2025-06-26",
+          "PASHUPATI_2026-04-17_SPLIT",
+          "RMDRIP_2026-04-10_BONUS",
+          "TATACONSUM_2024-07-26_RIGHTS"
+        ]
+      },
+      "array_sizes": {
+        "transformational_case_labels": 11,
+        "cases": 23
+      }
+    },
+    {
+      "file": "tests\\fixtures\\synthetic_manual\\adjustment_reference_hand_computed.json",
+      "summary": {
+        "case_count": 14
+      },
+      "array_sizes": {
+        "cases": 14
+      }
+    },
+    {
+      "file": "artifacts\\verification\\pit_universe_backfill_report.json",
+      "summary": {
+        "seed_pack": "data/reference/official/pit_universe_reference_pack.json",
+        "db_url": "sqlite:///artifacts/verification/pipeline_run_work.sqlite",
+        "official_backed": true,
+        "loaded_rows": 70,
+        "snapshot_validations": [
+          {
+            "index_name": "NIFTY50",
+            "as_of_date": "2015-10-31",
+            "matched": true,
+            "expected_count": 50,
+            "actual_count": 50,
+            "source": "SEBI Bulletin November 2015 Table 26"
+          },
+          {
+            "index_name": "NIFTY50",
+            "as_of_date": "2019-11-30",
+            "matched": true,
+            "expected_count": 50,
+            "actual_count": 50,
+            "source": "SEBI Bulletin December 2019 Table 25"
+          },
+          {
+            "index_name": "NIFTY50",
+            "as_of_date": "2020-03-19",
+            "matched": true,
+            "expected_count": 50,
+            "actual_count": 50,
+            "source": "NSE Indices press release replacing Yes Bank with Shree Cement"
+          },
+          {
+            "index_name": "NIFTY50",
+            "as_of_date": "2022-05-31",
+            "matched": true,
+            "expected_count": 50,
+            "actual_count": 50,
+            "source": "SEBI Bulletin June 2022 Table 25"
+          },
+          {
+            "index_name": "NIFTY50",
+            "as_of_date": "2025-02-28",
+            "matched": true,
+            "expected_count": 50,
+            "actual_count": 50,
+            "source": "SEBI Bulletin Annexure Tables March 2025 Table 25"
+          }
+        ],
+        "matched_validation_count": 5
+      },
+      "array_sizes": {
+        "snapshot_validations": 5
+      }
+    }
+  ]
+}

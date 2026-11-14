@@ -1,0 +1,15 @@
+{
+  "utc": "2026-11-14T11:27:32.960717+00:00",
+  "top_level_audit_reports": 9,
+  "top_level_plan_reports": 3,
+  "broken_prose_links": [
+    {
+      "file": "docs\\omegadata_v2\\audit\\03_historical_evidence_and_release_status.md",
+      "target": "logs/encoding-followup.json"
+    }
+  ],
+  "tracked_files_checked": 11357,
+  "tracked_byte_deltas": [],
+  "git_note": "status-before already included the newly created audit log directory; compare initial orientation for pre-existing state",
+  "qa_note": "first checker incorrectly treated historical Markdown links inside fenced captured output as document navigation; corrected to inspect prose links only; initial result retained"
+}
