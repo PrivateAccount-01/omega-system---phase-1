@@ -1,0 +1,67 @@
+{
+  "utc": "2026-11-14T15:16:45.366533+00:00",
+  "checked": 11411,
+  "changes": {
+    "scripts/generate_source_probe_report.py": {
+      "before": {
+        "length": 17334,
+        "sha256": "8517421cfa9b5463623aaa5a0518aefd8980d4e6e34751e9377310ae14c507e5"
+      },
+      "after": {
+        "length": 18236,
+        "sha256": "934d991d17cbf823dde481cb0c78a3edda5ee01f431f4549db530528e7efdf22"
+      }
+    },
+    "src/omegadata/pipelines/sequential_pipeline.py": {
+      "before": {
+        "length": 45120,
+        "sha256": "2244d6bfd1fdf6b811987fc8d75448de485122bce8532fb422bec90a7d8ac793"
+      },
+      "after": {
+        "length": 45242,
+        "sha256": "84b58a67bdd9331e2a7714c357508a5f94335bd34e118e30df243c36b790890c"
+      }
+    },
+    "src/omegadata/track_a/download_manager.py": {
+      "before": {
+        "length": 40664,
+        "sha256": "842f422e889af1cba19d3e002a217002a35eee9551f304d3516c488e6be95020"
+      },
+      "after": {
+        "length": 47017,
+        "sha256": "9d78446c8f7d96a417fe47d593923adea218736d868a36fb611de5e8604d5e73"
+      }
+    },
+    "tests/conftest.py": {
+      "before": {
+        "length": 625,
+        "sha256": "46555ac817dc46fec7b9eefce9a48a536d2565ff08e226d8772b11d3a9276294"
+      },
+      "after": {
+        "length": 2747,
+        "sha256": "a47587512c6594c3905b7f43b942c26e8dc25ec60ba0d792fbc1e31c4983b89a"
+      }
+    },
+    "tests/unit/test_operations_layer.py": {
+      "before": {
+        "length": 4268,
+        "sha256": "15b331af109d45c118aae15053b73c67a0b357cf5831d73a1c8947eb91c70d02"
+      },
+      "after": {
+        "length": 4348,
+        "sha256": "72baa20101d4dd9a1d6252078c1f1177e47adac03a983f614557f39b9bb489b7"
+      }
+    },
+    "tests/unit/test_pipeline_and_api.py": {
+      "before": {
+        "length": 57453,
+        "sha256": "5fcd471aebb92f923694794616072a4a0a7b357ff7040a2f57b74c8a493d8908"
+      },
+      "after": {
+        "length": 58026,
+        "sha256": "a647bb75b396bb27c8c7fc8481c8c58a9ccb13b9912f79074d87c563ef545c4f"
+      }
+    }
+  },
+  "note": "Signing paths checked by metadata only; secrets never opened."
+}

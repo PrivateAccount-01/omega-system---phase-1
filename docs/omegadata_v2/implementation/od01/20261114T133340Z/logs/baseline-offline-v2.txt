@@ -1,0 +1,48 @@
+ImportError while loading conftest 'E:\omega system - phase 1\tests\conftest.py'.
+tests\conftest.py:6: in <module>
+    from sqlalchemy import create_engine
+.venv\Lib\site-packages\sqlalchemy\__init__.py:12: in <module>
+    from . import util as _util
+.venv\Lib\site-packages\sqlalchemy\util\__init__.py:14: in <module>
+    from ._collections import coerce_generator_arg as coerce_generator_arg
+.venv\Lib\site-packages\sqlalchemy\util\_collections.py:38: in <module>
+    from ._has_cy import HAS_CYEXTENSION
+.venv\Lib\site-packages\sqlalchemy\util\_has_cy.py:32: in <module>
+    _import_cy_extensions()
+.venv\Lib\site-packages\sqlalchemy\util\_has_cy.py:20: in _import_cy_extensions
+    from ..cyextension import util
+lib/sqlalchemy/cyextension/util.pyx:9: in init sqlalchemy.cyextension.util
+    ???
+.venv\Lib\site-packages\sqlalchemy\exc.py:26: in <module>
+    from .util import compat
+.venv\Lib\site-packages\sqlalchemy\util\compat.py:51: in <module>
+    arm = "aarch" in platform.machine().lower()
+                     ^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\platform.py:1127: in machine
+    return uname().machine
+           ^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\platform.py:1016: in uname
+    release, version, csd, ptype = win32_ver()
+                                   ^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\platform.py:467: in win32_ver
+    version, csd, ptype, is_client = _win32_ver(version, csd, ptype)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\platform.py:434: in _win32_ver
+    version = _syscmd_ver()[2]
+              ^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\platform.py:304: in _syscmd_ver
+    info = subprocess.check_output(cmd,
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py:472: in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py:554: in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py:1038: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py:1548: in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+docs\omegadata_v2\implementation\od01\20261114T133340Z\verification_runner.py:102: in audit
+    deny()
+docs\omegadata_v2\implementation\od01\20261114T133340Z\verification_runner.py:94: in deny
+    raise RuntimeError("OD-01 forbids network or subprocess side effects during tests")
+E   RuntimeError: OD-01 forbids network or subprocess side effects during tests

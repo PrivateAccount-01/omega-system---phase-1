@@ -1,0 +1,162 @@
+{
+  "utc": "2026-11-14T13:36:44.860129+00:00",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "shell": "Windows PowerShell 5.1",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:41.737916+00:00",
+      "end_utc": "2026-11-14T13:36:41.798845+00:00",
+      "exit_code": 0,
+      "stdout": "E:/omega system - phase 1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:41.798860+00:00",
+      "end_utc": "2026-11-14T13:36:41.865676+00:00",
+      "exit_code": 0,
+      "stdout": "main\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:41.865692+00:00",
+      "end_utc": "2026-11-14T13:36:41.927810+00:00",
+      "exit_code": 0,
+      "stdout": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:41.927823+00:00",
+      "end_utc": "2026-11-14T13:36:42.009479+00:00",
+      "exit_code": 0,
+      "stdout": "?? .venv-linux/\n?? artifacts/gnupg/openpgp-revocs.d/36B1626F19983C4B8F7C643B26A3DDBB6030631F.rev\n?? artifacts/gnupg/private-keys-v1.d/CC8A0E3CC8C92D4A27115F70CA3DE3DCC3C7CEE1.key\n?? artifacts/gnupg/private-keys-v1.d/E1CF3EA03F1E3F45D57248F5A92D37E1FE153B7A.key\n?? docs/omegadata_v2/implementation/\n?? docs/verification/OMEGADATA_OD01_CODEX_NEXT_PROMPT.md\n",
+      "stderr": "warning: unable to access 'C:\\Users\\Paril Rupani/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\Paril Rupani/.config/git/ignore': Permission denied\n"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-4",
+        "--oneline"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:42.009497+00:00",
+      "end_utc": "2026-11-14T13:36:42.107040+00:00",
+      "exit_code": 0,
+      "stdout": "d4b5a58 chore: preserve warehouse updates and release evidence\nf43ecec docs: record OD-00 audit and implementation plan\n09631ae final fix 8\n038b48a final fix 7\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:42.107055+00:00",
+      "end_utc": "2026-11-14T13:36:42.179230+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--name-only"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:42.179242+00:00",
+      "end_utc": "2026-11-14T13:36:42.246449+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:42.246461+00:00",
+      "end_utc": "2026-11-14T13:36:42.305955+00:00",
+      "exit_code": 0,
+      "stdout": "Python 3.14.3\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:42.305970+00:00",
+      "end_utc": "2026-11-14T13:36:42.630991+00:00",
+      "exit_code": 0,
+      "stdout": "pytest 9.0.2\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:42.631002+00:00",
+      "end_utc": "2026-11-14T13:36:44.393999+00:00",
+      "exit_code": 0,
+      "stdout": "ruff 0.15.9\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-14T13:36:44.394014+00:00",
+      "end_utc": "2026-11-14T13:36:44.860118+00:00",
+      "exit_code": 0,
+      "stdout": "mypy 1.20.0 (compiled: yes)\n",
+      "stderr": ""
+    }
+  ],
+  "packages": {
+    "pydantic": "2.12.5",
+    "pydantic-settings": "2.13.1",
+    "pytest": "9.0.2",
+    "ruff": "0.15.9",
+    "mypy": "1.20.0",
+    "coverage": "7.13.5",
+    "httpx": "0.28.1"
+  }
+}

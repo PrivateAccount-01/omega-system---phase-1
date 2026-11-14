@@ -203,8 +203,8 @@ def test_ensure_instrument_is_idempotent_before_flush(db_session) -> None:
     assert len(db_session.scalars(select(SymbolMap).where(SymbolMap.isin == "INEIDEM00001")).all()) == 1
 
 
-def test_nse_request_workaround_can_fall_back_to_curl(monkeypatch) -> None:
-    manager = DownloadManager()
+def test_nse_request_workaround_can_fall_back_to_curl(monkeypatch, synthetic_source_policy_provider) -> None:
+    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
 
     def fail_httpx(*args, **kwargs):  # noqa: ANN002, ANN003
         raise DownloadError("tls issue", stage="request")
@@ -225,17 +225,18 @@ def test_nse_request_workaround_can_fall_back_to_curl(monkeypatch) -> None:
     monkeypatch.setattr(manager, "_request_via_urllib", fail_urllib)
     monkeypatch.setattr(manager, "_request_via_curl", succeed_curl)
 
-    result = manager._request_with_workarounds(
-        client=None,  # type: ignore[arg-type]
-        url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
-        request_headers={"User-Agent": "test"},
-        timeout_seconds=1.0,
-    )
+    with manager._source_scope("NSE_CORPORATE_ACTIONS"):
+        result = manager._request_with_workarounds(
+            client=None,  # type: ignore[arg-type]
+            url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+            request_headers={"User-Agent": "test"},
+            timeout_seconds=1.0,
+        )
     assert result.transport == "curl"
 
 
-def test_nse_request_workaround_passes_bootstrapped_cookies_to_fallbacks(monkeypatch) -> None:
-    manager = DownloadManager()
+def test_nse_request_workaround_passes_bootstrapped_cookies_to_fallbacks(monkeypatch, synthetic_source_policy_provider) -> None:
+    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
     seen_headers: dict[str, str] = {}
 
     def fail_httpx(*args, **kwargs):  # noqa: ANN002, ANN003
@@ -263,22 +264,23 @@ def test_nse_request_workaround_passes_bootstrapped_cookies_to_fallbacks(monkeyp
         def __init__(self) -> None:
             self.cookies = {"bm_sv": "cookie123", "nsit": "cookie456"}
 
-    result = manager._request_with_workarounds(
-        client=DummyClient(),  # type: ignore[arg-type]
-        url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
-        request_headers={"User-Agent": "test"},
-        timeout_seconds=1.0,
-    )
+    with manager._source_scope("NSE_CORPORATE_ACTIONS"):
+        result = manager._request_with_workarounds(
+            client=DummyClient(),  # type: ignore[arg-type]
+            url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+            request_headers={"User-Agent": "test"},
+            timeout_seconds=1.0,
+        )
     assert result.transport == "curl"
     assert "Cookie" in seen_headers
     assert "bm_sv=cookie123" in seen_headers["Cookie"]
 
 
-def test_download_manager_reuses_cached_immutable_artifact(tmp_path: Path, monkeypatch) -> None:
+def test_download_manager_reuses_cached_immutable_artifact(tmp_path: Path, monkeypatch, synthetic_source_policy_provider) -> None:
     raw_root = tmp_path / "raw"
     monkeypatch.setattr(settings, "raw_root", str(raw_root))
     monkeypatch.setattr(settings, "seed_raw_root", str(tmp_path / "seed_raw"))
-    manager = DownloadManager()
+    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
     as_of = date(2026, 4, 13)
     out_dir = raw_root / "nse_corporate_actions" / "year=2026" / "month=04"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -307,12 +309,12 @@ def test_download_manager_reuses_cached_immutable_artifact(tmp_path: Path, monke
     assert cached.checksum == checksum
 
 
-def test_download_manager_falls_back_to_seed_cache_when_canonical_missing(tmp_path: Path, monkeypatch) -> None:
+def test_download_manager_falls_back_to_seed_cache_when_canonical_missing(tmp_path: Path, monkeypatch, synthetic_source_policy_provider) -> None:
     raw_root = tmp_path / "raw"
     seed_root = tmp_path / "seed_raw"
     monkeypatch.setattr(settings, "raw_root", str(raw_root))
     monkeypatch.setattr(settings, "seed_raw_root", str(seed_root))
-    manager = DownloadManager()
+    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
     as_of = date(2024, 1, 2)
     out_dir = seed_root / "nse_equity_bhavcopy" / "year=2024" / "month=01"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -739,9 +741,9 @@ def test_nse_fo_loader_supports_udiff_zip_payload(tmp_path: Path, db_session) ->
     assert loaded == 2
 
 
-def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, monkeypatch) -> None:
+def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, monkeypatch, synthetic_source_policy_provider) -> None:
     settings.raw_root = str(tmp_path)
-    manager = DownloadManager()
+    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
     payloads = [b"first-payload"]
 
     def fake_request(*args, **kwargs):
@@ -749,7 +751,7 @@ def test_download_manager_stores_versioned_immutable_artifacts(tmp_path: Path, m
             payload=payloads.pop(0),
             status_code=200,
             content_type="application/octet-stream",
-            transport="test",
+            transport="httpx",
             request_attempts=1,
         )
 

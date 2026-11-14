@@ -1,0 +1,72 @@
+{
+  "classification": "SYNTHETIC_TEST_ONLY approval example; NOT a real source approval; never install in runtime register",
+  "synthetic_approved": {
+    "schema_version": "source-policy/v1",
+    "source_key": "NSE_EQUITY_BHAVCOPY",
+    "policy_id": "SYNTHETIC_TEST_ONLY-NSE_EQUITY_BHAVCOPY",
+    "policy_revision": 1,
+    "status": "APPROVED",
+    "created_at": "2020-01-01T00:00:00Z",
+    "change_reason": "SYNTHETIC_TEST_ONLY: mock transports only",
+    "revision_hash": "372787ddecd26ccfd785f045ee8b4cf3709cfd31a36304c1ad8c4d98d333153b",
+    "previous_revision_hash": null,
+    "source_entity": "SYNTHETIC_TEST_ONLY",
+    "source_terms_url": "https://example.invalid/terms",
+    "terms_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "terms_retrieved_at": "2020-01-01T00:00:00Z",
+    "approval_evidence_ref": "SYNTHETIC_TEST_ONLY/mock-permission",
+    "approved_by": "SYNTHETIC_TEST_ONLY",
+    "approved_at": "2020-01-01T00:00:00Z",
+    "valid_from": "2020-01-01T00:00:00Z",
+    "valid_until": "2100-01-01T00:00:00Z",
+    "permitted_operations": [
+      "FETCH",
+      "STORE_RAW"
+    ],
+    "permitted_transports": [
+      "HTTPX"
+    ],
+    "allowed_hosts": [
+      "example.invalid"
+    ],
+    "rate_limit": null,
+    "retention_policy": null,
+    "attribution": null,
+    "geography": null,
+    "credential_requirement": null,
+    "cost_ceiling": null,
+    "revocation_reason": null,
+    "revoked_at": null
+  },
+  "real_source_pending": {
+    "schema_version": "source-policy/v1",
+    "source_key": "NSE_EQUITY_BHAVCOPY",
+    "policy_id": "od01-nse_equity_bhavcopy",
+    "policy_revision": 1,
+    "status": "PENDING_REVIEW",
+    "created_at": "2026-11-14T13:33:40Z",
+    "change_reason": "Initial pending record; no human source-rights approval supplied.",
+    "revision_hash": "3748506c02f3dd069b865d9522214bc93ab43e6c0f529d9d7f8cc1de86be70e1",
+    "previous_revision_hash": null,
+    "source_entity": null,
+    "source_terms_url": null,
+    "terms_sha256": null,
+    "terms_retrieved_at": null,
+    "approval_evidence_ref": null,
+    "approved_by": null,
+    "approved_at": null,
+    "valid_from": null,
+    "valid_until": null,
+    "permitted_operations": [],
+    "permitted_transports": [],
+    "allowed_hosts": [],
+    "rate_limit": null,
+    "retention_policy": null,
+    "attribution": null,
+    "geography": null,
+    "credential_requirement": null,
+    "cost_ceiling": null,
+    "revocation_reason": null,
+    "revoked_at": null
+  }
+}

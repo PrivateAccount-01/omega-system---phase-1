@@ -1,0 +1,225 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> src\omegadata\track_a\source_rights.py:2:1
+   |
+ 1 |   """Versioned source-use preconditions. Technical validation is not legal approval."""
+ 2 | / from __future__ import annotations
+ 3 | |
+ 4 | | import hashlib
+ 5 | | import json
+ 6 | | import re
+ 7 | | from collections.abc import Callable
+ 8 | | from datetime import datetime, timedelta
+ 9 | | from enum import StrEnum
+10 | | from pathlib import Path
+11 | | from typing import Annotated, Literal, Self
+12 | |
+13 | | from pydantic import BaseModel, ConfigDict, Field, StrictStr, StringConstraints, ValidationError, field_validator, model_validator
+14 | |
+15 | | from omegadata.track_a.source_registry import SOURCE_REGISTRY
+   | |_____________________________________________________________^
+16 |
+17 |   DEFAULT_POLICY_PATH = Path(__file__).resolve().parents[3] / "config/source_rights_policy.v1.json"
+   |
+help: Organize imports
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:30:1
+   |
+29 | # All approvals below are SYNTHETIC_TEST_ONLY and reach fake transports only.
+30 | import hashlib
+   | ^^^^^^^^^^^^^^
+31 | import json
+32 | from concurrent.futures import ThreadPoolExecutor
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\unit\test_od01_source_rights.py:30:1
+   |
+29 |   # All approvals below are SYNTHETIC_TEST_ONLY and reach fake transports only.
+30 | / import hashlib
+31 | | import json
+32 | | from concurrent.futures import ThreadPoolExecutor
+33 | | from datetime import UTC, datetime, timedelta
+34 | | from importlib.util import module_from_spec, spec_from_file_location
+35 | |
+36 | | import httpx
+37 | | from pydantic import ValidationError
+38 | |
+39 | | from omegadata.track_a import download_manager as downloader
+40 | | from omegadata.track_a.source_registry import SOURCE_REGISTRY
+41 | | from omegadata.track_a.source_rights import (
+42 | |     DEFAULT_POLICY_PATH,
+43 | |     PolicyReason,
+44 | |     PolicyRegisterError,
+45 | |     PolicyRequest,
+46 | |     PolicyStatus,
+47 | |     SourceOperation as Op,
+48 | |     SourcePolicy,
+49 | |     SourcePolicyError,
+50 | |     SourcePolicyRegister,
+51 | |     SourceTransport as Transport,
+52 | |     authorize_source,
+53 | |     load_policy_register,
+54 | | )
+   | |_^
+55 |
+56 |   NOW = datetime(2026, 11, 14, 15, 0, tzinfo=UTC)
+   |
+help: Organize imports
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:31:1
+   |
+29 | # All approvals below are SYNTHETIC_TEST_ONLY and reach fake transports only.
+30 | import hashlib
+31 | import json
+   | ^^^^^^^^^^^
+32 | from concurrent.futures import ThreadPoolExecutor
+33 | from datetime import UTC, datetime, timedelta
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:32:1
+   |
+30 | import hashlib
+31 | import json
+32 | from concurrent.futures import ThreadPoolExecutor
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+33 | from datetime import UTC, datetime, timedelta
+34 | from importlib.util import module_from_spec, spec_from_file_location
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:33:1
+   |
+31 | import json
+32 | from concurrent.futures import ThreadPoolExecutor
+33 | from datetime import UTC, datetime, timedelta
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+34 | from importlib.util import module_from_spec, spec_from_file_location
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:34:1
+   |
+32 | from concurrent.futures import ThreadPoolExecutor
+33 | from datetime import UTC, datetime, timedelta
+34 | from importlib.util import module_from_spec, spec_from_file_location
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+35 |
+36 | import httpx
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:36:1
+   |
+34 | from importlib.util import module_from_spec, spec_from_file_location
+35 |
+36 | import httpx
+   | ^^^^^^^^^^^^
+37 | from pydantic import ValidationError
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:37:1
+   |
+36 | import httpx
+37 | from pydantic import ValidationError
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+38 |
+39 | from omegadata.track_a import download_manager as downloader
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:39:1
+   |
+37 | from pydantic import ValidationError
+38 |
+39 | from omegadata.track_a import download_manager as downloader
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+40 | from omegadata.track_a.source_registry import SOURCE_REGISTRY
+41 | from omegadata.track_a.source_rights import (
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:40:1
+   |
+39 | from omegadata.track_a import download_manager as downloader
+40 | from omegadata.track_a.source_registry import SOURCE_REGISTRY
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+41 | from omegadata.track_a.source_rights import (
+42 |     DEFAULT_POLICY_PATH,
+   |
+
+E402 Module level import not at top of file
+  --> tests\unit\test_od01_source_rights.py:41:1
+   |
+39 |   from omegadata.track_a import download_manager as downloader
+40 |   from omegadata.track_a.source_registry import SOURCE_REGISTRY
+41 | / from omegadata.track_a.source_rights import (
+42 | |     DEFAULT_POLICY_PATH,
+43 | |     PolicyReason,
+44 | |     PolicyRegisterError,
+45 | |     PolicyRequest,
+46 | |     PolicyStatus,
+47 | |     SourceOperation as Op,
+48 | |     SourcePolicy,
+49 | |     SourcePolicyError,
+50 | |     SourcePolicyRegister,
+51 | |     SourceTransport as Transport,
+52 | |     authorize_source,
+53 | |     load_policy_register,
+54 | | )
+   | |_^
+55 |
+56 |   NOW = datetime(2026, 11, 14, 15, 0, tzinfo=UTC)
+   |
+
+E731 Do not assign a `lambda` expression, use a `def`
+   --> tests\unit\test_od01_source_rights.py:114:5
+    |
+112 |     }.get(case, {})
+113 |     policy = changed(approved, **body)
+114 |     provider = lambda: register() if case == "missing" else register(policy)
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+115 |     raw = tmp_path/"no-raw"
+116 |     monkeypatch.setattr(settings, "raw_root", str(raw))
+    |
+help: Rewrite `provider` as a `def`
+
+E731 Do not assign a `lambda` expression, use a `def`
+   --> tests\unit\test_od01_source_rights.py:140:5
+    |
+139 | def test_t08_fetch_does_not_grant_redistribution(approved) -> None:
+140 |     provider = lambda: register(changed(approved, permitted_operations=(Op.FETCH,)))
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+141 |     assert authorize_source(request(), provider).allowed
+142 |     with pytest.raises(SourcePolicyError) as exc:
+    |
+help: Rewrite `provider` as a `def`
+
+E731 Do not assign a `lambda` expression, use a `def`
+   --> tests\unit\test_od01_source_rights.py:148:5
+    |
+147 | def test_t09_research_does_not_grant_trade_use(approved) -> None:
+148 |     provider = lambda: register(changed(approved, permitted_operations=(Op.FETCH,Op.RESEARCH)))
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+149 |     assert authorize_source(request(consumer_purpose=Op.RESEARCH),provider).allowed
+150 |     with pytest.raises(SourcePolicyError) as exc:
+    |
+help: Rewrite `provider` as a `def`
+
+E731 Do not assign a `lambda` expression, use a `def`
+   --> tests\unit\test_od01_source_rights.py:250:5
+    |
+248 |     path=tmp_path/"policy.json"
+249 |     path.write_bytes(contents)
+250 |     provider=lambda:load_policy_register(path)
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+251 |     manager=DownloadManager(policy_provider=provider,decision_clock=lambda:NOW)
+252 |     spy=Mock()
+    |
+help: Rewrite `provider` as a `def`
+
+Found 16 errors.
+[*] 2 fixable with the `--fix` option (4 hidden fixes can be enabled with the `--unsafe-fixes` option).

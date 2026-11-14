@@ -9,6 +9,14 @@ import tempfile
 import zipfile
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
+from urllib.parse import urlsplit
+
+from omegadata.track_a.source_rights import (
+    PolicyRequest,
+    SourceOperation,
+    SourceTransport,
+    authorize_source,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CALENDAR_PATH = REPO_ROOT / "config/trading_holidays_india.json"
@@ -89,10 +97,18 @@ def _render_bse_fallbacks(as_of: date) -> list[str]:
 
 def _curl_probe(
     *,
+    source_key: str,
     url: str,
     timeout_seconds: float,
     bootstrap_nse: bool = False,
 ) -> tuple[int | None, str, bytes, str | None]:
+    urls = [url, "https://www.nseindia.com/"] if bootstrap_nse else [url]
+    for target in urls:
+        authorize_source(PolicyRequest(
+            source_key=source_key, operation=SourceOperation.FETCH,
+            decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+            requested_host=urlsplit(target).hostname,
+        ))
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
         body_path = tmp / "body.bin"
@@ -184,9 +200,15 @@ def _probe_entry(
     timeout_seconds: float,
     kind: str,
 ) -> dict[str, object]:
+    policy_decision = authorize_source(PolicyRequest(
+        source_key=source_key, operation=SourceOperation.FETCH,
+        decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+        requested_host=urlsplit(url).hostname,
+    ))
     bootstrap_nse = "nseindia.com" in url or "nsearchives.nseindia.com" in url
     started = datetime.now(UTC)
     status_code, content_type, body, stderr = _curl_probe(
+        source_key=source_key,
         url=url,
         timeout_seconds=timeout_seconds,
         bootstrap_nse=bootstrap_nse,
@@ -223,6 +245,7 @@ def _probe_entry(
             )
     return {
         "source_key": source_key,
+        "source_policy_decision": policy_decision.model_dump(mode="json"),
         "as_of": as_of.isoformat(),
         "url": url,
         "role": role,

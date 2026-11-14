@@ -1,0 +1,29 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01\\20261114T133340Z\\verification_runner.py",
+    "baseline-ruff",
+    "ruff",
+    "check",
+    "--no-cache",
+    "src/omegadata",
+    "tests",
+    "scripts"
+  ],
+  "effective_module": [
+    "ruff",
+    "check",
+    "--no-cache",
+    "src/omegadata",
+    "tests",
+    "scripts"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-14T14:51:39.973875+00:00",
+  "end_utc": "2026-11-14T14:51:40.210777+00:00",
+  "elapsed_seconds": 0.23690199997508898,
+  "exit_code": 0,
+  "output": "baseline-ruff.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

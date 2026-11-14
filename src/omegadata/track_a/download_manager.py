@@ -10,8 +10,10 @@ import subprocess
 import tempfile
 import time
 import zipfile
-from contextlib import suppress
-from dataclasses import dataclass
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
+from dataclasses import dataclass, replace
 from datetime import UTC, date, datetime
 from html.parser import HTMLParser
 from pathlib import Path
@@ -25,6 +27,16 @@ from omegadata.config import settings
 from omegadata.track_a.alerting import AlertEvent, AlertRouter
 from omegadata.track_a.monitoring import DOWNLOAD_COUNTER, DOWNLOAD_LATENCY, FAILOVER_COUNTER
 from omegadata.track_a.source_registry import SOURCE_REGISTRY, resolve_era
+from omegadata.track_a.source_rights import (
+    PolicyProvider,
+    PolicyRequest,
+    SourceOperation,
+    SourcePolicyDecision,
+    SourcePolicyError,
+    SourceTransport,
+    authorize_source,
+    load_policy_register,
+)
 
 
 class DownloadError(RuntimeError):
@@ -50,6 +62,7 @@ class DownloadArtifact:
     bytes_downloaded: int
     used_url: str
     attempts: int
+    policy_decisions: tuple[SourcePolicyDecision, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -80,15 +93,62 @@ class SourceProbeResult:
     error: str | None
     validation_error: str | None
     body_preview: str
+    policy_decisions: tuple[SourcePolicyDecision, ...] = ()
 
 
 class DownloadManager:
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        *,
+        policy_provider: PolicyProvider | None = None,
+        decision_clock: Callable[[], datetime] | None = None,
+    ) -> None:
         self.raw_root = Path(settings.raw_root)
-        self.raw_root.mkdir(parents=True, exist_ok=True)
         self.seed_raw_root = Path(settings.seed_raw_root)
-        self.seed_raw_root.mkdir(parents=True, exist_ok=True)
         self.alert_router = AlertRouter()
+        self._policy_provider = load_policy_register if policy_provider is None else policy_provider
+        self._decision_clock = decision_clock or (lambda: datetime.now(UTC))
+        self._policy_source: ContextVar[str] = ContextVar("download_policy_source", default="")
+
+    @contextmanager
+    def _source_scope(self, source_key: str) -> Iterator[None]:
+        token = self._policy_source.set(source_key)
+        try:
+            yield
+        finally:
+            self._policy_source.reset(token)
+
+    def _authorize(
+        self,
+        source_key: str,
+        operation: SourceOperation,
+        transport: SourceTransport,
+        host: str | None = None,
+        consumer_purpose: SourceOperation | None = None,
+    ) -> SourcePolicyDecision:
+        return authorize_source(
+            PolicyRequest(
+                source_key=source_key or "UNSCOPED_TRANSPORT",
+                operation=operation,
+                decision_at=self._decision_clock(),
+                requested_transport=transport,
+                requested_host=host,
+                consumer_purpose=consumer_purpose,
+            ),
+            self._policy_provider,
+        )
+
+    def _authorize_url(
+        self,
+        source_key: str,
+        url: str,
+        transport: SourceTransport,
+        operation: SourceOperation = SourceOperation.FETCH,
+        consumer_purpose: SourceOperation | None = None,
+    ) -> SourcePolicyDecision:
+        parsed = urlparse(url)
+        host = parsed.hostname if parsed.scheme in {"http", "https"} and not parsed.username and not parsed.password else None
+        return self._authorize(source_key, operation, transport, host, consumer_purpose)
 
     def _load_cached_artifact_from_root(
         self,
@@ -96,6 +156,10 @@ class DownloadManager:
         source_key: str,
         as_of: date,
     ) -> DownloadArtifact | None:
+        decision = self._authorize(
+            source_key, SourceOperation.READ_CACHED,
+            SourceTransport.CACHE if root == self.raw_root else SourceTransport.SEED_CACHE,
+        )
         out_dir = root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
         latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
         if not latest_pointer.exists():
@@ -126,6 +190,7 @@ class DownloadManager:
             bytes_downloaded=int(manifest_payload.get("bytes_downloaded", artifact_path.stat().st_size)),
             used_url=str(manifest_payload.get("used_url", "")),
             attempts=int(manifest_payload.get("attempts", 0)),
+            policy_decisions=(decision,),
         )
 
     def _load_cached_artifact(self, source_key: str, as_of: date) -> DownloadArtifact | None:
@@ -265,6 +330,7 @@ class DownloadManager:
         return hashlib.sha256(data).hexdigest()
 
     def _request_once(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
+        self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
         response = client.get(url, timeout=timeout_seconds)
         if response.status_code in {403, 429}:
             raise DownloadError(
@@ -296,6 +362,7 @@ class DownloadManager:
         timeout_seconds: float = 60.0,
         max_attempts: int = 5,
     ) -> FetchResult:
+        self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
         attempts = 0
         last_error: Exception | None = None
         while attempts < max_attempts:
@@ -326,6 +393,7 @@ class DownloadManager:
         ]
         last_error: Exception | None = None
         for bootstrap_url in bootstrap_urls:
+            self._authorize_url(self._policy_source.get(), bootstrap_url, SourceTransport.HTTPX)
             try:
                 bootstrap = client.get(bootstrap_url, timeout=30.0)
                 if bootstrap.status_code in {200, 204, 304}:
@@ -333,6 +401,8 @@ class DownloadManager:
                 last_error = DownloadError(
                     f"Unexpected NSE bootstrap status {bootstrap.status_code} for {bootstrap_url}"
                 )
+            except SourcePolicyError:
+                raise
             except Exception as exc:  # noqa: BLE001
                 last_error = exc
                 continue
@@ -345,6 +415,7 @@ class DownloadManager:
         *,
         timeout_seconds: float = 60.0,
     ) -> FetchResult:
+        self._authorize_url(self._policy_source.get(), url, SourceTransport.URLLIB)
         context = ssl.create_default_context()
         context.minimum_version = ssl.TLSVersion.TLSv1_2
         req = Request(url=url, headers=headers, method="GET")
@@ -392,6 +463,7 @@ class DownloadManager:
         *,
         timeout_seconds: float = 60.0,
     ) -> FetchResult:
+        self._authorize_url(self._policy_source.get(), url, SourceTransport.CURL)
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_root = Path(temp_dir)
             body_path = temp_root / "curl_body.bin"
@@ -483,6 +555,7 @@ class DownloadManager:
         timeout_seconds: float = 60.0,
         max_request_attempts: int = 5,
     ) -> FetchResult:
+        self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
         try:
             return self._request(
                 client,
@@ -490,19 +563,25 @@ class DownloadManager:
                 timeout_seconds=timeout_seconds,
                 max_attempts=max_request_attempts,
             )
+        except SourcePolicyError:
+            raise
         except Exception as exc:  # noqa: BLE001
             if not self._is_nse_url(url) or not self._is_retryable_nse_request_error(exc):
                 raise
         fallback_headers = self._attach_cookie_header(request_headers, client)
+        self._authorize_url(self._policy_source.get(), url, SourceTransport.URLLIB)
         try:
             return self._request_via_urllib(
                 url=url,
                 headers=fallback_headers,
                 timeout_seconds=timeout_seconds,
             )
+        except SourcePolicyError:
+            raise
         except Exception as urllib_exc:  # noqa: BLE001
             if not self._is_retryable_nse_request_error(urllib_exc) and not self._is_tls_error(urllib_exc):
                 raise
+        self._authorize_url(self._policy_source.get(), url, SourceTransport.CURL)
         return self._request_via_curl(url=url, headers=fallback_headers, timeout_seconds=timeout_seconds)
 
     def _render_url(self, source_key: str, as_of: date) -> str:
@@ -540,22 +619,26 @@ class DownloadManager:
 
     def _discover_bse_equity_urls(self, as_of: date) -> list[str]:
         page_url = "https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3"
+        self._authorize_url("BSE_EQUITY_BHAVCOPY", page_url, SourceTransport.HTTPX)
         base_profile = self._header_profiles()[0]
         headers = self._profile_for_url(base_profile, page_url)
         try:
             with httpx.Client(headers=headers, follow_redirects=True, timeout=30.0) as client:
                 response = client.get(page_url)
                 response.raise_for_status()
+        except SourcePolicyError:
+            raise
         except Exception:
             return []
         return self._extract_bse_equity_urls(response.text, as_of)
 
     def _discover_nse_fo_urls(self, as_of: date) -> list[str]:
         api_url = "https://www.nseindia.com/api/daily-reports?key=FO"
+        self._authorize_url("NSE_FO_BHAVCOPY", api_url, SourceTransport.HTTPX)
         base_profile = self._header_profiles()[0]
         headers = self._profile_for_url(base_profile, api_url)
         try:
-            with httpx.Client(headers=headers, follow_redirects=True) as client:
+            with self._source_scope("NSE_FO_BHAVCOPY"), httpx.Client(headers=headers, follow_redirects=True) as client:
                 self._bootstrap_nse_session(client)
                 response = self._request_with_workarounds(
                     client,
@@ -563,6 +646,8 @@ class DownloadManager:
                     request_headers=headers,
                     timeout_seconds=settings.source_probe_timeout_seconds,
                 )
+        except SourcePolicyError:
+            raise
         except Exception:
             return []
 
@@ -600,6 +685,9 @@ class DownloadManager:
         return list(dict.fromkeys(urls))
 
     def _candidate_urls(self, source_key: str, as_of: date) -> list[str]:
+        if source_key not in SOURCE_REGISTRY:
+            self._authorize(source_key, SourceOperation.FETCH, SourceTransport.HTTPX)
+        self._authorize_url(source_key, self._render_url(source_key, as_of), SourceTransport.HTTPX)
         source = SOURCE_REGISTRY[source_key]
         urls: list[str] = []
         if source_key == "BSE_EQUITY_BHAVCOPY":
@@ -752,11 +840,16 @@ class DownloadManager:
         request_timeout_seconds: float = 60.0,
         max_request_attempts: int = 5,
     ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
         request_headers = self._profile_for_url(profile, url)
-        with httpx.Client(headers=request_headers, follow_redirects=True) as client:
+        with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
             if self._is_nse_url(url):
-                with suppress(Exception):
+                try:
                     self._bootstrap_nse_session(client)
+                except SourcePolicyError:
+                    raise
+                except Exception:  # noqa: BLE001
+                    pass
             result = self._request_with_workarounds(
                 client,
                 url,
@@ -777,6 +870,9 @@ class DownloadManager:
         request_timeout_seconds: float = 15.0,
         max_request_attempts: int = 5,
     ) -> list[SourceProbeResult]:
+        if source_key not in SOURCE_REGISTRY:
+            self._authorize(source_key, SourceOperation.FETCH, SourceTransport.HTTPX)
+        self._authorize_url(source_key, self._render_url(source_key, as_of), SourceTransport.HTTPX)
         candidate_urls = self._candidate_urls(source_key, as_of)
         if limit is not None:
             candidate_urls = candidate_urls[:limit]
@@ -798,12 +894,14 @@ class DownloadManager:
             validated = False
             attempts = 0
             elapsed_seconds = 0.0
+            policy_decision: SourcePolicyDecision | None = None
 
             for profile in probe_profiles:
                 attempts += 1
                 last_profile_name = self._profile_name(profile)
                 started = time.perf_counter()
                 try:
+                    policy_decision = self._authorize_url(source_key, url, SourceTransport.HTTPX)
                     result = self._fetch_candidate(
                         source_key,
                         as_of,
@@ -813,6 +911,7 @@ class DownloadManager:
                         max_request_attempts=max_request_attempts,
                     )
                     last_status_code = result.status_code
+                    policy_decision = self._authorize_url(source_key, url, SourceTransport(result.transport.upper()))
                     last_content_type = result.content_type
                     last_bytes = len(result.payload)
                     last_preview = result.payload[:220].decode("utf-8", errors="ignore").replace("\n", " ")
@@ -824,6 +923,8 @@ class DownloadManager:
                     last_validation_error = None
                     last_failure_stage = None
                     break
+                except SourcePolicyError:
+                    raise
                 except Exception as exc:  # noqa: BLE001
                     elapsed_seconds = time.perf_counter() - started
                     last_error = str(exc)
@@ -856,6 +957,7 @@ class DownloadManager:
                     error=last_error,
                     validation_error=last_validation_error,
                     body_preview=last_preview,
+                    policy_decisions=() if policy_decision is None else (policy_decision,),
                 )
             )
         return results
@@ -867,13 +969,23 @@ class DownloadManager:
         *,
         request_timeout_seconds: float | None = None,
         max_request_attempts: int | None = None,
+        use_cache: bool = True,
+        consumer_purpose: SourceOperation | None = None,
     ) -> DownloadArtifact:
         if source_key not in SOURCE_REGISTRY:
-            raise KeyError(f"Unknown source key: {source_key}")
-        cached = self._load_cached_artifact(source_key, as_of)
-        if cached is not None:
-            DOWNLOAD_COUNTER.labels(source=source_key, status="cached").inc()
-            return cached
+            self._authorize(source_key, SourceOperation.READ_CACHED, SourceTransport.CACHE)
+        if use_cache:
+            cache_decision = self._authorize(
+                source_key, SourceOperation.READ_CACHED, SourceTransport.CACHE,
+                consumer_purpose=consumer_purpose,
+            )
+            cached = self._load_cached_artifact(source_key, as_of)
+            if cached is not None:
+                DOWNLOAD_COUNTER.labels(source=source_key, status="cached").inc()
+                return replace(cached, policy_decisions=(cache_decision, *cached.policy_decisions))
+        primary_url = self._render_url(source_key, as_of)
+        self._authorize_url(source_key, primary_url, SourceTransport.HTTPX, consumer_purpose=consumer_purpose)
+        self._authorize_url(source_key, primary_url, SourceTransport.HTTPX, SourceOperation.STORE_RAW, consumer_purpose)
         source = SOURCE_REGISTRY[source_key]
         candidate_urls = self._candidate_urls(source_key, as_of)
         attempts = 0
@@ -887,6 +999,7 @@ class DownloadManager:
                 for idx, url in enumerate(candidate_urls):
                     attempts += 1
                     try:
+                        self._authorize_url(source_key, url, SourceTransport.HTTPX, consumer_purpose=consumer_purpose)
                         result = self._fetch_candidate(
                             source_key,
                             as_of,
@@ -900,6 +1013,8 @@ class DownloadManager:
                         if idx > 0:
                             FAILOVER_COUNTER.labels(source=source_key).inc()
                         break
+                    except SourcePolicyError:
+                        raise
                     except Exception as exc:  # noqa: BLE001
                         last_error = exc
                         consecutive_failures += 1
@@ -938,6 +1053,12 @@ class DownloadManager:
                     created_at=datetime.now(UTC),
                 )
             )
+        fetch_decision = self._authorize_url(
+            source_key, used_url, SourceTransport(result.transport.upper()), consumer_purpose=consumer_purpose,
+        )
+        store_decision = self._authorize_url(
+            source_key, used_url, SourceTransport(result.transport.upper()), SourceOperation.STORE_RAW, consumer_purpose,
+        )
         DOWNLOAD_COUNTER.labels(source=source_key, status="success").inc()
 
         digest = self._hash_content(payload, source.checksum)
@@ -969,6 +1090,7 @@ class DownloadManager:
             "used_url": used_url,
             "attempts": attempts,
             "downloaded_at": datetime.now(UTC).isoformat(),
+            "policy_decisions": [d.model_dump(mode="json") for d in (fetch_decision, store_decision)],
         }
         manifest_path = out_dir / f"{artifact_stem}.manifest.json"
         if not manifest_path.exists():
@@ -985,6 +1107,7 @@ class DownloadManager:
             bytes_downloaded=len(payload),
             used_url=used_url,
             attempts=attempts,
+            policy_decisions=(fetch_decision, store_decision),
         )
 
     def fetch_bse_stockreach_graph(
@@ -993,6 +1116,8 @@ class DownloadManager:
         from_date: date,
         to_date: date,
     ) -> dict[str, object]:
+        # This helper is not a registered data source; never borrow another feed's rights.
+        self._authorize("BSE_STOCKREACH_GRAPH", SourceOperation.FETCH, SourceTransport.HTTPX, "api.bseindia.com")
         if not scrip_code.strip():
             raise DownloadError("scrip_code is required for StockReachGraph")
 
@@ -1018,6 +1143,8 @@ class DownloadManager:
                 if not isinstance(parsed, dict):
                     raise DownloadError("Unexpected StockReachGraph payload type")
                 return parsed
+            except SourcePolicyError:
+                raise
             except Exception as exc:  # noqa: BLE001
                 last_error = exc
                 continue

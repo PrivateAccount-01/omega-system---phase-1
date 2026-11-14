@@ -1,0 +1,35 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01\\20261114T133340Z\\verification_runner.py",
+    "full-offline-coverage",
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata.track_a.source_rights",
+    "--cov=omegadata.track_a.download_manager",
+    "--cov-branch",
+    "--cov-report=term-missing",
+    "--cov-report=json:docs/omegadata_v2/implementation/od01/20261114T133340Z/logs/coverage.json"
+  ],
+  "effective_module": [
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata.track_a.source_rights",
+    "--cov=omegadata.track_a.download_manager",
+    "--cov-branch",
+    "--cov-report=term-missing",
+    "--cov-report=json:docs/omegadata_v2/implementation/od01/20261114T133340Z/logs/coverage.json"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-14T15:05:11.002722+00:00",
+  "end_utc": "2026-11-14T15:05:36.768001+00:00",
+  "elapsed_seconds": 25.765278599981684,
+  "exit_code": 0,
+  "output": "full-offline-coverage.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

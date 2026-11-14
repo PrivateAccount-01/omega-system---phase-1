@@ -35,6 +35,7 @@ from omegadata.track_a.collection_schedule import (
     require_confirmation_window,
 )
 from omegadata.track_a.orchestration import IngestionOrchestrator
+from omegadata.track_a.source_rights import SourcePolicyError
 from omegadata.track_b.adjustment_engine import PriceAdjustmentEngine
 from omegadata.track_b.confidence import ConfidenceInputs, ConfidenceScorer
 from omegadata.track_b.corporate_action_parser import CorporateActionParser
@@ -882,6 +883,8 @@ class OmegaDataSequentialPipeline:
         for source in sources:
             try:
                 paths[source] = self.ingestor.ingest_raw_source(source, as_of)
+            except SourcePolicyError:
+                raise
             except Exception:
                 if source in required_sources:
                     raise

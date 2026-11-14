@@ -1,0 +1,43 @@
+........................................................................ [ 72%]
+........F..................                                              [100%]
+================================== FAILURES ===================================
+_______________ test_t17_denied_fallback_transport_is_terminal ________________
+
+approved = SourcePolicy(schema_version='source-policy/v1', source_key='NSE_EQUITY_BHAVCOPY', policy_id='SYNTHETIC_TEST_ONLY-NSE_E...ribution=None, geography=None, credential_requirement=None, cost_ceiling=None, revocation_reason=None, revoked_at=None)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002D1CC411E10>
+
+    def test_t17_denied_fallback_transport_is_terminal(approved, monkeypatch) -> None:
+        policy = changed(approved, permitted_transports=(Transport.HTTPX,))
+        manager = DownloadManager(policy_provider=lambda: register(policy), decision_clock=lambda: NOW)
+        first = Mock(side_effect=downloader.DownloadError("TLS issue"))
+        fallback = Mock()
+        monkeypatch.setattr(manager, "_request", first)
+        monkeypatch.setattr(manager, "_request_via_urllib", fallback)
+        monkeypatch.setattr(manager, "_request_via_curl", fallback)
+        with manager._source_scope(KEY), pytest.raises(SourcePolicyError) as exc:
+>           manager._request_with_workarounds(Mock(), "https://www.nseindia.com/api/mock", {})
+
+tests\unit\test_od01_source_rights.py:460: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:573: in _request_with_workarounds
+    fallback_headers = self._attach_cookie_header(request_headers, client)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+headers = {}, client = <Mock id='3100097681392'>
+
+    @staticmethod
+    def _attach_cookie_header(
+        headers: dict[str, str],
+        client: httpx.Client | None,
+    ) -> dict[str, str]:
+        if client is None or not client.cookies:
+            return headers
+>       cookie_header = "; ".join(f"{name}={value}" for name, value in client.cookies.items())
+                                                                       ^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'Mock' object is not iterable
+
+src\omegadata\track_a\download_manager.py:454: TypeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od01_source_rights.py::test_t17_denied_fallback_transport_is_terminal
+1 failed, 98 passed in 1.55s

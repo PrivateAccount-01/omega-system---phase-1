@@ -1,0 +1,25 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________ test_pending_default_stops_before_cache_disclosure ______________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01-offline-4beqxkn3/pytest/test_pending_default_stops_bef0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F9F5FCC2B0>
+
+    def test_pending_default_stops_before_cache_disclosure(tmp_path: Path, monkeypatch) -> None:
+        """Negative-first proof: unchanged after production implementation."""
+        raw = tmp_path / "must-not-be-created"
+        monkeypatch.setattr(settings, "raw_root", str(raw))
+        monkeypatch.setattr(settings, "seed_raw_root", str(tmp_path / "seed"))
+        manager = DownloadManager()
+        cached = Mock(return_value=Mock(path=Path("SYNTHETIC_TEST_ONLY")))
+        fetch = Mock()
+        monkeypatch.setattr(manager, "_load_cached_artifact", cached)
+        monkeypatch.setattr(manager, "_fetch_candidate", fetch)
+>       with pytest.raises(RuntimeError, match="POLICY_PENDING"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests\unit\test_od01_source_rights.py:23: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od01_source_rights.py::test_pending_default_stops_before_cache_disclosure
+1 failed in 0.34s

@@ -103,8 +103,8 @@ def test_monthly_quality_report_generation(db_session, tmp_path) -> None:
         settings.report_root = original_report_root
 
 
-def test_download_manager_candidate_urls_include_failover() -> None:
-    manager = DownloadManager()
+def test_download_manager_candidate_urls_include_failover(synthetic_source_policy_provider) -> None:
+    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
     candidates = manager._candidate_urls("NSE_CORPORATE_ACTIONS", date(2026, 4, 7))
     assert len(candidates) >= 2
     assert any("corporate-announcements" in url for url in candidates)

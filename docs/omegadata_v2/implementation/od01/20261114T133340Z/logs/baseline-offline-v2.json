@@ -1,0 +1,25 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01\\20261114T133340Z\\verification_runner.py",
+    "baseline-offline-v2",
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "effective_module": [
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-14T14:52:11.032191+00:00",
+  "end_utc": "2026-11-14T14:52:11.649784+00:00",
+  "elapsed_seconds": 0.6175915999920107,
+  "exit_code": 4,
+  "output": "baseline-offline-v2.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

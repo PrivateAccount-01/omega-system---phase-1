@@ -1,0 +1,79 @@
+........................................................................ [ 34%]
+........................................................................ [ 68%]
+...................................................................C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\ast.py:46: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F18F2BD30>
+  return compile(source, filename, mode, flags,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\ast.py:46: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F59A548B0>
+  return compile(source, filename, mode, flags,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\ast.py:46: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F189DCE50>
+  return compile(source, filename, mode, flags,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+      [100%]
+============================== warnings summary ===============================
+tests/unit/test_pipeline_and_api.py::test_nse_fo_loader_supports_udiff_zip_payload
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\util\topological.py:35: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F194C5F30>
+    edges[child].add(parent)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_pipeline_and_api.py::test_nse_fo_loader_supports_udiff_zip_payload
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\util\topological.py:35: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F196B06D0>
+    edges[child].add(parent)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\engine\cursor.py:1644: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F196209A0>
+    def _soft_close(self, hard: bool = False) -> None:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\engine\cursor.py:1644: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F195CAA70>
+    def _soft_close(self, hard: bool = False) -> None:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\engine\cursor.py:1644: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F19517100>
+    def _soft_close(self, hard: bool = False) -> None:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\engine\cursor.py:1644: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F194C53F0>
+    def _soft_close(self, hard: bool = False) -> None:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\engine\cursor.py:1644: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F18F5D4E0>
+    def _soft_close(self, hard: bool = False) -> None:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+  E:\omega system - phase 1\.venv\Lib\site-packages\sqlalchemy\engine\cursor.py:1644: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F18E79C60>
+    def _soft_close(self, hard: bool = False) -> None:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.14.3-final-0 _______________
+
+Name                                        Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------------
+src\omegadata\track_a\download_manager.py     678    251    210     50    58%   169-170, 175, 180, 183, 206, 222, 225, 239, 256-265, 271, 273, 307-309, 320-324, 329, 336, 342, 348, 379-385, 389-409, 419-437, 454, 467-541, 567, 570, 580, 583, 610->609, 616->614, 623-633, 638-685, 689, 694, 696, 705, 710, 720->723, 727, 731, 733, 741, 751, 754, 763-774, 786-795, 798-810, 814, 823-831, 849-852, 874, 877->879, 899->941, 926-939, 998->1029, 999->1026, 1014, 1018-1025, 1026->998, 1030-1043, 1047, 1072, 1074, 1076, 1080->1083, 1096->1099, 1121-1152
+src\omegadata\track_a\source_rights.py        251      1     66      1    99%   298
+---------------------------------------------------------------------------------------
+TOTAL                                         929    252    276     51    69%
+Coverage JSON written to file docs/omegadata_v2/implementation/od01/20261114T133340Z/logs/coverage-reviewed.json
+211 passed, 4 deselected, 8 warnings in 19.35s
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F5999DA80>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027F18DB3010>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback

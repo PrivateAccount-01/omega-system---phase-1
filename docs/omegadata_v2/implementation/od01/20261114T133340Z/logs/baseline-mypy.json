@@ -1,0 +1,21 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01\\20261114T133340Z\\verification_runner.py",
+    "baseline-mypy",
+    "mypy",
+    "src/omegadata"
+  ],
+  "effective_module": [
+    "mypy",
+    "src/omegadata"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-14T14:51:41.579091+00:00",
+  "end_utc": "2026-11-14T14:52:11.321411+00:00",
+  "elapsed_seconds": 29.74232070002472,
+  "exit_code": 0,
+  "output": "baseline-mypy.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}
