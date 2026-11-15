@@ -1,0 +1,64 @@
+{
+  "utc": "2026-11-15T13:30:11.884369+00:00",
+  "original_records": 11849,
+  "original_changes": [
+    "src/omegadata/track_a/download_manager.py"
+  ],
+  "unexpected_original_changes": [],
+  "git": {
+    "head": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+    "branch": "feature/od01-source-rights",
+    "main": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674",
+    "index": ""
+  },
+  "source_hashes": {
+    "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+    "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+    "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+    "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+    "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+  },
+  "tested_copies_match": {
+    "win314-accepted": true,
+    "win311-accepted": true,
+    "linux312-accepted": true
+  },
+  "checks": {
+    "win314-accepted": {
+      "collection": 0,
+      "targeted": 0,
+      "full": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0
+    },
+    "win311-accepted": {
+      "collection": 0,
+      "targeted": 0,
+      "full": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0
+    },
+    "linux312-accepted": {
+      "collection": 0,
+      "targeted": 0,
+      "full": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0
+    }
+  },
+  "process_checks": {
+    "win": true,
+    "linux": true
+  },
+  "pending_sources": 13,
+  "approved_sources": 0,
+  "missing_reports": [],
+  "broken_links": [],
+  "mechanical_checks_passed": true,
+  "signing": "metadata unchanged only; contents never opened/hashed/copied",
+  "gatekeeper": "OD04_BLOCKED",
+  "blocking_reason": "Entire A01-A28 negative-first tranche not completed before implementation"
+}

@@ -1,0 +1,296 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+    "green-unit-v1",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od04_raw_archive.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+  "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T12:56:21.795237+00:00",
+  "end_utc": "2026-11-15T12:56:28.093341+00:00",
+  "elapsed_seconds": 6.298072899982799,
+  "exit_code": 0,
+  "output": "green-unit-v1.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-s_ctt4h8",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[objects]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od04-copy-3oda4_3r\\\\repo\\\\tests\\\\unit\\\\test_od04_raw_archive.py', 195, \"Skipped: File symlink privilege unavailable; paired native Linux coverage: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e0\\\\\\\\outside' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e0\\\\\\\\archive\\\\\\\\objects'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[observations]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od04-copy-3oda4_3r\\\\repo\\\\tests\\\\unit\\\\test_od04_raw_archive.py', 195, \"Skipped: File symlink privilege unavailable; paired native Linux coverage: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e1\\\\\\\\outside' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e1\\\\\\\\archive\\\\\\\\observations'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[commits]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od04-copy-3oda4_3r\\\\repo\\\\tests\\\\unit\\\\test_od04_raw_archive.py', 195, \"Skipped: File symlink privilege unavailable; paired native Linux coverage: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e2\\\\\\\\outside' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e2\\\\\\\\archive\\\\\\\\commits'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[staging]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od04-copy-3oda4_3r\\\\repo\\\\tests\\\\unit\\\\test_od04_raw_archive.py', 195, \"Skipped: File symlink privilege unavailable; paired native Linux coverage: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e3\\\\\\\\outside' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-s_ctt4h8\\\\\\\\pytest\\\\\\\\test_a13_real_directory_link_e3\\\\\\\\archive\\\\\\\\staging'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_pending_before_write_or_read",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_revocation_before_replay",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[17]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a17_legacy_facade_is_read_only",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 40,
+    "skipped": 4
+  }
+}

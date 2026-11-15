@@ -1,0 +1,3175 @@
+[
+  {
+    "id": "A01",
+    "requirement": "exact full digest and original bytes",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A02",
+    "requirement": "dedup bytes, retain distinct observations",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A03",
+    "requirement": "same-day different versions",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A04",
+    "requirement": "idempotence includes payload/request/policy identity",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models",
+      "tests/unit/test_od04_raw_archive.py::test_a04_policy_identity_change_is_not_idempotent"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A05",
+    "requirement": "conflicting operation reuse",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A06",
+    "requirement": "marker-last visibility",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A07",
+    "requirement": "five injected and forced-termination boundaries",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:/omega system - phase 1/.venv/Scripts/python.exe",
+          "-B",
+          "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+          "win-process-accepted"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:19:33.365194+00:00",
+        "end_utc": "2026-11-15T13:19:59.421228+00:00",
+        "elapsed_seconds": 26.056029200030025,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "linux-process-persistent"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:29:04.061930+00:00",
+        "end_utc": "2026-11-15T13:29:31.926365+00:00",
+        "elapsed_seconds": 27.86449150001863,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A08",
+    "requirement": "read-only inventory/retry after interrupted states",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+      "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:/omega system - phase 1/.venv/Scripts/python.exe",
+          "-B",
+          "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+          "win-process-accepted"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:19:33.365194+00:00",
+        "end_utc": "2026-11-15T13:19:59.421228+00:00",
+        "elapsed_seconds": 26.056029200030025,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "linux-process-persistent"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:29:04.061930+00:00",
+        "end_utc": "2026-11-15T13:29:31.926365+00:00",
+        "elapsed_seconds": 27.86449150001863,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A09",
+    "requirement": "twelve thread writers",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A10",
+    "requirement": "independent same-hash processes",
+    "nodes": [],
+    "commands": [
+      {
+        "command": [
+          "E:/omega system - phase 1/.venv/Scripts/python.exe",
+          "-B",
+          "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+          "win-process-accepted"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:19:33.365194+00:00",
+        "end_utc": "2026-11-15T13:19:59.421228+00:00",
+        "elapsed_seconds": 26.056029200030025,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "linux-process-persistent"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:29:04.061930+00:00",
+        "end_utc": "2026-11-15T13:29:31.926365+00:00",
+        "elapsed_seconds": 27.86449150001863,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A11",
+    "requirement": "independent different-hash processes",
+    "nodes": [],
+    "commands": [
+      {
+        "command": [
+          "E:/omega system - phase 1/.venv/Scripts/python.exe",
+          "-B",
+          "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+          "win-process-accepted"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:19:33.365194+00:00",
+        "end_utc": "2026-11-15T13:19:59.421228+00:00",
+        "elapsed_seconds": 26.056029200030025,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "linux-process-persistent"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:29:04.061930+00:00",
+        "end_utc": "2026-11-15T13:29:31.926365+00:00",
+        "elapsed_seconds": 27.86449150001863,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A12",
+    "requirement": "full bytes/length/link checks and deterministic corruption scan",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A13",
+    "requirement": "traversal/hash/drive/UNC and real directory-link confinement",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[commits]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[objects]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[observations]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[staging]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[relative_path-../escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[sha256-aaaaaaaaaaaa]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[size-True]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A14",
+    "requirement": "duplicate/invalid JSON and version refusal",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A15",
+    "requirement": "mode and synthetic-origin non-escalation",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+      "tests/unit/test_od04_raw_archive.py::test_a15_synthetic_cannot_be_relabelled"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A16",
+    "requirement": "pending/missing/revoked/scope and commit-time policy refresh",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[MISSING]",
+      "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[REVOKED]",
+      "tests/unit/test_od04_raw_archive.py::test_a16_pending_before_write_or_read",
+      "tests/unit/test_od04_raw_archive.py::test_a16_read_consumer_scope_enforced",
+      "tests/unit/test_od04_raw_archive.py::test_a16_revocation_at_commit_boundary",
+      "tests/unit/test_od04_raw_archive.py::test_a16_revocation_before_replay"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A17",
+    "requirement": "cache-only no fetch / legacy read-only",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+      "tests/unit/test_od04_raw_archive.py::test_a17_legacy_facade_is_read_only"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A18",
+    "requirement": "legacy dry-run and all-original preservation",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+      "tests/unit/test_od04_raw_archive.py::test_a18_dry_run_migration_and_cli_verifier"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\measure_corpus.py",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:21:55.302510+00:00",
+        "end_utc": "2026-11-15T13:21:55.463952+00:00",
+        "elapsed_seconds": 0.16143819998251274,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/measure_corpus.py",
+          "/home/parilrupani/omega-od04-process-zlno5bym"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:30:04.611554+00:00",
+        "end_utc": "2026-11-15T13:30:05.103688+00:00",
+        "elapsed_seconds": 0.4921386000351049,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A19",
+    "requirement": "empty/oversize/metadata/entry/total budgets",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a19_metadata_and_entry_budget",
+      "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[0]",
+      "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[17]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A20",
+    "requirement": "typed fsync/link ENOSPC/EACCES/EIO injection",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-fsync]",
+      "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-link]",
+      "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-fsync]",
+      "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-link]",
+      "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-fsync]",
+      "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-link]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A21",
+    "requirement": "readers during paused publication and independent processes",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader",
+      "tests/unit/test_od04_raw_archive.py::test_a21_reader_during_publication"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:/omega system - phase 1/.venv/Scripts/python.exe",
+          "-B",
+          "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+          "win-process-accepted"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:19:33.365194+00:00",
+        "end_utc": "2026-11-15T13:19:59.421228+00:00",
+        "elapsed_seconds": 26.056029200030025,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "linux-process-persistent"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:29:04.061930+00:00",
+        "end_utc": "2026-11-15T13:29:31.926365+00:00",
+        "elapsed_seconds": 27.86449150001863,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A22",
+    "requirement": "URL redaction in observation/structured refusal",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A23",
+    "requirement": "pinned replay and sorted read-only scan",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+      "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A24",
+    "requirement": "actual parser validation, exact era/date/schema/rights references, null published_at",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+      "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+      "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy",
+      "tests/unit/test_od04_raw_archive.py::test_a24_structural_state_requires_actual_validator"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:48.946638+00:00",
+        "end_utc": "2026-11-15T13:17:08.190774+00:00",
+        "elapsed_seconds": 19.244132800027728,
+        "exit_code": 0,
+        "output": "win314-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-targeted",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:17.443866+00:00",
+        "end_utc": "2026-11-15T13:19:42.120244+00:00",
+        "elapsed_seconds": 24.68800000002375,
+        "exit_code": 0,
+        "output": "win311-accepted-targeted.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-targeted",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "tests/unit/test_od01_source_rights.py",
+          "tests/unit/test_od01r_rights_hardening.py",
+          "tests/unit/test_od02_acquisition.py",
+          "tests/unit/test_od02v_portability.py",
+          "tests/unit/test_od04_raw_archive.py",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:08.160804+00:00",
+        "end_utc": "2026-11-15T13:17:15.013163+00:00",
+        "elapsed_seconds": 6.852363304999999,
+        "exit_code": 0,
+        "output": "linux312-accepted-targeted.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A25",
+    "requirement": "Windows and native Linux filesystem execution",
+    "nodes": [
+      "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[sha256-aaaaaaaaaaaa]"
+    ],
+    "commands": [
+      {
+        "command": [
+          "E:/omega system - phase 1/.venv/Scripts/python.exe",
+          "-B",
+          "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+          "win-process-accepted"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:19:33.365194+00:00",
+        "end_utc": "2026-11-15T13:19:59.421228+00:00",
+        "elapsed_seconds": 26.056029200030025,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "linux-process-persistent"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:29:04.061930+00:00",
+        "end_utc": "2026-11-15T13:29:31.926365+00:00",
+        "elapsed_seconds": 27.86449150001863,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A26",
+    "requirement": "unchanged inherited/full offline suites",
+    "nodes": [],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-full",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "-m",
+          "not realdata",
+          "--cov=omegadata",
+          "--cov-branch",
+          "--cov-report=term-missing"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:17:09.171690+00:00",
+        "end_utc": "2026-11-15T13:17:58.813240+00:00",
+        "elapsed_seconds": 49.64153670001542,
+        "exit_code": 0,
+        "output": "win314-accepted-full.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-full",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "-q",
+          "-m",
+          "not realdata",
+          "--cov=omegadata",
+          "--cov-branch",
+          "--cov-report=term-missing"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:42.884152+00:00",
+        "end_utc": "2026-11-15T13:20:36.426006+00:00",
+        "elapsed_seconds": 53.54700000002049,
+        "exit_code": 0,
+        "output": "win311-accepted-full.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-full",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "-q",
+          "-m",
+          "not realdata",
+          "--cov=omegadata",
+          "--cov-branch",
+          "--cov-report=term-missing"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:15.594048+00:00",
+        "end_utc": "2026-11-15T13:18:04.850659+00:00",
+        "elapsed_seconds": 48.56022256199999,
+        "exit_code": 0,
+        "output": "linux312-accepted-full.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A27",
+    "requirement": "imports/collection, Ruff, strict mypy49 and pip consistency",
+    "nodes": [],
+    "commands": [
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-collection",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "--collect-only",
+          "-q",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:16:45.092441+00:00",
+        "end_utc": "2026-11-15T13:16:48.105374+00:00",
+        "elapsed_seconds": 3.0129268000018783,
+        "exit_code": 0,
+        "output": "win314-accepted-collection.txt"
+      },
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-ruff",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "ruff",
+          "check",
+          "--no-cache",
+          "src/omegadata",
+          "tests",
+          "scripts"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:18:00.695025+00:00",
+        "end_utc": "2026-11-15T13:18:01.017916+00:00",
+        "elapsed_seconds": 0.3228821999509819,
+        "exit_code": 0,
+        "output": "win314-accepted-ruff.txt"
+      },
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-mypy",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "mypy",
+          "src/omegadata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:18:01.560857+00:00",
+        "end_utc": "2026-11-15T13:18:21.223003+00:00",
+        "elapsed_seconds": 19.662131000019144,
+        "exit_code": 0,
+        "output": "win314-accepted-mypy.txt"
+      },
+      {
+        "command": [
+          "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win314-accepted-pip",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pip",
+          "check"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:18:21.744321+00:00",
+        "end_utc": "2026-11-15T13:18:22.978588+00:00",
+        "elapsed_seconds": 1.2342558999662288,
+        "exit_code": 0,
+        "output": "win314-accepted-pip.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-collection",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pytest",
+          "--collect-only",
+          "-q",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:19:13.573113+00:00",
+        "end_utc": "2026-11-15T13:19:16.834589+00:00",
+        "elapsed_seconds": 3.25,
+        "exit_code": 0,
+        "output": "win311-accepted-collection.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-ruff",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "ruff",
+          "check",
+          "--no-cache",
+          "src/omegadata",
+          "tests",
+          "scripts"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:20:37.621312+00:00",
+        "end_utc": "2026-11-15T13:20:37.952285+00:00",
+        "elapsed_seconds": 0.3279999999795109,
+        "exit_code": 0,
+        "output": "win311-accepted-ruff.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-mypy",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "mypy",
+          "src/omegadata"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:20:38.452938+00:00",
+        "end_utc": "2026-11-15T13:20:49.958137+00:00",
+        "elapsed_seconds": 11.5,
+        "exit_code": 0,
+        "output": "win311-accepted-mypy.txt"
+      },
+      {
+        "command": [
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+          "-B",
+          "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\verification_runner.py",
+          "win311-accepted-pip",
+          "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+          "pip",
+          "check"
+        ],
+        "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Windows-10-10.0.26300-SP0",
+        "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+        "start_utc": "2026-11-15T13:20:50.351508+00:00",
+        "end_utc": "2026-11-15T13:20:51.839393+00:00",
+        "elapsed_seconds": 1.5,
+        "exit_code": 0,
+        "output": "win311-accepted-pip.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-collection",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pytest",
+          "--collect-only",
+          "-q",
+          "-m",
+          "not realdata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:17:03.960286+00:00",
+        "end_utc": "2026-11-15T13:17:07.642039+00:00",
+        "elapsed_seconds": 3.6817461390000012,
+        "exit_code": 0,
+        "output": "linux312-accepted-collection.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-ruff",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "ruff",
+          "check",
+          "--no-cache",
+          "src/omegadata",
+          "tests",
+          "scripts"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:18:06.121468+00:00",
+        "end_utc": "2026-11-15T13:18:06.210438+00:00",
+        "elapsed_seconds": 0.08897873400000833,
+        "exit_code": 0,
+        "output": "linux312-accepted-ruff.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-mypy",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "mypy",
+          "src/omegadata"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:18:06.403211+00:00",
+        "end_utc": "2026-11-15T13:18:22.718252+00:00",
+        "elapsed_seconds": 16.315133172999992,
+        "exit_code": 0,
+        "output": "linux312-accepted-mypy.txt"
+      },
+      {
+        "command": [
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+          "linux312-accepted-pip",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "pip",
+          "check"
+        ],
+        "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+        "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+        "start_utc": "2026-11-15T13:18:22.972154+00:00",
+        "end_utc": "2026-11-15T13:18:24.260234+00:00",
+        "elapsed_seconds": 1.2880830139999944,
+        "exit_code": 0,
+        "output": "linux312-accepted-pip.txt"
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  },
+  {
+    "id": "A28",
+    "requirement": "measured 4KiB/64KiB/1MiB costs, disk and recovery",
+    "nodes": [],
+    "commands": [
+      {
+        "command": [
+          "E:/omega system - phase 1/.venv/Scripts/python.exe",
+          "-B",
+          "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+          "win-process-accepted"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:19:33.365194+00:00",
+        "end_utc": "2026-11-15T13:19:59.421228+00:00",
+        "elapsed_seconds": 26.056029200030025,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "wsl",
+          "--exec",
+          "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+          "-B",
+          "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+          "/home/parilrupani/omega-od04-6br9vbxk/repo",
+          "linux-process-persistent"
+        ],
+        "cwd": "E:\\omega system - phase 1",
+        "start_utc": "2026-11-15T13:29:04.061930+00:00",
+        "end_utc": "2026-11-15T13:29:31.926365+00:00",
+        "elapsed_seconds": 27.86449150001863,
+        "exit_code": 0
+      }
+    ],
+    "final_source_hashes": {
+      "win314-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "win311-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      },
+      "linux312-accepted": {
+        "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+        "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+        "tests/unit/test_od04_raw_archive.py": "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+        "scripts/verify_raw_archive.py": "64eea6dba6d3c3cba0ca5a759ecfa24b5a0f3a12a620623c485d9499420ed612",
+        "scripts/plan_legacy_raw_import.py": "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee"
+      }
+    },
+    "red_proof": "four baseline storage failures; later adversarial reds linked; no invented red for already-correct/new-API contracts",
+    "final_technical": "PASS",
+    "process_conformance": "BLOCKED: complete pre-implementation Gate 2 tranche not satisfied"
+  }
+]

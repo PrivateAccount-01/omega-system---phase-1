@@ -1,0 +1,17 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________________ test_a15_synthetic_cannot_be_relabelled ___________________
+
+api = <module 'omegadata.track_a.raw_archive' from 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo\\src\\omegadata\\track_a\\raw_archive.py'>
+service = <omegadata.track_a.raw_archive.RawArchive object at 0x000001F649F85D30>
+
+    def test_a15_synthetic_cannot_be_relabelled(api, service):
+        candidate = request(api)
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\unit\test_od04_raw_archive.py:278: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od04_raw_archive.py::test_a15_synthetic_cannot_be_relabelled
+1 failed, 52 deselected in 0.71s

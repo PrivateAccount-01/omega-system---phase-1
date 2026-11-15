@@ -1,0 +1,442 @@
+wsl: Failed to translate 'G:\Scripts\'
+wsl: Failed to translate 'G:\'
+wsl: Failed to translate 'D:\Scripts\'
+wsl: Failed to translate 'D:\'
+wsl: Failed to translate 'G:\Scripts\'
+wsl: Failed to translate 'G:\'
+wsl: Failed to translate 'D:\Scripts\'
+wsl: Failed to translate 'D:\'
+wsl: Failed to translate 'G:\Scripts\'
+wsl: Failed to translate 'G:\'
+wsl: Failed to translate 'D:\Scripts\'
+wsl: Failed to translate 'D:\'
+wsl: Failed to translate 'D:\flutter_sdk\flutter\bin'
+{
+  "passed": true,
+  "root": "/home/parilrupani/omega-od04-process-zlno5bym",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "start_utc": "2026-11-15T13:29:10.232451+00:00",
+  "end_utc": "2026-11-15T13:29:32.565138+00:00",
+  "workers": [
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/guard",
+        "guard",
+        "00000000000000000000000000000000",
+        "same"
+      ],
+      "pid": 484,
+      "start_utc": "2026-11-15T13:29:10.267529+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.7593464870000002,
+      "output": "FOUR_GUARD_NEGATIVES_PASS\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/same",
+        "reader",
+        "00000000000000000000000000000000",
+        "same"
+      ],
+      "pid": 485,
+      "start_utc": "2026-11-15T13:29:12.088995+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.984906573,
+      "output": "CONCURRENT_READER_VERIFIED_THREE_COMMITS\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/same",
+        "publish",
+        "00000000000000000000000000000001",
+        "same"
+      ],
+      "pid": 486,
+      "start_utc": "2026-11-15T13:29:12.104613+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.8516801540000003,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000001\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"f7478d1c0bd812562240e5ca7873ff0e45f0e75612741ad8f11c3ce3bf881eb0\",\"committed_at\":\"2026-11-15T13:29:12.858663Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/same",
+        "publish",
+        "00000000000000000000000000000002",
+        "same"
+      ],
+      "pid": 487,
+      "start_utc": "2026-11-15T13:29:12.119193+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.8859338650000002,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000002\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"c7fa96874e08ea85e8193bd69415bb2dcaf0ae3abab2dda5506abd87c9e41d6f\",\"committed_at\":\"2026-11-15T13:29:12.913515Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/same",
+        "publish",
+        "00000000000000000000000000000003",
+        "same"
+      ],
+      "pid": 488,
+      "start_utc": "2026-11-15T13:29:12.124200+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.9367156039999998,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000003\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"7320e1dd232216f46b4cd654d04b3d3e00ae7296a7fa357ce7072864092bfcd4\",\"committed_at\":\"2026-11-15T13:29:12.955324Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/different",
+        "reader",
+        "00000000000000000000000000000000",
+        "different"
+      ],
+      "pid": 489,
+      "start_utc": "2026-11-15T13:29:13.087471+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.080403154999999,
+      "output": "CONCURRENT_READER_VERIFIED_THREE_COMMITS\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/different",
+        "publish",
+        "00000000000000000000000000000001",
+        "different"
+      ],
+      "pid": 490,
+      "start_utc": "2026-11-15T13:29:13.098230+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.0139512830000008,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000001\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"e0cca2965509df678c8064f5e0b9076016fa752f88a6c749768db83479450cc5\",\"size\":32,\"relative_path\":\"objects/sha256/e0/cc/e0cca2965509df678c8064f5e0b9076016fa752f88a6c749768db83479450cc5\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"2d6698129fe2f9702c132f590daf31441a6f89ca5ab6c6647f56edd131637d30\",\"committed_at\":\"2026-11-15T13:29:13.997609Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/different",
+        "publish",
+        "00000000000000000000000000000002",
+        "different"
+      ],
+      "pid": 491,
+      "start_utc": "2026-11-15T13:29:13.101311+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.0110530709999992,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000002\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"d2b1f1d83f0ad4f52dec8a1e2091f5c94ffad00ed3528362353fbe97aacd0187\",\"size\":32,\"relative_path\":\"objects/sha256/d2/b1/d2b1f1d83f0ad4f52dec8a1e2091f5c94ffad00ed3528362353fbe97aacd0187\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"11ad558cd0ac7c8bd1318ddaffa2549f55ab67ebfc4be51750c9b1b918ee16b6\",\"committed_at\":\"2026-11-15T13:29:13.969162Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/different",
+        "publish",
+        "00000000000000000000000000000003",
+        "different"
+      ],
+      "pid": 492,
+      "start_utc": "2026-11-15T13:29:13.107341+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.0514982459999995,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000003\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"19d8d35c06ab2cb2ae937b5b8dd4c8570a15280b813e6f0c534b258c9954c7c6\",\"size\":32,\"relative_path\":\"objects/sha256/19/d8/19d8d35c06ab2cb2ae937b5b8dd4c8570a15280b813e6f0c534b258c9954c7c6\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"4a3590fa2e17a02f220a136905c416d9ad0453504dbe8b2dbf93a62323d6b250\",\"committed_at\":\"2026-11-15T13:29:14.052189Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/conflict",
+        "publish",
+        "66666666666666666666666666666666",
+        "same"
+      ],
+      "pid": 493,
+      "start_utc": "2026-11-15T13:29:14.181716+00:00",
+      "exit_code": 2,
+      "elapsed_seconds": 1.131990716999999,
+      "output": "CONFLICT\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/conflict",
+        "publish",
+        "66666666666666666666666666666666",
+        "different"
+      ],
+      "pid": 494,
+      "start_utc": "2026-11-15T13:29:14.195327+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.1182888389999999,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"66666666666666666666666666666666\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"22af5eb7a99e9a167adafc9b1c22f688cb7d7f87cd31c10e00dda28bd0953cfc\",\"size\":32,\"relative_path\":\"objects/sha256/22/af/22af5eb7a99e9a167adafc9b1c22f688cb7d7f87cd31c10e00dda28bd0953cfc\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"69599e9c4ec76a5c7a4175c5490d3faef0587d09d2f6c67369eb5130fcd82c9e\",\"committed_at\":\"2026-11-15T13:29:15.124942Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/before_stage",
+        "crash",
+        "55555555555555555555555555555555",
+        "before_stage"
+      ],
+      "pid": 497,
+      "start_utc": "2026-11-15T13:29:15.323484+00:00",
+      "exit_code": -9,
+      "elapsed_seconds": 2.0496738809999986,
+      "output": ""
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/before_stage",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 499,
+      "start_utc": "2026-11-15T13:29:17.391312+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.199833967,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"ecf6dbd37f87fa7f7f55786b3595509784b614cc79ead5af23b0f5ebc019379a\",\"committed_at\":\"2026-11-15T13:29:19.482695Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/after_stage",
+        "crash",
+        "55555555555555555555555555555555",
+        "after_stage"
+      ],
+      "pid": 500,
+      "start_utc": "2026-11-15T13:29:19.604289+00:00",
+      "exit_code": -9,
+      "elapsed_seconds": 1.0707206990000007,
+      "output": ""
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/after_stage",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 501,
+      "start_utc": "2026-11-15T13:29:20.872738+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.1188950080000009,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"7652e7b7093acef3df8f75bc885b1081bf383d463b6ffb9e15a359f1a5b1589e\",\"committed_at\":\"2026-11-15T13:29:21.904281Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/after_object",
+        "crash",
+        "55555555555555555555555555555555",
+        "after_object"
+      ],
+      "pid": 502,
+      "start_utc": "2026-11-15T13:29:22.006938+00:00",
+      "exit_code": -9,
+      "elapsed_seconds": 1.373595582,
+      "output": ""
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/after_object",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 503,
+      "start_utc": "2026-11-15T13:29:23.405499+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.6344098890000005,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"a6a8a14b3ac8285c77ef7e470bd5bd54ac7444f5eefd53f7ea37fd75f7f93220\",\"committed_at\":\"2026-11-15T13:29:24.942927Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/after_observation",
+        "crash",
+        "55555555555555555555555555555555",
+        "after_observation"
+      ],
+      "pid": 504,
+      "start_utc": "2026-11-15T13:29:25.089417+00:00",
+      "exit_code": -9,
+      "elapsed_seconds": 1.198391878999999,
+      "output": ""
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/after_observation",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 505,
+      "start_utc": "2026-11-15T13:29:26.379626+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.4011172089999988,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"806f89bf1a934df4401e30e099aeb1e6b9f4a376fd4a78aec65a45354e0839fd\",\"committed_at\":\"2026-11-15T13:29:27.669065Z\"}\n"
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/before_commit",
+        "crash",
+        "55555555555555555555555555555555",
+        "before_commit"
+      ],
+      "pid": 506,
+      "start_utc": "2026-11-15T13:29:27.794718+00:00",
+      "exit_code": -9,
+      "elapsed_seconds": 1.9264344909999984,
+      "output": ""
+    },
+    {
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_worker.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "/home/parilrupani/omega-od04-process-zlno5bym/before_commit",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 507,
+      "start_utc": "2026-11-15T13:29:29.734620+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.9237289460000007,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"93c6d6e5ec2a44b366258d96fa3c912484e3f0e70a4da296a1e405ba567de7ce\",\"committed_at\":\"2026-11-15T13:29:31.585440Z\"}\n"
+    }
+  ],
+  "exact_worker_sha256": "d6329e4361d966ee16a9617b0e588e8ff2486e40ebdab7ed2df716e153359207",
+  "publish_strategies": [
+    "hardlink",
+    "kernel_lock_rename"
+  ],
+  "forced_crashes": 5,
+  "reference_verified_commits": 6,
+  "inventory": {
+    "committed": 3,
+    "commit_ids": [
+      "00000000000000000000000000000001",
+      "00000000000000000000000000000002",
+      "00000000000000000000000000000003"
+    ],
+    "uncommitted_observations": [],
+    "retained_staging": [
+      "35d72d937adc43cf99ff32bc38912d98",
+      "75b9bc2639a64c519a324d1c6e01669a",
+      "95e43a9e71ef43aaac1f24727aab2c44"
+    ],
+    "logical_bytes": 11651,
+    "entries": 25,
+    "action": "READ_ONLY_NO_PROMOTION_NO_DELETION",
+    "verification": "UNVERIFIED_COMMIT_MARKER_COUNT_USE_SCAN_VERIFIED"
+  },
+  "benchmark": {
+    "payload_bytes": 23,
+    "observations": 3,
+    "objects": 1,
+    "duplicate_object_bytes_avoided": 46,
+    "read_verify_seconds": 0.0006628360000000555,
+    "recovery_seconds": 0.006554821000001709,
+    "tracemalloc_peak_bytes": 10448,
+    "larger_samples": [
+      {
+        "bytes": 4096,
+        "put_seconds": 0.0642349849999988,
+        "verified_read_seconds": 0.008590995999998796,
+        "peak_bytes": 16814050
+      },
+      {
+        "bytes": 65536,
+        "put_seconds": 0.06202035100000103,
+        "verified_read_seconds": 0.007777232999998773,
+        "peak_bytes": 16813460
+      },
+      {
+        "bytes": 1048576,
+        "put_seconds": 0.082989855000001,
+        "verified_read_seconds": 0.01472270400000042,
+        "peak_bytes": 16813218
+      }
+    ],
+    "larger_observations": 6,
+    "larger_objects": 3,
+    "logical_bytes": 2259705,
+    "hardlink_unique_bytes": 1129853
+  },
+  "source_hashes": {
+    "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+    "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91"
+  }
+}

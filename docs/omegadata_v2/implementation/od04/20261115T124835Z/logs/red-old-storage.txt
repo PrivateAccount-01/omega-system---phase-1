@@ -1,0 +1,159 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+_________ test_a01_a02_a06_a12_negative_first_old_storage[full_hash] __________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001325C3755B0>
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x000001325C3F4EB0>
+synthetic_equity_zip = <function synthetic_equity_zip.<locals>.make at 0x000001325C3F5010>
+requirement = 'full_hash'
+
+    @pytest.mark.parametrize("requirement", ["full_hash", "separate_events", "existing_corruption", "partial_failure"])
+    def test_a01_a02_a06_a12_negative_first_old_storage(
+        tmp_path, monkeypatch, synthetic_source_policy_provider, synthetic_equity_zip, requirement
+    ):
+        """Real old-code behavior, not a missing-module/import failure."""
+        body = synthetic_equity_zip(DAY)
+        manager = manager_fixture(tmp_path, monkeypatch, synthetic_source_policy_provider, body)
+        try:
+            api = importlib.import_module("omegadata.track_a.raw_archive")
+        except ModuleNotFoundError:
+            api = None
+        if api is not None:
+            manager.raw_archive = api.RawArchive(tmp_path / "archive", policy_provider=synthetic_source_policy_provider)
+        first = manager.download(KEY, DAY, use_cache=False)
+        if requirement == "full_hash":
+>           assert first.path.name == hashlib.sha256(body).hexdigest()
+E           AssertionError: assert '20260410__867cea503fd7.bin' == '867cea503fd7...4b45236272338'
+E             
+E             - 867cea503fd7b30e9c0f0d8b555ab49190c02906dcf6946b4464b45236272338
+E             + 20260410__867cea503fd7.bin
+
+tests\unit\test_od04_raw_archive.py:70: AssertionError
+______ test_a01_a02_a06_a12_negative_first_old_storage[separate_events] _______
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001325C375350>
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x000001325C3F5220>
+synthetic_equity_zip = <function synthetic_equity_zip.<locals>.make at 0x000001325C3F7B60>
+requirement = 'separate_events'
+
+    @pytest.mark.parametrize("requirement", ["full_hash", "separate_events", "existing_corruption", "partial_failure"])
+    def test_a01_a02_a06_a12_negative_first_old_storage(
+        tmp_path, monkeypatch, synthetic_source_policy_provider, synthetic_equity_zip, requirement
+    ):
+        """Real old-code behavior, not a missing-module/import failure."""
+        body = synthetic_equity_zip(DAY)
+        manager = manager_fixture(tmp_path, monkeypatch, synthetic_source_policy_provider, body)
+        try:
+            api = importlib.import_module("omegadata.track_a.raw_archive")
+        except ModuleNotFoundError:
+            api = None
+        if api is not None:
+            manager.raw_archive = api.RawArchive(tmp_path / "archive", policy_provider=synthetic_source_policy_provider)
+        first = manager.download(KEY, DAY, use_cache=False)
+        if requirement == "full_hash":
+            assert first.path.name == hashlib.sha256(body).hexdigest()
+        elif requirement == "separate_events":
+            second = manager.download(KEY, DAY, use_cache=False)
+>           assert first.manifest_path != second.manifest_path
+E           AssertionError: assert WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_1/legacy/nse_equity_bhavcopy/year=2026/month=04/20260410__867cea503fd7.manifest.json') != WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_1/legacy/nse_equity_bhavcopy/year=2026/month=04/20260410__867cea503fd7.manifest.json')
+E            +  where WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_1/legacy/nse_equity_bhavcopy/year=2026/month=04/20260410__867cea503fd7.manifest.json') = DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2026, 4, 10), path=WindowsPath('C:/Users/Paril ...uisition_state='PAYLOAD_STRUCTURALLY_VALID', sha256='867cea503fd7b30e9c0f0d8b555ab49190c02906dcf6946b4464b45236272338').manifest_path
+E            +  and   WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_1/legacy/nse_equity_bhavcopy/year=2026/month=04/20260410__867cea503fd7.manifest.json') = DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2026, 4, 10), path=WindowsPath('C:/Users/Paril ...uisition_state='PAYLOAD_STRUCTURALLY_VALID', sha256='867cea503fd7b30e9c0f0d8b555ab49190c02906dcf6946b4464b45236272338').manifest_path
+
+tests\unit\test_od04_raw_archive.py:73: AssertionError
+____ test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption] _____
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001325C346E70>
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x000001325C50C300>
+synthetic_equity_zip = <function synthetic_equity_zip.<locals>.make at 0x000001325C50C3B0>
+requirement = 'existing_corruption'
+
+    @pytest.mark.parametrize("requirement", ["full_hash", "separate_events", "existing_corruption", "partial_failure"])
+    def test_a01_a02_a06_a12_negative_first_old_storage(
+        tmp_path, monkeypatch, synthetic_source_policy_provider, synthetic_equity_zip, requirement
+    ):
+        """Real old-code behavior, not a missing-module/import failure."""
+        body = synthetic_equity_zip(DAY)
+        manager = manager_fixture(tmp_path, monkeypatch, synthetic_source_policy_provider, body)
+        try:
+            api = importlib.import_module("omegadata.track_a.raw_archive")
+        except ModuleNotFoundError:
+            api = None
+        if api is not None:
+            manager.raw_archive = api.RawArchive(tmp_path / "archive", policy_provider=synthetic_source_policy_provider)
+        first = manager.download(KEY, DAY, use_cache=False)
+        if requirement == "full_hash":
+            assert first.path.name == hashlib.sha256(body).hexdigest()
+        elif requirement == "separate_events":
+            second = manager.download(KEY, DAY, use_cache=False)
+            assert first.manifest_path != second.manifest_path
+            assert first.path == second.path
+        elif requirement == "existing_corruption":
+            first.path.write_bytes(b"SYNTHETIC_CORRUPTION")
+>           with pytest.raises(RuntimeError, match="INTEGRITY"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests\unit\test_od04_raw_archive.py:77: Failed
+______ test_a01_a02_a06_a12_negative_first_old_storage[partial_failure] _______
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001325C392140>
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x000001325C50C9E0>
+synthetic_equity_zip = <function synthetic_equity_zip.<locals>.make at 0x000001325C50C510>
+requirement = 'partial_failure'
+
+    @pytest.mark.parametrize("requirement", ["full_hash", "separate_events", "existing_corruption", "partial_failure"])
+    def test_a01_a02_a06_a12_negative_first_old_storage(
+        tmp_path, monkeypatch, synthetic_source_policy_provider, synthetic_equity_zip, requirement
+    ):
+        """Real old-code behavior, not a missing-module/import failure."""
+        body = synthetic_equity_zip(DAY)
+        manager = manager_fixture(tmp_path, monkeypatch, synthetic_source_policy_provider, body)
+        try:
+            api = importlib.import_module("omegadata.track_a.raw_archive")
+        except ModuleNotFoundError:
+            api = None
+        if api is not None:
+            manager.raw_archive = api.RawArchive(tmp_path / "archive", policy_provider=synthetic_source_policy_provider)
+        first = manager.download(KEY, DAY, use_cache=False)
+        if requirement == "full_hash":
+            assert first.path.name == hashlib.sha256(body).hexdigest()
+        elif requirement == "separate_events":
+            second = manager.download(KEY, DAY, use_cache=False)
+            assert first.manifest_path != second.manifest_path
+            assert first.path == second.path
+        elif requirement == "existing_corruption":
+            first.path.write_bytes(b"SYNTHETIC_CORRUPTION")
+            with pytest.raises(RuntimeError, match="INTEGRITY"):
+                manager.download(KEY, DAY, use_cache=False)
+        else:
+            if api is None:
+                original = Path.write_text
+                def fail_manifest(path, *a, **kw):
+                    if str(path).endswith(".manifest.json"):
+                        raise OSError(errno.ENOSPC, "synthetic disk full")
+                    return original(path, *a, **kw)
+                monkeypatch.setattr(Path, "write_text", fail_manifest)
+            else:
+                manager.raw_archive.fault = lambda phase: (_ for _ in ()).throw(OSError(errno.ENOSPC, "synthetic")) if phase == "after_stage" else None
+            # Fresh storage namespace, not already-committed fixture above.
+            manager.raw_root = tmp_path / "fresh-legacy"
+            with pytest.raises((OSError, RuntimeError)):
+                manager.download(KEY, DAY, use_cache=False)
+>           assert not list(manager.raw_root.rglob("*"))
+E           AssertionError: assert not [WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/py...ytest/test_a01_a02_a06_a12_negative_3/fresh-legacy/nse_equity_bhavcopy/year=2026/month=04/20260410__867cea503fd7.bin')]
+E            +  where [WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/py...ytest/test_a01_a02_a06_a12_negative_3/fresh-legacy/nse_equity_bhavcopy/year=2026/month=04/20260410__867cea503fd7.bin')] = list(<map object at 0x00000132594E8240>)
+E            +    where <map object at 0x00000132594E8240> = rglob('*')
+E            +      where rglob = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_3/fresh-legacy').rglob
+E            +        where WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-o0u_tg36/pytest/test_a01_a02_a06_a12_negative_3/fresh-legacy') = <omegadata.track_a.download_manager.DownloadManager object at 0x000001325C3768B0>.raw_root
+
+tests\unit\test_od04_raw_archive.py:93: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]
+FAILED tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]
+FAILED tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]
+FAILED tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]
+4 failed, 40 deselected in 0.50s

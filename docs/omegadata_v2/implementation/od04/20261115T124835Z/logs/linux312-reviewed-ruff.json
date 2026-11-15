@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/verification_runner.py",
+    "linux312-reviewed-ruff",
+    "/home/parilrupani/omega-od04-6br9vbxk/repo",
+    "ruff",
+    "check",
+    "--no-cache",
+    "src/omegadata",
+    "tests",
+    "scripts"
+  ],
+  "cwd": "/home/parilrupani/omega-od04-6br9vbxk/repo",
+  "baseline": "d24e9cfd29c8a59e590aaee85983babe9e8bf182",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T13:13:48.516862+00:00",
+  "end_utc": "2026-11-15T13:13:48.736221+00:00",
+  "elapsed_seconds": 0.21935955600000057,
+  "exit_code": 0,
+  "output": "linux312-reviewed-ruff.txt"
+}

@@ -1,0 +1,429 @@
+{
+  "passed": true,
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "start_utc": "2026-11-15T13:19:33.583265+00:00",
+  "end_utc": "2026-11-15T13:19:59.279236+00:00",
+  "workers": [
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\guard",
+        "guard",
+        "00000000000000000000000000000000",
+        "same"
+      ],
+      "pid": 40524,
+      "start_utc": "2026-11-15T13:19:33.724283+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.5713199999881908,
+      "output": "FOUR_GUARD_NEGATIVES_PASS\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\same",
+        "reader",
+        "00000000000000000000000000000000",
+        "same"
+      ],
+      "pid": 23088,
+      "start_utc": "2026-11-15T13:19:35.294627+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.4856567999813706,
+      "output": "CONCURRENT_READER_VERIFIED_THREE_COMMITS\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\same",
+        "publish",
+        "00000000000000000000000000000001",
+        "same"
+      ],
+      "pid": 31948,
+      "start_utc": "2026-11-15T13:19:35.306155+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.014575299981516,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000001\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"36d51804b6973fbb134849373bcf98a2c64ab7a9893c302d0aad968e90330651\",\"committed_at\":\"2026-11-15T13:19:36.984050Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\same",
+        "publish",
+        "00000000000000000000000000000002",
+        "same"
+      ],
+      "pid": 25164,
+      "start_utc": "2026-11-15T13:19:35.319490+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.369142100040335,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000002\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"1ededae21990e92c7ec5aa8e161b647ebca1f1d426cec85d6ed80592ae780269\",\"committed_at\":\"2026-11-15T13:19:37.319402Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\same",
+        "publish",
+        "00000000000000000000000000000003",
+        "same"
+      ],
+      "pid": 19500,
+      "start_utc": "2026-11-15T13:19:35.331211+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.3561756000272,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000003\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"039c379d5a792d4c011165c2c9238d1fe7306caaf0e45420c6a928c975ff134c\",\"committed_at\":\"2026-11-15T13:19:37.115543Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\different",
+        "reader",
+        "00000000000000000000000000000000",
+        "different"
+      ],
+      "pid": 24232,
+      "start_utc": "2026-11-15T13:19:37.787111+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.4967922000214458,
+      "output": "CONCURRENT_READER_VERIFIED_THREE_COMMITS\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\different",
+        "publish",
+        "00000000000000000000000000000001",
+        "different"
+      ],
+      "pid": 6496,
+      "start_utc": "2026-11-15T13:19:37.798965+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.015864299959503,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000001\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"e0cca2965509df678c8064f5e0b9076016fa752f88a6c749768db83479450cc5\",\"size\":32,\"relative_path\":\"objects/sha256/e0/cc/e0cca2965509df678c8064f5e0b9076016fa752f88a6c749768db83479450cc5\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"a05a437cfb6a0b43c3f07f01a52b4d846da4ef5deef3d3daac225c7cff5d6f21\",\"committed_at\":\"2026-11-15T13:19:39.437638Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\different",
+        "publish",
+        "00000000000000000000000000000002",
+        "different"
+      ],
+      "pid": 38576,
+      "start_utc": "2026-11-15T13:19:37.814469+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.401843799976632,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000002\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"d2b1f1d83f0ad4f52dec8a1e2091f5c94ffad00ed3528362353fbe97aacd0187\",\"size\":32,\"relative_path\":\"objects/sha256/d2/b1/d2b1f1d83f0ad4f52dec8a1e2091f5c94ffad00ed3528362353fbe97aacd0187\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"05b05bcf4f709f6c7d62b46e805decc881a2beee7335a41de6e445c264ba15ca\",\"committed_at\":\"2026-11-15T13:19:39.795171Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\different",
+        "publish",
+        "00000000000000000000000000000003",
+        "different"
+      ],
+      "pid": 20308,
+      "start_utc": "2026-11-15T13:19:37.828259+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.3872356999781914,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"00000000000000000000000000000003\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"19d8d35c06ab2cb2ae937b5b8dd4c8570a15280b813e6f0c534b258c9954c7c6\",\"size\":32,\"relative_path\":\"objects/sha256/19/d8/19d8d35c06ab2cb2ae937b5b8dd4c8570a15280b813e6f0c534b258c9954c7c6\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"d05c3a6c4f01978b7fa14aaaa4039d1bee7b9ca402626f26262091fe9aab7866\",\"committed_at\":\"2026-11-15T13:19:39.598060Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\conflict",
+        "publish",
+        "66666666666666666666666666666666",
+        "same"
+      ],
+      "pid": 38888,
+      "start_utc": "2026-11-15T13:19:40.284890+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.6723466999828815,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"66666666666666666666666666666666\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"57b5d6f775792342bf037eeeef7c121ae165cb7d27fdba31185950f7201f2e5f\",\"committed_at\":\"2026-11-15T13:19:41.658945Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\conflict",
+        "publish",
+        "66666666666666666666666666666666",
+        "different"
+      ],
+      "pid": 24128,
+      "start_utc": "2026-11-15T13:19:40.297551+00:00",
+      "exit_code": 2,
+      "elapsed_seconds": 1.662869599997066,
+      "output": "CONFLICT\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\before_stage",
+        "crash",
+        "55555555555555555555555555555555",
+        "before_stage"
+      ],
+      "pid": 26636,
+      "start_utc": "2026-11-15T13:19:41.963057+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 1.4436320000095293,
+      "output": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\before_stage",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 13068,
+      "start_utc": "2026-11-15T13:19:43.410105+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.6622155000222847,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"789737c9d42c25fff32b00f85d730cc6545fa16b0dc372ca299bd4c9faf1ec77\",\"committed_at\":\"2026-11-15T13:19:44.776556Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\after_stage",
+        "crash",
+        "55555555555555555555555555555555",
+        "after_stage"
+      ],
+      "pid": 17452,
+      "start_utc": "2026-11-15T13:19:45.070989+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 1.2826460000360385,
+      "output": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\after_stage",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 30064,
+      "start_utc": "2026-11-15T13:19:46.357550+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.5418271999806166,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"cdd3db65b2250f215e8c812dfe85997c1b132121f4a06452ec516690688d36c4\",\"committed_at\":\"2026-11-15T13:19:47.626229Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\after_object",
+        "crash",
+        "55555555555555555555555555555555",
+        "after_object"
+      ],
+      "pid": 34012,
+      "start_utc": "2026-11-15T13:19:47.899808+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 1.3872867000172846,
+      "output": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\after_object",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 25252,
+      "start_utc": "2026-11-15T13:19:49.284836+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.4441211000084877,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"e4212854a5fa4d45ac7dc9dbded82aebf6fd982b43e94fcedf6f4688194d7a24\",\"committed_at\":\"2026-11-15T13:19:50.468899Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\after_observation",
+        "crash",
+        "55555555555555555555555555555555",
+        "after_observation"
+      ],
+      "pid": 20068,
+      "start_utc": "2026-11-15T13:19:50.731146+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 1.2850111000007018,
+      "output": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\after_observation",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 18404,
+      "start_utc": "2026-11-15T13:19:52.025008+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.6301607000059448,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"f03f16e9817f058a6eca8c471573182f42efbdb9c46fd101e274248d01d23756\",\"committed_at\":\"2026-11-15T13:19:53.363454Z\"}\r\n"
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\before_commit",
+        "crash",
+        "55555555555555555555555555555555",
+        "before_commit"
+      ],
+      "pid": 17380,
+      "start_utc": "2026-11-15T13:19:53.650923+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 1.3768859999836423,
+      "output": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\process_worker.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-copy-3oda4_3r\\repo",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy\\before_commit",
+        "publish",
+        "55555555555555555555555555555555",
+        "same"
+      ],
+      "pid": 40656,
+      "start_utc": "2026-11-15T13:19:55.031412+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.775573200022336,
+      "output": "{\"schema_version\":\"raw-commit/v1\",\"state\":\"COMMITTED\",\"observation_id\":\"55555555555555555555555555555555\",\"object\":{\"schema_version\":\"raw-object/v1\",\"sha256\":\"825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"size\":23,\"relative_path\":\"objects/sha256/82/5d/825db0def5df93aa8efabbb357b7659d5cecbbad18ba4769743a4f810a0bdd0f\",\"verification\":\"RAW_BYTES_CAPTURED\",\"media_hint\":\"application/octet-stream\"},\"observation_sha256\":\"354fabca851c706d9f848e2ae7e2bc76c4f80fe7e8158a54acf03323035e32ad\",\"committed_at\":\"2026-11-15T13:19:56.356903Z\"}\r\n"
+    }
+  ],
+  "exact_worker_sha256": "d6329e4361d966ee16a9617b0e588e8ff2486e40ebdab7ed2df716e153359207",
+  "publish_strategies": [
+    "hardlink",
+    "kernel_lock_rename"
+  ],
+  "forced_crashes": 5,
+  "reference_verified_commits": 6,
+  "inventory": {
+    "committed": 3,
+    "commit_ids": [
+      "00000000000000000000000000000001",
+      "00000000000000000000000000000002",
+      "00000000000000000000000000000003"
+    ],
+    "uncommitted_observations": [],
+    "retained_staging": [
+      "0013c9799d1949da9e361c86ee18c3b9",
+      "0e588937d0be40969ce7bb952ce4206e",
+      "3a5d7eaa342c438494b90172a0f90215"
+    ],
+    "logical_bytes": 11651,
+    "entries": 25,
+    "action": "READ_ONLY_NO_PROMOTION_NO_DELETION",
+    "verification": "UNVERIFIED_COMMIT_MARKER_COUNT_USE_SCAN_VERIFIED"
+  },
+  "benchmark": {
+    "payload_bytes": 23,
+    "observations": 3,
+    "objects": 1,
+    "duplicate_object_bytes_avoided": 46,
+    "read_verify_seconds": 0.0012650999706238508,
+    "recovery_seconds": 0.07277610001619905,
+    "tracemalloc_peak_bytes": 8236,
+    "larger_samples": [
+      {
+        "bytes": 4096,
+        "put_seconds": 0.16793290001805872,
+        "verified_read_seconds": 0.030354799993801862,
+        "peak_bytes": 17077747
+      },
+      {
+        "bytes": 65536,
+        "put_seconds": 0.21131300000706688,
+        "verified_read_seconds": 0.02987510000821203,
+        "peak_bytes": 17074760
+      },
+      {
+        "bytes": 1048576,
+        "put_seconds": 0.25755010003922507,
+        "verified_read_seconds": 0.030391699983738363,
+        "peak_bytes": 17072918
+      }
+    ],
+    "larger_observations": 6,
+    "larger_objects": 3,
+    "logical_bytes": 2259705,
+    "hardlink_unique_bytes": 1129853
+  },
+  "source_hashes": {
+    "src/omegadata/track_a/raw_archive.py": "68e40852eb7bc5ebaa6d52b1abc95cb749b03e897a916b73eab5824147ad4117",
+    "src/omegadata/track_a/download_manager.py": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91"
+  }
+}

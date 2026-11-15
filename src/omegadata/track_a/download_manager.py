@@ -16,6 +16,7 @@ from datetime import UTC, date, datetime
 from html.parser import HTMLParser
 from pathlib import Path, PureWindowsPath
 from threading import RLock
+from typing import Literal, cast
 from urllib.parse import urljoin, urlparse
 from urllib.request import urlopen as urlopen
 
@@ -36,6 +37,7 @@ from omegadata.track_a.acquisition import (
 )
 from omegadata.track_a.alerting import AlertEvent, AlertRouter
 from omegadata.track_a.monitoring import DOWNLOAD_COUNTER, DOWNLOAD_LATENCY, FAILOVER_COUNTER
+from omegadata.track_a.raw_archive import ObservationRequest, RawArchive
 from omegadata.track_a.source_registry import SOURCE_REGISTRY, resolve_era
 from omegadata.track_a.source_rights import (
     PolicyProvider,
@@ -65,6 +67,9 @@ class DownloadArtifact:
     source_mode: str = "source_unverified"
     acquisition_state: str = "HTTP_RECEIVED"
     sha256: str = ""
+    observation_id: str | None = None
+    commit_id: str | None = None
+    archive_state: str | None = None
 
 
 @dataclass(frozen=True)
@@ -110,6 +115,7 @@ class DownloadManager:
         acquisition_clock: Callable[[], float] | None = None,
         acquisition_sleep: Callable[[float], None] | None = None,
         offline_adapters: dict[SourceTransport, Callable[[str, dict[str, str], float], FetchResult]] | None = None,
+        raw_archive: RawArchive | None = None,
     ) -> None:
         self.raw_root = Path(settings.raw_root)
         self.seed_raw_root = Path(settings.seed_raw_root)
@@ -122,6 +128,7 @@ class DownloadManager:
         self._acquisition_sleep = acquisition_sleep or time.sleep
         self._job: ContextVar[RequestBudget | None] = ContextVar("acquisition_job", default=None)
         self._offline_adapters = dict(offline_adapters or {})
+        self.raw_archive = raw_archive
         # Serialize this manager's candidate bundle writes only. Cross-process
         # atomic publication remains OD-04 work.
         self._candidate_lock = RLock()
@@ -955,13 +962,15 @@ class DownloadManager:
 
     def download(self, source_key: str, as_of: date, *, request_timeout_seconds: float | None = None,
                  max_request_attempts: int | None = None, use_cache: bool = True,
-                 consumer_purpose: SourceOperation | None = None, cache_only: bool = False) -> DownloadArtifact:
+                 consumer_purpose: SourceOperation | None = None, cache_only: bool = False,
+                 operation_id: str | None = None, observed_at: datetime | None = None) -> DownloadArtifact:
         validate_request_options(request_timeout_seconds, max_request_attempts)
         with self._job_scope() as budget:
             try:
                 return self._download_in_job(source_key, as_of, request_timeout_seconds=request_timeout_seconds,
                     max_request_attempts=max_request_attempts, use_cache=use_cache,
-                    consumer_purpose=consumer_purpose, cache_only=cache_only)
+                    consumer_purpose=consumer_purpose, cache_only=cache_only,
+                    operation_id=operation_id, observed_at=observed_at)
             except DownloadError as exc:
                 exc.context.update(budget.context, source_key=source_key, requested_date=as_of.isoformat(),
                     purpose=consumer_purpose.value if consumer_purpose else "raw-acquisition",
@@ -979,6 +988,8 @@ class DownloadManager:
         use_cache: bool = True,
         consumer_purpose: SourceOperation | None = None,
         cache_only: bool = False,
+        operation_id: str | None = None,
+        observed_at: datetime | None = None,
     ) -> DownloadArtifact:
         if source_key not in SOURCE_REGISTRY:
             self._authorize(source_key, SourceOperation.READ_CACHED, SourceTransport.CACHE)
@@ -990,7 +1001,8 @@ class DownloadManager:
             cached = self._load_cached_artifact(source_key, as_of)
             if cached is not None:
                 DOWNLOAD_COUNTER.labels(source=source_key, status="cached").inc()
-                return replace(cached, policy_decisions=(cache_decision, *cached.policy_decisions))
+                return replace(cached, policy_decisions=(cache_decision, *cached.policy_decisions),
+                               archive_state="LEGACY_UNVERIFIED" if self.raw_archive else cached.archive_state)
         if cache_only:
             raise failure("CACHE_MISS")
         primary_url = self._render_url(source_key, as_of)
@@ -1080,6 +1092,32 @@ class DownloadManager:
             DOWNLOAD_COUNTER.labels(source=source_key, status="captured").inc()
 
             digest = self._hash_content(payload, source.checksum)
+            if self.raw_archive is not None:
+                identity = {} if operation_id is None else {"operation_id": operation_id}
+                observation = ObservationRequest(
+                    source_key=source_key, business_date=as_of,
+                    observed_at=observed_at or datetime.now(UTC),
+                    source_era=resolve_era(source_key, as_of).name,
+                    source_mode="SYNTHETIC_TEST_ONLY",  # actual provider egress remains disabled
+                    parser_schema="mock-unverified" if validation is None else validation.schema,
+                    payload_state=cast(Literal["HTTP_RECEIVED", "PAYLOAD_STRUCTURALLY_VALID"],
+                                       "HTTP_RECEIVED" if validation is None else validation.state),
+                    transport=SourceTransport(result.transport.upper()),
+                    original_url=safe_url(used_url), final_url=safe_url(result.final_url or used_url),
+                    origin_ref="OFFLINE_SYNTHETIC_TEST_ONLY", attempts=active_budget.attempts,
+                    consumer_purpose=consumer_purpose, **identity,
+                )
+                committed = self.raw_archive.put(payload, observation)
+                return DownloadArtifact(
+                    source_key=source_key, as_of=as_of,
+                    path=self.raw_archive.root / committed.object.relative_path,
+                    manifest_path=self.raw_archive.observation_path(committed.observation_id),
+                    checksum=digest, bytes_downloaded=len(payload), used_url=safe_url(used_url),
+                    attempts=attempts, policy_decisions=(fetch_decision, store_decision),
+                    source_mode="source_unverified", acquisition_state=observation.payload_state,
+                    sha256=committed.object.sha256, observation_id=committed.observation_id,
+                    commit_id=committed.observation_id, archive_state=committed.state,
+                )
             out_dir = self.raw_root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
             out_dir.mkdir(parents=True, exist_ok=True)
 

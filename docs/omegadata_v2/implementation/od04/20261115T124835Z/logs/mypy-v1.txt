@@ -1,0 +1,10 @@
+src\omegadata\track_a\raw_archive.py:149: error: Variable "omegadata.track_a.raw_archive.RawCommit.object" is not valid as a type  [valid-type]
+src\omegadata\track_a\raw_archive.py:149: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#variables-vs-type-aliases
+src\omegadata\track_a\raw_archive.py:249: error: Module has no attribute "flock"  [attr-defined]
+src\omegadata\track_a\raw_archive.py:249: error: Module has no attribute "LOCK_EX"  [attr-defined]
+src\omegadata\track_a\raw_archive.py:249: error: Module has no attribute "LOCK_NB"  [attr-defined]
+src\omegadata\track_a\raw_archive.py:264: error: Module has no attribute "flock"  [attr-defined]
+src\omegadata\track_a\raw_archive.py:264: error: Module has no attribute "LOCK_UN"  [attr-defined]
+src\omegadata\track_a\raw_archive.py:286: error: Module has no attribute "O_DIRECTORY"  [attr-defined]
+src\omegadata\track_a\download_manager.py:1102: error: Argument "payload_state" to "ObservationRequest" has incompatible type "str"; expected "Literal['HTTP_RECEIVED', 'PAYLOAD_STRUCTURALLY_VALID']"  [arg-type]
+Found 8 errors in 2 files (checked 49 source files)
