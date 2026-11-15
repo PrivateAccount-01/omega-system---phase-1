@@ -1,0 +1,38 @@
+........................................................................ [ 24%]
+........................................................................ [ 49%]
+..........................s...ss........................................ [ 74%]
+........................................................................ [ 99%]
+.                                                                        [100%]
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.14.3-final-0 _______________
+
+Name                                        Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------------
+src\omegadata\track_a\download_manager.py     719    241    236     51    62%   178, 185, 188, 193, 202, 208, 282, 285, 299, 316-325, 331, 333, 380-384, 389, 396, 402, 408, 439-445, 449-469, 479-497, 514, 527-601, 627, 630, 640, 643, 670->669, 676->674, 688-689, 692-693, 699-746, 750, 755, 757, 766, 771, 781->784, 788, 792, 794, 802, 812, 815, 824-835, 847-856, 859-871, 875, 884-892, 910-913, 935, 938->940, 960->1002, 987-1000, 1059->1090, 1060->1087, 1075, 1079-1086, 1087->1059, 1091-1104, 1108, 1133, 1135, 1137, 1141->1144, 1157->1160, 1182-1213
+src\omegadata\track_a\source_rights.py        270      1     72      1    99%   321
+---------------------------------------------------------------------------------------
+TOTAL                                         989    242    308     52    72%
+Coverage JSON written to file C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\od01r-offline-128mihvs\coverage.json
+=========================== short test summary info ===========================
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-128mihvs\\pytest\\test_r05_cache_escape_never_op3\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-128mihvs\\pytest\\test_r05_cache_escape_never_op3\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-128mihvs\\pytest\\test_r05_cache_escape_never_op7\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-128mihvs\\pytest\\test_r05_cache_escape_never_op7\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:159: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-128mihvs\\pytest\\test_r06_real_symlink_payload_0\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-128mihvs\\pytest\\test_r06_real_symlink_payload_0\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\linked.bin'
+286 passed, 3 skipped, 4 deselected in 25.07s
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027EEA8F65C0>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027EEB248F40>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027EEB4E7D30>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027EEA2BAA70>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027EEA9AA980>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+E:\omega system - phase 1\.venv\Lib\site-packages\_pytest\unraisableexception.py:33: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000027EEB44A2F0>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback

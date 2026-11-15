@@ -1,0 +1,647 @@
+{
+  "utc": "2026-11-15T09:16:33.698002+00:00",
+  "python311_syntax_parse_only": [
+    "src/omegadata/__init__.py",
+    "src/omegadata/api/__init__.py",
+    "src/omegadata/api/main.py",
+    "src/omegadata/config.py",
+    "src/omegadata/db/__init__.py",
+    "src/omegadata/db/base.py",
+    "src/omegadata/db/models.py",
+    "src/omegadata/db/session.py",
+    "src/omegadata/domain.py",
+    "src/omegadata/pipelines/__init__.py",
+    "src/omegadata/pipelines/monthly_quality_pipeline.py",
+    "src/omegadata/pipelines/sequential_pipeline.py",
+    "src/omegadata/track_a/__init__.py",
+    "src/omegadata/track_a/acquisition.py",
+    "src/omegadata/track_a/alerting.py",
+    "src/omegadata/track_a/collection_schedule.py",
+    "src/omegadata/track_a/download_manager.py",
+    "src/omegadata/track_a/kafka_bus.py",
+    "src/omegadata/track_a/monitoring.py",
+    "src/omegadata/track_a/news_pipeline.py",
+    "src/omegadata/track_a/orchestration.py",
+    "src/omegadata/track_a/quality_reporting.py",
+    "src/omegadata/track_a/redis_cache.py",
+    "src/omegadata/track_a/slo.py",
+    "src/omegadata/track_a/source_registry.py",
+    "src/omegadata/track_a/source_rights.py",
+    "src/omegadata/track_a/storage.py",
+    "src/omegadata/track_a/trading_calendar.py",
+    "src/omegadata/track_a/warehouse.py",
+    "src/omegadata/track_b/__init__.py",
+    "src/omegadata/track_b/adjustment_engine.py",
+    "src/omegadata/track_b/confidence.py",
+    "src/omegadata/track_b/corporate_action_matching.py",
+    "src/omegadata/track_b/corporate_action_parser.py",
+    "src/omegadata/track_b/corporate_actions.py",
+    "src/omegadata/track_b/cross_source_validation.py",
+    "src/omegadata/track_b/discontinuity.py",
+    "src/omegadata/track_b/isin_master.py",
+    "src/omegadata/track_b/manual_review.py",
+    "src/omegadata/track_b/matching_policy.py",
+    "src/omegadata/track_b/publication.py",
+    "src/omegadata/track_b/release_manager.py",
+    "src/omegadata/track_b/release_readiness.py",
+    "src/omegadata/track_b/review_policy.py",
+    "src/omegadata/track_b/tolerance_policy.py",
+    "src/omegadata/track_b/universe_manager.py",
+    "src/omegadata/verification/__init__.py",
+    "src/omegadata/verification/audit.py",
+    "scripts/backfill_nse_equity_history.py",
+    "scripts/backfill_pit_universe.py",
+    "scripts/build_30day_replay_proof.py",
+    "scripts/build_adjusted_ohlcv_proof.py",
+    "scripts/build_adjustment_reference_corpus.py",
+    "scripts/build_corporate_action_corpus_coverage.py",
+    "scripts/build_corporate_action_end_to_end_proof.py",
+    "scripts/build_corporate_action_matching_report.py",
+    "scripts/build_cross_source_tolerance_report.py",
+    "scripts/build_discontinuity_spike_report.py",
+    "scripts/build_futures_continuation_proof.py",
+    "scripts/build_historical_trading_calendar_proof.py",
+    "scripts/build_options_query_proof.py",
+    "scripts/build_pipeline_state_artifact.py",
+    "scripts/build_pit_universe_proof.py",
+    "scripts/build_pit_universe_seed_pack.py",
+    "scripts/build_post_pipeline_state.py",
+    "scripts/build_release_bundle.py",
+    "scripts/build_release_evidence_index.py",
+    "scripts/build_release_readiness_report.py",
+    "scripts/build_sidefeed_proof.py",
+    "scripts/check_trading_calendar_coverage.py",
+    "scripts/generate_extreme_report.py",
+    "scripts/generate_implementation_audit.py",
+    "scripts/generate_source_probe_matrix.py",
+    "scripts/generate_source_probe_report.py",
+    "scripts/import_seed_raw_cache.py",
+    "scripts/load_nse_fo_into_pipeline_db.py",
+    "scripts/probe_bse_urls.py",
+    "scripts/probe_endpoints.py",
+    "scripts/reconcile_release_blocking_reviews.py",
+    "scripts/reconcile_release_readiness_artifacts.py",
+    "scripts/replay_official_corporate_actions_into_pipeline_db.py",
+    "scripts/run_db_migrations.py",
+    "scripts/run_full_pipeline.py",
+    "scripts/run_monthly_quality_report.py",
+    "scripts/run_quarterly_secondary_validation.py",
+    "scripts/run_robustness_gate.py",
+    "scripts/run_weekly_reaudit.py",
+    "tests/conftest.py",
+    "tests/integration/test_real_data_sources.py",
+    "tests/unit/test_adjustment_engine.py",
+    "tests/unit/test_adjustment_reference_corpus.py",
+    "tests/unit/test_collection_schedule.py",
+    "tests/unit/test_confidence_and_validation.py",
+    "tests/unit/test_corporate_actions.py",
+    "tests/unit/test_discontinuity.py",
+    "tests/unit/test_discontinuity_sector_fallback.py",
+    "tests/unit/test_external_validation_jobs.py",
+    "tests/unit/test_isin_master.py",
+    "tests/unit/test_news_pipeline.py",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "tests/unit/test_od02_acquisition.py",
+    "tests/unit/test_operations_layer.py",
+    "tests/unit/test_pipeline_and_api.py",
+    "tests/unit/test_trackb_extreme_edges.py",
+    "tests/unit/test_universe_manager.py",
+    "tests/unit/test_validation_policies.py",
+    "airflow/dags/omegadata_corporate_actions_windows.py",
+    "airflow/dags/omegadata_monthly_quality.py",
+    "airflow/dags/omegadata_pipeline.py",
+    "airflow/dags/omegadata_quarterly_validation.py",
+    "airflow/dags/omegadata_track_b_reaudit.py",
+    "airflow/dags/omegadata_verification.py"
+  ],
+  "network_boundary_calls": [
+    {
+      "file": "src/omegadata/track_a/alerting.py",
+      "line": 48,
+      "call": "httpx.post"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 816,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 466,
+      "call": "client.get"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 649,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 659,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 443,
+      "call": "client.stream"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 1170,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 440,
+      "call": "httpx.URL"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 445,
+      "call": "httpx.URL"
+    },
+    {
+      "file": "src/omegadata/track_a/redis_cache.py",
+      "line": 20,
+      "call": "self.client.get"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 146,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 158,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 177,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 199,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 220,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "scripts/generate_source_probe_matrix.py",
+      "line": 14,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "scripts/generate_source_probe_report.py",
+      "line": 136,
+      "call": "offline_runner"
+    },
+    {
+      "file": "scripts/load_nse_fo_into_pipeline_db.py",
+      "line": 83,
+      "call": "httpx.get"
+    },
+    {
+      "file": "scripts/probe_bse_urls.py",
+      "line": 30,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "scripts/probe_bse_urls.py",
+      "line": 34,
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 28,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 64,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 34,
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 38,
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 71,
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/run_db_migrations.py",
+      "line": 7,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "tests/unit/test_od01_source_rights.py",
+      "line": 198,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od01_source_rights.py",
+      "line": 204,
+      "call": "httpx.MockTransport"
+    },
+    {
+      "file": "tests/unit/test_od01r_rights_hardening.py",
+      "line": 342,
+      "call": "subprocess.assert_not_called"
+    },
+    {
+      "file": "tests/unit/test_od01r_rights_hardening.py",
+      "line": 421,
+      "call": "client.get.assert_not_called"
+    },
+    {
+      "file": "tests/unit/test_od01r_rights_hardening.py",
+      "line": 95,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od01r_rights_hardening.py",
+      "line": 431,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od01r_rights_hardening.py",
+      "line": 464,
+      "call": "subprocess.run"
+    },
+    {
+      "file": "tests/unit/test_od01r_rights_hardening.py",
+      "line": 99,
+      "call": "httpx.MockTransport"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 390,
+      "call": "httpx.ConnectError"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 106,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 134,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 150,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 361,
+      "call": "httpx.Client"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 376,
+      "call": "httpx.ConnectError"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 467,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 133,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 264,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 278,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 307,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 324,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 344,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 418,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 435,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 452,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 489,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 513,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 688,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 696,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 296,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 296,
+      "call": "httpx.Response"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 667,
+      "call": "httpx.ConnectError"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 111,
+      "call": "httpx.MockTransport"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 137,
+      "call": "httpx.MockTransport"
+    },
+    {
+      "file": "tests/unit/test_od02_acquisition.py",
+      "line": 176,
+      "call": "httpx.MockTransport"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 119,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 125,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 145,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 149,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 153,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 796,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 848,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 890,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 895,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 964,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 971,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 977,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 990,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 1008,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 1010,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 1064,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 1067,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 1078,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_pipeline_and_api.py",
+      "line": 1458,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_validation_policies.py",
+      "line": 274,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_validation_policies.py",
+      "line": 350,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_validation_policies.py",
+      "line": 451,
+      "call": "client.get"
+    },
+    {
+      "file": "tests/unit/test_validation_policies.py",
+      "line": 558,
+      "call": "client.get"
+    },
+    {
+      "file": "airflow/dags/omegadata_verification.py",
+      "line": 17,
+      "call": "subprocess.run"
+    }
+  ],
+  "installed_metadata": {
+    "httpx": {
+      "version": "0.28.1",
+      "license": "BSD-3-Clause",
+      "requires": [
+        "anyio",
+        "certifi",
+        "httpcore==1.*",
+        "idna",
+        "brotli; (platform_python_implementation == 'CPython') and extra == 'brotli'",
+        "brotlicffi; (platform_python_implementation != 'CPython') and extra == 'brotli'",
+        "click==8.*; extra == 'cli'",
+        "pygments==2.*; extra == 'cli'",
+        "rich<14,>=10; extra == 'cli'",
+        "h2<5,>=3; extra == 'http2'",
+        "socksio==1.*; extra == 'socks'",
+        "zstandard>=0.18.0; extra == 'zstd'"
+      ]
+    },
+    "httpcore": {
+      "version": "1.0.9",
+      "license": "BSD-3-Clause",
+      "requires": [
+        "certifi",
+        "h11>=0.16",
+        "anyio<5.0,>=4.0; extra == 'asyncio'",
+        "h2<5,>=3; extra == 'http2'",
+        "socksio==1.*; extra == 'socks'",
+        "trio<1.0,>=0.22.0; extra == 'trio'"
+      ]
+    },
+    "anyio": {
+      "version": "4.13.0",
+      "license": "MIT",
+      "requires": [
+        "exceptiongroup>=1.0.2; python_version < \"3.11\"",
+        "idna>=2.8",
+        "typing_extensions>=4.5; python_version < \"3.13\"",
+        "trio>=0.32.0; extra == \"trio\""
+      ]
+    },
+    "h11": {
+      "version": "0.16.0",
+      "license": "MIT",
+      "requires": []
+    },
+    "idna": {
+      "version": "3.11",
+      "license": "BSD-3-Clause",
+      "requires": [
+        "ruff >= 0.6.2 ; extra == \"all\"",
+        "mypy >= 1.11.2 ; extra == \"all\"",
+        "pytest >= 8.3.2 ; extra == \"all\"",
+        "flake8 >= 7.1.1 ; extra == \"all\""
+      ]
+    },
+    "certifi": {
+      "version": "2026.2.25",
+      "license": "MPL-2.0",
+      "requires": []
+    },
+    "pydantic": {
+      "version": "2.12.5",
+      "license": "MIT",
+      "requires": [
+        "annotated-types>=0.6.0",
+        "pydantic-core==2.41.5",
+        "typing-extensions>=4.14.1",
+        "typing-inspection>=0.4.2",
+        "email-validator>=2.0.0; extra == 'email'",
+        "tzdata; (python_version >= '3.9' and platform_system == 'Windows') and extra == 'timezone'"
+      ]
+    },
+    "omegadata": {
+      "version": "0.1.0",
+      "license": null,
+      "requires": [
+        "fastapi>=0.115.0",
+        "uvicorn[standard]>=0.30.0",
+        "pydantic>=2.9.0",
+        "pydantic-settings>=2.4.0",
+        "sqlalchemy>=2.0.32",
+        "psycopg[binary]>=3.2.9",
+        "alembic>=1.13.2",
+        "httpx>=0.27.0",
+        "tenacity>=9.0.0",
+        "pandas>=2.2.2",
+        "pyarrow>=17.0.0",
+        "numpy>=2.1.0",
+        "prometheus-client>=0.20.0",
+        "redis>=5.0.8",
+        "confluent-kafka>=2.5.3",
+        "clickhouse-connect>=0.7.18",
+        "python-dateutil>=2.9.0.post0",
+        "pendulum>=3.0.0",
+        "orjson>=3.10.7",
+        "python-multipart>=0.0.9",
+        "pytest>=8.3.2; extra == \"dev\"",
+        "pytest-asyncio>=0.24.0; extra == \"dev\"",
+        "pytest-cov>=5.0.0; extra == \"dev\"",
+        "ruff>=0.6.4; extra == \"dev\"",
+        "mypy>=1.11.2; extra == \"dev\"",
+        "types-python-dateutil>=2.9.0.20240316; extra == \"dev\""
+      ]
+    }
+  },
+  "limitation": "Syntax parse is not Python 3.11 dependency/runtime verification. No upstream advisories queried."
+}

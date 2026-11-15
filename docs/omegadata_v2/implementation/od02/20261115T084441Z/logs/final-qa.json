@@ -1,0 +1,50 @@
+{
+  "utc": "2026-11-15T09:22:52.493407+00:00",
+  "original_records_checked": 11551,
+  "authorized_existing_changes": [
+    "scripts/generate_source_probe_report.py",
+    "scripts/load_nse_fo_into_pipeline_db.py",
+    "src/omegadata/track_a/download_manager.py",
+    "tests/conftest.py",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py"
+  ],
+  "new_implementation_paths": [
+    "config/acquisition_limits.v1.json",
+    "src/omegadata/track_a/acquisition.py",
+    "tests/unit/test_od02_acquisition.py"
+  ],
+  "unexpected_original_changes": [],
+  "missing_docs": [],
+  "broken_links": [],
+  "pending_sources": 13,
+  "approved_sources": 0,
+  "checks": {
+    "baseline": 0,
+    "targeted-final": 0,
+    "final-reviewed": 0,
+    "collection-final": 0,
+    "lint-reviewed": 0,
+    "type-final": 0,
+    "pip-final": 0
+  },
+  "blocked_platform_exits": {
+    "py311-targeted": 1,
+    "linux-targeted": 1
+  },
+  "git": {
+    "head": "3b5c0fffdd5ecd28a9318a51b43784d3ba133dcc",
+    "branch": "feature/od01-source-rights",
+    "main": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674",
+    "staged": []
+  },
+  "integrity_checks_passed": true,
+  "gatekeeper": "BLOCKED",
+  "blocked_dimensions": [
+    "3 inherited Windows file-symlink cases require privilege",
+    "Windows Python 3.11 and Linux Python 3.12 missing pytest/dependencies"
+  ],
+  "independent_source_review": "SOURCE_REFERENCE_PENDING; no live financial certification",
+  "signing": "metadata only; no key content opened",
+  "phase_stop": "OD-02 only; no commit/push/release/later phase"
+}

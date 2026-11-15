@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
+from functools import cached_property
 
 import pandas as pd
 
@@ -11,7 +12,11 @@ from omegadata.track_a.storage import ParquetStorage
 class IngestionOrchestrator:
     def __init__(self) -> None:
         self.download_manager = DownloadManager()
-        self.storage = ParquetStorage()
+
+    @cached_property
+    def storage(self) -> ParquetStorage:
+        # Raw-source refusal must not create an unrelated output directory.
+        return ParquetStorage()
 
     def ingest_raw_source(self, source_key: str, as_of: date) -> str:
         artifact = self.download_manager.download(source_key=source_key, as_of=as_of)

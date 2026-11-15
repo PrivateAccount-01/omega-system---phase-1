@@ -1,0 +1,222 @@
+{
+  "utc": "2026-11-15T08:26:51.964442+00:00",
+  "calls": [
+    {
+      "file": "src/omegadata/pipelines/sequential_pipeline.py",
+      "line": 885,
+      "function": "run_track_a",
+      "call": "self.ingestor.ingest_raw_source"
+    },
+    {
+      "file": "src/omegadata/pipelines/sequential_pipeline.py",
+      "line": 926,
+      "function": "run_scheduled_corporate_action_collection",
+      "call": "self.ingestor.ingest_raw_source"
+    },
+    {
+      "file": "src/omegadata/track_a/alerting.py",
+      "line": 48,
+      "function": "route",
+      "call": "httpx.post"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 394,
+      "function": "_request_once",
+      "call": "client.get"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 458,
+      "function": "_bootstrap_nse_session",
+      "call": "client.get"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 483,
+      "function": "_request_via_urllib",
+      "call": "urlopen"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 557,
+      "function": "_request_via_curl",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 686,
+      "function": "_discover_bse_equity_urls",
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 688,
+      "function": "_discover_bse_equity_urls",
+      "call": "client.get"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 702,
+      "function": "_discover_nse_fo_urls",
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 906,
+      "function": "_fetch_candidate",
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/download_manager.py",
+      "line": 1200,
+      "function": "fetch_bse_stockreach_graph",
+      "call": "httpx.Client"
+    },
+    {
+      "file": "src/omegadata/track_a/orchestration.py",
+      "line": 22,
+      "function": "ingest_raw_source",
+      "call": "self.download_manager.download"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 146,
+      "function": "_ensure_gpg_key",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 158,
+      "function": "_ensure_gpg_key",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 177,
+      "function": "_ensure_gpg_key",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 199,
+      "function": "_sign_manifest",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "src/omegadata/track_b/release_manager.py",
+      "line": 220,
+      "function": "verify_signature",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "scripts/backfill_nse_equity_history.py",
+      "line": 123,
+      "function": "_attempt_live_download",
+      "call": "?.download"
+    },
+    {
+      "file": "scripts/generate_source_probe_matrix.py",
+      "line": 14,
+      "function": "_run",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "scripts/generate_source_probe_report.py",
+      "line": 122,
+      "function": "_curl_probe",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "scripts/generate_source_probe_report.py",
+      "line": 156,
+      "function": "_curl_probe",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "scripts/load_nse_fo_into_pipeline_db.py",
+      "line": 79,
+      "function": "main",
+      "call": "httpx.get"
+    },
+    {
+      "file": "scripts/probe_bse_urls.py",
+      "line": 30,
+      "function": "main",
+      "call": "httpx.Client"
+    },
+    {
+      "file": "scripts/probe_bse_urls.py",
+      "line": 34,
+      "function": "main",
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 28,
+      "function": "probe_corporate_actions",
+      "call": "httpx.Client"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 34,
+      "function": "probe_corporate_actions",
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 38,
+      "function": "probe_corporate_actions",
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 64,
+      "function": "probe_bse_bhavcopy",
+      "call": "httpx.Client"
+    },
+    {
+      "file": "scripts/probe_endpoints.py",
+      "line": 71,
+      "function": "probe_bse_bhavcopy",
+      "call": "client.get"
+    },
+    {
+      "file": "scripts/run_db_migrations.py",
+      "line": 7,
+      "function": "main",
+      "call": "subprocess.run"
+    },
+    {
+      "file": "airflow/dags/omegadata_pipeline.py",
+      "line": 13,
+      "function": "run_daily_equity_ingest",
+      "call": "orchestrator.ingest_raw_source"
+    },
+    {
+      "file": "airflow/dags/omegadata_pipeline.py",
+      "line": 18,
+      "function": "run_nse_ca_collection",
+      "call": "orchestrator.ingest_raw_source"
+    },
+    {
+      "file": "airflow/dags/omegadata_pipeline.py",
+      "line": 23,
+      "function": "run_bse_ca_collection",
+      "call": "orchestrator.ingest_raw_source"
+    },
+    {
+      "file": "airflow/dags/omegadata_verification.py",
+      "line": 17,
+      "function": "_run_script",
+      "call": "subprocess.run"
+    }
+  ],
+  "workflow_files": [
+    {
+      "file": ".github/workflows/trading-calendar-guard.yml",
+      "sha256": "092850bcdaa5c8a9cae0fbac3d2ce5ef30c6d1cc884c63e237f34df4b6deaf77"
+    }
+  ],
+  "scope": "AST source/scripts/airflow; source access classification in 01_review_findings.md"
+}

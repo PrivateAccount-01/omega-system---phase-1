@@ -8,6 +8,8 @@ import zipfile
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
+from omegadata.track_a.source_rights import SourcePolicyError
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RAW_ROOT = REPO_ROOT / "data/raw/nse_equity_bhavcopy"
 SEED_RAW_ROOT = REPO_ROOT / "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy"
@@ -119,6 +121,8 @@ def _attempt_live_download(as_of: date) -> tuple[bool, Path | None, list[str], s
 
     try:
         artifact = DownloadManager().download("NSE_EQUITY_BHAVCOPY", as_of)
+    except SourcePolicyError:
+        raise
     except Exception as exc:  # noqa: BLE001
         return False, None, [f"live_download_failed:{exc}"], None
 

@@ -1,0 +1,231 @@
+{
+  "utc": "2026-11-15T06:53:09.562734+00:00",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "shell": "Windows PowerShell 5.1",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.179039+00:00",
+      "end_utc": "2026-11-15T06:53:04.234274+00:00",
+      "exit_code": 0,
+      "stdout": "E:/omega system - phase 1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.234286+00:00",
+      "end_utc": "2026-11-15T06:53:04.289483+00:00",
+      "exit_code": 0,
+      "stdout": "feature/od01-source-rights\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.289495+00:00",
+      "end_utc": "2026-11-15T06:53:04.347761+00:00",
+      "exit_code": 0,
+      "stdout": "3b5c0fffdd5ecd28a9318a51b43784d3ba133dcc\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.347773+00:00",
+      "end_utc": "2026-11-15T06:53:04.451039+00:00",
+      "exit_code": 0,
+      "stdout": "?? .venv-linux/\n?? OMEGADATA_OD01R_CODEX_REMEDIATION.md\n?? artifacts/gnupg/openpgp-revocs.d/36B1626F19983C4B8F7C643B26A3DDBB6030631F.rev\n?? artifacts/gnupg/private-keys-v1.d/CC8A0E3CC8C92D4A27115F70CA3DE3DCC3C7CEE1.key\n?? artifacts/gnupg/private-keys-v1.d/E1CF3EA03F1E3F45D57248F5A92D37E1FE153B7A.key\n?? docs/omegadata_v2/implementation/od01r/\n",
+      "stderr": "warning: unable to access 'C:\\Users\\Paril Rupani/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\Paril Rupani/.config/git/ignore': Permission denied\n"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-4",
+        "--oneline"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.451052+00:00",
+      "end_utc": "2026-11-15T06:53:04.520683+00:00",
+      "exit_code": 0,
+      "stdout": "3b5c0ff feat: enforce versioned source-rights policies\nd4b5a58 chore: preserve warehouse updates and release evidence\nf43ecec docs: record OD-00 audit and implementation plan\n09631ae final fix 8\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.520695+00:00",
+      "end_utc": "2026-11-15T06:53:04.605766+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--name-only"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.605778+00:00",
+      "end_utc": "2026-11-15T06:53:04.698470+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.698483+00:00",
+      "end_utc": "2026-11-15T06:53:04.761616+00:00",
+      "exit_code": 0,
+      "stdout": "Python 3.14.3\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "remote",
+        "-v"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.761628+00:00",
+      "end_utc": "2026-11-15T06:53:04.819440+00:00",
+      "exit_code": 0,
+      "stdout": "origin\thttps://github.com/PrivateAccount-01/omega-system---phase-1.git (fetch)\norigin\thttps://github.com/PrivateAccount-01/omega-system---phase-1.git (push)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "main",
+        "HEAD"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.819452+00:00",
+      "end_utc": "2026-11-15T06:53:04.874417+00:00",
+      "exit_code": 0,
+      "stdout": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--stat",
+        "main...HEAD"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.874429+00:00",
+      "end_utc": "2026-11-15T06:53:04.953671+00:00",
+      "exit_code": 0,
+      "stdout": " config/source_rights_policy.v1.json                |   408 +\n .../decisions/od01-source-policy-reuse.md          |    28 +\n .../implementation/od01/20261114T133340Z/design.md |    38 +\n .../od01/20261114T133340Z/final_checks.py          |    86 +\n .../od01/20261114T133340Z/gatekeeper-verdict.md    |    55 +\n .../od01/20261114T133340Z/implementation-diff.md   |    36 +\n .../logs/baseline-collection-v2.json               |    27 +\n .../logs/baseline-collection-v2.txt                |    48 +\n .../logs/baseline-collection-v3.json               |    27 +\n .../logs/baseline-collection-v3.txt                |   113 +\n .../20261114T133340Z/logs/baseline-collection.txt  |     0\n .../od01/20261114T133340Z/logs/baseline-mypy.json  |    21 +\n .../od01/20261114T133340Z/logs/baseline-mypy.txt   |     1 +\n .../20261114T133340Z/logs/baseline-offline-v2.json |    25 +\n .../20261114T133340Z/logs/baseline-offline-v2.txt  |    48 +\n .../20261114T133340Z/logs/baseline-offline-v3.json |    25 +\n .../20261114T133340Z/logs/baseline-offline-v3.txt  |     3 +\n .../20261114T133340Z/logs/baseline-offline.txt     |     0\n .../od01/20261114T133340Z/logs/baseline-ruff.json  |    29 +\n .../od01/20261114T133340Z/logs/baseline-ruff.txt   |     1 +\n .../20261114T133340Z/logs/coverage-reviewed.json   |     1 +\n .../od01/20261114T133340Z/logs/coverage.json       |     1 +\n .../20261114T133340Z/logs/definition-index.json    |   173 +\n .../od01/20261114T133340Z/logs/final-qa.json       |    24 +\n .../od01/20261114T133340Z/logs/final-status.txt    |    18 +\n .../logs/full-offline-coverage.coverage            |   Bin 0 -> 90112 bytes\n .../logs/full-offline-coverage.json                |    35 +\n .../logs/full-offline-coverage.txt                 |    79 +\n .../logs/full-offline-reviewed.coverage            |   Bin 0 -> 90112 bytes\n .../logs/full-offline-reviewed.json                |    35 +\n .../logs/full-offline-reviewed.txt                 |    79 +\n .../20261114T133340Z/logs/full-offline-v1.json     |    25 +\n .../od01/20261114T133340Z/logs/full-offline-v1.txt |     4 +\n .../logs/implementation-final.patch                |   684 +\n .../20261114T133340Z/logs/implementation.patch     |   684 +\n .../od01/20261114T133340Z/logs/mypy-final.json     |    21 +\n .../od01/20261114T133340Z/logs/mypy-final.txt      |     1 +\n .../od01/20261114T133340Z/logs/mypy-reviewed.json  |    21 +\n .../od01/20261114T133340Z/logs/mypy-reviewed.txt   |     1 +\n .../od01/20261114T133340Z/logs/mypy-v1.json        |    21 +\n .../od01/20261114T133340Z/logs/mypy-v1.txt         |     1 +\n .../logs/negative-first-green.json                 |    23 +\n .../20261114T133340Z/logs/negative-first-green.txt |     2 +\n .../od01/20261114T133340Z/logs/negative-first.json |    23 +\n .../od01/20261114T133340Z/logs/negative-first.txt  |    25 +\n .../od01/20261114T133340Z/logs/pip-final.json      |    21 +\n .../od01/20261114T133340Z/logs/pip-final.txt       |     1 +\n .../od01/20261114T133340Z/logs/preflight.json      |   162 +\n .../20261114T133340Z/logs/preservation-after.json  |    67 +\n .../20261114T133340Z/logs/preservation-before.json | 45646 +++++++++++++++++++\n .../od01/20261114T133340Z/logs/ruff-final.json     |    29 +\n .../od01/20261114T133340Z/logs/ruff-final.txt      |     1 +\n .../od01/20261114T133340Z/logs/ruff-reviewed.json  |    29 +\n .../od01/20261114T133340Z/logs/ruff-reviewed.txt   |     1 +\n .../od01/20261114T133340Z/logs/ruff-v1.json        |    29 +\n .../od01/20261114T133340Z/logs/ruff-v1.txt         |   225 +\n .../od01/20261114T133340Z/logs/targeted-final.json |    23 +\n .../od01/20261114T133340Z/logs/targeted-final.txt  |     3 +\n .../20261114T133340Z/logs/targeted-reviewed.json   |    23 +\n .../20261114T133340Z/logs/targeted-reviewed.txt    |     3 +\n .../od01/20261114T133340Z/logs/targeted-v1.json    |    23 +\n .../od01/20261114T133340Z/logs/targeted-v1.txt     |     2 +\n .../od01/20261114T133340Z/logs/targeted-v2.json    |    23 +\n .../od01/20261114T133340Z/logs/targeted-v2.txt     |     2 +\n .../od01/20261114T133340Z/logs/targeted-v3.json    |    23 +\n .../od01/20261114T133340Z/logs/targeted-v3.txt     |    43 +\n .../od01/20261114T133340Z/next-phase-request.md    |    14 +\n .../od01/20261114T133340Z/policy-examples.json     |    72 +\n .../od01/20261114T133340Z/risk-and-rollback.md     |    45 +\n .../od01/20261114T133340Z/source-policy-schema.md  |    58 +\n .../od01/20261114T133340Z/test-matrix.md           |    76 +\n .../od01/20261114T133340Z/verification_runner.py   |   153 +\n .../OMEGADATA_OD01_CODEX_NEXT_PROMPT.md            |   322 +\n scripts/generate_source_probe_report.py            |    23 +\n src/omegadata/pipelines/sequential_pipeline.py     |     3 +\n src/omegadata/track_a/download_manager.py          |   153 +-\n src/omegadata/track_a/source_rights.py             |   395 +\n tests/conftest.py                                  |    46 +\n tests/unit/test_od01_source_rights.py              |   663 +\n tests/unit/test_operations_layer.py                |     4 +-\n tests/unit/test_pipeline_and_api.py                |    48 +-\n 81 files changed, 51416 insertions(+), 38 deletions(-)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "artifacts/gnupg/**"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:04.953687+00:00",
+      "end_utc": "2026-11-15T06:53:05.015827+00:00",
+      "exit_code": 0,
+      "stdout": "artifacts/gnupg/openpgp-revocs.d/7CB8FB5ABF96A475B757CEB3B545296F9505618C.rev\nartifacts/gnupg/private-keys-v1.d/1683F3C9EC0CBDFDDA24D0D6D9B548A29682089D.key\nartifacts/gnupg/private-keys-v1.d/878E7B4B587E2895C8E2A03FBE6BDA3FFD383C03.key\nartifacts/gnupg/pubring.kbx\nartifacts/gnupg/pubring.kbx~\nartifacts/gnupg/trustdb.gpg\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "list",
+        "--format=json"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:05.015839+00:00",
+      "end_utc": "2026-11-15T06:53:06.413773+00:00",
+      "exit_code": 0,
+      "stdout": "[{\"name\": \"alembic\", \"version\": \"1.18.4\"}, {\"name\": \"annotated-doc\", \"version\": \"0.0.4\"}, {\"name\": \"annotated-types\", \"version\": \"0.7.0\"}, {\"name\": \"anyio\", \"version\": \"4.13.0\"}, {\"name\": \"certifi\", \"version\": \"2026.2.25\"}, {\"name\": \"click\", \"version\": \"8.3.2\"}, {\"name\": \"clickhouse-connect\", \"version\": \"0.15.1\"}, {\"name\": \"colorama\", \"version\": \"0.4.6\"}, {\"name\": \"confluent-kafka\", \"version\": \"2.14.0\"}, {\"name\": \"coverage\", \"version\": \"7.13.5\"}, {\"name\": \"et_xmlfile\", \"version\": \"2.0.0\"}, {\"name\": \"fastapi\", \"version\": \"0.135.3\"}, {\"name\": \"greenlet\", \"version\": \"3.3.2\"}, {\"name\": \"h11\", \"version\": \"0.16.0\"}, {\"name\": \"httpcore\", \"version\": \"1.0.9\"}, {\"name\": \"httptools\", \"version\": \"0.7.1\"}, {\"name\": \"httpx\", \"version\": \"0.28.1\"}, {\"name\": \"idna\", \"version\": \"3.11\"}, {\"name\": \"iniconfig\", \"version\": \"2.3.0\"}, {\"name\": \"librt\", \"version\": \"0.8.1\"}, {\"name\": \"lz4\", \"version\": \"4.4.5\"}, {\"name\": \"Mako\", \"version\": \"1.3.10\"}, {\"name\": \"MarkupSafe\", \"version\": \"3.0.3\"}, {\"name\": \"mypy\", \"version\": \"1.20.0\"}, {\"name\": \"mypy_extensions\", \"version\": \"1.1.0\"}, {\"name\": \"numpy\", \"version\": \"2.4.4\"}, {\"name\": \"omegadata\", \"version\": \"0.1.0\", \"editable_project_location\": \"E:\\\\omega system - phase 1\"}, {\"name\": \"openpyxl\", \"version\": \"3.1.5\"}, {\"name\": \"orjson\", \"version\": \"3.11.8\"}, {\"name\": \"packaging\", \"version\": \"26.0\"}, {\"name\": \"pandas\", \"version\": \"3.0.2\"}, {\"name\": \"pandas-stubs\", \"version\": \"3.0.0.260204\"}, {\"name\": \"pathspec\", \"version\": \"1.0.4\"}, {\"name\": \"pendulum\", \"version\": \"3.2.0\"}, {\"name\": \"pip\", \"version\": \"26.0.1\"}, {\"name\": \"pluggy\", \"version\": \"1.6.0\"}, {\"name\": \"prometheus_client\", \"version\": \"0.24.1\"}, {\"name\": \"psycopg\", \"version\": \"3.3.3\"}, {\"name\": \"psycopg-binary\", \"version\": \"3.3.3\"}, {\"name\": \"pyarrow\", \"version\": \"23.0.1\"}, {\"name\": \"pydantic\", \"version\": \"2.12.5\"}, {\"name\": \"pydantic_core\", \"version\": \"2.41.5\"}, {\"name\": \"pydantic-settings\", \"version\": \"2.13.1\"}, {\"name\": \"Pygments\", \"version\": \"2.20.0\"}, {\"name\": \"pytest\", \"version\": \"9.0.2\"}, {\"name\": \"pytest-asyncio\", \"version\": \"1.3.0\"}, {\"name\": \"pytest-cov\", \"version\": \"7.1.0\"}, {\"name\": \"python-dateutil\", \"version\": \"2.9.0.post0\"}, {\"name\": \"python-dotenv\", \"version\": \"1.2.2\"}, {\"name\": \"python-multipart\", \"version\": \"0.0.24\"}, {\"name\": \"pytz\", \"version\": \"2026.1.post1\"}, {\"name\": \"PyYAML\", \"version\": \"6.0.3\"}, {\"name\": \"redis\", \"version\": \"7.4.0\"}, {\"name\": \"ruff\", \"version\": \"0.15.9\"}, {\"name\": \"six\", \"version\": \"1.17.0\"}, {\"name\": \"SQLAlchemy\", \"version\": \"2.0.49\"}, {\"name\": \"starlette\", \"version\": \"1.0.0\"}, {\"name\": \"tenacity\", \"version\": \"9.1.4\"}, {\"name\": \"types-python-dateutil\", \"version\": \"2.9.0.20260402\"}, {\"name\": \"typing_extensions\", \"version\": \"4.15.0\"}, {\"name\": \"typing-inspection\", \"version\": \"0.4.2\"}, {\"name\": \"tzdata\", \"version\": \"2026.1\"}, {\"name\": \"urllib3\", \"version\": \"2.6.3\"}, {\"name\": \"uvicorn\", \"version\": \"0.44.0\"}, {\"name\": \"watchfiles\", \"version\": \"1.1.1\"}, {\"name\": \"websockets\", \"version\": \"16.0\"}, {\"name\": \"zstandard\", \"version\": \"0.25.0\"}]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:06.413786+00:00",
+      "end_utc": "2026-11-15T06:53:06.824780+00:00",
+      "exit_code": 0,
+      "stdout": "pytest 9.0.2\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:06.824792+00:00",
+      "end_utc": "2026-11-15T06:53:09.006512+00:00",
+      "exit_code": 0,
+      "stdout": "ruff 0.15.9\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "--version"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T06:53:09.006527+00:00",
+      "end_utc": "2026-11-15T06:53:09.562722+00:00",
+      "exit_code": 0,
+      "stdout": "mypy 1.20.0 (compiled: yes)\n",
+      "stderr": ""
+    }
+  ],
+  "packages": {
+    "pydantic": "2.12.5",
+    "pydantic-settings": "2.13.1",
+    "pytest": "9.0.2",
+    "ruff": "0.15.9",
+    "mypy": "1.20.0",
+    "coverage": "7.13.5",
+    "httpx": "0.28.1"
+  }
+}

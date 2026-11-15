@@ -5,9 +5,7 @@ import hashlib
 import io
 import json
 import re
-import ssl
-import subprocess
-import tempfile
+import subprocess as subprocess
 import time
 import zipfile
 from collections.abc import Callable, Iterator
@@ -16,14 +14,26 @@ from contextvars import ContextVar
 from dataclasses import dataclass, replace
 from datetime import UTC, date, datetime
 from html.parser import HTMLParser
-from pathlib import Path
-from urllib.error import HTTPError, URLError
+from pathlib import Path, PureWindowsPath
+from threading import RLock
 from urllib.parse import urljoin, urlparse
-from urllib.request import Request, urlopen
+from urllib.request import urlopen as urlopen
 
 import httpx
 
 from omegadata.config import settings
+from omegadata.track_a.acquisition import (
+    AcquisitionLimits,
+    DownloadError,
+    PayloadValidation,
+    RequestBudget,
+    check_status,
+    failure,
+    load_limits,
+    safe_url,
+    validate_payload,
+    validate_request_options,
+)
 from omegadata.track_a.alerting import AlertEvent, AlertRouter
 from omegadata.track_a.monitoring import DOWNLOAD_COUNTER, DOWNLOAD_LATENCY, FAILOVER_COUNTER
 from omegadata.track_a.source_registry import SOURCE_REGISTRY, resolve_era
@@ -36,21 +46,10 @@ from omegadata.track_a.source_rights import (
     SourceTransport,
     authorize_source,
     load_policy_register,
+    policy_url_host,
 )
 
-
-class DownloadError(RuntimeError):
-    def __init__(
-        self,
-        message: str,
-        *,
-        status_code: int | None = None,
-        stage: str = "request",
-    ) -> None:
-        super().__init__(message)
-        self.status_code = status_code
-        self.stage = stage
-
+HTTPX_CLIENT_TYPE = httpx.Client
 
 @dataclass(frozen=True)
 class DownloadArtifact:
@@ -63,6 +62,9 @@ class DownloadArtifact:
     used_url: str
     attempts: int
     policy_decisions: tuple[SourcePolicyDecision, ...] = ()
+    source_mode: str = "source_unverified"
+    acquisition_state: str = "HTTP_RECEIVED"
+    sha256: str = ""
 
 
 @dataclass(frozen=True)
@@ -72,6 +74,7 @@ class FetchResult:
     content_type: str
     transport: str
     request_attempts: int
+    final_url: str = ""
 
 
 @dataclass(frozen=True)
@@ -94,6 +97,7 @@ class SourceProbeResult:
     validation_error: str | None
     body_preview: str
     policy_decisions: tuple[SourcePolicyDecision, ...] = ()
+    acquisition_state: str = "HTTP_RECEIVED"
 
 
 class DownloadManager:
@@ -102,6 +106,10 @@ class DownloadManager:
         *,
         policy_provider: PolicyProvider | None = None,
         decision_clock: Callable[[], datetime] | None = None,
+        acquisition_limits: AcquisitionLimits | None = None,
+        acquisition_clock: Callable[[], float] | None = None,
+        acquisition_sleep: Callable[[float], None] | None = None,
+        offline_adapters: dict[SourceTransport, Callable[[str, dict[str, str], float], FetchResult]] | None = None,
     ) -> None:
         self.raw_root = Path(settings.raw_root)
         self.seed_raw_root = Path(settings.seed_raw_root)
@@ -109,6 +117,28 @@ class DownloadManager:
         self._policy_provider = load_policy_register if policy_provider is None else policy_provider
         self._decision_clock = decision_clock or (lambda: datetime.now(UTC))
         self._policy_source: ContextVar[str] = ContextVar("download_policy_source", default="")
+        self.limits = acquisition_limits or load_limits()
+        self._acquisition_clock = acquisition_clock or time.monotonic
+        self._acquisition_sleep = acquisition_sleep or time.sleep
+        self._job: ContextVar[RequestBudget | None] = ContextVar("acquisition_job", default=None)
+        self._offline_adapters = dict(offline_adapters or {})
+        # Serialize this manager's candidate bundle writes only. Cross-process
+        # atomic publication remains OD-04 work.
+        self._candidate_lock = RLock()
+
+    @contextmanager
+    def _job_scope(self) -> Iterator[RequestBudget]:
+        active = self._job.get()
+        if active is not None:
+            yield active
+            return
+        budget = RequestBudget(self.limits, self._acquisition_clock, self._acquisition_sleep)
+        budget.remaining()
+        token = self._job.set(budget)
+        try:
+            yield budget
+        finally:
+            self._job.reset(token)
 
     @contextmanager
     def _source_scope(self, source_key: str) -> Iterator[None]:
@@ -146,9 +176,14 @@ class DownloadManager:
         operation: SourceOperation = SourceOperation.FETCH,
         consumer_purpose: SourceOperation | None = None,
     ) -> SourcePolicyDecision:
-        parsed = urlparse(url)
-        host = parsed.hostname if parsed.scheme in {"http", "https"} and not parsed.username and not parsed.password else None
-        return self._authorize(source_key, operation, transport, host, consumer_purpose)
+        host = policy_url_host(url)
+        decision = self._authorize(source_key, operation, transport, host, consumer_purpose)
+        budget = self._job.get()
+        if budget is not None:
+            budget.context.update(source_key=source_key, candidate=safe_url(url),
+                transport=transport.value, policy_revision=decision.policy_revision,
+                policy_id=decision.policy_id)
+        return decision
 
     def _load_cached_artifact_from_root(
         self,
@@ -162,24 +197,55 @@ class DownloadManager:
         )
         out_dir = root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
         latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
-        if not latest_pointer.exists():
-            return None
         try:
-            manifest_payload = json.loads(latest_pointer.read_text(encoding="utf-8"))
-        except Exception:  # noqa: BLE001
-            return None
-
-        artifact_path = self._path_from_manifest(str(manifest_payload.get("artifact_path", "")))
-        manifest_path = self._path_from_manifest(str(manifest_payload.get("manifest_path", latest_pointer)))
-        if not artifact_path.exists():
-            return None
-        if not manifest_path.is_absolute():
-            manifest_path = out_dir / manifest_path.name
-        checksum = str(manifest_payload.get("checksum", "")).strip()
-        if not checksum:
-            return None
-        actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
-        if actual_checksum != checksum:
+            canonical_root = root.resolve()
+            partition = out_dir.resolve()
+            if not partition.is_relative_to(canonical_root) or not latest_pointer.resolve().is_relative_to(partition):
+                return None
+            manifest_payload = self._read_cache_manifest(latest_pointer)
+            artifact_path = self._path_from_manifest(
+                manifest_payload.get("artifact_path"), partition=partition,
+            )
+            manifest_path = self._path_from_manifest(
+                manifest_payload.get("manifest_path", str(latest_pointer)), partition=partition,
+            )
+            if not artifact_path.is_file():
+                return None
+            if not manifest_path.is_file():
+                # Legacy pointers are self-contained even when the optional
+                # sidecar is absent. Its reference was already confined above.
+                manifest_path = latest_pointer.resolve()
+            # Legacy missing identity is constrained by the dated pointer and filename.
+            if not artifact_path.name.startswith((f"{as_of:%Y%m%d}.", f"{as_of:%Y%m%d}__")):
+                return None
+            records = [manifest_payload]
+            if manifest_path.resolve() != latest_pointer.resolve():
+                records.append(self._read_cache_manifest(manifest_path))
+            checksum = manifest_payload.get("checksum")
+            if not isinstance(checksum, str) or not re.fullmatch(
+                r"[0-9a-f]{32}" if SOURCE_REGISTRY[source_key].checksum == "md5" else r"[0-9a-f]{64}", checksum,
+            ):
+                return None
+            size = artifact_path.stat().st_size
+            for record in records:
+                if record.get("source_key", source_key) != source_key or any(
+                    field in record and record[field] != as_of.isoformat()
+                    for field in ("as_of", "trade_date")
+                ) or record.get("checksum") != checksum:
+                    return None
+                if self._path_from_manifest(record.get("artifact_path"), partition=partition) != artifact_path:
+                    return None
+                length = record.get("bytes_downloaded", size)
+                if type(length) is not int or length != size:
+                    return None
+            attempts = manifest_payload.get("attempts", 0)
+            if type(attempts) is not int or attempts < 0:
+                return None
+            cached_payload = artifact_path.read_bytes()
+            actual_checksum = self._hash_content(cached_payload, SOURCE_REGISTRY[source_key].checksum)
+            if actual_checksum != checksum:
+                return None
+        except (OSError, ValueError, TypeError, RuntimeError):
             return None
         return DownloadArtifact(
             source_key=source_key,
@@ -187,10 +253,12 @@ class DownloadManager:
             path=artifact_path,
             manifest_path=manifest_path if manifest_path.exists() else latest_pointer,
             checksum=checksum,
-            bytes_downloaded=int(manifest_payload.get("bytes_downloaded", artifact_path.stat().st_size)),
+            bytes_downloaded=size,
             used_url=str(manifest_payload.get("used_url", "")),
-            attempts=int(manifest_payload.get("attempts", 0)),
+            attempts=attempts,
             policy_decisions=(decision,),
+            source_mode="source_cached_raw" if root == self.raw_root else "source_seed_imported",
+            sha256=hashlib.sha256(cached_payload).hexdigest(),
         )
 
     def _load_cached_artifact(self, source_key: str, as_of: date) -> DownloadArtifact | None:
@@ -200,11 +268,41 @@ class DownloadManager:
         return self._load_cached_artifact_from_root(self.seed_raw_root, source_key, as_of)
 
     @staticmethod
-    def _path_from_manifest(raw_path: str) -> Path:
-        normalized = raw_path.replace("\\", "/").strip()
-        if not normalized:
-            return Path(raw_path)
-        return Path(normalized)
+    def _path_from_manifest(raw_path: object, *, partition: Path) -> Path:
+        if not isinstance(raw_path, str) or not raw_path or raw_path != raw_path.strip():
+            raise ValueError("Invalid cache path")
+        normalized = raw_path.replace("\\", "/")
+        windows = PureWindowsPath(normalized)
+        if (
+            ".." in windows.parts or "\x00" in normalized or normalized.startswith("//")
+            or (windows.drive and (len(windows.drive) != 2 or not windows.root))
+            or ":" in normalized.removeprefix(windows.drive)
+        ):
+            raise ValueError("Ambiguous cache path")
+        path = Path(normalized)
+        # Historical writers used absolute or repository-relative paths; bare names
+        # are interpreted only within the dated source partition, never guessed.
+        if not path.is_absolute() and len(path.parts) == 1:
+            path = partition / path
+        resolved = path.resolve()
+        if not resolved.is_relative_to(partition):
+            raise ValueError("Cache path escapes source partition")
+        return resolved
+
+    @staticmethod
+    def _read_cache_manifest(path: Path) -> dict[str, object]:
+        def unique(pairs: list[tuple[str, object]]) -> dict[str, object]:
+            result: dict[str, object] = {}
+            for key, value in pairs:
+                if key in result:
+                    raise ValueError("Duplicate cache manifest field")
+                result[key] = value
+            return result
+
+        payload = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique)
+        if not isinstance(payload, dict):
+            raise ValueError("Cache manifest must be an object")
+        return payload
 
     @staticmethod
     def _expected_bse_equity_markers(as_of: date) -> tuple[str, ...]:
@@ -330,117 +428,118 @@ class DownloadManager:
         return hashlib.sha256(data).hexdigest()
 
     def _request_once(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
+        validate_request_options(timeout_seconds, None)
         self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
-        response = client.get(url, timeout=timeout_seconds)
-        if response.status_code in {403, 429}:
-            raise DownloadError(
-                f"Blocked by remote source ({response.status_code}): {url}",
-                status_code=response.status_code,
-                stage="request",
-            )
-        if response.status_code >= 400:
-            raise DownloadError(
-                f"HTTP {response.status_code} for {url}",
-                status_code=response.status_code,
-                stage="request",
-            )
-        if not response.content:
-            raise DownloadError(f"Empty payload: {url}", stage="request")
-        return FetchResult(
-            payload=response.content,
-            status_code=response.status_code,
-            content_type=response.headers.get("content-type", ""),
-            transport="httpx",
-            request_attempts=1,
-        )
+        with self._job_scope() as budget:
+            # Only the explicit in-process MockTransport is enabled. No DNS lookup,
+            # system proxy or provider connection can run on a normal client.
+            if isinstance(client, HTTPX_CLIENT_TYPE):
+                if not isinstance(client._transport, httpx.MockTransport):
+                    raise failure("BLOCKED_EXTERNAL_EGRESS")
+                # MockTransport clients may still have environment proxy mounts.
+                if client._transport_for_url(httpx.URL(url)) is not client._transport:
+                    raise failure("BLOCKED_EXTERNAL_EGRESS")
+                timeout = min(timeout_seconds, budget.consume())
+                with client.stream("GET", url, timeout=timeout, follow_redirects=False) as response:
+                    check_status(response.status_code, response.headers)
+                    if str(response.url) != str(httpx.URL(url)):
+                        raise failure("REDIRECT_NOT_ALLOWED")
+                    if response.headers.get("content-encoding", "identity").lower() != "identity":
+                        raise failure("ENCODING_UNSUPPORTED")
+                    length = response.headers.get("content-length")
+                    if length is not None and (not length.isdigit() or int(length) > self.limits.body_bytes):
+                        raise failure("BODY_LIMIT_EXCEEDED")
+                    chunks = bytearray()
+                    for chunk in response.iter_bytes():
+                        budget.remaining()
+                        if len(chunks) + len(chunk) > self.limits.body_bytes:
+                            raise failure("BODY_LIMIT_EXCEEDED")
+                        chunks.extend(chunk)
+                    payload = bytes(chunks)
+                    if length is not None and int(length) != len(payload):
+                        raise failure("PARTIAL_PAYLOAD")
+                    content_type, status = response.headers.get("content-type", ""), response.status_code
+            else:
+                # Private callers may explicitly supply a local fake client; the
+                # production factory always constructs an HTTPX Client above.
+                timeout = min(timeout_seconds, budget.consume())
+                response = client.get(url, timeout=timeout)
+                check_status(response.status_code, response.headers)
+                payload, content_type, status = response.content, response.headers.get("content-type", ""), response.status_code
+                if len(payload) > self.limits.body_bytes:
+                    raise failure("BODY_LIMIT_EXCEEDED")
+            budget.remaining()
+            if not payload:
+                raise failure("PAYLOAD_EMPTY")
+            return FetchResult(payload, status, content_type, "httpx", 1, safe_url(url))
 
-    def _request(
-        self,
-        client: httpx.Client,
-        url: str,
-        *,
-        timeout_seconds: float = 60.0,
-        max_attempts: int = 5,
-    ) -> FetchResult:
+    def _request(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0,
+                 max_attempts: int = 5) -> FetchResult:
         self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
-        attempts = 0
-        last_error: Exception | None = None
-        while attempts < max_attempts:
-            attempts += 1
-            try:
-                result = self._request_once(client, url, timeout_seconds=timeout_seconds)
-                return FetchResult(
-                    payload=result.payload,
-                    status_code=result.status_code,
-                    content_type=result.content_type,
-                    transport=result.transport,
-                    request_attempts=attempts,
-                )
-            except (httpx.HTTPError, DownloadError) as exc:
-                last_error = exc
-                if attempts >= max_attempts:
+        if type(max_attempts) is not int or max_attempts <= 0:
+            raise failure("INVALID_ACQUISITION_LIMITS")
+        with self._job_scope() as budget:
+            for index in range(min(max_attempts, self.limits.max_attempts)):
+                try:
+                    return self._request_once(client, url, timeout_seconds=timeout_seconds)
+                except SourcePolicyError:
                     raise
-                delay = min(30.0, 2 ** (attempts - 1))
-                time.sleep(delay)
-        raise DownloadError(f"Request failed for {url}: {last_error}", stage="request")
+                except DownloadError as exc:
+                    if exc.terminal or exc.reason_code != "HTTP_TRANSIENT":
+                        raise
+                    if index + 1 >= max_attempts:
+                        raise
+                except httpx.HTTPError as exc:
+                    if self._is_tls_error(exc):
+                        raise failure("TLS_INVALID") from exc
+                    if not isinstance(exc, (httpx.TimeoutException, httpx.NetworkError)):
+                        raise failure("INTERNAL_ERROR") from exc
+                    if index + 1 >= max_attempts:
+                        raise failure("HTTP_TRANSIENT", terminal=False) from exc
+                budget.backoff()
+            raise failure("ATTEMPT_BUDGET_EXCEEDED")
 
     def _bootstrap_nse_session(self, client: httpx.Client) -> None:
-        # NSE APIs require a warmed session with cookies set by the landing page.
-        bootstrap_urls = [
-            "https://www.nseindia.com",
-            "https://www.nseindia.com/market-data/live-equity-market",
-            "https://www.nseindia.com/companies-listing/corporate-filings-actions",
-        ]
-        last_error: Exception | None = None
-        for bootstrap_url in bootstrap_urls:
-            self._authorize_url(self._policy_source.get(), bootstrap_url, SourceTransport.HTTPX)
-            try:
-                bootstrap = client.get(bootstrap_url, timeout=30.0)
-                if bootstrap.status_code in {200, 204, 304}:
+        urls = ("https://www.nseindia.com", "https://www.nseindia.com/market-data/live-equity-market",
+                "https://www.nseindia.com/companies-listing/corporate-filings-actions")
+        with self._job_scope():
+            for url in urls:
+                self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
+                try:
+                    result = self._request(client, url, timeout_seconds=self.limits.request_seconds)
+                    if b"access denied" in result.payload[:1024].lower() or b"captcha" in result.payload[:1024].lower():
+                        raise failure("PAYLOAD_HTML_DENIAL")
                     return
-                last_error = DownloadError(
-                    f"Unexpected NSE bootstrap status {bootstrap.status_code} for {bootstrap_url}"
-                )
-            except SourcePolicyError:
-                raise
-            except Exception as exc:  # noqa: BLE001
-                last_error = exc
-                continue
-        raise DownloadError(f"Unable to bootstrap NSE session: {last_error}")
+                except SourcePolicyError:
+                    raise
+                except DownloadError as exc:
+                    if exc.terminal:
+                        raise
+            raise failure("HTTP_TRANSIENT", terminal=False)
 
-    def _request_via_urllib(
-        self,
-        url: str,
-        headers: dict[str, str],
-        *,
-        timeout_seconds: float = 60.0,
-    ) -> FetchResult:
-        self._authorize_url(self._policy_source.get(), url, SourceTransport.URLLIB)
-        context = ssl.create_default_context()
-        context.minimum_version = ssl.TLSVersion.TLSv1_2
-        req = Request(url=url, headers=headers, method="GET")
-        try:
-            with urlopen(req, timeout=timeout_seconds, context=context) as response:
-                payload = bytes(response.read())
-                content_type = response.headers.get("content-type", "")
-        except HTTPError as exc:
-            raise DownloadError(
-                f"HTTP {exc.code} via urllib for {url}",
-                status_code=exc.code,
-                stage="request",
-            ) from exc
-        except URLError as exc:
-            raise DownloadError(f"URL error via urllib for {url}: {exc}", stage="request") from exc
+    def _request_via_urllib(self, url: str, headers: dict[str, str], *, timeout_seconds: float = 60.0) -> FetchResult:
+        return self._offline_adapter(SourceTransport.URLLIB, url, headers, timeout_seconds)
 
-        if not payload:
-            raise DownloadError(f"Empty payload via urllib: {url}", stage="request")
-        return FetchResult(
-            payload=payload,
-            status_code=200,
-            content_type=content_type,
-            transport="urllib",
-            request_attempts=1,
-        )
+    def _offline_adapter(self, transport: SourceTransport, url: str, headers: dict[str, str], timeout_seconds: float) -> FetchResult:
+        validate_request_options(timeout_seconds, None)
+        self._authorize_url(self._policy_source.get(), url, transport)
+        adapter = self._offline_adapters.get(transport)
+        if adapter is None:
+            raise failure("BLOCKED_EXTERNAL_EGRESS")
+        with self._job_scope() as budget:
+            timeout = min(timeout_seconds, budget.consume())
+            # Never forward session cookies/authorization to another transport.
+            clean = {k: v for k, v in headers.items() if k.lower() not in {"cookie", "authorization", "proxy-authorization"}}
+            result = adapter(url, clean, timeout)
+            budget.remaining()
+            check_status(result.status_code or 0, {})
+            if result.final_url and result.final_url != safe_url(url):
+                raise failure("REDIRECT_NOT_ALLOWED")
+            if len(result.payload) > self.limits.body_bytes:
+                raise failure("BODY_LIMIT_EXCEEDED")
+            if not result.payload:
+                raise failure("PAYLOAD_EMPTY")
+            return replace(result, transport=transport.value.lower(), request_attempts=1, final_url=safe_url(url))
 
     @staticmethod
     def _attach_cookie_header(
@@ -456,97 +555,18 @@ class DownloadManager:
         enriched["Cookie"] = cookie_header
         return enriched
 
-    def _request_via_curl(
-        self,
-        url: str,
-        headers: dict[str, str],
-        *,
-        timeout_seconds: float = 60.0,
-    ) -> FetchResult:
-        self._authorize_url(self._policy_source.get(), url, SourceTransport.CURL)
-        with tempfile.TemporaryDirectory() as temp_dir:
-            temp_root = Path(temp_dir)
-            body_path = temp_root / "curl_body.bin"
-            header_path = temp_root / "curl_headers.txt"
-            body_output = str(body_path)
-            header_output = str(header_path)
-            cmd = [
-                "curl",
-                "--http1.1",
-                "--location",
-                "--silent",
-                "--show-error",
-                "--fail",
-                "--retry",
-                "2",
-                "--retry-all-errors",
-                "--connect-timeout",
-                str(int(timeout_seconds)),
-                "--max-time",
-                str(int(timeout_seconds)),
-                "--dump-header",
-                header_output,
-                "--output",
-                body_output,
-            ]
-            for name, value in headers.items():
-                cmd.extend(["-H", f"{name}: {value}"])
-            cmd.append(url)
-
-            try:
-                completed = subprocess.run(
-                    cmd,
-                    capture_output=True,
-                    text=True,
-                    check=False,
-                    timeout=timeout_seconds + 10.0,
-                )
-            except subprocess.TimeoutExpired as exc:
-                raise DownloadError(
-                    f"curl timeout for {url}",
-                    stage="request",
-                ) from exc
-
-            if completed.returncode != 0:
-                message = completed.stderr.strip() or completed.stdout.strip() or f"curl exited {completed.returncode}"
-                raise DownloadError(
-                    f"curl failed for {url}: {message}",
-                    stage="request",
-                )
-
-            payload = body_path.read_bytes()
-            if not payload:
-                raise DownloadError(f"Empty payload via curl: {url}", stage="request")
-
-            status_code: int | None = None
-            content_type = ""
-            for raw_line in header_path.read_text(encoding="utf-8", errors="ignore").splitlines():
-                line = raw_line.strip()
-                if line.startswith("HTTP/"):
-                    parts = line.split()
-                    if len(parts) >= 2 and parts[1].isdigit():
-                        status_code = int(parts[1])
-                elif ":" in line:
-                    name, value = line.split(":", 1)
-                    if name.lower().strip() == "content-type":
-                        content_type = value.strip()
-
-            if status_code is not None and status_code >= 400:
-                raise DownloadError(
-                    f"HTTP {status_code} via curl for {url}",
-                    status_code=status_code,
-                    stage="request",
-                )
-
-            return FetchResult(
-                payload=payload,
-                status_code=status_code or 200,
-                content_type=content_type,
-                transport="curl",
-                request_attempts=1,
-            )
+    def _request_via_curl(self, url: str, headers: dict[str, str], *, timeout_seconds: float = 60.0) -> FetchResult:
+        return self._offline_adapter(SourceTransport.CURL, url, headers, timeout_seconds)
 
     def _request_with_workarounds(
+        self, client: httpx.Client, url: str, request_headers: dict[str, str], *,
+        timeout_seconds: float = 60.0, max_request_attempts: int = 5,
+    ) -> FetchResult:
+        with self._job_scope():
+            return self._workarounds_in_job(client, url, request_headers,
+                timeout_seconds=timeout_seconds, max_request_attempts=max_request_attempts)
+
+    def _workarounds_in_job(
         self,
         client: httpx.Client,
         url: str,
@@ -566,6 +586,8 @@ class DownloadManager:
         except SourcePolicyError:
             raise
         except Exception as exc:  # noqa: BLE001
+            if isinstance(exc, DownloadError) and exc.terminal:
+                raise
             if not self._is_nse_url(url) or not self._is_retryable_nse_request_error(exc):
                 raise
         fallback_headers = self._attach_cookie_header(request_headers, client)
@@ -579,6 +601,8 @@ class DownloadManager:
         except SourcePolicyError:
             raise
         except Exception as urllib_exc:  # noqa: BLE001
+            if isinstance(urllib_exc, DownloadError) and urllib_exc.terminal:
+                raise
             if not self._is_retryable_nse_request_error(urllib_exc) and not self._is_tls_error(urllib_exc):
                 raise
         self._authorize_url(self._policy_source.get(), url, SourceTransport.CURL)
@@ -618,19 +642,13 @@ class DownloadManager:
         return list(dict.fromkeys(candidates))
 
     def _discover_bse_equity_urls(self, as_of: date) -> list[str]:
-        page_url = "https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3"
-        self._authorize_url("BSE_EQUITY_BHAVCOPY", page_url, SourceTransport.HTTPX)
-        base_profile = self._header_profiles()[0]
-        headers = self._profile_for_url(base_profile, page_url)
-        try:
-            with httpx.Client(headers=headers, follow_redirects=True, timeout=30.0) as client:
-                response = client.get(page_url)
-                response.raise_for_status()
-        except SourcePolicyError:
-            raise
-        except Exception:
-            return []
-        return self._extract_bse_equity_urls(response.text, as_of)
+        url = "https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3"
+        self._authorize_url("BSE_EQUITY_BHAVCOPY", url, SourceTransport.HTTPX)
+        headers = self._profile_for_url(self._header_profiles()[0], url)
+        with self._job_scope(), self._source_scope("BSE_EQUITY_BHAVCOPY"):
+            with httpx.Client(headers=headers, follow_redirects=False, trust_env=False) as client:
+                result = self._request(client, url)
+            return self._extract_bse_equity_urls(result.payload.decode("utf-8", errors="strict"), as_of)
 
     def _discover_nse_fo_urls(self, as_of: date) -> list[str]:
         api_url = "https://www.nseindia.com/api/daily-reports?key=FO"
@@ -638,7 +656,7 @@ class DownloadManager:
         base_profile = self._header_profiles()[0]
         headers = self._profile_for_url(base_profile, api_url)
         try:
-            with self._source_scope("NSE_FO_BHAVCOPY"), httpx.Client(headers=headers, follow_redirects=True) as client:
+            with self._source_scope("NSE_FO_BHAVCOPY"), httpx.Client(headers=headers, follow_redirects=False, trust_env=False) as client:
                 self._bootstrap_nse_session(client)
                 response = self._request_with_workarounds(
                     client,
@@ -649,7 +667,8 @@ class DownloadManager:
         except SourcePolicyError:
             raise
         except Exception:
-            return []
+            # Provider/resource failures must never disappear into discovery fallback.
+            raise
 
         try:
             payload = json.loads(response.payload.decode("utf-8", errors="ignore"))
@@ -778,57 +797,9 @@ class DownloadManager:
         )
 
     @staticmethod
-    def _validate_payload(source_key: str, payload: bytes, *, as_of: date | None = None) -> None:
-        if source_key == "BSE_EQUITY_BHAVCOPY":
-            if payload.startswith(b"PK\x03\x04"):
-                DownloadManager._validate_bse_equity_zip_payload(payload, as_of)
-                return
-            text = payload.decode("utf-8", errors="ignore").strip()
-            if not text:
-                raise DownloadError(f"Empty payload for {source_key}", stage="validation")
-            header = text.splitlines()[0] if text.splitlines() else ""
-            DownloadManager._validate_csv_header(
-                header,
-                ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb"),
-                source_key=source_key,
-            )
-            return
-
-        if source_key == "NSE_FO_BHAVCOPY":
-            if payload.startswith(b"PK\x03\x04"):
-                DownloadManager._validate_nse_fo_zip_payload(payload)
-                return
-            text = payload.decode("utf-8", errors="ignore").strip()
-            if not text:
-                raise DownloadError(f"Empty payload for {source_key}", stage="validation")
-            header = text.splitlines()[0] if text.splitlines() else ""
-            DownloadManager._validate_csv_header(
-                header,
-                ("FH_INSTRUMENT", "INSTRUMENT", "FH_SYMBOL", "SYMBOL"),
-                source_key=source_key,
-            )
-            return
-
-        text = payload.decode("utf-8", errors="ignore").strip()
-        if not text:
-            raise DownloadError(f"Empty payload for {source_key}", stage="validation")
-
-        json_sources = {
-            "NSE_CORPORATE_ACTIONS",
-            "BSE_CORPORATE_ACTIONS",
-            "NSE_FII_DII",
-            "INDIA_VIX",
-        }
-        if source_key in json_sources:
-            try:
-                parsed = json.loads(text)
-            except Exception as exc:  # noqa: BLE001
-                raise DownloadError(f"Non-JSON payload for {source_key}", stage="validation") from exc
-
-            if source_key == "NSE_CORPORATE_ACTIONS" and isinstance(parsed, dict) and str(
-                parsed.get("message", "")
-            ).lower().startswith("missing index"):
-                raise DownloadError("NSE corporate actions payload indicates missing index", stage="validation")
+    def _validate_payload(source_key: str, payload: bytes, *, as_of: date | None = None,
+                          limits: AcquisitionLimits | None = None, content_type: str = "") -> PayloadValidation:
+        return validate_payload(source_key, payload, as_of, limits or load_limits(), content_type)
 
     def _fetch_candidate(
         self,
@@ -842,12 +813,15 @@ class DownloadManager:
     ) -> FetchResult:
         self._authorize_url(source_key, url, SourceTransport.HTTPX)
         request_headers = self._profile_for_url(profile, url)
-        with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+        with self._job_scope(), self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=False, trust_env=False) as client:
             if self._is_nse_url(url):
                 try:
                     self._bootstrap_nse_session(client)
                 except SourcePolicyError:
                     raise
+                except DownloadError as exc:
+                    if exc.terminal:
+                        raise
                 except Exception:  # noqa: BLE001
                     pass
             result = self._request_with_workarounds(
@@ -857,10 +831,9 @@ class DownloadManager:
                 timeout_seconds=request_timeout_seconds,
                 max_request_attempts=max_request_attempts,
             )
-        self._validate_payload(source_key, result.payload, as_of=as_of)
         return result
 
-    def probe_source_candidates(
+    def _probe_in_job(
         self,
         source_key: str,
         as_of: date,
@@ -910,15 +883,17 @@ class DownloadManager:
                         request_timeout_seconds=request_timeout_seconds,
                         max_request_attempts=max_request_attempts,
                     )
+                    validation = self._validate_payload(source_key, result.payload, as_of=as_of,
+                                                        limits=self.limits, content_type=result.content_type)
                     last_status_code = result.status_code
                     policy_decision = self._authorize_url(source_key, url, SourceTransport(result.transport.upper()))
                     last_content_type = result.content_type
                     last_bytes = len(result.payload)
-                    last_preview = result.payload[:220].decode("utf-8", errors="ignore").replace("\n", " ")
+                    last_preview = ""  # Bodies may contain provider/session secrets.
                     last_transport = result.transport
                     last_request_attempts = result.request_attempts
                     elapsed_seconds = time.perf_counter() - started
-                    validated = True
+                    validated = validation is not None and validation.state == "PAYLOAD_STRUCTURALLY_VALID"
                     last_error = None
                     last_validation_error = None
                     last_failure_stage = None
@@ -926,6 +901,8 @@ class DownloadManager:
                 except SourcePolicyError:
                     raise
                 except Exception as exc:  # noqa: BLE001
+                    if isinstance(exc, DownloadError) and exc.terminal:
+                        raise
                     elapsed_seconds = time.perf_counter() - started
                     last_error = str(exc)
                     last_preview = ""
@@ -942,7 +919,7 @@ class DownloadManager:
                 SourceProbeResult(
                     source_key=source_key,
                     as_of=as_of,
-                    url=url,
+                    url=safe_url(url),
                     role=role,
                     validated=validated,
                     status_code=last_status_code,
@@ -958,11 +935,41 @@ class DownloadManager:
                     validation_error=last_validation_error,
                     body_preview=last_preview,
                     policy_decisions=() if policy_decision is None else (policy_decision,),
+                    acquisition_state="PAYLOAD_STRUCTURALLY_VALID" if validated else "HTTP_RECEIVED",
                 )
             )
         return results
 
-    def download(
+    def probe_source_candidates(self, source_key: str, as_of: date, *, limit: int | None = None,
+                                profiles: list[dict[str, str]] | None = None,
+                                request_timeout_seconds: float = 15.0, max_request_attempts: int = 5) -> list[SourceProbeResult]:
+        validate_request_options(request_timeout_seconds, max_request_attempts)
+        with self._job_scope() as budget:
+            try:
+                return self._probe_in_job(source_key, as_of, limit=limit, profiles=profiles,
+                                         request_timeout_seconds=request_timeout_seconds, max_request_attempts=max_request_attempts)
+            except DownloadError as exc:
+                exc.context.update(budget.context, source_key=source_key, requested_date=as_of.isoformat(),
+                    purpose="probe", actual_attempts=budget.attempts, max_attempts=budget.limits.max_attempts)
+                raise
+
+    def download(self, source_key: str, as_of: date, *, request_timeout_seconds: float | None = None,
+                 max_request_attempts: int | None = None, use_cache: bool = True,
+                 consumer_purpose: SourceOperation | None = None, cache_only: bool = False) -> DownloadArtifact:
+        validate_request_options(request_timeout_seconds, max_request_attempts)
+        with self._job_scope() as budget:
+            try:
+                return self._download_in_job(source_key, as_of, request_timeout_seconds=request_timeout_seconds,
+                    max_request_attempts=max_request_attempts, use_cache=use_cache,
+                    consumer_purpose=consumer_purpose, cache_only=cache_only)
+            except DownloadError as exc:
+                exc.context.update(budget.context, source_key=source_key, requested_date=as_of.isoformat(),
+                    purpose=consumer_purpose.value if consumer_purpose else "raw-acquisition",
+                    actual_attempts=budget.attempts, max_attempts=budget.limits.max_attempts,
+                    source_era=resolve_era(source_key, as_of).name if source_key in SOURCE_REGISTRY else "unknown")
+                raise
+
+    def _download_in_job(
         self,
         source_key: str,
         as_of: date,
@@ -971,6 +978,7 @@ class DownloadManager:
         max_request_attempts: int | None = None,
         use_cache: bool = True,
         consumer_purpose: SourceOperation | None = None,
+        cache_only: bool = False,
     ) -> DownloadArtifact:
         if source_key not in SOURCE_REGISTRY:
             self._authorize(source_key, SourceOperation.READ_CACHED, SourceTransport.CACHE)
@@ -983,6 +991,8 @@ class DownloadManager:
             if cached is not None:
                 DOWNLOAD_COUNTER.labels(source=source_key, status="cached").inc()
                 return replace(cached, policy_decisions=(cache_decision, *cached.policy_decisions))
+        if cache_only:
+            raise failure("CACHE_MISS")
         primary_url = self._render_url(source_key, as_of)
         self._authorize_url(source_key, primary_url, SourceTransport.HTTPX, consumer_purpose=consumer_purpose)
         self._authorize_url(source_key, primary_url, SourceTransport.HTTPX, SourceOperation.STORE_RAW, consumer_purpose)
@@ -1005,9 +1015,11 @@ class DownloadManager:
                             as_of,
                             url=url,
                             profile=profile,
-                            request_timeout_seconds=request_timeout_seconds or 60.0,
-                            max_request_attempts=max_request_attempts or 5,
+                            request_timeout_seconds=self.limits.request_seconds if request_timeout_seconds is None else request_timeout_seconds,
+                            max_request_attempts=self.limits.max_attempts if max_request_attempts is None else max_request_attempts,
                         )
+                        validation = self._validate_payload(source_key, result.payload, as_of=as_of,
+                                                            limits=self.limits, content_type=result.content_type)
                         payload = result.payload
                         used_url = url
                         if idx > 0:
@@ -1016,6 +1028,8 @@ class DownloadManager:
                     except SourcePolicyError:
                         raise
                     except Exception as exc:  # noqa: BLE001
+                        if isinstance(exc, DownloadError) and exc.terminal:
+                            raise
                         last_error = exc
                         consecutive_failures += 1
                         if self._is_nse_url(url) and self._is_tls_error(exc):
@@ -1048,67 +1062,84 @@ class DownloadManager:
                 AlertEvent(
                     severity="WARN",
                     title="Source Failover Triggered",
-                    message=f"{source_key} succeeded after failover in {attempts} attempts via {used_url}",
+                    message=f"{source_key} succeeded after failover in {attempts} attempts via {safe_url(used_url)}",
                     source="download_manager",
                     created_at=datetime.now(UTC),
                 )
             )
-        fetch_decision = self._authorize_url(
-            source_key, used_url, SourceTransport(result.transport.upper()), consumer_purpose=consumer_purpose,
-        )
-        store_decision = self._authorize_url(
-            source_key, used_url, SourceTransport(result.transport.upper()), SourceOperation.STORE_RAW, consumer_purpose,
-        )
-        DOWNLOAD_COUNTER.labels(source=source_key, status="success").inc()
+        with self._candidate_lock:
+            fetch_decision = self._authorize_url(
+                source_key, used_url, SourceTransport(result.transport.upper()), consumer_purpose=consumer_purpose,
+            )
+            store_decision = self._authorize_url(
+                source_key, used_url, SourceTransport(result.transport.upper()), SourceOperation.STORE_RAW, consumer_purpose,
+            )
+            active_budget = self._job.get()
+            assert active_budget is not None
+            active_budget.remaining()
+            DOWNLOAD_COUNTER.labels(source=source_key, status="captured").inc()
 
-        digest = self._hash_content(payload, source.checksum)
-        out_dir = self.raw_root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
-        out_dir.mkdir(parents=True, exist_ok=True)
+            digest = self._hash_content(payload, source.checksum)
+            out_dir = self.raw_root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+            out_dir.mkdir(parents=True, exist_ok=True)
 
-        suffix = ".bin"
-        if used_url.endswith(".zip"):
-            suffix = ".zip"
-        elif used_url.endswith(".csv"):
-            suffix = ".csv"
-        elif used_url.endswith(".json"):
-            suffix = ".json"
-        elif used_url.endswith(".txt"):
-            suffix = ".txt"
+            suffix = ".bin"
+            if used_url.endswith(".zip"):
+                suffix = ".zip"
+            elif used_url.endswith(".csv"):
+                suffix = ".csv"
+            elif used_url.endswith(".json"):
+                suffix = ".json"
+            elif used_url.endswith(".txt"):
+                suffix = ".txt"
 
-        artifact_stem = f"{as_of.strftime('%Y%m%d')}__{digest[:12]}"
-        output = out_dir / f"{artifact_stem}{suffix}"
-        if not output.exists():
-            output.write_bytes(payload)
+            artifact_stem = f"{as_of.strftime('%Y%m%d')}__{digest[:12]}"
+            output = out_dir / f"{artifact_stem}{suffix}"
+            if not output.exists():
+                output.write_bytes(payload)
 
-        manifest_payload = {
-            "source_key": source_key,
-            "as_of": as_of.isoformat(),
-            "checksum": digest,
-            "storage_mode": "immutable_versioned",
-            "artifact_path": str(output),
-            "bytes_downloaded": len(payload),
-            "used_url": used_url,
-            "attempts": attempts,
-            "downloaded_at": datetime.now(UTC).isoformat(),
-            "policy_decisions": [d.model_dump(mode="json") for d in (fetch_decision, store_decision)],
-        }
-        manifest_path = out_dir / f"{artifact_stem}.manifest.json"
-        if not manifest_path.exists():
-            manifest_path.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
+            manifest_payload = {
+                "source_key": source_key,
+                "as_of": as_of.isoformat(),
+                "checksum": digest,
+                "storage_mode": "immutable_versioned",
+                "artifact_path": str(output),
+                "bytes_downloaded": len(payload),
+                "used_url": safe_url(used_url),
+                "attempts": attempts,
+                "downloaded_at": datetime.now(UTC).isoformat(),
+                "policy_decisions": [d.model_dump(mode="json") for d in (fetch_decision, store_decision)],
+                "acquisition_evidence": {
+                    "schema_version": "acquisition-evidence/v1", "sha256": hashlib.sha256(payload).hexdigest(),
+                    "state": "HTTP_RECEIVED" if validation is None else validation.state,
+                    "parser_schema": "mock-unverified" if validation is None else validation.schema,
+                    "source_era": resolve_era(source_key, as_of).name,
+                    "original_url": safe_url(used_url), "final_url": result.final_url or safe_url(used_url),
+                    "transport": result.transport, "http_status": result.status_code,
+                    "content_type": result.content_type, "actual_attempts": active_budget.attempts,
+                    "source_mode": "source_unverified", "external_egress": "BLOCKED_EXTERNAL_EGRESS",
+                    "execution_mode": "OFFLINE_SYNTHETIC_TEST_ONLY",
+                },
+            }
+            manifest_path = out_dir / f"{artifact_stem}.manifest.json"
+            if not manifest_path.exists():
+                manifest_path.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
 
-        latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
-        latest_pointer.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
-        return DownloadArtifact(
-            source_key=source_key,
-            as_of=as_of,
-            path=output,
-            manifest_path=manifest_path,
-            checksum=digest,
-            bytes_downloaded=len(payload),
-            used_url=used_url,
-            attempts=attempts,
-            policy_decisions=(fetch_decision, store_decision),
-        )
+            latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+            latest_pointer.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
+            return DownloadArtifact(
+                source_key=source_key,
+                as_of=as_of,
+                path=output,
+                manifest_path=manifest_path,
+                checksum=digest,
+                bytes_downloaded=len(payload),
+                used_url=safe_url(used_url),
+                attempts=attempts,
+                policy_decisions=(fetch_decision, store_decision),
+                source_mode="source_unverified", sha256=hashlib.sha256(payload).hexdigest(),
+                acquisition_state="HTTP_RECEIVED" if validation is None else validation.state,
+            )
 
     def fetch_bse_stockreach_graph(
         self,
@@ -1136,7 +1167,7 @@ class DownloadManager:
         for base in base_urls:
             url = f"{base}?{query}"
             try:
-                with httpx.Client(headers=headers, follow_redirects=True) as client:
+                with httpx.Client(headers=headers, follow_redirects=False, trust_env=False) as client:
                     result = self._request(client, url)
                     self._validate_payload("BSE_CORPORATE_ACTIONS", result.payload)
                 parsed = json.loads(result.payload.decode("utf-8", errors="ignore"))

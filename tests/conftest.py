@@ -10,6 +10,25 @@ from omegadata.db.base import Base
 
 
 @pytest.fixture()
+def synthetic_equity_zip():
+    """SYNTHETIC_TEST_ONLY modern NSE mapping, not official source evidence."""
+    import io
+    import zipfile
+
+    def make(day):
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr(
+                f"BhavCopy_NSE_CM_0_0_0_{day:%Y%m%d}_F_0000.csv",
+                "TradDt,BizDt,ISIN,TckrSymb,SctySrs,OpnPric,HghPric,LwPric,ClsPric,TtlTradgVol\n"
+                f"{day.isoformat()},{day.isoformat()},TEST00000001,SYNTHETIC_TEST_ONLY,EQ,10,12,9,11,0\n",
+            )
+        return buffer.getvalue()
+
+    return make
+
+
+@pytest.fixture()
 def synthetic_source_policy_provider():
     """Explicit SYNTHETIC_TEST_ONLY permission, never installed as runtime policy."""
     from datetime import UTC, datetime

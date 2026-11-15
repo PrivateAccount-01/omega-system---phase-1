@@ -1,0 +1,42 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+___________ test_r10_probe_bootstrap_scoped_mock_and_refresh[True] ____________
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x0000020BCA271A60>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020BC80923F0>
+revoke_after_bootstrap = True
+
+    @pytest.mark.parametrize("revoke_after_bootstrap", [False, True])
+    def test_r10_probe_bootstrap_scoped_mock_and_refresh(synthetic_source_policy_provider, monkeypatch, revoke_after_bootstrap):
+        module = script("generate_source_probe_report")
+        from omegadata.track_a.source_rights import authorize_source
+    
+        active = synthetic_source_policy_provider()
+        calls = []
+    
+        def authorize(request):
+            return authorize_source(request, lambda: active)
+    
+        def fake_run(command, **kwargs):
+            nonlocal active
+            calls.append(command)
+            if "-o" in command:
+                Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+                Path(command[command.index("-D") + 1]).write_text("HTTP/1.1 200 OK\nContent-Type: text/plain\n")
+            elif revoke_after_bootstrap:
+                item = updated(active.policies[0], status=PolicyStatus.REVOKED,
+                               revoked_at=NOW, revocation_reason="SYNTHETIC_TEST_ONLY")
+                active = registry(item)
+            return Mock(returncode=0, stderr=b"")
+    
+        monkeypatch.setattr(module, "authorize_source", authorize)
+        monkeypatch.setattr(module.subprocess, "run", fake_run)
+        if revoke_after_bootstrap:
+>           with pytest.raises(SourcePolicyError, match="POLICY_REVOKED"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE <class 'omegadata.track_a.source_rights.SourcePolicyError'>
+
+tests\unit\test_od01r_rights_hardening.py:326: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[True]
+1 failed, 1 passed, 71 deselected in 0.45s

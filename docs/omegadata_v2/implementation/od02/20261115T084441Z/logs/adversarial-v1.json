@@ -1,0 +1,27 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od02\\20261115T084441Z\\verification_runner.py",
+    "adversarial-v1",
+    "pytest",
+    "tests/unit/test_od02_acquisition.py",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "effective_module": [
+    "pytest",
+    "tests/unit/test_od02_acquisition.py",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-15T09:05:46.887362+00:00",
+  "end_utc": "2026-11-15T09:05:48.745379+00:00",
+  "elapsed_seconds": 1.8580142999999225,
+  "exit_code": 1,
+  "output": "adversarial-v1.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

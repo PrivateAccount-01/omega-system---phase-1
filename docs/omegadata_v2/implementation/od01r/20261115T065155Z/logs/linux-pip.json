@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/mnt/e/omega system - phase 1/.venv-linux/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od01r/20261115T065155Z/verification_runner.py",
+    "linux-pip",
+    "pip",
+    "check"
+  ],
+  "effective_module": [
+    "pip",
+    "check"
+  ],
+  "cwd": "/mnt/e/omega system - phase 1",
+  "start_utc": "2026-11-15T07:13:17.988203+00:00",
+  "end_utc": "2026-11-15T07:13:38.498695+00:00",
+  "elapsed_seconds": 20.510489006,
+  "exit_code": 0,
+  "output": "linux-pip.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

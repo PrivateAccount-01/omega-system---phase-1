@@ -1,21 +1,27 @@
 from __future__ import annotations
 
 import argparse
-import csv
-import io
 import json
-import subprocess
+import subprocess as subprocess
 import tempfile
-import zipfile
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
-from urllib.parse import urlsplit
 
+from omegadata.track_a.acquisition import (
+    RequestBudget,
+    check_status,
+    failure,
+    load_limits,
+    safe_url,
+    validate_payload,
+    validate_request_options,
+)
 from omegadata.track_a.source_rights import (
     PolicyRequest,
     SourceOperation,
     SourceTransport,
     authorize_source,
+    policy_url_host,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -96,99 +102,67 @@ def _render_bse_fallbacks(as_of: date) -> list[str]:
 
 
 def _curl_probe(
-    *,
-    source_key: str,
-    url: str,
-    timeout_seconds: float,
-    bootstrap_nse: bool = False,
+    *, source_key: str, url: str, timeout_seconds: float,
+    bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,
 ) -> tuple[int | None, str, bytes, str | None]:
-    urls = [url, "https://www.nseindia.com/"] if bootstrap_nse else [url]
-    for target in urls:
+    """Only explicit offline runner injection is supported; no provider subprocess."""
+    validate_request_options(timeout_seconds, None)
+    limits = load_limits()
+    budget = budget or RequestBudget(limits)
+    def preflight(target: str) -> None:
         authorize_source(PolicyRequest(
             source_key=source_key, operation=SourceOperation.FETCH,
             decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
-            requested_host=urlsplit(target).hostname,
+            requested_host=policy_url_host(target),
         ))
+    targets = ["https://www.nseindia.com/", url] if bootstrap_nse else [url]
+    for target in targets:
+        preflight(target)
+    if offline_runner is None:
+        raise failure("BLOCKED_EXTERNAL_EGRESS")
+    budget.remaining()
     with tempfile.TemporaryDirectory() as tmpdir:
-        tmp = Path(tmpdir)
-        body_path = tmp / "body.bin"
-        header_path = tmp / "headers.txt"
-        cookie_path = tmp / "cookies.txt"
-        if bootstrap_nse:
-            subprocess.run(
-                [
-                    "curl",
-                    "-sS",
-                    "-L",
-                    "--max-time",
-                    str(timeout_seconds),
-                    "-A",
-                    USER_AGENT,
-                    "-c",
-                    str(cookie_path),
-                    "https://www.nseindia.com/",
-                ],
-                check=False,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-        cmd = [
-            "curl",
-            "-sS",
-            "-L",
-            "--max-time",
-            str(timeout_seconds),
-            "-A",
-            USER_AGENT,
-            "-D",
-            str(header_path),
-            "-o",
-            str(body_path),
-        ]
-        if bootstrap_nse:
-            cmd.extend(["-b", str(cookie_path), "-c", str(cookie_path)])
-            cmd.extend(["-H", "Referer: https://www.nseindia.com/", "-H", "Origin: https://www.nseindia.com"])
-        result = subprocess.run(cmd + [url], check=False, capture_output=True)
-        stderr = result.stderr.decode("utf-8", errors="ignore").strip() or None
-        headers_text = header_path.read_text(encoding="utf-8", errors="ignore") if header_path.exists() else ""
-        status_code = None
-        content_type = ""
-        for line in headers_text.splitlines():
-            if line.startswith("HTTP/"):
-                parts = line.split()
-                if len(parts) >= 2 and parts[1].isdigit():
-                    status_code = int(parts[1])
-            if line.lower().startswith("content-type:"):
-                content_type = line.split(":", 1)[1].strip()
-        body = body_path.read_bytes() if body_path.exists() else b""
-        return status_code, content_type, body, stderr
-
-
-def _validate_json(body: bytes) -> bool:
-    stripped = body.lstrip()
-    return stripped.startswith(b"{") or stripped.startswith(b"[")
-
-
-def _validate_csv(body: bytes, expected_headers: list[set[str]]) -> bool:
-    try:
-        text = body.decode("utf-8", errors="ignore")
-        reader = csv.DictReader(io.StringIO(text))
-        headers = {str(value).strip() for value in (reader.fieldnames or [])}
-        return any(expected.issubset(headers) for expected in expected_headers)
-    except Exception:
-        return False
-
-
-def _validate_zip_csv(body: bytes, expected_headers: list[set[str]]) -> bool:
-    try:
-        with zipfile.ZipFile(io.BytesIO(body)) as archive:
-            members = [name for name in archive.namelist() if name.lower().endswith(".csv")]
-            if not members:
-                return False
-            payload = archive.read(members[0])
-    except Exception:
-        return False
-    return _validate_csv(payload, expected_headers)
+        root = Path(tmpdir)
+        result_body = b""
+        status, content_type = None, ""
+        for index, target in enumerate(targets):
+            preflight(target)
+            timeout = min(timeout_seconds, budget.consume())
+            body_path, header_path = root / f"{index}.body", root / f"{index}.headers"
+            command = ["curl", "--proto", "=https", "--max-redirs", "0", "--proxy", "",
+                "--noproxy", "*", "--max-filesize", str(limits.body_bytes),
+                "--max-time", str(timeout), "--connect-timeout", str(timeout),
+                "-sS", "-D", str(header_path), "-o", str(body_path), "-A", USER_AGENT, target]
+            result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)
+            budget.remaining()
+            if result.returncode != 0:
+                raise failure("HTTP_TRANSIENT", terminal=False)
+            headers = {}
+            status = None
+            if not header_path.is_file():
+                raise failure("PARTIAL_PAYLOAD")
+            if header_path.stat().st_size > 65536:
+                raise failure("BODY_LIMIT_EXCEEDED")
+            for line in header_path.read_text(encoding="utf-8", errors="strict").splitlines():
+                if line.startswith("HTTP/"):
+                    status = int(line.split()[1])
+                elif ":" in line:
+                    name, value = line.split(":", 1)
+                    headers[name.lower().strip()] = value.strip()
+            check_status(status or 0, headers)
+            if not body_path.is_file() or body_path.stat().st_size > limits.body_bytes:
+                raise failure("BODY_LIMIT_EXCEEDED")
+            with body_path.open("rb") as handle:
+                result_body = handle.read(limits.body_bytes + 1)
+            if not result_body or len(result_body) > limits.body_bytes:
+                raise failure("PAYLOAD_EMPTY" if not result_body else "BODY_LIMIT_EXCEEDED")
+            length = headers.get("content-length")
+            if length is not None and (not length.isdigit() or int(length) != len(result_body)):
+                raise failure("PARTIAL_PAYLOAD")
+            if b"access denied" in result_body[:1024].lower() or b"captcha" in result_body[:1024].lower():
+                raise failure("PAYLOAD_HTML_DENIAL")
+            content_type = headers.get("content-type", "")
+        return status, content_type, result_body, None
 
 
 def _probe_entry(
@@ -199,11 +173,14 @@ def _probe_entry(
     role: str,
     timeout_seconds: float,
     kind: str,
+    budget: RequestBudget | None = None,
+    offline_runner=None,
 ) -> dict[str, object]:
+    budget = budget or RequestBudget(load_limits())
     policy_decision = authorize_source(PolicyRequest(
         source_key=source_key, operation=SourceOperation.FETCH,
         decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
-        requested_host=urlsplit(url).hostname,
+        requested_host=policy_url_host(url),
     ))
     bootstrap_nse = "nseindia.com" in url or "nsearchives.nseindia.com" in url
     started = datetime.now(UTC)
@@ -212,56 +189,34 @@ def _probe_entry(
         url=url,
         timeout_seconds=timeout_seconds,
         bootstrap_nse=bootstrap_nse,
+        budget=budget, offline_runner=offline_runner,
     )
     elapsed = (datetime.now(UTC) - started).total_seconds()
-    if kind == "json":
-        validated = status_code == 200 and _validate_json(body)
-    elif kind == "csv":
-        if source_key == "BSE_EQUITY_BHAVCOPY":
-            validated = status_code == 200 and _validate_csv(
-                body,
-                [
-                    {"TradDt", "BizDt", "ISIN", "TckrSymb", "OpnPric", "ClsPric"},
-                    {"SC_CODE", "SC_NAME", "OPEN", "CLOSE", "ISIN_CODE", "TRADING_DATE"},
-                ],
-            )
-        else:
-            validated = status_code == 200 and _validate_csv(body, [{"SYMBOL", "SERIES", "ISIN"}])
-    else:
-        if source_key == "NSE_EQUITY_BHAVCOPY":
-            validated = status_code == 200 and _validate_zip_csv(
-                body,
-                [
-                    {"SYMBOL", "SERIES", "ISIN"},
-                    {"TradDt", "BizDt", "ISIN", "TckrSymb", "OpnPric", "ClsPric"},
-                ],
-            )
-        elif source_key == "NSE_FO_BHAVCOPY":
-            validated = status_code == 200 and _validate_zip_csv(body, [{"FinInstrmTp", "TckrSymb", "XpryDt"}])
-        else:
-            validated = status_code == 200 and (
-                _validate_zip_csv(body, [{"TckrSymb", "ISIN", "OpnPric"}, {"SC_CODE", "OPEN", "CLOSE", "ISIN_CODE"}])
-                or body.startswith(b"PK")
-            )
+    validation = validate_payload(source_key, body, as_of, budget.limits, content_type)
+    validated = validation.state == "PAYLOAD_STRUCTURALLY_VALID"
     return {
         "source_key": source_key,
         "source_policy_decision": policy_decision.model_dump(mode="json"),
         "as_of": as_of.isoformat(),
-        "url": url,
+        "url": safe_url(url),
         "role": role,
         "validated": validated,
         "status_code": status_code,
         "content_type": content_type,
         "bytes_downloaded": len(body),
-        "attempts": 1,
-        "request_attempts": 1,
+        "attempts": budget.attempts,
+        "request_attempts": budget.attempts,
         "transport": "curl",
         "header_profile": "chrome_desktop",
         "elapsed_seconds": round(elapsed, 3),
         "failure_stage": None if validated else ("request" if status_code != 200 else "validation"),
         "error": stderr,
         "validation_error": None if validated else "payload_validation_failed",
-        "body_preview": body[:120].decode("utf-8", errors="ignore"),
+        "body_preview": "",
+        "acquisition_state": validation.state,
+        "parser_schema": validation.schema,
+        "sha256": validation.sha256,
+        "external_egress": "BLOCKED_EXTERNAL_EGRESS",
     }
 
 
@@ -286,6 +241,7 @@ def main() -> None:
     parser.add_argument("--workflow", choices=["diagnostic", "scheduled_verification"], default="diagnostic")
     args = parser.parse_args()
 
+    budget = RequestBudget(load_limits())
     calendar = _load_calendar()
     timeout_seconds = 8.0
     probe_history_days = 3
@@ -298,6 +254,7 @@ def main() -> None:
 
     nse_probes = [
         _probe_entry(
+            budget=budget,
             source_key="NSE_CORPORATE_ACTIONS",
             as_of=completed_anchor,
             url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
@@ -308,6 +265,7 @@ def main() -> None:
     ]
     nse_equity_probes = [
         _probe_entry(
+            budget=budget,
             source_key="NSE_EQUITY_BHAVCOPY",
             as_of=nse_probe_date,
             url=_render_nse_equity(nse_probe_date),
@@ -318,6 +276,7 @@ def main() -> None:
     ]
     nse_fo_probes = [
         _probe_entry(
+            budget=budget,
             source_key="NSE_FO_BHAVCOPY",
             as_of=nse_probe_date,
             url=_render_nse_fo(nse_probe_date),
@@ -327,6 +286,7 @@ def main() -> None:
         )
     ]
     bse_primary = _probe_entry(
+            budget=budget,
         source_key="BSE_EQUITY_BHAVCOPY",
         as_of=probe_date,
         url=_render_bse_primary(probe_date),
@@ -336,6 +296,7 @@ def main() -> None:
     )
     bse_fallbacks = [
         _probe_entry(
+            budget=budget,
             source_key="BSE_EQUITY_BHAVCOPY",
             as_of=probe_date,
             url=url,
@@ -351,6 +312,7 @@ def main() -> None:
     for candidate_date in bse_days:
         candidate_results = [
             _probe_entry(
+            budget=budget,
                 source_key="BSE_EQUITY_BHAVCOPY",
                 as_of=candidate_date,
                 url=_render_bse_primary(candidate_date),
@@ -360,6 +322,7 @@ def main() -> None:
             ),
             *[
                 _probe_entry(
+            budget=budget,
                     source_key="BSE_EQUITY_BHAVCOPY",
                     as_of=candidate_date,
                     url=url,
@@ -376,6 +339,7 @@ def main() -> None:
     for candidate_date in nse_days:
         candidate_results = [
             _probe_entry(
+            budget=budget,
                 source_key="NSE_EQUITY_BHAVCOPY",
                 as_of=candidate_date,
                 url=_render_nse_equity(candidate_date),

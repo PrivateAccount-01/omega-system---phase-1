@@ -1,0 +1,447 @@
+diff --git a/OMEGADATA_AGENTS.md b/OMEGADATA_AGENTS.md
+index 694722e..bf59803 100644
+--- a/OMEGADATA_AGENTS.md
++++ b/OMEGADATA_AGENTS.md
+@@ -1,6 +1,6 @@
+ # OmegaData Repository Instructions for Codex
+ 
+-**Use this file as repository-root `AGENTS.md`.** Keep this file short; the controlling project-specific technical reference is `docs/OMEGADATA_CODEX_MASTER_PROMPT.md`. Read the master document when running an OmegaData architecture, audit, ingestion, data-quality, historical-correctness, publication or release phase. For trivial unrelated edits, read only the relevant sections.
++**Repository instructions (loaded by root `AGENTS.md`).** Keep this file short; the controlling project-specific technical reference is `docs/verification/OMEGADATA_CODEX_MASTER_PROMPT.md`. Read the master document when running an OmegaData architecture, audit, ingestion, data-quality, historical-correctness, publication or release phase. For trivial unrelated edits, read only the relevant sections.
+ 
+ ## Operating rule
+ 
+diff --git a/scripts/backfill_nse_equity_history.py b/scripts/backfill_nse_equity_history.py
+index 7300dd5..3a23ac7 100644
+--- a/scripts/backfill_nse_equity_history.py
++++ b/scripts/backfill_nse_equity_history.py
+@@ -8,6 +8,8 @@ import zipfile
+ from datetime import UTC, date, datetime, timedelta
+ from pathlib import Path
+ 
++from omegadata.track_a.source_rights import SourcePolicyError
++
+ REPO_ROOT = Path(__file__).resolve().parents[1]
+ RAW_ROOT = REPO_ROOT / "data/raw/nse_equity_bhavcopy"
+ SEED_RAW_ROOT = REPO_ROOT / "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy"
+@@ -119,6 +121,8 @@ def _attempt_live_download(as_of: date) -> tuple[bool, Path | None, list[str], s
+ 
+     try:
+         artifact = DownloadManager().download("NSE_EQUITY_BHAVCOPY", as_of)
++    except SourcePolicyError:
++        raise
+     except Exception as exc:  # noqa: BLE001
+         return False, None, [f"live_download_failed:{exc}"], None
+ 
+diff --git a/scripts/generate_source_probe_matrix.py b/scripts/generate_source_probe_matrix.py
+index f031803..dba9742 100644
+--- a/scripts/generate_source_probe_matrix.py
++++ b/scripts/generate_source_probe_matrix.py
+@@ -10,6 +10,7 @@ PYTHON = Path(sys.executable)
+ 
+ 
+ def _run(mode: str) -> dict[str, object]:
++    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
+     subprocess.run(
+         [
+             str(PYTHON),
+@@ -29,6 +30,7 @@ def _run(mode: str) -> dict[str, object]:
+ 
+ 
+ def main() -> None:
++    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
+     canonical = REPO_ROOT / "artifacts/verification/source_probe_report.json"
+     original_canonical = canonical.read_text(encoding="utf-8") if canonical.exists() else None
+     deterministic = _run("deterministic")
+diff --git a/scripts/generate_source_probe_report.py b/scripts/generate_source_probe_report.py
+index 0b4c820..3980ccb 100644
+--- a/scripts/generate_source_probe_report.py
++++ b/scripts/generate_source_probe_report.py
+@@ -9,13 +9,13 @@ import tempfile
+ import zipfile
+ from datetime import UTC, date, datetime, timedelta
+ from pathlib import Path
+-from urllib.parse import urlsplit
+ 
+ from omegadata.track_a.source_rights import (
+     PolicyRequest,
+     SourceOperation,
+     SourceTransport,
+     authorize_source,
++    policy_url_host,
+ )
+ 
+ REPO_ROOT = Path(__file__).resolve().parents[1]
+@@ -102,19 +102,23 @@ def _curl_probe(
+     timeout_seconds: float,
+     bootstrap_nse: bool = False,
+ ) -> tuple[int | None, str, bytes, str | None]:
+-    urls = [url, "https://www.nseindia.com/"] if bootstrap_nse else [url]
+-    for target in urls:
++    def preflight(target: str) -> None:
+         authorize_source(PolicyRequest(
+             source_key=source_key, operation=SourceOperation.FETCH,
+             decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+-            requested_host=urlsplit(target).hostname,
++            requested_host=policy_url_host(target),
+         ))
++
++    urls = [url, "https://www.nseindia.com/"] if bootstrap_nse else [url]
++    for target in urls:
++        preflight(target)
+     with tempfile.TemporaryDirectory() as tmpdir:
+         tmp = Path(tmpdir)
+         body_path = tmp / "body.bin"
+         header_path = tmp / "headers.txt"
+         cookie_path = tmp / "cookies.txt"
+         if bootstrap_nse:
++            preflight("https://www.nseindia.com/")
+             subprocess.run(
+                 [
+                     "curl",
+@@ -148,6 +152,7 @@ def _curl_probe(
+         if bootstrap_nse:
+             cmd.extend(["-b", str(cookie_path), "-c", str(cookie_path)])
+             cmd.extend(["-H", "Referer: https://www.nseindia.com/", "-H", "Origin: https://www.nseindia.com"])
++        preflight(url)
+         result = subprocess.run(cmd + [url], check=False, capture_output=True)
+         stderr = result.stderr.decode("utf-8", errors="ignore").strip() or None
+         headers_text = header_path.read_text(encoding="utf-8", errors="ignore") if header_path.exists() else ""
+@@ -203,7 +208,7 @@ def _probe_entry(
+     policy_decision = authorize_source(PolicyRequest(
+         source_key=source_key, operation=SourceOperation.FETCH,
+         decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+-        requested_host=urlsplit(url).hostname,
++        requested_host=policy_url_host(url),
+     ))
+     bootstrap_nse = "nseindia.com" in url or "nsearchives.nseindia.com" in url
+     started = datetime.now(UTC)
+diff --git a/scripts/load_nse_fo_into_pipeline_db.py b/scripts/load_nse_fo_into_pipeline_db.py
+index b77ae9c..0695538 100644
+--- a/scripts/load_nse_fo_into_pipeline_db.py
++++ b/scripts/load_nse_fo_into_pipeline_db.py
+@@ -19,6 +19,13 @@ from omegadata.db.models import (
+ from omegadata.db.session import get_session, init_db
+ from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+ from omegadata.track_a.source_registry import resolve_era
++from omegadata.track_a.source_rights import (
++    PolicyRequest,
++    SourceOperation,
++    SourceTransport,
++    authorize_source,
++    policy_url_host,
++)
+ 
+ REPO_ROOT = Path(__file__).resolve().parents[1]
+ 
+@@ -53,16 +60,26 @@ def main() -> None:
+     )
+     args = parser.parse_args()
+ 
++    trade_date = date.fromisoformat(args.trade_date)
++    url = _render_fo_url(trade_date)
++    def preflight(operation: SourceOperation):
++        return authorize_source(PolicyRequest(
++            source_key="NSE_FO_BHAVCOPY", operation=operation,
++            decision_at=datetime.now(UTC), requested_transport=SourceTransport.HTTPX,
++            requested_host=policy_url_host(url),
++        ))
++
++    decisions = [preflight(operation) for operation in (SourceOperation.FETCH, SourceOperation.STORE_RAW)]
+     if args.db_url:
+         settings.db_url = str(args.db_url)
+     init_db()
+ 
+-    trade_date = date.fromisoformat(args.trade_date)
+-    url = _render_fo_url(trade_date)
+     headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://www.nseindia.com/all-reports-derivatives"}
++    decisions[0] = preflight(SourceOperation.FETCH)
+     response = httpx.get(url, headers=headers, timeout=60.0, follow_redirects=True)
+     response.raise_for_status()
+     payload = response.content
++    decisions[1] = preflight(SourceOperation.STORE_RAW)
+ 
+     out_dir = REPO_ROOT / "data/raw/nse_fo_bhavcopy" / f"year={trade_date.year:04d}" / f"month={trade_date.month:02d}"
+     out_dir.mkdir(parents=True, exist_ok=True)
+@@ -79,6 +96,7 @@ def main() -> None:
+                 "used_url": url,
+                 "artifact_path": _relative_repo_path(artifact_path),
+                 "checksum": checksum,
++                "policy_decisions": [decision.model_dump(mode="json") for decision in decisions],
+                 "bytes_downloaded": len(payload),
+             },
+             indent=2,
+diff --git a/scripts/probe_bse_urls.py b/scripts/probe_bse_urls.py
+index ac93195..fac2ff1 100644
+--- a/scripts/probe_bse_urls.py
++++ b/scripts/probe_bse_urls.py
+@@ -4,6 +4,7 @@ import httpx
+ 
+ 
+ def main() -> None:
++    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
+     date_token = "060426"
+     patterns = [
+         "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{d}.zip",
+diff --git a/scripts/probe_endpoints.py b/scripts/probe_endpoints.py
+index 8b7704d..8da4080 100644
+--- a/scripts/probe_endpoints.py
++++ b/scripts/probe_endpoints.py
+@@ -7,6 +7,7 @@ import httpx
+ 
+ 
+ def probe_corporate_actions() -> None:
++    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
+     urls = [
+         "https://www.nseindia.com/api/corporates-corporateActions",
+         "https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+@@ -47,6 +48,7 @@ def probe_corporate_actions() -> None:
+ 
+ 
+ def probe_bse_bhavcopy() -> None:
++    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
+     patterns = [
+         "https://www.bseindia.com/download/BhavCopy/Equity/EQ{d}_CSV.ZIP",
+         "https://www.bseindia.com/download/BhavCopy/Equity/EQ{d}.CSV",
+diff --git a/src/omegadata/track_a/download_manager.py b/src/omegadata/track_a/download_manager.py
+index 87d4097..8b5a6f9 100644
+--- a/src/omegadata/track_a/download_manager.py
++++ b/src/omegadata/track_a/download_manager.py
+@@ -16,7 +16,7 @@ from contextvars import ContextVar
+ from dataclasses import dataclass, replace
+ from datetime import UTC, date, datetime
+ from html.parser import HTMLParser
+-from pathlib import Path
++from pathlib import Path, PureWindowsPath
+ from urllib.error import HTTPError, URLError
+ from urllib.parse import urljoin, urlparse
+ from urllib.request import Request, urlopen
+@@ -36,6 +36,7 @@ from omegadata.track_a.source_rights import (
+     SourceTransport,
+     authorize_source,
+     load_policy_register,
++    policy_url_host,
+ )
+ 
+ 
+@@ -146,8 +147,7 @@ class DownloadManager:
+         operation: SourceOperation = SourceOperation.FETCH,
+         consumer_purpose: SourceOperation | None = None,
+     ) -> SourcePolicyDecision:
+-        parsed = urlparse(url)
+-        host = parsed.hostname if parsed.scheme in {"http", "https"} and not parsed.username and not parsed.password else None
++        host = policy_url_host(url)
+         return self._authorize(source_key, operation, transport, host, consumer_purpose)
+ 
+     def _load_cached_artifact_from_root(
+@@ -162,24 +162,54 @@ class DownloadManager:
+         )
+         out_dir = root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+         latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+-        if not latest_pointer.exists():
+-            return None
+         try:
+-            manifest_payload = json.loads(latest_pointer.read_text(encoding="utf-8"))
+-        except Exception:  # noqa: BLE001
+-            return None
+-
+-        artifact_path = self._path_from_manifest(str(manifest_payload.get("artifact_path", "")))
+-        manifest_path = self._path_from_manifest(str(manifest_payload.get("manifest_path", latest_pointer)))
+-        if not artifact_path.exists():
+-            return None
+-        if not manifest_path.is_absolute():
+-            manifest_path = out_dir / manifest_path.name
+-        checksum = str(manifest_payload.get("checksum", "")).strip()
+-        if not checksum:
+-            return None
+-        actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+-        if actual_checksum != checksum:
++            canonical_root = root.resolve()
++            partition = out_dir.resolve()
++            if not partition.is_relative_to(canonical_root) or not latest_pointer.resolve().is_relative_to(partition):
++                return None
++            manifest_payload = self._read_cache_manifest(latest_pointer)
++            artifact_path = self._path_from_manifest(
++                manifest_payload.get("artifact_path"), partition=partition,
++            )
++            manifest_path = self._path_from_manifest(
++                manifest_payload.get("manifest_path", str(latest_pointer)), partition=partition,
++            )
++            if not artifact_path.is_file():
++                return None
++            if not manifest_path.is_file():
++                # Legacy pointers are self-contained even when the optional
++                # sidecar is absent. Its reference was already confined above.
++                manifest_path = latest_pointer.resolve()
++            # Legacy missing identity is constrained by the dated pointer and filename.
++            if not artifact_path.name.startswith((f"{as_of:%Y%m%d}.", f"{as_of:%Y%m%d}__")):
++                return None
++            records = [manifest_payload]
++            if manifest_path.resolve() != latest_pointer.resolve():
++                records.append(self._read_cache_manifest(manifest_path))
++            checksum = manifest_payload.get("checksum")
++            if not isinstance(checksum, str) or not re.fullmatch(
++                r"[0-9a-f]{32}" if SOURCE_REGISTRY[source_key].checksum == "md5" else r"[0-9a-f]{64}", checksum,
++            ):
++                return None
++            size = artifact_path.stat().st_size
++            for record in records:
++                if record.get("source_key", source_key) != source_key or any(
++                    field in record and record[field] != as_of.isoformat()
++                    for field in ("as_of", "trade_date")
++                ) or record.get("checksum") != checksum:
++                    return None
++                if self._path_from_manifest(record.get("artifact_path"), partition=partition) != artifact_path:
++                    return None
++                length = record.get("bytes_downloaded", size)
++                if type(length) is not int or length != size:
++                    return None
++            attempts = manifest_payload.get("attempts", 0)
++            if type(attempts) is not int or attempts < 0:
++                return None
++            actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
++            if actual_checksum != checksum:
++                return None
++        except (OSError, ValueError, TypeError, RuntimeError):
+             return None
+         return DownloadArtifact(
+             source_key=source_key,
+@@ -187,9 +217,9 @@ class DownloadManager:
+             path=artifact_path,
+             manifest_path=manifest_path if manifest_path.exists() else latest_pointer,
+             checksum=checksum,
+-            bytes_downloaded=int(manifest_payload.get("bytes_downloaded", artifact_path.stat().st_size)),
++            bytes_downloaded=size,
+             used_url=str(manifest_payload.get("used_url", "")),
+-            attempts=int(manifest_payload.get("attempts", 0)),
++            attempts=attempts,
+             policy_decisions=(decision,),
+         )
+ 
+@@ -200,11 +230,41 @@ class DownloadManager:
+         return self._load_cached_artifact_from_root(self.seed_raw_root, source_key, as_of)
+ 
+     @staticmethod
+-    def _path_from_manifest(raw_path: str) -> Path:
+-        normalized = raw_path.replace("\\", "/").strip()
+-        if not normalized:
+-            return Path(raw_path)
+-        return Path(normalized)
++    def _path_from_manifest(raw_path: object, *, partition: Path) -> Path:
++        if not isinstance(raw_path, str) or not raw_path or raw_path != raw_path.strip():
++            raise ValueError("Invalid cache path")
++        normalized = raw_path.replace("\\", "/")
++        windows = PureWindowsPath(normalized)
++        if (
++            ".." in windows.parts or "\x00" in normalized or normalized.startswith("//")
++            or (windows.drive and (len(windows.drive) != 2 or not windows.root))
++            or ":" in normalized.removeprefix(windows.drive)
++        ):
++            raise ValueError("Ambiguous cache path")
++        path = Path(normalized)
++        # Historical writers used absolute or repository-relative paths; bare names
++        # are interpreted only within the dated source partition, never guessed.
++        if not path.is_absolute() and len(path.parts) == 1:
++            path = partition / path
++        resolved = path.resolve()
++        if not resolved.is_relative_to(partition):
++            raise ValueError("Cache path escapes source partition")
++        return resolved
++
++    @staticmethod
++    def _read_cache_manifest(path: Path) -> dict[str, object]:
++        def unique(pairs: list[tuple[str, object]]) -> dict[str, object]:
++            result: dict[str, object] = {}
++            for key, value in pairs:
++                if key in result:
++                    raise ValueError("Duplicate cache manifest field")
++                result[key] = value
++            return result
++
++        payload = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique)
++        if not isinstance(payload, dict):
++            raise ValueError("Cache manifest must be an object")
++        return payload
+ 
+     @staticmethod
+     def _expected_bse_equity_markers(as_of: date) -> tuple[str, ...]:
+@@ -624,6 +684,7 @@ class DownloadManager:
+         headers = self._profile_for_url(base_profile, page_url)
+         try:
+             with httpx.Client(headers=headers, follow_redirects=True, timeout=30.0) as client:
++                self._authorize_url("BSE_EQUITY_BHAVCOPY", page_url, SourceTransport.HTTPX)
+                 response = client.get(page_url)
+                 response.raise_for_status()
+         except SourcePolicyError:
+diff --git a/src/omegadata/track_a/orchestration.py b/src/omegadata/track_a/orchestration.py
+index 90d5949..f565ba7 100644
+--- a/src/omegadata/track_a/orchestration.py
++++ b/src/omegadata/track_a/orchestration.py
+@@ -1,6 +1,7 @@
+ from __future__ import annotations
+ 
+ from datetime import date
++from functools import cached_property
+ 
+ import pandas as pd
+ 
+@@ -11,7 +12,11 @@ from omegadata.track_a.storage import ParquetStorage
+ class IngestionOrchestrator:
+     def __init__(self) -> None:
+         self.download_manager = DownloadManager()
+-        self.storage = ParquetStorage()
++
++    @cached_property
++    def storage(self) -> ParquetStorage:
++        # Raw-source refusal must not create an unrelated output directory.
++        return ParquetStorage()
+ 
+     def ingest_raw_source(self, source_key: str, as_of: date) -> str:
+         artifact = self.download_manager.download(source_key=source_key, as_of=as_of)
+diff --git a/src/omegadata/track_a/source_rights.py b/src/omegadata/track_a/source_rights.py
+index 5645de3..101c31a 100644
+--- a/src/omegadata/track_a/source_rights.py
++++ b/src/omegadata/track_a/source_rights.py
+@@ -3,6 +3,7 @@
+ from __future__ import annotations
+ 
+ import hashlib
++import ipaddress
+ import json
+ import re
+ from collections.abc import Callable
+@@ -10,6 +11,7 @@ from datetime import datetime, timedelta
+ from enum import StrEnum
+ from pathlib import Path
+ from typing import Annotated, Literal, Self
++from urllib.parse import urlsplit
+ 
+ from pydantic import (
+     BaseModel,
+@@ -93,6 +95,27 @@ def normalized_host(value: str) -> str:
+     return host
+ 
+ 
++def policy_url_host(url: str) -> str | None:
++    """v1 remote authority: exact DNS, HTTPS/443 only; no DNS/redirect guarantee."""
++    try:
++        if not url or any(ord(char) <= 32 or ord(char) == 127 for char in url) or "\\" in url:
++            return None
++        parsed = urlsplit(url)
++        host = parsed.hostname
++        if parsed.scheme != "https" or not host or parsed.username is not None or parsed.password is not None:
++            return None
++        # Also reject empty, noncanonical, encoded and malformed port/authority spellings.
++        if parsed.port not in {None, 443} or parsed.netloc.lower() not in {host, host + ":443"}:
++            return None
++        try:
++            ipaddress.ip_address(host)
++        except ValueError:
++            return normalized_host(host)
++        return None
++    except ValueError:
++        return None
++
++
+ class FrozenModel(BaseModel):
+     model_config = ConfigDict(extra="forbid", frozen=True, revalidate_instances="always")
+ 

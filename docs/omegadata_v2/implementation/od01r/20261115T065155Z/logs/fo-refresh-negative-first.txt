@@ -1,0 +1,62 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_________________ test_r13_fo_loader_rechecks_after_db_setup __________________
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x0000011CAC7B21F0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000011CAC774E90>
+
+    def test_r13_fo_loader_rechecks_after_db_setup(synthetic_source_policy_provider, monkeypatch):
+        module = script("load_nse_fo_into_pipeline_db")
+        from omegadata.track_a.source_rights import authorize_source
+    
+        active = synthetic_source_policy_provider()
+        calls = Mock(side_effect=AssertionError("Revoked source must not fetch"))
+    
+        def authorize(request):
+            return authorize_source(request, lambda: active)
+    
+        def init():
+            nonlocal active
+            item = next(p for p in active.policies if p.source_key == "NSE_FO_BHAVCOPY")
+            active = registry(updated(item, status=PolicyStatus.REVOKED,
+                                      revoked_at=NOW, revocation_reason="SYNTHETIC_TEST_ONLY"))
+    
+        monkeypatch.setattr(module, "authorize_source", authorize)
+        monkeypatch.setattr(module, "init_db", init)
+        monkeypatch.setattr(module.httpx, "get", calls)
+        monkeypatch.setattr(sys, "argv", ["loader", "--trade-date", DAY.isoformat()])
+        with pytest.raises(SourcePolicyError, match="POLICY_REVOKED"):
+>           module.main()
+
+tests\unit\test_od01r_rights_hardening.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\load_nse_fo_into_pipeline_db.py:75: in main
+    response = httpx.get(url, headers=headers, timeout=60.0, follow_redirects=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1223246078576'>
+args = ('https://www1.nseindia.com/content/historical/DERIVATIVES/2024/JAN/fo02JAN2024bhav.csv.zip',)
+kwargs = {'follow_redirects': True, 'headers': {'Referer': 'https://www.nseindia.com/all-reports-derivatives', 'User-Agent': 'Mozilla/5.0'}, 'timeout': 60.0}
+effect = AssertionError('Revoked source must not fetch')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Revoked source must not fetch
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r13_fo_loader_rechecks_after_db_setup
+1 failed, 77 deselected in 1.94s

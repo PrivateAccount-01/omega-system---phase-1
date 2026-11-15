@@ -1,0 +1,23 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od02\\20261115T084441Z\\verification_runner.py",
+    "negative-first",
+    "pytest",
+    "-q",
+    "tests/unit/test_od02_acquisition.py"
+  ],
+  "effective_module": [
+    "pytest",
+    "-q",
+    "tests/unit/test_od02_acquisition.py"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-15T08:50:51.077134+00:00",
+  "end_utc": "2026-11-15T08:50:52.524763+00:00",
+  "elapsed_seconds": 1.447636800003238,
+  "exit_code": 1,
+  "output": "negative-first.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

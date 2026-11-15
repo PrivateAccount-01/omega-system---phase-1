@@ -434,16 +434,16 @@ def test_t17_optional_pipeline_refusal_does_not_try_later_source(approved, monke
 
 
 def test_allowed_fake_probe_preserves_policy_attribution(
-    synthetic_source_policy_provider, monkeypatch
+    synthetic_source_policy_provider, monkeypatch, synthetic_equity_zip
 ) -> None:
     manager = DownloadManager(
         policy_provider=synthetic_source_policy_provider, decision_clock=lambda: NOW
     )
     fake = Mock(
-        return_value=downloader.FetchResult(b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)
+        return_value=downloader.FetchResult(synthetic_equity_zip(AS_OF), 200, "application/zip", "httpx", 1)
     )
     monkeypatch.setattr(manager, "_fetch_candidate", fake)
-    results = manager.probe_source_candidates("MOSPI", AS_OF, limit=1)
+    results = manager.probe_source_candidates(KEY, AS_OF, limit=1)
     assert len(results) == 1 and results[0].validated
     assert results[0].policy_decisions[0].policy_id.startswith("SYNTHETIC_TEST_ONLY")
     assert fake.call_count == 1

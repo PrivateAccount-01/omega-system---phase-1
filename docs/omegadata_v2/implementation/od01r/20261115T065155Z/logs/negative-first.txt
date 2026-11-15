@@ -1,0 +1,1644 @@
+FFFF....F..FFFFF...FF...F.....FFFsFFFssFFF.FF...FFF.F.F.FFFFFFFFF..      [100%]
+================================== FAILURES ===================================
+__ test_r01_r03_url_denied_before_client[https://example.invalid:4443/file] ___
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B1D2B0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1B80C30>
+url = 'https://example.invalid:4443/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B1D2B0>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+___ test_r01_r03_url_denied_before_client[https://example.invalid:80/file] ____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B0F250>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF09C23F0>
+url = 'https://example.invalid:80/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B0F250>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+__ test_r01_r03_url_denied_before_client[https://example.invalid:8080/file] ___
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CBC190>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1B1AB10>
+url = 'https://example.invalid:8080/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CBC190>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+_____ test_r01_r03_url_denied_before_client[http://example.invalid/file] ______
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B80B00>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1B77CE0>
+url = 'http://example.invalid/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B80B00>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+____ test_r01_r03_url_denied_before_client[https://@example.invalid/file] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C58350>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1CD5C70>
+url = 'https://@example.invalid/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C58350>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+____ test_r01_r03_url_denied_before_client[https://example.invalid:/file] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B173E0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1BC1BF0>
+url = 'https://example.invalid:/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1B173E0>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+__ test_r01_r03_url_denied_before_client[https://example.invalid:65536/file] __
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF0A0EEB0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1BB8AD0>
+url = 'https://example.invalid:65536/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF0A0EEB0>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+___ test_r01_r03_url_denied_before_client[https://example.invalid:-1/file] ____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1BB3930>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1BB9190>
+url = 'https://example.invalid:-1/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1BB3930>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+___ test_r01_r03_url_denied_before_client[https://example.invalid:abc/file] ___
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1BC2680>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1BD6E60>
+url = 'https://example.invalid:abc/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1BC2680>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+__ test_r01_r03_url_denied_before_client[https://example.invalid:0443/file] ___
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1BB9550>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1BD7800>
+url = 'https://example.invalid:0443/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1BB9550>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+____ test_r01_r03_url_denied_before_client[https://exam\nple.invalid/file] ____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C97A70>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1CD0C50>
+url = 'https://exam\nple.invalid/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C97A70>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+____ test_r01_r03_url_denied_before_client[ https://example.invalid/file] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1D15270>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1D410D0>
+url = ' https://example.invalid/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1D15270>
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _fetch_candidate(
+        self,
+        source_key: str,
+        as_of: date,
+        *,
+        url: str,
+        profile: dict[str, str],
+        request_timeout_seconds: float = 60.0,
+        max_request_attempts: int = 5,
+    ) -> FetchResult:
+        self._authorize_url(source_key, url, SourceTransport.HTTPX)
+        request_headers = self._profile_for_url(profile, url)
+>       with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'unittest.mock.Mock' object does not support the context manager protocol (missed __exit__ method)
+
+src\omegadata\track_a\download_manager.py:845: TypeError
+__________ test_r01_r03_url_denied_before_client[https://[bad/file] ___________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C17E30>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1C6B850>
+url = 'https://[bad/file'
+
+    @pytest.mark.parametrize("url", BAD_URLS)
+    def test_r01_r03_url_denied_before_client(manager, monkeypatch, url):
+        client = Mock()
+        monkeypatch.setattr(dm.httpx, "Client", client)
+        monkeypatch.setattr(manager, "_request_with_workarounds", Mock(return_value=FetchResult(
+            b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)))
+        monkeypatch.setattr(manager, "_bootstrap_nse_session", Mock())
+        with pytest.raises(SourcePolicyError) as exc:
+>           manager._fetch_candidate(KEY, DAY, url=url, profile={})
+
+tests\unit\test_od01r_rights_hardening.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:843: in _fetch_candidate
+    self._authorize_url(source_key, url, SourceTransport.HTTPX)
+src\omegadata\track_a\download_manager.py:149: in _authorize_url
+    parsed = urlparse(url)
+             ^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\urllib\parse.py:395: in urlparse
+    scheme, netloc, url, params, query, fragment = _urlparse(url, scheme, allow_fragments)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\urllib\parse.py:400: in _urlparse
+    scheme, netloc, url, query, fragment = _urlsplit(url, scheme, allow_fragments)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+url = '/file', scheme = 'https', allow_fragments = True
+
+    def _urlsplit(url, scheme=None, allow_fragments=True):
+        # Only lstrip url as some applications rely on preserving trailing space.
+        # (https://url.spec.whatwg.org/#concept-basic-url-parser would strip both)
+        url = url.lstrip(_WHATWG_C0_CONTROL_OR_SPACE)
+        for b in _UNSAFE_URL_BYTES_TO_REMOVE:
+            url = url.replace(b, "")
+        if scheme is not None:
+            scheme = scheme.strip(_WHATWG_C0_CONTROL_OR_SPACE)
+            for b in _UNSAFE_URL_BYTES_TO_REMOVE:
+                scheme = scheme.replace(b, "")
+    
+        allow_fragments = bool(allow_fragments)
+        netloc = query = fragment = None
+        i = url.find(':')
+        if i > 0 and url[0].isascii() and url[0].isalpha():
+            for c in url[:i]:
+                if c not in scheme_chars:
+                    break
+            else:
+                scheme, url = url[:i].lower(), url[i+1:]
+        if url[:2] == '//':
+            netloc, url = _splitnetloc(url, 2)
+            if (('[' in netloc and ']' not in netloc) or
+                    (']' in netloc and '[' not in netloc)):
+>               raise ValueError("Invalid IPv6 URL")
+E               ValueError: Invalid IPv6 URL
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\urllib\parse.py:523: ValueError
+_____ test_r05_cache_escape_never_opens_external_sentinel[False-absolute] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF1D90>
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1D852B0>
+form = 'absolute', seed = False
+
+    @pytest.mark.parametrize("form", ["absolute", "traversal", "manifest_escape", "pointer_escape"])
+    @pytest.mark.parametrize("seed", [False, True])
+    def test_r05_cache_escape_never_opens_external_sentinel(manager, tmp_path, monkeypatch, form, seed):
+        root = manager.seed_raw_root if seed else manager.raw_root
+        folder, artifact, pointer, body = cache_fixture(manager, root)
+        outside = tmp_path / "sentinel.bin"
+        outside.write_bytes(b"SYNTHETIC_TEST_ONLY harmless payload")
+        if form == "absolute":
+            body["artifact_path"] = str(outside)
+        elif form == "traversal":
+            body["artifact_path"] = str(folder / ".." / ".." / ".." / ".." / outside.name)
+        elif form == "manifest_escape":
+            body["manifest_path"] = str(outside)
+        else:
+            try:
+                pointer.symlink_to(outside)
+            except OSError as exc:
+                pytest.skip(f"Real symlink unavailable: {exc}")
+        if form != "pointer_escape":
+            pointer.write_text(json.dumps(body), encoding="utf-8")
+        reads = []
+        original = Path.open
+    
+        def watch(path, *args, **kw):
+            if path.resolve() == outside.resolve():
+                reads.append(path)
+                raise AssertionError("External sentinel must never be opened")
+            return original(path, *args, **kw)
+    
+        monkeypatch.setattr(Path, "open", watch)
+>       assert manager._load_cached_artifact_from_root(root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:147: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:181: in _load_cached_artifact_from_root
+    actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op0/sentinel.bin')
+args = (), kw = {'buffering': 0, 'mode': 'rb'}
+
+    def watch(path, *args, **kw):
+        if path.resolve() == outside.resolve():
+            reads.append(path)
+>           raise AssertionError("External sentinel must never be opened")
+E           AssertionError: External sentinel must never be opened
+
+tests\unit\test_od01r_rights_hardening.py:143: AssertionError
+____ test_r05_cache_escape_never_opens_external_sentinel[False-traversal] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF04D0>
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1DEAE40>
+form = 'traversal', seed = False
+
+    @pytest.mark.parametrize("form", ["absolute", "traversal", "manifest_escape", "pointer_escape"])
+    @pytest.mark.parametrize("seed", [False, True])
+    def test_r05_cache_escape_never_opens_external_sentinel(manager, tmp_path, monkeypatch, form, seed):
+        root = manager.seed_raw_root if seed else manager.raw_root
+        folder, artifact, pointer, body = cache_fixture(manager, root)
+        outside = tmp_path / "sentinel.bin"
+        outside.write_bytes(b"SYNTHETIC_TEST_ONLY harmless payload")
+        if form == "absolute":
+            body["artifact_path"] = str(outside)
+        elif form == "traversal":
+            body["artifact_path"] = str(folder / ".." / ".." / ".." / ".." / outside.name)
+        elif form == "manifest_escape":
+            body["manifest_path"] = str(outside)
+        else:
+            try:
+                pointer.symlink_to(outside)
+            except OSError as exc:
+                pytest.skip(f"Real symlink unavailable: {exc}")
+        if form != "pointer_escape":
+            pointer.write_text(json.dumps(body), encoding="utf-8")
+        reads = []
+        original = Path.open
+    
+        def watch(path, *args, **kw):
+            if path.resolve() == outside.resolve():
+                reads.append(path)
+                raise AssertionError("External sentinel must never be opened")
+            return original(path, *args, **kw)
+    
+        monkeypatch.setattr(Path, "open", watch)
+>       assert manager._load_cached_artifact_from_root(root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:147: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:181: in _load_cached_artifact_from_root
+    actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op1/raw/nse_equity_bhavcopy/year=2024/month=01/../../../../sentinel.bin')
+args = (), kw = {'buffering': 0, 'mode': 'rb'}
+
+    def watch(path, *args, **kw):
+        if path.resolve() == outside.resolve():
+            reads.append(path)
+>           raise AssertionError("External sentinel must never be opened")
+E           AssertionError: External sentinel must never be opened
+
+tests\unit\test_od01r_rights_hardening.py:143: AssertionError
+_ test_r05_cache_escape_never_opens_external_sentinel[False-manifest_escape] __
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF12E0>
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1D586E0>
+form = 'manifest_escape', seed = False
+
+    @pytest.mark.parametrize("form", ["absolute", "traversal", "manifest_escape", "pointer_escape"])
+    @pytest.mark.parametrize("seed", [False, True])
+    def test_r05_cache_escape_never_opens_external_sentinel(manager, tmp_path, monkeypatch, form, seed):
+        root = manager.seed_raw_root if seed else manager.raw_root
+        folder, artifact, pointer, body = cache_fixture(manager, root)
+        outside = tmp_path / "sentinel.bin"
+        outside.write_bytes(b"SYNTHETIC_TEST_ONLY harmless payload")
+        if form == "absolute":
+            body["artifact_path"] = str(outside)
+        elif form == "traversal":
+            body["artifact_path"] = str(folder / ".." / ".." / ".." / ".." / outside.name)
+        elif form == "manifest_escape":
+            body["manifest_path"] = str(outside)
+        else:
+            try:
+                pointer.symlink_to(outside)
+            except OSError as exc:
+                pytest.skip(f"Real symlink unavailable: {exc}")
+        if form != "pointer_escape":
+            pointer.write_text(json.dumps(body), encoding="utf-8")
+        reads = []
+        original = Path.open
+    
+        def watch(path, *args, **kw):
+            if path.resolve() == outside.resolve():
+                reads.append(path)
+                raise AssertionError("External sentinel must never be opened")
+            return original(path, *args, **kw)
+    
+        monkeypatch.setattr(Path, "open", watch)
+>       assert manager._load_cached_artifact_from_root(root, KEY, DAY) is None
+E       AssertionError: assert DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) is None
+E        +  where DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) = _load_cached_artifact_from_root(WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op2/raw'), 'NSE_EQUITY_BHAVCOPY', datetime.date(2024, 1, 2))
+E        +    where _load_cached_artifact_from_root = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF12E0>._load_cached_artifact_from_root
+
+tests\unit\test_od01r_rights_hardening.py:147: AssertionError
+_____ test_r05_cache_escape_never_opens_external_sentinel[True-absolute] ______
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF0EF0>
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1D5AC10>
+form = 'absolute', seed = True
+
+    @pytest.mark.parametrize("form", ["absolute", "traversal", "manifest_escape", "pointer_escape"])
+    @pytest.mark.parametrize("seed", [False, True])
+    def test_r05_cache_escape_never_opens_external_sentinel(manager, tmp_path, monkeypatch, form, seed):
+        root = manager.seed_raw_root if seed else manager.raw_root
+        folder, artifact, pointer, body = cache_fixture(manager, root)
+        outside = tmp_path / "sentinel.bin"
+        outside.write_bytes(b"SYNTHETIC_TEST_ONLY harmless payload")
+        if form == "absolute":
+            body["artifact_path"] = str(outside)
+        elif form == "traversal":
+            body["artifact_path"] = str(folder / ".." / ".." / ".." / ".." / outside.name)
+        elif form == "manifest_escape":
+            body["manifest_path"] = str(outside)
+        else:
+            try:
+                pointer.symlink_to(outside)
+            except OSError as exc:
+                pytest.skip(f"Real symlink unavailable: {exc}")
+        if form != "pointer_escape":
+            pointer.write_text(json.dumps(body), encoding="utf-8")
+        reads = []
+        original = Path.open
+    
+        def watch(path, *args, **kw):
+            if path.resolve() == outside.resolve():
+                reads.append(path)
+                raise AssertionError("External sentinel must never be opened")
+            return original(path, *args, **kw)
+    
+        monkeypatch.setattr(Path, "open", watch)
+>       assert manager._load_cached_artifact_from_root(root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:147: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:181: in _load_cached_artifact_from_root
+    actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op4/sentinel.bin')
+args = (), kw = {'buffering': 0, 'mode': 'rb'}
+
+    def watch(path, *args, **kw):
+        if path.resolve() == outside.resolve():
+            reads.append(path)
+>           raise AssertionError("External sentinel must never be opened")
+E           AssertionError: External sentinel must never be opened
+
+tests\unit\test_od01r_rights_hardening.py:143: AssertionError
+_____ test_r05_cache_escape_never_opens_external_sentinel[True-traversal] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF1250>
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1DB44B0>
+form = 'traversal', seed = True
+
+    @pytest.mark.parametrize("form", ["absolute", "traversal", "manifest_escape", "pointer_escape"])
+    @pytest.mark.parametrize("seed", [False, True])
+    def test_r05_cache_escape_never_opens_external_sentinel(manager, tmp_path, monkeypatch, form, seed):
+        root = manager.seed_raw_root if seed else manager.raw_root
+        folder, artifact, pointer, body = cache_fixture(manager, root)
+        outside = tmp_path / "sentinel.bin"
+        outside.write_bytes(b"SYNTHETIC_TEST_ONLY harmless payload")
+        if form == "absolute":
+            body["artifact_path"] = str(outside)
+        elif form == "traversal":
+            body["artifact_path"] = str(folder / ".." / ".." / ".." / ".." / outside.name)
+        elif form == "manifest_escape":
+            body["manifest_path"] = str(outside)
+        else:
+            try:
+                pointer.symlink_to(outside)
+            except OSError as exc:
+                pytest.skip(f"Real symlink unavailable: {exc}")
+        if form != "pointer_escape":
+            pointer.write_text(json.dumps(body), encoding="utf-8")
+        reads = []
+        original = Path.open
+    
+        def watch(path, *args, **kw):
+            if path.resolve() == outside.resolve():
+                reads.append(path)
+                raise AssertionError("External sentinel must never be opened")
+            return original(path, *args, **kw)
+    
+        monkeypatch.setattr(Path, "open", watch)
+>       assert manager._load_cached_artifact_from_root(root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:147: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:181: in _load_cached_artifact_from_root
+    actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op5/seed/nse_equity_bhavcopy/year=2024/month=01/../../../../sentinel.bin')
+args = (), kw = {'buffering': 0, 'mode': 'rb'}
+
+    def watch(path, *args, **kw):
+        if path.resolve() == outside.resolve():
+            reads.append(path)
+>           raise AssertionError("External sentinel must never be opened")
+E           AssertionError: External sentinel must never be opened
+
+tests\unit\test_od01r_rights_hardening.py:143: AssertionError
+__ test_r05_cache_escape_never_opens_external_sentinel[True-manifest_escape] __
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C17EC0>
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1DB5470>
+form = 'manifest_escape', seed = True
+
+    @pytest.mark.parametrize("form", ["absolute", "traversal", "manifest_escape", "pointer_escape"])
+    @pytest.mark.parametrize("seed", [False, True])
+    def test_r05_cache_escape_never_opens_external_sentinel(manager, tmp_path, monkeypatch, form, seed):
+        root = manager.seed_raw_root if seed else manager.raw_root
+        folder, artifact, pointer, body = cache_fixture(manager, root)
+        outside = tmp_path / "sentinel.bin"
+        outside.write_bytes(b"SYNTHETIC_TEST_ONLY harmless payload")
+        if form == "absolute":
+            body["artifact_path"] = str(outside)
+        elif form == "traversal":
+            body["artifact_path"] = str(folder / ".." / ".." / ".." / ".." / outside.name)
+        elif form == "manifest_escape":
+            body["manifest_path"] = str(outside)
+        else:
+            try:
+                pointer.symlink_to(outside)
+            except OSError as exc:
+                pytest.skip(f"Real symlink unavailable: {exc}")
+        if form != "pointer_escape":
+            pointer.write_text(json.dumps(body), encoding="utf-8")
+        reads = []
+        original = Path.open
+    
+        def watch(path, *args, **kw):
+            if path.resolve() == outside.resolve():
+                reads.append(path)
+                raise AssertionError("External sentinel must never be opened")
+            return original(path, *args, **kw)
+    
+        monkeypatch.setattr(Path, "open", watch)
+>       assert manager._load_cached_artifact_from_root(root, KEY, DAY) is None
+E       AssertionError: assert DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) is None
+E        +  where DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) = _load_cached_artifact_from_root(WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r05_cache_escape_never_op6/seed'), 'NSE_EQUITY_BHAVCOPY', datetime.date(2024, 1, 2))
+E        +    where _load_cached_artifact_from_root = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C17EC0>._load_cached_artifact_from_root
+
+tests\unit\test_od01r_rights_hardening.py:147: AssertionError
+________________ test_r07_inconsistent_cache_is_miss[change0] _________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF32F0>
+change = {'source_key': 'MOSPI'}
+
+    @pytest.mark.parametrize("change", [
+        {"source_key": "MOSPI"}, {"as_of": "2024-01-03"}, {"trade_date": "2024-01-03"},
+        {"checksum": "a" * 64}, {"bytes_downloaded": 999}, {"artifact_path": ""},
+        {"artifact_path": "../escape.bin"}, {"artifact_path": "C:relative.bin"},
+        {"artifact_path": "safe.bin:stream"}, {"bytes_downloaded": "bad"},
+    ])
+    def test_r07_inconsistent_cache_is_miss(manager, change):
+        _, _, pointer, body = cache_fixture(manager)
+        body.update(change)
+        pointer.write_text(json.dumps(body), encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+E       AssertionError: assert DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) is None
+E        +  where DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) = _load_cached_artifact_from_root(WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is0/raw'), 'NSE_EQUITY_BHAVCOPY', datetime.date(2024, 1, 2))
+E        +    where _load_cached_artifact_from_root = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF32F0>._load_cached_artifact_from_root
+E        +    and   WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is0/raw') = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF32F0>.raw_root
+
+tests\unit\test_od01r_rights_hardening.py:178: AssertionError
+________________ test_r07_inconsistent_cache_is_miss[change1] _________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C17AD0>
+change = {'as_of': '2024-01-03'}
+
+    @pytest.mark.parametrize("change", [
+        {"source_key": "MOSPI"}, {"as_of": "2024-01-03"}, {"trade_date": "2024-01-03"},
+        {"checksum": "a" * 64}, {"bytes_downloaded": 999}, {"artifact_path": ""},
+        {"artifact_path": "../escape.bin"}, {"artifact_path": "C:relative.bin"},
+        {"artifact_path": "safe.bin:stream"}, {"bytes_downloaded": "bad"},
+    ])
+    def test_r07_inconsistent_cache_is_miss(manager, change):
+        _, _, pointer, body = cache_fixture(manager)
+        body.update(change)
+        pointer.write_text(json.dumps(body), encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+E       AssertionError: assert DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) is None
+E        +  where DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) = _load_cached_artifact_from_root(WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is1/raw'), 'NSE_EQUITY_BHAVCOPY', datetime.date(2024, 1, 2))
+E        +    where _load_cached_artifact_from_root = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C17AD0>._load_cached_artifact_from_root
+E        +    and   WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is1/raw') = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C17AD0>.raw_root
+
+tests\unit\test_od01r_rights_hardening.py:178: AssertionError
+________________ test_r07_inconsistent_cache_is_miss[change2] _________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C16F00>
+change = {'trade_date': '2024-01-03'}
+
+    @pytest.mark.parametrize("change", [
+        {"source_key": "MOSPI"}, {"as_of": "2024-01-03"}, {"trade_date": "2024-01-03"},
+        {"checksum": "a" * 64}, {"bytes_downloaded": 999}, {"artifact_path": ""},
+        {"artifact_path": "../escape.bin"}, {"artifact_path": "C:relative.bin"},
+        {"artifact_path": "safe.bin:stream"}, {"bytes_downloaded": "bad"},
+    ])
+    def test_r07_inconsistent_cache_is_miss(manager, change):
+        _, _, pointer, body = cache_fixture(manager)
+        body.update(change)
+        pointer.write_text(json.dumps(body), encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+E       AssertionError: assert DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) is None
+E        +  where DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) = _load_cached_artifact_from_root(WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is2/raw'), 'NSE_EQUITY_BHAVCOPY', datetime.date(2024, 1, 2))
+E        +    where _load_cached_artifact_from_root = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C16F00>._load_cached_artifact_from_root
+E        +    and   WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is2/raw') = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1C16F00>.raw_root
+
+tests\unit\test_od01r_rights_hardening.py:178: AssertionError
+________________ test_r07_inconsistent_cache_is_miss[change4] _________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF1520>
+change = {'bytes_downloaded': 999}
+
+    @pytest.mark.parametrize("change", [
+        {"source_key": "MOSPI"}, {"as_of": "2024-01-03"}, {"trade_date": "2024-01-03"},
+        {"checksum": "a" * 64}, {"bytes_downloaded": 999}, {"artifact_path": ""},
+        {"artifact_path": "../escape.bin"}, {"artifact_path": "C:relative.bin"},
+        {"artifact_path": "safe.bin:stream"}, {"bytes_downloaded": "bad"},
+    ])
+    def test_r07_inconsistent_cache_is_miss(manager, change):
+        _, _, pointer, body = cache_fixture(manager)
+        body.update(change)
+        pointer.write_text(json.dumps(body), encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+E       AssertionError: assert DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) is None
+E        +  where DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...UITY_BHAVCOPY', policy_revision=1, revision_hash='441c7deb2c7876f840e1d51e68cb4c5724f61b1216d32f15adb5f046bb044444'),)) = _load_cached_artifact_from_root(WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is4/raw'), 'NSE_EQUITY_BHAVCOPY', datetime.date(2024, 1, 2))
+E        +    where _load_cached_artifact_from_root = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF1520>._load_cached_artifact_from_root
+E        +    and   WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is4/raw') = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF1520>.raw_root
+
+tests\unit\test_od01r_rights_hardening.py:178: AssertionError
+________________ test_r07_inconsistent_cache_is_miss[change5] _________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF0F80>
+change = {'artifact_path': ''}
+
+    @pytest.mark.parametrize("change", [
+        {"source_key": "MOSPI"}, {"as_of": "2024-01-03"}, {"trade_date": "2024-01-03"},
+        {"checksum": "a" * 64}, {"bytes_downloaded": 999}, {"artifact_path": ""},
+        {"artifact_path": "../escape.bin"}, {"artifact_path": "C:relative.bin"},
+        {"artifact_path": "safe.bin:stream"}, {"bytes_downloaded": "bad"},
+    ])
+    def test_r07_inconsistent_cache_is_miss(manager, change):
+        _, _, pointer, body = cache_fixture(manager)
+        body.update(change)
+        pointer.write_text(json.dumps(body), encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:181: in _load_cached_artifact_from_root
+    actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('.'), mode = 'rb', buffering = 0, encoding = None
+errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: '.'
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:771: PermissionError
+________________ test_r07_inconsistent_cache_is_miss[change9] _________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF1640>
+change = {'bytes_downloaded': 'bad'}
+
+    @pytest.mark.parametrize("change", [
+        {"source_key": "MOSPI"}, {"as_of": "2024-01-03"}, {"trade_date": "2024-01-03"},
+        {"checksum": "a" * 64}, {"bytes_downloaded": 999}, {"artifact_path": ""},
+        {"artifact_path": "../escape.bin"}, {"artifact_path": "C:relative.bin"},
+        {"artifact_path": "safe.bin:stream"}, {"bytes_downloaded": "bad"},
+    ])
+    def test_r07_inconsistent_cache_is_miss(manager, change):
+        _, _, pointer, body = cache_fixture(manager)
+        body.update(change)
+        pointer.write_text(json.dumps(body), encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF1640>
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_inconsistent_cache_is9/raw')
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _load_cached_artifact_from_root(
+        self,
+        root: Path,
+        source_key: str,
+        as_of: date,
+    ) -> DownloadArtifact | None:
+        decision = self._authorize(
+            source_key, SourceOperation.READ_CACHED,
+            SourceTransport.CACHE if root == self.raw_root else SourceTransport.SEED_CACHE,
+        )
+        out_dir = root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+        latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+        if not latest_pointer.exists():
+            return None
+        try:
+            manifest_payload = json.loads(latest_pointer.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            return None
+    
+        artifact_path = self._path_from_manifest(str(manifest_payload.get("artifact_path", "")))
+        manifest_path = self._path_from_manifest(str(manifest_payload.get("manifest_path", latest_pointer)))
+        if not artifact_path.exists():
+            return None
+        if not manifest_path.is_absolute():
+            manifest_path = out_dir / manifest_path.name
+        checksum = str(manifest_payload.get("checksum", "")).strip()
+        if not checksum:
+            return None
+        actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+        if actual_checksum != checksum:
+            return None
+        return DownloadArtifact(
+            source_key=source_key,
+            as_of=as_of,
+            path=artifact_path,
+            manifest_path=manifest_path if manifest_path.exists() else latest_pointer,
+            checksum=checksum,
+>           bytes_downloaded=int(manifest_payload.get("bytes_downloaded", artifact_path.stat().st_size)),
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            used_url=str(manifest_payload.get("used_url", "")),
+            attempts=int(manifest_payload.get("attempts", 0)),
+            policy_decisions=(decision,),
+        )
+E       ValueError: invalid literal for int() with base 10: 'bad'
+
+src\omegadata\track_a\download_manager.py:190: ValueError
+___________________ test_r07_malformed_manifest_is_miss[[]] ___________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF2BA0>
+content = '[]'
+
+    @pytest.mark.parametrize("content", ["[]", "null", "{bad", '{"checksum":"a","checksum":"b"}'])
+    def test_r07_malformed_manifest_is_miss(manager, content):
+        _, _, pointer, _ = cache_fixture(manager)
+        pointer.write_text(content, encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF2BA0>
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_malformed_manifest_is0/raw')
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _load_cached_artifact_from_root(
+        self,
+        root: Path,
+        source_key: str,
+        as_of: date,
+    ) -> DownloadArtifact | None:
+        decision = self._authorize(
+            source_key, SourceOperation.READ_CACHED,
+            SourceTransport.CACHE if root == self.raw_root else SourceTransport.SEED_CACHE,
+        )
+        out_dir = root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+        latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+        if not latest_pointer.exists():
+            return None
+        try:
+            manifest_payload = json.loads(latest_pointer.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            return None
+    
+>       artifact_path = self._path_from_manifest(str(manifest_payload.get("artifact_path", "")))
+                                                     ^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'list' object has no attribute 'get'
+
+src\omegadata\track_a\download_manager.py:172: AttributeError
+__________________ test_r07_malformed_manifest_is_miss[null] __________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF07A0>
+content = 'null'
+
+    @pytest.mark.parametrize("content", ["[]", "null", "{bad", '{"checksum":"a","checksum":"b"}'])
+    def test_r07_malformed_manifest_is_miss(manager, content):
+        _, _, pointer, _ = cache_fixture(manager)
+        pointer.write_text(content, encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF07A0>
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_malformed_manifest_is1/raw')
+source_key = 'NSE_EQUITY_BHAVCOPY', as_of = datetime.date(2024, 1, 2)
+
+    def _load_cached_artifact_from_root(
+        self,
+        root: Path,
+        source_key: str,
+        as_of: date,
+    ) -> DownloadArtifact | None:
+        decision = self._authorize(
+            source_key, SourceOperation.READ_CACHED,
+            SourceTransport.CACHE if root == self.raw_root else SourceTransport.SEED_CACHE,
+        )
+        out_dir = root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+        latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+        if not latest_pointer.exists():
+            return None
+        try:
+            manifest_payload = json.loads(latest_pointer.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            return None
+    
+>       artifact_path = self._path_from_manifest(str(manifest_payload.get("artifact_path", "")))
+                                                     ^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'get'
+
+src\omegadata\track_a\download_manager.py:172: AttributeError
+____ test_r07_malformed_manifest_is_miss[{"checksum":"a","checksum":"b"}] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF39B0>
+content = '{"checksum":"a","checksum":"b"}'
+
+    @pytest.mark.parametrize("content", ["[]", "null", "{bad", '{"checksum":"a","checksum":"b"}'])
+    def test_r07_malformed_manifest_is_miss(manager, content):
+        _, _, pointer, _ = cache_fixture(manager)
+        pointer.write_text(content, encoding="utf-8")
+>       assert manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\download_manager.py:181: in _load_cached_artifact_from_root
+    actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('.'), mode = 'rb', buffering = 0, encoding = None
+errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: '.'
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:771: PermissionError
+_________________ test_r07_safe_legacy_cache_compatible[bare] _________________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAF1CF3530>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1D842F0>
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/od01r-offline-4_xtz9po/pytest/test_r07_safe_legacy_cache_com1')
+form = 'bare'
+
+    @pytest.mark.parametrize("form", ["absolute", "bare", "repo_relative"])
+    def test_r07_safe_legacy_cache_compatible(manager, monkeypatch, tmp_path, form):
+        monkeypatch.chdir(tmp_path)
+        _, artifact, pointer, body = cache_fixture(manager)
+        body.pop("source_key")
+        body.pop("as_of")
+        if form == "bare":
+            body["artifact_path"] = artifact.name
+        elif form == "repo_relative":
+            body["artifact_path"] = str(artifact.relative_to(tmp_path))
+        pointer.write_text(json.dumps(body), encoding="utf-8")
+        cached = manager._load_cached_artifact_from_root(manager.raw_root, KEY, DAY)
+>       assert cached is not None and cached.path.resolve() == artifact.resolve()
+E       assert (None is not None)
+
+E:\omega system - phase 1\tests\unit\test_od01r_rights_hardening.py:200: AssertionError
+_ test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_corporate_actions] _
+
+name = 'probe_endpoints', entry = 'probe_corporate_actions'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1FBB850>
+
+    @pytest.mark.parametrize("name,entry", [
+        ("probe_endpoints", "probe_corporate_actions"), ("probe_endpoints", "probe_bse_bhavcopy"),
+        ("probe_bse_urls", "main"), ("generate_source_probe_matrix", "main"),
+        ("generate_source_probe_matrix", "_run"),
+    ])
+    def test_r15_manual_diagnostics_disabled_before_side_effects(name, entry, monkeypatch):
+        module = script(name)
+        network = Mock(side_effect=AssertionError("Must refuse before side effects"))
+        if hasattr(module, "httpx"):
+            monkeypatch.setattr(module.httpx, "Client", network)
+        if hasattr(module, "subprocess"):
+            monkeypatch.setattr(module.subprocess, "run", network)
+        with pytest.raises(RuntimeError, match="disabled"):
+>           getattr(module, entry)(*([] if entry != "_run" else ["deterministic"]))
+
+tests\unit\test_od01r_rights_hardening.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\probe_endpoints.py:27: in probe_corporate_actions
+    with httpx.Client(headers=headers, follow_redirects=True, timeout=30.0) as client:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902412332544'>, args = ()
+kwargs = {'follow_redirects': True, 'headers': {'Accept': '*/*', 'Accept-Language': 'en-US,en;q=0.9', 'Referer': 'https://www.n...(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}, 'timeout': 30.0}
+effect = AssertionError('Must refuse before side effects')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before side effects
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+_ test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_bse_bhavcopy] _
+
+name = 'probe_endpoints', entry = 'probe_bse_bhavcopy'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1C2CE50>
+
+    @pytest.mark.parametrize("name,entry", [
+        ("probe_endpoints", "probe_corporate_actions"), ("probe_endpoints", "probe_bse_bhavcopy"),
+        ("probe_bse_urls", "main"), ("generate_source_probe_matrix", "main"),
+        ("generate_source_probe_matrix", "_run"),
+    ])
+    def test_r15_manual_diagnostics_disabled_before_side_effects(name, entry, monkeypatch):
+        module = script(name)
+        network = Mock(side_effect=AssertionError("Must refuse before side effects"))
+        if hasattr(module, "httpx"):
+            monkeypatch.setattr(module.httpx, "Client", network)
+        if hasattr(module, "subprocess"):
+            monkeypatch.setattr(module.subprocess, "run", network)
+        with pytest.raises(RuntimeError, match="disabled"):
+>           getattr(module, entry)(*([] if entry != "_run" else ["deterministic"]))
+
+tests\unit\test_od01r_rights_hardening.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\probe_endpoints.py:62: in probe_bse_bhavcopy
+    with httpx.Client(headers=headers, follow_redirects=True, timeout=30.0) as client:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902430513072'>, args = ()
+kwargs = {'follow_redirects': True, 'headers': {'Referer': 'https://www.bseindia.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}, 'timeout': 30.0}
+effect = AssertionError('Must refuse before side effects')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before side effects
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+_ test_r15_manual_diagnostics_disabled_before_side_effects[probe_bse_urls-main] _
+
+name = 'probe_bse_urls', entry = 'main'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1F76820>
+
+    @pytest.mark.parametrize("name,entry", [
+        ("probe_endpoints", "probe_corporate_actions"), ("probe_endpoints", "probe_bse_bhavcopy"),
+        ("probe_bse_urls", "main"), ("generate_source_probe_matrix", "main"),
+        ("generate_source_probe_matrix", "_run"),
+    ])
+    def test_r15_manual_diagnostics_disabled_before_side_effects(name, entry, monkeypatch):
+        module = script(name)
+        network = Mock(side_effect=AssertionError("Must refuse before side effects"))
+        if hasattr(module, "httpx"):
+            monkeypatch.setattr(module.httpx, "Client", network)
+        if hasattr(module, "subprocess"):
+            monkeypatch.setattr(module.subprocess, "run", network)
+        with pytest.raises(RuntimeError, match="disabled"):
+>           getattr(module, entry)(*([] if entry != "_run" else ["deterministic"]))
+
+tests\unit\test_od01r_rights_hardening.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\probe_bse_urls.py:29: in main
+    with httpx.Client(headers=headers, follow_redirects=True, timeout=20.0) as client:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902430509712'>, args = ()
+kwargs = {'follow_redirects': True, 'headers': {'Accept': '*/*', 'Referer': 'https://www.bseindia.com/', 'User-Agent': 'Mozilla...(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}, 'timeout': 20.0}
+effect = AssertionError('Must refuse before side effects')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before side effects
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+_ test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-main] _
+
+name = 'generate_source_probe_matrix', entry = 'main'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1F765F0>
+
+    @pytest.mark.parametrize("name,entry", [
+        ("probe_endpoints", "probe_corporate_actions"), ("probe_endpoints", "probe_bse_bhavcopy"),
+        ("probe_bse_urls", "main"), ("generate_source_probe_matrix", "main"),
+        ("generate_source_probe_matrix", "_run"),
+    ])
+    def test_r15_manual_diagnostics_disabled_before_side_effects(name, entry, monkeypatch):
+        module = script(name)
+        network = Mock(side_effect=AssertionError("Must refuse before side effects"))
+        if hasattr(module, "httpx"):
+            monkeypatch.setattr(module.httpx, "Client", network)
+        if hasattr(module, "subprocess"):
+            monkeypatch.setattr(module.subprocess, "run", network)
+        with pytest.raises(RuntimeError, match="disabled"):
+>           getattr(module, entry)(*([] if entry != "_run" else ["deterministic"]))
+
+tests\unit\test_od01r_rights_hardening.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\generate_source_probe_matrix.py:34: in main
+    deterministic = _run("deterministic")
+                    ^^^^^^^^^^^^^^^^^^^^^
+scripts\generate_source_probe_matrix.py:13: in _run
+    subprocess.run(
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902430509040'>
+args = (['E:\\omega system - phase 1\\.venv\\Scripts\\python.exe', 'scripts/generate_source_probe_report.py', '--profile-mode', 'deterministic', '--workflow', 'diagnostic'],)
+kwargs = {'check': True, 'cwd': WindowsPath('E:/omega system - phase 1')}
+effect = AssertionError('Must refuse before side effects')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before side effects
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+_ test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-_run] _
+
+name = 'generate_source_probe_matrix', entry = '_run'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1DC0BB0>
+
+    @pytest.mark.parametrize("name,entry", [
+        ("probe_endpoints", "probe_corporate_actions"), ("probe_endpoints", "probe_bse_bhavcopy"),
+        ("probe_bse_urls", "main"), ("generate_source_probe_matrix", "main"),
+        ("generate_source_probe_matrix", "_run"),
+    ])
+    def test_r15_manual_diagnostics_disabled_before_side_effects(name, entry, monkeypatch):
+        module = script(name)
+        network = Mock(side_effect=AssertionError("Must refuse before side effects"))
+        if hasattr(module, "httpx"):
+            monkeypatch.setattr(module.httpx, "Client", network)
+        if hasattr(module, "subprocess"):
+            monkeypatch.setattr(module.subprocess, "run", network)
+        with pytest.raises(RuntimeError, match="disabled"):
+>           getattr(module, entry)(*([] if entry != "_run" else ["deterministic"]))
+
+tests\unit\test_od01r_rights_hardening.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\generate_source_probe_matrix.py:13: in _run
+    subprocess.run(
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902412332544'>
+args = (['E:\\omega system - phase 1\\.venv\\Scripts\\python.exe', 'scripts/generate_source_probe_report.py', '--profile-mode', 'deterministic', '--workflow', 'diagnostic'],)
+kwargs = {'check': True, 'cwd': WindowsPath('E:/omega system - phase 1')}
+effect = AssertionError('Must refuse before side effects')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before side effects
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+________________ test_r08_fo_loader_pending_before_db_or_http _________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAF1DC0C90>
+
+    def test_r08_fo_loader_pending_before_db_or_http(monkeypatch):
+        module = script("load_nse_fo_into_pipeline_db")
+        db, network = Mock(), Mock(side_effect=AssertionError("Must refuse before HTTP"))
+        monkeypatch.setattr(module, "init_db", db)
+        monkeypatch.setattr(module.httpx, "get", network)
+        monkeypatch.setattr(sys, "argv", ["loader", "--trade-date", DAY.isoformat()])
+        with pytest.raises(SourcePolicyError, match="POLICY_PENDING"):
+>           module.main()
+
+tests\unit\test_od01r_rights_hardening.py:234: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\load_nse_fo_into_pipeline_db.py:63: in main
+    response = httpx.get(url, headers=headers, timeout=60.0, follow_redirects=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902662265424'>
+args = ('https://www1.nseindia.com/content/historical/DERIVATIVES/2024/JAN/fo02JAN2024bhav.csv.zip',)
+kwargs = {'follow_redirects': True, 'headers': {'Referer': 'https://www.nseindia.com/all-reports-derivatives', 'User-Agent': 'Mozilla/5.0'}, 'timeout': 60.0}
+effect = AssertionError('Must refuse before HTTP')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before HTTP
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+__________________ test_r09_backfill_policy_refusal_terminal __________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAFF980C90>
+
+    def test_r09_backfill_policy_refusal_terminal(monkeypatch):
+        module = script("backfill_nse_equity_history")
+>       with pytest.raises(SourcePolicyError, match="POLICY_PENDING"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.source_rights.SourcePolicyError'>
+
+tests\unit\test_od01r_rights_hardening.py:241: Failed
+____ test_r10_probe_authority_before_curl[https://example.invalid:4443/x] _____
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAFFA21EB0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAFFA2DF60>
+url = 'https://example.invalid:4443/x'
+
+    @pytest.mark.parametrize("url", ["https://example.invalid:4443/x", "http://example.invalid/x"])
+    def test_r10_probe_authority_before_curl(manager, monkeypatch, url):
+        module = script("generate_source_probe_report")
+        from omegadata.track_a.source_rights import authorize_source
+    
+        def authorize(request):
+            return authorize_source(request, manager._policy_provider)
+    
+        monkeypatch.setattr(module, "authorize_source", authorize)
+        subprocess = Mock(side_effect=AssertionError("Must refuse before curl"))
+        temporary = Mock(side_effect=AssertionError("Must refuse before temporary output"))
+        monkeypatch.setattr(module.subprocess, "run", subprocess)
+        monkeypatch.setattr(module.tempfile, "TemporaryDirectory", temporary)
+        with pytest.raises(SourcePolicyError):
+>           module._curl_probe(source_key=KEY, url=url, timeout_seconds=1)
+
+tests\unit\test_od01r_rights_hardening.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\generate_source_probe_report.py:112: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902662268784'>, args = (), kwargs = {}
+effect = AssertionError('Must refuse before temporary output')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before temporary output
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+_______ test_r10_probe_authority_before_curl[http://example.invalid/x] ________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001BAFFA222A0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001BAFF984C20>
+url = 'http://example.invalid/x'
+
+    @pytest.mark.parametrize("url", ["https://example.invalid:4443/x", "http://example.invalid/x"])
+    def test_r10_probe_authority_before_curl(manager, monkeypatch, url):
+        module = script("generate_source_probe_report")
+        from omegadata.track_a.source_rights import authorize_source
+    
+        def authorize(request):
+            return authorize_source(request, manager._policy_provider)
+    
+        monkeypatch.setattr(module, "authorize_source", authorize)
+        subprocess = Mock(side_effect=AssertionError("Must refuse before curl"))
+        temporary = Mock(side_effect=AssertionError("Must refuse before temporary output"))
+        monkeypatch.setattr(module.subprocess, "run", subprocess)
+        monkeypatch.setattr(module.tempfile, "TemporaryDirectory", temporary)
+        with pytest.raises(SourcePolicyError):
+>           module._curl_probe(source_key=KEY, url=url, timeout_seconds=1)
+
+tests\unit\test_od01r_rights_hardening.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\generate_source_probe_report.py:112: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1902662270128'>, args = (), kwargs = {}
+effect = AssertionError('Must refuse before temporary output')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Must refuse before temporary output
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-4_xtz9po\\pytest\\test_r05_cache_escape_never_op3\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-4_xtz9po\\pytest\\test_r05_cache_escape_never_op3\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-4_xtz9po\\pytest\\test_r05_cache_escape_never_op7\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-4_xtz9po\\pytest\\test_r05_cache_escape_never_op7\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:159: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-4_xtz9po\\pytest\\test_r06_real_symlink_payload_0\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-4_xtz9po\\pytest\\test_r06_real_symlink_payload_0\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\linked.bin'
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:4443/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:80/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:8080/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[http://example.invalid/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://@example.invalid/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:65536/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:-1/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:abc/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:0443/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://exam\nple.invalid/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[ https://example.invalid/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://[bad/file]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-absolute]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-traversal]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-manifest_escape]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-absolute]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-traversal]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-manifest_escape]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change0]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change1]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change2]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change4]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change5]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change9]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[[]]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[null]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[{"checksum":"a","checksum":"b"}]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[bare]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_corporate_actions]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_bse_bhavcopy]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_bse_urls-main]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-main]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-_run]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r08_fo_loader_pending_before_db_or_http
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r09_backfill_policy_refusal_terminal
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[https://example.invalid:4443/x]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[http://example.invalid/x]
+38 failed, 26 passed, 3 skipped in 4.15s

@@ -1,0 +1,15 @@
+# ADR: OD-01R policy boundary hardening
+
+Status: IMPLEMENTED FOR LOCAL TECHNICAL REVIEW; human adoption/source approval pending. Branch feature/od01-source-rights; baseline 3b5c0fffdd5ecd28a9318a51b43784d3ba133dcc. Evidence: [OD-01R review](../implementation/od01r/20261115T065155Z/01_review_findings.md), [design](../implementation/od01r/20261115T065155Z/02_contract_and_design.md), [tests](../implementation/od01r/20261115T065155Z/03_test_matrix.md).
+
+Problem: hostname-only checks lost scheme/port details; manifest paths escaped roots; independent loader/manual paths bypassed enforcement; cached policy decisions missed later requests and orchestrator initialization wrote output before refusal. Reproduced with local negative-first tests.
+
+Decision: **EXTEND_EXISTING**. Keep the existing small immutable Pydantic 2.12.5 implementation and JSON v1 register. Use Python stdlib urllib.parse/ipaddress/pathlib/hashlib for exact authority and canonical confinement. V1 remote access defaults strictly to HTTPS with no port or canonical :443; unlisted hosts, IP literals, credentials and malformed authorities reject. No new allowed_schemes/ports schema fields or permissions invented. Future HTTP/nonstandard-port needs require a separately approved versioned contract. Keep original Technical Registry and policy bytes unchanged.
+
+Alternatives: leave existing hostname/path checks (rejected by executed negative tests); introduce new granular scheme/port schema (defer until a human-approved source requires it); adopt a new ingestion/authorization/storage platform (unnecessary for these reproduced boundaries). dlt is acquisition-phase comparator only; Obscura/Playwright optional OD-03, Qlib downstream consumer work. None installed, fetched or benchmarked. Existing Pydantic/httpx versions observed locally, no new upstream pin/license/advisory clearance fabricated; supply-chain review OD-14.
+
+Compatibility: safe old cache formats remain read-only and checked, missing optional sidecar may use the self-contained pointer after confinement; ambiguous metadata becomes miss, never silent external read. Lazy orchestrator storage retains explicit tabular use. Manual legacy probes remain disabled until separately migrated/approved. No dependency/service/DB schema, financial math or release change.
+
+Human trust: canonical hash is consistency, not a signature/legal authority. A forged principal string can pass structural checks; external access-controlled signoff/revision checkpoints and separate operator enablement must be verified before any real policy approval. All 13 production entries remain pending; no live use or financial-profit claim.
+
+Costs: additional stdlib checks/provider refresh, unbenchmarked overhead; zero new paid services/dependencies. Residual DNS/redirect/egress and real denial semantics OD-02; concurrent immutable storage OD-04/10; P0 signing/publication OD-11/14. Reversal is bounded local hunks after review, retains old bytes/evidence and keeps sources/publication disabled. [Risk and rollback](../implementation/od01r/20261115T065155Z/05_risks_rollback.md).

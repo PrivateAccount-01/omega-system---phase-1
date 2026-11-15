@@ -1,0 +1,33 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\verification_runner.py",
+    "full-reviewed",
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata.track_a.source_rights",
+    "--cov=omegadata.track_a.download_manager",
+    "--cov-branch",
+    "--cov-report=term-missing"
+  ],
+  "effective_module": [
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata.track_a.source_rights",
+    "--cov=omegadata.track_a.download_manager",
+    "--cov-branch",
+    "--cov-report=term-missing"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-15T08:06:43.053919+00:00",
+  "end_utc": "2026-11-15T08:07:10.270083+00:00",
+  "elapsed_seconds": 27.2161572999903,
+  "exit_code": 0,
+  "output": "full-reviewed.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

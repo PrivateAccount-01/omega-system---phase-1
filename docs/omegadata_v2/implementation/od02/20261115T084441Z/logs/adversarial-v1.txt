@@ -1,0 +1,21 @@
+............................................F........................... [ 80%]
+..................                                                       [100%]
+================================== FAILURES ===================================
+________________ test_t11_retry_after_and_typed_public_context ________________
+
+offline = (<omegadata.track_a.download_manager.DownloadManager object at 0x000001FBEDC7AE00>, ['https://example.invalid/one.zip'], <function offline.<locals>.install at 0x000001FBEF15E770>)
+
+    def test_t11_retry_after_and_typed_public_context(offline):
+        manager, calls, install = offline
+        install(lambda _: httpx.Response(429, headers={"retry-after":"120"}))
+        with pytest.raises(DownloadError) as exc:
+            manager.download(KEY, DAY, use_cache=False)
+        assert exc.value.retry_after == "120" and exc.value.terminal
+>       assert exc.value.context["source_key"] == KEY
+               ^^^^^^^^^^^^^^^^^
+E       AttributeError: 'DownloadError' object has no attribute 'context'
+
+tests\unit\test_od02_acquisition.py:209: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od02_acquisition.py::test_t11_retry_after_and_typed_public_context
+1 failed, 89 passed in 1.13s

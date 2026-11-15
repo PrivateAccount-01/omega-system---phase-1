@@ -7,6 +7,7 @@ import httpx
 
 
 def probe_corporate_actions() -> None:
+    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
     urls = [
         "https://www.nseindia.com/api/corporates-corporateActions",
         "https://www.nseindia.com/api/corporates-corporateActions?index=equities",
@@ -47,6 +48,7 @@ def probe_corporate_actions() -> None:
 
 
 def probe_bse_bhavcopy() -> None:
+    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
     patterns = [
         "https://www.bseindia.com/download/BhavCopy/Equity/EQ{d}_CSV.ZIP",
         "https://www.bseindia.com/download/BhavCopy/Equity/EQ{d}.CSV",

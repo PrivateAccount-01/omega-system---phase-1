@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import ipaddress
 import json
 import re
 from collections.abc import Callable
@@ -10,6 +11,7 @@ from datetime import datetime, timedelta
 from enum import StrEnum
 from pathlib import Path
 from typing import Annotated, Literal, Self
+from urllib.parse import urlsplit
 
 from pydantic import (
     BaseModel,
@@ -91,6 +93,27 @@ def normalized_host(value: str) -> str:
     ):
         raise ValueError("Expected an exact DNS hostname, without scheme, port or wildcard")
     return host
+
+
+def policy_url_host(url: str) -> str | None:
+    """v1 remote authority: exact DNS, HTTPS/443 only; no DNS/redirect guarantee."""
+    try:
+        if not url or any(ord(char) <= 32 or ord(char) == 127 for char in url) or "\\" in url:
+            return None
+        parsed = urlsplit(url)
+        host = parsed.hostname
+        if parsed.scheme != "https" or not host or parsed.username is not None or parsed.password is not None:
+            return None
+        # Also reject empty, noncanonical, encoded and malformed port/authority spellings.
+        if parsed.port not in {None, 443} or parsed.netloc.lower() not in {host, host + ":443"}:
+            return None
+        try:
+            ipaddress.ip_address(host)
+        except ValueError:
+            return normalized_host(host)
+        return None
+    except ValueError:
+        return None
 
 
 class FrozenModel(BaseModel):

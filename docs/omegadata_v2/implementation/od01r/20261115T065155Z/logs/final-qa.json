@@ -1,0 +1,96 @@
+{
+  "utc": "2026-11-15T08:39:23.016613+00:00",
+  "original_records_checked": 11487,
+  "changes": [
+    "OMEGADATA_AGENTS.md",
+    "scripts/backfill_nse_equity_history.py",
+    "scripts/generate_source_probe_matrix.py",
+    "scripts/generate_source_probe_report.py",
+    "scripts/load_nse_fo_into_pipeline_db.py",
+    "scripts/probe_bse_urls.py",
+    "scripts/probe_endpoints.py",
+    "src/omegadata/track_a/download_manager.py",
+    "src/omegadata/track_a/orchestration.py",
+    "src/omegadata/track_a/source_rights.py"
+  ],
+  "unexpected_original_changes": [],
+  "missing_docs": [],
+  "broken_links": [
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\00_baseline_identity.md",
+      "target": "logs/final-qa.json"
+    },
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\00_baseline_identity.md",
+      "target": "logs/final-qa.json"
+    },
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\04_implementation_diff.md",
+      "target": "logs/implementation.patch"
+    },
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\04_implementation_diff.md",
+      "target": "logs/final-qa.json"
+    },
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\05_risks_rollback.md",
+      "target": "logs/implementation.patch"
+    },
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\05_risks_rollback.md",
+      "target": "logs/final-qa.json"
+    },
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\06_gatekeeper_verdict.md",
+      "target": "logs/final-qa.json"
+    },
+    {
+      "file": "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od01r\\20261115T065155Z\\07_next_phase_request.md",
+      "target": "logs/final-qa.json"
+    }
+  ],
+  "pending_sources": 13,
+  "checks": {
+    "baseline-offline-v2": 0,
+    "targeted-reviewed": 0,
+    "full-reviewed": 0,
+    "collection-reviewed": 0,
+    "ruff-reviewed": 0,
+    "mypy-reviewed": 0,
+    "pip-reviewed": 0
+  },
+  "git": {
+    "head": {
+      "exit_code": 0,
+      "stdout": "3b5c0fffdd5ecd28a9318a51b43784d3ba133dcc\n",
+      "stderr": ""
+    },
+    "branch": {
+      "exit_code": 0,
+      "stdout": "feature/od01-source-rights\n",
+      "stderr": ""
+    },
+    "main": {
+      "exit_code": 0,
+      "stdout": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674\n",
+      "stderr": ""
+    },
+    "status": {
+      "exit_code": 0,
+      "stdout": " M OMEGADATA_AGENTS.md\n M scripts/backfill_nse_equity_history.py\n M scripts/generate_source_probe_matrix.py\n M scripts/generate_source_probe_report.py\n M scripts/load_nse_fo_into_pipeline_db.py\n M scripts/probe_bse_urls.py\n M scripts/probe_endpoints.py\n M src/omegadata/track_a/download_manager.py\n M src/omegadata/track_a/orchestration.py\n M src/omegadata/track_a/source_rights.py\n?? .venv-linux/\n?? AGENTS.md\n?? OMEGADATA_OD01R_CODEX_REMEDIATION.md\n?? artifacts/gnupg/openpgp-revocs.d/36B1626F19983C4B8F7C643B26A3DDBB6030631F.rev\n?? artifacts/gnupg/private-keys-v1.d/CC8A0E3CC8C92D4A27115F70CA3DE3DCC3C7CEE1.key\n?? artifacts/gnupg/private-keys-v1.d/E1CF3EA03F1E3F45D57248F5A92D37E1FE153B7A.key\n?? docs/omegadata_v2/decisions/od01r-policy-boundary.md\n?? docs/omegadata_v2/implementation/od01r/\n?? tests/unit/test_od01r_rights_hardening.py\n",
+      "stderr": "warning: unable to access 'C:\\Users\\Paril Rupani/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\Paril Rupani/.config/git/ignore': Permission denied\n"
+    },
+    "scope": {
+      "exit_code": 0,
+      "stdout": "OMEGADATA_AGENTS.md\nscripts/backfill_nse_equity_history.py\nscripts/generate_source_probe_matrix.py\nscripts/generate_source_probe_report.py\nscripts/load_nse_fo_into_pipeline_db.py\nscripts/probe_bse_urls.py\nscripts/probe_endpoints.py\nsrc/omegadata/track_a/download_manager.py\nsrc/omegadata/track_a/orchestration.py\nsrc/omegadata/track_a/source_rights.py\n",
+      "stderr": "warning: in the working copy of 'OMEGADATA_AGENTS.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'scripts/backfill_nse_equity_history.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'scripts/generate_source_probe_matrix.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'scripts/generate_source_probe_report.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'scripts/load_nse_fo_into_pipeline_db.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/omegadata/track_a/source_rights.py', LF will be replaced by CRLF the next time Git touches it\n"
+    },
+    "staged": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\Paril Rupani/.config/git/ignore': Permission denied\n"
+    }
+  },
+  "passed": false,
+  "signing": "metadata only; no key contents opened"
+}

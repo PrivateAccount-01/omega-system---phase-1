@@ -1,0 +1,2674 @@
+--- /dev/null
++++ b/config/acquisition_limits.v1.json
+@@ -0,0 +1,13 @@
++{
++  "schema_version": "acquisition-limits/v1",
++  "max_attempts": 5,
++  "total_seconds": 30,
++  "request_seconds": 8,
++  "body_bytes": 8388608,
++  "archive_bytes": 33554432,
++  "zip_entries": 8,
++  "compression_ratio": 100,
++  "max_rows": 20000,
++  "max_redirects": 0,
++  "backoff_seconds": [0.25, 0.5, 1.0]
++}
+--- a/scripts/generate_source_probe_report.py
++++ b/scripts/generate_source_probe_report.py
+@@ -1,15 +1,21 @@
+ from __future__ import annotations
+ 
+ import argparse
+-import csv
+-import io
+ import json
+-import subprocess
++import subprocess as subprocess
+ import tempfile
+-import zipfile
+ from datetime import UTC, date, datetime, timedelta
+ from pathlib import Path
+ 
++from omegadata.track_a.acquisition import (
++    RequestBudget,
++    check_status,
++    failure,
++    load_limits,
++    safe_url,
++    validate_payload,
++    validate_request_options,
++)
+ from omegadata.track_a.source_rights import (
+     PolicyRequest,
+     SourceOperation,
+@@ -96,104 +102,67 @@
+ 
+ 
+ def _curl_probe(
+-    *,
+-    source_key: str,
+-    url: str,
+-    timeout_seconds: float,
+-    bootstrap_nse: bool = False,
++    *, source_key: str, url: str, timeout_seconds: float,
++    bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,
+ ) -> tuple[int | None, str, bytes, str | None]:
++    """Only explicit offline runner injection is supported; no provider subprocess."""
++    validate_request_options(timeout_seconds, None)
++    limits = load_limits()
++    budget = budget or RequestBudget(limits)
+     def preflight(target: str) -> None:
+         authorize_source(PolicyRequest(
+             source_key=source_key, operation=SourceOperation.FETCH,
+             decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+             requested_host=policy_url_host(target),
+         ))
+-
+-    urls = [url, "https://www.nseindia.com/"] if bootstrap_nse else [url]
+-    for target in urls:
++    targets = ["https://www.nseindia.com/", url] if bootstrap_nse else [url]
++    for target in targets:
+         preflight(target)
++    if offline_runner is None:
++        raise failure("BLOCKED_EXTERNAL_EGRESS")
++    budget.remaining()
+     with tempfile.TemporaryDirectory() as tmpdir:
+-        tmp = Path(tmpdir)
+-        body_path = tmp / "body.bin"
+-        header_path = tmp / "headers.txt"
+-        cookie_path = tmp / "cookies.txt"
+-        if bootstrap_nse:
+-            preflight("https://www.nseindia.com/")
+-            subprocess.run(
+-                [
+-                    "curl",
+-                    "-sS",
+-                    "-L",
+-                    "--max-time",
+-                    str(timeout_seconds),
+-                    "-A",
+-                    USER_AGENT,
+-                    "-c",
+-                    str(cookie_path),
+-                    "https://www.nseindia.com/",
+-                ],
+-                check=False,
+-                stdout=subprocess.DEVNULL,
+-                stderr=subprocess.DEVNULL,
+-            )
+-        cmd = [
+-            "curl",
+-            "-sS",
+-            "-L",
+-            "--max-time",
+-            str(timeout_seconds),
+-            "-A",
+-            USER_AGENT,
+-            "-D",
+-            str(header_path),
+-            "-o",
+-            str(body_path),
+-        ]
+-        if bootstrap_nse:
+-            cmd.extend(["-b", str(cookie_path), "-c", str(cookie_path)])
+-            cmd.extend(["-H", "Referer: https://www.nseindia.com/", "-H", "Origin: https://www.nseindia.com"])
+-        preflight(url)
+-        result = subprocess.run(cmd + [url], check=False, capture_output=True)
+-        stderr = result.stderr.decode("utf-8", errors="ignore").strip() or None
+-        headers_text = header_path.read_text(encoding="utf-8", errors="ignore") if header_path.exists() else ""
+-        status_code = None
+-        content_type = ""
+-        for line in headers_text.splitlines():
+-            if line.startswith("HTTP/"):
+-                parts = line.split()
+-                if len(parts) >= 2 and parts[1].isdigit():
+-                    status_code = int(parts[1])
+-            if line.lower().startswith("content-type:"):
+-                content_type = line.split(":", 1)[1].strip()
+-        body = body_path.read_bytes() if body_path.exists() else b""
+-        return status_code, content_type, body, stderr
+-
+-
+-def _validate_json(body: bytes) -> bool:
+-    stripped = body.lstrip()
+-    return stripped.startswith(b"{") or stripped.startswith(b"[")
+-
+-
+-def _validate_csv(body: bytes, expected_headers: list[set[str]]) -> bool:
+-    try:
+-        text = body.decode("utf-8", errors="ignore")
+-        reader = csv.DictReader(io.StringIO(text))
+-        headers = {str(value).strip() for value in (reader.fieldnames or [])}
+-        return any(expected.issubset(headers) for expected in expected_headers)
+-    except Exception:
+-        return False
+-
+-
+-def _validate_zip_csv(body: bytes, expected_headers: list[set[str]]) -> bool:
+-    try:
+-        with zipfile.ZipFile(io.BytesIO(body)) as archive:
+-            members = [name for name in archive.namelist() if name.lower().endswith(".csv")]
+-            if not members:
+-                return False
+-            payload = archive.read(members[0])
+-    except Exception:
+-        return False
+-    return _validate_csv(payload, expected_headers)
++        root = Path(tmpdir)
++        result_body = b""
++        status, content_type = None, ""
++        for index, target in enumerate(targets):
++            preflight(target)
++            timeout = min(timeout_seconds, budget.consume())
++            body_path, header_path = root / f"{index}.body", root / f"{index}.headers"
++            command = ["curl", "--proto", "=https", "--max-redirs", "0", "--proxy", "",
++                "--noproxy", "*", "--max-filesize", str(limits.body_bytes),
++                "--max-time", str(timeout), "--connect-timeout", str(timeout),
++                "-sS", "-D", str(header_path), "-o", str(body_path), "-A", USER_AGENT, target]
++            result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)
++            budget.remaining()
++            if result.returncode != 0:
++                raise failure("HTTP_TRANSIENT", terminal=False)
++            headers = {}
++            status = None
++            if not header_path.is_file():
++                raise failure("PARTIAL_PAYLOAD")
++            if header_path.stat().st_size > 65536:
++                raise failure("BODY_LIMIT_EXCEEDED")
++            for line in header_path.read_text(encoding="utf-8", errors="strict").splitlines():
++                if line.startswith("HTTP/"):
++                    status = int(line.split()[1])
++                elif ":" in line:
++                    name, value = line.split(":", 1)
++                    headers[name.lower().strip()] = value.strip()
++            check_status(status or 0, headers)
++            if not body_path.is_file() or body_path.stat().st_size > limits.body_bytes:
++                raise failure("BODY_LIMIT_EXCEEDED")
++            with body_path.open("rb") as handle:
++                result_body = handle.read(limits.body_bytes + 1)
++            if not result_body or len(result_body) > limits.body_bytes:
++                raise failure("PAYLOAD_EMPTY" if not result_body else "BODY_LIMIT_EXCEEDED")
++            length = headers.get("content-length")
++            if length is not None and (not length.isdigit() or int(length) != len(result_body)):
++                raise failure("PARTIAL_PAYLOAD")
++            if b"access denied" in result_body[:1024].lower() or b"captcha" in result_body[:1024].lower():
++                raise failure("PAYLOAD_HTML_DENIAL")
++            content_type = headers.get("content-type", "")
++        return status, content_type, result_body, None
+ 
+ 
+ def _probe_entry(
+@@ -204,7 +173,10 @@
+     role: str,
+     timeout_seconds: float,
+     kind: str,
++    budget: RequestBudget | None = None,
++    offline_runner=None,
+ ) -> dict[str, object]:
++    budget = budget or RequestBudget(load_limits())
+     policy_decision = authorize_source(PolicyRequest(
+         source_key=source_key, operation=SourceOperation.FETCH,
+         decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+@@ -217,56 +189,34 @@
+         url=url,
+         timeout_seconds=timeout_seconds,
+         bootstrap_nse=bootstrap_nse,
++        budget=budget, offline_runner=offline_runner,
+     )
+     elapsed = (datetime.now(UTC) - started).total_seconds()
+-    if kind == "json":
+-        validated = status_code == 200 and _validate_json(body)
+-    elif kind == "csv":
+-        if source_key == "BSE_EQUITY_BHAVCOPY":
+-            validated = status_code == 200 and _validate_csv(
+-                body,
+-                [
+-                    {"TradDt", "BizDt", "ISIN", "TckrSymb", "OpnPric", "ClsPric"},
+-                    {"SC_CODE", "SC_NAME", "OPEN", "CLOSE", "ISIN_CODE", "TRADING_DATE"},
+-                ],
+-            )
+-        else:
+-            validated = status_code == 200 and _validate_csv(body, [{"SYMBOL", "SERIES", "ISIN"}])
+-    else:
+-        if source_key == "NSE_EQUITY_BHAVCOPY":
+-            validated = status_code == 200 and _validate_zip_csv(
+-                body,
+-                [
+-                    {"SYMBOL", "SERIES", "ISIN"},
+-                    {"TradDt", "BizDt", "ISIN", "TckrSymb", "OpnPric", "ClsPric"},
+-                ],
+-            )
+-        elif source_key == "NSE_FO_BHAVCOPY":
+-            validated = status_code == 200 and _validate_zip_csv(body, [{"FinInstrmTp", "TckrSymb", "XpryDt"}])
+-        else:
+-            validated = status_code == 200 and (
+-                _validate_zip_csv(body, [{"TckrSymb", "ISIN", "OpnPric"}, {"SC_CODE", "OPEN", "CLOSE", "ISIN_CODE"}])
+-                or body.startswith(b"PK")
+-            )
++    validation = validate_payload(source_key, body, as_of, budget.limits, content_type)
++    validated = validation.state == "PAYLOAD_STRUCTURALLY_VALID"
+     return {
+         "source_key": source_key,
+         "source_policy_decision": policy_decision.model_dump(mode="json"),
+         "as_of": as_of.isoformat(),
+-        "url": url,
++        "url": safe_url(url),
+         "role": role,
+         "validated": validated,
+         "status_code": status_code,
+         "content_type": content_type,
+         "bytes_downloaded": len(body),
+-        "attempts": 1,
+-        "request_attempts": 1,
++        "attempts": budget.attempts,
++        "request_attempts": budget.attempts,
+         "transport": "curl",
+         "header_profile": "chrome_desktop",
+         "elapsed_seconds": round(elapsed, 3),
+         "failure_stage": None if validated else ("request" if status_code != 200 else "validation"),
+         "error": stderr,
+         "validation_error": None if validated else "payload_validation_failed",
+-        "body_preview": body[:120].decode("utf-8", errors="ignore"),
++        "body_preview": "",
++        "acquisition_state": validation.state,
++        "parser_schema": validation.schema,
++        "sha256": validation.sha256,
++        "external_egress": "BLOCKED_EXTERNAL_EGRESS",
+     }
+ 
+ 
+@@ -291,6 +241,7 @@
+     parser.add_argument("--workflow", choices=["diagnostic", "scheduled_verification"], default="diagnostic")
+     args = parser.parse_args()
+ 
++    budget = RequestBudget(load_limits())
+     calendar = _load_calendar()
+     timeout_seconds = 8.0
+     probe_history_days = 3
+@@ -303,6 +254,7 @@
+ 
+     nse_probes = [
+         _probe_entry(
++            budget=budget,
+             source_key="NSE_CORPORATE_ACTIONS",
+             as_of=completed_anchor,
+             url="https://www.nseindia.com/api/corporates-corporateActions?index=equities",
+@@ -313,6 +265,7 @@
+     ]
+     nse_equity_probes = [
+         _probe_entry(
++            budget=budget,
+             source_key="NSE_EQUITY_BHAVCOPY",
+             as_of=nse_probe_date,
+             url=_render_nse_equity(nse_probe_date),
+@@ -323,6 +276,7 @@
+     ]
+     nse_fo_probes = [
+         _probe_entry(
++            budget=budget,
+             source_key="NSE_FO_BHAVCOPY",
+             as_of=nse_probe_date,
+             url=_render_nse_fo(nse_probe_date),
+@@ -332,6 +286,7 @@
+         )
+     ]
+     bse_primary = _probe_entry(
++            budget=budget,
+         source_key="BSE_EQUITY_BHAVCOPY",
+         as_of=probe_date,
+         url=_render_bse_primary(probe_date),
+@@ -341,6 +296,7 @@
+     )
+     bse_fallbacks = [
+         _probe_entry(
++            budget=budget,
+             source_key="BSE_EQUITY_BHAVCOPY",
+             as_of=probe_date,
+             url=url,
+@@ -356,6 +312,7 @@
+     for candidate_date in bse_days:
+         candidate_results = [
+             _probe_entry(
++            budget=budget,
+                 source_key="BSE_EQUITY_BHAVCOPY",
+                 as_of=candidate_date,
+                 url=_render_bse_primary(candidate_date),
+@@ -365,6 +322,7 @@
+             ),
+             *[
+                 _probe_entry(
++            budget=budget,
+                     source_key="BSE_EQUITY_BHAVCOPY",
+                     as_of=candidate_date,
+                     url=url,
+@@ -381,6 +339,7 @@
+     for candidate_date in nse_days:
+         candidate_results = [
+             _probe_entry(
++            budget=budget,
+                 source_key="NSE_EQUITY_BHAVCOPY",
+                 as_of=candidate_date,
+                 url=_render_nse_equity(candidate_date),
+--- a/scripts/load_nse_fo_into_pipeline_db.py
++++ b/scripts/load_nse_fo_into_pipeline_db.py
+@@ -18,6 +18,7 @@
+ )
+ from omegadata.db.session import get_session, init_db
+ from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
++from omegadata.track_a.acquisition import failure
+ from omegadata.track_a.source_registry import resolve_era
+ from omegadata.track_a.source_rights import (
+     PolicyRequest,
+@@ -76,7 +77,10 @@
+ 
+     headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://www.nseindia.com/all-reports-derivatives"}
+     decisions[0] = preflight(SourceOperation.FETCH)
+-    response = httpx.get(url, headers=headers, timeout=60.0, follow_redirects=True)
++    # Connection-time egress control and FO structural validation are not certified.
++    # Never let this independent legacy loader bypass the offline acquisition gate.
++    raise failure("BLOCKED_EXTERNAL_EGRESS")
++    response = httpx.get(url, headers=headers, timeout=60.0, follow_redirects=False)
+     response.raise_for_status()
+     payload = response.content
+     decisions[1] = preflight(SourceOperation.STORE_RAW)
+--- /dev/null
++++ b/src/omegadata/track_a/acquisition.py
+@@ -0,0 +1,446 @@
++"""Bounded offline acquisition contracts. No legal approval or live egress authority."""
++
++from __future__ import annotations
++
++import csv
++import hashlib
++import io
++import json
++import math
++import re
++import stat
++import time
++import zipfile
++from collections.abc import Callable, Mapping
++from dataclasses import dataclass, field
++from datetime import date, datetime
++from decimal import Decimal, InvalidOperation
++from email.utils import parsedate_to_datetime
++from pathlib import Path, PurePosixPath
++from urllib.parse import urlsplit, urlunsplit
++
++from omegadata.track_a.source_registry import resolve_era
++
++
++class DownloadError(RuntimeError):
++    def __init__(
++        self,
++        message: str,
++        *,
++        status_code: int | None = None,
++        stage: str = "request",
++        reason_code: str = "INTERNAL_ERROR",
++        terminal: bool = False,
++        retry_after: str | None = None,
++    ) -> None:
++        super().__init__(message)
++        self.status_code = status_code
++        self.stage = stage
++        self.reason_code = reason_code
++        self.terminal = terminal
++        self.retry_after = retry_after
++        self.context: dict[str, object] = {}
++
++
++def failure(
++    reason: str,
++    *,
++    status: int | None = None,
++    terminal: bool = True,
++    stage: str = "request",
++    retry_after: str | None = None,
++) -> DownloadError:
++    return DownloadError(
++        reason,
++        reason_code=reason,
++        status_code=status,
++        terminal=terminal,
++        stage=stage,
++        retry_after=retry_after,
++    )
++
++
++@dataclass(frozen=True)
++class AcquisitionLimits:
++    schema_version: str
++    max_attempts: int
++    total_seconds: float
++    request_seconds: float
++    body_bytes: int
++    archive_bytes: int
++    zip_entries: int
++    compression_ratio: float
++    max_rows: int
++    max_redirects: int
++    backoff_seconds: tuple[float, ...]
++
++    def __post_init__(self) -> None:
++        if (
++            self.schema_version != "acquisition-limits/v1"
++            or type(self.max_redirects) is not int
++            or self.max_redirects != 0
++        ):
++            raise ValueError("Only explicit no-redirect acquisition-limits/v1 is supported")
++        for key in ("max_attempts", "body_bytes", "archive_bytes", "zip_entries", "max_rows"):
++            value = getattr(self, key)
++            if type(value) is not int or value <= 0:
++                raise ValueError("Positive integer acquisition limit required")
++        for value in (self.total_seconds, self.request_seconds, self.compression_ratio):
++            if type(value) not in (int, float) or not math.isfinite(value) or value <= 0:
++                raise ValueError("Finite positive acquisition limit required")
++        if not self.backoff_seconds or any(
++            type(v) not in (int, float) or not math.isfinite(v) or v < 0
++            for v in self.backoff_seconds
++        ):
++            raise ValueError("Explicit finite backoff schedule required")
++
++
++def load_limits(path: Path | None = None) -> AcquisitionLimits:
++    path = path or Path(__file__).resolve().parents[3] / "config/acquisition_limits.v1.json"
++    try:
++        body = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_object)
++        body["backoff_seconds"] = tuple(body["backoff_seconds"])
++        return AcquisitionLimits(**body)
++    except (OSError, ValueError, TypeError, KeyError) as exc:
++        raise failure("INVALID_ACQUISITION_LIMITS") from exc
++
++
++def validate_request_options(timeout_seconds: float | None, max_attempts: int | None) -> None:
++    if timeout_seconds is not None and (
++        type(timeout_seconds) not in (int, float)
++        or not math.isfinite(timeout_seconds)
++        or timeout_seconds <= 0
++    ):
++        raise failure("INVALID_ACQUISITION_LIMITS")
++    if max_attempts is not None and (type(max_attempts) is not int or max_attempts <= 0):
++        raise failure("INVALID_ACQUISITION_LIMITS")
++
++
++@dataclass
++class RequestBudget:
++    limits: AcquisitionLimits
++    clock: Callable[[], float] = time.monotonic
++    sleep: Callable[[float], None] = time.sleep
++    attempts: int = 0
++    started: float | None = None
++    context: dict[str, object] = field(default_factory=dict)
++
++    def remaining(self) -> float:
++        now = self.clock()
++        if self.started is None:
++            self.started = now
++        remaining = self.limits.total_seconds - (now - self.started)
++        if remaining <= 0:
++            raise failure("TOTAL_DEADLINE_EXCEEDED")
++        return remaining
++
++    def consume(self) -> float:
++        remaining = self.remaining()
++        if self.attempts >= self.limits.max_attempts:
++            raise failure("ATTEMPT_BUDGET_EXCEEDED")
++        self.attempts += 1
++        return min(remaining, self.limits.request_seconds)
++
++    def backoff(self) -> None:
++        delay = self.limits.backoff_seconds[
++            min(max(0, self.attempts - 1), len(self.limits.backoff_seconds) - 1)
++        ]
++        if delay >= self.remaining():
++            raise failure("TOTAL_DEADLINE_EXCEEDED")
++        if self.attempts >= self.limits.max_attempts:
++            raise failure("ATTEMPT_BUDGET_EXCEEDED")
++        self.sleep(delay)
++        self.remaining()
++
++
++def safe_url(url: str) -> str:
++    parsed = urlsplit(url)
++    # Evidence must never retain userinfo or query tokens, even on rejected URLs.
++    authority = parsed.netloc.rsplit("@", 1)[-1]
++    return urlunsplit((parsed.scheme, authority, parsed.path, "", ""))
++
++
++def check_status(status: int, headers: Mapping[str, str]) -> None:
++    if 300 <= status < 400:
++        raise failure("REDIRECT_NOT_ALLOWED", status=status)
++    if status in {401, 403, 451}:
++        raise failure("HTTP_ACCESS_DENIED", status=status)
++    if status == 429:
++        raw = headers.get("retry-after", "")
++        retry_after = None
++        if raw.isascii() and raw.isdigit() and len(raw) <= 8:
++            retry_after = str(int(raw))
++        else:
++            try:
++                parsed = parsedate_to_datetime(raw)
++                if parsed.tzinfo is not None:
++                    retry_after = parsed.isoformat()
++            except (ValueError, TypeError, OverflowError):
++                pass
++        raise failure("HTTP_RATE_LIMITED", status=status, retry_after=retry_after)
++    if status == 404:
++        raise failure("HTTP_NOT_FOUND", status=status)
++    if status in {500, 502, 503, 504}:
++        raise failure("HTTP_TRANSIENT", status=status, terminal=False)
++    if status < 200 or status >= 300:
++        raise failure("HTTP_REJECTED", status=status)
++
++
++def check_body(payload: bytes, content_type: str, limits: AcquisitionLimits) -> None:
++    if len(payload) > limits.body_bytes:
++        raise failure("BODY_LIMIT_EXCEEDED", stage="validation")
++    if not payload:
++        raise failure("PAYLOAD_EMPTY", stage="validation")
++    beginning = payload[:1024].lstrip().lower()
++    if (
++        "html" in content_type.lower()
++        or beginning.startswith((b"<html", b"<!doctype", b"<head", b"<body"))
++        or beginning.startswith((b"access denied", b"login required"))
++    ):
++        raise failure("PAYLOAD_HTML_DENIAL", stage="validation")
++
++
++def unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
++    result: dict[str, object] = {}
++    for key, value in pairs:
++        if key in result:
++            raise ValueError("Duplicate JSON field")
++        result[key] = value
++    return result
++
++
++@dataclass(frozen=True)
++class PayloadValidation:
++    schema: str
++    era: str
++    rows: int
++    state: str
++    sha256: str
++
++
++def _date(value: str) -> date:
++    for pattern in ("%Y-%m-%d", "%d-%b-%Y", "%d-%b-%y", "%d/%m/%Y", "%d-%m-%Y"):
++        try:
++            return datetime.strptime(value.strip(), pattern).date()
++        except ValueError:
++            pass
++    raise failure("TRADE_DATE_MISMATCH", stage="validation")
++
++
++def _csv(
++    payload: bytes,
++    key: str,
++    requested: date,
++    legacy: bool,
++    filename_date: bool,
++    limits: AcquisitionLimits,
++) -> tuple[str, int]:
++    try:
++        text = payload.decode("utf-8-sig", errors="strict")
++    except UnicodeError as exc:
++        raise failure("ENCODING_UNSUPPORTED", stage="validation") from exc
++    reader = csv.reader(io.StringIO(text), strict=True)
++    try:
++        header = [v.strip().upper() for v in next(reader, [])]
++        if len(set(header)) != len(header) or not header or any(not v for v in header):
++            raise failure("SCHEMA_UNKNOWN", stage="validation")
++        modern = {
++            "TRADDT",
++            "BIZDT",
++            "ISIN",
++            "TCKRSYMB",
++            "OPNPRIC",
++            "HGHPRIC",
++            "LWPRIC",
++            "CLSPRIC",
++            "TTLTRADGVOL",
++        }
++        identity: tuple[str, ...]
++        date_fields: tuple[str, ...]
++        old_nse = {
++            "SYMBOL",
++            "SERIES",
++            "OPEN",
++            "HIGH",
++            "LOW",
++            "CLOSE",
++            "TOTTRDQTY",
++            "ISIN",
++            "TIMESTAMP",
++        }
++        old_bse = {"SC_CODE", "OPEN", "HIGH", "LOW", "CLOSE", "NO_OF_SHRS", "ISIN_CODE"}
++        if not legacy and modern.issubset(header):
++            fields = ("OPNPRIC", "HGHPRIC", "LWPRIC", "CLSPRIC", "TTLTRADGVOL")
++            identity, date_fields, schema = (
++                ("ISIN", "TCKRSYMB"),
++                ("TRADDT", "BIZDT"),
++                "equity-udiff/v1",
++            )
++        elif key == "NSE_EQUITY_BHAVCOPY" and legacy and old_nse.issubset(header):
++            fields = ("OPEN", "HIGH", "LOW", "CLOSE", "TOTTRDQTY")
++            identity, date_fields, schema = (
++                ("ISIN", "SYMBOL", "SERIES"),
++                ("TIMESTAMP",),
++                "nse-equity-legacy/v1",
++            )
++        elif key == "BSE_EQUITY_BHAVCOPY" and old_bse.issubset(header) and filename_date:
++            fields = ("OPEN", "HIGH", "LOW", "CLOSE", "NO_OF_SHRS")
++            identity, date_fields, schema = (
++                ("ISIN_CODE", "SC_CODE"),
++                (),
++                "bse-equity-legacy-filename-date/v1",
++            )
++        else:
++            raise failure("SCHEMA_UNKNOWN", stage="validation")
++        count = 0
++        seen: set[tuple[str, ...]] = set()
++        for values in reader:
++            if len(values) != len(header):
++                raise failure("PARTIAL_PAYLOAD", stage="validation")
++            row = dict(zip(header, values, strict=True))
++            if any(_date(row[field]) != requested for field in date_fields):
++                raise failure("TRADE_DATE_MISMATCH", stage="validation")
++            row_key = tuple(row[field].strip() for field in identity)
++            if not all(row_key) or row_key in seen:
++                raise failure("PARTIAL_PAYLOAD", stage="validation")
++            seen.add(row_key)
++            try:
++                numbers = [Decimal(row[field]) for field in fields]
++            except InvalidOperation as exc:
++                raise failure("PARTIAL_PAYLOAD", stage="validation") from exc
++            if any(not number.is_finite() or number < 0 for number in numbers):
++                raise failure("PARTIAL_PAYLOAD", stage="validation")
++            opening, high, low, close, volume = numbers
++            if (
++                high < max(opening, low, close)
++                or low > min(opening, high, close)
++                or volume != volume.to_integral_value()
++            ):
++                raise failure("PARTIAL_PAYLOAD", stage="validation")
++            count += 1
++            if count > limits.max_rows:
++                raise failure("BODY_LIMIT_EXCEEDED", stage="validation")
++        if count == 0:
++            raise failure("PAYLOAD_EMPTY", stage="validation")
++        return schema, count
++    except csv.Error as exc:
++        raise failure("PARTIAL_PAYLOAD", stage="validation") from exc
++
++
++def validate_payload(
++    key: str,
++    payload: bytes,
++    requested: date | None,
++    limits: AcquisitionLimits,
++    content_type: str = "",
++) -> PayloadValidation:
++    check_body(payload, content_type, limits)
++    era = "unknown" if requested is None else resolve_era(key, requested).name
++    digest = hashlib.sha256(payload).hexdigest()
++    if key in {"NSE_EQUITY_BHAVCOPY", "BSE_EQUITY_BHAVCOPY"}:
++        mime = content_type.split(";", 1)[0].strip().lower()
++        accepted = {
++            "",
++            "application/octet-stream",
++            "application/zip",
++            "application/x-zip-compressed",
++            "text/csv",
++            "application/csv",
++            "text/plain",
++        }
++        if (
++            mime not in accepted
++            or ("zip" in mime and not payload.startswith(b"PK"))
++            or ("csv" in mime and payload.startswith(b"PK"))
++        ):
++            raise failure("SCHEMA_UNKNOWN", stage="validation")
++        if requested is None:
++            raise failure("SCHEMA_UNKNOWN", stage="validation")
++        legacy = key.startswith("NSE") and requested.year < 2020
++        filename_date = False
++        csv_payload = payload
++        if payload.startswith(b"PK"):
++            try:
++                with zipfile.ZipFile(io.BytesIO(payload)) as zf:
++                    entries = zf.infolist()
++                    if (
++                        len(entries) > limits.zip_entries
++                        or sum(e.file_size for e in entries) > limits.archive_bytes
++                    ):
++                        raise failure("ARCHIVE_TOO_LARGE", stage="validation")
++                    names = set()
++                    for item in entries:
++                        name = PurePosixPath(item.filename.replace("\\", "/"))
++                        if (
++                            name.is_absolute()
++                            or ".." in name.parts
++                            or ":" in item.filename
++                            or item.filename in names
++                            or item.flag_bits & 1
++                            or stat.S_ISLNK(item.external_attr >> 16)
++                            or name.suffix.lower() in {".zip", ".gz", ".7z"}
++                        ):
++                            raise failure("ZIP_ENTRY_UNSAFE", stage="validation")
++                        names.add(item.filename)
++                        if (
++                            item.file_size > limits.archive_bytes
++                            or item.file_size
++                            > max(1, item.compress_size) * limits.compression_ratio
++                        ):
++                            raise failure("ARCHIVE_TOO_LARGE", stage="validation")
++                    expected = (
++                        (
++                            (f"cm{requested:%d%b%Y}bhav.csv",)
++                            if legacy
++                            else (f"BhavCopy_NSE_CM_0_0_0_{requested:%Y%m%d}_F_0000.csv",)
++                        )
++                        if key.startswith("NSE")
++                        else (
++                            f"BhavCopy_BSE_CM_0_0_0_{requested:%Y%m%d}_F_0000.csv",
++                            f"EQ_ISINCODE_{requested:%d%m%y}_T0.csv",
++                            f"BSE_EQ_BHAVCOPY_{requested:%d%m%Y}_T0.csv",
++                        )
++                    )
++                    chosen = [
++                        e
++                        for e in entries
++                        if PurePosixPath(e.filename).name.lower() in {v.lower() for v in expected}
++                    ]
++                    if len(chosen) != 1:
++                        csv_entries = [e for e in entries if e.filename.lower().endswith(".csv")]
++                        reason = (
++                            "TRADE_DATE_MISMATCH"
++                            if len(csv_entries) == 1
++                            and re.search(r"\d{8}|\d{2}[A-Za-z]{3}\d{4}", csv_entries[0].filename)
++                            else "SCHEMA_UNKNOWN"
++                        )
++                        raise failure(reason, stage="validation")
++                    filename_date = True
++                    with zf.open(chosen[0]) as member:
++                        csv_payload = member.read(limits.archive_bytes + 1)
++                    if len(csv_payload) > limits.archive_bytes:
++                        raise failure("ARCHIVE_TOO_LARGE", stage="validation")
++            except (zipfile.BadZipFile, EOFError, RuntimeError, NotImplementedError) as exc:
++                if isinstance(exc, DownloadError):
++                    raise
++                raise failure("ARCHIVE_INVALID", stage="validation") from exc
++        elif key.startswith("NSE"):
++            raise failure("ARCHIVE_INVALID", stage="validation")
++        schema, rows = _csv(csv_payload, key, requested, legacy, filename_date, limits)
++        return PayloadValidation(schema, era, rows, "PAYLOAD_STRUCTURALLY_VALID", digest)
++    json_keys = {"NSE_CORPORATE_ACTIONS", "BSE_CORPORATE_ACTIONS", "NSE_FII_DII", "INDIA_VIX"}
++    if key in json_keys:
++        try:
++            parsed = json.loads(payload.decode("utf-8-sig"), object_pairs_hook=unique_object)
++        except (ValueError, UnicodeError) as exc:
++            raise failure("SCHEMA_UNKNOWN", stage="validation") from exc
++        if isinstance(parsed, dict) and any(
++            field.lower() in {"message", "error", "login", "captcha"} for field in parsed
++        ):
++            raise failure("PAYLOAD_HTML_DENIAL", stage="validation")
++        if not isinstance(parsed, (dict, list)) or not parsed:
++            raise failure("SCHEMA_UNKNOWN", stage="validation")
++        return PayloadValidation(
++            "json-structure-only/v1", era, len(parsed), "HTTP_RECEIVED", digest
++        )
++    return PayloadValidation("unverified-format/v1", era, 0, "HTTP_RECEIVED", digest)
+--- a/src/omegadata/track_a/download_manager.py
++++ b/src/omegadata/track_a/download_manager.py
+@@ -5,9 +5,7 @@
+ import io
+ import json
+ import re
+-import ssl
+-import subprocess
+-import tempfile
++import subprocess as subprocess
+ import time
+ import zipfile
+ from collections.abc import Callable, Iterator
+@@ -17,13 +15,25 @@
+ from datetime import UTC, date, datetime
+ from html.parser import HTMLParser
+ from pathlib import Path, PureWindowsPath
+-from urllib.error import HTTPError, URLError
++from threading import RLock
+ from urllib.parse import urljoin, urlparse
+-from urllib.request import Request, urlopen
++from urllib.request import urlopen as urlopen
+ 
+ import httpx
+ 
+ from omegadata.config import settings
++from omegadata.track_a.acquisition import (
++    AcquisitionLimits,
++    DownloadError,
++    PayloadValidation,
++    RequestBudget,
++    check_status,
++    failure,
++    load_limits,
++    safe_url,
++    validate_payload,
++    validate_request_options,
++)
+ from omegadata.track_a.alerting import AlertEvent, AlertRouter
+ from omegadata.track_a.monitoring import DOWNLOAD_COUNTER, DOWNLOAD_LATENCY, FAILOVER_COUNTER
+ from omegadata.track_a.source_registry import SOURCE_REGISTRY, resolve_era
+@@ -39,19 +49,7 @@
+     policy_url_host,
+ )
+ 
+-
+-class DownloadError(RuntimeError):
+-    def __init__(
+-        self,
+-        message: str,
+-        *,
+-        status_code: int | None = None,
+-        stage: str = "request",
+-    ) -> None:
+-        super().__init__(message)
+-        self.status_code = status_code
+-        self.stage = stage
+-
++HTTPX_CLIENT_TYPE = httpx.Client
+ 
+ @dataclass(frozen=True)
+ class DownloadArtifact:
+@@ -64,6 +62,9 @@
+     used_url: str
+     attempts: int
+     policy_decisions: tuple[SourcePolicyDecision, ...] = ()
++    source_mode: str = "source_unverified"
++    acquisition_state: str = "HTTP_RECEIVED"
++    sha256: str = ""
+ 
+ 
+ @dataclass(frozen=True)
+@@ -73,6 +74,7 @@
+     content_type: str
+     transport: str
+     request_attempts: int
++    final_url: str = ""
+ 
+ 
+ @dataclass(frozen=True)
+@@ -95,6 +97,7 @@
+     validation_error: str | None
+     body_preview: str
+     policy_decisions: tuple[SourcePolicyDecision, ...] = ()
++    acquisition_state: str = "HTTP_RECEIVED"
+ 
+ 
+ class DownloadManager:
+@@ -103,6 +106,10 @@
+         *,
+         policy_provider: PolicyProvider | None = None,
+         decision_clock: Callable[[], datetime] | None = None,
++        acquisition_limits: AcquisitionLimits | None = None,
++        acquisition_clock: Callable[[], float] | None = None,
++        acquisition_sleep: Callable[[float], None] | None = None,
++        offline_adapters: dict[SourceTransport, Callable[[str, dict[str, str], float], FetchResult]] | None = None,
+     ) -> None:
+         self.raw_root = Path(settings.raw_root)
+         self.seed_raw_root = Path(settings.seed_raw_root)
+@@ -110,6 +117,28 @@
+         self._policy_provider = load_policy_register if policy_provider is None else policy_provider
+         self._decision_clock = decision_clock or (lambda: datetime.now(UTC))
+         self._policy_source: ContextVar[str] = ContextVar("download_policy_source", default="")
++        self.limits = acquisition_limits or load_limits()
++        self._acquisition_clock = acquisition_clock or time.monotonic
++        self._acquisition_sleep = acquisition_sleep or time.sleep
++        self._job: ContextVar[RequestBudget | None] = ContextVar("acquisition_job", default=None)
++        self._offline_adapters = dict(offline_adapters or {})
++        # Serialize this manager's candidate bundle writes only. Cross-process
++        # atomic publication remains OD-04 work.
++        self._candidate_lock = RLock()
++
++    @contextmanager
++    def _job_scope(self) -> Iterator[RequestBudget]:
++        active = self._job.get()
++        if active is not None:
++            yield active
++            return
++        budget = RequestBudget(self.limits, self._acquisition_clock, self._acquisition_sleep)
++        budget.remaining()
++        token = self._job.set(budget)
++        try:
++            yield budget
++        finally:
++            self._job.reset(token)
+ 
+     @contextmanager
+     def _source_scope(self, source_key: str) -> Iterator[None]:
+@@ -148,7 +177,13 @@
+         consumer_purpose: SourceOperation | None = None,
+     ) -> SourcePolicyDecision:
+         host = policy_url_host(url)
+-        return self._authorize(source_key, operation, transport, host, consumer_purpose)
++        decision = self._authorize(source_key, operation, transport, host, consumer_purpose)
++        budget = self._job.get()
++        if budget is not None:
++            budget.context.update(source_key=source_key, candidate=safe_url(url),
++                transport=transport.value, policy_revision=decision.policy_revision,
++                policy_id=decision.policy_id)
++        return decision
+ 
+     def _load_cached_artifact_from_root(
+         self,
+@@ -206,7 +241,8 @@
+             attempts = manifest_payload.get("attempts", 0)
+             if type(attempts) is not int or attempts < 0:
+                 return None
+-            actual_checksum = self._hash_content(artifact_path.read_bytes(), SOURCE_REGISTRY[source_key].checksum)
++            cached_payload = artifact_path.read_bytes()
++            actual_checksum = self._hash_content(cached_payload, SOURCE_REGISTRY[source_key].checksum)
+             if actual_checksum != checksum:
+                 return None
+         except (OSError, ValueError, TypeError, RuntimeError):
+@@ -221,6 +257,8 @@
+             used_url=str(manifest_payload.get("used_url", "")),
+             attempts=attempts,
+             policy_decisions=(decision,),
++            source_mode="source_cached_raw" if root == self.raw_root else "source_seed_imported",
++            sha256=hashlib.sha256(cached_payload).hexdigest(),
+         )
+ 
+     def _load_cached_artifact(self, source_key: str, as_of: date) -> DownloadArtifact | None:
+@@ -390,117 +428,118 @@
+         return hashlib.sha256(data).hexdigest()
+ 
+     def _request_once(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0) -> FetchResult:
++        validate_request_options(timeout_seconds, None)
+         self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
+-        response = client.get(url, timeout=timeout_seconds)
+-        if response.status_code in {403, 429}:
+-            raise DownloadError(
+-                f"Blocked by remote source ({response.status_code}): {url}",
+-                status_code=response.status_code,
+-                stage="request",
+-            )
+-        if response.status_code >= 400:
+-            raise DownloadError(
+-                f"HTTP {response.status_code} for {url}",
+-                status_code=response.status_code,
+-                stage="request",
+-            )
+-        if not response.content:
+-            raise DownloadError(f"Empty payload: {url}", stage="request")
+-        return FetchResult(
+-            payload=response.content,
+-            status_code=response.status_code,
+-            content_type=response.headers.get("content-type", ""),
+-            transport="httpx",
+-            request_attempts=1,
+-        )
+-
+-    def _request(
+-        self,
+-        client: httpx.Client,
+-        url: str,
+-        *,
+-        timeout_seconds: float = 60.0,
+-        max_attempts: int = 5,
+-    ) -> FetchResult:
++        with self._job_scope() as budget:
++            # Only the explicit in-process MockTransport is enabled. No DNS lookup,
++            # system proxy or provider connection can run on a normal client.
++            if isinstance(client, HTTPX_CLIENT_TYPE):
++                if not isinstance(client._transport, httpx.MockTransport):
++                    raise failure("BLOCKED_EXTERNAL_EGRESS")
++                # MockTransport clients may still have environment proxy mounts.
++                if client._transport_for_url(httpx.URL(url)) is not client._transport:
++                    raise failure("BLOCKED_EXTERNAL_EGRESS")
++                timeout = min(timeout_seconds, budget.consume())
++                with client.stream("GET", url, timeout=timeout, follow_redirects=False) as response:
++                    check_status(response.status_code, response.headers)
++                    if str(response.url) != str(httpx.URL(url)):
++                        raise failure("REDIRECT_NOT_ALLOWED")
++                    if response.headers.get("content-encoding", "identity").lower() != "identity":
++                        raise failure("ENCODING_UNSUPPORTED")
++                    length = response.headers.get("content-length")
++                    if length is not None and (not length.isdigit() or int(length) > self.limits.body_bytes):
++                        raise failure("BODY_LIMIT_EXCEEDED")
++                    chunks = bytearray()
++                    for chunk in response.iter_bytes():
++                        budget.remaining()
++                        if len(chunks) + len(chunk) > self.limits.body_bytes:
++                            raise failure("BODY_LIMIT_EXCEEDED")
++                        chunks.extend(chunk)
++                    payload = bytes(chunks)
++                    if length is not None and int(length) != len(payload):
++                        raise failure("PARTIAL_PAYLOAD")
++                    content_type, status = response.headers.get("content-type", ""), response.status_code
++            else:
++                # Private callers may explicitly supply a local fake client; the
++                # production factory always constructs an HTTPX Client above.
++                timeout = min(timeout_seconds, budget.consume())
++                response = client.get(url, timeout=timeout)
++                check_status(response.status_code, response.headers)
++                payload, content_type, status = response.content, response.headers.get("content-type", ""), response.status_code
++                if len(payload) > self.limits.body_bytes:
++                    raise failure("BODY_LIMIT_EXCEEDED")
++            budget.remaining()
++            if not payload:
++                raise failure("PAYLOAD_EMPTY")
++            return FetchResult(payload, status, content_type, "httpx", 1, safe_url(url))
++
++    def _request(self, client: httpx.Client, url: str, *, timeout_seconds: float = 60.0,
++                 max_attempts: int = 5) -> FetchResult:
+         self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
+-        attempts = 0
+-        last_error: Exception | None = None
+-        while attempts < max_attempts:
+-            attempts += 1
+-            try:
+-                result = self._request_once(client, url, timeout_seconds=timeout_seconds)
+-                return FetchResult(
+-                    payload=result.payload,
+-                    status_code=result.status_code,
+-                    content_type=result.content_type,
+-                    transport=result.transport,
+-                    request_attempts=attempts,
+-                )
+-            except (httpx.HTTPError, DownloadError) as exc:
+-                last_error = exc
+-                if attempts >= max_attempts:
++        if type(max_attempts) is not int or max_attempts <= 0:
++            raise failure("INVALID_ACQUISITION_LIMITS")
++        with self._job_scope() as budget:
++            for index in range(min(max_attempts, self.limits.max_attempts)):
++                try:
++                    return self._request_once(client, url, timeout_seconds=timeout_seconds)
++                except SourcePolicyError:
+                     raise
+-                delay = min(30.0, 2 ** (attempts - 1))
+-                time.sleep(delay)
+-        raise DownloadError(f"Request failed for {url}: {last_error}", stage="request")
++                except DownloadError as exc:
++                    if exc.terminal or exc.reason_code != "HTTP_TRANSIENT":
++                        raise
++                    if index + 1 >= max_attempts:
++                        raise
++                except httpx.HTTPError as exc:
++                    if self._is_tls_error(exc):
++                        raise failure("TLS_INVALID") from exc
++                    if not isinstance(exc, (httpx.TimeoutException, httpx.NetworkError)):
++                        raise failure("INTERNAL_ERROR") from exc
++                    if index + 1 >= max_attempts:
++                        raise failure("HTTP_TRANSIENT", terminal=False) from exc
++                budget.backoff()
++            raise failure("ATTEMPT_BUDGET_EXCEEDED")
+ 
+     def _bootstrap_nse_session(self, client: httpx.Client) -> None:
+-        # NSE APIs require a warmed session with cookies set by the landing page.
+-        bootstrap_urls = [
+-            "https://www.nseindia.com",
+-            "https://www.nseindia.com/market-data/live-equity-market",
+-            "https://www.nseindia.com/companies-listing/corporate-filings-actions",
+-        ]
+-        last_error: Exception | None = None
+-        for bootstrap_url in bootstrap_urls:
+-            self._authorize_url(self._policy_source.get(), bootstrap_url, SourceTransport.HTTPX)
+-            try:
+-                bootstrap = client.get(bootstrap_url, timeout=30.0)
+-                if bootstrap.status_code in {200, 204, 304}:
++        urls = ("https://www.nseindia.com", "https://www.nseindia.com/market-data/live-equity-market",
++                "https://www.nseindia.com/companies-listing/corporate-filings-actions")
++        with self._job_scope():
++            for url in urls:
++                self._authorize_url(self._policy_source.get(), url, SourceTransport.HTTPX)
++                try:
++                    result = self._request(client, url, timeout_seconds=self.limits.request_seconds)
++                    if b"access denied" in result.payload[:1024].lower() or b"captcha" in result.payload[:1024].lower():
++                        raise failure("PAYLOAD_HTML_DENIAL")
+                     return
+-                last_error = DownloadError(
+-                    f"Unexpected NSE bootstrap status {bootstrap.status_code} for {bootstrap_url}"
+-                )
+-            except SourcePolicyError:
+-                raise
+-            except Exception as exc:  # noqa: BLE001
+-                last_error = exc
+-                continue
+-        raise DownloadError(f"Unable to bootstrap NSE session: {last_error}")
+-
+-    def _request_via_urllib(
+-        self,
+-        url: str,
+-        headers: dict[str, str],
+-        *,
+-        timeout_seconds: float = 60.0,
+-    ) -> FetchResult:
+-        self._authorize_url(self._policy_source.get(), url, SourceTransport.URLLIB)
+-        context = ssl.create_default_context()
+-        context.minimum_version = ssl.TLSVersion.TLSv1_2
+-        req = Request(url=url, headers=headers, method="GET")
+-        try:
+-            with urlopen(req, timeout=timeout_seconds, context=context) as response:
+-                payload = bytes(response.read())
+-                content_type = response.headers.get("content-type", "")
+-        except HTTPError as exc:
+-            raise DownloadError(
+-                f"HTTP {exc.code} via urllib for {url}",
+-                status_code=exc.code,
+-                stage="request",
+-            ) from exc
+-        except URLError as exc:
+-            raise DownloadError(f"URL error via urllib for {url}: {exc}", stage="request") from exc
+-
+-        if not payload:
+-            raise DownloadError(f"Empty payload via urllib: {url}", stage="request")
+-        return FetchResult(
+-            payload=payload,
+-            status_code=200,
+-            content_type=content_type,
+-            transport="urllib",
+-            request_attempts=1,
+-        )
++                except SourcePolicyError:
++                    raise
++                except DownloadError as exc:
++                    if exc.terminal:
++                        raise
++            raise failure("HTTP_TRANSIENT", terminal=False)
++
++    def _request_via_urllib(self, url: str, headers: dict[str, str], *, timeout_seconds: float = 60.0) -> FetchResult:
++        return self._offline_adapter(SourceTransport.URLLIB, url, headers, timeout_seconds)
++
++    def _offline_adapter(self, transport: SourceTransport, url: str, headers: dict[str, str], timeout_seconds: float) -> FetchResult:
++        validate_request_options(timeout_seconds, None)
++        self._authorize_url(self._policy_source.get(), url, transport)
++        adapter = self._offline_adapters.get(transport)
++        if adapter is None:
++            raise failure("BLOCKED_EXTERNAL_EGRESS")
++        with self._job_scope() as budget:
++            timeout = min(timeout_seconds, budget.consume())
++            # Never forward session cookies/authorization to another transport.
++            clean = {k: v for k, v in headers.items() if k.lower() not in {"cookie", "authorization", "proxy-authorization"}}
++            result = adapter(url, clean, timeout)
++            budget.remaining()
++            check_status(result.status_code or 0, {})
++            if result.final_url and result.final_url != safe_url(url):
++                raise failure("REDIRECT_NOT_ALLOWED")
++            if len(result.payload) > self.limits.body_bytes:
++                raise failure("BODY_LIMIT_EXCEEDED")
++            if not result.payload:
++                raise failure("PAYLOAD_EMPTY")
++            return replace(result, transport=transport.value.lower(), request_attempts=1, final_url=safe_url(url))
+ 
+     @staticmethod
+     def _attach_cookie_header(
+@@ -516,97 +555,18 @@
+         enriched["Cookie"] = cookie_header
+         return enriched
+ 
+-    def _request_via_curl(
+-        self,
+-        url: str,
+-        headers: dict[str, str],
+-        *,
+-        timeout_seconds: float = 60.0,
++    def _request_via_curl(self, url: str, headers: dict[str, str], *, timeout_seconds: float = 60.0) -> FetchResult:
++        return self._offline_adapter(SourceTransport.CURL, url, headers, timeout_seconds)
++
++    def _request_with_workarounds(
++        self, client: httpx.Client, url: str, request_headers: dict[str, str], *,
++        timeout_seconds: float = 60.0, max_request_attempts: int = 5,
+     ) -> FetchResult:
+-        self._authorize_url(self._policy_source.get(), url, SourceTransport.CURL)
+-        with tempfile.TemporaryDirectory() as temp_dir:
+-            temp_root = Path(temp_dir)
+-            body_path = temp_root / "curl_body.bin"
+-            header_path = temp_root / "curl_headers.txt"
+-            body_output = str(body_path)
+-            header_output = str(header_path)
+-            cmd = [
+-                "curl",
+-                "--http1.1",
+-                "--location",
+-                "--silent",
+-                "--show-error",
+-                "--fail",
+-                "--retry",
+-                "2",
+-                "--retry-all-errors",
+-                "--connect-timeout",
+-                str(int(timeout_seconds)),
+-                "--max-time",
+-                str(int(timeout_seconds)),
+-                "--dump-header",
+-                header_output,
+-                "--output",
+-                body_output,
+-            ]
+-            for name, value in headers.items():
+-                cmd.extend(["-H", f"{name}: {value}"])
+-            cmd.append(url)
+-
+-            try:
+-                completed = subprocess.run(
+-                    cmd,
+-                    capture_output=True,
+-                    text=True,
+-                    check=False,
+-                    timeout=timeout_seconds + 10.0,
+-                )
+-            except subprocess.TimeoutExpired as exc:
+-                raise DownloadError(
+-                    f"curl timeout for {url}",
+-                    stage="request",
+-                ) from exc
+-
+-            if completed.returncode != 0:
+-                message = completed.stderr.strip() or completed.stdout.strip() or f"curl exited {completed.returncode}"
+-                raise DownloadError(
+-                    f"curl failed for {url}: {message}",
+-                    stage="request",
+-                )
+-
+-            payload = body_path.read_bytes()
+-            if not payload:
+-                raise DownloadError(f"Empty payload via curl: {url}", stage="request")
+-
+-            status_code: int | None = None
+-            content_type = ""
+-            for raw_line in header_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+-                line = raw_line.strip()
+-                if line.startswith("HTTP/"):
+-                    parts = line.split()
+-                    if len(parts) >= 2 and parts[1].isdigit():
+-                        status_code = int(parts[1])
+-                elif ":" in line:
+-                    name, value = line.split(":", 1)
+-                    if name.lower().strip() == "content-type":
+-                        content_type = value.strip()
+-
+-            if status_code is not None and status_code >= 400:
+-                raise DownloadError(
+-                    f"HTTP {status_code} via curl for {url}",
+-                    status_code=status_code,
+-                    stage="request",
+-                )
+-
+-            return FetchResult(
+-                payload=payload,
+-                status_code=status_code or 200,
+-                content_type=content_type,
+-                transport="curl",
+-                request_attempts=1,
+-            )
+-
+-    def _request_with_workarounds(
++        with self._job_scope():
++            return self._workarounds_in_job(client, url, request_headers,
++                timeout_seconds=timeout_seconds, max_request_attempts=max_request_attempts)
++
++    def _workarounds_in_job(
+         self,
+         client: httpx.Client,
+         url: str,
+@@ -626,6 +586,8 @@
+         except SourcePolicyError:
+             raise
+         except Exception as exc:  # noqa: BLE001
++            if isinstance(exc, DownloadError) and exc.terminal:
++                raise
+             if not self._is_nse_url(url) or not self._is_retryable_nse_request_error(exc):
+                 raise
+         fallback_headers = self._attach_cookie_header(request_headers, client)
+@@ -639,6 +601,8 @@
+         except SourcePolicyError:
+             raise
+         except Exception as urllib_exc:  # noqa: BLE001
++            if isinstance(urllib_exc, DownloadError) and urllib_exc.terminal:
++                raise
+             if not self._is_retryable_nse_request_error(urllib_exc) and not self._is_tls_error(urllib_exc):
+                 raise
+         self._authorize_url(self._policy_source.get(), url, SourceTransport.CURL)
+@@ -678,20 +642,13 @@
+         return list(dict.fromkeys(candidates))
+ 
+     def _discover_bse_equity_urls(self, as_of: date) -> list[str]:
+-        page_url = "https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3"
+-        self._authorize_url("BSE_EQUITY_BHAVCOPY", page_url, SourceTransport.HTTPX)
+-        base_profile = self._header_profiles()[0]
+-        headers = self._profile_for_url(base_profile, page_url)
+-        try:
+-            with httpx.Client(headers=headers, follow_redirects=True, timeout=30.0) as client:
+-                self._authorize_url("BSE_EQUITY_BHAVCOPY", page_url, SourceTransport.HTTPX)
+-                response = client.get(page_url)
+-                response.raise_for_status()
+-        except SourcePolicyError:
+-            raise
+-        except Exception:
+-            return []
+-        return self._extract_bse_equity_urls(response.text, as_of)
++        url = "https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx?expandable=3"
++        self._authorize_url("BSE_EQUITY_BHAVCOPY", url, SourceTransport.HTTPX)
++        headers = self._profile_for_url(self._header_profiles()[0], url)
++        with self._job_scope(), self._source_scope("BSE_EQUITY_BHAVCOPY"):
++            with httpx.Client(headers=headers, follow_redirects=False, trust_env=False) as client:
++                result = self._request(client, url)
++            return self._extract_bse_equity_urls(result.payload.decode("utf-8", errors="strict"), as_of)
+ 
+     def _discover_nse_fo_urls(self, as_of: date) -> list[str]:
+         api_url = "https://www.nseindia.com/api/daily-reports?key=FO"
+@@ -699,7 +656,7 @@
+         base_profile = self._header_profiles()[0]
+         headers = self._profile_for_url(base_profile, api_url)
+         try:
+-            with self._source_scope("NSE_FO_BHAVCOPY"), httpx.Client(headers=headers, follow_redirects=True) as client:
++            with self._source_scope("NSE_FO_BHAVCOPY"), httpx.Client(headers=headers, follow_redirects=False, trust_env=False) as client:
+                 self._bootstrap_nse_session(client)
+                 response = self._request_with_workarounds(
+                     client,
+@@ -710,7 +667,8 @@
+         except SourcePolicyError:
+             raise
+         except Exception:
+-            return []
++            # Provider/resource failures must never disappear into discovery fallback.
++            raise
+ 
+         try:
+             payload = json.loads(response.payload.decode("utf-8", errors="ignore"))
+@@ -839,57 +797,9 @@
+         )
+ 
+     @staticmethod
+-    def _validate_payload(source_key: str, payload: bytes, *, as_of: date | None = None) -> None:
+-        if source_key == "BSE_EQUITY_BHAVCOPY":
+-            if payload.startswith(b"PK\x03\x04"):
+-                DownloadManager._validate_bse_equity_zip_payload(payload, as_of)
+-                return
+-            text = payload.decode("utf-8", errors="ignore").strip()
+-            if not text:
+-                raise DownloadError(f"Empty payload for {source_key}", stage="validation")
+-            header = text.splitlines()[0] if text.splitlines() else ""
+-            DownloadManager._validate_csv_header(
+-                header,
+-                ("ISIN", "ISIN_CODE", "SC_CODE", "TckrSymb"),
+-                source_key=source_key,
+-            )
+-            return
+-
+-        if source_key == "NSE_FO_BHAVCOPY":
+-            if payload.startswith(b"PK\x03\x04"):
+-                DownloadManager._validate_nse_fo_zip_payload(payload)
+-                return
+-            text = payload.decode("utf-8", errors="ignore").strip()
+-            if not text:
+-                raise DownloadError(f"Empty payload for {source_key}", stage="validation")
+-            header = text.splitlines()[0] if text.splitlines() else ""
+-            DownloadManager._validate_csv_header(
+-                header,
+-                ("FH_INSTRUMENT", "INSTRUMENT", "FH_SYMBOL", "SYMBOL"),
+-                source_key=source_key,
+-            )
+-            return
+-
+-        text = payload.decode("utf-8", errors="ignore").strip()
+-        if not text:
+-            raise DownloadError(f"Empty payload for {source_key}", stage="validation")
+-
+-        json_sources = {
+-            "NSE_CORPORATE_ACTIONS",
+-            "BSE_CORPORATE_ACTIONS",
+-            "NSE_FII_DII",
+-            "INDIA_VIX",
+-        }
+-        if source_key in json_sources:
+-            try:
+-                parsed = json.loads(text)
+-            except Exception as exc:  # noqa: BLE001
+-                raise DownloadError(f"Non-JSON payload for {source_key}", stage="validation") from exc
+-
+-            if source_key == "NSE_CORPORATE_ACTIONS" and isinstance(parsed, dict) and str(
+-                parsed.get("message", "")
+-            ).lower().startswith("missing index"):
+-                raise DownloadError("NSE corporate actions payload indicates missing index", stage="validation")
++    def _validate_payload(source_key: str, payload: bytes, *, as_of: date | None = None,
++                          limits: AcquisitionLimits | None = None, content_type: str = "") -> PayloadValidation:
++        return validate_payload(source_key, payload, as_of, limits or load_limits(), content_type)
+ 
+     def _fetch_candidate(
+         self,
+@@ -903,12 +813,15 @@
+     ) -> FetchResult:
+         self._authorize_url(source_key, url, SourceTransport.HTTPX)
+         request_headers = self._profile_for_url(profile, url)
+-        with self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=True) as client:
++        with self._job_scope(), self._source_scope(source_key), httpx.Client(headers=request_headers, follow_redirects=False, trust_env=False) as client:
+             if self._is_nse_url(url):
+                 try:
+                     self._bootstrap_nse_session(client)
+                 except SourcePolicyError:
+                     raise
++                except DownloadError as exc:
++                    if exc.terminal:
++                        raise
+                 except Exception:  # noqa: BLE001
+                     pass
+             result = self._request_with_workarounds(
+@@ -918,10 +831,9 @@
+                 timeout_seconds=request_timeout_seconds,
+                 max_request_attempts=max_request_attempts,
+             )
+-        self._validate_payload(source_key, result.payload, as_of=as_of)
+         return result
+ 
+-    def probe_source_candidates(
++    def _probe_in_job(
+         self,
+         source_key: str,
+         as_of: date,
+@@ -971,15 +883,17 @@
+                         request_timeout_seconds=request_timeout_seconds,
+                         max_request_attempts=max_request_attempts,
+                     )
++                    validation = self._validate_payload(source_key, result.payload, as_of=as_of,
++                                                        limits=self.limits, content_type=result.content_type)
+                     last_status_code = result.status_code
+                     policy_decision = self._authorize_url(source_key, url, SourceTransport(result.transport.upper()))
+                     last_content_type = result.content_type
+                     last_bytes = len(result.payload)
+-                    last_preview = result.payload[:220].decode("utf-8", errors="ignore").replace("\n", " ")
++                    last_preview = ""  # Bodies may contain provider/session secrets.
+                     last_transport = result.transport
+                     last_request_attempts = result.request_attempts
+                     elapsed_seconds = time.perf_counter() - started
+-                    validated = True
++                    validated = validation is not None and validation.state == "PAYLOAD_STRUCTURALLY_VALID"
+                     last_error = None
+                     last_validation_error = None
+                     last_failure_stage = None
+@@ -987,6 +901,8 @@
+                 except SourcePolicyError:
+                     raise
+                 except Exception as exc:  # noqa: BLE001
++                    if isinstance(exc, DownloadError) and exc.terminal:
++                        raise
+                     elapsed_seconds = time.perf_counter() - started
+                     last_error = str(exc)
+                     last_preview = ""
+@@ -1003,7 +919,7 @@
+                 SourceProbeResult(
+                     source_key=source_key,
+                     as_of=as_of,
+-                    url=url,
++                    url=safe_url(url),
+                     role=role,
+                     validated=validated,
+                     status_code=last_status_code,
+@@ -1019,11 +935,41 @@
+                     validation_error=last_validation_error,
+                     body_preview=last_preview,
+                     policy_decisions=() if policy_decision is None else (policy_decision,),
++                    acquisition_state="PAYLOAD_STRUCTURALLY_VALID" if validated else "HTTP_RECEIVED",
+                 )
+             )
+         return results
+ 
+-    def download(
++    def probe_source_candidates(self, source_key: str, as_of: date, *, limit: int | None = None,
++                                profiles: list[dict[str, str]] | None = None,
++                                request_timeout_seconds: float = 15.0, max_request_attempts: int = 5) -> list[SourceProbeResult]:
++        validate_request_options(request_timeout_seconds, max_request_attempts)
++        with self._job_scope() as budget:
++            try:
++                return self._probe_in_job(source_key, as_of, limit=limit, profiles=profiles,
++                                         request_timeout_seconds=request_timeout_seconds, max_request_attempts=max_request_attempts)
++            except DownloadError as exc:
++                exc.context.update(budget.context, source_key=source_key, requested_date=as_of.isoformat(),
++                    purpose="probe", actual_attempts=budget.attempts, max_attempts=budget.limits.max_attempts)
++                raise
++
++    def download(self, source_key: str, as_of: date, *, request_timeout_seconds: float | None = None,
++                 max_request_attempts: int | None = None, use_cache: bool = True,
++                 consumer_purpose: SourceOperation | None = None, cache_only: bool = False) -> DownloadArtifact:
++        validate_request_options(request_timeout_seconds, max_request_attempts)
++        with self._job_scope() as budget:
++            try:
++                return self._download_in_job(source_key, as_of, request_timeout_seconds=request_timeout_seconds,
++                    max_request_attempts=max_request_attempts, use_cache=use_cache,
++                    consumer_purpose=consumer_purpose, cache_only=cache_only)
++            except DownloadError as exc:
++                exc.context.update(budget.context, source_key=source_key, requested_date=as_of.isoformat(),
++                    purpose=consumer_purpose.value if consumer_purpose else "raw-acquisition",
++                    actual_attempts=budget.attempts, max_attempts=budget.limits.max_attempts,
++                    source_era=resolve_era(source_key, as_of).name if source_key in SOURCE_REGISTRY else "unknown")
++                raise
++
++    def _download_in_job(
+         self,
+         source_key: str,
+         as_of: date,
+@@ -1032,6 +978,7 @@
+         max_request_attempts: int | None = None,
+         use_cache: bool = True,
+         consumer_purpose: SourceOperation | None = None,
++        cache_only: bool = False,
+     ) -> DownloadArtifact:
+         if source_key not in SOURCE_REGISTRY:
+             self._authorize(source_key, SourceOperation.READ_CACHED, SourceTransport.CACHE)
+@@ -1044,6 +991,8 @@
+             if cached is not None:
+                 DOWNLOAD_COUNTER.labels(source=source_key, status="cached").inc()
+                 return replace(cached, policy_decisions=(cache_decision, *cached.policy_decisions))
++        if cache_only:
++            raise failure("CACHE_MISS")
+         primary_url = self._render_url(source_key, as_of)
+         self._authorize_url(source_key, primary_url, SourceTransport.HTTPX, consumer_purpose=consumer_purpose)
+         self._authorize_url(source_key, primary_url, SourceTransport.HTTPX, SourceOperation.STORE_RAW, consumer_purpose)
+@@ -1066,9 +1015,11 @@
+                             as_of,
+                             url=url,
+                             profile=profile,
+-                            request_timeout_seconds=request_timeout_seconds or 60.0,
+-                            max_request_attempts=max_request_attempts or 5,
++                            request_timeout_seconds=self.limits.request_seconds if request_timeout_seconds is None else request_timeout_seconds,
++                            max_request_attempts=self.limits.max_attempts if max_request_attempts is None else max_request_attempts,
+                         )
++                        validation = self._validate_payload(source_key, result.payload, as_of=as_of,
++                                                            limits=self.limits, content_type=result.content_type)
+                         payload = result.payload
+                         used_url = url
+                         if idx > 0:
+@@ -1077,6 +1028,8 @@
+                     except SourcePolicyError:
+                         raise
+                     except Exception as exc:  # noqa: BLE001
++                        if isinstance(exc, DownloadError) and exc.terminal:
++                            raise
+                         last_error = exc
+                         consecutive_failures += 1
+                         if self._is_nse_url(url) and self._is_tls_error(exc):
+@@ -1109,67 +1062,84 @@
+                 AlertEvent(
+                     severity="WARN",
+                     title="Source Failover Triggered",
+-                    message=f"{source_key} succeeded after failover in {attempts} attempts via {used_url}",
++                    message=f"{source_key} succeeded after failover in {attempts} attempts via {safe_url(used_url)}",
+                     source="download_manager",
+                     created_at=datetime.now(UTC),
+                 )
+             )
+-        fetch_decision = self._authorize_url(
+-            source_key, used_url, SourceTransport(result.transport.upper()), consumer_purpose=consumer_purpose,
+-        )
+-        store_decision = self._authorize_url(
+-            source_key, used_url, SourceTransport(result.transport.upper()), SourceOperation.STORE_RAW, consumer_purpose,
+-        )
+-        DOWNLOAD_COUNTER.labels(source=source_key, status="success").inc()
+-
+-        digest = self._hash_content(payload, source.checksum)
+-        out_dir = self.raw_root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
+-        out_dir.mkdir(parents=True, exist_ok=True)
+-
+-        suffix = ".bin"
+-        if used_url.endswith(".zip"):
+-            suffix = ".zip"
+-        elif used_url.endswith(".csv"):
+-            suffix = ".csv"
+-        elif used_url.endswith(".json"):
+-            suffix = ".json"
+-        elif used_url.endswith(".txt"):
+-            suffix = ".txt"
+-
+-        artifact_stem = f"{as_of.strftime('%Y%m%d')}__{digest[:12]}"
+-        output = out_dir / f"{artifact_stem}{suffix}"
+-        if not output.exists():
+-            output.write_bytes(payload)
+-
+-        manifest_payload = {
+-            "source_key": source_key,
+-            "as_of": as_of.isoformat(),
+-            "checksum": digest,
+-            "storage_mode": "immutable_versioned",
+-            "artifact_path": str(output),
+-            "bytes_downloaded": len(payload),
+-            "used_url": used_url,
+-            "attempts": attempts,
+-            "downloaded_at": datetime.now(UTC).isoformat(),
+-            "policy_decisions": [d.model_dump(mode="json") for d in (fetch_decision, store_decision)],
+-        }
+-        manifest_path = out_dir / f"{artifact_stem}.manifest.json"
+-        if not manifest_path.exists():
+-            manifest_path.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
+-
+-        latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
+-        latest_pointer.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
+-        return DownloadArtifact(
+-            source_key=source_key,
+-            as_of=as_of,
+-            path=output,
+-            manifest_path=manifest_path,
+-            checksum=digest,
+-            bytes_downloaded=len(payload),
+-            used_url=used_url,
+-            attempts=attempts,
+-            policy_decisions=(fetch_decision, store_decision),
+-        )
++        with self._candidate_lock:
++            fetch_decision = self._authorize_url(
++                source_key, used_url, SourceTransport(result.transport.upper()), consumer_purpose=consumer_purpose,
++            )
++            store_decision = self._authorize_url(
++                source_key, used_url, SourceTransport(result.transport.upper()), SourceOperation.STORE_RAW, consumer_purpose,
++            )
++            active_budget = self._job.get()
++            assert active_budget is not None
++            active_budget.remaining()
++            DOWNLOAD_COUNTER.labels(source=source_key, status="captured").inc()
++
++            digest = self._hash_content(payload, source.checksum)
++            out_dir = self.raw_root / source_key.lower() / f"year={as_of.year:04d}" / f"month={as_of.month:02d}"
++            out_dir.mkdir(parents=True, exist_ok=True)
++
++            suffix = ".bin"
++            if used_url.endswith(".zip"):
++                suffix = ".zip"
++            elif used_url.endswith(".csv"):
++                suffix = ".csv"
++            elif used_url.endswith(".json"):
++                suffix = ".json"
++            elif used_url.endswith(".txt"):
++                suffix = ".txt"
++
++            artifact_stem = f"{as_of.strftime('%Y%m%d')}__{digest[:12]}"
++            output = out_dir / f"{artifact_stem}{suffix}"
++            if not output.exists():
++                output.write_bytes(payload)
++
++            manifest_payload = {
++                "source_key": source_key,
++                "as_of": as_of.isoformat(),
++                "checksum": digest,
++                "storage_mode": "immutable_versioned",
++                "artifact_path": str(output),
++                "bytes_downloaded": len(payload),
++                "used_url": safe_url(used_url),
++                "attempts": attempts,
++                "downloaded_at": datetime.now(UTC).isoformat(),
++                "policy_decisions": [d.model_dump(mode="json") for d in (fetch_decision, store_decision)],
++                "acquisition_evidence": {
++                    "schema_version": "acquisition-evidence/v1", "sha256": hashlib.sha256(payload).hexdigest(),
++                    "state": "HTTP_RECEIVED" if validation is None else validation.state,
++                    "parser_schema": "mock-unverified" if validation is None else validation.schema,
++                    "source_era": resolve_era(source_key, as_of).name,
++                    "original_url": safe_url(used_url), "final_url": result.final_url or safe_url(used_url),
++                    "transport": result.transport, "http_status": result.status_code,
++                    "content_type": result.content_type, "actual_attempts": active_budget.attempts,
++                    "source_mode": "source_unverified", "external_egress": "BLOCKED_EXTERNAL_EGRESS",
++                    "execution_mode": "OFFLINE_SYNTHETIC_TEST_ONLY",
++                },
++            }
++            manifest_path = out_dir / f"{artifact_stem}.manifest.json"
++            if not manifest_path.exists():
++                manifest_path.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
++
++            latest_pointer = out_dir / f"{as_of.strftime('%Y%m%d')}.latest.json"
++            latest_pointer.write_text(json.dumps(manifest_payload, indent=2), encoding="utf-8")
++            return DownloadArtifact(
++                source_key=source_key,
++                as_of=as_of,
++                path=output,
++                manifest_path=manifest_path,
++                checksum=digest,
++                bytes_downloaded=len(payload),
++                used_url=safe_url(used_url),
++                attempts=attempts,
++                policy_decisions=(fetch_decision, store_decision),
++                source_mode="source_unverified", sha256=hashlib.sha256(payload).hexdigest(),
++                acquisition_state="HTTP_RECEIVED" if validation is None else validation.state,
++            )
+ 
+     def fetch_bse_stockreach_graph(
+         self,
+@@ -1197,7 +1167,7 @@
+         for base in base_urls:
+             url = f"{base}?{query}"
+             try:
+-                with httpx.Client(headers=headers, follow_redirects=True) as client:
++                with httpx.Client(headers=headers, follow_redirects=False, trust_env=False) as client:
+                     result = self._request(client, url)
+                     self._validate_payload("BSE_CORPORATE_ACTIONS", result.payload)
+                 parsed = json.loads(result.payload.decode("utf-8", errors="ignore"))
+--- a/tests/conftest.py
++++ b/tests/conftest.py
+@@ -1,70 +1,89 @@
+-from __future__ import annotations
+-
+-from pathlib import Path
+-
+-import pytest
+-from sqlalchemy import create_engine
+-from sqlalchemy.orm import Session, sessionmaker
+-
+-from omegadata.db.base import Base
+-
+-
+-@pytest.fixture()
+-def synthetic_source_policy_provider():
+-    """Explicit SYNTHETIC_TEST_ONLY permission, never installed as runtime policy."""
+-    from datetime import UTC, datetime
+-    from urllib.parse import urlsplit
+-
+-    from omegadata.track_a.source_registry import SOURCE_REGISTRY
+-    from omegadata.track_a.source_rights import (
+-        SourceOperation,
+-        SourcePolicy,
+-        SourcePolicyRegister,
+-        SourceTransport,
+-    )
+-
+-    policies = []
+-    for key, source in SOURCE_REGISTRY.items():
+-        hosts = {urlsplit(era.url_pattern).hostname for era in source.eras}
+-        hosts.update(urlsplit(url).hostname for url in source.failover_url_patterns)
+-        hosts.update({"www.nseindia.com", "example.invalid"})
+-        policy = SourcePolicy(
+-            schema_version="source-policy/v1",
+-            source_key=key,
+-            policy_id="SYNTHETIC_TEST_ONLY-" + key,
+-            policy_revision=1,
+-            status="APPROVED",
+-            created_at=datetime(2020, 1, 1, tzinfo=UTC),
+-            change_reason="SYNTHETIC_TEST_ONLY: mock transports only",
+-            revision_hash="0" * 64,
+-            source_entity="SYNTHETIC_TEST_ONLY",
+-            source_terms_url="https://example.invalid/terms",
+-            terms_sha256="a" * 64,
+-            terms_retrieved_at=datetime(2020, 1, 1, tzinfo=UTC),
+-            approval_evidence_ref="SYNTHETIC_TEST_ONLY/mock-permission",
+-            approved_by="SYNTHETIC_TEST_ONLY",
+-            approved_at=datetime(2020, 1, 1, tzinfo=UTC),
+-            valid_from=datetime(2020, 1, 1, tzinfo=UTC),
+-            valid_until=datetime(2100, 1, 1, tzinfo=UTC),
+-            permitted_operations=tuple(SourceOperation),
+-            permitted_transports=tuple(t for t in SourceTransport if t != SourceTransport.BROWSER),
+-            allowed_hosts=tuple(sorted(h for h in hosts if h)),
+-        )
+-        policies.append(policy.model_copy(update={"revision_hash": policy.canonical_hash()}))
+-    register = SourcePolicyRegister(schema_version="source-policy/v1", policies=tuple(policies))
+-    return lambda: register
+-
+-
+-@pytest.fixture()
+-def db_session(tmp_path: Path) -> Session:
+-    db_path = tmp_path / "test.db"
+-    engine = create_engine(f"sqlite:///{db_path}")
+-    Base.metadata.create_all(bind=engine)
+-    Local = sessionmaker(bind=engine, autoflush=True, autocommit=False)
+-    session = Local()
+-    try:
+-        yield session
+-        session.commit()
+-    finally:
+-        session.close()
+-        engine.dispose()
++from __future__ import annotations
++
++from pathlib import Path
++
++import pytest
++from sqlalchemy import create_engine
++from sqlalchemy.orm import Session, sessionmaker
++
++from omegadata.db.base import Base
++
++
++@pytest.fixture()
++def synthetic_equity_zip():
++    """SYNTHETIC_TEST_ONLY modern NSE mapping, not official source evidence."""
++    import io
++    import zipfile
++
++    def make(day):
++        buffer = io.BytesIO()
++        with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as zf:
++            zf.writestr(
++                f"BhavCopy_NSE_CM_0_0_0_{day:%Y%m%d}_F_0000.csv",
++                "TradDt,BizDt,ISIN,TckrSymb,SctySrs,OpnPric,HghPric,LwPric,ClsPric,TtlTradgVol\n"
++                f"{day.isoformat()},{day.isoformat()},TEST00000001,SYNTHETIC_TEST_ONLY,EQ,10,12,9,11,0\n",
++            )
++        return buffer.getvalue()
++
++    return make
++
++
++@pytest.fixture()
++def synthetic_source_policy_provider():
++    """Explicit SYNTHETIC_TEST_ONLY permission, never installed as runtime policy."""
++    from datetime import UTC, datetime
++    from urllib.parse import urlsplit
++
++    from omegadata.track_a.source_registry import SOURCE_REGISTRY
++    from omegadata.track_a.source_rights import (
++        SourceOperation,
++        SourcePolicy,
++        SourcePolicyRegister,
++        SourceTransport,
++    )
++
++    policies = []
++    for key, source in SOURCE_REGISTRY.items():
++        hosts = {urlsplit(era.url_pattern).hostname for era in source.eras}
++        hosts.update(urlsplit(url).hostname for url in source.failover_url_patterns)
++        hosts.update({"www.nseindia.com", "example.invalid"})
++        policy = SourcePolicy(
++            schema_version="source-policy/v1",
++            source_key=key,
++            policy_id="SYNTHETIC_TEST_ONLY-" + key,
++            policy_revision=1,
++            status="APPROVED",
++            created_at=datetime(2020, 1, 1, tzinfo=UTC),
++            change_reason="SYNTHETIC_TEST_ONLY: mock transports only",
++            revision_hash="0" * 64,
++            source_entity="SYNTHETIC_TEST_ONLY",
++            source_terms_url="https://example.invalid/terms",
++            terms_sha256="a" * 64,
++            terms_retrieved_at=datetime(2020, 1, 1, tzinfo=UTC),
++            approval_evidence_ref="SYNTHETIC_TEST_ONLY/mock-permission",
++            approved_by="SYNTHETIC_TEST_ONLY",
++            approved_at=datetime(2020, 1, 1, tzinfo=UTC),
++            valid_from=datetime(2020, 1, 1, tzinfo=UTC),
++            valid_until=datetime(2100, 1, 1, tzinfo=UTC),
++            permitted_operations=tuple(SourceOperation),
++            permitted_transports=tuple(t for t in SourceTransport if t != SourceTransport.BROWSER),
++            allowed_hosts=tuple(sorted(h for h in hosts if h)),
++        )
++        policies.append(policy.model_copy(update={"revision_hash": policy.canonical_hash()}))
++    register = SourcePolicyRegister(schema_version="source-policy/v1", policies=tuple(policies))
++    return lambda: register
++
++
++@pytest.fixture()
++def db_session(tmp_path: Path) -> Session:
++    db_path = tmp_path / "test.db"
++    engine = create_engine(f"sqlite:///{db_path}")
++    Base.metadata.create_all(bind=engine)
++    Local = sessionmaker(bind=engine, autoflush=True, autocommit=False)
++    session = Local()
++    try:
++        yield session
++        session.commit()
++    finally:
++        session.close()
++        engine.dispose()
+--- a/tests/unit/test_od01_source_rights.py
++++ b/tests/unit/test_od01_source_rights.py
+@@ -434,16 +434,16 @@
+ 
+ 
+ def test_allowed_fake_probe_preserves_policy_attribution(
+-    synthetic_source_policy_provider, monkeypatch
++    synthetic_source_policy_provider, monkeypatch, synthetic_equity_zip
+ ) -> None:
+     manager = DownloadManager(
+         policy_provider=synthetic_source_policy_provider, decision_clock=lambda: NOW
+     )
+     fake = Mock(
+-        return_value=downloader.FetchResult(b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)
++        return_value=downloader.FetchResult(synthetic_equity_zip(AS_OF), 200, "application/zip", "httpx", 1)
+     )
+     monkeypatch.setattr(manager, "_fetch_candidate", fake)
+-    results = manager.probe_source_candidates("MOSPI", AS_OF, limit=1)
++    results = manager.probe_source_candidates(KEY, AS_OF, limit=1)
+     assert len(results) == 1 and results[0].validated
+     assert results[0].policy_decisions[0].policy_id.startswith("SYNTHETIC_TEST_ONLY")
+     assert fake.call_count == 1
+--- a/tests/unit/test_od01r_rights_hardening.py
++++ b/tests/unit/test_od01r_rights_hardening.py
+@@ -360,7 +360,7 @@
+         if "-o" in command:
+             Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+             Path(command[command.index("-D") + 1]).write_text("HTTP/1.1 200 OK\nContent-Type: text/plain\n")
+-        elif revoke_after_bootstrap:
++        if revoke_after_bootstrap and command[-1] == "https://www.nseindia.com/":
+             item = updated(active.policies[0], status=PolicyStatus.REVOKED,
+                            revoked_at=NOW, revocation_reason="SYNTHETIC_TEST_ONLY")
+             active = registry(item)
+@@ -370,10 +370,10 @@
+     monkeypatch.setattr(module.subprocess, "run", fake_run)
+     if revoke_after_bootstrap:
+         with pytest.raises(SourcePolicyError, match="POLICY_REVOKED"):
+-            module._curl_probe(source_key=KEY, url="https://example.invalid/file", timeout_seconds=1, bootstrap_nse=True)
++            module._curl_probe(source_key=KEY, url="https://example.invalid/file", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)
+         assert len(calls) == 1
+     else:
+-        status, _, payload, _ = module._curl_probe(source_key=KEY, url="https://example.invalid/file", timeout_seconds=1, bootstrap_nse=True)
++        status, _, payload, _ = module._curl_probe(source_key=KEY, url="https://example.invalid/file", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)
+         assert status == 200 and payload == b"SYNTHETIC_TEST_ONLY" and len(calls) == 2
+ 
+ 
+--- /dev/null
++++ b/tests/unit/test_od02_acquisition.py
+@@ -0,0 +1,718 @@
++"""SYNTHETIC_TEST_ONLY acquisition fixtures; no provider traffic or official truth claim."""
++
++from __future__ import annotations
++
++import hashlib
++import io
++import json
++import socket
++import zipfile
++from concurrent.futures import ThreadPoolExecutor
++from dataclasses import replace
++from datetime import date, timedelta
++from importlib.util import module_from_spec, spec_from_file_location
++from pathlib import Path
++from types import SimpleNamespace
++from unittest.mock import Mock
++
++import httpx
++import pytest
++
++from omegadata.track_a import download_manager as dm
++from omegadata.track_a.acquisition import RequestBudget, load_limits, validate_payload
++from omegadata.track_a.download_manager import DownloadError, DownloadManager
++from omegadata.track_a.source_rights import SourcePolicyError, SourceTransport
++
++DAY = date(2026, 4, 10)
++KEY = "NSE_EQUITY_BHAVCOPY"
++
++
++def archive(text=None, *, day=DAY, legacy=False, names=None):
++    """Known repository mappings, never an authenticated official archive."""
++    if text is None:
++        text = (
++            "SYMBOL,SERIES,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN,TIMESTAMP\n"
++            f"SYNTHETIC_TEST_ONLY,EQ,10,12,9,11,0,TEST00000001,{day:%d-%b-%Y}\n"
++            if legacy
++            else "TradDt,BizDt,ISIN,TckrSymb,SctySrs,OpnPric,HghPric,LwPric,ClsPric,TtlTradgVol\n"
++            f"{day.isoformat()},{day.isoformat()},TEST00000001,SYNTHETIC_TEST_ONLY,EQ,10,12,9,11,0\n"
++        )
++    output = io.BytesIO()
++    with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as zf:
++        default = (
++            f"cm{day:%d%b%Y}bhav.csv"
++            if legacy
++            else f"BhavCopy_NSE_CM_0_0_0_{day:%Y%m%d}_F_0000.csv"
++        )
++        for name in names or [default]:
++            member = zipfile.ZipInfo(name, date_time=(2020, 1, 1, 0, 0, 0))
++            member.compress_type = zipfile.ZIP_DEFLATED
++            zf.writestr(member, text)
++    return output.getvalue()
++
++
++@pytest.mark.parametrize(
++    "payload,reason",
++    [
++        (b"<html>Access Denied</html>", "PAYLOAD_HTML_DENIAL"),
++        (b"PK\x03\x04truncated", "ARCHIVE_INVALID"),
++        (archive(day=date(2026, 4, 9)), "TRADE_DATE_MISMATCH"),
++        (archive("wrong,header\n1,2\n"), "SCHEMA_UNKNOWN"),
++        (archive(names=["../escape.csv"]), "ZIP_ENTRY_UNSAFE"),
++        (archive(names=[f"{n}.csv" for n in range(20)]), "ARCHIVE_TOO_LARGE"),
++    ],
++)
++def test_t01_t04_t07_invalid_nse_never_validated(payload, reason):
++    with pytest.raises(DownloadError) as exc:
++        DownloadManager._validate_payload(KEY, payload, as_of=DAY)
++    assert getattr(exc.value, "reason_code", None) == reason
++
++
++@pytest.mark.parametrize("legacy,day", [(True, date(2019, 4, 10)), (False, DAY)])
++def test_t05_t06_valid_synthetic_era(legacy, day):
++    payload = archive(day=day, legacy=legacy)
++    DownloadManager._validate_payload(KEY, payload, as_of=day)
++
++
++@pytest.mark.parametrize("key", ["NSE_CORPORATE_ACTIONS", "BSE_CORPORATE_ACTIONS", "INDIA_VIX"])
++def test_t09_json_denial_not_success(key):
++    with pytest.raises(DownloadError) as exc:
++        DownloadManager._validate_payload(
++            key, b'{"message":"missing index or login required"}', as_of=DAY
++        )
++    assert getattr(exc.value, "reason_code", None) == "PAYLOAD_HTML_DENIAL"
++
++
++@pytest.mark.parametrize(
++    "status,reason",
++    [
++        (401, "HTTP_ACCESS_DENIED"),
++        (403, "HTTP_ACCESS_DENIED"),
++        (451, "HTTP_ACCESS_DENIED"),
++        (429, "HTTP_RATE_LIMITED"),
++        (404, "HTTP_NOT_FOUND"),
++    ],
++)
++def test_t10_t13_terminal_status_no_later_candidate(
++    status, reason, synthetic_source_policy_provider, tmp_path, monkeypatch
++):
++    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
++    manager.raw_root = tmp_path / "raw"
++    calls = []
++    real_client = httpx.Client
++
++    def respond(request):
++        calls.append(str(request.url))
++        return httpx.Response(
++            status, headers={"retry-after": "120"}, content=b"SYNTHETIC_TEST_ONLY"
++        )
++
++    monkeypatch.setattr(
++        dm.httpx, "Client", lambda **kw: real_client(transport=httpx.MockTransport(respond), **kw)
++    )
++    monkeypatch.setattr(dm.time, "sleep", lambda *_: None)
++    monkeypatch.setattr(
++        manager,
++        "_candidate_urls",
++        lambda *_: ["https://example.invalid/one", "https://example.invalid/two"],
++    )
++    with pytest.raises(DownloadError) as exc:
++        manager.download("MOSPI", DAY, use_cache=False)
++    assert getattr(exc.value, "reason_code", None) == reason
++    assert len(calls) == 1 and not manager.raw_root.exists()
++
++
++def test_t14_t15_redirect_never_contacts_second_host(synthetic_source_policy_provider, monkeypatch):
++    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
++    calls = []
++    real_client = httpx.Client
++
++    def respond(request):
++        calls.append(str(request.url))
++        if len(calls) == 1:
++            return httpx.Response(302, headers={"location": "https://foreign.invalid/secret"})
++        return httpx.Response(200, content=b"SYNTHETIC_TEST_ONLY")
++
++    monkeypatch.setattr(
++        dm.httpx, "Client", lambda **kw: real_client(transport=httpx.MockTransport(respond), **kw)
++    )
++    with pytest.raises(DownloadError) as exc:
++        manager._fetch_candidate("MOSPI", DAY, url="https://example.invalid/data", profile={})
++    assert getattr(exc.value, "reason_code", None) == "REDIRECT_NOT_ALLOWED"
++    assert calls == ["https://example.invalid/data"]
++
++
++def test_t17_default_external_egress_disabled(synthetic_source_policy_provider, monkeypatch):
++    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
++    contact = Mock(side_effect=AssertionError("No real transport may run"))
++    monkeypatch.setattr(httpx.HTTPTransport, "handle_request", contact)
++    with (
++        httpx.Client(trust_env=False) as client,
++        manager._source_scope(KEY),
++        pytest.raises(DownloadError) as exc,
++    ):
++        manager._request_once(client, "https://example.invalid/file")
++    assert getattr(exc.value, "reason_code", None) == "BLOCKED_EXTERNAL_EGRESS"
++    contact.assert_not_called()
++
++
++@pytest.fixture()
++def offline(synthetic_source_policy_provider, tmp_path, monkeypatch):
++    manager = DownloadManager(
++        policy_provider=synthetic_source_policy_provider, acquisition_sleep=lambda _: None
++    )
++    manager.raw_root, manager.seed_raw_root = tmp_path / "raw", tmp_path / "seed"
++    calls = []
++    real_client = httpx.Client
++
++    def install(responder):
++        def handler(request):
++            calls.append(str(request.url))
++            return responder(request)
++
++        monkeypatch.setattr(
++            dm.httpx,
++            "Client",
++            lambda **kw: real_client(transport=httpx.MockTransport(handler), **kw),
++        )
++
++    monkeypatch.setattr(
++        manager,
++        "_candidate_urls",
++        lambda *_: ["https://example.invalid/one.zip", "https://example.invalid/two.zip"],
++    )
++    return manager, calls, install
++
++
++@pytest.mark.parametrize(
++    "change,reason",
++    [
++        (lambda s: s.replace("HghPric", "OpnPric"), "SCHEMA_UNKNOWN"),
++        (lambda s: s.replace(",12,9,11,0", ",8,9,11,0"), "PARTIAL_PAYLOAD"),
++        (lambda s: s.replace(",10,12,9,11,0", ",NaN,12,9,11,0"), "PARTIAL_PAYLOAD"),
++        (lambda s: s.replace(",10,12,9,11,0", ",-1,12,9,11,0"), "PARTIAL_PAYLOAD"),
++        (lambda s: s.replace(",11,0", ",11,0.5"), "PARTIAL_PAYLOAD"),
++        (lambda s: s + s.splitlines()[1] + "\n", "PARTIAL_PAYLOAD"),
++        (lambda s: s.replace(",EQ,10", ",EQ,extra,10"), "PARTIAL_PAYLOAD"),
++        (lambda s: s.splitlines()[0] + "\n", "PAYLOAD_EMPTY"),
++        (lambda s: s.replace("2026-04-10", "2026-04-09"), "TRADE_DATE_MISMATCH"),
++    ],
++)
++def test_t07_numeric_date_row_and_header_corruption(change, reason):
++    with zipfile.ZipFile(io.BytesIO(archive())) as zf:
++        text = zf.read(zf.namelist()[0]).decode()
++    with pytest.raises(DownloadError, match=reason):
++        validate_payload(KEY, archive(change(text)), DAY, load_limits())
++
++
++def test_t04_t19_expansion_encoding_and_declared_caps():
++    limits = load_limits()
++    for body, overrides, reason in [
++        (archive("x" * 100000), {"compression_ratio": 2}, "ARCHIVE_TOO_LARGE"),
++        (archive(), {"archive_bytes": 10}, "ARCHIVE_TOO_LARGE"),
++        (archive(), {"body_bytes": 10}, "BODY_LIMIT_EXCEEDED"),
++        (archive(b"\xff\xfe"), {}, "ENCODING_UNSUPPORTED"),
++    ]:
++        with pytest.raises(DownloadError, match=reason):
++            validate_payload(KEY, body, DAY, replace(limits, **overrides))
++
++
++@pytest.mark.parametrize("name", ["/absolute.csv", "C:/escape.csv", "nested.zip", "..\\escape.csv"])
++def test_t04_archive_unsafe_members(name):
++    with pytest.raises(DownloadError, match="ZIP_ENTRY_UNSAFE"):
++        validate_payload(KEY, archive(names=[name]), DAY, load_limits())
++
++
++@pytest.mark.parametrize("mime", ["application/json", "image/png", "text/csv"])
++def test_t07_content_type_mismatch(mime):
++    with pytest.raises(DownloadError, match="SCHEMA_UNKNOWN"):
++        validate_payload(KEY, archive(), DAY, load_limits(), mime)
++
++
++@pytest.mark.parametrize("zipped", [False, True])
++def test_t08_bse_synthetic_modern_and_wrong_date(zipped):
++    with zipfile.ZipFile(io.BytesIO(archive())) as zf:
++        csv_body = zf.read(zf.namelist()[0])
++    body = (
++        archive(csv_body, names=[f"BhavCopy_BSE_CM_0_0_0_{DAY:%Y%m%d}_F_0000.csv"])
++        if zipped
++        else csv_body
++    )
++    result = validate_payload("BSE_EQUITY_BHAVCOPY", body, DAY, load_limits())
++    assert result.state == "PAYLOAD_STRUCTURALLY_VALID" and result.rows == 1
++    with pytest.raises(DownloadError, match="TRADE_DATE_MISMATCH"):
++        validate_payload("BSE_EQUITY_BHAVCOPY", body, date(2026, 4, 9), load_limits())
++
++
++@pytest.mark.parametrize(
++    "body",
++    [b"<html>login</html>", b'{"x":1,"x":2}', b'{"ERROR":"missing index"}', b"[]", b"{broken"],
++)
++def test_t09_json_strict_errors(body):
++    with pytest.raises(DownloadError):
++        validate_payload("NSE_CORPORATE_ACTIONS", body, DAY, load_limits())
++
++
++@pytest.mark.parametrize("body", [b'{"data":[{"value":1}]}', b'[{"value":1}]'])
++def test_t09_json_not_financially_verified(body):
++    result = validate_payload("NSE_CORPORATE_ACTIONS", body, DAY, load_limits())
++    assert result.state == "HTTP_RECEIVED"
++
++
++def test_t11_retry_after_and_typed_public_context(offline):
++    manager, calls, install = offline
++    install(lambda _: httpx.Response(429, headers={"retry-after": "120"}))
++    with pytest.raises(DownloadError) as exc:
++        manager.download(KEY, DAY, use_cache=False)
++    assert exc.value.retry_after == "120" and exc.value.terminal
++    assert exc.value.context["source_key"] == KEY
++    assert exc.value.context["requested_date"] == DAY.isoformat()
++    assert exc.value.context["actual_attempts"] == 1
++    assert exc.value.context["transport"] == "HTTPX"
++    assert len(calls) == 1
++
++
++@pytest.mark.parametrize("mode", ["download", "probe", "bootstrap", "discovery"])
++def test_t10_terminal_denial_entire_call_graph(offline, mode):
++    manager, calls, install = offline
++    install(lambda _: httpx.Response(403))
++    with pytest.raises(DownloadError, match="HTTP_ACCESS_DENIED"):
++        if mode == "download":
++            manager.download(KEY, DAY, use_cache=False)
++        elif mode == "probe":
++            manager.probe_source_candidates(KEY, DAY)
++        elif mode == "bootstrap":
++            manager._fetch_candidate(KEY, DAY, url="https://www.nseindia.com/data", profile={})
++        else:
++            manager._discover_bse_equity_urls(DAY)
++    assert len(calls) == 1 and not manager.raw_root.exists()
++
++
++def test_t13_transient_retries_bounded_and_recovers(offline):
++    manager, calls, install = offline
++    sleeps = []
++    manager._acquisition_sleep = sleeps.append
++    install(
++        lambda _: httpx.Response(503) if len(calls) < 3 else httpx.Response(200, content=archive())
++    )
++    artifact = manager.download(KEY, DAY, use_cache=False)
++    assert len(calls) == 3 and sleeps == [0.25, 0.5]
++    manifest = json.loads(artifact.manifest_path.read_text())
++    assert manifest["acquisition_evidence"]["actual_attempts"] == 3
++
++
++def test_t13_attempt_cap_stops_candidates_and_profiles(offline):
++    manager, calls, install = offline
++    manager.limits = replace(load_limits(), max_attempts=3)
++    install(lambda _: httpx.Response(503))
++    with pytest.raises(DownloadError, match="ATTEMPT_BUDGET_EXCEEDED"):
++        manager.download(KEY, DAY, use_cache=False)
++    assert len(calls) == 3 and not manager.raw_root.exists()
++
++
++@pytest.mark.parametrize(
++    "destination",
++    [
++        "https://example.invalid/other",
++        "https://foreign.invalid/other",
++        "http://example.invalid/other",
++        "https://169.254.169.254/latest",
++    ],
++)
++def test_t14_t15_all_redirect_destinations_refused(offline, destination):
++    manager, calls, install = offline
++    install(lambda _: httpx.Response(302, headers={"location": destination}))
++    with pytest.raises(DownloadError, match="REDIRECT_NOT_ALLOWED"):
++        manager.download(KEY, DAY, use_cache=False)
++    assert len(calls) == 1
++
++
++@pytest.mark.parametrize(
++    "url",
++    [
++        "http://example.invalid/file",
++        "https://example.invalid:444/file",
++        "https://user:password@example.invalid/file",
++        "https:///file",
++        "https://127.0.0.1/file",
++        "https://169.254.169.254/file",
++        "https://[::1]/file",
++    ],
++)
++def test_t16_t17_unsafe_destination_before_transport(offline, url):
++    manager, calls, install = offline
++    install(lambda _: httpx.Response(200, content=archive()))
++    with pytest.raises(SourcePolicyError):
++        manager._fetch_candidate(KEY, DAY, url=url, profile={})
++    assert not calls
++
++
++def test_t17_rebinding_and_env_proxy_never_resolved(synthetic_source_policy_provider, monkeypatch):
++    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
++    resolver = Mock(
++        side_effect=[
++            [(socket.AF_INET, socket.SOCK_STREAM, 6, "", ("8.8.8.8", 443))],
++            [(socket.AF_INET, socket.SOCK_STREAM, 6, "", ("127.0.0.1", 443))],
++        ]
++    )
++    monkeypatch.setattr(socket, "getaddrinfo", resolver)
++    monkeypatch.setenv("HTTPS_PROXY", "http://127.0.0.1:1")
++    with (
++        httpx.Client(trust_env=False) as client,
++        manager._source_scope(KEY),
++        pytest.raises(DownloadError, match="BLOCKED_EXTERNAL_EGRESS"),
++    ):
++        manager._request_once(client, "https://example.invalid/file")
++    resolver.assert_not_called()
++
++
++def test_t18_cross_transport_budget_no_cookie_leak(synthetic_source_policy_provider):
++    from omegadata.track_a.download_manager import FetchResult
++
++    seen = []
++
++    def urllib(url, headers, timeout):
++        seen.append(("urllib", headers, timeout))
++        raise httpx.ConnectError("SYNTHETIC_TEST_ONLY transient network error")
++
++    def curl(url, headers, timeout):
++        seen.append(("curl", headers, timeout))
++        return FetchResult(archive(), 200, "application/zip", "curl", 1)
++
++    manager = DownloadManager(
++        policy_provider=synthetic_source_policy_provider,
++        acquisition_limits=replace(load_limits(), max_attempts=3),
++        offline_adapters={SourceTransport.URLLIB: urllib, SourceTransport.CURL: curl},
++        acquisition_sleep=lambda _: None,
++    )
++    fake = Mock()
++    fake.cookies = {"private-session": "SYNTHETIC_TEST_ONLY"}
++    fake.get.side_effect = httpx.ConnectError("SYNTHETIC_TEST_ONLY network error")
++    with manager._source_scope(KEY), manager._job_scope() as budget:
++        result = manager._request_with_workarounds(
++            fake,
++            "https://www.nseindia.com/file",
++            {"Authorization": "SYNTHETIC_TEST_ONLY"},
++            max_request_attempts=1,
++        )
++        assert budget.attempts == 3 and result.transport == "curl"
++    assert [entry[0] for entry in seen] == ["urllib", "curl"]
++    assert all(
++        not any(k.lower() in {"cookie", "authorization"} for k in entry[1]) for entry in seen
++    )
++
++
++@pytest.mark.parametrize("adapter", ["urllib", "curl"])
++def test_t18_default_alternate_transports_disabled(synthetic_source_policy_provider, adapter):
++    manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
++    with manager._source_scope(KEY), pytest.raises(DownloadError, match="BLOCKED_EXTERNAL_EGRESS"):
++        getattr(manager, "_request_via_" + adapter)("https://example.invalid/file", {})
++
++
++def test_t19_deadline_includes_backoff(offline):
++    manager, calls, install = offline
++    clock = [0.0]
++    manager._acquisition_clock = lambda: clock[0]
++    manager._acquisition_sleep = lambda delay: clock.__setitem__(0, clock[0] + delay)
++    manager.limits = replace(load_limits(), total_seconds=0.2)
++    install(lambda _: httpx.Response(503))
++    with pytest.raises(DownloadError, match="TOTAL_DEADLINE_EXCEEDED"):
++        manager.download(KEY, DAY, use_cache=False)
++    assert len(calls) == 1 and not manager.raw_root.exists()
++
++
++@pytest.mark.parametrize(
++    "headers,body,reason",
++    [
++        ({"content-length": "1000000000"}, b"x", "BODY_LIMIT_EXCEEDED"),
++        ({"content-length": "1"}, b"xx", "PARTIAL_PAYLOAD"),
++        ({"content-encoding": "gzip"}, b"x", "ENCODING_UNSUPPORTED"),
++        ({}, b"", "PAYLOAD_EMPTY"),
++    ],
++)
++def test_t19_transport_limits_before_write(offline, headers, body, reason):
++    manager, calls, install = offline
++    install(lambda _: httpx.Response(200, headers=headers, content=body))
++    with pytest.raises(DownloadError, match=reason):
++        manager.download(KEY, DAY, use_cache=False)
++    assert len(calls) == 1 and not manager.raw_root.exists()
++
++
++def test_t19_stream_growth_bounded(offline):
++    manager, calls, install = offline
++    consumed = []
++
++    class Stream(httpx.SyncByteStream):
++        def __iter__(self):
++            for n in range(100):
++                consumed.append(n)
++                yield b"12345678"
++
++    manager.limits = replace(load_limits(), body_bytes=16)
++    install(lambda _: httpx.Response(200, stream=Stream()))
++    with pytest.raises(DownloadError, match="BODY_LIMIT_EXCEEDED"):
++        manager.download(KEY, DAY, use_cache=False)
++    assert consumed == [0, 1, 2] and not manager.raw_root.exists()
++
++
++def test_t20_revoked_after_mock_fetch_no_storage(offline, synthetic_source_policy_provider):
++    from omegadata.track_a.source_rights import SourcePolicyRegister
++
++    manager, calls, install = offline
++    state = [synthetic_source_policy_provider()]
++    manager._policy_provider = lambda: state[0]
++
++    def responder(_):
++        state[0] = SourcePolicyRegister(schema_version="source-policy/v1", policies=())
++        return httpx.Response(200, content=archive())
++
++    install(responder)
++    with pytest.raises(SourcePolicyError):
++        manager.download(KEY, DAY, use_cache=False)
++    assert len(calls) == 1 and not manager.raw_root.exists()
++
++
++def test_t21_cache_only_never_fetches(offline, monkeypatch):
++    manager, calls, install = offline
++    fetch = Mock(side_effect=AssertionError("CACHE_ONLY cannot fetch"))
++    monkeypatch.setattr(manager, "_fetch_candidate", fetch)
++    with pytest.raises(DownloadError, match="CACHE_MISS"):
++        manager.download(KEY, DAY, cache_only=True)
++    fetch.assert_not_called()
++    assert not calls and not manager.raw_root.exists()
++
++
++def test_t22_valid_fetch_cache_hash_and_secret_free_evidence(offline):
++    manager, calls, install = offline
++    body = archive()
++    install(
++        lambda _: httpx.Response(200, headers={"content-type": "application/zip"}, content=body)
++    )
++    artifact = manager.download(KEY, DAY, use_cache=False)
++    cached = manager.download(KEY, DAY, cache_only=True)
++    assert artifact.path.read_bytes() == body == cached.path.read_bytes()
++    assert artifact.sha256 == cached.sha256 == hashlib.sha256(body).hexdigest()
++    assert artifact.source_mode == "source_unverified" and cached.source_mode == "source_cached_raw"
++    assert artifact.acquisition_state == "PAYLOAD_STRUCTURALLY_VALID" and len(calls) == 1
++    evidence = json.loads(artifact.manifest_path.read_text())["acquisition_evidence"]
++    assert (
++        evidence["source_mode"] == "source_unverified"
++        and evidence["external_egress"] == "BLOCKED_EXTERNAL_EGRESS"
++    )
++    assert evidence["parser_schema"] == "equity-udiff/v1" and evidence["sha256"] == artifact.sha256
++
++
++def test_t23_concurrent_dates_repeated_candidate_staging(offline, monkeypatch):
++    manager, calls, install = offline
++    monkeypatch.setattr(
++        manager,
++        "_candidate_urls",
++        lambda _, day: [f"https://example.invalid/{day.isoformat()}.zip"],
++    )
++    install(
++        lambda request: httpx.Response(
++            200, content=archive(day=date.fromisoformat(request.url.path[1:-4]))
++        )
++    )
++
++    def fetch(index):
++        day = DAY + timedelta(days=index % 3)
++        item = manager.download(KEY, day, use_cache=False)
++        return item.path, item.path.read_bytes(), json.loads(item.manifest_path.read_text()), day
++
++    with ThreadPoolExecutor(max_workers=4) as pool:
++        results = list(pool.map(fetch, range(8)))
++    assert len({r[0] for r in results}) == 3
++    assert all(
++        body == archive(day=day) and record["as_of"] == day.isoformat()
++        for _, body, record, day in results
++    )
++    assert all(path.is_relative_to(manager.raw_root) for path, _, _, _ in results)
++
++
++def probe_module():
++    path = Path(__file__).resolve().parents[2] / "scripts/generate_source_probe_report.py"
++    spec = spec_from_file_location("od02_probe", path)
++    module = module_from_spec(spec)
++    spec.loader.exec_module(module)
++    return module
++
++
++@pytest.mark.parametrize(
++    "status,reason",
++    [
++        (403, "HTTP_ACCESS_DENIED"),
++        (429, "HTTP_RATE_LIMITED"),
++        (302, "REDIRECT_NOT_ALLOWED"),
++        (401, "HTTP_ACCESS_DENIED"),
++        (451, "HTTP_ACCESS_DENIED"),
++    ],
++)
++def test_t24_probe_bootstrap_terminal_and_redirect_budget(
++    synthetic_source_policy_provider, monkeypatch, status, reason
++):
++    from omegadata.track_a.source_rights import authorize_source
++
++    module = probe_module()
++    monkeypatch.setattr(
++        module,
++        "authorize_source",
++        lambda request: authorize_source(request, synthetic_source_policy_provider),
++    )
++    calls = []
++
++    def runner(command, **kw):
++        calls.append(command)
++        Path(command[command.index("-D") + 1]).write_text(
++            f"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\nRetry-After: 120\nLocation: https://foreign.invalid/\n"
++        )
++        Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
++        return SimpleNamespace(returncode=0)
++
++    with pytest.raises(DownloadError, match=reason):
++        module._curl_probe(
++            source_key=KEY,
++            url="https://example.invalid/file",
++            timeout_seconds=1,
++            bootstrap_nse=True,
++            offline_runner=runner,
++        )
++    assert len(calls) == 1
++    assert all(flag not in calls[0] for flag in ["-L", "--location", "--retry", "--insecure"])
++
++
++def test_t24_probe_strict_validation_and_shared_budget(
++    synthetic_source_policy_provider, monkeypatch
++):
++    from omegadata.track_a.source_rights import authorize_source
++
++    module = probe_module()
++    monkeypatch.setattr(
++        module,
++        "authorize_source",
++        lambda request: authorize_source(request, synthetic_source_policy_provider),
++    )
++    body = [archive()]
++
++    def runner(command, **kw):
++        Path(command[command.index("-D") + 1]).write_text(
++            "HTTP/1.1 200 OK\nContent-Type: application/zip\n"
++        )
++        Path(command[command.index("-o") + 1]).write_bytes(body[0])
++        return SimpleNamespace(returncode=0)
++
++    budget = RequestBudget(replace(load_limits(), max_attempts=2))
++    result = module._probe_entry(
++        source_key=KEY,
++        as_of=DAY,
++        url="https://example.invalid/file",
++        role="primary",
++        timeout_seconds=1,
++        kind="zip",
++        budget=budget,
++        offline_runner=runner,
++    )
++    assert result["validated"] and result["request_attempts"] == 1 and result["body_preview"] == ""
++    body[0] = b"<html>login</html>"
++    with pytest.raises(DownloadError, match="PAYLOAD_HTML_DENIAL"):
++        module._probe_entry(
++            source_key=KEY,
++            as_of=DAY,
++            url="https://example.invalid/file",
++            role="fallback",
++            timeout_seconds=1,
++            kind="zip",
++            budget=budget,
++            offline_runner=runner,
++        )
++    with pytest.raises(DownloadError, match="ATTEMPT_BUDGET_EXCEEDED"):
++        module._curl_probe(
++            source_key=KEY,
++            url="https://example.invalid/file",
++            timeout_seconds=1,
++            budget=budget,
++            offline_runner=runner,
++        )
++
++
++@pytest.mark.parametrize(
++    "change",
++    [
++        {"max_attempts": 0},
++        {"max_attempts": True},
++        {"total_seconds": float("nan")},
++        {"max_redirects": 1},
++        {"backoff_seconds": (-1,)},
++        {"body_bytes": -1},
++    ],
++)
++def test_t19_configuration_fails_closed(change):
++    with pytest.raises(ValueError):
++        replace(load_limits(), **change)
++
++
++def test_t19_missing_and_malformed_configuration(tmp_path):
++    path = tmp_path / "absent.json"
++    with pytest.raises(DownloadError, match="INVALID_ACQUISITION_LIMITS"):
++        load_limits(path)
++    path.write_text('{"max_attempts":1,"max_attempts":2}')
++    with pytest.raises(DownloadError, match="INVALID_ACQUISITION_LIMITS"):
++        load_limits(path)
++
++
++def test_t16_tls_invalid_is_terminal_no_fallback(offline):
++    manager, calls, install = offline
++    install(
++        lambda _: (_ for _ in ()).throw(
++            httpx.ConnectError("CERTIFICATE_VERIFY_FAILED SYNTHETIC_TEST_ONLY")
++        )
++    )
++    with pytest.raises(DownloadError, match="TLS_INVALID"):
++        manager.download(KEY, DAY, use_cache=False)
++    assert len(calls) == 1 and not manager.raw_root.exists()
++
++
++@pytest.mark.parametrize(
++    "options",
++    [
++        {"max_request_attempts": 0},
++        {"max_request_attempts": -1},
++        {"max_request_attempts": True},
++        {"request_timeout_seconds": 0},
++        {"request_timeout_seconds": -1},
++        {"request_timeout_seconds": float("nan")},
++    ],
++)
++def test_t19_public_invalid_overrides_refuse_before_transport(offline, options):
++    manager, calls, install = offline
++    install(lambda _: httpx.Response(200, content=archive()))
++    with pytest.raises(DownloadError, match="INVALID_ACQUISITION_LIMITS"):
++        manager.download(KEY, DAY, use_cache=False, **options)
++    assert not calls and not manager.raw_root.exists()
++
++
++def test_t22_urls_sanitized_and_seed_mode_distinct(offline, monkeypatch):
++    manager, calls, install = offline
++    install(lambda _: httpx.Response(200, content=archive()))
++    monkeypatch.setattr(
++        manager,
++        "_candidate_urls",
++        lambda *_: ["https://example.invalid/file.zip?token=SYNTHETIC_SECRET"],
++    )
++    artifact = manager.download(KEY, DAY, use_cache=False)
++    assert artifact.used_url == "https://example.invalid/file.zip"
++    assert "SYNTHETIC_SECRET" not in artifact.manifest_path.read_text()
++    # Seed import uses a separate test-only tree, preserving the same exact bytes.
++    import shutil
++
++    shutil.copytree(manager.raw_root, manager.seed_raw_root)
++    for manifest in manager.seed_raw_root.rglob("*.json"):
++        payload = json.loads(manifest.read_text())
++        payload["artifact_path"] = str(
++            manager.seed_raw_root / Path(payload["artifact_path"]).relative_to(manager.raw_root)
++        )
++        manifest.write_text(json.dumps(payload))
++    manager.raw_root = manager.raw_root.parent / "empty"
++    cached = manager.download(KEY, DAY, cache_only=True)
++    assert cached.source_mode == "source_seed_imported" and cached.sha256 == artifact.sha256
++    assert len(calls) == 1

@@ -10,6 +10,7 @@ PYTHON = Path(sys.executable)
 
 
 def _run(mode: str) -> dict[str, object]:
+    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
     subprocess.run(
         [
             str(PYTHON),
@@ -29,6 +30,7 @@ def _run(mode: str) -> dict[str, object]:
 
 
 def main() -> None:
+    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
     canonical = REPO_ROOT / "artifacts/verification/source_probe_report.json"
     original_canonical = canonical.read_text(encoding="utf-8") if canonical.exists() else None
     deterministic = _run("deterministic")

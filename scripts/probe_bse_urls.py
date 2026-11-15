@@ -4,6 +4,7 @@ import httpx
 
 
 def main() -> None:
+    raise RuntimeError("Legacy live diagnostic disabled; use a separately rights-approved guarded source path.")
     date_token = "060426"
     patterns = [
         "https://www.bseindia.com/download/BhavCopy/Equity/EQ_ISINCODE_{d}.zip",

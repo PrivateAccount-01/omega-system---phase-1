@@ -1,0 +1,80 @@
+F..FFF                                                                   [100%]
+================================== FAILURES ===================================
+_____ test_t19_public_invalid_overrides_refuse_before_transport[options0] _____
+
+offline = (<omegadata.track_a.download_manager.DownloadManager object at 0x0000020A4D071A90>, ['https://example.invalid/one.zip'], <function offline.<locals>.install at 0x0000020A4D117CC0>)
+options = {'max_request_attempts': 0}
+
+    @pytest.mark.parametrize("options", [
+        {"max_request_attempts":0}, {"max_request_attempts":-1},
+        {"max_request_attempts":True}, {"request_timeout_seconds":0},
+        {"request_timeout_seconds":-1}, {"request_timeout_seconds":float("nan")},
+    ])
+    def test_t19_public_invalid_overrides_refuse_before_transport(offline,options):
+        manager,calls,install=offline
+        install(lambda _:httpx.Response(200,content=archive()))
+>       with pytest.raises(DownloadError,match="INVALID_ACQUISITION_LIMITS"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.acquisition.DownloadError'>
+
+tests\unit\test_od02_acquisition.py:477: Failed
+_____ test_t19_public_invalid_overrides_refuse_before_transport[options3] _____
+
+offline = (<omegadata.track_a.download_manager.DownloadManager object at 0x0000020A4D02B490>, ['https://example.invalid/one.zip'], <function offline.<locals>.install at 0x0000020A4D172B90>)
+options = {'request_timeout_seconds': 0}
+
+    @pytest.mark.parametrize("options", [
+        {"max_request_attempts":0}, {"max_request_attempts":-1},
+        {"max_request_attempts":True}, {"request_timeout_seconds":0},
+        {"request_timeout_seconds":-1}, {"request_timeout_seconds":float("nan")},
+    ])
+    def test_t19_public_invalid_overrides_refuse_before_transport(offline,options):
+        manager,calls,install=offline
+        install(lambda _:httpx.Response(200,content=archive()))
+>       with pytest.raises(DownloadError,match="INVALID_ACQUISITION_LIMITS"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.acquisition.DownloadError'>
+
+tests\unit\test_od02_acquisition.py:477: Failed
+_____ test_t19_public_invalid_overrides_refuse_before_transport[options4] _____
+
+offline = (<omegadata.track_a.download_manager.DownloadManager object at 0x0000020A4D02A190>, ['https://example.invalid/one.zip'], <function offline.<locals>.install at 0x0000020A4D116F00>)
+options = {'request_timeout_seconds': -1}
+
+    @pytest.mark.parametrize("options", [
+        {"max_request_attempts":0}, {"max_request_attempts":-1},
+        {"max_request_attempts":True}, {"request_timeout_seconds":0},
+        {"request_timeout_seconds":-1}, {"request_timeout_seconds":float("nan")},
+    ])
+    def test_t19_public_invalid_overrides_refuse_before_transport(offline,options):
+        manager,calls,install=offline
+        install(lambda _:httpx.Response(200,content=archive()))
+>       with pytest.raises(DownloadError,match="INVALID_ACQUISITION_LIMITS"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.acquisition.DownloadError'>
+
+tests\unit\test_od02_acquisition.py:477: Failed
+_____ test_t19_public_invalid_overrides_refuse_before_transport[options5] _____
+
+offline = (<omegadata.track_a.download_manager.DownloadManager object at 0x0000020A4D026C30>, ['https://example.invalid/one.zip'], <function offline.<locals>.install at 0x0000020A4D116560>)
+options = {'request_timeout_seconds': nan}
+
+    @pytest.mark.parametrize("options", [
+        {"max_request_attempts":0}, {"max_request_attempts":-1},
+        {"max_request_attempts":True}, {"request_timeout_seconds":0},
+        {"request_timeout_seconds":-1}, {"request_timeout_seconds":float("nan")},
+    ])
+    def test_t19_public_invalid_overrides_refuse_before_transport(offline,options):
+        manager,calls,install=offline
+        install(lambda _:httpx.Response(200,content=archive()))
+>       with pytest.raises(DownloadError,match="INVALID_ACQUISITION_LIMITS"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.acquisition.DownloadError'>
+
+tests\unit\test_od02_acquisition.py:477: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options0]
+FAILED tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options3]
+FAILED tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options4]
+FAILED tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options5]
+4 failed, 2 passed, 91 deselected in 0.53s

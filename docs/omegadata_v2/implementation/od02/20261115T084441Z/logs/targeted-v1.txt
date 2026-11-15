@@ -1,0 +1,32 @@
+........................................................................ [ 36%]
+..........................F............................................. [ 73%]
+.......s...ss.......................................                     [100%]
+================================== FAILURES ===================================
+____________ test_allowed_fake_probe_preserves_policy_attribution _____________
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x000001C1D291D170>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C1D28F20B0>
+
+    def test_allowed_fake_probe_preserves_policy_attribution(
+        synthetic_source_policy_provider, monkeypatch
+    ) -> None:
+        manager = DownloadManager(
+            policy_provider=synthetic_source_policy_provider, decision_clock=lambda: NOW
+        )
+        fake = Mock(
+            return_value=downloader.FetchResult(b"SYNTHETIC_TEST_ONLY", 200, "text/plain", "httpx", 1)
+        )
+        monkeypatch.setattr(manager, "_fetch_candidate", fake)
+        results = manager.probe_source_candidates("MOSPI", AS_OF, limit=1)
+>       assert len(results) == 1 and results[0].validated
+E       AssertionError: assert (1 == 1 and False)
+E        +  where 1 = len([SourceProbeResult(source_key='MOSPI', as_of=datetime.date(2024, 1, 2), url='https://www.mospi.gov.in/data', role='pri...evision_hash='dbe88638ecf0a20870a5c8d4147165a0dc61b1c4f0ca4e2e76ca9026c8b8b95d'),), acquisition_state='HTTP_RECEIVED')])
+E        +  and   False = SourceProbeResult(source_key='MOSPI', as_of=datetime.date(2024, 1, 2), url='https://www.mospi.gov.in/data', role='prim...revision_hash='dbe88638ecf0a20870a5c8d4147165a0dc61b1c4f0ca4e2e76ca9026c8b8b95d'),), acquisition_state='HTTP_RECEIVED').validated
+
+tests\unit\test_od01_source_rights.py:447: AssertionError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-our54loc\\pytest\\test_r05_cache_escape_never_op3\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-our54loc\\pytest\\test_r05_cache_escape_never_op3\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-our54loc\\pytest\\test_r05_cache_escape_never_op7\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-our54loc\\pytest\\test_r05_cache_escape_never_op7\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:159: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-our54loc\\pytest\\test_r06_real_symlink_payload_0\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-our54loc\\pytest\\test_r06_real_symlink_payload_0\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\linked.bin'
+FAILED tests/unit/test_od01_source_rights.py::test_allowed_fake_probe_preserves_policy_attribution
+1 failed, 192 passed, 3 skipped in 2.43s

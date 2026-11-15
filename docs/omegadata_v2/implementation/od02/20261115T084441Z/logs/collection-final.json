@@ -1,0 +1,27 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od02\\20261115T084441Z\\verification_runner.py",
+    "collection-final",
+    "pytest",
+    "--collect-only",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "effective_module": [
+    "pytest",
+    "--collect-only",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-15T09:10:32.914135+00:00",
+  "end_utc": "2026-11-15T09:10:35.837224+00:00",
+  "elapsed_seconds": 2.9230891999904998,
+  "exit_code": 0,
+  "output": "collection-final.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

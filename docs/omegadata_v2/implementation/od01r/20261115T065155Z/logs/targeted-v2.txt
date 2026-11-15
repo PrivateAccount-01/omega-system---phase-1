@@ -1,0 +1,48 @@
+........................................................................ [ 40%]
+.............................................................s...ss..... [ 81%]
+.......................F.........                                        [100%]
+================================== FAILURES ===================================
+__________ test_r08_production_entry_pending_no_output[scheduled_ca] __________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001CBD435F250>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CBD43AC4B0>
+entry = 'scheduled_ca'
+
+    @pytest.mark.parametrize("entry", ["orchestrator", "pipeline", "scheduled_ca"])
+    def test_r08_production_entry_pending_no_output(manager, monkeypatch, entry):
+        from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+        from omegadata.track_a.orchestration import IngestionOrchestrator
+    
+        writes = Mock(side_effect=AssertionError("Pending source must not create output"))
+        clients = Mock(side_effect=AssertionError("Pending source must not create client"))
+        monkeypatch.setattr(Path, "mkdir", writes)
+        monkeypatch.setattr(dm.httpx, "Client", clients)
+        with pytest.raises(SourcePolicyError, match="POLICY_PENDING"):
+            if entry == "orchestrator":
+                IngestionOrchestrator().ingest_raw_source(KEY, DAY)
+            elif entry == "pipeline":
+                OmegaDataSequentialPipeline().run_track_a(DAY)
+            else:
+>               OmegaDataSequentialPipeline().run_scheduled_corporate_action_collection(
+                    datetime(2026, 4, 13, 2, 30, tzinfo=UTC))
+
+tests\unit\test_od01r_rights_hardening.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <omegadata.pipelines.sequential_pipeline.OmegaDataSequentialPipeline object at 0x000001CBD420A0D0>
+run_at = datetime.datetime(2026, 4, 13, 2, 30, tzinfo=datetime.timezone.utc)
+
+    def run_scheduled_corporate_action_collection(self, run_at: datetime) -> dict[str, str]:
+        aware_run_at = run_at if run_at.tzinfo is not None else run_at.replace(tzinfo=UTC)
+        due_sources = due_corporate_action_sources(aware_run_at)
+        if not due_sources:
+>           raise ValueError(f"No corporate action source is due at {aware_run_at.isoformat()}")
+E           ValueError: No corporate action source is due at 2026-04-13T02:30:00+00:00
+
+src\omegadata\pipelines\sequential_pipeline.py:921: ValueError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-r3z6ii74\\pytest\\test_r05_cache_escape_never_op3\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-r3z6ii74\\pytest\\test_r05_cache_escape_never_op3\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:134: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-r3z6ii74\\pytest\\test_r05_cache_escape_never_op7\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-r3z6ii74\\pytest\\test_r05_cache_escape_never_op7\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od01r_rights_hardening.py:159: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-r3z6ii74\\pytest\\test_r06_real_symlink_payload_0\\sentinel.bin' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\od01r-offline-r3z6ii74\\pytest\\test_r06_real_symlink_payload_0\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\linked.bin'
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[scheduled_ca]
+1 failed, 173 passed, 3 skipped in 2.89s

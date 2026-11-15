@@ -1,0 +1,27 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od02\\20261115T084441Z\\verification_runner.py",
+    "targeted-v1",
+    "pytest",
+    "-q",
+    "tests/unit/test_od02_acquisition.py",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py"
+  ],
+  "effective_module": [
+    "pytest",
+    "-q",
+    "tests/unit/test_od02_acquisition.py",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-15T08:57:23.810648+00:00",
+  "end_utc": "2026-11-15T08:57:27.116818+00:00",
+  "elapsed_seconds": 3.306166500027757,
+  "exit_code": 1,
+  "output": "targeted-v1.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

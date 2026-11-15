@@ -1,0 +1,31 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_________________ test_r13_bse_discovery_refreshes_before_get _________________
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x000001AE16441B10>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001AE16404B00>
+
+    def test_r13_bse_discovery_refreshes_before_get(synthetic_source_policy_provider, monkeypatch):
+        active = synthetic_source_policy_provider()
+        manager = DownloadManager(policy_provider=lambda: active, decision_clock=lambda: NOW)
+        client = Mock()
+        client.__enter__ = Mock(return_value=client)
+        client.__exit__ = Mock(return_value=False)
+        client.get.return_value = Mock(text="", raise_for_status=Mock())
+    
+        def construct(**kwargs):
+            nonlocal active
+            item = next(p for p in active.policies if p.source_key == "BSE_EQUITY_BHAVCOPY")
+            active = registry(updated(item, status=PolicyStatus.REVOKED,
+                                      revoked_at=NOW, revocation_reason="SYNTHETIC_TEST_ONLY"))
+            return client
+    
+        monkeypatch.setattr(dm.httpx, "Client", construct)
+>       with pytest.raises(SourcePolicyError, match="POLICY_REVOKED"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.source_rights.SourcePolicyError'>
+
+tests\unit\test_od01r_rights_hardening.py:373: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r13_bse_discovery_refreshes_before_get
+1 failed, 73 deselected in 0.39s

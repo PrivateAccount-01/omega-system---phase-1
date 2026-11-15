@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/mnt/e/omega system - phase 1/.venv-linux/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02/20261115T084441Z/verification_runner.py",
+    "linux-targeted",
+    "pytest",
+    "tests/unit/test_od02_acquisition.py",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "effective_module": [
+    "pytest",
+    "tests/unit/test_od02_acquisition.py",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "/mnt/e/omega system - phase 1",
+  "start_utc": "2026-11-15T09:13:08.502754+00:00",
+  "end_utc": "2026-11-15T09:13:08.556222+00:00",
+  "elapsed_seconds": 0.0534683890000025,
+  "exit_code": 1,
+  "output": "linux-targeted.txt",
+  "guard": "pytest: sockets/subprocess blocked, internal Windows socketpair allowed; disposable paths"
+}

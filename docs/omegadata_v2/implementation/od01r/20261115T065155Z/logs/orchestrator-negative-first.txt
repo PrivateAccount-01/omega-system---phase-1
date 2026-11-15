@@ -1,0 +1,170 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+__________ test_r08_production_entry_pending_no_output[orchestrator] __________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001A1C616D160>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A1C61E4FC0>
+entry = 'orchestrator'
+
+    @pytest.mark.parametrize("entry", ["orchestrator", "pipeline", "scheduled_ca"])
+    def test_r08_production_entry_pending_no_output(manager, monkeypatch, entry):
+        from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+        from omegadata.track_a.orchestration import IngestionOrchestrator
+    
+        writes = Mock(side_effect=AssertionError("Pending source must not create output"))
+        clients = Mock(side_effect=AssertionError("Pending source must not create client"))
+        monkeypatch.setattr(Path, "mkdir", writes)
+        monkeypatch.setattr(dm.httpx, "Client", clients)
+        with pytest.raises(SourcePolicyError, match="POLICY_PENDING"):
+            if entry == "orchestrator":
+>               IngestionOrchestrator().ingest_raw_source(KEY, DAY)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:292: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\track_a\orchestration.py:14: in __init__
+    self.storage = ParquetStorage()
+                   ^^^^^^^^^^^^^^^^
+src\omegadata\track_a\storage.py:23: in __init__
+    self.parquet_root.mkdir(parents=True, exist_ok=True)
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1794906989840'>, args = ()
+kwargs = {'exist_ok': True, 'parents': True}
+effect = AssertionError('Pending source must not create output')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Pending source must not create output
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+____________ test_r08_production_entry_pending_no_output[pipeline] ____________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001A1E8D9B610>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A1C50023F0>
+entry = 'pipeline'
+
+    @pytest.mark.parametrize("entry", ["orchestrator", "pipeline", "scheduled_ca"])
+    def test_r08_production_entry_pending_no_output(manager, monkeypatch, entry):
+        from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+        from omegadata.track_a.orchestration import IngestionOrchestrator
+    
+        writes = Mock(side_effect=AssertionError("Pending source must not create output"))
+        clients = Mock(side_effect=AssertionError("Pending source must not create client"))
+        monkeypatch.setattr(Path, "mkdir", writes)
+        monkeypatch.setattr(dm.httpx, "Client", clients)
+        with pytest.raises(SourcePolicyError, match="POLICY_PENDING"):
+            if entry == "orchestrator":
+                IngestionOrchestrator().ingest_raw_source(KEY, DAY)
+            elif entry == "pipeline":
+>               OmegaDataSequentialPipeline().run_track_a(DAY)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od01r_rights_hardening.py:294: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\pipelines\sequential_pipeline.py:59: in __init__
+    self.ingestor = IngestionOrchestrator()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+src\omegadata\track_a\orchestration.py:14: in __init__
+    self.storage = ParquetStorage()
+                   ^^^^^^^^^^^^^^^^
+src\omegadata\track_a\storage.py:23: in __init__
+    self.parquet_root.mkdir(parents=True, exist_ok=True)
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1794906990848'>, args = ()
+kwargs = {'exist_ok': True, 'parents': True}
+effect = AssertionError('Pending source must not create output')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Pending source must not create output
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+__________ test_r08_production_entry_pending_no_output[scheduled_ca] __________
+
+manager = <omegadata.track_a.download_manager.DownloadManager object at 0x000001A1E8D9DA70>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A1E8D95EB0>
+entry = 'scheduled_ca'
+
+    @pytest.mark.parametrize("entry", ["orchestrator", "pipeline", "scheduled_ca"])
+    def test_r08_production_entry_pending_no_output(manager, monkeypatch, entry):
+        from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+        from omegadata.track_a.orchestration import IngestionOrchestrator
+    
+        writes = Mock(side_effect=AssertionError("Pending source must not create output"))
+        clients = Mock(side_effect=AssertionError("Pending source must not create client"))
+        monkeypatch.setattr(Path, "mkdir", writes)
+        monkeypatch.setattr(dm.httpx, "Client", clients)
+        with pytest.raises(SourcePolicyError, match="POLICY_PENDING"):
+            if entry == "orchestrator":
+                IngestionOrchestrator().ingest_raw_source(KEY, DAY)
+            elif entry == "pipeline":
+                OmegaDataSequentialPipeline().run_track_a(DAY)
+            else:
+>               OmegaDataSequentialPipeline().run_scheduled_corporate_action_collection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    datetime(2026, 4, 13, 2, 30, tzinfo=UTC))
+
+tests\unit\test_od01r_rights_hardening.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\pipelines\sequential_pipeline.py:59: in __init__
+    self.ingestor = IngestionOrchestrator()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+src\omegadata\track_a\orchestration.py:14: in __init__
+    self.storage = ParquetStorage()
+                   ^^^^^^^^^^^^^^^^
+src\omegadata\track_a\storage.py:23: in __init__
+    self.parquet_root.mkdir(parents=True, exist_ok=True)
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1175: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1179: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Mock id='1794906995216'>, args = ()
+kwargs = {'exist_ok': True, 'parents': True}
+effect = AssertionError('Pending source must not create output')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: Pending source must not create output
+
+C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\unittest\mock.py:1234: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[orchestrator]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[pipeline]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[scheduled_ca]
+3 failed, 74 deselected in 1.35s

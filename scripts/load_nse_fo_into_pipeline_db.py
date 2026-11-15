@@ -18,7 +18,15 @@ from omegadata.db.models import (
 )
 from omegadata.db.session import get_session, init_db
 from omegadata.pipelines.sequential_pipeline import OmegaDataSequentialPipeline
+from omegadata.track_a.acquisition import failure
 from omegadata.track_a.source_registry import resolve_era
+from omegadata.track_a.source_rights import (
+    PolicyRequest,
+    SourceOperation,
+    SourceTransport,
+    authorize_source,
+    policy_url_host,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -53,16 +61,29 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    trade_date = date.fromisoformat(args.trade_date)
+    url = _render_fo_url(trade_date)
+    def preflight(operation: SourceOperation):
+        return authorize_source(PolicyRequest(
+            source_key="NSE_FO_BHAVCOPY", operation=operation,
+            decision_at=datetime.now(UTC), requested_transport=SourceTransport.HTTPX,
+            requested_host=policy_url_host(url),
+        ))
+
+    decisions = [preflight(operation) for operation in (SourceOperation.FETCH, SourceOperation.STORE_RAW)]
     if args.db_url:
         settings.db_url = str(args.db_url)
     init_db()
 
-    trade_date = date.fromisoformat(args.trade_date)
-    url = _render_fo_url(trade_date)
     headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://www.nseindia.com/all-reports-derivatives"}
-    response = httpx.get(url, headers=headers, timeout=60.0, follow_redirects=True)
+    decisions[0] = preflight(SourceOperation.FETCH)
+    # Connection-time egress control and FO structural validation are not certified.
+    # Never let this independent legacy loader bypass the offline acquisition gate.
+    raise failure("BLOCKED_EXTERNAL_EGRESS")
+    response = httpx.get(url, headers=headers, timeout=60.0, follow_redirects=False)
     response.raise_for_status()
     payload = response.content
+    decisions[1] = preflight(SourceOperation.STORE_RAW)
 
     out_dir = REPO_ROOT / "data/raw/nse_fo_bhavcopy" / f"year={trade_date.year:04d}" / f"month={trade_date.month:02d}"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -79,6 +100,7 @@ def main() -> None:
                 "used_url": url,
                 "artifact_path": _relative_repo_path(artifact_path),
                 "checksum": checksum,
+                "policy_decisions": [decision.model_dump(mode="json") for decision in decisions],
                 "bytes_downloaded": len(payload),
             },
             indent=2,

@@ -1,6 +1,6 @@
 # OmegaData Repository Instructions for Codex
 
-**Use this file as repository-root `AGENTS.md`.** Keep this file short; the controlling project-specific technical reference is `docs/OMEGADATA_CODEX_MASTER_PROMPT.md`. Read the master document when running an OmegaData architecture, audit, ingestion, data-quality, historical-correctness, publication or release phase. For trivial unrelated edits, read only the relevant sections.
+**Repository instructions (loaded by root `AGENTS.md`).** Keep this file short; the controlling project-specific technical reference is `docs/verification/OMEGADATA_CODEX_MASTER_PROMPT.md`. Read the master document when running an OmegaData architecture, audit, ingestion, data-quality, historical-correctness, publication or release phase. For trivial unrelated edits, read only the relevant sections.
 
 ## Operating rule
 
