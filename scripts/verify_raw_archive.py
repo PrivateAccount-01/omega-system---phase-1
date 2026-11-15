@@ -16,10 +16,14 @@ def main() -> None:
     parser.add_argument("observation_id")
     parser.add_argument("source_key")
     parser.add_argument("business_date", type=date.fromisoformat)
+    parser.add_argument("--expected-count", type=int, help="Separately pinned number of committed observations; ALL only")
     args = parser.parse_args()
     if args.observation_id == "ALL":
-        print(json.dumps(RawArchive(args.root).scan_verified(args.source_key, args.business_date), sort_keys=True))
+        print(json.dumps(RawArchive(args.root).scan_verified(
+            args.source_key, args.business_date, expected_count=args.expected_count), sort_keys=True))
         return
+    if args.expected_count is not None:
+        parser.error("--expected-count requires ALL")
     data, observation = RawArchive(args.root).read_verified(
         args.observation_id, args.source_key, args.business_date
     )

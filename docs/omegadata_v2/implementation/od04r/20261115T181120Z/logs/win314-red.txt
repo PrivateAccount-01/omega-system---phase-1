@@ -1,0 +1,319 @@
+FFFFFFFFFFFFFFF...                                                       [100%]
+================================== FAILURES ===================================
+____________ test_r01_absence_is_never_verified[missing-NOT_FOUND] ____________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2EBE7B0>
+layout = 'missing', reason = 'NOT_FOUND'
+
+    @pytest.mark.parametrize("layout,reason", [
+        ("missing", "NOT_FOUND"), ("empty", "EMPTY_ARCHIVE"),
+        ("staging", "EMPTY_ARCHIVE"), ("orphan", "EMPTY_ARCHIVE"),
+        ("root_file", "INTEGRITY"), ("commits_file", "INTEGRITY"),
+    ])
+    def test_r01_absence_is_never_verified(archive, layout, reason):
+        if layout == "root_file":
+            archive.root.write_bytes(b"SYNTHETIC_TEST_ONLY")
+        elif layout != "missing":
+            archive.root.mkdir()
+            if layout == "staging":
+                (archive.root / "staging").mkdir()
+                (archive.root / "staging" / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+            elif layout == "orphan":
+                (archive.root / "observations").mkdir()
+                (archive.root / "observations" / ("a" * 32 + ".json")).write_text("{}")
+            elif layout == "commits_file":
+                (archive.root / "commits").write_bytes(b"SYNTHETIC_TEST_ONLY")
+>       with pytest.raises(ArchiveError, match=reason):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:51: Failed
+___________ test_r01_absence_is_never_verified[empty-EMPTY_ARCHIVE] ___________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2EE7610>
+layout = 'empty', reason = 'EMPTY_ARCHIVE'
+
+    @pytest.mark.parametrize("layout,reason", [
+        ("missing", "NOT_FOUND"), ("empty", "EMPTY_ARCHIVE"),
+        ("staging", "EMPTY_ARCHIVE"), ("orphan", "EMPTY_ARCHIVE"),
+        ("root_file", "INTEGRITY"), ("commits_file", "INTEGRITY"),
+    ])
+    def test_r01_absence_is_never_verified(archive, layout, reason):
+        if layout == "root_file":
+            archive.root.write_bytes(b"SYNTHETIC_TEST_ONLY")
+        elif layout != "missing":
+            archive.root.mkdir()
+            if layout == "staging":
+                (archive.root / "staging").mkdir()
+                (archive.root / "staging" / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+            elif layout == "orphan":
+                (archive.root / "observations").mkdir()
+                (archive.root / "observations" / ("a" * 32 + ".json")).write_text("{}")
+            elif layout == "commits_file":
+                (archive.root / "commits").write_bytes(b"SYNTHETIC_TEST_ONLY")
+>       with pytest.raises(ArchiveError, match=reason):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:51: Failed
+__________ test_r01_absence_is_never_verified[staging-EMPTY_ARCHIVE] __________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2EE7B10>
+layout = 'staging', reason = 'EMPTY_ARCHIVE'
+
+    @pytest.mark.parametrize("layout,reason", [
+        ("missing", "NOT_FOUND"), ("empty", "EMPTY_ARCHIVE"),
+        ("staging", "EMPTY_ARCHIVE"), ("orphan", "EMPTY_ARCHIVE"),
+        ("root_file", "INTEGRITY"), ("commits_file", "INTEGRITY"),
+    ])
+    def test_r01_absence_is_never_verified(archive, layout, reason):
+        if layout == "root_file":
+            archive.root.write_bytes(b"SYNTHETIC_TEST_ONLY")
+        elif layout != "missing":
+            archive.root.mkdir()
+            if layout == "staging":
+                (archive.root / "staging").mkdir()
+                (archive.root / "staging" / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+            elif layout == "orphan":
+                (archive.root / "observations").mkdir()
+                (archive.root / "observations" / ("a" * 32 + ".json")).write_text("{}")
+            elif layout == "commits_file":
+                (archive.root / "commits").write_bytes(b"SYNTHETIC_TEST_ONLY")
+>       with pytest.raises(ArchiveError, match=reason):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:51: Failed
+__________ test_r01_absence_is_never_verified[orphan-EMPTY_ARCHIVE] ___________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2FA5CD0>
+layout = 'orphan', reason = 'EMPTY_ARCHIVE'
+
+    @pytest.mark.parametrize("layout,reason", [
+        ("missing", "NOT_FOUND"), ("empty", "EMPTY_ARCHIVE"),
+        ("staging", "EMPTY_ARCHIVE"), ("orphan", "EMPTY_ARCHIVE"),
+        ("root_file", "INTEGRITY"), ("commits_file", "INTEGRITY"),
+    ])
+    def test_r01_absence_is_never_verified(archive, layout, reason):
+        if layout == "root_file":
+            archive.root.write_bytes(b"SYNTHETIC_TEST_ONLY")
+        elif layout != "missing":
+            archive.root.mkdir()
+            if layout == "staging":
+                (archive.root / "staging").mkdir()
+                (archive.root / "staging" / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+            elif layout == "orphan":
+                (archive.root / "observations").mkdir()
+                (archive.root / "observations" / ("a" * 32 + ".json")).write_text("{}")
+            elif layout == "commits_file":
+                (archive.root / "commits").write_bytes(b"SYNTHETIC_TEST_ONLY")
+>       with pytest.raises(ArchiveError, match=reason):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:51: Failed
+___________ test_r01_absence_is_never_verified[root_file-INTEGRITY] ___________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2FA6520>
+layout = 'root_file', reason = 'INTEGRITY'
+
+    @pytest.mark.parametrize("layout,reason", [
+        ("missing", "NOT_FOUND"), ("empty", "EMPTY_ARCHIVE"),
+        ("staging", "EMPTY_ARCHIVE"), ("orphan", "EMPTY_ARCHIVE"),
+        ("root_file", "INTEGRITY"), ("commits_file", "INTEGRITY"),
+    ])
+    def test_r01_absence_is_never_verified(archive, layout, reason):
+        if layout == "root_file":
+            archive.root.write_bytes(b"SYNTHETIC_TEST_ONLY")
+        elif layout != "missing":
+            archive.root.mkdir()
+            if layout == "staging":
+                (archive.root / "staging").mkdir()
+                (archive.root / "staging" / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+            elif layout == "orphan":
+                (archive.root / "observations").mkdir()
+                (archive.root / "observations" / ("a" * 32 + ".json")).write_text("{}")
+            elif layout == "commits_file":
+                (archive.root / "commits").write_bytes(b"SYNTHETIC_TEST_ONLY")
+>       with pytest.raises(ArchiveError, match=reason):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:51: Failed
+_________ test_r01_absence_is_never_verified[commits_file-INTEGRITY] __________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2E7FD10>
+layout = 'commits_file', reason = 'INTEGRITY'
+
+    @pytest.mark.parametrize("layout,reason", [
+        ("missing", "NOT_FOUND"), ("empty", "EMPTY_ARCHIVE"),
+        ("staging", "EMPTY_ARCHIVE"), ("orphan", "EMPTY_ARCHIVE"),
+        ("root_file", "INTEGRITY"), ("commits_file", "INTEGRITY"),
+    ])
+    def test_r01_absence_is_never_verified(archive, layout, reason):
+        if layout == "root_file":
+            archive.root.write_bytes(b"SYNTHETIC_TEST_ONLY")
+        elif layout != "missing":
+            archive.root.mkdir()
+            if layout == "staging":
+                (archive.root / "staging").mkdir()
+                (archive.root / "staging" / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+            elif layout == "orphan":
+                (archive.root / "observations").mkdir()
+                (archive.root / "observations" / ("a" * 32 + ".json")).write_text("{}")
+            elif layout == "commits_file":
+                (archive.root / "commits").write_bytes(b"SYNTHETIC_TEST_ONLY")
+>       with pytest.raises(ArchiveError, match=reason):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:51: Failed
+_____________________ test_r01_disappears_after_inventory _____________________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2FBDD00>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022DA2FA6FD0>
+
+    def test_r01_disappears_after_inventory(archive, monkeypatch):
+        archive.root.mkdir()
+        original = archive._inventory
+    
+        def move_after_inventory():
+            result = original()
+            archive.root.rename(archive.root.with_name("moved-disposable-archive"))
+            return result
+    
+        monkeypatch.setattr(archive, "_inventory", move_after_inventory)
+>       with pytest.raises(ArchiveError, match="NOT_FOUND"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:65: Failed
+______________ test_r01_walk_error_cannot_hide_existing_evidence ______________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA2FBE580>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022DA2FA7100>
+
+    def test_r01_walk_error_cannot_hide_existing_evidence(archive, monkeypatch):
+        archive.put(b"SYNTHETIC_TEST_ONLY", request())
+    
+        def denied_walk(*args, **kwargs):
+            callback = kwargs.get("onerror")
+            if callback:
+                callback(PermissionError("SYNTHETIC_TEST_ONLY"))
+            return iter(())
+    
+        monkeypatch.setattr("omegadata.track_a.raw_archive.os.walk", denied_walk)
+>       with pytest.raises(ArchiveError, match="INTEGRITY"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.track_a.raw_archive.ArchiveError'>
+
+tests\unit\test_od04r_adversarial.py:79: Failed
+________________ test_r01_expected_count_is_external_contract _________________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA302CD50>
+
+    def test_r01_expected_count_is_external_contract(archive):
+        archive.root.mkdir()
+>       result = archive.scan_verified(KEY, DAY, expected_count=0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: RawArchive.scan_verified() got an unexpected keyword argument 'expected_count'
+
+tests\unit\test_od04r_adversarial.py:85: TypeError
+______________________ test_r01_invalid_expectation[-1] _______________________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA302D750>
+value = -1
+
+    @pytest.mark.parametrize("value", [-1, True, "1"])
+    def test_r01_invalid_expectation(archive, value):
+        with pytest.raises(ArchiveError, match="INPUT_INVALID"):
+>           archive.scan_verified(KEY, DAY, expected_count=value)
+E           TypeError: RawArchive.scan_verified() got an unexpected keyword argument 'expected_count'
+
+tests\unit\test_od04r_adversarial.py:100: TypeError
+_____________________ test_r01_invalid_expectation[True] ______________________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA307F2F0>
+value = True
+
+    @pytest.mark.parametrize("value", [-1, True, "1"])
+    def test_r01_invalid_expectation(archive, value):
+        with pytest.raises(ArchiveError, match="INPUT_INVALID"):
+>           archive.scan_verified(KEY, DAY, expected_count=value)
+E           TypeError: RawArchive.scan_verified() got an unexpected keyword argument 'expected_count'
+
+tests\unit\test_od04r_adversarial.py:100: TypeError
+_______________________ test_r01_invalid_expectation[1] _______________________
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA30C0410>
+value = '1'
+
+    @pytest.mark.parametrize("value", [-1, True, "1"])
+    def test_r01_invalid_expectation(archive, value):
+        with pytest.raises(ArchiveError, match="INPUT_INVALID"):
+>           archive.scan_verified(KEY, DAY, expected_count=value)
+E           TypeError: RawArchive.scan_verified() got an unexpected keyword argument 'expected_count'
+
+tests\unit\test_od04r_adversarial.py:100: TypeError
+______ test_r01_expected_empty_does_not_hide_incomplete_storage[missing] ______
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA3080050>
+layout = 'missing'
+
+    @pytest.mark.parametrize("layout", ["missing", "staging", "orphan"])
+    def test_r01_expected_empty_does_not_hide_incomplete_storage(archive, layout):
+        if layout != "missing":
+            (archive.root / layout).mkdir(parents=True)
+            (archive.root / layout / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+        with pytest.raises(ArchiveError, match="NOT_FOUND|EMPTY_ARCHIVE"):
+>           archive.scan_verified(KEY, DAY, expected_count=0)
+E           TypeError: RawArchive.scan_verified() got an unexpected keyword argument 'expected_count'
+
+tests\unit\test_od04r_adversarial.py:110: TypeError
+______ test_r01_expected_empty_does_not_hide_incomplete_storage[staging] ______
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA308C130>
+layout = 'staging'
+
+    @pytest.mark.parametrize("layout", ["missing", "staging", "orphan"])
+    def test_r01_expected_empty_does_not_hide_incomplete_storage(archive, layout):
+        if layout != "missing":
+            (archive.root / layout).mkdir(parents=True)
+            (archive.root / layout / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+        with pytest.raises(ArchiveError, match="NOT_FOUND|EMPTY_ARCHIVE"):
+>           archive.scan_verified(KEY, DAY, expected_count=0)
+E           TypeError: RawArchive.scan_verified() got an unexpected keyword argument 'expected_count'
+
+tests\unit\test_od04r_adversarial.py:110: TypeError
+______ test_r01_expected_empty_does_not_hide_incomplete_storage[orphan] _______
+
+archive = <omegadata.track_a.raw_archive.RawArchive object at 0x0000022DA3098BB0>
+layout = 'orphan'
+
+    @pytest.mark.parametrize("layout", ["missing", "staging", "orphan"])
+    def test_r01_expected_empty_does_not_hide_incomplete_storage(archive, layout):
+        if layout != "missing":
+            (archive.root / layout).mkdir(parents=True)
+            (archive.root / layout / "pending").write_bytes(b"SYNTHETIC_TEST_ONLY")
+        with pytest.raises(ArchiveError, match="NOT_FOUND|EMPTY_ARCHIVE"):
+>           archive.scan_verified(KEY, DAY, expected_count=0)
+E           TypeError: RawArchive.scan_verified() got an unexpected keyword argument 'expected_count'
+
+tests\unit\test_od04r_adversarial.py:110: TypeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[missing-NOT_FOUND]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[empty-EMPTY_ARCHIVE]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[staging-EMPTY_ARCHIVE]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[orphan-EMPTY_ARCHIVE]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[root_file-INTEGRITY]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[commits_file-INTEGRITY]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_disappears_after_inventory
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_walk_error_cannot_hide_existing_evidence
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_expected_count_is_external_contract
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[-1]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[True]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[1]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[missing]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[staging]
+FAILED tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[orphan]
+15 failed, 3 passed in 1.36s

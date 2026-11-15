@@ -1,0 +1,31 @@
+{
+  "asserted_existing_defects": [
+    "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[missing-NOT_FOUND]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[empty-EMPTY_ARCHIVE]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[staging-EMPTY_ARCHIVE]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[orphan-EMPTY_ARCHIVE]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[root_file-INTEGRITY]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[commits_file-INTEGRITY]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_disappears_after_inventory",
+    "tests/unit/test_od04r_adversarial.py::test_r01_walk_error_cannot_hide_existing_evidence"
+  ],
+  "additive_missing_api_not_defect_proof": [
+    "tests/unit/test_od04r_adversarial.py::test_r01_expected_count_is_external_contract",
+    "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[-1]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[True]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[1]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[missing]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[staging]",
+    "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[orphan]"
+  ],
+  "unchanged_counterexamples": [
+    "tests/unit/test_od04r_adversarial.py::test_r09_existing_wrong_size_object_refuses_without_overwrite",
+    "tests/unit/test_od04r_adversarial.py::test_r18_independent_link_oracle_and_missing_object",
+    "tests/unit/test_od04r_adversarial.py::test_r18_namespace_mixing_refuses"
+  ],
+  "later_controlled_positive_tests": [
+    "test_r12_marker_link_failure_preserves_existing_evidence",
+    "test_r01_cli_count_and_read_only"
+  ],
+  "red_snapshot": "Reconstructed from initial authored text after formatting/additional positive tests; exact SHA matches frozen pre-edit ledger"
+}

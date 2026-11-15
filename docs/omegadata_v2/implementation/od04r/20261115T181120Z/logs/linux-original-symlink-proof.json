@@ -1,0 +1,23 @@
+{
+  "command": [
+    "wsl",
+    "--exec",
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+    "linux312-symlink-proof",
+    "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "-k",
+    "symlink_payload_escape or cache_escape_never_opens_external_sentinel",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-15T18:32:51.064593+00:00",
+  "end_utc": "2026-11-15T18:33:00.542644+00:00",
+  "elapsed_seconds": 9.478080700035207,
+  "exit_code": 0
+}

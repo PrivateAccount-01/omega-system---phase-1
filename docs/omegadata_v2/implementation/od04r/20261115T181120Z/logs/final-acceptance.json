@@ -1,0 +1,50 @@
+{
+  "utc": "2026-11-15T18:43:06.579323+00:00",
+  "mechanical_checks_passed": true,
+  "branch": "feature/od01-source-rights",
+  "head": "44090a42958869faaab57a42b65f7ad8571d924d",
+  "index_empty": true,
+  "changed_original_files": [
+    "scripts/verify_raw_archive.py",
+    "src/omegadata/track_a/raw_archive.py"
+  ],
+  "original_records_compared": 12137,
+  "unexpected_original_changes": [],
+  "old_evidence_unchanged": true,
+  "required_reports": [
+    "00_PREFLIGHT_AND_IDENTITY.md",
+    "01_PRIOR_EVIDENCE_INDEPENDENT_RECONCILIATION.md",
+    "02_THREAT_MODEL_AND_CONTRACT.md",
+    "03_NEW_RED_GREEN_TEST_MATRIX.md",
+    "04_CODE_REVIEW_AND_MINIMAL_DIFF.md",
+    "05_PROCESS_CRASH_AND_INDEPENDENT_ORACLE.md",
+    "06_CROSS_PLATFORM_REGRESSION.md",
+    "07_RIGHTS_SECURITY_AND_REUSE_DECISION.md",
+    "08_REMAINING_DEFECTS_AND_ROLLBACK.md",
+    "09_GATEKEEPER_VERDICT.md",
+    "10_OWNER_EXCEPTION_DECISION_REQUEST.md"
+  ],
+  "missing_or_broken_links": [],
+  "tested_files": 146,
+  "per_runtime_full_pass": {
+    "win314-reviewed": 478,
+    "win311-reviewed": 478,
+    "linux312-reviewed": 486
+  },
+  "all_final_acceptance_commands_exit_zero": true,
+  "new_archive_tests": 27,
+  "original_archive_tests": 58,
+  "negative_first_asserted_defects": 8,
+  "missing_api_errors_not_defect_proof": 7,
+  "policy_pending": 13,
+  "policy_approved": 0,
+  "process_crashes_each_os": 5,
+  "independent_observations_objects_each_os": [
+    18,
+    13
+  ],
+  "signing": "metadata unchanged; content never opened/hashed/copied",
+  "human_exception_approved": false,
+  "gatekeeper": "OD04R_TECHNICALLY_REVERIFIED_PROCESS_EXCEPTION_PENDING",
+  "later_phase_authorized": false
+}

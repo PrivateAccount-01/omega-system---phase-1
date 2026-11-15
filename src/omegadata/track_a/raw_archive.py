@@ -279,7 +279,10 @@ class RawArchive:
         total = entries = 0
         if not self.root.exists():
             return total, entries
-        for directory, dirs, files in os.walk(self._safe(self.root), followlinks=False):
+        def walk_error(error: OSError) -> None:
+            raise ArchiveError("INTEGRITY") from None
+
+        for directory, dirs, files in os.walk(self._safe(self.root), followlinks=False, onerror=walk_error):
             for name in [*dirs, *files]:
                 path = self._safe(Path(directory) / name)
                 entries += 1
@@ -428,20 +431,45 @@ class RawArchive:
             raise ArchiveError("INTEGRITY") from None
 
     def scan_verified(self, source_key: str, business_date: date,
-                      consumer_purpose: SourceOperation | None = None) -> dict[str, Any]:
+                      consumer_purpose: SourceOperation | None = None, *,
+                      expected_count: int | None = None) -> dict[str, Any]:
         """Deterministic fail-closed scan of a scoped archive, never repair it.
 
         A mixed source/date root refuses rather than silently omitting records.
         Recovery inventory is not a substitute for this full byte verification.
         """
         self._read_rights(source_key, consumer_purpose)
+        if expected_count is not None and (type(expected_count) is not int or expected_count < 0):
+            raise ArchiveError("INPUT_INVALID")
+
+        def check_root() -> None:
+            self._safe(self.root)
+            if not self.root.exists():
+                raise ArchiveError("NOT_FOUND")
+            if not self.root.is_dir():
+                raise ArchiveError("INTEGRITY")
+            for name in ("objects", "observations", "commits", "staging"):
+                path = self._safe(self.root / name)
+                if path.exists() and not path.is_dir():
+                    raise ArchiveError("INTEGRITY")
+
+        check_root()
         inventory = self.recover_staging()
+        check_root()
+        count = len(inventory["commit_ids"])
+        if expected_count is not None and count != expected_count:
+            raise ArchiveError("COUNT_MISMATCH")
+        if not count and (expected_count != 0 or inventory["entries"]):
+            raise ArchiveError("EMPTY_ARCHIVE")
         rows = []
         for identity in inventory["commit_ids"]:
             data, obs = self.read_verified(identity, source_key, business_date, consumer_purpose)
             rows.append({"observation_id": identity, "sha256": hashlib.sha256(data).hexdigest(),
                          "bytes": len(data), "source_mode": obs.request.source_mode,
                          "source_reference": obs.source_reference})
-        return {"schema_version": "raw-verification/v1", "source_key": source_key,
+        check_root()
+        return {"schema_version": "raw-verification/v2", "source_key": source_key,
                 "business_date": business_date.isoformat(), "observations": rows,
+                "expected_count": expected_count,
+                "verification": "EXPECTED_COUNT_MATCHED" if expected_count is not None else "VERIFIED_NONEMPTY_SNAPSHOT",
                 "retention": "NO_PROMOTION_NO_DELETION"}

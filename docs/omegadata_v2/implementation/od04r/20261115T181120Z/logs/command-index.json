@@ -1,0 +1,1529 @@
+{
+  "diff-check-reviewed.json": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:10.316227+00:00",
+    "end_utc": "2026-11-15T18:39:10.398511+00:00",
+    "elapsed_seconds": 0.08229400002164766,
+    "exit_code": 0,
+    "output": null
+  },
+  "diff-check.json": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:26:31.712035+00:00",
+    "end_utc": "2026-11-15T18:26:31.830762+00:00",
+    "elapsed_seconds": 0.11873840005137026,
+    "exit_code": 0,
+    "output": null
+  },
+  "final-acceptance-command.json": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-B",
+      "docs/omegadata_v2/implementation/od04r/20261115T181120Z/final_check.py"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:42:32.941537+00:00",
+    "end_utc": "2026-11-15T18:42:33.651510+00:00",
+    "elapsed_seconds": 0.7099693999625742,
+    "exit_code": 1,
+    "output": null
+  },
+  "final-status-reviewed.json": {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "-uall"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:10.125954+00:00",
+    "end_utc": "2026-11-15T18:39:10.315263+00:00",
+    "elapsed_seconds": 0.1893047000048682,
+    "exit_code": 0,
+    "output": null
+  },
+  "final-status.json": {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "-uall"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:26:31.450135+00:00",
+    "end_utc": "2026-11-15T18:26:31.711279+00:00",
+    "elapsed_seconds": 0.26114690001122653,
+    "exit_code": 0,
+    "output": null
+  },
+  "git-branch.json": {
+    "command": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:15:39.117793+00:00",
+    "end_utc": "2026-11-15T18:15:39.187219+00:00",
+    "elapsed_seconds": 0.06943309999769554,
+    "exit_code": 0,
+    "output": null
+  },
+  "git-diff.json": {
+    "command": [
+      "git",
+      "diff",
+      "--stat"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:15:39.326976+00:00",
+    "end_utc": "2026-11-15T18:15:39.406047+00:00",
+    "elapsed_seconds": 0.07908039999892935,
+    "exit_code": 0,
+    "output": null
+  },
+  "git-head.json": {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:15:39.187653+00:00",
+    "end_utc": "2026-11-15T18:15:39.247461+00:00",
+    "elapsed_seconds": 0.05981820001034066,
+    "exit_code": 0,
+    "output": null
+  },
+  "git-history.json": {
+    "command": [
+      "git",
+      "log",
+      "-5",
+      "--oneline"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:15:39.406501+00:00",
+    "end_utc": "2026-11-15T18:15:39.465467+00:00",
+    "elapsed_seconds": 0.05897640000330284,
+    "exit_code": 0,
+    "output": null
+  },
+  "git-main.json": {
+    "command": [
+      "git",
+      "rev-parse",
+      "main"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:15:39.465914+00:00",
+    "end_utc": "2026-11-15T18:15:39.522118+00:00",
+    "elapsed_seconds": 0.05621060001431033,
+    "exit_code": 0,
+    "output": null
+  },
+  "git-root.json": {
+    "command": [
+      "git",
+      "rev-parse",
+      "--show-toplevel"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:15:39.043991+00:00",
+    "end_utc": "2026-11-15T18:15:39.117362+00:00",
+    "elapsed_seconds": 0.07335600000806153,
+    "exit_code": 0,
+    "output": null
+  },
+  "git-status.json": {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:15:39.248006+00:00",
+    "end_utc": "2026-11-15T18:15:39.326589+00:00",
+    "elapsed_seconds": 0.07858789997408167,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-filesystem.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "stat",
+      "-f",
+      "-c",
+      "%T",
+      "/home/parilrupani"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:51.834924+00:00",
+    "end_utc": "2026-11-15T18:39:55.237686+00:00",
+    "elapsed_seconds": 3.402764300000854,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-matrix-launch.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/matrix.py",
+      "linux312-final",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:20:00.276633+00:00",
+    "end_utc": "2026-11-15T18:21:05.381828+00:00",
+    "elapsed_seconds": 65.10521559999324,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-oracle-missing-negative.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/independent_oracle.py",
+      "/home/parilrupani/omega-od04-process-missing-c4804036df5a41a0ab1051a152a9e397"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:21:48.242129+00:00",
+    "end_utc": "2026-11-15T18:21:52.376483+00:00",
+    "elapsed_seconds": 4.134368999977596,
+    "exit_code": 1,
+    "output": null
+  },
+  "linux-oracle-moved-negative.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/independent_oracle.py",
+      "/home/parilrupani/omega-od04-process-pcskyp1v"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:25:14.922708+00:00",
+    "end_utc": "2026-11-15T18:25:15.589402+00:00",
+    "elapsed_seconds": 0.6667034000274725,
+    "exit_code": 1,
+    "output": null
+  },
+  "linux-oracle-moved-positive.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/independent_oracle.py",
+      "/home/parilrupani/omega-od04-process-pcskyp1v-moved-for-negative"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:25:15.590365+00:00",
+    "end_utc": "2026-11-15T18:25:16.344859+00:00",
+    "elapsed_seconds": 0.7545085999881849,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-oracle-positive.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/independent_oracle.py",
+      "/home/parilrupani/omega-od04-process-pcskyp1v"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:22:23.197118+00:00",
+    "end_utc": "2026-11-15T18:22:23.896955+00:00",
+    "elapsed_seconds": 0.6998396000126377,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-original-symlink-proof.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-symlink-proof",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "-k",
+      "symlink_payload_escape or cache_escape_never_opens_external_sentinel",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:32:51.064593+00:00",
+    "end_utc": "2026-11-15T18:33:00.542644+00:00",
+    "elapsed_seconds": 9.478080700035207,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-prepare.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/prepare_linux.py",
+      "/mnt/c/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04r-copy-hmf5jvyc/repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:19:40.309446+00:00",
+    "end_utc": "2026-11-15T18:20:00.249259+00:00",
+    "elapsed_seconds": 19.939823900000192,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-process.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/process_experiments.py",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "linux-fresh"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:21:52.380123+00:00",
+    "end_utc": "2026-11-15T18:22:23.175165+00:00",
+    "elapsed_seconds": 30.79502910003066,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-relocate.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/relocate_disposable.py",
+      "/home/parilrupani/omega-od04-process-pcskyp1v"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:25:07.550509+00:00",
+    "end_utc": "2026-11-15T18:25:14.899653+00:00",
+    "elapsed_seconds": 7.349154499999713,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux-reviewed-launch.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/matrix.py",
+      "linux312-reviewed",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:35:33.391902+00:00",
+    "end_utc": "2026-11-15T18:36:49.749384+00:00",
+    "elapsed_seconds": 76.3574862999958,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux312-all-source-final.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/source_identity.py",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:26:26.899849+00:00",
+    "end_utc": "2026-11-15T18:26:31.272539+00:00",
+    "elapsed_seconds": 4.372715700010303,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux312-all-source-reviewed.json": {
+    "command": [
+      "wsl",
+      "--exec",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/source_identity.py",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:03.567692+00:00",
+    "end_utc": "2026-11-15T18:39:09.955872+00:00",
+    "elapsed_seconds": 6.388208399992436,
+    "exit_code": 0,
+    "output": null
+  },
+  "linux312-final-collection.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-final-collection",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:20:01.947148+00:00",
+    "end_utc": "2026-11-15T18:20:04.991982+00:00",
+    "elapsed_seconds": 3.044876305999999,
+    "exit_code": 0,
+    "output": "linux312-final-collection.txt"
+  },
+  "linux312-final-environment.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-final-environment",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "environment"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:20:01.487023+00:00",
+    "end_utc": "2026-11-15T18:20:01.656171+00:00",
+    "elapsed_seconds": 0.16912307799999837,
+    "exit_code": 0,
+    "output": "linux312-final-environment.txt"
+  },
+  "linux312-final-full.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-final-full",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "-q",
+      "-m",
+      "not realdata",
+      "--cov=omegadata",
+      "--cov-branch",
+      "--cov-report=term-missing"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:20:12.238007+00:00",
+    "end_utc": "2026-11-15T18:20:48.789295+00:00",
+    "elapsed_seconds": 36.55128645599999,
+    "exit_code": 0,
+    "output": "linux312-final-full.txt"
+  },
+  "linux312-final-mypy.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-final-mypy",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "mypy",
+      "src/omegadata"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:20:50.746433+00:00",
+    "end_utc": "2026-11-15T18:21:04.122561+00:00",
+    "elapsed_seconds": 13.376118426000005,
+    "exit_code": 0,
+    "output": "linux312-final-mypy.txt"
+  },
+  "linux312-final-pip.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-final-pip",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pip",
+      "check"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:21:04.409504+00:00",
+    "end_utc": "2026-11-15T18:21:05.466737+00:00",
+    "elapsed_seconds": 1.0572339830000033,
+    "exit_code": 0,
+    "output": "linux312-final-pip.txt"
+  },
+  "linux312-final-ruff.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-final-ruff",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "tests",
+      "scripts"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:20:50.264344+00:00",
+    "end_utc": "2026-11-15T18:20:50.356472+00:00",
+    "elapsed_seconds": 0.0921293730000059,
+    "exit_code": 0,
+    "output": "linux312-final-ruff.txt"
+  },
+  "linux312-final-targeted.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-final-targeted",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01_source_rights.py",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "tests/unit/test_od02_acquisition.py",
+      "tests/unit/test_od02v_portability.py",
+      "tests/unit/test_od04_raw_archive.py",
+      "tests/unit/test_od04r_adversarial.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:20:05.682652+00:00",
+    "end_utc": "2026-11-15T18:20:11.523205+00:00",
+    "elapsed_seconds": 5.8405512900000005,
+    "exit_code": 0,
+    "output": "linux312-final-targeted.txt"
+  },
+  "linux312-reviewed-collection.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-reviewed-collection",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:35:40.807414+00:00",
+    "end_utc": "2026-11-15T18:35:44.640174+00:00",
+    "elapsed_seconds": 3.832793668,
+    "exit_code": 0,
+    "output": "linux312-reviewed-collection.txt"
+  },
+  "linux312-reviewed-environment.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-reviewed-environment",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "environment"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:35:40.275610+00:00",
+    "end_utc": "2026-11-15T18:35:40.512081+00:00",
+    "elapsed_seconds": 0.23645989999999983,
+    "exit_code": 0,
+    "output": "linux312-reviewed-environment.txt"
+  },
+  "linux312-reviewed-full.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-reviewed-full",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "-q",
+      "-m",
+      "not realdata",
+      "--cov=omegadata",
+      "--cov-branch",
+      "--cov-report=term-missing"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:35:51.795063+00:00",
+    "end_utc": "2026-11-15T18:36:34.601126+00:00",
+    "elapsed_seconds": 42.806084897999995,
+    "exit_code": 0,
+    "output": "linux312-reviewed-full.txt"
+  },
+  "linux312-reviewed-mypy.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-reviewed-mypy",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "mypy",
+      "src/omegadata"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:36:36.432997+00:00",
+    "end_utc": "2026-11-15T18:36:48.358866+00:00",
+    "elapsed_seconds": 11.925873476,
+    "exit_code": 0,
+    "output": "linux312-reviewed-mypy.txt"
+  },
+  "linux312-reviewed-pip.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-reviewed-pip",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pip",
+      "check"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:36:48.731379+00:00",
+    "end_utc": "2026-11-15T18:36:49.578135+00:00",
+    "elapsed_seconds": 0.8467540800000108,
+    "exit_code": 0,
+    "output": "linux312-reviewed-pip.txt"
+  },
+  "linux312-reviewed-ruff.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-reviewed-ruff",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "tests",
+      "scripts"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:36:36.046497+00:00",
+    "end_utc": "2026-11-15T18:36:36.150334+00:00",
+    "elapsed_seconds": 0.10383262500000257,
+    "exit_code": 0,
+    "output": "linux312-reviewed-ruff.txt"
+  },
+  "linux312-reviewed-targeted.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-reviewed-targeted",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01_source_rights.py",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "tests/unit/test_od02_acquisition.py",
+      "tests/unit/test_od02v_portability.py",
+      "tests/unit/test_od04_raw_archive.py",
+      "tests/unit/test_od04r_adversarial.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:35:45.170493+00:00",
+    "end_utc": "2026-11-15T18:35:51.095870+00:00",
+    "elapsed_seconds": 5.925379866,
+    "exit_code": 0,
+    "output": "linux312-reviewed-targeted.txt"
+  },
+  "linux312-symlink-proof.json": {
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+      "linux312-symlink-proof",
+      "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "-k",
+      "symlink_payload_escape or cache_escape_never_opens_external_sentinel",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "start_utc": "2026-11-15T18:32:58.387508+00:00",
+    "end_utc": "2026-11-15T18:33:00.480314+00:00",
+    "elapsed_seconds": 2.0927884889999993,
+    "exit_code": 0,
+    "output": "linux312-symlink-proof.txt"
+  },
+  "main-diff-reviewed.json": {
+    "command": [
+      "git",
+      "diff",
+      "--name-status",
+      "main...HEAD"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:09.957342+00:00",
+    "end_utc": "2026-11-15T18:39:10.124264+00:00",
+    "elapsed_seconds": 0.16692059999331832,
+    "exit_code": 0,
+    "output": null
+  },
+  "main-diff.json": {
+    "command": [
+      "git",
+      "diff",
+      "--name-status",
+      "main...HEAD"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:26:31.274149+00:00",
+    "end_utc": "2026-11-15T18:26:31.448575+00:00",
+    "elapsed_seconds": 0.1744390000239946,
+    "exit_code": 0,
+    "output": null
+  },
+  "reconciliation-final.json": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-B",
+      "docs/omegadata_v2/implementation/od04r/20261115T181120Z/reconcile.py"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:32:30.117813+00:00",
+    "end_utc": "2026-11-15T18:33:15.093246+00:00",
+    "elapsed_seconds": 44.97546270000748,
+    "exit_code": 0,
+    "output": null
+  },
+  "reconciliation-reviewed.json": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-B",
+      "docs/omegadata_v2/implementation/od04r/20261115T181120Z/reconcile_reviewed.py"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:41.449465+00:00",
+    "end_utc": "2026-11-15T18:39:51.021539+00:00",
+    "elapsed_seconds": 9.572093099995982,
+    "exit_code": 0,
+    "output": null
+  },
+  "render-reports.json": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-B",
+      "docs/omegadata_v2/implementation/od04r/20261115T181120Z/report.py"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:40:26.516703+00:00",
+    "end_utc": "2026-11-15T18:40:26.801377+00:00",
+    "elapsed_seconds": 0.28467369999270886,
+    "exit_code": 0,
+    "output": null
+  },
+  "win-oracle-missing-negative.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\independent_oracle.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\omega-od04-process-missing-3139bbaf02994f65b8b75706422a2603"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:22:24.404372+00:00",
+    "end_utc": "2026-11-15T18:22:24.559817+00:00",
+    "elapsed_seconds": 0.15544559998670593,
+    "exit_code": 1,
+    "output": null
+  },
+  "win-oracle-moved-negative.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\independent_oracle.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-wu41svu0"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:25:06.433839+00:00",
+    "end_utc": "2026-11-15T18:25:06.647251+00:00",
+    "elapsed_seconds": 0.21341660001780838,
+    "exit_code": 1,
+    "output": null
+  },
+  "win-oracle-moved-positive.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\independent_oracle.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-wu41svu0-moved-for-negative"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:25:06.647934+00:00",
+    "end_utc": "2026-11-15T18:25:06.868993+00:00",
+    "elapsed_seconds": 0.2210657999967225,
+    "exit_code": 0,
+    "output": null
+  },
+  "win-oracle-positive.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\independent_oracle.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-wu41svu0"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:22:57.044438+00:00",
+    "end_utc": "2026-11-15T18:22:57.491358+00:00",
+    "elapsed_seconds": 0.44691790000069886,
+    "exit_code": 0,
+    "output": null
+  },
+  "win-process.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\process_experiments.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "win-fresh"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:22:24.560304+00:00",
+    "end_utc": "2026-11-15T18:22:56.988800+00:00",
+    "elapsed_seconds": 32.428554100042675,
+    "exit_code": 0,
+    "output": null
+  },
+  "win-relocate.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\relocate_disposable.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-wu41svu0"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:25:06.124449+00:00",
+    "end_utc": "2026-11-15T18:25:06.415235+00:00",
+    "elapsed_seconds": 0.2907911000074819,
+    "exit_code": 0,
+    "output": null
+  },
+  "win311-all-source-final.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\source_identity.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:26:26.548723+00:00",
+    "end_utc": "2026-11-15T18:26:26.898790+00:00",
+    "elapsed_seconds": 0.350073000008706,
+    "exit_code": 0,
+    "output": null
+  },
+  "win311-all-source-reviewed.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\source_identity.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:03.415433+00:00",
+    "end_utc": "2026-11-15T18:39:03.566550+00:00",
+    "elapsed_seconds": 0.1511241999687627,
+    "exit_code": 0,
+    "output": null
+  },
+  "win311-final-collection.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-final-collection",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:20:57.562996+00:00",
+    "end_utc": "2026-11-15T18:21:11.118078+00:00",
+    "elapsed_seconds": 13.547000000020489,
+    "exit_code": 0,
+    "output": "win311-final-collection.txt"
+  },
+  "win311-final-environment.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-final-environment",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "environment"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:20:56.010608+00:00",
+    "end_utc": "2026-11-15T18:20:57.045691+00:00",
+    "elapsed_seconds": 1.047000000020489,
+    "exit_code": 0,
+    "output": "win311-final-environment.txt"
+  },
+  "win311-final-full.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-final-full",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pytest",
+      "-q",
+      "-m",
+      "not realdata",
+      "--cov=omegadata",
+      "--cov-branch",
+      "--cov-report=term-missing"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:21:59.497712+00:00",
+    "end_utc": "2026-11-15T18:24:19.540423+00:00",
+    "elapsed_seconds": 140.03100000001723,
+    "exit_code": 0,
+    "output": "win311-final-full.txt"
+  },
+  "win311-final-mypy.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-final-mypy",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "mypy",
+      "src/omegadata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:24:25.517241+00:00",
+    "end_utc": "2026-11-15T18:24:57.725089+00:00",
+    "elapsed_seconds": 32.20299999997951,
+    "exit_code": 0,
+    "output": "win311-final-mypy.txt"
+  },
+  "win311-final-pip.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-final-pip",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pip",
+      "check"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:24:58.153249+00:00",
+    "end_utc": "2026-11-15T18:24:59.758500+00:00",
+    "elapsed_seconds": 1.5939999999827705,
+    "exit_code": 0,
+    "output": "win311-final-pip.txt"
+  },
+  "win311-final-ruff.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-final-ruff",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "tests",
+      "scripts"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:24:22.488626+00:00",
+    "end_utc": "2026-11-15T18:24:25.071292+00:00",
+    "elapsed_seconds": 2.577999999979511,
+    "exit_code": 0,
+    "output": "win311-final-ruff.txt"
+  },
+  "win311-final-targeted.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-final-targeted",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01_source_rights.py",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "tests/unit/test_od02_acquisition.py",
+      "tests/unit/test_od02v_portability.py",
+      "tests/unit/test_od04_raw_archive.py",
+      "tests/unit/test_od04r_adversarial.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:21:12.117337+00:00",
+    "end_utc": "2026-11-15T18:21:58.661302+00:00",
+    "elapsed_seconds": 46.54700000002049,
+    "exit_code": 0,
+    "output": "win311-final-targeted.txt"
+  },
+  "win311-matrix-launch.json": {
+    "command": [
+      "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-copy-78jr_vg3/venv311/Scripts/python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\matrix.py",
+      "win311-final",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:20:54.259579+00:00",
+    "end_utc": "2026-11-15T18:24:59.831538+00:00",
+    "elapsed_seconds": 245.57201709999936,
+    "exit_code": 0,
+    "output": null
+  },
+  "win311-reviewed-collection.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-reviewed-collection",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:35:23.940659+00:00",
+    "end_utc": "2026-11-15T18:35:28.539910+00:00",
+    "elapsed_seconds": 4.594000000040978,
+    "exit_code": 0,
+    "output": "win311-reviewed-collection.txt"
+  },
+  "win311-reviewed-environment.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-reviewed-environment",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "environment"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:35:23.498652+00:00",
+    "end_utc": "2026-11-15T18:35:23.580248+00:00",
+    "elapsed_seconds": 0.0779999999795109,
+    "exit_code": 0,
+    "output": "win311-reviewed-environment.txt"
+  },
+  "win311-reviewed-full.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-reviewed-full",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pytest",
+      "-q",
+      "-m",
+      "not realdata",
+      "--cov=omegadata",
+      "--cov-branch",
+      "--cov-report=term-missing"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:36:18.378336+00:00",
+    "end_utc": "2026-11-15T18:38:39.539010+00:00",
+    "elapsed_seconds": 141.15600000001723,
+    "exit_code": 0,
+    "output": "win311-reviewed-full.txt"
+  },
+  "win311-reviewed-mypy.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-reviewed-mypy",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "mypy",
+      "src/omegadata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:38:43.833747+00:00",
+    "end_utc": "2026-11-15T18:39:13.663252+00:00",
+    "elapsed_seconds": 29.82800000003772,
+    "exit_code": 0,
+    "output": "win311-reviewed-mypy.txt"
+  },
+  "win311-reviewed-pip.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-reviewed-pip",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pip",
+      "check"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:39:14.095589+00:00",
+    "end_utc": "2026-11-15T18:39:15.563056+00:00",
+    "elapsed_seconds": 1.4679999999934807,
+    "exit_code": 0,
+    "output": "win311-reviewed-pip.txt"
+  },
+  "win311-reviewed-ruff.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-reviewed-ruff",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "tests",
+      "scripts"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:38:41.712305+00:00",
+    "end_utc": "2026-11-15T18:38:43.528983+00:00",
+    "elapsed_seconds": 1.8280000000377186,
+    "exit_code": 0,
+    "output": "win311-reviewed-ruff.txt"
+  },
+  "win311-reviewed-targeted.json": {
+    "command": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win311-reviewed-targeted",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01_source_rights.py",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "tests/unit/test_od02_acquisition.py",
+      "tests/unit/test_od02v_portability.py",
+      "tests/unit/test_od04_raw_archive.py",
+      "tests/unit/test_od04r_adversarial.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "start_utc": "2026-11-15T18:35:29.555427+00:00",
+    "end_utc": "2026-11-15T18:36:17.366823+00:00",
+    "elapsed_seconds": 47.81199999997625,
+    "exit_code": 0,
+    "output": "win311-reviewed-targeted.txt"
+  },
+  "win314-all-source-final.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\source_identity.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:26:26.317782+00:00",
+    "end_utc": "2026-11-15T18:26:26.541857+00:00",
+    "elapsed_seconds": 0.22407579998252913,
+    "exit_code": 0,
+    "output": null
+  },
+  "win314-all-source-reviewed.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\source_identity.py",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:03.224214+00:00",
+    "end_utc": "2026-11-15T18:39:03.414772+00:00",
+    "elapsed_seconds": 0.1905585000058636,
+    "exit_code": 0,
+    "output": null
+  },
+  "win314-final-collection.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-final-collection",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:19:10.057977+00:00",
+    "end_utc": "2026-11-15T18:19:13.073789+00:00",
+    "elapsed_seconds": 3.015798399981577,
+    "exit_code": 0,
+    "output": "win314-final-collection.txt"
+  },
+  "win314-final-environment.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-final-environment",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "environment"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:19:09.611914+00:00",
+    "end_utc": "2026-11-15T18:19:09.708226+00:00",
+    "elapsed_seconds": 0.09628199995495379,
+    "exit_code": 0,
+    "output": "win314-final-environment.txt"
+  },
+  "win314-final-full.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-final-full",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "-q",
+      "-m",
+      "not realdata",
+      "--cov=omegadata",
+      "--cov-branch",
+      "--cov-report=term-missing"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:19:52.619012+00:00",
+    "end_utc": "2026-11-15T18:21:26.820983+00:00",
+    "elapsed_seconds": 94.20196440001018,
+    "exit_code": 0,
+    "output": "win314-final-full.txt"
+  },
+  "win314-final-mypy.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-final-mypy",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "mypy",
+      "src/omegadata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:21:30.539354+00:00",
+    "end_utc": "2026-11-15T18:22:04.398463+00:00",
+    "elapsed_seconds": 33.85909849999007,
+    "exit_code": 0,
+    "output": "win314-final-mypy.txt"
+  },
+  "win314-final-pip.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-final-pip",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pip",
+      "check"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:22:04.897862+00:00",
+    "end_utc": "2026-11-15T18:22:05.922402+00:00",
+    "elapsed_seconds": 1.024528799986001,
+    "exit_code": 0,
+    "output": "win314-final-pip.txt"
+  },
+  "win314-final-ruff.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-final-ruff",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "tests",
+      "scripts"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:21:29.706129+00:00",
+    "end_utc": "2026-11-15T18:21:30.229213+00:00",
+    "elapsed_seconds": 0.523058700026013,
+    "exit_code": 0,
+    "output": "win314-final-ruff.txt"
+  },
+  "win314-final-targeted.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-final-targeted",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01_source_rights.py",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "tests/unit/test_od02_acquisition.py",
+      "tests/unit/test_od02v_portability.py",
+      "tests/unit/test_od04_raw_archive.py",
+      "tests/unit/test_od04r_adversarial.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:19:14.335103+00:00",
+    "end_utc": "2026-11-15T18:19:51.376649+00:00",
+    "elapsed_seconds": 37.041532600007486,
+    "exit_code": 0,
+    "output": "win314-final-targeted.txt"
+  },
+  "win314-green.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-green",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od04r_adversarial.py",
+      "tests/unit/test_od04_raw_archive.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:17:49.571480+00:00",
+    "end_utc": "2026-11-15T18:18:11.251885+00:00",
+    "elapsed_seconds": 21.68039080000017,
+    "exit_code": 0,
+    "output": "win314-green.txt"
+  },
+  "win314-lint-preview.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-lint-preview",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "tests",
+      "scripts"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:18:51.310170+00:00",
+    "end_utc": "2026-11-15T18:18:54.095577+00:00",
+    "elapsed_seconds": 2.7853899000328965,
+    "exit_code": 1,
+    "output": "win314-lint-preview.txt"
+  },
+  "win314-red.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-red",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od04r_adversarial.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:17:04.744144+00:00",
+    "end_utc": "2026-11-15T18:17:07.207488+00:00",
+    "elapsed_seconds": 2.4633347000344656,
+    "exit_code": 1,
+    "output": "win314-red.txt"
+  },
+  "win314-reviewed-collection.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-reviewed-collection",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:35:13.611802+00:00",
+    "end_utc": "2026-11-15T18:35:16.628728+00:00",
+    "elapsed_seconds": 3.0169351999647915,
+    "exit_code": 0,
+    "output": "win314-reviewed-collection.txt"
+  },
+  "win314-reviewed-environment.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-reviewed-environment",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "environment"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:35:13.189775+00:00",
+    "end_utc": "2026-11-15T18:35:13.303264+00:00",
+    "elapsed_seconds": 0.11345940001774579,
+    "exit_code": 0,
+    "output": "win314-reviewed-environment.txt"
+  },
+  "win314-reviewed-full.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-reviewed-full",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "-q",
+      "-m",
+      "not realdata",
+      "--cov=omegadata",
+      "--cov-branch",
+      "--cov-report=term-missing"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:36:00.091793+00:00",
+    "end_utc": "2026-11-15T18:37:44.810594+00:00",
+    "elapsed_seconds": 104.71879999997327,
+    "exit_code": 0,
+    "output": "win314-reviewed-full.txt"
+  },
+  "win314-reviewed-mypy.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-reviewed-mypy",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "mypy",
+      "src/omegadata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:37:50.604592+00:00",
+    "end_utc": "2026-11-15T18:38:23.972189+00:00",
+    "elapsed_seconds": 33.367585699947085,
+    "exit_code": 0,
+    "output": "win314-reviewed-mypy.txt"
+  },
+  "win314-reviewed-pip.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-reviewed-pip",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pip",
+      "check"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:38:24.367889+00:00",
+    "end_utc": "2026-11-15T18:38:25.419088+00:00",
+    "elapsed_seconds": 1.0511925999890082,
+    "exit_code": 0,
+    "output": "win314-reviewed-pip.txt"
+  },
+  "win314-reviewed-ruff.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-reviewed-ruff",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "tests",
+      "scripts"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:37:47.702720+00:00",
+    "end_utc": "2026-11-15T18:37:50.286157+00:00",
+    "elapsed_seconds": 2.583422800002154,
+    "exit_code": 0,
+    "output": "win314-reviewed-ruff.txt"
+  },
+  "win314-reviewed-targeted.json": {
+    "command": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+      "win314-reviewed-targeted",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+      "pytest",
+      "-q",
+      "tests/unit/test_od01_source_rights.py",
+      "tests/unit/test_od01r_rights_hardening.py",
+      "tests/unit/test_od02_acquisition.py",
+      "tests/unit/test_od02v_portability.py",
+      "tests/unit/test_od04_raw_archive.py",
+      "tests/unit/test_od04r_adversarial.py",
+      "-m",
+      "not realdata"
+    ],
+    "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "start_utc": "2026-11-15T18:35:17.714182+00:00",
+    "end_utc": "2026-11-15T18:35:58.999877+00:00",
+    "elapsed_seconds": 41.28570180002134,
+    "exit_code": 0,
+    "output": "win314-reviewed-targeted.txt"
+  },
+  "windows-filesystem.json": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-B",
+      "docs/omegadata_v2/implementation/od04r/20261115T181120Z/filesystem_probe.py"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-15T18:39:51.559403+00:00",
+    "end_utc": "2026-11-15T18:39:51.672857+00:00",
+    "elapsed_seconds": 0.11345150001579896,
+    "exit_code": 0,
+    "output": null
+  }
+}

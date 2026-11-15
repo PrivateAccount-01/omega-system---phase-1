@@ -1,0 +1,121 @@
+wsl: Failed to translate 'G:\Scripts\'
+wsl: Failed to translate 'G:\'
+wsl: Failed to translate 'D:\Scripts\'
+wsl: Failed to translate 'D:\'
+wsl: Failed to translate 'G:\Scripts\'
+wsl: Failed to translate 'G:\'
+wsl: Failed to translate 'D:\Scripts\'
+wsl: Failed to translate 'D:\'
+wsl: Failed to translate 'G:\Scripts\'
+wsl: Failed to translate 'G:\'
+wsl: Failed to translate 'D:\Scripts\'
+wsl: Failed to translate 'D:\'
+wsl: Failed to translate 'D:\flutter_sdk\flutter\bin'
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+    "linux312-symlink-proof",
+    "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "-k",
+    "symlink_payload_escape or cache_escape_never_opens_external_sentinel",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "baseline": "44090a42958869faaab57a42b65f7ad8571d924d",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T18:32:58.387508+00:00",
+  "end_utc": "2026-11-15T18:33:00.480314+00:00",
+  "elapsed_seconds": 2.0927884889999993,
+  "exit_code": 0,
+  "output": "linux312-symlink-proof.txt",
+  "sandbox": "/tmp/omega-od02v-tests-ufrb_ypy",
+  "root": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "guard_denials": {},
+  "symlink_observations": [
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "absolute",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op0/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "traversal",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op1/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "manifest_escape",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op2/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "pointer_escape",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op3/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "absolute",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op4/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "traversal",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op5/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "manifest_escape",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op6/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "pointer_escape",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op7/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r06_real_symlink_payload_escape",
+      "form": null,
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r06_real_symlink_payload_0/raw/nse_equity_bhavcopy/year=2024/month=01/linked.bin"
+    }
+  ],
+  "call_counts": {
+    "passed": 9
+  }
+}
+.........                                                                [100%]
+9 passed, 69 deselected in 1.05s
+

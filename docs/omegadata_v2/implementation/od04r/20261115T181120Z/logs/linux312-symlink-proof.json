@@ -1,0 +1,232 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+    "linux312-symlink-proof",
+    "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "-k",
+    "symlink_payload_escape or cache_escape_never_opens_external_sentinel",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "baseline": "44090a42958869faaab57a42b65f7ad8571d924d",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T18:32:58.387508+00:00",
+  "end_utc": "2026-11-15T18:33:00.480314+00:00",
+  "elapsed_seconds": 2.0927884889999993,
+  "exit_code": 0,
+  "output": "linux312-symlink-proof.txt",
+  "sandbox": "/tmp/omega-od02v-tests-ufrb_ypy",
+  "root": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-traversal]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-manifest_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-pointer_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-traversal]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-manifest_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-pointer_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_real_symlink_payload_escape",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:4443/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:80/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:8080/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[http://example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[ftp://example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[file://example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[//example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://user:pass@example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://@example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid@other.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https:///example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:65536/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:-1/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:abc/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:0443/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid../file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid\\\\@other.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid%2e/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://exam\\nple.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[ https://example.invalid/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://127.0.0.1/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://10.0.0.1/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://[::1]/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://[bad/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://localhost/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://loopback.local/file]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://example.invalid/data]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://example.invalid:443/data]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://EXAMPLE.INVALID./data?q=http://foreign.invalid:80]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[partition]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[payload_directory]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change0]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change1]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change2]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change3]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change4]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change5]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change6]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change7]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change8]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change9]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[[]]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[null]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[{bad]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[{\"checksum\":\"a\",\"checksum\":\"b\"}]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[absolute]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[bare]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[repo_relative]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_corporate_actions]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_bse_bhavcopy]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_bse_urls-main]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-main]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-_run]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r08_fo_loader_pending_before_db_or_http",
+    "tests/unit/test_od01r_rights_hardening.py::test_r13_fo_loader_rechecks_after_db_setup",
+    "tests/unit/test_od01r_rights_hardening.py::test_r09_backfill_policy_refusal_terminal",
+    "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[orchestrator]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[pipeline]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[scheduled_ca]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[https://example.invalid:4443/x]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[http://example.invalid/x]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[False]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[True]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r12_forged_strings_are_only_technical_consistency",
+    "tests/unit/test_od01r_rights_hardening.py::test_r08_pending_probe_bootstrap_no_temp_or_subprocess",
+    "tests/unit/test_od01r_rights_hardening.py::test_r13_bse_discovery_refreshes_before_get",
+    "tests/unit/test_od01r_rights_hardening.py::test_r13_simultaneous_source_scopes_and_refresh",
+    "tests/unit/test_od01r_rights_hardening.py::test_r16_harness_blocks_real_side_effects"
+  ],
+  "symlink_observations": [
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "absolute",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op0/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "traversal",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op1/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "manifest_escape",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op2/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "pointer_escape",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op3/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "absolute",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op4/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "traversal",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op5/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "manifest_escape",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": false,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op6/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "pointer_escape",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r05_cache_escape_never_op7/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r06_real_symlink_payload_escape",
+      "form": null,
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ufrb_ypy/pytest/test_r06_real_symlink_payload_0/raw/nse_equity_bhavcopy/year=2024/month=01/linked.bin"
+    }
+  ],
+  "call_counts": {
+    "passed": 9
+  }
+}

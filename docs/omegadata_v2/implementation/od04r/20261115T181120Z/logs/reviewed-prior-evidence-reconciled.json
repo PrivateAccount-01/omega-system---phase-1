@@ -1,0 +1,722 @@
+{
+  "runtime_checks": [
+    {
+      "label": "win314-accepted",
+      "source_identity_match": true,
+      "gates": {
+        "collection": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win314-accepted-collection.json",
+          "metadata_sha256": "5157a10ef05ee81aa377117a02ac79b79ad155b2c96a605333cf1e73de752203",
+          "raw_sha256": "cc4fd5b0ac99ad476ecae79d1e49264051ebc72fbf3aa11f9594203044427321",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:16:45.092441+00:00",
+          "end_utc": "2026-11-15T13:16:48.105374+00:00",
+          "counts": {},
+          "deselected": [
+            "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+            "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+          ]
+        },
+        "targeted": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win314-accepted-targeted.json",
+          "metadata_sha256": "795fc2890a593aa6bd9ac46c1b1359538dc21b99c3c18d11e5b83a55be97ce17",
+          "raw_sha256": "f20e9654740f2a0ad55a27da8d4f8d10b0c516b40b177019dd8e8711fdc2e262",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:16:48.946638+00:00",
+          "end_utc": "2026-11-15T13:17:08.190774+00:00",
+          "counts": {
+            "passed": 340,
+            "skipped": 10
+          },
+          "deselected": []
+        },
+        "full": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win314-accepted-full.json",
+          "metadata_sha256": "ef23bf444e3df8c08be80483fb9535c01dabb598f6a046271cab8b154f0b0c8e",
+          "raw_sha256": "3ff41fb95a36d08db5e52f49fd7395a778480ba31e544615503b9acd802bf049",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:17:09.171690+00:00",
+          "end_utc": "2026-11-15T13:17:58.813240+00:00",
+          "counts": {
+            "passed": 451,
+            "skipped": 10
+          },
+          "deselected": [
+            "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+            "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+          ]
+        },
+        "ruff": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win314-accepted-ruff.json",
+          "metadata_sha256": "ddad1a46ecdd8d538a8b1ca9595c68b8ac0218b2eae989ae302a2ef44070de62",
+          "raw_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:18:00.695025+00:00",
+          "end_utc": "2026-11-15T13:18:01.017916+00:00",
+          "counts": {},
+          "deselected": []
+        },
+        "mypy": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win314-accepted-mypy.json",
+          "metadata_sha256": "eafaeada205cf734d20b17d7a0286ecccb874787ae984269ceaf5f23b7d60b12",
+          "raw_sha256": "d118a4201f267325695bdc581e6b10cc8bd325c8bd311be8db6a62db052e092f",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:18:01.560857+00:00",
+          "end_utc": "2026-11-15T13:18:21.223003+00:00",
+          "counts": {},
+          "deselected": []
+        },
+        "pip": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win314-accepted-pip.json",
+          "metadata_sha256": "a97a07033cbc8d5850a1318e44bcc119ffc0b63837b995b71a157744d05bc9ef",
+          "raw_sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:18:21.744321+00:00",
+          "end_utc": "2026-11-15T13:18:22.978588+00:00",
+          "counts": {},
+          "deselected": []
+        }
+      }
+    },
+    {
+      "label": "win311-accepted",
+      "source_identity_match": true,
+      "gates": {
+        "collection": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win311-accepted-collection.json",
+          "metadata_sha256": "99f17cb68a54166035aba93c0c7080a63dc95c1956a3eb37fd51156029ea7606",
+          "raw_sha256": "87072ff72e3ea8b2c8612b7c624fed1353f7487aa00b0e7fd30d8729b16baf9e",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:19:13.573113+00:00",
+          "end_utc": "2026-11-15T13:19:16.834589+00:00",
+          "counts": {},
+          "deselected": [
+            "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+            "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+          ]
+        },
+        "targeted": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win311-accepted-targeted.json",
+          "metadata_sha256": "46a3eac87a7bc68a31a42df4e630e9928194b6e0459b263069cd113f49e23aaf",
+          "raw_sha256": "f13b006e45e578d4fa32f1b231d650cd09738e63d83120a8ab48916b0846e312",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:19:17.443866+00:00",
+          "end_utc": "2026-11-15T13:19:42.120244+00:00",
+          "counts": {
+            "passed": 340,
+            "skipped": 10
+          },
+          "deselected": []
+        },
+        "full": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win311-accepted-full.json",
+          "metadata_sha256": "8a8f4682254ed67247c91d0fd8a69fddd55d1a09a7d379559caa56cbdda8f74c",
+          "raw_sha256": "b8068ef0ddf90d61323fd57477958a967998f6f879874f815172a52a230e2705",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:19:42.884152+00:00",
+          "end_utc": "2026-11-15T13:20:36.426006+00:00",
+          "counts": {
+            "passed": 451,
+            "skipped": 10
+          },
+          "deselected": [
+            "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+            "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+          ]
+        },
+        "ruff": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win311-accepted-ruff.json",
+          "metadata_sha256": "2862f3369ff9170675f7084af07a525044c7c840494d4f209ec0e1b81cd09325",
+          "raw_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:20:37.621312+00:00",
+          "end_utc": "2026-11-15T13:20:37.952285+00:00",
+          "counts": {},
+          "deselected": []
+        },
+        "mypy": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win311-accepted-mypy.json",
+          "metadata_sha256": "9fc9d525f54087dd30a459bfa645742b7702bdfed566c87b0750d8301fe83514",
+          "raw_sha256": "d118a4201f267325695bdc581e6b10cc8bd325c8bd311be8db6a62db052e092f",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:20:38.452938+00:00",
+          "end_utc": "2026-11-15T13:20:49.958137+00:00",
+          "counts": {},
+          "deselected": []
+        },
+        "pip": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\win311-accepted-pip.json",
+          "metadata_sha256": "30c37e47eae5f41371a873164e47d34bec7dd3799ee700ca9d0eefd74f82ae79",
+          "raw_sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:20:50.351508+00:00",
+          "end_utc": "2026-11-15T13:20:51.839393+00:00",
+          "counts": {},
+          "deselected": []
+        }
+      }
+    },
+    {
+      "label": "linux312-accepted",
+      "source_identity_match": true,
+      "gates": {
+        "collection": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\linux312-accepted-collection.json",
+          "metadata_sha256": "67974420a17e1af7150dca6d458f54205074a7af9079ad08c603a7673f844b83",
+          "raw_sha256": "aba538dfe7923826e294069b2f15a354f973163cd3c5cd8a288fc625e9d7b5b7",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:17:03.960286+00:00",
+          "end_utc": "2026-11-15T13:17:07.642039+00:00",
+          "counts": {},
+          "deselected": [
+            "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+            "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+          ]
+        },
+        "targeted": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\linux312-accepted-targeted.json",
+          "metadata_sha256": "a514392751e7422498ddf225576724387566aa129d657cc6d4dd8a63a22ed4e7",
+          "raw_sha256": "2d619cd4faaf4c2730318352c3c03744152785b64534e2c19477129de80e7dc3",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:17:08.160804+00:00",
+          "end_utc": "2026-11-15T13:17:15.013163+00:00",
+          "counts": {
+            "passed": 348,
+            "skipped": 2
+          },
+          "deselected": []
+        },
+        "full": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\linux312-accepted-full.json",
+          "metadata_sha256": "19a1e6add56e7814d04a23067679c5a6e8a256616ab8b811adcd499dd2d124d3",
+          "raw_sha256": "85635ded8f883ebc65276a35985a4d9f445177cf478d323d691ad2575a055e99",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:17:15.594048+00:00",
+          "end_utc": "2026-11-15T13:18:04.850659+00:00",
+          "counts": {
+            "passed": 459,
+            "skipped": 2
+          },
+          "deselected": [
+            "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+            "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+            "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+          ]
+        },
+        "ruff": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\linux312-accepted-ruff.json",
+          "metadata_sha256": "3bd4ee350766f7185c47e3714af87a053439495327f1b6191c53e00be11323c1",
+          "raw_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:18:06.121468+00:00",
+          "end_utc": "2026-11-15T13:18:06.210438+00:00",
+          "counts": {},
+          "deselected": []
+        },
+        "mypy": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\linux312-accepted-mypy.json",
+          "metadata_sha256": "be4c1d477ac4a90b13ab1cc89a46b98577182a6dc1fc3cbdb86a11745fa0c098",
+          "raw_sha256": "b1fdd8413863455c6896d811c9ab42dc9256d679a668643bb18df2318c3bc875",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:18:06.403211+00:00",
+          "end_utc": "2026-11-15T13:18:22.718252+00:00",
+          "counts": {},
+          "deselected": []
+        },
+        "pip": {
+          "metadata": "docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\logs\\linux312-accepted-pip.json",
+          "metadata_sha256": "1ae02e9a19bd56d0d1d17ccb47860d1a31f0f3eb1b60037c96f9413cdc0edc70",
+          "raw_sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+          "actual_exit": 0,
+          "start_utc": "2026-11-15T13:18:22.972154+00:00",
+          "end_utc": "2026-11-15T13:18:24.260234+00:00",
+          "counts": {},
+          "deselected": []
+        }
+      }
+    }
+  ],
+  "A01_A28": [
+    {
+      "requirement": "A01",
+      "requirement_text": "exact full digest and original bytes",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A02",
+      "requirement_text": "dedup bytes, retain distinct observations",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A03",
+      "requirement_text": "same-day different versions",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A04",
+      "requirement_text": "idempotence includes payload/request/policy identity",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models",
+        "tests/unit/test_od04_raw_archive.py::test_a04_policy_identity_change_is_not_idempotent"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models",
+        "tests/unit/test_od04_raw_archive.py::test_a04_policy_identity_change_is_not_idempotent"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A05",
+      "requirement_text": "conflicting operation reuse",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A06",
+      "requirement_text": "marker-last visibility",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A07",
+      "requirement_text": "five injected and forced-termination boundaries",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A08",
+      "requirement_text": "read-only inventory/retry after interrupted states",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A09",
+      "requirement_text": "twelve thread writers",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A10",
+      "requirement_text": "independent same-hash processes",
+      "old_attribution": [],
+      "exact_function_token_nodes": [],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A11",
+      "requirement_text": "independent different-hash processes",
+      "old_attribution": [],
+      "exact_function_token_nodes": [],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A12",
+      "requirement_text": "full bytes/length/link checks and deterministic corruption scan",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A13",
+      "requirement_text": "traversal/hash/drive/UNC and real directory-link confinement",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[commits]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[objects]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[observations]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[staging]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[relative_path-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[sha256-aaaaaaaaaaaa]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[size-True]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[commits]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[objects]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[observations]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[staging]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[relative_path-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[sha256-aaaaaaaaaaaa]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[size-True]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A14",
+      "requirement_text": "duplicate/invalid JSON and version refusal",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A15",
+      "requirement_text": "mode and synthetic-origin non-escalation",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+        "tests/unit/test_od04_raw_archive.py::test_a15_synthetic_cannot_be_relabelled"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+        "tests/unit/test_od04_raw_archive.py::test_a15_synthetic_cannot_be_relabelled"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A16",
+      "requirement_text": "pending/missing/revoked/scope and commit-time policy refresh",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[MISSING]",
+        "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[REVOKED]",
+        "tests/unit/test_od04_raw_archive.py::test_a16_pending_before_write_or_read",
+        "tests/unit/test_od04_raw_archive.py::test_a16_read_consumer_scope_enforced",
+        "tests/unit/test_od04_raw_archive.py::test_a16_revocation_at_commit_boundary",
+        "tests/unit/test_od04_raw_archive.py::test_a16_revocation_before_replay"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[MISSING]",
+        "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[REVOKED]",
+        "tests/unit/test_od04_raw_archive.py::test_a16_pending_before_write_or_read",
+        "tests/unit/test_od04_raw_archive.py::test_a16_read_consumer_scope_enforced",
+        "tests/unit/test_od04_raw_archive.py::test_a16_revocation_at_commit_boundary",
+        "tests/unit/test_od04_raw_archive.py::test_a16_revocation_before_replay"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A17",
+      "requirement_text": "cache-only no fetch / legacy read-only",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+        "tests/unit/test_od04_raw_archive.py::test_a17_legacy_facade_is_read_only"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+        "tests/unit/test_od04_raw_archive.py::test_a17_legacy_facade_is_read_only"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A18",
+      "requirement_text": "legacy dry-run and all-original preservation",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+        "tests/unit/test_od04_raw_archive.py::test_a18_dry_run_migration_and_cli_verifier"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+        "tests/unit/test_od04_raw_archive.py::test_a18_dry_run_migration_and_cli_verifier"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A19",
+      "requirement_text": "empty/oversize/metadata/entry/total budgets",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a19_metadata_and_entry_budget",
+        "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[0]",
+        "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[17]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a19_metadata_and_entry_budget",
+        "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[0]",
+        "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[17]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A20",
+      "requirement_text": "typed fsync/link ENOSPC/EACCES/EIO injection",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-fsync]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-link]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-fsync]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-link]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-fsync]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-link]"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-fsync]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-link]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-fsync]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-link]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-fsync]",
+        "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-link]"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A21",
+      "requirement_text": "readers during paused publication and independent processes",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader",
+        "tests/unit/test_od04_raw_archive.py::test_a21_reader_during_publication"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader",
+        "tests/unit/test_od04_raw_archive.py::test_a21_reader_during_publication"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A22",
+      "requirement_text": "URL redaction in observation/structured refusal",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A23",
+      "requirement_text": "pinned replay and sorted read-only scan",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+        "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A24",
+      "requirement_text": "actual parser validation, exact era/date/schema/rights references, null published_at",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+        "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy",
+        "tests/unit/test_od04_raw_archive.py::test_a24_structural_state_requires_actual_validator"
+      ],
+      "exact_function_token_nodes": [
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+        "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+        "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy",
+        "tests/unit/test_od04_raw_archive.py::test_a24_structural_state_requires_actual_validator"
+      ],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A25",
+      "requirement_text": "Windows and native Linux filesystem execution",
+      "old_attribution": [
+        "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[sha256-aaaaaaaaaaaa]"
+      ],
+      "exact_function_token_nodes": [],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A26",
+      "requirement_text": "unchanged inherited/full offline suites",
+      "old_attribution": [],
+      "exact_function_token_nodes": [],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A27",
+      "requirement_text": "imports/collection, Ruff, strict mypy49 and pip consistency",
+      "old_attribution": [],
+      "exact_function_token_nodes": [],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    },
+    {
+      "requirement": "A28",
+      "requirement_text": "measured 4KiB/64KiB/1MiB costs, disk and recovery",
+      "old_attribution": [],
+      "exact_function_token_nodes": [],
+      "chronology": "ARCH BLOCKED; no retroactive negative-first claim"
+    }
+  ],
+  "A25_contradiction": "sha256 parameter matched a25 substring; that object-model node does not prove platform execution",
+  "attribution_limits": "Grouped names over-attribute individual parameters; exact assertions and process logs govern.",
+  "historical_gate": "OD04_BLOCKED",
+  "human_exception": false
+}

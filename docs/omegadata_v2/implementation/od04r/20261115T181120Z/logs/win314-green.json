@@ -1,0 +1,490 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+    "win314-green",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od04r_adversarial.py",
+    "tests/unit/test_od04_raw_archive.py",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+  "baseline": "44090a42958869faaab57a42b65f7ad8571d924d",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T18:17:49.571480+00:00",
+  "end_utc": "2026-11-15T18:18:11.251885+00:00",
+  "elapsed_seconds": 21.68039080000017,
+  "exit_code": 0,
+  "output": "win314-green.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-2supv_qi",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[missing-NOT_FOUND]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[empty-EMPTY_ARCHIVE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[staging-EMPTY_ARCHIVE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[orphan-EMPTY_ARCHIVE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[root_file-INTEGRITY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[commits_file-INTEGRITY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_disappears_after_inventory",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_walk_error_cannot_hide_existing_evidence",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_count_is_external_contract",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[-1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[missing]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[staging]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[orphan]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r09_existing_wrong_size_object_refuses_without_overwrite",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r18_independent_link_oracle_and_missing_object",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r18_namespace_mixing_refuses",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[objects]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[observations]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[commits]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[staging]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_pending_before_write_or_read",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_revocation_before_replay",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[17]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a17_legacy_facade_is_read_only",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a15_synthetic_cannot_be_relabelled",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[sha256-aaaaaaaaaaaa]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[size-True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[relative_path-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a21_reader_during_publication",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_revocation_at_commit_boundary",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_metadata_and_entry_budget",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_read_consumer_scope_enforced",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a18_dry_run_migration_and_cli_verifier",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a04_policy_identity_change_is_not_idempotent",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a24_structural_state_requires_actual_validator",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[MISSING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 76
+  }
+}

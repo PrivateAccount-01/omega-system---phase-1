@@ -1,0 +1,52 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+    "linux312-reviewed-targeted",
+    "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "tests/unit/test_od02_acquisition.py",
+    "tests/unit/test_od02v_portability.py",
+    "tests/unit/test_od04_raw_archive.py",
+    "tests/unit/test_od04r_adversarial.py",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "baseline": "44090a42958869faaab57a42b65f7ad8571d924d",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T18:35:45.170493+00:00",
+  "end_utc": "2026-11-15T18:35:51.095870+00:00",
+  "elapsed_seconds": 5.925379866,
+  "exit_code": 0,
+  "output": "linux312-reviewed-targeted.txt",
+  "sandbox": "/tmp/omega-od02v-tests-j4bqjzlv",
+  "root": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "guard_denials": {
+    "DNS": 2,
+    "SUBPROCESS": 2,
+    "PROTECTED_WRITE": 6,
+    "SOCKET": 1,
+    "UDP": 1
+  },
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 375,
+    "skipped": 2
+  }
+}
+........................................................................ [ 19%]
+...................................................................ss... [ 38%]
+........................................................................ [ 57%]
+........................................................................ [ 76%]
+........................................................................ [ 95%]
+.................                                                        [100%]
+=========================== short test summary info ============================
+SKIPPED [2] tests/unit/test_od01r_rights_hardening.py:171: Windows junction test
+375 passed, 2 skipped in 5.33s
+

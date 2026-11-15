@@ -1,0 +1,71 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+    "linux312-final-full",
+    "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata",
+    "--cov-branch",
+    "--cov-report=term-missing"
+  ],
+  "cwd": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "baseline": "44090a42958869faaab57a42b65f7ad8571d924d",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T18:20:12.238007+00:00",
+  "end_utc": "2026-11-15T18:20:48.789295+00:00",
+  "elapsed_seconds": 36.55128645599999,
+  "exit_code": 0,
+  "output": "linux312-final-full.txt",
+  "sandbox": "/tmp/omega-od02v-tests-i4ic_6mk",
+  "root": "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+  "guard_denials": {
+    "DNS": 2,
+    "SUBPROCESS": 3,
+    "PROTECTED_WRITE": 6,
+    "SOCKET": 1,
+    "UDP": 1
+  },
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 479,
+    "skipped": 2
+  }
+}
+   4      2    91%   37, 68
+src/omegadata/track_a/source_registry.py                 30      1      4      1    94%   329
+src/omegadata/track_a/source_rights.py                  270      1     72      1    99%   321
+src/omegadata/track_a/storage.py                         24      9      2      0    58%   22-23, 26-38
+src/omegadata/track_a/trading_calendar.py               145     16     64     14    85%   56->82, 83->90, 86, 91->98, 94, 99->118, 102, 106, 109, 112-113, 116->100, 119-120, 153, 188->186, 245-247, 259-261
+src/omegadata/track_a/warehouse.py                       29     16      2      0    42%   19-20, 30-99
+src/omegadata/track_b/__init__.py                         0      0      0      0   100%
+src/omegadata/track_b/adjustment_engine.py              145      8     50      8    92%   34, 178, 192, 203, 207, 219, 246, 256
+src/omegadata/track_b/confidence.py                      78      2     34      3    96%   48->54, 51, 67
+src/omegadata/track_b/corporate_action_matching.py      131      9     52      9    90%   53-54, 56, 70, 91, 98, 103->105, 114, 117, 165, 166->160
+src/omegadata/track_b/corporate_action_parser.py         77     11     52     14    81%   27, 30-31, 47, 51, 53, 57, 59, 72, 78->86, 79->82, 83-84, 88->93, 90->93, 95->exit, 98->exit
+src/omegadata/track_b/corporate_actions.py              160     26     56     10    81%   71-78, 139, 157, 234, 271, 281-282, 332-359, 369, 377, 386-387, 390, 402, 436
+src/omegadata/track_b/cross_source_validation.py        238     27     88     17    85%   99-114, 206, 212-213, 217-221, 224, 229, 232->241, 239->241, 344, 449, 454-470, 475-478, 524, 530, 570, 586, 709
+src/omegadata/track_b/discontinuity.py                  162      6     62      9    93%   57->60, 63->66, 87, 130, 133, 143->112, 172, 205, 211
+src/omegadata/track_b/isin_master.py                     80     14     22      5    79%   68, 72, 84->94, 104-111, 122-130, 150, 179-188, 201
+src/omegadata/track_b/manual_review.py                  248     31     72     21    83%   54, 66, 106-119, 121-124, 143, 189-191, 273, 304->306, 313-326, 356, 374-375, 386, 421, 426, 428, 434, 436, 438, 440, 446, 451->453
+src/omegadata/track_b/matching_policy.py                 33      1      6      2    92%   49, 52->54
+src/omegadata/track_b/publication.py                    118     29     42      8    71%   40, 45-55, 81, 110-111, 113, 115-116, 117->101, 132->123, 138-142, 150, 162-166
+src/omegadata/track_b/release_manager.py                225     67     36      7    65%   61, 108, 112-117, 127-130, 138->140, 143-189, 192-216, 232-233, 236, 334-348, 351-376, 379-402, 405-420, 423-450, 501->506, 507-511, 558-565, 588, 591
+src/omegadata/track_b/release_readiness.py              193     12     58     13    89%   40, 65-66, 188, 193->200, 199, 203-206, 357->370, 370->380, 459->465, 505->507, 513, 516, 526, 541
+src/omegadata/track_b/review_policy.py                   55      3     12      3    91%   52->71, 55, 91-92
+src/omegadata/track_b/tolerance_policy.py                52      3     16      5    88%   73->88, 76, 100, 104, 107->109
+src/omegadata/track_b/universe_manager.py               220     25     78     20    83%   84, 188-189, 195, 209, 215, 221->218, 229->232, 238, 242, 245->240, 272-285, 305, 331, 355, 367, 385, 431, 435, 439, 443-454
+src/omegadata/verification/__init__.py                    0      0      0      0   100%
+src/omegadata/verification/audit.py                      71     46     22      0    27%   27, 31, 35-38, 42-61, 65-77, 88-94, 106, 265-273
+-------------------------------------------------------------------------------------------------
+TOTAL                                                  5926    866   1716    328    81%
+Coverage JSON written to file /tmp/omega-od02v-tests-i4ic_6mk/coverage.json
+=========================== short test summary info ============================
+SKIPPED [2] tests/unit/test_od01r_rights_hardening.py:171: Windows junction test
+479 passed, 2 skipped, 4 deselected in 34.24s
+

@@ -1,0 +1,19 @@
+C408 Unnecessary `dict()` call (rewrite as a literal)
+  --> tests\unit\test_od04r_adversarial.py:17:14
+   |
+16 |   def request(**changes):
+17 |       fields = dict(source_key=KEY, business_date=DAY,
+   |  ______________^
+18 | |                   observed_at=datetime(2026, 11, 15, 12, tzinfo=UTC),
+19 | |                   source_era="2019_present", source_mode="SYNTHETIC_TEST_ONLY",
+20 | |                   parser_schema="test/v1", payload_state="HTTP_RECEIVED",
+21 | |                   transport="HTTPX", original_url="https://example.invalid/file",
+22 | |                   final_url="https://example.invalid/file", origin_ref="SYNTHETIC_TEST_ONLY",
+23 | |                   operation_id="a" * 32)
+   | |________________________________________^
+24 |       return ObservationRequest(**(fields | changes))
+   |
+help: Rewrite as a literal
+
+Found 1 error.
+No fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).

@@ -1,0 +1,114 @@
+[
+  {
+    "label": "win-process-accepted",
+    "metadata": {
+      "command": [
+        "E:/omega system - phase 1/.venv/Scripts/python.exe",
+        "-B",
+        "E:/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+        "C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od04-copy-3oda4_3r/repo",
+        "win-process-accepted"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T13:19:33.365194+00:00",
+      "end_utc": "2026-11-15T13:19:59.421228+00:00",
+      "elapsed_seconds": 26.056029200030025,
+      "exit_code": 0
+    },
+    "raw_sha256": "a972ccd9527d10e70efec1232340dbc4386f0a5765da5eec5ad760d0ee4bf58e"
+  },
+  {
+    "label": "linux-process-persistent",
+    "metadata": {
+      "command": [
+        "wsl",
+        "--exec",
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/process_experiments.py",
+        "/home/parilrupani/omega-od04-6br9vbxk/repo",
+        "linux-process-persistent"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T13:29:04.061930+00:00",
+      "end_utc": "2026-11-15T13:29:31.926365+00:00",
+      "elapsed_seconds": 27.86449150001863,
+      "exit_code": 0
+    },
+    "raw_sha256": "c61e15bdaa39a23d51ca9efcc86bb8a507cd3b7bf048185a14b7014ee07aa306"
+  },
+  {
+    "label": "win-corpus-reference",
+    "metadata": {
+      "command": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04\\20261115T124835Z\\measure_corpus.py",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04-process-h3bmm3hy"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T13:21:55.302510+00:00",
+      "end_utc": "2026-11-15T13:21:55.463952+00:00",
+      "elapsed_seconds": 0.16143819998251274,
+      "exit_code": 0
+    },
+    "raw_sha256": "8dd5214dc3187cedcd2953cb22dc178083b75b64c2d2119a113b68dfedeb75b6"
+  },
+  {
+    "label": "linux-corpus-persistent",
+    "metadata": {
+      "command": [
+        "wsl",
+        "--exec",
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/measure_corpus.py",
+        "/home/parilrupani/omega-od04-process-zlno5bym"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T13:30:04.611554+00:00",
+      "end_utc": "2026-11-15T13:30:05.103688+00:00",
+      "elapsed_seconds": 0.4921386000351049,
+      "exit_code": 0
+    },
+    "raw_sha256": "0b538841a4d145659846633db0f265ef68cc321938eb489c90debfd1c55dbddd"
+  },
+  {
+    "label": "linux-missing-corpus-negative",
+    "metadata": {
+      "command": [
+        "wsl",
+        "--exec",
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/measure_corpus.py",
+        "/tmp/omega-od04-process-j2ejxevj"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T13:30:00.884061+00:00",
+      "end_utc": "2026-11-15T13:30:04.609767+00:00",
+      "elapsed_seconds": 3.7257064000004902,
+      "exit_code": 1
+    },
+    "raw_sha256": "36ca6c343294080e15b2bbae4fc0f6a11aaaf2286acfcb68818be4845a44c9e7"
+  },
+  {
+    "label": "linux-corpus-reference",
+    "metadata": {
+      "command": [
+        "wsl",
+        "--exec",
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04/20261115T124835Z/measure_corpus.py",
+        "/tmp/omega-od04-process-j2ejxevj"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-15T13:21:55.476464+00:00",
+      "end_utc": "2026-11-15T13:22:01.028462+00:00",
+      "elapsed_seconds": 5.552013900014572,
+      "exit_code": 0
+    },
+    "raw_sha256": "226fe763e229cde117fb3e3ccce071460aa8dbd3ce8c32cc5dab69efe246024c"
+  }
+]

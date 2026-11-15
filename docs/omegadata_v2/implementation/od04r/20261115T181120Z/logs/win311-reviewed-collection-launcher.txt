@@ -1,0 +1,73 @@
+{
+  "command": [
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+    "win311-reviewed-collection",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+    "pytest",
+    "--collect-only",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+  "baseline": "44090a42958869faaab57a42b65f7ad8571d924d",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T18:35:23.940659+00:00",
+  "end_utc": "2026-11-15T18:35:28.539910+00:00",
+  "elapsed_seconds": 4.594000000040978,
+  "exit_code": 0,
+  "output": "win311-reviewed-collection.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-5pah4qn4",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+  "guard_denials": {},
+  "symlink_observations": [],
+  "call_counts": {}
+}
+idate_detection_allows_bse_subdomains
+tests/unit/test_pipeline_and_api.py::test_bse_source_registry_primary_format_is_csv
+tests/unit/test_pipeline_and_api.py::test_bse_zip_payload_validation_checks_contents
+tests/unit/test_pipeline_and_api.py::test_bse_zip_payload_validation_selects_expected_member_by_date
+tests/unit/test_pipeline_and_api.py::test_review_policy_cache_reloads_on_file_change
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_skips_configured_holidays
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_treats_special_session_as_trading_day
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_treats_weekend_special_session_as_trading_day
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_degrades_without_explicit_year_coverage
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_coverage_status_warns_near_expiry
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_loads_maintenance_metadata_from_config
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_statuses_include_supported_exchanges_without_coverage
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_missing_config_still_reports_supported_exchange_statuses
+tests/unit/test_pipeline_and_api.py::test_trading_calendar_invalid_config_reports_invalid_state
+tests/unit/test_pipeline_and_api.py::test_manual_review_open_listing_marks_sla_breach
+tests/unit/test_trackb_extreme_edges.py::test_staging_validation_warn_when_bse_missing
+tests/unit/test_trackb_extreme_edges.py::test_staging_validation_date_gap_fail
+tests/unit/test_trackb_extreme_edges.py::test_staging_numeric_payload_warn_band
+tests/unit/test_trackb_extreme_edges.py::test_validation_logs_are_idempotent_on_repeat
+tests/unit/test_trackb_extreme_edges.py::test_adjustment_reverse_split_and_invalid_demerger
+tests/unit/test_trackb_extreme_edges.py::test_unmatched_staging_older_than_48h_is_escalated
+tests/unit/test_trackb_extreme_edges.py::test_validator_treats_bse_only_as_valid_bse_candidate
+tests/unit/test_trackb_extreme_edges.py::test_validator_flags_missing_parameter_on_one_side_of_matched_pair
+tests/unit/test_trackb_extreme_edges.py::test_unmatched_validation_requires_high_similarity_before_type_fail
+tests/unit/test_trackb_extreme_edges.py::test_unmatched_validation_tracks_false_negative_risk
+tests/unit/test_universe_manager.py::test_effective_date_membership_logic
+tests/unit/test_universe_manager.py::test_delisted_removed_from_future_universe
+tests/unit/test_universe_manager.py::test_reconstruction_confidence_pre2010
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_reproduces_reference_snapshots
+tests/unit/test_universe_manager.py::test_seed_pack_preserves_knowledge_vs_effective_date_semantics
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+tests/unit/test_universe_manager.py::test_seed_pack_validation_handles_missing_symbol_mapping_without_crashing
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_is_non_destructive_until_validation_passes
+tests/unit/test_universe_manager.py::test_remove_membership_raises_for_missing_active_row
+tests/unit/test_universe_manager.py::test_reconstruct_pre2010_validates_required_columns
+tests/unit/test_validation_policies.py::test_cross_source_validator_uses_loaded_tolerance_policy
+tests/unit/test_validation_policies.py::test_corporate_action_matcher_uses_policy_thresholds
+tests/unit/test_validation_policies.py::test_release_readiness_blocks_on_overdue_review
+tests/unit/test_validation_policies.py::test_release_readiness_requires_pipeline_success_and_nse_equity_probe
+tests/unit/test_validation_policies.py::test_release_readiness_checks_adjusted_ohlcv_and_release_bundle
+tests/unit/test_validation_policies.py::test_release_readiness_does_not_treat_instrument_scope_reviews_as_open_release_blockers
+tests/unit/test_validation_policies.py::test_manual_review_service_refreshes_existing_instrument_scope_review
+
+488/492 tests collected (4 deselected) in 3.23s
+
