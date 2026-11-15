@@ -1,0 +1,557 @@
+{
+    "observed_utc":  "2026-11-15T19:11:38.9642882Z",
+    "reviewed_head":  "bbc38716d902fe27192f80affaca29c6f51e9890",
+    "six_current_source_hashes":  [
+                                      {
+                                          "path":  "src/omegadata/track_a/raw_archive.py",
+                                          "sha256":  "8915d06fcfad9edefaaf178ac3b6e1c9c38321ec193575fa3790cf4f2a38544d",
+                                          "matches_od04r":  true
+                                      },
+                                      {
+                                          "path":  "src/omegadata/track_a/download_manager.py",
+                                          "sha256":  "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+                                          "matches_od04r":  true
+                                      },
+                                      {
+                                          "path":  "tests/unit/test_od04_raw_archive.py",
+                                          "sha256":  "00c6ab6645a9e3055f4a47c7e454edadf335898457350f5251a5a1697c9c56bd",
+                                          "matches_od04r":  true
+                                      },
+                                      {
+                                          "path":  "scripts/verify_raw_archive.py",
+                                          "sha256":  "31dd6226e43d17ca99cf5bc03b2e9db521183a065975abf3f84cb5afc8d677e1",
+                                          "matches_od04r":  true
+                                      },
+                                      {
+                                          "path":  "scripts/plan_legacy_raw_import.py",
+                                          "sha256":  "3db7c16b743e2defc0393ee161cbfe93d38648593e1abd3c22e10fa7dc8a0fee",
+                                          "matches_od04r":  true
+                                      },
+                                      {
+                                          "path":  "tests/unit/test_od04r_adversarial.py",
+                                          "sha256":  "284539d5a0a7e335d6d4ac876ff7f5e5170f3e7097b37bb612ed192ae0770b4f",
+                                          "matches_od04r":  true
+                                      }
+                                  ],
+    "eleven_reports_match":  true,
+    "runtime_evidence":  [
+                             {
+                                 "label":  "win314-reviewed",
+                                 "evidence":  "ARCH",
+                                 "commands":  [
+                                                  {
+                                                      "gate":  "environment",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win314-reviewed-environment",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                                   "environment"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                      "utc":  "2026-11-15T18:35:13.189775+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "bfa84427c2047c64900971ea63e147f6d7461a26a191341ccdd20ea3fd23af40"
+                                                  },
+                                                  {
+                                                      "gate":  "collection",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win314-reviewed-collection",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                                   "pytest",
+                                                                   "--collect-only",
+                                                                   "-q",
+                                                                   "-m",
+                                                                   "not realdata"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                      "utc":  "2026-11-15T18:35:13.611802+00:00",
+                                                      "counts":  {
+
+                                                                 },
+                                                      "deselected":  [
+                                                                         "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+                                                                     ],
+                                                      "metadata_sha256":  "af450cfb235fcb9b0524a27541ef9929ed9b4750d2f9e968b499f397cd4b9ce4"
+                                                  },
+                                                  {
+                                                      "gate":  "targeted",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win314-reviewed-targeted",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                                   "pytest",
+                                                                   "-q",
+                                                                   "tests/unit/test_od01_source_rights.py",
+                                                                   "tests/unit/test_od01r_rights_hardening.py",
+                                                                   "tests/unit/test_od02_acquisition.py",
+                                                                   "tests/unit/test_od02v_portability.py",
+                                                                   "tests/unit/test_od04_raw_archive.py",
+                                                                   "tests/unit/test_od04r_adversarial.py",
+                                                                   "-m",
+                                                                   "not realdata"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                      "utc":  "2026-11-15T18:35:17.714182+00:00",
+                                                      "counts":  {
+                                                                     "passed":  367,
+                                                                     "skipped":  10
+                                                                 },
+                                                      "deselected":  [
+
+                                                                     ],
+                                                      "metadata_sha256":  "ef7e313d353b60a8b5d38eafd6b8c3f1fc4c2bbf236129a31c461e71d235eea0"
+                                                  },
+                                                  {
+                                                      "gate":  "full",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win314-reviewed-full",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                                   "pytest",
+                                                                   "-q",
+                                                                   "-m",
+                                                                   "not realdata",
+                                                                   "--cov=omegadata",
+                                                                   "--cov-branch",
+                                                                   "--cov-report=term-missing"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                      "utc":  "2026-11-15T18:36:00.091793+00:00",
+                                                      "counts":  {
+                                                                     "passed":  478,
+                                                                     "skipped":  10
+                                                                 },
+                                                      "deselected":  [
+                                                                         "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+                                                                     ],
+                                                      "metadata_sha256":  "fb0ab63337bd7de431c4128333e3822781faeb5376c9a985d2d6edf11de3991c"
+                                                  },
+                                                  {
+                                                      "gate":  "ruff",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win314-reviewed-ruff",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                                   "ruff",
+                                                                   "check",
+                                                                   "--no-cache",
+                                                                   "src/omegadata",
+                                                                   "tests",
+                                                                   "scripts"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                      "utc":  "2026-11-15T18:37:47.702720+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "7bb2d0fc5588b34fb319feea86a74afcdb8eb15c467394e37b6e7fcf190026a2"
+                                                  },
+                                                  {
+                                                      "gate":  "mypy",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win314-reviewed-mypy",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                                   "mypy",
+                                                                   "src/omegadata"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                      "utc":  "2026-11-15T18:37:50.604592+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "545cc19b671a80329ff86ec4954c67121ff0a097a14511cef09a2b7e61587c00"
+                                                  },
+                                                  {
+                                                      "gate":  "pip",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win314-reviewed-pip",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                                   "pip",
+                                                                   "check"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                      "utc":  "2026-11-15T18:38:24.367889+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "7369e806a6645609b8d7dbb45bbe3a4d1923d1dcd6e9c001d4cfcc0d82414b7e"
+                                                  }
+                                              ]
+                             },
+                             {
+                                 "label":  "win311-reviewed",
+                                 "evidence":  "ARCH",
+                                 "commands":  [
+                                                  {
+                                                      "gate":  "environment",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win311-reviewed-environment",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                                   "environment"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                      "utc":  "2026-11-15T18:35:23.498652+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "3655deea8bb89c845496e536291772c9a93b9f08ea47ae85e13ce465be4107f4"
+                                                  },
+                                                  {
+                                                      "gate":  "collection",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win311-reviewed-collection",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                                   "pytest",
+                                                                   "--collect-only",
+                                                                   "-q",
+                                                                   "-m",
+                                                                   "not realdata"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                      "utc":  "2026-11-15T18:35:23.940659+00:00",
+                                                      "counts":  {
+
+                                                                 },
+                                                      "deselected":  [
+                                                                         "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+                                                                     ],
+                                                      "metadata_sha256":  "b21c789ec1f398c2cb2792f26a514cacdb07385ae9d851a3fb7399325adc307a"
+                                                  },
+                                                  {
+                                                      "gate":  "targeted",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win311-reviewed-targeted",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                                   "pytest",
+                                                                   "-q",
+                                                                   "tests/unit/test_od01_source_rights.py",
+                                                                   "tests/unit/test_od01r_rights_hardening.py",
+                                                                   "tests/unit/test_od02_acquisition.py",
+                                                                   "tests/unit/test_od02v_portability.py",
+                                                                   "tests/unit/test_od04_raw_archive.py",
+                                                                   "tests/unit/test_od04r_adversarial.py",
+                                                                   "-m",
+                                                                   "not realdata"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                      "utc":  "2026-11-15T18:35:29.555427+00:00",
+                                                      "counts":  {
+                                                                     "passed":  367,
+                                                                     "skipped":  10
+                                                                 },
+                                                      "deselected":  [
+
+                                                                     ],
+                                                      "metadata_sha256":  "36ff5aebf93ae343cfa9b2e858c0668b4cb062939a4195de3640c44c4829a4ea"
+                                                  },
+                                                  {
+                                                      "gate":  "full",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win311-reviewed-full",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                                   "pytest",
+                                                                   "-q",
+                                                                   "-m",
+                                                                   "not realdata",
+                                                                   "--cov=omegadata",
+                                                                   "--cov-branch",
+                                                                   "--cov-report=term-missing"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                      "utc":  "2026-11-15T18:36:18.378336+00:00",
+                                                      "counts":  {
+                                                                     "passed":  478,
+                                                                     "skipped":  10
+                                                                 },
+                                                      "deselected":  [
+                                                                         "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+                                                                     ],
+                                                      "metadata_sha256":  "8be146d78eac42847a4a45ad619a22ceecf21718270812601c304c49b6ff4373"
+                                                  },
+                                                  {
+                                                      "gate":  "ruff",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win311-reviewed-ruff",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                                   "ruff",
+                                                                   "check",
+                                                                   "--no-cache",
+                                                                   "src/omegadata",
+                                                                   "tests",
+                                                                   "scripts"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                      "utc":  "2026-11-15T18:38:41.712305+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "4d2cfe1fa34767b04833541ffb89edfd7ac40691b154eabd4c38b1fb97c09e72"
+                                                  },
+                                                  {
+                                                      "gate":  "mypy",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win311-reviewed-mypy",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                                   "mypy",
+                                                                   "src/omegadata"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                      "utc":  "2026-11-15T18:38:43.833747+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "778225d71f92c9e9eed42f8e183b855b663b55f6bde539df7857f462e0eea763"
+                                                  },
+                                                  {
+                                                      "gate":  "pip",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                                   "-B",
+                                                                   "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                                   "win311-reviewed-pip",
+                                                                   "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                                   "pip",
+                                                                   "check"
+                                                               ],
+                                                      "cwd":  "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                      "utc":  "2026-11-15T18:39:14.095589+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "ca4608117b40a9dcbd32ce7fd024d1df490f2db02f29a13c8d5d7f48632bf19e"
+                                                  }
+                                              ]
+                             },
+                             {
+                                 "label":  "linux312-reviewed",
+                                 "evidence":  "ARCH",
+                                 "commands":  [
+                                                  {
+                                                      "gate":  "environment",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                                   "-B",
+                                                                   "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                                   "linux312-reviewed-environment",
+                                                                   "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                                   "environment"
+                                                               ],
+                                                      "cwd":  "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                      "utc":  "2026-11-15T18:35:40.275610+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "58ca305b2eabfba5edd8bfccc4207d14a805f59e532afa45206f143d1a5389be"
+                                                  },
+                                                  {
+                                                      "gate":  "collection",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                                   "-B",
+                                                                   "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                                   "linux312-reviewed-collection",
+                                                                   "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                                   "pytest",
+                                                                   "--collect-only",
+                                                                   "-q",
+                                                                   "-m",
+                                                                   "not realdata"
+                                                               ],
+                                                      "cwd":  "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                      "utc":  "2026-11-15T18:35:40.807414+00:00",
+                                                      "counts":  {
+
+                                                                 },
+                                                      "deselected":  [
+                                                                         "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+                                                                     ],
+                                                      "metadata_sha256":  "c48fa892bd300330100d203865daf3693548a59ba1b1bb7b63dbf94f04a622a4"
+                                                  },
+                                                  {
+                                                      "gate":  "targeted",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                                   "-B",
+                                                                   "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                                   "linux312-reviewed-targeted",
+                                                                   "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                                   "pytest",
+                                                                   "-q",
+                                                                   "tests/unit/test_od01_source_rights.py",
+                                                                   "tests/unit/test_od01r_rights_hardening.py",
+                                                                   "tests/unit/test_od02_acquisition.py",
+                                                                   "tests/unit/test_od02v_portability.py",
+                                                                   "tests/unit/test_od04_raw_archive.py",
+                                                                   "tests/unit/test_od04r_adversarial.py",
+                                                                   "-m",
+                                                                   "not realdata"
+                                                               ],
+                                                      "cwd":  "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                      "utc":  "2026-11-15T18:35:45.170493+00:00",
+                                                      "counts":  {
+                                                                     "passed":  375,
+                                                                     "skipped":  2
+                                                                 },
+                                                      "deselected":  [
+
+                                                                     ],
+                                                      "metadata_sha256":  "82f92a535635bc0d74438b914cba1a1c960799e3157c5cc68071cdeffcb76737"
+                                                  },
+                                                  {
+                                                      "gate":  "full",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                                   "-B",
+                                                                   "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                                   "linux312-reviewed-full",
+                                                                   "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                                   "pytest",
+                                                                   "-q",
+                                                                   "-m",
+                                                                   "not realdata",
+                                                                   "--cov=omegadata",
+                                                                   "--cov-branch",
+                                                                   "--cov-report=term-missing"
+                                                               ],
+                                                      "cwd":  "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                      "utc":  "2026-11-15T18:35:51.795063+00:00",
+                                                      "counts":  {
+                                                                     "passed":  486,
+                                                                     "skipped":  2
+                                                                 },
+                                                      "deselected":  [
+                                                                         "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+                                                                         "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+                                                                     ],
+                                                      "metadata_sha256":  "260b31ededf9fd26f4992016850972fabd141c92ae7785859cece54ba82d3134"
+                                                  },
+                                                  {
+                                                      "gate":  "ruff",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                                   "-B",
+                                                                   "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                                   "linux312-reviewed-ruff",
+                                                                   "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                                   "ruff",
+                                                                   "check",
+                                                                   "--no-cache",
+                                                                   "src/omegadata",
+                                                                   "tests",
+                                                                   "scripts"
+                                                               ],
+                                                      "cwd":  "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                      "utc":  "2026-11-15T18:36:36.046497+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "04f196f31285f4f91041122e5d8b0a7c5d6b6b49e5dbde769c3fd02b8a8c3ed2"
+                                                  },
+                                                  {
+                                                      "gate":  "mypy",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                                   "-B",
+                                                                   "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                                   "linux312-reviewed-mypy",
+                                                                   "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                                   "mypy",
+                                                                   "src/omegadata"
+                                                               ],
+                                                      "cwd":  "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                      "utc":  "2026-11-15T18:36:36.432997+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "edd10080e0ca791eb99abbfa710296e0d730db1abbbe4f476facab81d5edaeb3"
+                                                  },
+                                                  {
+                                                      "gate":  "pip",
+                                                      "exit_code":  0,
+                                                      "argv":  [
+                                                                   "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                                   "-B",
+                                                                   "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                                   "linux312-reviewed-pip",
+                                                                   "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                                   "pip",
+                                                                   "check"
+                                                               ],
+                                                      "cwd":  "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                      "utc":  "2026-11-15T18:36:48.731379+00:00",
+                                                      "counts":  null,
+                                                      "deselected":  null,
+                                                      "metadata_sha256":  "e68223ab961b6197c516bf5e3d6d4b31cef325ae2d36694506f8ca1dcc66c5f6"
+                                                  }
+                                              ]
+                             }
+                         ],
+    "fresh_runtime_tests_run":  false,
+    "pending_real_sources":  13,
+    "approved_real_sources":  0,
+    "owner_exception":  false,
+    "separate_od05_implementation_authorization":  false
+}

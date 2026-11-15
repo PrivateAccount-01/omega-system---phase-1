@@ -1,0 +1,94 @@
+{
+    "observed_utc":  "2026-11-15T19:20:16.7733210Z",
+    "read_only_inspection":  true,
+    "new_tests_executed":  false,
+    "archived_runtimes":  [
+                              {
+                                  "label":  "win314-reviewed",
+                                  "evidence":  "ARCH",
+                                  "passed":  478,
+                                  "skipped":  10,
+                                  "deselected":  4,
+                                  "exit_code":  0,
+                                  "original_command":  [
+                                                           "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+                                                           "-B",
+                                                           "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                           "win314-reviewed-full",
+                                                           "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-copy-hmf5jvyc\\repo",
+                                                           "pytest",
+                                                           "-q",
+                                                           "-m",
+                                                           "not realdata",
+                                                           "--cov=omegadata",
+                                                           "--cov-branch",
+                                                           "--cov-report=term-missing"
+                                                       ],
+                                  "original_start_utc":  "2026-11-15T18:36:00.091793+00:00"
+                              },
+                              {
+                                  "label":  "win311-reviewed",
+                                  "evidence":  "ARCH",
+                                  "passed":  478,
+                                  "skipped":  10,
+                                  "deselected":  4,
+                                  "exit_code":  0,
+                                  "original_command":  [
+                                                           "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+                                                           "-B",
+                                                           "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od04r\\20261115T181120Z\\verification_runner.py",
+                                                           "win311-reviewed-full",
+                                                           "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od04r-win311-ykjomirl\\repo",
+                                                           "pytest",
+                                                           "-q",
+                                                           "-m",
+                                                           "not realdata",
+                                                           "--cov=omegadata",
+                                                           "--cov-branch",
+                                                           "--cov-report=term-missing"
+                                                       ],
+                                  "original_start_utc":  "2026-11-15T18:36:18.378336+00:00"
+                              },
+                              {
+                                  "label":  "linux312-reviewed",
+                                  "evidence":  "ARCH",
+                                  "passed":  486,
+                                  "skipped":  2,
+                                  "deselected":  4,
+                                  "exit_code":  0,
+                                  "original_command":  [
+                                                           "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+                                                           "-B",
+                                                           "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od04r/20261115T181120Z/verification_runner.py",
+                                                           "linux312-reviewed-full",
+                                                           "/home/parilrupani/omega-od04r-nc_va_2q/repo",
+                                                           "pytest",
+                                                           "-q",
+                                                           "-m",
+                                                           "not realdata",
+                                                           "--cov=omegadata",
+                                                           "--cov-branch",
+                                                           "--cov-report=term-missing"
+                                                       ],
+                                  "original_start_utc":  "2026-11-15T18:35:51.795063+00:00"
+                              }
+                          ],
+    "archived_process":  [
+                             {
+                                 "os":  "win",
+                                 "evidence":  "ARCH",
+                                 "observations":  18,
+                                 "objects":  13,
+                                 "forced_crashes":  5,
+                                 "current_source_hashes_match":  true
+                             },
+                             {
+                                 "os":  "linux",
+                                 "evidence":  "ARCH",
+                                 "observations":  18,
+                                 "objects":  13,
+                                 "forced_crashes":  5,
+                                 "current_source_hashes_match":  true
+                             }
+                         ]
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": "od05-reference-inventory/v1",
+  "execution_mode": "READ_ONLY_AUDIT_AND_PLAN_OWNER_GATE_BLOCKED",
+  "reviewed_head": "bbc38716d902fe27192f80affaca29c6f51e9890",
+  "research_utc_date": "2026-11-15",
+  "research_local_date": "2026-11-16 Asia/Kolkata",
+  "search_timestamp_instrumentation": "Initial interactive searches not separately timed; exact original-document retrieval times are unknown and never invented.",
+  "official_reference_verified_count": 0,
+  "owner_exception_accepted": false,
+  "implementation_authorized": false,
+  "entries": [
+    {
+      "id": "NSE-CM-REPORTS-SWITCH-INDEXED",
+      "publisher": "National Stock Exchange of India",
+      "url": "https://www.nseindia.com/all-reports/",
+      "access": "Search-index excerpt of official publisher documentation; no direct exchange request/download",
+      "evidence": "RUN documentation research; SOURCE_REFERENCE_PENDING for schema/row certification",
+      "supported_scope": "Announced withdrawal/switch of earlier CM bhavcopy products to UDiFF final ZIP effective 2024-07-08; page cites circular62424 dated2024-06-12",
+      "unsupported_scope": "Earliest introduction, exclusive use, parallel formats, exact catalogue/columns, authoritative row semantics, source rights",
+      "retrieved_at_utc": null,
+      "original_document_sha256": null,
+      "human_reference_permission": null,
+      "status": "SOURCE_REFERENCE_PENDING"
+    },
+    {
+      "id": "NSE-62424-CITED-NOT-RECEIVED",
+      "publisher": "National Stock Exchange of India",
+      "expected_document_id_from_prompt": "NSE/MSD/62424",
+      "independently_observed_identifier": "62424 as cited on indexed official reports page",
+      "date_as_cited": "2024-06-12",
+      "canonical_document_url": null,
+      "access": "Original circular and schema attachments not received",
+      "retrieved_at_utc": null,
+      "original_document_sha256": null,
+      "human_reference_permission": null,
+      "status": "SOURCE_REFERENCE_PENDING"
+    },
+    {
+      "id": "NSE-CM-2024-CALENDAR-INDEXED",
+      "publisher": "National Stock Exchange of India",
+      "document_id": "NSE/CMTR/59722",
+      "publication_date": "2023-12-12",
+      "url": "https://nsearchives.nseindia.com/content/circulars/CMTR59722.pdf",
+      "access": "Indexed documentation text only; no direct PDF download",
+      "supported_scope": "Initial annual CM2024 closure list, including July17",
+      "unsupported_scope": "Positive proof of queried sessions, all later amendments or 2020 calendar coverage",
+      "retrieved_at_utc": null,
+      "original_document_sha256": null,
+      "human_reference_permission": null,
+      "status": "SOURCE_REFERENCE_PENDING"
+    },
+    {
+      "id": "NSE-FORMS-CATALOGUE-STARTING-POINT",
+      "publisher": "National Stock Exchange of India",
+      "url": "https://www.nseindia.com/static/resources/forms-formats-members",
+      "access": "User-provided reference starting point, not fetched",
+      "verified_catalogue_version": null,
+      "verified_format_rows": 0,
+      "retrieved_at_utc": null,
+      "original_document_sha256": null,
+      "human_reference_permission": null,
+      "status": "SOURCE_REFERENCE_PENDING"
+    },
+    {
+      "id": "BSE-HISTORICAL-CM-REFERENCES",
+      "publisher": "BSE",
+      "canonical_document_url": null,
+      "access": "No separately authenticated historical specification or representative rows supplied",
+      "retrieved_at_utc": null,
+      "original_document_sha256": null,
+      "human_reference_permission": null,
+      "status": "SOURCE_REFERENCE_PENDING"
+    },
+    {
+      "id": "LOCAL-OD02-SYNTHETIC-FACTORIES",
+      "paths": ["tests/conftest.py", "tests/unit/test_od02_acquisition.py", "tests/unit/test_pipeline_and_api.py"],
+      "byte_identity_source": "logs/preservation-before.json",
+      "coverage": "Explicit 2019/2026 mapping tests and a modern-named member dated2024-01-02 in an existing seed-cache test",
+      "human_reference_permission": "Synthetic fixture authorization only; never production source approval",
+      "status": "SYNTHETIC_TEST_ONLY"
+    },
+    {
+      "id": "LOCAL-OFFICIAL-LABELED-FIXTURES",
+      "paths": ["tests/fixtures/official_source/adjustment_reference_corpus.json", "tests/fixtures/official_source/pit_universe_reference_pack.json", "tests/fixtures/official_source/circular_extracts/20microns_reverse_split_2025-06-24.json"],
+      "byte_identity_source": "logs/preservation-before.json",
+      "scope": "Existing historical claims; do not count as authenticated bhavcopy era/schema references",
+      "human_reference_permission": null,
+      "status": "ARCHIVED_UNVERIFIED"
+    },
+    {
+      "id": "EXCLUDED-WRONG-REFERENCE-RESULTS",
+      "examples": ["NSE/CMTR/46623 covers2021, not2020", "NSE/MSD/64667 covers trade-modification reports, not cash-bhavcopy schema", "NCDEX commodity bhavcopy cannot prove NSE CM formats"],
+      "used_for_acceptance": false,
+      "status": "SOURCE_REFERENCE_PENDING"
+    }
+  ],
+  "integrity_note": "The hash of this registry, if recorded in final QA, identifies agent-authored metadata only; it is never a hash of unreceived original publisher bytes."
+}

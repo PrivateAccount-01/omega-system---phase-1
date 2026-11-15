@@ -1,0 +1,11 @@
+# Independent numerical/reference oracle — DESIGN ONLY
+
+Audit/plan only; RUN static reasoning; TEST/SYN proposed numeric vectors; ARCH prior OD04R hash/corpus oracle; UNK official rows. **No OD05 oracle was implemented or executed.** Existing18/13 OD04R hash proof is byte-storage evidence, not a financial parser oracle.
+
+After gates, a separate stdlib comparator must not import parser-under-test functions/models to compute expected values. Freeze independent input SHA and row/field expectations before implementation, with lawful source document/row proof IDs. Verify exact source/exchange/date/symbol/series/ISIN/scrip identity, all OHLC fields, integer volume, preserved unknown fields and source_row_index (freeze logical CSV data-record numbering explicitly; do not accidentally conflate physical lines containing quoted newlines).
+
+Arithmetic illustration only, SYNTHETIC_TEST_ONLY: input prices10.10,12.20,9.05,11.15 and volume0 have separately specified scaled-integer price values1010,1220,905,1115 at scale2; no binary floating-point conversion. Keep original lexemes separately from canonical numeric representation. Use independent integer arithmetic/lexeme grammar for expectations, not production Decimal parsing helpers. This is a planned vector, not a real stock, executed calculation or official golden row.
+
+Comparator should verify full field values and canonical evidence bytes/digests, including parser/schema/reference/raw identities; repeat pinned replay; two same-day raw versions; changed byte/ref/hash rejection. Expected counts/digests come from separate frozen configuration, not parser inventory. Missing/empty/moved corpus must fail before positive verification. Deliberately corrupt one numeric field, source index, reference identity and raw byte separately; each must refuse. Include explicit no-mutation and rights checks before protected reads.
+
+Source-document statements alone cannot validate row mappings. Requirements still absent: exact allowed authoritative archive bytes aligned to a dated schema; human reference-use permission; calendar/session proof; independent reviewed expected row fields. Until supplied, official-format golden subsets are BLOCKED_REFERENCE and arithmetic-only subsets may prove only their explicit synthetic semantics after separate authorization.

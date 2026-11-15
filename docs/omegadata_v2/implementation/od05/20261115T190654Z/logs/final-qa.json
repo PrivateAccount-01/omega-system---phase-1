@@ -1,0 +1,48 @@
+{
+    "command":  "\u0026 \u0027docs/omegadata_v2/implementation/od05/20261115T190654Z/final_qa.ps1\u0027",
+    "shell_executable":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "cwd":  "E:\\omega system - phase 1",
+    "start_utc":  "2026-11-15T19:21:58.3947149Z",
+    "end_utc":  "2026-11-15T19:21:58.9754048Z",
+    "duration_seconds":  0.5825804,
+    "exit_code":  0,
+    "mechanical_checks_passed":  true,
+    "branch":  "feature/od01-source-rights",
+    "head":  "bbc38716d902fe27192f80affaca29c6f51e9890",
+    "original_records":  12449,
+    "original_changes":  [
+
+                         ],
+    "reports":  [
+                    "00_preflight_and_owner_gate.md",
+                    "01_reference_and_era_matrix.md",
+                    "02_contracts_and_adr.md",
+                    "03_repo_selection.md",
+                    "04_negative_first_matrix.md",
+                    "05_implementation_diff.md",
+                    "06_independent_reference_oracle.md",
+                    "07_security_rights_pit_review.md",
+                    "08_runtime_quality_matrix.md",
+                    "09_remaining_defects_and_rollback.md",
+                    "10_gatekeeper_verdict.md",
+                    "11_next_phase_request.md"
+                ],
+    "planned_groups":  32,
+    "executed_od05_groups":  0,
+    "fresh_runtime_tests":  false,
+    "official_reference_verified_count":  0,
+    "source_policy_pending":  13,
+    "source_policy_approved":  0,
+    "human_exception_approved":  false,
+    "separate_od05_authorization":  false,
+    "execution_scope":  "READ_ONLY_AUDIT_AND_PLAN_ONLY",
+    "gatekeeper":  "OD05_BLOCKED",
+    "stop_reason":  "OD05_GATE_BLOCKED_OWNER_DECISION",
+    "secondary_blockers":  [
+                               "OD05_GATE_BLOCKED_AUTHORIZATION",
+                               "BLOCKED_REFERENCE"
+                           ],
+    "signing":  "Metadata only; original contents never opened/hashed/copied",
+    "git_lifecycle_mutation":  false,
+    "later_phase_started":  false
+}
