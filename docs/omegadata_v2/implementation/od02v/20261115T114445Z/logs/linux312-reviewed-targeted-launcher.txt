@@ -1,0 +1,48 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py",
+    "linux312-reviewed-targeted",
+    "/home/parilrupani/omega-od02v-37b3vimd/repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "tests/unit/test_od02_acquisition.py",
+    "tests/unit/test_od02v_portability.py",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "baseline": "eaedac1bddc35867f9089486beffa3bb38cb11f4",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T12:03:17.490777+00:00",
+  "end_utc": "2026-11-15T12:03:21.380682+00:00",
+  "elapsed_seconds": 3.8899026160000005,
+  "exit_code": 0,
+  "output": "linux312-reviewed-targeted.txt",
+  "sandbox": "/tmp/omega-od02v-tests-9j90_pbe",
+  "root": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "guard_denials": {
+    "DNS": 2,
+    "SUBPROCESS": 2,
+    "PROTECTED_WRITE": 6,
+    "SOCKET": 1,
+    "UDP": 1
+  },
+  "call_counts": {
+    "passed": 290,
+    "skipped": 2
+  }
+}
+........................................................................ [ 24%]
+...................................................................ss... [ 49%]
+........................................................................ [ 73%]
+........................................................................ [ 98%]
+....                                                                     [100%]
+=========================== short test summary info ============================
+SKIPPED [2] tests/unit/test_od01r_rights_hardening.py:171: Windows junction test
+290 passed, 2 skipped in 3.15s
+

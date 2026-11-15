@@ -1,0 +1,23 @@
+{
+  "label": "linux312-v2-cache-resolution",
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-m",
+    "pip",
+    "--isolated",
+    "install",
+    "--dry-run",
+    "--no-index",
+    "--only-binary=:all:",
+    "-c",
+    "/home/parilrupani/omega-od02v-37b3vimd/working-environment-constraints.txt",
+    "-e",
+    "/home/parilrupani/omega-od02v-37b3vimd/repo[dev]"
+  ],
+  "cwd": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "start_utc": "2026-11-15T11:55:36.298210+00:00",
+  "end_utc": "2026-11-15T11:55:37.569726+00:00",
+  "elapsed_seconds": 1.2715298210000014,
+  "exit_code": 1,
+  "output": "linux312-v2-cache-resolution.txt"
+}

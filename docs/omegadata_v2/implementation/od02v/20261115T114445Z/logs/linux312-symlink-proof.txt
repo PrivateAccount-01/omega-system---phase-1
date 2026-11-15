@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0 -- /home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python
+rootdir: /home/parilrupani/omega-od02v-37b3vimd/repo
+configfile: pyproject.toml
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 4 items
+
+tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-pointer_escape] PASSED [ 25%]
+tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-pointer_escape] PASSED [ 50%]
+tests/unit/test_od01r_rights_hardening.py::test_r06_real_symlink_payload_escape PASSED [ 75%]
+tests/unit/test_od02v_portability.py::test_v00_real_file_symlink_capability PASSED [100%]
+
+============================== 4 passed in 0.88s ===============================

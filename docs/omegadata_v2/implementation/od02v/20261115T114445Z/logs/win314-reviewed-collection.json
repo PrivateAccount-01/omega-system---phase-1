@@ -1,0 +1,35 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od02v\\20261115T114445Z\\verification_runner.py",
+    "win314-reviewed-collection",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\repo",
+    "pytest",
+    "--collect-only",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\repo",
+  "baseline": "eaedac1bddc35867f9089486beffa3bb38cb11f4",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T12:16:40.095564+00:00",
+  "end_utc": "2026-11-15T12:16:43.397202+00:00",
+  "elapsed_seconds": 3.301641199970618,
+  "exit_code": 0,
+  "output": "win314-reviewed-collection.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-o8wexqos",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\repo",
+  "guard_denials": {},
+  "test_reports": [],
+  "deselected": [
+    "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+    "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+  ],
+  "symlink_observations": [],
+  "call_counts": {}
+}

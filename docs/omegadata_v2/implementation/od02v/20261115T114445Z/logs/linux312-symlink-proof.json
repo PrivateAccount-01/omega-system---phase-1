@@ -1,0 +1,83 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py",
+    "linux312-symlink-proof",
+    "/home/parilrupani/omega-od02v-37b3vimd/repo",
+    "pytest",
+    "-vv",
+    "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-pointer_escape]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-pointer_escape]",
+    "tests/unit/test_od01r_rights_hardening.py::test_r06_real_symlink_payload_escape",
+    "tests/unit/test_od02v_portability.py::test_v00_real_file_symlink_capability"
+  ],
+  "cwd": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "baseline": "eaedac1bddc35867f9089486beffa3bb38cb11f4",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T12:06:21.150069+00:00",
+  "end_utc": "2026-11-15T12:06:22.871555+00:00",
+  "elapsed_seconds": 1.7214839599999996,
+  "exit_code": 0,
+  "output": "linux312-symlink-proof.txt",
+  "sandbox": "/tmp/omega-od02v-tests-ef7j8aax",
+  "root": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-pointer_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-pointer_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_real_symlink_payload_escape",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v00_real_file_symlink_capability",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "pointer_escape",
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ef7j8aax/pytest/test_r05_cache_escape_never_op0/raw/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r05_cache_escape_never_opens_external_sentinel",
+      "form": "pointer_escape",
+      "seed": true,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ef7j8aax/pytest/test_r05_cache_escape_never_op1/seed/nse_equity_bhavcopy/year=2024/month=01/20240102.latest.json"
+    },
+    {
+      "function": "test_r06_real_symlink_payload_escape",
+      "form": null,
+      "seed": false,
+      "outside_read_calls": 0,
+      "is_actual_symlink": true,
+      "path": "/tmp/omega-od02v-tests-ef7j8aax/pytest/test_r06_real_symlink_payload_0/raw/nse_equity_bhavcopy/year=2024/month=01/linked.bin"
+    }
+  ],
+  "call_counts": {
+    "passed": 4
+  }
+}

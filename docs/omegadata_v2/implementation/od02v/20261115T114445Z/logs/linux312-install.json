@@ -1,0 +1,23 @@
+{
+  "label": "linux312-install",
+  "command": [
+    "/tmp/omega-od02v-80h9ibbk/venv312/bin/python",
+    "-m",
+    "pip",
+    "--isolated",
+    "install",
+    "--index-url",
+    "https://pypi.org/simple",
+    "--only-binary=:all:",
+    "-c",
+    "/tmp/omega-od02v-80h9ibbk/working-environment-constraints.txt",
+    "-e",
+    "/tmp/omega-od02v-80h9ibbk/repo[dev]"
+  ],
+  "cwd": "/tmp/omega-od02v-80h9ibbk/repo",
+  "start_utc": "2026-11-15T11:48:24.013092+00:00",
+  "end_utc": "2026-11-15T11:49:27.428526+00:00",
+  "elapsed_seconds": 62.858978419,
+  "exit_code": 0,
+  "output": "linux312-install.txt"
+}

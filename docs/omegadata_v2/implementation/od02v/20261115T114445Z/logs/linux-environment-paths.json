@@ -1,0 +1,710 @@
+{
+  "python": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "copy": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "cache_only_exit": 1,
+  "install_exit": 0,
+  "files_match_head": [
+    {
+      "path": "README.md",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/acquisition_limits.v1.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/corporate_action_matching_policy.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/cross_source_tolerance_policy.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/release_profile_matrix.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/release_readiness_policy.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/review_policies.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/source_rights_policy.v1.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "config/trading_holidays_india.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "pyproject.toml",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/backfill_nse_equity_history.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/backfill_pit_universe.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_30day_replay_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_adjusted_ohlcv_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_adjustment_reference_corpus.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_corporate_action_corpus_coverage.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_corporate_action_end_to_end_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_corporate_action_matching_report.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_cross_source_tolerance_report.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_discontinuity_spike_report.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_futures_continuation_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_historical_trading_calendar_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_options_query_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_pipeline_state_artifact.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_pit_universe_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_pit_universe_seed_pack.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_post_pipeline_state.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_release_bundle.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_release_evidence_index.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_release_readiness_report.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/build_sidefeed_proof.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/check_trading_calendar_coverage.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/generate_extreme_report.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/generate_implementation_audit.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/generate_source_probe_matrix.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/generate_source_probe_report.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/import_seed_raw_cache.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/load_nse_fo_into_pipeline_db.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/probe_bse_urls.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/probe_endpoints.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/reconcile_release_blocking_reviews.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/reconcile_release_readiness_artifacts.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/replay_official_corporate_actions_into_pipeline_db.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/run_db_migrations.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/run_full_pipeline.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/run_monthly_quality_report.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/run_quarterly_secondary_validation.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/run_robustness_gate.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "scripts/run_weekly_reaudit.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata.egg-info/PKG-INFO",
+      "matches_head": false,
+      "generated_package_metadata": true
+    },
+    {
+      "path": "src/omegadata.egg-info/SOURCES.txt",
+      "matches_head": false,
+      "generated_package_metadata": true
+    },
+    {
+      "path": "src/omegadata.egg-info/dependency_links.txt",
+      "matches_head": true,
+      "generated_package_metadata": true
+    },
+    {
+      "path": "src/omegadata.egg-info/requires.txt",
+      "matches_head": false,
+      "generated_package_metadata": true
+    },
+    {
+      "path": "src/omegadata.egg-info/top_level.txt",
+      "matches_head": true,
+      "generated_package_metadata": true
+    },
+    {
+      "path": "src/omegadata/__init__.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/api/__init__.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/api/main.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/config.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/db/__init__.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/db/base.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/db/models.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/db/session.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/domain.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/pipelines/__init__.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/pipelines/monthly_quality_pipeline.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/pipelines/sequential_pipeline.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/__init__.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/acquisition.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/alerting.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/collection_schedule.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/download_manager.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/kafka_bus.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/monitoring.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/news_pipeline.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/orchestration.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/quality_reporting.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/redis_cache.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/slo.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/source_registry.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/source_rights.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/storage.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/trading_calendar.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_a/warehouse.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/__init__.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/adjustment_engine.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/confidence.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/corporate_action_matching.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/corporate_action_parser.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/corporate_actions.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/cross_source_validation.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/discontinuity.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/isin_master.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/manual_review.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/matching_policy.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/publication.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/release_manager.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/release_readiness.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/review_policy.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/tolerance_policy.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/track_b/universe_manager.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/ui/terminal.css",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/ui/terminal.html",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/ui/terminal.js",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/verification/__init__.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "src/omegadata/verification/audit.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/conftest.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/README.md",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/adjustment_reference_corpus.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/20microns_reverse_split_2025-06-24.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/21stcenmgm_demerger_final_2025-06-24.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/360one_sequential_chain_2025-06-24.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/3iinfotech_correction_supersession_2025-06-24.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/3mindia_reverse_split_later_delisted_2025-06-24.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/nestleind_split_2024-01-04.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/nmdc_bonus_2024-12-26.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/circular_extracts/tataconsum_rights_2024-07-25.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/corporate_action_matching_benchmark.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/official_transformational_case_specs.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/official_source/pit_universe_reference_pack.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/synthetic_manual/adjustment_reference_hand_computed.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/fixtures/synthetic_seed/pit_universe_seed_pack.json",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/integration/test_real_data_sources.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_adjustment_engine.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_adjustment_reference_corpus.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_collection_schedule.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_confidence_and_validation.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_corporate_actions.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_discontinuity.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_discontinuity_sector_fallback.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_external_validation_jobs.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_isin_master.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_news_pipeline.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_od01_source_rights.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_od01r_rights_hardening.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_od02_acquisition.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_operations_layer.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_pipeline_and_api.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_trackb_extreme_edges.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_universe_manager.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    },
+    {
+      "path": "tests/unit/test_validation_policies.py",
+      "matches_head": true,
+      "generated_package_metadata": false
+    }
+  ],
+  "native_filesystem": true,
+  "source": "https://pypi.org/simple; no source/provider requests"
+}

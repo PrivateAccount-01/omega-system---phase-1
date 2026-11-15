@@ -254,7 +254,7 @@ class DownloadManager:
             manifest_path=manifest_path if manifest_path.exists() else latest_pointer,
             checksum=checksum,
             bytes_downloaded=size,
-            used_url=str(manifest_payload.get("used_url", "")),
+            used_url=safe_url(str(manifest_payload.get("used_url", ""))),
             attempts=attempts,
             policy_decisions=(decision,),
             source_mode="source_cached_raw" if root == self.raw_root else "source_seed_imported",

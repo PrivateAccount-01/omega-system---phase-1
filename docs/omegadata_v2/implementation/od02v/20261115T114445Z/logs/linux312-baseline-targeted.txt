@@ -1,0 +1,974 @@
+........................................................................ [ 26%]
+...................................................................ss... [ 52%]
+...........................FF........................................... [ 78%]
+......................................FFFFFF...............              [100%]
+=================================== FAILURES ===================================
+___________ test_r10_probe_bootstrap_scoped_mock_and_refresh[False] ____________
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29eb39afc0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29eb4944d0>
+revoke_after_bootstrap = False
+
+    @pytest.mark.parametrize("revoke_after_bootstrap", [False, True])
+    def test_r10_probe_bootstrap_scoped_mock_and_refresh(synthetic_source_policy_provider, monkeypatch, revoke_after_bootstrap):
+        module = script("generate_source_probe_report")
+        from omegadata.track_a.source_rights import authorize_source
+    
+        active = synthetic_source_policy_provider()
+        calls = []
+    
+        def authorize(request):
+            return authorize_source(request, lambda: active)
+    
+        def fake_run(command, **kwargs):
+            nonlocal active
+            calls.append(command)
+            if "-o" in command:
+                Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+                Path(command[command.index("-D") + 1]).write_text("HTTP/1.1 200 OK\nContent-Type: text/plain\n")
+            if revoke_after_bootstrap and command[-1] == "https://www.nseindia.com/":
+                item = updated(active.policies[0], status=PolicyStatus.REVOKED,
+                               revoked_at=NOW, revocation_reason="SYNTHETIC_TEST_ONLY")
+                active = registry(item)
+            return Mock(returncode=0, stderr=b"")
+    
+        monkeypatch.setattr(module, "authorize_source", authorize)
+        monkeypatch.setattr(module.subprocess, "run", fake_run)
+        if revoke_after_bootstrap:
+            with pytest.raises(SourcePolicyError, match="POLICY_REVOKED"):
+                module._curl_probe(source_key=KEY, url="https://example.invalid/file", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)
+            assert len(calls) == 1
+        else:
+>           status, _, payload, _ = module._curl_probe(source_key=KEY, url="https://example.invalid/file", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_od01r_rights_hardening.py:376: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+____________ test_r10_probe_bootstrap_scoped_mock_and_refresh[True] ____________
+
+request = PolicyRequest(source_key='NSE_EQUITY_BHAVCOPY', operation=<SourceOperation.FETCH: 'FETCH'>, decision_at=datetime.datet...zone.utc), requested_transport=<SourceTransport.CURL: 'CURL'>, requested_host='example.invalid', consumer_purpose=None)
+
+    def authorize(request):
+>       return authorize_source(request, lambda: active)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_od01r_rights_hardening.py:355: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+request = PolicyRequest(source_key='NSE_EQUITY_BHAVCOPY', operation=<SourceOperation.FETCH: 'FETCH'>, decision_at=datetime.datet...zone.utc), requested_transport=<SourceTransport.CURL: 'CURL'>, requested_host='example.invalid', consumer_purpose=None)
+provider = <function test_r10_probe_bootstrap_scoped_mock_and_refresh.<locals>.authorize.<locals>.<lambda> at 0x7d29e92782c0>
+
+    def authorize_source(
+        request: PolicyRequest, provider: PolicyProvider = load_policy_register
+    ) -> SourcePolicyDecision:
+        if request.source_key not in SOURCE_REGISTRY:
+            raise SourcePolicyError(decision_record(request, PolicyReason.UNKNOWN_SOURCE))
+        try:
+            decision = provider().evaluate(request)
+        except PolicyRegisterError as exc:
+            raise SourcePolicyError(decision_record(request, exc.reason_code)) from exc
+        if not decision.allowed:
+>           raise SourcePolicyError(decision)
+E           omegadata.track_a.source_rights.SourcePolicyError: POLICY_REVOKED: source=NSE_EQUITY_BHAVCOPY, operation=FETCH
+
+src/omegadata/track_a/source_rights.py:417: SourcePolicyError
+
+During handling of the above exception, another exception occurred:
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e92a3420>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29eb4979b0>
+revoke_after_bootstrap = True
+
+    @pytest.mark.parametrize("revoke_after_bootstrap", [False, True])
+    def test_r10_probe_bootstrap_scoped_mock_and_refresh(synthetic_source_policy_provider, monkeypatch, revoke_after_bootstrap):
+        module = script("generate_source_probe_report")
+        from omegadata.track_a.source_rights import authorize_source
+    
+        active = synthetic_source_policy_provider()
+        calls = []
+    
+        def authorize(request):
+            return authorize_source(request, lambda: active)
+    
+        def fake_run(command, **kwargs):
+            nonlocal active
+            calls.append(command)
+            if "-o" in command:
+                Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+                Path(command[command.index("-D") + 1]).write_text("HTTP/1.1 200 OK\nContent-Type: text/plain\n")
+            if revoke_after_bootstrap and command[-1] == "https://www.nseindia.com/":
+                item = updated(active.policies[0], status=PolicyStatus.REVOKED,
+                               revoked_at=NOW, revocation_reason="SYNTHETIC_TEST_ONLY")
+                active = registry(item)
+            return Mock(returncode=0, stderr=b"")
+    
+        monkeypatch.setattr(module, "authorize_source", authorize)
+        monkeypatch.setattr(module.subprocess, "run", fake_run)
+        if revoke_after_bootstrap:
+            with pytest.raises(SourcePolicyError, match="POLICY_REVOKED"):
+>               module._curl_probe(source_key=KEY, url="https://example.invalid/file", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)
+
+tests/unit/test_od01r_rights_hardening.py:373: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+_ test_t24_probe_bootstrap_terminal_and_redirect_budget[403-HTTP_ACCESS_DENIED] _
+
+    def _curl_probe(
+        *, source_key: str, url: str, timeout_seconds: float,
+        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,
+    ) -> tuple[int | None, str, bytes, str | None]:
+        """Only explicit offline runner injection is supported; no provider subprocess."""
+        validate_request_options(timeout_seconds, None)
+        limits = load_limits()
+        budget = budget or RequestBudget(limits)
+        def preflight(target: str) -> None:
+            authorize_source(PolicyRequest(
+                source_key=source_key, operation=SourceOperation.FETCH,
+                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+                requested_host=policy_url_host(target),
+            ))
+        targets = ["https://www.nseindia.com/", url] if bootstrap_nse else [url]
+        for target in targets:
+            preflight(target)
+        if offline_runner is None:
+            raise failure("BLOCKED_EXTERNAL_EGRESS")
+        budget.remaining()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            result_body = b""
+            status, content_type = None, ""
+            for index, target in enumerate(targets):
+                preflight(target)
+                timeout = min(timeout_seconds, budget.consume())
+                body_path, header_path = root / f"{index}.body", root / f"{index}.headers"
+                command = ["curl", "--proto", "=https", "--max-redirs", "0", "--proxy", "",
+                    "--noproxy", "*", "--max-filesize", str(limits.body_bytes),
+                    "--max-time", str(timeout), "--connect-timeout", str(timeout),
+                    "-sS", "-D", str(header_path), "-o", str(body_path), "-A", USER_AGENT, target]
+                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)
+                budget.remaining()
+                if result.returncode != 0:
+                    raise failure("HTTP_TRANSIENT", terminal=False)
+                headers = {}
+                status = None
+                if not header_path.is_file():
+                    raise failure("PARTIAL_PAYLOAD")
+                if header_path.stat().st_size > 65536:
+                    raise failure("BODY_LIMIT_EXCEEDED")
+                for line in header_path.read_text(encoding="utf-8", errors="strict").splitlines():
+                    if line.startswith("HTTP/"):
+                        status = int(line.split()[1])
+                    elif ":" in line:
+                        name, value = line.split(":", 1)
+                        headers[name.lower().strip()] = value.strip()
+>               check_status(status or 0, headers)
+
+scripts/generate_source_probe_report.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+status = 403
+headers = {'location': 'https://foreign.invalid/', 'retry-after': '120'}
+
+    def check_status(status: int, headers: Mapping[str, str]) -> None:
+        if 300 <= status < 400:
+            raise failure("REDIRECT_NOT_ALLOWED", status=status)
+        if status in {401, 403, 451}:
+>           raise failure("HTTP_ACCESS_DENIED", status=status)
+E           omegadata.track_a.acquisition.DownloadError: HTTP_ACCESS_DENIED
+
+src/omegadata/track_a/acquisition.py:167: DownloadError
+
+During handling of the above exception, another exception occurred:
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e931afc0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29e92bc5f0>
+status = 403, reason = 'HTTP_ACCESS_DENIED'
+
+    @pytest.mark.parametrize(
+        "status,reason",
+        [
+            (403, "HTTP_ACCESS_DENIED"),
+            (429, "HTTP_RATE_LIMITED"),
+            (302, "REDIRECT_NOT_ALLOWED"),
+            (401, "HTTP_ACCESS_DENIED"),
+            (451, "HTTP_ACCESS_DENIED"),
+        ],
+    )
+    def test_t24_probe_bootstrap_terminal_and_redirect_budget(
+        synthetic_source_policy_provider, monkeypatch, status, reason
+    ):
+        from omegadata.track_a.source_rights import authorize_source
+    
+        module = probe_module()
+        monkeypatch.setattr(
+            module,
+            "authorize_source",
+            lambda request: authorize_source(request, synthetic_source_policy_provider),
+        )
+        calls = []
+    
+        def runner(command, **kw):
+            calls.append(command)
+            Path(command[command.index("-D") + 1]).write_text(
+                f"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\nRetry-After: 120\nLocation: https://foreign.invalid/\n"
+            )
+            Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+            return SimpleNamespace(returncode=0)
+    
+        with pytest.raises(DownloadError, match=reason):
+>           module._curl_probe(
+                source_key=KEY,
+                url="https://example.invalid/file",
+                timeout_seconds=1,
+                bootstrap_nse=True,
+                offline_runner=runner,
+            )
+
+tests/unit/test_od02_acquisition.py:573: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+_ test_t24_probe_bootstrap_terminal_and_redirect_budget[429-HTTP_RATE_LIMITED] _
+
+    def _curl_probe(
+        *, source_key: str, url: str, timeout_seconds: float,
+        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,
+    ) -> tuple[int | None, str, bytes, str | None]:
+        """Only explicit offline runner injection is supported; no provider subprocess."""
+        validate_request_options(timeout_seconds, None)
+        limits = load_limits()
+        budget = budget or RequestBudget(limits)
+        def preflight(target: str) -> None:
+            authorize_source(PolicyRequest(
+                source_key=source_key, operation=SourceOperation.FETCH,
+                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+                requested_host=policy_url_host(target),
+            ))
+        targets = ["https://www.nseindia.com/", url] if bootstrap_nse else [url]
+        for target in targets:
+            preflight(target)
+        if offline_runner is None:
+            raise failure("BLOCKED_EXTERNAL_EGRESS")
+        budget.remaining()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            result_body = b""
+            status, content_type = None, ""
+            for index, target in enumerate(targets):
+                preflight(target)
+                timeout = min(timeout_seconds, budget.consume())
+                body_path, header_path = root / f"{index}.body", root / f"{index}.headers"
+                command = ["curl", "--proto", "=https", "--max-redirs", "0", "--proxy", "",
+                    "--noproxy", "*", "--max-filesize", str(limits.body_bytes),
+                    "--max-time", str(timeout), "--connect-timeout", str(timeout),
+                    "-sS", "-D", str(header_path), "-o", str(body_path), "-A", USER_AGENT, target]
+                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)
+                budget.remaining()
+                if result.returncode != 0:
+                    raise failure("HTTP_TRANSIENT", terminal=False)
+                headers = {}
+                status = None
+                if not header_path.is_file():
+                    raise failure("PARTIAL_PAYLOAD")
+                if header_path.stat().st_size > 65536:
+                    raise failure("BODY_LIMIT_EXCEEDED")
+                for line in header_path.read_text(encoding="utf-8", errors="strict").splitlines():
+                    if line.startswith("HTTP/"):
+                        status = int(line.split()[1])
+                    elif ":" in line:
+                        name, value = line.split(":", 1)
+                        headers[name.lower().strip()] = value.strip()
+>               check_status(status or 0, headers)
+
+scripts/generate_source_probe_report.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+status = 429
+headers = {'location': 'https://foreign.invalid/', 'retry-after': '120'}
+
+    def check_status(status: int, headers: Mapping[str, str]) -> None:
+        if 300 <= status < 400:
+            raise failure("REDIRECT_NOT_ALLOWED", status=status)
+        if status in {401, 403, 451}:
+            raise failure("HTTP_ACCESS_DENIED", status=status)
+        if status == 429:
+            raw = headers.get("retry-after", "")
+            retry_after = None
+            if raw.isascii() and raw.isdigit() and len(raw) <= 8:
+                retry_after = str(int(raw))
+            else:
+                try:
+                    parsed = parsedate_to_datetime(raw)
+                    if parsed.tzinfo is not None:
+                        retry_after = parsed.isoformat()
+                except (ValueError, TypeError, OverflowError):
+                    pass
+>           raise failure("HTTP_RATE_LIMITED", status=status, retry_after=retry_after)
+E           omegadata.track_a.acquisition.DownloadError: HTTP_RATE_LIMITED
+
+src/omegadata/track_a/acquisition.py:180: DownloadError
+
+During handling of the above exception, another exception occurred:
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e931b7e0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29eb3ae4e0>
+status = 429, reason = 'HTTP_RATE_LIMITED'
+
+    @pytest.mark.parametrize(
+        "status,reason",
+        [
+            (403, "HTTP_ACCESS_DENIED"),
+            (429, "HTTP_RATE_LIMITED"),
+            (302, "REDIRECT_NOT_ALLOWED"),
+            (401, "HTTP_ACCESS_DENIED"),
+            (451, "HTTP_ACCESS_DENIED"),
+        ],
+    )
+    def test_t24_probe_bootstrap_terminal_and_redirect_budget(
+        synthetic_source_policy_provider, monkeypatch, status, reason
+    ):
+        from omegadata.track_a.source_rights import authorize_source
+    
+        module = probe_module()
+        monkeypatch.setattr(
+            module,
+            "authorize_source",
+            lambda request: authorize_source(request, synthetic_source_policy_provider),
+        )
+        calls = []
+    
+        def runner(command, **kw):
+            calls.append(command)
+            Path(command[command.index("-D") + 1]).write_text(
+                f"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\nRetry-After: 120\nLocation: https://foreign.invalid/\n"
+            )
+            Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+            return SimpleNamespace(returncode=0)
+    
+        with pytest.raises(DownloadError, match=reason):
+>           module._curl_probe(
+                source_key=KEY,
+                url="https://example.invalid/file",
+                timeout_seconds=1,
+                bootstrap_nse=True,
+                offline_runner=runner,
+            )
+
+tests/unit/test_od02_acquisition.py:573: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+_ test_t24_probe_bootstrap_terminal_and_redirect_budget[302-REDIRECT_NOT_ALLOWED] _
+
+    def _curl_probe(
+        *, source_key: str, url: str, timeout_seconds: float,
+        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,
+    ) -> tuple[int | None, str, bytes, str | None]:
+        """Only explicit offline runner injection is supported; no provider subprocess."""
+        validate_request_options(timeout_seconds, None)
+        limits = load_limits()
+        budget = budget or RequestBudget(limits)
+        def preflight(target: str) -> None:
+            authorize_source(PolicyRequest(
+                source_key=source_key, operation=SourceOperation.FETCH,
+                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+                requested_host=policy_url_host(target),
+            ))
+        targets = ["https://www.nseindia.com/", url] if bootstrap_nse else [url]
+        for target in targets:
+            preflight(target)
+        if offline_runner is None:
+            raise failure("BLOCKED_EXTERNAL_EGRESS")
+        budget.remaining()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            result_body = b""
+            status, content_type = None, ""
+            for index, target in enumerate(targets):
+                preflight(target)
+                timeout = min(timeout_seconds, budget.consume())
+                body_path, header_path = root / f"{index}.body", root / f"{index}.headers"
+                command = ["curl", "--proto", "=https", "--max-redirs", "0", "--proxy", "",
+                    "--noproxy", "*", "--max-filesize", str(limits.body_bytes),
+                    "--max-time", str(timeout), "--connect-timeout", str(timeout),
+                    "-sS", "-D", str(header_path), "-o", str(body_path), "-A", USER_AGENT, target]
+                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)
+                budget.remaining()
+                if result.returncode != 0:
+                    raise failure("HTTP_TRANSIENT", terminal=False)
+                headers = {}
+                status = None
+                if not header_path.is_file():
+                    raise failure("PARTIAL_PAYLOAD")
+                if header_path.stat().st_size > 65536:
+                    raise failure("BODY_LIMIT_EXCEEDED")
+                for line in header_path.read_text(encoding="utf-8", errors="strict").splitlines():
+                    if line.startswith("HTTP/"):
+                        status = int(line.split()[1])
+                    elif ":" in line:
+                        name, value = line.split(":", 1)
+                        headers[name.lower().strip()] = value.strip()
+>               check_status(status or 0, headers)
+
+scripts/generate_source_probe_report.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+status = 302
+headers = {'location': 'https://foreign.invalid/', 'retry-after': '120'}
+
+    def check_status(status: int, headers: Mapping[str, str]) -> None:
+        if 300 <= status < 400:
+>           raise failure("REDIRECT_NOT_ALLOWED", status=status)
+E           omegadata.track_a.acquisition.DownloadError: REDIRECT_NOT_ALLOWED
+
+src/omegadata/track_a/acquisition.py:165: DownloadError
+
+During handling of the above exception, another exception occurred:
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e92f51c0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29e930bce0>
+status = 302, reason = 'REDIRECT_NOT_ALLOWED'
+
+    @pytest.mark.parametrize(
+        "status,reason",
+        [
+            (403, "HTTP_ACCESS_DENIED"),
+            (429, "HTTP_RATE_LIMITED"),
+            (302, "REDIRECT_NOT_ALLOWED"),
+            (401, "HTTP_ACCESS_DENIED"),
+            (451, "HTTP_ACCESS_DENIED"),
+        ],
+    )
+    def test_t24_probe_bootstrap_terminal_and_redirect_budget(
+        synthetic_source_policy_provider, monkeypatch, status, reason
+    ):
+        from omegadata.track_a.source_rights import authorize_source
+    
+        module = probe_module()
+        monkeypatch.setattr(
+            module,
+            "authorize_source",
+            lambda request: authorize_source(request, synthetic_source_policy_provider),
+        )
+        calls = []
+    
+        def runner(command, **kw):
+            calls.append(command)
+            Path(command[command.index("-D") + 1]).write_text(
+                f"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\nRetry-After: 120\nLocation: https://foreign.invalid/\n"
+            )
+            Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+            return SimpleNamespace(returncode=0)
+    
+        with pytest.raises(DownloadError, match=reason):
+>           module._curl_probe(
+                source_key=KEY,
+                url="https://example.invalid/file",
+                timeout_seconds=1,
+                bootstrap_nse=True,
+                offline_runner=runner,
+            )
+
+tests/unit/test_od02_acquisition.py:573: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+_ test_t24_probe_bootstrap_terminal_and_redirect_budget[401-HTTP_ACCESS_DENIED] _
+
+    def _curl_probe(
+        *, source_key: str, url: str, timeout_seconds: float,
+        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,
+    ) -> tuple[int | None, str, bytes, str | None]:
+        """Only explicit offline runner injection is supported; no provider subprocess."""
+        validate_request_options(timeout_seconds, None)
+        limits = load_limits()
+        budget = budget or RequestBudget(limits)
+        def preflight(target: str) -> None:
+            authorize_source(PolicyRequest(
+                source_key=source_key, operation=SourceOperation.FETCH,
+                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+                requested_host=policy_url_host(target),
+            ))
+        targets = ["https://www.nseindia.com/", url] if bootstrap_nse else [url]
+        for target in targets:
+            preflight(target)
+        if offline_runner is None:
+            raise failure("BLOCKED_EXTERNAL_EGRESS")
+        budget.remaining()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            result_body = b""
+            status, content_type = None, ""
+            for index, target in enumerate(targets):
+                preflight(target)
+                timeout = min(timeout_seconds, budget.consume())
+                body_path, header_path = root / f"{index}.body", root / f"{index}.headers"
+                command = ["curl", "--proto", "=https", "--max-redirs", "0", "--proxy", "",
+                    "--noproxy", "*", "--max-filesize", str(limits.body_bytes),
+                    "--max-time", str(timeout), "--connect-timeout", str(timeout),
+                    "-sS", "-D", str(header_path), "-o", str(body_path), "-A", USER_AGENT, target]
+                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)
+                budget.remaining()
+                if result.returncode != 0:
+                    raise failure("HTTP_TRANSIENT", terminal=False)
+                headers = {}
+                status = None
+                if not header_path.is_file():
+                    raise failure("PARTIAL_PAYLOAD")
+                if header_path.stat().st_size > 65536:
+                    raise failure("BODY_LIMIT_EXCEEDED")
+                for line in header_path.read_text(encoding="utf-8", errors="strict").splitlines():
+                    if line.startswith("HTTP/"):
+                        status = int(line.split()[1])
+                    elif ":" in line:
+                        name, value = line.split(":", 1)
+                        headers[name.lower().strip()] = value.strip()
+>               check_status(status or 0, headers)
+
+scripts/generate_source_probe_report.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+status = 401
+headers = {'location': 'https://foreign.invalid/', 'retry-after': '120'}
+
+    def check_status(status: int, headers: Mapping[str, str]) -> None:
+        if 300 <= status < 400:
+            raise failure("REDIRECT_NOT_ALLOWED", status=status)
+        if status in {401, 403, 451}:
+>           raise failure("HTTP_ACCESS_DENIED", status=status)
+E           omegadata.track_a.acquisition.DownloadError: HTTP_ACCESS_DENIED
+
+src/omegadata/track_a/acquisition.py:167: DownloadError
+
+During handling of the above exception, another exception occurred:
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e931ac00>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d2a23ee9310>
+status = 401, reason = 'HTTP_ACCESS_DENIED'
+
+    @pytest.mark.parametrize(
+        "status,reason",
+        [
+            (403, "HTTP_ACCESS_DENIED"),
+            (429, "HTTP_RATE_LIMITED"),
+            (302, "REDIRECT_NOT_ALLOWED"),
+            (401, "HTTP_ACCESS_DENIED"),
+            (451, "HTTP_ACCESS_DENIED"),
+        ],
+    )
+    def test_t24_probe_bootstrap_terminal_and_redirect_budget(
+        synthetic_source_policy_provider, monkeypatch, status, reason
+    ):
+        from omegadata.track_a.source_rights import authorize_source
+    
+        module = probe_module()
+        monkeypatch.setattr(
+            module,
+            "authorize_source",
+            lambda request: authorize_source(request, synthetic_source_policy_provider),
+        )
+        calls = []
+    
+        def runner(command, **kw):
+            calls.append(command)
+            Path(command[command.index("-D") + 1]).write_text(
+                f"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\nRetry-After: 120\nLocation: https://foreign.invalid/\n"
+            )
+            Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+            return SimpleNamespace(returncode=0)
+    
+        with pytest.raises(DownloadError, match=reason):
+>           module._curl_probe(
+                source_key=KEY,
+                url="https://example.invalid/file",
+                timeout_seconds=1,
+                bootstrap_nse=True,
+                offline_runner=runner,
+            )
+
+tests/unit/test_od02_acquisition.py:573: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+_ test_t24_probe_bootstrap_terminal_and_redirect_budget[451-HTTP_ACCESS_DENIED] _
+
+    def _curl_probe(
+        *, source_key: str, url: str, timeout_seconds: float,
+        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,
+    ) -> tuple[int | None, str, bytes, str | None]:
+        """Only explicit offline runner injection is supported; no provider subprocess."""
+        validate_request_options(timeout_seconds, None)
+        limits = load_limits()
+        budget = budget or RequestBudget(limits)
+        def preflight(target: str) -> None:
+            authorize_source(PolicyRequest(
+                source_key=source_key, operation=SourceOperation.FETCH,
+                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,
+                requested_host=policy_url_host(target),
+            ))
+        targets = ["https://www.nseindia.com/", url] if bootstrap_nse else [url]
+        for target in targets:
+            preflight(target)
+        if offline_runner is None:
+            raise failure("BLOCKED_EXTERNAL_EGRESS")
+        budget.remaining()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            result_body = b""
+            status, content_type = None, ""
+            for index, target in enumerate(targets):
+                preflight(target)
+                timeout = min(timeout_seconds, budget.consume())
+                body_path, header_path = root / f"{index}.body", root / f"{index}.headers"
+                command = ["curl", "--proto", "=https", "--max-redirs", "0", "--proxy", "",
+                    "--noproxy", "*", "--max-filesize", str(limits.body_bytes),
+                    "--max-time", str(timeout), "--connect-timeout", str(timeout),
+                    "-sS", "-D", str(header_path), "-o", str(body_path), "-A", USER_AGENT, target]
+                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)
+                budget.remaining()
+                if result.returncode != 0:
+                    raise failure("HTTP_TRANSIENT", terminal=False)
+                headers = {}
+                status = None
+                if not header_path.is_file():
+                    raise failure("PARTIAL_PAYLOAD")
+                if header_path.stat().st_size > 65536:
+                    raise failure("BODY_LIMIT_EXCEEDED")
+                for line in header_path.read_text(encoding="utf-8", errors="strict").splitlines():
+                    if line.startswith("HTTP/"):
+                        status = int(line.split()[1])
+                    elif ":" in line:
+                        name, value = line.split(":", 1)
+                        headers[name.lower().strip()] = value.strip()
+>               check_status(status or 0, headers)
+
+scripts/generate_source_probe_report.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+status = 451
+headers = {'location': 'https://foreign.invalid/', 'retry-after': '120'}
+
+    def check_status(status: int, headers: Mapping[str, str]) -> None:
+        if 300 <= status < 400:
+            raise failure("REDIRECT_NOT_ALLOWED", status=status)
+        if status in {401, 403, 451}:
+>           raise failure("HTTP_ACCESS_DENIED", status=status)
+E           omegadata.track_a.acquisition.DownloadError: HTTP_ACCESS_DENIED
+
+src/omegadata/track_a/acquisition.py:167: DownloadError
+
+During handling of the above exception, another exception occurred:
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e92f6840>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29e8f0af60>
+status = 451, reason = 'HTTP_ACCESS_DENIED'
+
+    @pytest.mark.parametrize(
+        "status,reason",
+        [
+            (403, "HTTP_ACCESS_DENIED"),
+            (429, "HTTP_RATE_LIMITED"),
+            (302, "REDIRECT_NOT_ALLOWED"),
+            (401, "HTTP_ACCESS_DENIED"),
+            (451, "HTTP_ACCESS_DENIED"),
+        ],
+    )
+    def test_t24_probe_bootstrap_terminal_and_redirect_budget(
+        synthetic_source_policy_provider, monkeypatch, status, reason
+    ):
+        from omegadata.track_a.source_rights import authorize_source
+    
+        module = probe_module()
+        monkeypatch.setattr(
+            module,
+            "authorize_source",
+            lambda request: authorize_source(request, synthetic_source_policy_provider),
+        )
+        calls = []
+    
+        def runner(command, **kw):
+            calls.append(command)
+            Path(command[command.index("-D") + 1]).write_text(
+                f"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\nRetry-After: 120\nLocation: https://foreign.invalid/\n"
+            )
+            Path(command[command.index("-o") + 1]).write_bytes(b"SYNTHETIC_TEST_ONLY")
+            return SimpleNamespace(returncode=0)
+    
+        with pytest.raises(DownloadError, match=reason):
+>           module._curl_probe(
+                source_key=KEY,
+                url="https://example.invalid/file",
+                timeout_seconds=1,
+                bootstrap_nse=True,
+                offline_runner=runner,
+            )
+
+tests/unit/test_od02_acquisition.py:573: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+______________ test_t24_probe_strict_validation_and_shared_budget ______________
+
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e93198a0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d2a23eea0f0>
+
+    def test_t24_probe_strict_validation_and_shared_budget(
+        synthetic_source_policy_provider, monkeypatch
+    ):
+        from omegadata.track_a.source_rights import authorize_source
+    
+        module = probe_module()
+        monkeypatch.setattr(
+            module,
+            "authorize_source",
+            lambda request: authorize_source(request, synthetic_source_policy_provider),
+        )
+        body = [archive()]
+    
+        def runner(command, **kw):
+            Path(command[command.index("-D") + 1]).write_text(
+                "HTTP/1.1 200 OK\nContent-Type: application/zip\n"
+            )
+            Path(command[command.index("-o") + 1]).write_bytes(body[0])
+            return SimpleNamespace(returncode=0)
+    
+        budget = RequestBudget(replace(load_limits(), max_attempts=2))
+>       result = module._probe_entry(
+            source_key=KEY,
+            as_of=DAY,
+            url="https://example.invalid/file",
+            role="primary",
+            timeout_seconds=1,
+            kind="zip",
+            budget=budget,
+            offline_runner=runner,
+        )
+
+tests/unit/test_od02_acquisition.py:605: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/generate_source_probe_report.py:187: in _probe_entry
+    status_code, content_type, body, stderr = _curl_probe(
+scripts/generate_source_probe_report.py:124: in _curl_probe
+    with tempfile.TemporaryDirectory() as tmpdir:
+/usr/lib/python3.12/tempfile.py:1085: in __exit__
+    self.cleanup()
+/usr/lib/python3.12/tempfile.py:1089: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+/usr/lib/python3.12/tempfile.py:1069: in _rmtree
+    _rmtree(name, onexc=onexc)
+/usr/lib/python3.12/shutil.py:785: in rmtree
+    _rmtree_safe_fd(fd, path, onexc)
+/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit
+    if event in {"os.remove","os.rmdir"}:bounded(args[0],False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'PROTECTED_WRITE'
+
+    def deny(kind):
+        denials[kind]+=1
+>       raise RuntimeError("OD02V_BLOCKED_"+kind)
+E       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError
+=========================== short test summary info ============================
+SKIPPED [2] tests/unit/test_od01r_rights_hardening.py:171: Windows junction test
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[False]
+FAILED tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[True]
+FAILED tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[403-HTTP_ACCESS_DENIED]
+FAILED tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[429-HTTP_RATE_LIMITED]
+FAILED tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[302-REDIRECT_NOT_ALLOWED]
+FAILED tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[401-HTTP_ACCESS_DENIED]
+FAILED tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[451-HTTP_ACCESS_DENIED]
+FAILED tests/unit/test_od02_acquisition.py::test_t24_probe_strict_validation_and_shared_budget
+8 failed, 265 passed, 2 skipped in 3.89s

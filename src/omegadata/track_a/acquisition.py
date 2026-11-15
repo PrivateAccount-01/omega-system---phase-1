@@ -17,7 +17,7 @@ from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 from email.utils import parsedate_to_datetime
 from pathlib import Path, PurePosixPath
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import unquote, urlsplit, urlunsplit
 
 from omegadata.track_a.source_registry import resolve_era
 
@@ -154,10 +154,26 @@ class RequestBudget:
 
 
 def safe_url(url: str) -> str:
-    parsed = urlsplit(url)
+    try:
+        parsed = urlsplit(url)
+    except ValueError:
+        return "[REDACTED_URL]"
     # Evidence must never retain userinfo or query tokens, even on rejected URLs.
     authority = parsed.netloc.rsplit("@", 1)[-1]
-    return urlunsplit((parsed.scheme, authority, parsed.path, "", ""))
+    fields = {"token", "access_token", "api_key", "apikey", "password", "secret", "authorization", "signature"}
+    parts = parsed.path.split("/")
+    redact_next = False
+    for index, part in enumerate(parts):
+        label = unquote(part).partition("=")[0].casefold().replace("-", "_")
+        if redact_next:
+            parts[index] = "[REDACTED]"
+            redact_next = False
+        elif label in fields:
+            if "=" in unquote(part):
+                parts[index] = label + "=[REDACTED]"
+            else:
+                redact_next = True
+    return urlunsplit((parsed.scheme, authority, "/".join(parts), "", ""))
 
 
 def check_status(status: int, headers: Mapping[str, str]) -> None:

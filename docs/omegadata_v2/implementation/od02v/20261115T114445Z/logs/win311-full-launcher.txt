@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "E:\omega system - phase 1\docs\omegadata_v2\implementation\od02v\20261115T114445Z\verification_runner.py", line 184, in <module>
+    
+  File "E:\omega system - phase 1\docs\omegadata_v2\implementation\od02v\20261115T114445Z\verification_runner.py", line 175, in main
+    code=1
+           
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\platform.py", line 1227, in platform
+    rel, vers, csd, ptype = win32_ver(version)
+                            ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\platform.py", line 371, in win32_ver
+    major, minor, build = map(int, _syscmd_ver()[2].split('.'))
+                                   ^^^^^^^^^^^^^
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\platform.py", line 284, in _syscmd_ver
+    info = subprocess.check_output(cmd,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\subprocess.py", line 992, in __init__
+    errread, errwrite) = self._get_handles(stdin, stdout, stderr)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\subprocess.py", line 1359, in _get_handles
+    p2cread = msvcrt.get_osfhandle(self._get_devnull())
+                                   ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paril Rupani\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\subprocess.py", line 1137, in _get_devnull
+    self._devnull = os.open(os.devnull, os.O_RDWR)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\omega system - phase 1\docs\omegadata_v2\implementation\od02v\20261115T114445Z\verification_runner.py", line 95, in descriptor_open
+    if flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):bounded(actual)
+                                                                         ^^^^^^^^^^^^^^^
+  File "E:\omega system - phase 1\docs\omegadata_v2\implementation\od02v\20261115T114445Z\verification_runner.py", line 90, in bounded
+    if not target.is_relative_to(sandbox):deny("PROTECTED_WRITE")
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\omega system - phase 1\docs\omegadata_v2\implementation\od02v\20261115T114445Z\verification_runner.py", line 56, in deny
+    raise RuntimeError("OD02V_BLOCKED_"+kind)
+RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE

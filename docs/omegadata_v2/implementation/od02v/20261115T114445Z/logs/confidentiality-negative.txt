@@ -1,0 +1,146 @@
+FFFFFFF                                                                  [100%]
+================================== FAILURES ===================================
+_ test_v04_credential_shaped_path_redacted[/api/token/SYNTHETIC_SECRET/data] __
+
+path = '/api/token/SYNTHETIC_SECRET/data'
+
+    @pytest.mark.parametrize("path", [
+        "/api/token/SYNTHETIC_SECRET/data", "/api/api_key/SYNTHETIC_SECRET",
+        "/api/access_token/SYNTHETIC_SECRET", "/api/password=SYNTHETIC_SECRET/data",
+        "/api/%74oken/SYNTHETIC_SECRET",
+    ])
+    def test_v04_credential_shaped_path_redacted(path):
+        value = safe_url("https://user:SYNTHETIC_SECRET@example.invalid" + path + "?token=SYNTHETIC_SECRET#SYNTHETIC_SECRET")
+>       assert "SYNTHETIC_SECRET" not in value
+E       AssertionError: assert 'SYNTHETIC_SECRET' not in 'https://exa..._SECRET/data'
+E         
+E         'SYNTHETIC_SECRET' is contained here:
+E           https://example.invalid/api/token/SYNTHETIC_SECRET/data
+E         ?                                   ++++++++++++++++
+
+tests\unit\test_od02v_portability.py:128: AssertionError
+___ test_v04_credential_shaped_path_redacted[/api/api_key/SYNTHETIC_SECRET] ___
+
+path = '/api/api_key/SYNTHETIC_SECRET'
+
+    @pytest.mark.parametrize("path", [
+        "/api/token/SYNTHETIC_SECRET/data", "/api/api_key/SYNTHETIC_SECRET",
+        "/api/access_token/SYNTHETIC_SECRET", "/api/password=SYNTHETIC_SECRET/data",
+        "/api/%74oken/SYNTHETIC_SECRET",
+    ])
+    def test_v04_credential_shaped_path_redacted(path):
+        value = safe_url("https://user:SYNTHETIC_SECRET@example.invalid" + path + "?token=SYNTHETIC_SECRET#SYNTHETIC_SECRET")
+>       assert "SYNTHETIC_SECRET" not in value
+E       AssertionError: assert 'SYNTHETIC_SECRET' not in 'https://exa...HETIC_SECRET'
+E         
+E         'SYNTHETIC_SECRET' is contained here:
+E           https://example.invalid/api/api_key/SYNTHETIC_SECRET
+E         ?                                     ++++++++++++++++
+
+tests\unit\test_od02v_portability.py:128: AssertionError
+_ test_v04_credential_shaped_path_redacted[/api/access_token/SYNTHETIC_SECRET] _
+
+path = '/api/access_token/SYNTHETIC_SECRET'
+
+    @pytest.mark.parametrize("path", [
+        "/api/token/SYNTHETIC_SECRET/data", "/api/api_key/SYNTHETIC_SECRET",
+        "/api/access_token/SYNTHETIC_SECRET", "/api/password=SYNTHETIC_SECRET/data",
+        "/api/%74oken/SYNTHETIC_SECRET",
+    ])
+    def test_v04_credential_shaped_path_redacted(path):
+        value = safe_url("https://user:SYNTHETIC_SECRET@example.invalid" + path + "?token=SYNTHETIC_SECRET#SYNTHETIC_SECRET")
+>       assert "SYNTHETIC_SECRET" not in value
+E       AssertionError: assert 'SYNTHETIC_SECRET' not in 'https://exa...HETIC_SECRET'
+E         
+E         'SYNTHETIC_SECRET' is contained here:
+E           https://example.invalid/api/access_token/SYNTHETIC_SECRET
+E         ?                                          ++++++++++++++++
+
+tests\unit\test_od02v_portability.py:128: AssertionError
+_ test_v04_credential_shaped_path_redacted[/api/password=SYNTHETIC_SECRET/data] _
+
+path = '/api/password=SYNTHETIC_SECRET/data'
+
+    @pytest.mark.parametrize("path", [
+        "/api/token/SYNTHETIC_SECRET/data", "/api/api_key/SYNTHETIC_SECRET",
+        "/api/access_token/SYNTHETIC_SECRET", "/api/password=SYNTHETIC_SECRET/data",
+        "/api/%74oken/SYNTHETIC_SECRET",
+    ])
+    def test_v04_credential_shaped_path_redacted(path):
+        value = safe_url("https://user:SYNTHETIC_SECRET@example.invalid" + path + "?token=SYNTHETIC_SECRET#SYNTHETIC_SECRET")
+>       assert "SYNTHETIC_SECRET" not in value
+E       AssertionError: assert 'SYNTHETIC_SECRET' not in 'https://exa..._SECRET/data'
+E         
+E         'SYNTHETIC_SECRET' is contained here:
+E           https://example.invalid/api/password=SYNTHETIC_SECRET/data
+E         ?                                      ++++++++++++++++
+
+tests\unit\test_od02v_portability.py:128: AssertionError
+___ test_v04_credential_shaped_path_redacted[/api/%74oken/SYNTHETIC_SECRET] ___
+
+path = '/api/%74oken/SYNTHETIC_SECRET'
+
+    @pytest.mark.parametrize("path", [
+        "/api/token/SYNTHETIC_SECRET/data", "/api/api_key/SYNTHETIC_SECRET",
+        "/api/access_token/SYNTHETIC_SECRET", "/api/password=SYNTHETIC_SECRET/data",
+        "/api/%74oken/SYNTHETIC_SECRET",
+    ])
+    def test_v04_credential_shaped_path_redacted(path):
+        value = safe_url("https://user:SYNTHETIC_SECRET@example.invalid" + path + "?token=SYNTHETIC_SECRET#SYNTHETIC_SECRET")
+>       assert "SYNTHETIC_SECRET" not in value
+E       AssertionError: assert 'SYNTHETIC_SECRET' not in 'https://exa...HETIC_SECRET'
+E         
+E         'SYNTHETIC_SECRET' is contained here:
+E           https://example.invalid/api/%74oken/SYNTHETIC_SECRET
+E         ?                                     ++++++++++++++++
+
+tests\unit\test_od02v_portability.py:128: AssertionError
+____________________ test_v04_legacy_cache_url_is_redacted ____________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-_1fwduxd/pytest/test_v04_legacy_cache_url_is_r0')
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x0000028B2BE531C0>
+
+    def test_v04_legacy_cache_url_is_redacted(tmp_path, synthetic_source_policy_provider):
+        manager, root, folder, pointer, artifact, body = make_cache(tmp_path, synthetic_source_policy_provider)
+        body["used_url"] = "https://example.invalid/api/token/SYNTHETIC_SECRET?token=SYNTHETIC_SECRET"
+        pointer.write_text(json.dumps(body))
+        cached = manager._load_cached_artifact_from_root(root, KEY, DAY)
+>       assert cached is not None and "SYNTHETIC_SECRET" not in cached.used_url
+E       AssertionError: assert (DownloadArtifact(source_key='NSE_EQUITY_BHAVCOPY', as_of=datetime.date(2024, 1, 2), path=WindowsPath('C:/Users/Paril R...hed_raw', acquisition_state='HTTP_RECEIVED', sha256='636a41c508055d64bbc1a11197b0e4c40bbffc7cce32469f41302a9c1f2b97ba') is not None and 'SYNTHETIC_SECRET' not in 'https://exa...HETIC_SECRET'
+E         
+E         'SYNTHETIC_SECRET' is contained here:
+E           https://example.invalid/api/token/SYNTHETIC_SECRET?token=SYNTHETIC_SECRET
+E         ?                                   ++++++++++++++++)
+
+tests\unit\test_od02v_portability.py:137: AssertionError
+_______________ test_v04_structured_error_context_redacts_path ________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-_1fwduxd/pytest/test_v04_structured_error_cont0')
+synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x0000028B2BE538A0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028B2BE363F0>
+
+    def test_v04_structured_error_context_redacts_path(tmp_path, synthetic_source_policy_provider, monkeypatch):
+        manager = DownloadManager(policy_provider=synthetic_source_policy_provider)
+        manager.raw_root = tmp_path / "raw"
+        real_client = httpx.Client
+        monkeypatch.setattr(dm.httpx, "Client", lambda **kw: real_client(transport=httpx.MockTransport(lambda _: httpx.Response(429)), **kw))
+        monkeypatch.setattr(manager, "_candidate_urls", lambda *_: ["https://example.invalid/token/SYNTHETIC_SECRET/file"])
+        with pytest.raises(DownloadError) as exc:
+            manager.download(KEY, DAY, use_cache=False)
+>       assert "SYNTHETIC_SECRET" not in json.dumps(exc.value.context)
+E       assert 'SYNTHETIC_SECRET' not in '{"source_ke...19_present"}'
+E         
+E         'SYNTHETIC_SECRET' is contained here:
+E           lid/token/SYNTHETIC_SECRET/file", "transport": "HTTPX", "policy_revision": 1, "policy_id": "SYNTHETIC_TEST_ONLY-NSE_EQUITY_BHAVCOPY", "requested_date": "2024-01-02", "purpose": "raw-acquisition", "actual_attempts": 1, "max_attempts": 5, "source_era": "2019_present"}
+E         ?           ++++++++++++++++
+
+tests\unit\test_od02v_portability.py:148: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/token/SYNTHETIC_SECRET/data]
+FAILED tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/api_key/SYNTHETIC_SECRET]
+FAILED tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/access_token/SYNTHETIC_SECRET]
+FAILED tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/password=SYNTHETIC_SECRET/data]
+FAILED tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/%74oken/SYNTHETIC_SECRET]
+FAILED tests/unit/test_od02v_portability.py::test_v04_legacy_cache_url_is_redacted
+FAILED tests/unit/test_od02v_portability.py::test_v04_structured_error_context_redacts_path
+7 failed, 9 deselected in 0.58s

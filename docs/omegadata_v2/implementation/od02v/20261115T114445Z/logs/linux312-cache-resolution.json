@@ -1,0 +1,23 @@
+{
+  "label": "linux312-cache-resolution",
+  "command": [
+    "/tmp/omega-od02v-80h9ibbk/venv312/bin/python",
+    "-m",
+    "pip",
+    "--isolated",
+    "install",
+    "--dry-run",
+    "--no-index",
+    "--only-binary=:all:",
+    "-c",
+    "/tmp/omega-od02v-80h9ibbk/working-environment-constraints.txt",
+    "-e",
+    "/tmp/omega-od02v-80h9ibbk/repo[dev]"
+  ],
+  "cwd": "/tmp/omega-od02v-80h9ibbk/repo",
+  "start_utc": "2026-11-15T11:48:22.535978+00:00",
+  "end_utc": "2026-11-15T11:48:23.973762+00:00",
+  "elapsed_seconds": 1.4377796770000018,
+  "exit_code": 1,
+  "output": "linux312-cache-resolution.txt"
+}

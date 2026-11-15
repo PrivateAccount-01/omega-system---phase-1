@@ -1,0 +1,18 @@
+# OD-02V preflight
+
+OD-02V VERIFY_AND_REMEDIATE_ONLY; run 20261115T114445Z. Branch `feature/od01-source-rights`, unchanged reviewed HEAD `eaedac1bddc35867f9089486beffa3bb38cb11f4`. Evidence classes RUN/TEST/SYN; prior reports remain ARCH. Same-model engineering review, not independent human financial/legal approval.
+
+
+The exact required branch and HEAD were verified before setup; there is no commit drift. Original tracked worktree was clean. Existing untracked items: prior `.venv-linux`, supplied OD-02V prompt, private signing/revocation paths. These were preserved, not cleaned, opened or uploaded. No stage/commit/push/merge/rebase, CI edit, production release or signing action is authorized or performed.
+
+Required master/agent/phase instructions, OD-00 defect register and phase plan, OD-01R Gatekeeper/matrix/findings, OD-02 reports/runner/logs and current rights/acquisition/downloader/orchestration/probe/config/tests were read/re-evaluated. Prior pass strings were not accepted as new evidence. Read-only Git state records: [root](logs/git-root.txt), [branch](logs/git-branch.txt), [HEAD](logs/git-head.txt), [complete porcelain before](logs/git-status-before.txt), [main comparison](logs/git-main-diff.txt), [five-commit log](logs/git-log.txt), [main identity](logs/git-main.txt). All associated command JSONs preserve exact arguments, UTC intervals and exits. Root remains E:/omega system - phase 1.
+
+Before setup, [original preservation](logs/preservation-before.json) froze non-secret content hashes and signing file length/mtime metadata. Private signing files were never opened, read, hashed, copied or uploaded. New isolated copies excluded all GnuPG, .env, operational databases, environments, releases and old evidence. A later precise fixture allowlist supplies only existing regression dependencies under the contract's fixture exception. Original raw data and historical artifacts were not changed.
+
+[GitHub CI observation](logs/github-ci-observation.json): connector returned no commit statuses and no first-page PR-triggered workflow runs. That workflow API is PR-filtered; all-event CI visibility remains unverified. GitHub CLI was unavailable. No workflow dispatch occurred and no local result is represented as a CI run.
+
+Available interpreters: Windows project venv Python 3.14.3, existing Windows base Python 3.11.15, native WSL /usr/bin/python3 3.12.3. The latter two initially lacked the project test dependencies. Invocation explicitly authorizes disposable official-index dependency setup; no additional permission was needed. Optional Linux 3.11 was not on PATH and no existing uv runtime was found: [probe](logs/linux-optional-runtime.txt). No new Python runtime/system package was installed.
+
+Fresh baseline targeted: Windows 3.14 and 3.11 **272 passed, 3 skipped**, command exit 0. Fresh sanitized full first had **4 fixture-omission failures, 379 passed, 3 skipped, 4 deselected**, exit 1; exact reviewed fixture dependencies were then copied, with no test/source workaround. Original Linux targeted reached assertions but eight cleanup failures exposed the runner's descriptor-relative path bug, not an application failure. All initial failures remain retained and explained in [findings](04_cross_platform_findings.md).
+
+Final [preservation/identity gate](logs/final-check-accepted.json) verifies exact authorized changes, unchanged original evidence/data/signing metadata, 13 pending policies, no approvals, empty index, unchanged HEAD/branch/main and tested-copy hashes. Windows file-symlink privileges remain unavailable; actual Linux execution closes the three original skipped scenarios, not Windows privilege equivalence.

@@ -1,0 +1,23 @@
+{
+  "label": "linux312-v2-install",
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-m",
+    "pip",
+    "--isolated",
+    "install",
+    "--index-url",
+    "https://pypi.org/simple",
+    "--only-binary=:all:",
+    "-c",
+    "/home/parilrupani/omega-od02v-37b3vimd/working-environment-constraints.txt",
+    "-e",
+    "/home/parilrupani/omega-od02v-37b3vimd/repo[dev]"
+  ],
+  "cwd": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "start_utc": "2026-11-15T11:55:37.632058+00:00",
+  "end_utc": "2026-11-15T11:56:03.663120+00:00",
+  "elapsed_seconds": 26.031057795000002,
+  "exit_code": 0,
+  "output": "linux312-v2-install.txt"
+}

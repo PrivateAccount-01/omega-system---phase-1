@@ -1,0 +1,84 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od02v\\20261115T114445Z\\verification_runner.py",
+    "confidentiality-green",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od02v_portability.py",
+    "-k",
+    "v04"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\repo",
+  "baseline": "eaedac1bddc35867f9089486beffa3bb38cb11f4",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T11:57:51.719452+00:00",
+  "end_utc": "2026-11-15T11:57:53.002242+00:00",
+  "elapsed_seconds": 1.2827930999919772,
+  "exit_code": 0,
+  "output": "confidentiality-green.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-51zdkhmt",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/token/SYNTHETIC_SECRET/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/api_key/SYNTHETIC_SECRET]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/access_token/SYNTHETIC_SECRET]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/password=SYNTHETIC_SECRET/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/%74oken/SYNTHETIC_SECRET]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_legacy_cache_url_is_redacted",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_structured_error_context_redacts_path",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [
+    "tests/unit/test_od02v_portability.py::test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes",
+    "tests/unit/test_od02v_portability.py::test_v02_real_directory_link_partition_confined[False]",
+    "tests/unit/test_od02v_portability.py::test_v02_real_directory_link_partition_confined[True]",
+    "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[False-broken]",
+    "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[False-loop]",
+    "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[False-retarget]",
+    "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[True-broken]",
+    "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[True-loop]",
+    "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[True-retarget]"
+  ],
+  "call_counts": {
+    "passed": 7
+  }
+}

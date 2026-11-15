@@ -1,0 +1,102 @@
+{
+  "utc": "2026-11-15T12:14:51.026518+00:00",
+  "original_records_checked": 11626,
+  "authorized_original_changes": [
+    "src/omegadata/track_a/acquisition.py",
+    "src/omegadata/track_a/download_manager.py"
+  ],
+  "unexpected_original_changes": [],
+  "missing_docs": [],
+  "broken_links": [
+    {
+      "file": "05_implementation_diff.md",
+      "link": "logs/implementation.patch"
+    }
+  ],
+  "pending_sources": 13,
+  "approved_sources": 0,
+  "checks": {
+    "Windows 3.14.3": {
+      "collection": 0,
+      "targeted": 0,
+      "full": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0
+    },
+    "Windows 3.11.15": {
+      "collection": 0,
+      "targeted": 0,
+      "full": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0
+    },
+    "WSL Linux 3.12.3": {
+      "collection": 0,
+      "targeted": 0,
+      "full": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0
+    }
+  },
+  "tested_source": [
+    {
+      "runtime": "Windows 3.14.3",
+      "path": "src/omegadata/track_a/acquisition.py",
+      "matches_tested": true
+    },
+    {
+      "runtime": "Windows 3.14.3",
+      "path": "src/omegadata/track_a/download_manager.py",
+      "matches_tested": false
+    },
+    {
+      "runtime": "Windows 3.14.3",
+      "path": "tests/unit/test_od02v_portability.py",
+      "matches_tested": false
+    },
+    {
+      "runtime": "Windows 3.11.15",
+      "path": "src/omegadata/track_a/acquisition.py",
+      "matches_tested": true
+    },
+    {
+      "runtime": "Windows 3.11.15",
+      "path": "src/omegadata/track_a/download_manager.py",
+      "matches_tested": true
+    },
+    {
+      "runtime": "Windows 3.11.15",
+      "path": "tests/unit/test_od02v_portability.py",
+      "matches_tested": true
+    },
+    {
+      "runtime": "WSL Linux 3.12.3",
+      "path": "src/omegadata/track_a/acquisition.py",
+      "matches_tested": true
+    },
+    {
+      "runtime": "WSL Linux 3.12.3",
+      "path": "src/omegadata/track_a/download_manager.py",
+      "matches_tested": true
+    },
+    {
+      "runtime": "WSL Linux 3.12.3",
+      "path": "tests/unit/test_od02v_portability.py",
+      "matches_tested": true
+    }
+  ],
+  "git": {
+    "head": "eaedac1bddc35867f9089486beffa3bb38cb11f4",
+    "branch": "feature/od01-source-rights",
+    "main": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674",
+    "staged": ""
+  },
+  "original_three_symlinks_executed_pass": true,
+  "signing": "file length/mtime only, never opened or hashed",
+  "private_signing_bytes_preservation": "No read/hash proof claimed; no access/mutation/copy and unchanged metadata",
+  "passed": false,
+  "gatekeeper": "OD02V_BLOCKED"
+}

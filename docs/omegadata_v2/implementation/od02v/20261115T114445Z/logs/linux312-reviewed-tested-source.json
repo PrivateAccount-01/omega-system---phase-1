@@ -1,0 +1,20 @@
+{
+  "copy": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "baseline": "eaedac1bddc35867f9089486beffa3bb38cb11f4",
+  "overlays": [
+    {
+      "path": "src/omegadata/track_a/acquisition.py",
+      "sha256": "0b1578e270c0b3d89bcc819036d38786967c58b04aa6c4271b63f47796d3472b"
+    },
+    {
+      "path": "src/omegadata/track_a/download_manager.py",
+      "sha256": "0db5d62f8fee87a11b2a41ecedce28c1f81f7afe3ce154d4333edd75d376a2e3"
+    },
+    {
+      "path": "tests/unit/test_od02v_portability.py",
+      "sha256": "0a72b774b7fedab1fe561777ab78bafa855115a3aec6e094e0ad5cb0bcdd3873"
+    }
+  ],
+  "all_other_source_test_config_match_head": true,
+  "original_inherited_tests_unmodified": true
+}

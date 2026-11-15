@@ -1,0 +1,1690 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py",
+    "linux312-baseline-targeted",
+    "/home/parilrupani/omega-od02v-37b3vimd/repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "tests/unit/test_od02_acquisition.py",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "baseline": "eaedac1bddc35867f9089486beffa3bb38cb11f4",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T11:58:16.448267+00:00",
+  "end_utc": "2026-11-15T11:58:21.235916+00:00",
+  "elapsed_seconds": 4.787629242,
+  "exit_code": 1,
+  "output": "linux312-baseline-targeted.txt",
+  "sandbox": "/tmp/omega-od02v-tests-ce9dcukh",
+  "root": "/home/parilrupani/omega-od02v-37b3vimd/repo",
+  "guard_denials": {
+    "PROTECTED_WRITE": 10,
+    "DNS": 1,
+    "SUBPROCESS": 1
+  },
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_pending_default_stops_before_cache_disclosure",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[unknown-UNKNOWN_SOURCE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[missing-MISSING_POLICY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[pending-POLICY_PENDING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[denied-POLICY_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[revoked-POLICY_REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[expired-POLICY_EXPIRED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[expiry_state-POLICY_EXPIRED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[evidence-EVIDENCE_INCOMPLETE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[host-HOST_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[transport-TRANSPORT_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[store-SCOPE_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[future-SCOPE_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t08_fetch_does_not_grant_redistribution",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t09_research_does_not_grant_trade_use",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t12_fake_http_acquisition_preserves_envelope",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t13_latest_revocation_keeps_old_decision_attributable",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[source_entity]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[source_terms_url]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[terms_sha256]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[terms_retrieved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[approval_evidence_ref]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[approved_by]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[approved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[valid_from]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[valid_until]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[created_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[terms_retrieved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[approved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[valid_from]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[valid_until]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[revoked_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_request_timestamp_ambiguity_rejects[2026-01-01]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_request_timestamp_ambiguity_rejects[2026-01-01T12:00:00+05:30]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_request_timestamp_ambiguity_rejects[1760000000]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation7]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation8]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation9]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation10]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation11]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_duplicate_entries_and_unlinked_revisions_reject",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[not json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[{\"schema_version\":\"source-policy/v1\",\"schema_version\":\"source-policy/v1\",\"policies\":[]}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[{\"schema_version\":\"source-policy/v1\",\"policies\":[],\"extra\":true}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[\\xff\\xfeinvalid encoding]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_EQUITY_BHAVCOPY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_FO_BHAVCOPY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[BSE_EQUITY_BHAVCOPY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_FII_DII]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[INDIA_VIX]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[BSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[GDELT]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[RBI_DBIE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[MOSPI]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[AMFI_MONTHLY_PORTFOLIOS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_BULK_BLOCK_DEALS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[INSIDER_TRADES]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[foreign.invalid]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[*.example.invalid]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[example.invalid:443]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[https://example.invalid]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[None]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_normalized_dns_and_local_cache_policy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_invalid_register_history_identity_rejects",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t17_optional_pipeline_refusal_does_not_try_later_source",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_allowed_fake_probe_preserves_policy_attribution",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t17_denied_fallback_transport_is_terminal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_missing_policy_file_is_typed_refusal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t15_every_registered_default_is_pending",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t16_revoked_cache_and_seed_do_not_read_payload[False]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t16_revoked_cache_and_seed_do_not_read_payload[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_cache_only_permission_does_not_escalate_on_miss",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t17_policy_refusal_in_fetch_is_not_swallowed",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t18_concurrent_decisions_are_immutable_and_deterministic",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t18_transport_source_context_is_thread_local",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[probe]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[discover_bse]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[discover_fo]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[stockreach]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[unscoped_request]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[unscoped_urllib]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[unscoped_curl]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_foreign_discovered_host_is_denied_before_client",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_policy_change_is_rechecked_before_operation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_source_probe_script_checks_policy_before_curl",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:4443/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:80/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:8080/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[http://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[ftp://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[file://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[//example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://user:pass@example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://@example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid@other.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https:///example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:65536/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:-1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:abc/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:0443/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid../file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid\\\\@other.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid%2e/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://exam\\nple.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[ https://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://127.0.0.1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://10.0.0.1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://[::1]/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://[bad/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://localhost/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://loopback.local/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://example.invalid/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://example.invalid:443/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://EXAMPLE.INVALID./data?q=http://foreign.invalid:80]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-traversal]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-manifest_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-pointer_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-traversal]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-manifest_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-pointer_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_real_symlink_payload_escape",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[partition]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('/home/parilrupani/omega-od02v-37b3vimd/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[payload_directory]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('/home/parilrupani/omega-od02v-37b3vimd/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change7]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change8]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change9]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[[]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[null]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[{bad]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[{\"checksum\":\"a\",\"checksum\":\"b\"}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[bare]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[repo_relative]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_corporate_actions]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_bse_bhavcopy]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_bse_urls-main]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-main]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-_run]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_fo_loader_pending_before_db_or_http",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r13_fo_loader_rechecks_after_db_setup",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r09_backfill_policy_refusal_terminal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[orchestrator]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[pipeline]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[scheduled_ca]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[https://example.invalid:4443/x]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[http://example.invalid/x]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[False]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29eb39afc0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29eb4944d0>\nrevoke_after_bootstrap = False\n\n    @pytest.mark.parametrize(\"revoke_after_bootstrap\", [False, True])\n    def test_r10_probe_bootstrap_scoped_mock_and_refresh(synthetic_source_policy_provider, monkeypatch, revoke_after_bootstrap):\n        module = script(\"generate_source_probe_report\")\n        from omegadata.track_a.source_rights import authorize_source\n    \n        active = synthetic_source_policy_provider()\n        calls = []\n    \n        def authorize(request):\n            return authorize_source(request, lambda: active)\n    \n        def fake_run(command, **kwargs):\n            nonlocal active\n            calls.append(command)\n            if \"-o\" in command:\n                Path(command[command.index(\"-o\") + 1]).write_bytes(b\"SYNTHETIC_TEST_ONLY\")\n                Path(command[command.index(\"-D\") + 1]).write_text(\"HTTP/1.1 200 OK\\nContent-Type: text/plain\\n\")\n            if revoke_after_bootstrap and command[-1] == \"https://www.nseindia.com/\":\n                item = updated(active.policies[0], status=PolicyStatus.REVOKED,\n                               revoked_at=NOW, revocation_reason=\"SYNTHETIC_TEST_ONLY\")\n                active = registry(item)\n            return Mock(returncode=0, stderr=b\"\")\n    \n        monkeypatch.setattr(module, \"authorize_source\", authorize)\n        monkeypatch.setattr(module.subprocess, \"run\", fake_run)\n        if revoke_after_bootstrap:\n            with pytest.raises(SourcePolicyError, match=\"POLICY_REVOKED\"):\n                module._curl_probe(source_key=KEY, url=\"https://example.invalid/file\", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)\n            assert len(calls) == 1\n        else:\n>           status, _, payload, _ = module._curl_probe(source_key=KEY, url=\"https://example.invalid/file\", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od01r_rights_hardening.py:376: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[True]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "request = PolicyRequest(source_key='NSE_EQUITY_BHAVCOPY', operation=<SourceOperation.FETCH: 'FETCH'>, decision_at=datetime.datet...zone.utc), requested_transport=<SourceTransport.CURL: 'CURL'>, requested_host='example.invalid', consumer_purpose=None)\n\n    def authorize(request):\n>       return authorize_source(request, lambda: active)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od01r_rights_hardening.py:355: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nrequest = PolicyRequest(source_key='NSE_EQUITY_BHAVCOPY', operation=<SourceOperation.FETCH: 'FETCH'>, decision_at=datetime.datet...zone.utc), requested_transport=<SourceTransport.CURL: 'CURL'>, requested_host='example.invalid', consumer_purpose=None)\nprovider = <function test_r10_probe_bootstrap_scoped_mock_and_refresh.<locals>.authorize.<locals>.<lambda> at 0x7d29e92782c0>\n\n    def authorize_source(\n        request: PolicyRequest, provider: PolicyProvider = load_policy_register\n    ) -> SourcePolicyDecision:\n        if request.source_key not in SOURCE_REGISTRY:\n            raise SourcePolicyError(decision_record(request, PolicyReason.UNKNOWN_SOURCE))\n        try:\n            decision = provider().evaluate(request)\n        except PolicyRegisterError as exc:\n            raise SourcePolicyError(decision_record(request, exc.reason_code)) from exc\n        if not decision.allowed:\n>           raise SourcePolicyError(decision)\nE           omegadata.track_a.source_rights.SourcePolicyError: POLICY_REVOKED: source=NSE_EQUITY_BHAVCOPY, operation=FETCH\n\nsrc/omegadata/track_a/source_rights.py:417: SourcePolicyError\n\nDuring handling of the above exception, another exception occurred:\n\nsynthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e92a3420>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29eb4979b0>\nrevoke_after_bootstrap = True\n\n    @pytest.mark.parametrize(\"revoke_after_bootstrap\", [False, True])\n    def test_r10_probe_bootstrap_scoped_mock_and_refresh(synthetic_source_policy_provider, monkeypatch, revoke_after_bootstrap):\n        module = script(\"generate_source_probe_report\")\n        from omegadata.track_a.source_rights import authorize_source\n    \n        active = synthetic_source_policy_provider()\n        calls = []\n    \n        def authorize(request):\n            return authorize_source(request, lambda: active)\n    \n        def fake_run(command, **kwargs):\n            nonlocal active\n            calls.append(command)\n            if \"-o\" in command:\n                Path(command[command.index(\"-o\") + 1]).write_bytes(b\"SYNTHETIC_TEST_ONLY\")\n                Path(command[command.index(\"-D\") + 1]).write_text(\"HTTP/1.1 200 OK\\nContent-Type: text/plain\\n\")\n            if revoke_after_bootstrap and command[-1] == \"https://www.nseindia.com/\":\n                item = updated(active.policies[0], status=PolicyStatus.REVOKED,\n                               revoked_at=NOW, revocation_reason=\"SYNTHETIC_TEST_ONLY\")\n                active = registry(item)\n            return Mock(returncode=0, stderr=b\"\")\n    \n        monkeypatch.setattr(module, \"authorize_source\", authorize)\n        monkeypatch.setattr(module.subprocess, \"run\", fake_run)\n        if revoke_after_bootstrap:\n            with pytest.raises(SourcePolicyError, match=\"POLICY_REVOKED\"):\n>               module._curl_probe(source_key=KEY, url=\"https://example.invalid/file\", timeout_seconds=1, bootstrap_nse=True, offline_runner=fake_run)\n\ntests/unit/test_od01r_rights_hardening.py:373: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r12_forged_strings_are_only_technical_consistency",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_pending_probe_bootstrap_no_temp_or_subprocess",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r13_bse_discovery_refreshes_before_get",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r13_simultaneous_source_scopes_and_refresh",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r16_harness_blocks_real_side_effects",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[<html>Access Denied</html>-PAYLOAD_HTML_DENIAL]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04truncated-ARCHIVE_INVALID]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\x1c\\xa5[\\xc3{\\x00\\x00\\x00\\x95\\x00\\x00\\x00)\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260409_F_0000.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x06\\x96:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x18\\x1a\\xe8\\x18\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\x1c\\xa5[\\xc3{\\x00\\x00\\x00\\x95\\x00\\x00\\x00)\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260409_F_0000.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00W\\x00\\x00\\x00\\xc2\\x00\\x00\\x00\\x00\\x00-TRADE_DATE_MISMATCH]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xbe\\n\\x95\\x89\\x13\\x00\\x00\\x00\\x11\\x00\\x00\\x00)\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260410_F_0000.csv+/\\xca\\xcfK\\xd7\\xc9HMLI-\\xe22\\xd41\\xe2\\x02\\x00PK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xbe\\n\\x95\\x89\\x13\\x00\\x00\\x00\\x11\\x00\\x00\\x00)\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260410_F_0000.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00W\\x00\\x00\\x00Z\\x00\\x00\\x00\\x00\\x00-SCHEMA_UNKNOWN]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\r\\x00\\x00\\x00../escape.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\r\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x00../escape.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00;\\x00\\x00\\x00\\xa5\\x00\\x00\\x00\\x00\\x00-ZIP_ENTRY_UNSAFE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x000.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x001.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x002.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x003.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x004.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x005.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x006.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x007.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x008.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x009.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0010.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0011.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0012.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0013.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0014.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0015.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0016.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0017.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0018.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0019.csv\\x0b)JLq)\\xd1q\\xca\\xac\\x02\\x92\\x9e\\xc1\\x9e~:!\\xc9\\xd9E\\xc1\\x95\\xb9I:\\xc1\\xc9%\\x95\\xc1E\\xc5:\\xfe\\x05y\\x01E\\x99\\xc9:\\x1e\\xe9\\x19`\\xda\\xa7\\x1cL9\\xe7\\x14\\x83\\xe9\\x90\\x92\\x9c\\x10\\xa0!\\xe9a\\xf99\\F\\x06Ff\\xba\\x06&\\xba\\x86\\x06:H\\xcc\\x10\\xd7\\xe0\\x10\\x03\\x080\\xd4\\t\\x8e\\xf4\\x0b\\xf1p\\r\\xf1t\\x8e\\x07\\t\\xc7\\xfb\\xfb\\xf9D\\xea\\xb8\\x06\\xea\\x00\\x95\\x19\\x1a\\xe9X\\xea\\x18\\x1a\\xea\\x18p\\x01\\x00PK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x000.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x9d\\x00\\x00\\x001.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01:\\x01\\x00\\x002.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xd7\\x01\\x00\\x003.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01t\\x02\\x00\\x004.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x11\\x03\\x00\\x005.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xae\\x03\\x00\\x006.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01K\\x04\\x00\\x007.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xe8\\x04\\x00\\x008.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x85\\x05\\x00\\x009.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\"\\x06\\x00\\x0010.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xc0\\x06\\x00\\x0011.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01^\\x07\\x00\\x0012.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xfc\\x07\\x00\\x0013.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x9a\\x08\\x00\\x0014.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x018\\t\\x00\\x0015.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xd6\\t\\x00\\x0016.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01t\\n\\x00\\x0017.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x12\\x0b\\x00\\x0018.csvPK\\x01\\x02\\x14\\x03\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1z\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xb0\\x0b\\x00\\x0019.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x14\\x00\\x14\\x00\\x06\\x04\\x00\\x00N\\x0c\\x00\\x00\\x00\\x00-ARCHIVE_TOO_LARGE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t05_t06_valid_synthetic_era[True-day0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t05_t06_valid_synthetic_era[False-day1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_denial_not_success[NSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_denial_not_success[BSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_denial_not_success[INDIA_VIX]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[401-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[403-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[451-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[429-HTTP_RATE_LIMITED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[404-HTTP_NOT_FOUND]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_redirect_never_contacts_second_host",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t17_default_external_egress_disabled",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-SCHEMA_UNKNOWN]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PAYLOAD_EMPTY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-TRADE_DATE_MISMATCH]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_t19_expansion_encoding_and_declared_caps",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[/absolute.csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[C:/escape.csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[nested.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[..\\\\escape.csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_content_type_mismatch[application/json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_content_type_mismatch[image/png]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_content_type_mismatch[text/csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t08_bse_synthetic_modern_and_wrong_date[False]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t08_bse_synthetic_modern_and_wrong_date[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[<html>login</html>]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[{\"x\":1,\"x\":2}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[{\"ERROR\":\"missing index\"}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[[]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[{broken]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_not_financially_verified[{\"data\":[{\"value\":1}]}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_not_financially_verified[[{\"value\":1}]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t11_retry_after_and_typed_public_context",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[download]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[probe]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[bootstrap]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[discovery]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t13_transient_retries_bounded_and_recovers",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t13_attempt_cap_stops_candidates_and_profiles",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[https://example.invalid/other]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[https://foreign.invalid/other]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[http://example.invalid/other]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[https://169.254.169.254/latest]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[http://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://example.invalid:444/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://user:password@example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https:///file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://127.0.0.1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://169.254.169.254/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://[::1]/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t17_rebinding_and_env_proxy_never_resolved",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t18_cross_transport_budget_no_cookie_leak",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t18_default_alternate_transports_disabled[urllib]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t18_default_alternate_transports_disabled[curl]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_deadline_includes_backoff",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers0-x-BODY_LIMIT_EXCEEDED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers1-xx-PARTIAL_PAYLOAD]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers2-x-ENCODING_UNSUPPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers3--PAYLOAD_EMPTY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_stream_growth_bounded",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t20_revoked_after_mock_fetch_no_storage",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t21_cache_only_never_fetches",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t22_valid_fetch_cache_hash_and_secret_free_evidence",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t23_concurrent_dates_repeated_candidate_staging",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[403-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "def _curl_probe(\n        *, source_key: str, url: str, timeout_seconds: float,\n        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,\n    ) -> tuple[int | None, str, bytes, str | None]:\n        \"\"\"Only explicit offline runner injection is supported; no provider subprocess.\"\"\"\n        validate_request_options(timeout_seconds, None)\n        limits = load_limits()\n        budget = budget or RequestBudget(limits)\n        def preflight(target: str) -> None:\n            authorize_source(PolicyRequest(\n                source_key=source_key, operation=SourceOperation.FETCH,\n                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,\n                requested_host=policy_url_host(target),\n            ))\n        targets = [\"https://www.nseindia.com/\", url] if bootstrap_nse else [url]\n        for target in targets:\n            preflight(target)\n        if offline_runner is None:\n            raise failure(\"BLOCKED_EXTERNAL_EGRESS\")\n        budget.remaining()\n        with tempfile.TemporaryDirectory() as tmpdir:\n            root = Path(tmpdir)\n            result_body = b\"\"\n            status, content_type = None, \"\"\n            for index, target in enumerate(targets):\n                preflight(target)\n                timeout = min(timeout_seconds, budget.consume())\n                body_path, header_path = root / f\"{index}.body\", root / f\"{index}.headers\"\n                command = [\"curl\", \"--proto\", \"=https\", \"--max-redirs\", \"0\", \"--proxy\", \"\",\n                    \"--noproxy\", \"*\", \"--max-filesize\", str(limits.body_bytes),\n                    \"--max-time\", str(timeout), \"--connect-timeout\", str(timeout),\n                    \"-sS\", \"-D\", str(header_path), \"-o\", str(body_path), \"-A\", USER_AGENT, target]\n                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)\n                budget.remaining()\n                if result.returncode != 0:\n                    raise failure(\"HTTP_TRANSIENT\", terminal=False)\n                headers = {}\n                status = None\n                if not header_path.is_file():\n                    raise failure(\"PARTIAL_PAYLOAD\")\n                if header_path.stat().st_size > 65536:\n                    raise failure(\"BODY_LIMIT_EXCEEDED\")\n                for line in header_path.read_text(encoding=\"utf-8\", errors=\"strict\").splitlines():\n                    if line.startswith(\"HTTP/\"):\n                        status = int(line.split()[1])\n                    elif \":\" in line:\n                        name, value = line.split(\":\", 1)\n                        headers[name.lower().strip()] = value.strip()\n>               check_status(status or 0, headers)\n\nscripts/generate_source_probe_report.py:152: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nstatus = 403\nheaders = {'location': 'https://foreign.invalid/', 'retry-after': '120'}\n\n    def check_status(status: int, headers: Mapping[str, str]) -> None:\n        if 300 <= status < 400:\n            raise failure(\"REDIRECT_NOT_ALLOWED\", status=status)\n        if status in {401, 403, 451}:\n>           raise failure(\"HTTP_ACCESS_DENIED\", status=status)\nE           omegadata.track_a.acquisition.DownloadError: HTTP_ACCESS_DENIED\n\nsrc/omegadata/track_a/acquisition.py:167: DownloadError\n\nDuring handling of the above exception, another exception occurred:\n\nsynthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e931afc0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29e92bc5f0>\nstatus = 403, reason = 'HTTP_ACCESS_DENIED'\n\n    @pytest.mark.parametrize(\n        \"status,reason\",\n        [\n            (403, \"HTTP_ACCESS_DENIED\"),\n            (429, \"HTTP_RATE_LIMITED\"),\n            (302, \"REDIRECT_NOT_ALLOWED\"),\n            (401, \"HTTP_ACCESS_DENIED\"),\n            (451, \"HTTP_ACCESS_DENIED\"),\n        ],\n    )\n    def test_t24_probe_bootstrap_terminal_and_redirect_budget(\n        synthetic_source_policy_provider, monkeypatch, status, reason\n    ):\n        from omegadata.track_a.source_rights import authorize_source\n    \n        module = probe_module()\n        monkeypatch.setattr(\n            module,\n            \"authorize_source\",\n            lambda request: authorize_source(request, synthetic_source_policy_provider),\n        )\n        calls = []\n    \n        def runner(command, **kw):\n            calls.append(command)\n            Path(command[command.index(\"-D\") + 1]).write_text(\n                f\"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\\nRetry-After: 120\\nLocation: https://foreign.invalid/\\n\"\n            )\n            Path(command[command.index(\"-o\") + 1]).write_bytes(b\"SYNTHETIC_TEST_ONLY\")\n            return SimpleNamespace(returncode=0)\n    \n        with pytest.raises(DownloadError, match=reason):\n>           module._curl_probe(\n                source_key=KEY,\n                url=\"https://example.invalid/file\",\n                timeout_seconds=1,\n                bootstrap_nse=True,\n                offline_runner=runner,\n            )\n\ntests/unit/test_od02_acquisition.py:573: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[429-HTTP_RATE_LIMITED]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "def _curl_probe(\n        *, source_key: str, url: str, timeout_seconds: float,\n        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,\n    ) -> tuple[int | None, str, bytes, str | None]:\n        \"\"\"Only explicit offline runner injection is supported; no provider subprocess.\"\"\"\n        validate_request_options(timeout_seconds, None)\n        limits = load_limits()\n        budget = budget or RequestBudget(limits)\n        def preflight(target: str) -> None:\n            authorize_source(PolicyRequest(\n                source_key=source_key, operation=SourceOperation.FETCH,\n                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,\n                requested_host=policy_url_host(target),\n            ))\n        targets = [\"https://www.nseindia.com/\", url] if bootstrap_nse else [url]\n        for target in targets:\n            preflight(target)\n        if offline_runner is None:\n            raise failure(\"BLOCKED_EXTERNAL_EGRESS\")\n        budget.remaining()\n        with tempfile.TemporaryDirectory() as tmpdir:\n            root = Path(tmpdir)\n            result_body = b\"\"\n            status, content_type = None, \"\"\n            for index, target in enumerate(targets):\n                preflight(target)\n                timeout = min(timeout_seconds, budget.consume())\n                body_path, header_path = root / f\"{index}.body\", root / f\"{index}.headers\"\n                command = [\"curl\", \"--proto\", \"=https\", \"--max-redirs\", \"0\", \"--proxy\", \"\",\n                    \"--noproxy\", \"*\", \"--max-filesize\", str(limits.body_bytes),\n                    \"--max-time\", str(timeout), \"--connect-timeout\", str(timeout),\n                    \"-sS\", \"-D\", str(header_path), \"-o\", str(body_path), \"-A\", USER_AGENT, target]\n                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)\n                budget.remaining()\n                if result.returncode != 0:\n                    raise failure(\"HTTP_TRANSIENT\", terminal=False)\n                headers = {}\n                status = None\n                if not header_path.is_file():\n                    raise failure(\"PARTIAL_PAYLOAD\")\n                if header_path.stat().st_size > 65536:\n                    raise failure(\"BODY_LIMIT_EXCEEDED\")\n                for line in header_path.read_text(encoding=\"utf-8\", errors=\"strict\").splitlines():\n                    if line.startswith(\"HTTP/\"):\n                        status = int(line.split()[1])\n                    elif \":\" in line:\n                        name, value = line.split(\":\", 1)\n                        headers[name.lower().strip()] = value.strip()\n>               check_status(status or 0, headers)\n\nscripts/generate_source_probe_report.py:152: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nstatus = 429\nheaders = {'location': 'https://foreign.invalid/', 'retry-after': '120'}\n\n    def check_status(status: int, headers: Mapping[str, str]) -> None:\n        if 300 <= status < 400:\n            raise failure(\"REDIRECT_NOT_ALLOWED\", status=status)\n        if status in {401, 403, 451}:\n            raise failure(\"HTTP_ACCESS_DENIED\", status=status)\n        if status == 429:\n            raw = headers.get(\"retry-after\", \"\")\n            retry_after = None\n            if raw.isascii() and raw.isdigit() and len(raw) <= 8:\n                retry_after = str(int(raw))\n            else:\n                try:\n                    parsed = parsedate_to_datetime(raw)\n                    if parsed.tzinfo is not None:\n                        retry_after = parsed.isoformat()\n                except (ValueError, TypeError, OverflowError):\n                    pass\n>           raise failure(\"HTTP_RATE_LIMITED\", status=status, retry_after=retry_after)\nE           omegadata.track_a.acquisition.DownloadError: HTTP_RATE_LIMITED\n\nsrc/omegadata/track_a/acquisition.py:180: DownloadError\n\nDuring handling of the above exception, another exception occurred:\n\nsynthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e931b7e0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29eb3ae4e0>\nstatus = 429, reason = 'HTTP_RATE_LIMITED'\n\n    @pytest.mark.parametrize(\n        \"status,reason\",\n        [\n            (403, \"HTTP_ACCESS_DENIED\"),\n            (429, \"HTTP_RATE_LIMITED\"),\n            (302, \"REDIRECT_NOT_ALLOWED\"),\n            (401, \"HTTP_ACCESS_DENIED\"),\n            (451, \"HTTP_ACCESS_DENIED\"),\n        ],\n    )\n    def test_t24_probe_bootstrap_terminal_and_redirect_budget(\n        synthetic_source_policy_provider, monkeypatch, status, reason\n    ):\n        from omegadata.track_a.source_rights import authorize_source\n    \n        module = probe_module()\n        monkeypatch.setattr(\n            module,\n            \"authorize_source\",\n            lambda request: authorize_source(request, synthetic_source_policy_provider),\n        )\n        calls = []\n    \n        def runner(command, **kw):\n            calls.append(command)\n            Path(command[command.index(\"-D\") + 1]).write_text(\n                f\"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\\nRetry-After: 120\\nLocation: https://foreign.invalid/\\n\"\n            )\n            Path(command[command.index(\"-o\") + 1]).write_bytes(b\"SYNTHETIC_TEST_ONLY\")\n            return SimpleNamespace(returncode=0)\n    \n        with pytest.raises(DownloadError, match=reason):\n>           module._curl_probe(\n                source_key=KEY,\n                url=\"https://example.invalid/file\",\n                timeout_seconds=1,\n                bootstrap_nse=True,\n                offline_runner=runner,\n            )\n\ntests/unit/test_od02_acquisition.py:573: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[302-REDIRECT_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "def _curl_probe(\n        *, source_key: str, url: str, timeout_seconds: float,\n        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,\n    ) -> tuple[int | None, str, bytes, str | None]:\n        \"\"\"Only explicit offline runner injection is supported; no provider subprocess.\"\"\"\n        validate_request_options(timeout_seconds, None)\n        limits = load_limits()\n        budget = budget or RequestBudget(limits)\n        def preflight(target: str) -> None:\n            authorize_source(PolicyRequest(\n                source_key=source_key, operation=SourceOperation.FETCH,\n                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,\n                requested_host=policy_url_host(target),\n            ))\n        targets = [\"https://www.nseindia.com/\", url] if bootstrap_nse else [url]\n        for target in targets:\n            preflight(target)\n        if offline_runner is None:\n            raise failure(\"BLOCKED_EXTERNAL_EGRESS\")\n        budget.remaining()\n        with tempfile.TemporaryDirectory() as tmpdir:\n            root = Path(tmpdir)\n            result_body = b\"\"\n            status, content_type = None, \"\"\n            for index, target in enumerate(targets):\n                preflight(target)\n                timeout = min(timeout_seconds, budget.consume())\n                body_path, header_path = root / f\"{index}.body\", root / f\"{index}.headers\"\n                command = [\"curl\", \"--proto\", \"=https\", \"--max-redirs\", \"0\", \"--proxy\", \"\",\n                    \"--noproxy\", \"*\", \"--max-filesize\", str(limits.body_bytes),\n                    \"--max-time\", str(timeout), \"--connect-timeout\", str(timeout),\n                    \"-sS\", \"-D\", str(header_path), \"-o\", str(body_path), \"-A\", USER_AGENT, target]\n                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)\n                budget.remaining()\n                if result.returncode != 0:\n                    raise failure(\"HTTP_TRANSIENT\", terminal=False)\n                headers = {}\n                status = None\n                if not header_path.is_file():\n                    raise failure(\"PARTIAL_PAYLOAD\")\n                if header_path.stat().st_size > 65536:\n                    raise failure(\"BODY_LIMIT_EXCEEDED\")\n                for line in header_path.read_text(encoding=\"utf-8\", errors=\"strict\").splitlines():\n                    if line.startswith(\"HTTP/\"):\n                        status = int(line.split()[1])\n                    elif \":\" in line:\n                        name, value = line.split(\":\", 1)\n                        headers[name.lower().strip()] = value.strip()\n>               check_status(status or 0, headers)\n\nscripts/generate_source_probe_report.py:152: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nstatus = 302\nheaders = {'location': 'https://foreign.invalid/', 'retry-after': '120'}\n\n    def check_status(status: int, headers: Mapping[str, str]) -> None:\n        if 300 <= status < 400:\n>           raise failure(\"REDIRECT_NOT_ALLOWED\", status=status)\nE           omegadata.track_a.acquisition.DownloadError: REDIRECT_NOT_ALLOWED\n\nsrc/omegadata/track_a/acquisition.py:165: DownloadError\n\nDuring handling of the above exception, another exception occurred:\n\nsynthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e92f51c0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29e930bce0>\nstatus = 302, reason = 'REDIRECT_NOT_ALLOWED'\n\n    @pytest.mark.parametrize(\n        \"status,reason\",\n        [\n            (403, \"HTTP_ACCESS_DENIED\"),\n            (429, \"HTTP_RATE_LIMITED\"),\n            (302, \"REDIRECT_NOT_ALLOWED\"),\n            (401, \"HTTP_ACCESS_DENIED\"),\n            (451, \"HTTP_ACCESS_DENIED\"),\n        ],\n    )\n    def test_t24_probe_bootstrap_terminal_and_redirect_budget(\n        synthetic_source_policy_provider, monkeypatch, status, reason\n    ):\n        from omegadata.track_a.source_rights import authorize_source\n    \n        module = probe_module()\n        monkeypatch.setattr(\n            module,\n            \"authorize_source\",\n            lambda request: authorize_source(request, synthetic_source_policy_provider),\n        )\n        calls = []\n    \n        def runner(command, **kw):\n            calls.append(command)\n            Path(command[command.index(\"-D\") + 1]).write_text(\n                f\"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\\nRetry-After: 120\\nLocation: https://foreign.invalid/\\n\"\n            )\n            Path(command[command.index(\"-o\") + 1]).write_bytes(b\"SYNTHETIC_TEST_ONLY\")\n            return SimpleNamespace(returncode=0)\n    \n        with pytest.raises(DownloadError, match=reason):\n>           module._curl_probe(\n                source_key=KEY,\n                url=\"https://example.invalid/file\",\n                timeout_seconds=1,\n                bootstrap_nse=True,\n                offline_runner=runner,\n            )\n\ntests/unit/test_od02_acquisition.py:573: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[401-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "def _curl_probe(\n        *, source_key: str, url: str, timeout_seconds: float,\n        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,\n    ) -> tuple[int | None, str, bytes, str | None]:\n        \"\"\"Only explicit offline runner injection is supported; no provider subprocess.\"\"\"\n        validate_request_options(timeout_seconds, None)\n        limits = load_limits()\n        budget = budget or RequestBudget(limits)\n        def preflight(target: str) -> None:\n            authorize_source(PolicyRequest(\n                source_key=source_key, operation=SourceOperation.FETCH,\n                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,\n                requested_host=policy_url_host(target),\n            ))\n        targets = [\"https://www.nseindia.com/\", url] if bootstrap_nse else [url]\n        for target in targets:\n            preflight(target)\n        if offline_runner is None:\n            raise failure(\"BLOCKED_EXTERNAL_EGRESS\")\n        budget.remaining()\n        with tempfile.TemporaryDirectory() as tmpdir:\n            root = Path(tmpdir)\n            result_body = b\"\"\n            status, content_type = None, \"\"\n            for index, target in enumerate(targets):\n                preflight(target)\n                timeout = min(timeout_seconds, budget.consume())\n                body_path, header_path = root / f\"{index}.body\", root / f\"{index}.headers\"\n                command = [\"curl\", \"--proto\", \"=https\", \"--max-redirs\", \"0\", \"--proxy\", \"\",\n                    \"--noproxy\", \"*\", \"--max-filesize\", str(limits.body_bytes),\n                    \"--max-time\", str(timeout), \"--connect-timeout\", str(timeout),\n                    \"-sS\", \"-D\", str(header_path), \"-o\", str(body_path), \"-A\", USER_AGENT, target]\n                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)\n                budget.remaining()\n                if result.returncode != 0:\n                    raise failure(\"HTTP_TRANSIENT\", terminal=False)\n                headers = {}\n                status = None\n                if not header_path.is_file():\n                    raise failure(\"PARTIAL_PAYLOAD\")\n                if header_path.stat().st_size > 65536:\n                    raise failure(\"BODY_LIMIT_EXCEEDED\")\n                for line in header_path.read_text(encoding=\"utf-8\", errors=\"strict\").splitlines():\n                    if line.startswith(\"HTTP/\"):\n                        status = int(line.split()[1])\n                    elif \":\" in line:\n                        name, value = line.split(\":\", 1)\n                        headers[name.lower().strip()] = value.strip()\n>               check_status(status or 0, headers)\n\nscripts/generate_source_probe_report.py:152: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nstatus = 401\nheaders = {'location': 'https://foreign.invalid/', 'retry-after': '120'}\n\n    def check_status(status: int, headers: Mapping[str, str]) -> None:\n        if 300 <= status < 400:\n            raise failure(\"REDIRECT_NOT_ALLOWED\", status=status)\n        if status in {401, 403, 451}:\n>           raise failure(\"HTTP_ACCESS_DENIED\", status=status)\nE           omegadata.track_a.acquisition.DownloadError: HTTP_ACCESS_DENIED\n\nsrc/omegadata/track_a/acquisition.py:167: DownloadError\n\nDuring handling of the above exception, another exception occurred:\n\nsynthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e931ac00>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d2a23ee9310>\nstatus = 401, reason = 'HTTP_ACCESS_DENIED'\n\n    @pytest.mark.parametrize(\n        \"status,reason\",\n        [\n            (403, \"HTTP_ACCESS_DENIED\"),\n            (429, \"HTTP_RATE_LIMITED\"),\n            (302, \"REDIRECT_NOT_ALLOWED\"),\n            (401, \"HTTP_ACCESS_DENIED\"),\n            (451, \"HTTP_ACCESS_DENIED\"),\n        ],\n    )\n    def test_t24_probe_bootstrap_terminal_and_redirect_budget(\n        synthetic_source_policy_provider, monkeypatch, status, reason\n    ):\n        from omegadata.track_a.source_rights import authorize_source\n    \n        module = probe_module()\n        monkeypatch.setattr(\n            module,\n            \"authorize_source\",\n            lambda request: authorize_source(request, synthetic_source_policy_provider),\n        )\n        calls = []\n    \n        def runner(command, **kw):\n            calls.append(command)\n            Path(command[command.index(\"-D\") + 1]).write_text(\n                f\"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\\nRetry-After: 120\\nLocation: https://foreign.invalid/\\n\"\n            )\n            Path(command[command.index(\"-o\") + 1]).write_bytes(b\"SYNTHETIC_TEST_ONLY\")\n            return SimpleNamespace(returncode=0)\n    \n        with pytest.raises(DownloadError, match=reason):\n>           module._curl_probe(\n                source_key=KEY,\n                url=\"https://example.invalid/file\",\n                timeout_seconds=1,\n                bootstrap_nse=True,\n                offline_runner=runner,\n            )\n\ntests/unit/test_od02_acquisition.py:573: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[451-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "def _curl_probe(\n        *, source_key: str, url: str, timeout_seconds: float,\n        bootstrap_nse: bool = False, offline_runner=None, budget: RequestBudget | None = None,\n    ) -> tuple[int | None, str, bytes, str | None]:\n        \"\"\"Only explicit offline runner injection is supported; no provider subprocess.\"\"\"\n        validate_request_options(timeout_seconds, None)\n        limits = load_limits()\n        budget = budget or RequestBudget(limits)\n        def preflight(target: str) -> None:\n            authorize_source(PolicyRequest(\n                source_key=source_key, operation=SourceOperation.FETCH,\n                decision_at=datetime.now(UTC), requested_transport=SourceTransport.CURL,\n                requested_host=policy_url_host(target),\n            ))\n        targets = [\"https://www.nseindia.com/\", url] if bootstrap_nse else [url]\n        for target in targets:\n            preflight(target)\n        if offline_runner is None:\n            raise failure(\"BLOCKED_EXTERNAL_EGRESS\")\n        budget.remaining()\n        with tempfile.TemporaryDirectory() as tmpdir:\n            root = Path(tmpdir)\n            result_body = b\"\"\n            status, content_type = None, \"\"\n            for index, target in enumerate(targets):\n                preflight(target)\n                timeout = min(timeout_seconds, budget.consume())\n                body_path, header_path = root / f\"{index}.body\", root / f\"{index}.headers\"\n                command = [\"curl\", \"--proto\", \"=https\", \"--max-redirs\", \"0\", \"--proxy\", \"\",\n                    \"--noproxy\", \"*\", \"--max-filesize\", str(limits.body_bytes),\n                    \"--max-time\", str(timeout), \"--connect-timeout\", str(timeout),\n                    \"-sS\", \"-D\", str(header_path), \"-o\", str(body_path), \"-A\", USER_AGENT, target]\n                result = offline_runner(command, check=False, capture_output=True, timeout=timeout + 1)\n                budget.remaining()\n                if result.returncode != 0:\n                    raise failure(\"HTTP_TRANSIENT\", terminal=False)\n                headers = {}\n                status = None\n                if not header_path.is_file():\n                    raise failure(\"PARTIAL_PAYLOAD\")\n                if header_path.stat().st_size > 65536:\n                    raise failure(\"BODY_LIMIT_EXCEEDED\")\n                for line in header_path.read_text(encoding=\"utf-8\", errors=\"strict\").splitlines():\n                    if line.startswith(\"HTTP/\"):\n                        status = int(line.split()[1])\n                    elif \":\" in line:\n                        name, value = line.split(\":\", 1)\n                        headers[name.lower().strip()] = value.strip()\n>               check_status(status or 0, headers)\n\nscripts/generate_source_probe_report.py:152: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nstatus = 451\nheaders = {'location': 'https://foreign.invalid/', 'retry-after': '120'}\n\n    def check_status(status: int, headers: Mapping[str, str]) -> None:\n        if 300 <= status < 400:\n            raise failure(\"REDIRECT_NOT_ALLOWED\", status=status)\n        if status in {401, 403, 451}:\n>           raise failure(\"HTTP_ACCESS_DENIED\", status=status)\nE           omegadata.track_a.acquisition.DownloadError: HTTP_ACCESS_DENIED\n\nsrc/omegadata/track_a/acquisition.py:167: DownloadError\n\nDuring handling of the above exception, another exception occurred:\n\nsynthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e92f6840>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d29e8f0af60>\nstatus = 451, reason = 'HTTP_ACCESS_DENIED'\n\n    @pytest.mark.parametrize(\n        \"status,reason\",\n        [\n            (403, \"HTTP_ACCESS_DENIED\"),\n            (429, \"HTTP_RATE_LIMITED\"),\n            (302, \"REDIRECT_NOT_ALLOWED\"),\n            (401, \"HTTP_ACCESS_DENIED\"),\n            (451, \"HTTP_ACCESS_DENIED\"),\n        ],\n    )\n    def test_t24_probe_bootstrap_terminal_and_redirect_budget(\n        synthetic_source_policy_provider, monkeypatch, status, reason\n    ):\n        from omegadata.track_a.source_rights import authorize_source\n    \n        module = probe_module()\n        monkeypatch.setattr(\n            module,\n            \"authorize_source\",\n            lambda request: authorize_source(request, synthetic_source_policy_provider),\n        )\n        calls = []\n    \n        def runner(command, **kw):\n            calls.append(command)\n            Path(command[command.index(\"-D\") + 1]).write_text(\n                f\"HTTP/1.1 {status} SYNTHETIC_TEST_ONLY\\nRetry-After: 120\\nLocation: https://foreign.invalid/\\n\"\n            )\n            Path(command[command.index(\"-o\") + 1]).write_bytes(b\"SYNTHETIC_TEST_ONLY\")\n            return SimpleNamespace(returncode=0)\n    \n        with pytest.raises(DownloadError, match=reason):\n>           module._curl_probe(\n                source_key=KEY,\n                url=\"https://example.invalid/file\",\n                timeout_seconds=1,\n                bootstrap_nse=True,\n                offline_runner=runner,\n            )\n\ntests/unit/test_od02_acquisition.py:573: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_strict_validation_and_shared_budget",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "synthetic_source_policy_provider = <function synthetic_source_policy_provider.<locals>.<lambda> at 0x7d29e93198a0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7d2a23eea0f0>\n\n    def test_t24_probe_strict_validation_and_shared_budget(\n        synthetic_source_policy_provider, monkeypatch\n    ):\n        from omegadata.track_a.source_rights import authorize_source\n    \n        module = probe_module()\n        monkeypatch.setattr(\n            module,\n            \"authorize_source\",\n            lambda request: authorize_source(request, synthetic_source_policy_provider),\n        )\n        body = [archive()]\n    \n        def runner(command, **kw):\n            Path(command[command.index(\"-D\") + 1]).write_text(\n                \"HTTP/1.1 200 OK\\nContent-Type: application/zip\\n\"\n            )\n            Path(command[command.index(\"-o\") + 1]).write_bytes(body[0])\n            return SimpleNamespace(returncode=0)\n    \n        budget = RequestBudget(replace(load_limits(), max_attempts=2))\n>       result = module._probe_entry(\n            source_key=KEY,\n            as_of=DAY,\n            url=\"https://example.invalid/file\",\n            role=\"primary\",\n            timeout_seconds=1,\n            kind=\"zip\",\n            budget=budget,\n            offline_runner=runner,\n        )\n\ntests/unit/test_od02_acquisition.py:605: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nscripts/generate_source_probe_report.py:187: in _probe_entry\n    status_code, content_type, body, stderr = _curl_probe(\nscripts/generate_source_probe_report.py:124: in _curl_probe\n    with tempfile.TemporaryDirectory() as tmpdir:\n/usr/lib/python3.12/tempfile.py:1085: in __exit__\n    self.cleanup()\n/usr/lib/python3.12/tempfile.py:1089: in cleanup\n    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n/usr/lib/python3.12/tempfile.py:1069: in _rmtree\n    _rmtree(name, onexc=onexc)\n/usr/lib/python3.12/shutil.py:785: in rmtree\n    _rmtree_safe_fd(fd, path, onexc)\n/usr/lib/python3.12/shutil.py:715: in _rmtree_safe_fd\n    os.unlink(entry.name, dir_fd=topfd)\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:97: in audit\n    if event in {\"os.remove\",\"os.rmdir\"}:bounded(args[0],False)\n                                         ^^^^^^^^^^^^^^^^^^^^^^\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:89: in bounded\n    if not target.is_relative_to(sandbox):deny(\"PROTECTED_WRITE\")\n                                          ^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'PROTECTED_WRITE'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_PROTECTED_WRITE\n\n/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od02v/20261115T114445Z/verification_runner.py:56: RuntimeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_missing_and_malformed_configuration",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_tls_invalid_is_terminal_no_fallback",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t22_urls_sanitized_and_seed_mode_distinct",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "call_counts": {
+    "passed": 265,
+    "skipped": 2,
+    "failed": 8
+  }
+}
