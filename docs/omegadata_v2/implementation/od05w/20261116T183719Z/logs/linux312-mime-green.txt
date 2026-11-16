@@ -1,0 +1,146 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+___________________ test_verification_and_terminal_endpoints ___________________
+
+tmp_path = PosixPath('/tmp/omega-od05w-run-obhwv_18/pytest/test_verification_and_terminal0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7c679d5aa0c0>
+
+    def test_verification_and_terminal_endpoints(tmp_path: Path, monkeypatch) -> None:
+        root = tmp_path / "verification"
+        root.mkdir(parents=True, exist_ok=True)
+        monkeypatch.setattr(api_main, "ARTIFACT_DIR", root)
+        (root / "implementation_audit.json").write_text(
+            '{"generated_at":"now","counts":{"implemented":1,"partial":0,"missing":0},"severity_counts":{"critical":0,"high":0,"medium":0,"low":0,"none":1},"items":[]}',
+            encoding="utf-8",
+        )
+        (root / "unit_test_results.txt").write_text("unit ok", encoding="utf-8")
+        (root / "realdata_test_results.txt").write_text("real ok", encoding="utf-8")
+    
+>       with TestClient(app) as client:
+
+tests/unit/test_pipeline_and_api.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/testclient.py:688: in __enter__
+    portal.call(self.wait_startup)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/anyio/from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/concurrent/futures/_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/anyio/from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/testclient.py:723: in wait_startup
+    await receive()
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/testclient.py:714: in receive
+    self.task.result()
+/usr/lib/python3.12/concurrent/futures/_base.py:449: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/anyio/from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/testclient.py:704: in lifespan
+    await self.app(scope, self.stream_receive.receive, self.stream_send.send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/fastapi/applications.py:1163: in __call__
+    await super().__call__(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/applications.py:90: in __call__
+    await self.middleware_stack(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/middleware/errors.py:151: in __call__
+    await self.app(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/middleware/base.py:103: in __call__
+    await self.app(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/middleware/exceptions.py:49: in __call__
+    await self.app(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/routing.py:660: in __call__
+    await self.middleware_stack(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/routing.py:669: in app
+    await self.lifespan(scope, receive, send)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/starlette/routing.py:638: in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+/usr/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+src/omegadata/api/main.py:44: in lifespan
+    init_db()
+src/omegadata/db/session.py:50: in init_db
+    Base.metadata.create_all(bind=engine)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/sql/schema.py:5931: in create_all
+    bind._run_ddl_visitor(
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3267: in _run_ddl_visitor
+    with self.begin() as conn:
+/usr/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3257: in begin
+    with self.connect() as conn:
+         ^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3293: in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/engine/base.py:143: in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3317: in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/base.py:448: in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/base.py:1272: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/base.py:712: in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:177: in _do_get
+    with util.safe_reraise():
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:121: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:175: in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/base.py:389: in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/base.py:674: in __init__
+    self.__connect()
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/base.py:900: in __connect
+    with util.safe_reraise():
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:121: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/pool/base.py:896: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/engine/create.py:667: in connect
+    return dialect.connect(*cargs_tup, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../omega-od02v-37b3vimd/venv312/lib/python3.12/site-packages/sqlalchemy/engine/default.py:630: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05w/20261116T183719Z/control.py:81: in audit
+    if event == 'sqlite3.connect' and args[0] != ':memory:': bounded(args[0])
+                                                             ^^^^^^^^^^^^^^^^
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05w/20261116T183719Z/control.py:59: in bounded
+    if not canonical(path).resolve().is_relative_to(writable): deny('WRITE')
+                                                               ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'WRITE'
+
+    def deny(kind):
+        state['denials'][kind] += 1
+>       raise GuardDenied('OD05W_BLOCKED_' + kind)
+E       GuardDenied: OD05W_BLOCKED_WRITE
+
+/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05w/20261116T183719Z/control.py:54: GuardDenied
+=========================== short test summary info ============================
+FAILED tests/unit/test_pipeline_and_api.py::test_verification_and_terminal_endpoints
+1 failed, 1 passed in 3.42s

@@ -1,0 +1,398 @@
+{
+  "argv": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05w\\20261116T183719Z\\control.py",
+    "run",
+    "win314-boundary-green",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05w-dxydz1gm\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05w_engineering.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05w-dxydz1gm\\repo",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "start_utc": "2026-11-16T18:54:17.158196+00:00",
+  "end_utc": "2026-11-16T18:54:18.689222+00:00",
+  "elapsed_seconds": 1.5309075000113808,
+  "exit_code": 0,
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w01_old_helper_and_glob_rejected_before_open",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w02_exact_allowlist",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.parquet]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.db]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[.env]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.key]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip.py]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_actual_guard_denials",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_original_boundary_covered",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_hardlinked_copy_source_refused",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w06_historical_incident_immutable",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_hardlink_physically_present",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_existing_physical_count_defect",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w08_hardlink_mismatch",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w09_presence_not_permission",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w10_fresh_original_ledger",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w11_historical_claims_unchanged",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[../x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[//host/share/x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[C:/x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[data/raw/x.zip:ads]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[DATA/x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w13_canonical_digest_and_redaction",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w14_budgets",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w15_profile_without_limit_relaxation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w16_immutable_observation_invalidated",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w17_native_link_refusal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w18_canary_not_financial_evidence",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w19_inventory_closed_world",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w20_blocked_input_not_passed",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w21_diagnostic_failures_preserved",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w22_integrity_refuses",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w23_fresh_copy_no_overwrite",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w24_test_fixture_preserved",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "collected": [
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w01_old_helper_and_glob_rejected_before_open",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w02_exact_allowlist",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.csv]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.parquet]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.db]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[.env]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.key]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip.py]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_actual_guard_denials",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_original_boundary_covered",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_hardlinked_copy_source_refused",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w06_historical_incident_immutable",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_hardlink_physically_present",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_existing_physical_count_defect",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w08_hardlink_mismatch",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w09_presence_not_permission",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w10_fresh_original_ledger",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w11_historical_claims_unchanged",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[../x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[//host/share/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[C:/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[data/raw/x.zip:ads]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[DATA/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w13_canonical_digest_and_redaction",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w14_budgets",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w15_profile_without_limit_relaxation",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w16_immutable_observation_invalidated",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w17_native_link_refusal",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w18_canary_not_financial_evidence",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w19_inventory_closed_world",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w20_blocked_input_not_passed",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w21_diagnostic_failures_preserved",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w22_integrity_refuses",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w23_fresh_copy_no_overwrite",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w24_test_fixture_preserved",
+      "realdata": false
+    }
+  ],
+  "deselected": [],
+  "counts": {
+    "passed": 36
+  },
+  "guard": {
+    "denials": {
+      "ORIGINAL_READ": 18,
+      "SUBPROCESS": 1,
+      "NETWORK": 1,
+      "READ_PROBE": 1,
+      "WRITE": 1
+    },
+    "os_isolation": "NOT_ESTABLISHED"
+  }
+}

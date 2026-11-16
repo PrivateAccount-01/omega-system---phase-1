@@ -1,0 +1,47 @@
+{
+  "utc": "2026-11-16T19:03:26.722484+00:00",
+  "class": "LOCAL_META",
+  "results": {
+    "seed": {
+      "state": "LINUX_ORIGINAL_MOUNT_FULL_SCAN_PERFORMANCE_BLOCKED",
+      "exit_code": 2,
+      "reason": "BUDGET",
+      "profile": {
+        "max_seconds": 30,
+        "entries": 10591,
+        "metadata_reads": 0,
+        "enumeration_seconds": 30.014174028000014,
+        "read_seconds": 0.0,
+        "correlation_seconds": 0.0,
+        "total_seconds": 30.014176209
+      },
+      "elapsed_seconds": 30.095351112999992
+    },
+    "cache": {
+      "state": "RUN",
+      "exit_code": 0,
+      "counts": {
+        "manifest_present": 30,
+        "present": 30,
+        "regular_file": 30,
+        "payload_path_exists": 30,
+        "size_matches_manifest": 30,
+        "hardlinked": 0,
+        "single_link": 30,
+        "missing_payload": 0,
+        "content_eligible": 0
+      },
+      "profile": {
+        "max_seconds": 30,
+        "entries": 114,
+        "metadata_reads": 30,
+        "enumeration_seconds": 0.5391478870000128,
+        "read_seconds": 1.3491953140000135,
+        "correlation_seconds": 0.42781195999998545,
+        "total_seconds": 2.4075142260000177
+      },
+      "elapsed_seconds": 2.408119830000004
+    }
+  },
+  "payload_bytes_read": 0
+}

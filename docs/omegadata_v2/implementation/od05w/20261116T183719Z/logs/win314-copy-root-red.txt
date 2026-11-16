@@ -1,0 +1,54 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+________________ test_w05_copy_root_ancestors_refused[private] ________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-4gfl5ej3/pytest/test_w05_copy_root_ancestors_r0')
+kind = 'private'
+
+    @pytest.mark.parametrize("kind", ["private", "linked_root"])
+    def test_w05_copy_root_ancestors_refused(tmp_path, kind):
+        h = harness()
+        source = tmp_path / (".env-private" if kind == "private" else "source")
+        source.mkdir()
+        (source / "a.py").write_text("# NON_MARKET_CANARY\n")
+        root = source
+        if kind == "linked_root":
+            root = tmp_path / "linked"
+            if os.name == "nt":
+                import _winapi
+                _winapi.CreateJunction(str(source), str(root))
+            else:
+                root.symlink_to(source, target_is_directory=True)
+>       with pytest.raises(ValueError, match="COPY_PATH_UNSAFE"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\unit\test_od05w_engineering.py:101: Failed
+______________ test_w05_copy_root_ancestors_refused[linked_root] ______________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-4gfl5ej3/pytest/test_w05_copy_root_ancestors_r1')
+kind = 'linked_root'
+
+    @pytest.mark.parametrize("kind", ["private", "linked_root"])
+    def test_w05_copy_root_ancestors_refused(tmp_path, kind):
+        h = harness()
+        source = tmp_path / (".env-private" if kind == "private" else "source")
+        source.mkdir()
+        (source / "a.py").write_text("# NON_MARKET_CANARY\n")
+        root = source
+        if kind == "linked_root":
+            root = tmp_path / "linked"
+            if os.name == "nt":
+                import _winapi
+                _winapi.CreateJunction(str(source), str(root))
+            else:
+                root.symlink_to(source, target_is_directory=True)
+>       with pytest.raises(ValueError, match="COPY_PATH_UNSAFE"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\unit\test_od05w_engineering.py:101: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[private]
+FAILED tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[linked_root]
+2 failed in 0.47s

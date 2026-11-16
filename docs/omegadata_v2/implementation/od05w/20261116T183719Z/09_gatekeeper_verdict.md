@@ -1,0 +1,9 @@
+# OD-05W Gatekeeper: BLOCKED / BLOCKED_REAL_DATA
+
+**Safe engineering verdict: BLOCKED.** The software corrections, 24-group/39-case focused suite, scoped A regressions and quality checks execute successfully on Windows 3.14/3.11 and native Linux 3.12, with recorded counterpart skips. That does not satisfy the full contract: W04 requires host-level filesystem, network and subprocess containment. Only Python-layer controls were installed/proven. A complete OS sandbox and actual kernel file/exec-denial evidence are absent; a network-namespace capability probe is not sufficient. W05 hostile cross-volume/mount mutation and W15 kernel syscall traces are not certified. No blanket containment PASS or process-exception acceptance is issued.
+
+**Financial verdict: BLOCKED_REAL_DATA.** 3626 regular paths/length matches and 2760 hardlinks are fresh LOCAL_META observations. Zero new raw hashes, ZIP inspections or independently compared financial rows. Source rights remain pending, publisher origin unverified and the 2020 era conflict unresolved. Existing synthetic robustness tests contribute zero financial acceptance.
+
+All final full diagnostics exit 1 with four genuine source-input failures; B remains BLOCKED_INPUT outside A and C remains NOT_RUN. The original-mounted Linux seed scan is separately PERFORMANCE_BLOCKED. One concurrent Windows A run additionally refused a canary INPUT_CHANGED snapshot; its unknown cause and later separate reprobe/serialized results are retained. No initial failure is erased. See [machine verdict](gatekeeper.json), [matrix](runtime-matrix.json), [failures](full-diagnostic-failures.json), [scorecard](07_real_data_scorecard.json), [preservation](preservation.json), and [chronology](05_negative_first_W01_W24.md).
+
+STOP after OD05W. Nothing was committed, pushed, merged, signed, released or advanced to OD06. Earlier historical Gatekeeper decisions are unchanged.

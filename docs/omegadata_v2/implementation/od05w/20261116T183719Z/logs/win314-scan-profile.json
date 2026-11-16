@@ -1,0 +1,83 @@
+{
+  "class": "NON_MARKET_CANARY",
+  "corpus_market_rows": 0,
+  "measurements": "Python API operation counters, NOT a kernel syscall trace",
+  "results": {
+    "seed-v1": {
+      "elapsed_seconds": 8.258283799979836,
+      "python_operations": {
+        "Path.lstat": 42557,
+        "os.scandir": 388,
+        "pinned_metadata_read": 3596
+      },
+      "profile": {},
+      "report_sha256": "a08b339e3b2ce4bb3520173985dc4d9c7831bfd760bf9131f67009129956499a"
+    },
+    "seed-v2": {
+      "elapsed_seconds": 9.413577099971008,
+      "python_operations": {
+        "Path.lstat": 25674,
+        "os.scandir": 194,
+        "pinned_metadata_read": 3596
+      },
+      "profile": {
+        "max_seconds": 30,
+        "entries": 10145,
+        "metadata_reads": 3596,
+        "enumeration_seconds": 2.699317099992186,
+        "read_seconds": 3.723361300828401,
+        "correlation_seconds": 2.8306888006045483,
+        "total_seconds": 9.40998249995755
+      },
+      "report_sha256": "daada24eeccd888aa653aaaa7528f8c287e135d132aa0d8122045971e36df551"
+    },
+    "seed-five-reused-observations": {
+      "elapsed_seconds": 17.39666169998236,
+      "scan_count": 1,
+      "python_operations": {
+        "Path.lstat": 104591,
+        "os.scandir": 1552,
+        "pinned_metadata_read": 3596
+      },
+      "metadata_reads_not_five_scans": true
+    },
+    "cache-v1": {
+      "elapsed_seconds": 0.09238649997860193,
+      "python_operations": {
+        "Path.lstat": 385,
+        "os.scandir": 20,
+        "pinned_metadata_read": 30
+      },
+      "profile": {},
+      "report_sha256": "2ab3e1831c9d7e46619f8596d2989fe39f8605f989908fbb1f8e6084a25746ae"
+    },
+    "cache-v2": {
+      "elapsed_seconds": 0.07220819999929518,
+      "python_operations": {
+        "Path.lstat": 280,
+        "os.scandir": 10,
+        "pinned_metadata_read": 30
+      },
+      "profile": {
+        "max_seconds": 30,
+        "entries": 69,
+        "metadata_reads": 30,
+        "enumeration_seconds": 0.025195700000040233,
+        "read_seconds": 0.02471569983754307,
+        "correlation_seconds": 0.02010860020527616,
+        "total_seconds": 0.07209199998760596
+      },
+      "report_sha256": "68c6c795af535ed3e855e78aa31b254b95a4eaf5cc4dc9ee0e97d43f20128c93"
+    },
+    "cache-five-reused-observations": {
+      "elapsed_seconds": 0.14418230002047494,
+      "scan_count": 1,
+      "python_operations": {
+        "Path.lstat": 859,
+        "os.scandir": 80,
+        "pinned_metadata_read": 30
+      },
+      "metadata_reads_not_five_scans": true
+    }
+  }
+}

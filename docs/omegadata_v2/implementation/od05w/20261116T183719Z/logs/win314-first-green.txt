@@ -1,0 +1,1562 @@
+............FFFF..FFFFFFFFFF.......                                      [100%]
+================================== FAILURES ===================================
+____________________ test_w07_hardlink_physically_present _____________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w07_hardlink_physically_p0')
+
+    def test_w07_hardlink_physically_present(tmp_path):
+        repo, _, payload, pins = fixture(tmp_path)
+        os.link(payload, tmp_path / "second-link")
+        # Existing v1 defect is executable independently of the absent v2 API.
+        old = presence().scan_presence(repo, "seed", expected=presence().ExpectedMetadata(tuple(pins)))
+        assert old["counts"]["regular_file"] == 1
+>       row = scan(repo, pins)["rows"][0]
+              ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w07_hardlink_physically_p0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+___________________ test_w07_existing_physical_count_defect ___________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w07_existing_physical_cou0')
+
+    def test_w07_existing_physical_count_defect(tmp_path):
+        repo, _, payload, pins = fixture(tmp_path)
+        os.link(payload, tmp_path / "second-link")
+        kwargs = {"version": 2} if hasattr(presence(), "PresenceObservation") else {}
+>       result = presence().scan_presence(
+            repo, "seed", expected=presence().ExpectedMetadata(tuple(pins)), **kwargs
+        )
+
+tests\unit\test_od05w_engineering.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w07_existing_physical_cou0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+_________________________ test_w08_hardlink_mismatch __________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w08_hardlink_mismatch0')
+
+    def test_w08_hardlink_mismatch(tmp_path):
+        repo, _, payload, pins = fixture(tmp_path)
+        os.link(payload, tmp_path / "link")
+        with payload.open("r+b") as stream:
+            stream.truncate(1)
+>       row = scan(repo, pins)["rows"][0]
+              ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w08_hardlink_mismatch0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+______________________ test_w09_presence_not_permission _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w09_presence_not_permissi0')
+
+    def test_w09_presence_not_permission(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+>       result = scan(repo, pins)
+                 ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w09_presence_not_permissi0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+_______________________ test_w12_unsafe_paths[../x.zip] _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths____x_zip0')
+claim = '../x.zip'
+
+    @pytest.mark.parametrize(
+        "claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"]
+    )
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text())
+        body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths____x_zip0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', '790f84147da4e7e3fed0a12e9642a09e747f480af59863f3704c96379fda320d', 875),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+__________________ test_w12_unsafe_paths[//host/share/x.zip] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths___host_s0')
+claim = '//host/share/x.zip'
+
+    @pytest.mark.parametrize(
+        "claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"]
+    )
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text())
+        body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths___host_s0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'b0a16c9a145dbb0fd34c4b3cf04ff3a139a29fd6c20079f76f2c2b38ce066d8f', 885),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+_______________________ test_w12_unsafe_paths[C:/x.zip] _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths_C__x_zip0')
+claim = 'C:/x.zip'
+
+    @pytest.mark.parametrize(
+        "claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"]
+    )
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text())
+        body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths_C__x_zip0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'd9aa20975e37d040ac4f6bfbde150535d8d92296a5127de34b17f3e2cdb9d468', 875),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+__________________ test_w12_unsafe_paths[data/raw/x.zip:ads] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths_data_raw0')
+claim = 'data/raw/x.zip:ads'
+
+    @pytest.mark.parametrize(
+        "claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"]
+    )
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text())
+        body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths_data_raw0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'a660406cc9561331555a9b80298005a73c30499bef079f68ee7eff81e97b57f0', 885),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+______________________ test_w12_unsafe_paths[DATA/x.zip] ______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths_DATA_x_z0')
+claim = 'DATA/x.zip'
+
+    @pytest.mark.parametrize(
+        "claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"]
+    )
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text())
+        body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w12_unsafe_paths_DATA_x_z0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', '62657b55d9941feeac6a05f53638de8ae4b14a85fe6aa797f158f6cf45859eed', 877),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+___________________ test_w13_canonical_digest_and_redaction ___________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w13_canonical_digest_and_0')
+
+    def test_w13_canonical_digest_and_redaction(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+>       a, b = scan(repo, pins), scan(repo, list(reversed(pins)))
+               ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w13_canonical_digest_and_0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+______________________________ test_w14_budgets _______________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w14_budgets0')
+
+    def test_w14_budgets(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+        with pytest.raises(presence().InventoryError, match="BUDGET"):
+>           scan(repo, pins, limits=presence().ScanLimits(max_entries=1))
+
+tests\unit\test_od05w_engineering.py:168: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w14_budgets0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=1, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w14_budgets0')
+
+    def test_w14_budgets(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+>       with pytest.raises(presence().InventoryError, match="BUDGET"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'BUDGET'
+E         Actual message: 'PATH_UNSAFE'
+
+tests\unit\test_od05w_engineering.py:167: AssertionError
+__________________ test_w15_profile_without_limit_relaxation __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w15_profile_without_limit0')
+
+    def test_w15_profile_without_limit_relaxation(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+        profile = {}
+>       scan(repo, pins, profile=profile)
+
+tests\unit\test_od05w_engineering.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w15_profile_without_limit0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = {'correlation_seconds': 0.0, 'entries': 1, 'enumeration_seconds': 0.0015901000006124377, 'max_seconds': 30, ...}
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+_________________ test_w16_immutable_observation_invalidated __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w16_immutable_observation0')
+
+    def test_w16_immutable_observation_invalidated(tmp_path):
+        repo, meta, _, pins = fixture(tmp_path)
+        observation = presence().PresenceObservation(
+            repo, "seed", presence().ExpectedMetadata(tuple(pins))
+        )
+>       a = observation.get()
+            ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:189: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\omegadata\parsers\local_archive_presence.py:548: in get
+    report = scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w16_immutable_observation0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+________________________ test_w17_native_link_refusal _________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w17_native_link_refusal0')
+
+    def test_w17_native_link_refusal(tmp_path):
+        repo, meta, payload, pins = fixture(tmp_path)
+        target = tmp_path / "NON_MARKET_CANARY"
+        target.touch()
+        if os.name == "nt":
+            import _winapi
+    
+            link = payload.parent / "junction"
+            _winapi.CreateJunction(str(tmp_path), str(link))
+            body = json.loads(meta.read_text())
+            body["artifact_path"] = link.relative_to(repo).as_posix() + "/NON_MARKET_CANARY.zip"
+            meta.write_text(json.dumps(body))
+            pins = repin(meta, repo)
+        else:
+            payload.unlink()
+            payload.symlink_to(target)
+>       assert scan(repo, pins)["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:27: in scan
+    return presence().scan_presence(
+src\omegadata\parsers\local_archive_presence.py:220: in scan_presence
+    return _scan_v2(repo, root_name, expected, source_key, limits or ScanLimits(), profile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-cvqeyoad/pytest/test_w17_native_link_refusal0/repo')
+label = 'seed'
+expected = ExpectedMetadata(files=(('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'aae7c43d4ce6f308f9315be0a9c40b5ecf072b1f934cfe87cce789b132c8b55e', 968),))
+source = 'NSE_EQUITY_BHAVCOPY'
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+profile = None
+
+    def _scan_v2(
+        repo: Path,
+        label: str,
+        expected: ExpectedMetadata,
+        source: str,
+        limits: ScanLimits,
+        profile: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        """One bounded enumeration, grouped ancestor checks and fresh final lstat.
+    
+        Trusted owner controlled roots only. Identity checks detect observed changes;
+        they do not provide race immunity against a concurrent hostile mount owner.
+        Profile timings are external to the deterministic report and semantic digest.
+        """
+        if source != SOURCE_KEY or label not in ROOTS:
+            raise InventoryError("SOURCE_SCOPE")
+        started = time.monotonic()
+        root = repo / ROOTS[label]
+        validate_root(repo, repo)
+        validate_root(root, root)
+        device = root.lstat().st_dev
+        directories: dict[Path, tuple[int, ...]] = {}
+        names: dict[Path, frozenset[str]] = {}
+        found: set[str] = set()
+        count = 0
+        reads = 0
+        read_seconds = 0.0
+        correlation_seconds = 0.0
+    
+        def budget() -> None:
+            if time.monotonic() - started > limits.max_seconds:
+                raise InventoryError("BUDGET")
+    
+        def check_directory(path: Path) -> None:
+            info = path.lstat()
+            if (
+                not stat.S_ISDIR(info.st_mode)
+                or info.st_dev != device
+                or getattr(info, "st_file_attributes", 0) & 0x400
+                or _identity(info) != directories[path]
+            ):
+                raise InventoryError("INPUT_CHANGED")
+    
+        try:
+            stack = [(root, 0)]
+            while stack:
+                directory, depth = stack.pop()
+                budget()
+                if depth > limits.max_depth:
+                    raise InventoryError("BUDGET")
+                info = directory.lstat()
+                if (
+                    not stat.S_ISDIR(info.st_mode)
+                    or info.st_dev != device
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                ):
+                    raise InventoryError("PATH_UNSAFE")
+                directories[directory] = _identity(info)
+                exact: set[str] = set()
+                aliases: set[str] = set()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        budget()
+                        count += 1
+                        if count > limits.max_entries:
+                            raise InventoryError("BUDGET")
+                        name = relative_name(Path(entry.path).relative_to(root).as_posix())
+                        if entry.name.casefold() in aliases:
+                            raise InventoryError("PATH_UNSAFE")
+                        aliases.add(entry.name.casefold())
+                        exact.add(entry.name)
+                        st = entry.stat(follow_symlinks=False)
+                        linked = (
+                            stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400
+                        )
+                        if st.st_dev != device:
+>                           raise InventoryError("PATH_UNSAFE")
+E                           omegadata.parsers.archive_candidate_inventory.InventoryError: PATH_UNSAFE
+
+src\omegadata\parsers\local_archive_presence.py:387: InventoryError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05w_engineering.py::test_w07_hardlink_physically_present
+FAILED tests/unit/test_od05w_engineering.py::test_w07_existing_physical_count_defect
+FAILED tests/unit/test_od05w_engineering.py::test_w08_hardlink_mismatch - ome...
+FAILED tests/unit/test_od05w_engineering.py::test_w09_presence_not_permission
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[../x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[//host/share/x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[C:/x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[data/raw/x.zip:ads]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[DATA/x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w13_canonical_digest_and_redaction
+FAILED tests/unit/test_od05w_engineering.py::test_w14_budgets - AssertionErro...
+FAILED tests/unit/test_od05w_engineering.py::test_w15_profile_without_limit_relaxation
+FAILED tests/unit/test_od05w_engineering.py::test_w16_immutable_observation_invalidated
+FAILED tests/unit/test_od05w_engineering.py::test_w17_native_link_refusal - o...
+14 failed, 21 passed in 0.91s

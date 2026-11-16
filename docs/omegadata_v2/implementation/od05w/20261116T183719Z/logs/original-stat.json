@@ -1,0 +1,66 @@
+{
+  "phase": "OD05W",
+  "utc": "2026-11-16T18:41:25.695681+00:00",
+  "evidence_class": "LOCAL_META",
+  "counts": {
+    "seed": 3596,
+    "cache": 30,
+    "present": 3626,
+    "size_matched": 3626,
+    "hardlinked": 2760,
+    "single_link": 866,
+    "missing": 0
+  },
+  "elapsed_seconds": 3.821949500008486,
+  "samples": {
+    "2011-06-22": {
+      "manifest": "year=2011/month=06/20110622__1eba7f9259b5.manifest.json",
+      "date": "2011-06-22",
+      "state": "HARDLINK_REFUSED",
+      "claimed_bytes": 53301,
+      "filesystem_bytes": 53301,
+      "payload_relative": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.zip",
+      "claim_format": "LEGACY_FILENAME_CLAIM",
+      "source_mode": "immutable_seed_cache",
+      "original_filename_claim": "cm22JUN2011bhav.csv.zip",
+      "lineage": "PHASE2_REPOSITORY_CLAIM",
+      "era_state": "REFERENCE_PENDING",
+      "payload_hash_verified": false,
+      "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+      "rights": "RIGHTS_PENDING"
+    },
+    "2020-01-02": {
+      "manifest": "year=2020/month=01/20200102__b3cdc49a3f68.manifest.json",
+      "date": "2020-01-02",
+      "state": "PRESENT_SIZE_MATCHED",
+      "claimed_bytes": 69955,
+      "filesystem_bytes": 69955,
+      "payload_relative": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2020/month=01/20200102__b3cdc49a3f68.zip",
+      "claim_format": "LEGACY_FILENAME_CLAIM",
+      "source_mode": "immutable_seed_cache",
+      "original_filename_claim": "cm02JAN2020bhav.csv.zip",
+      "lineage": "PHASE2_REPOSITORY_CLAIM",
+      "era_state": "ERA_CONFLICT_2020_REFERENCE_PENDING",
+      "payload_hash_verified": false,
+      "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+      "rights": "RIGHTS_PENDING"
+    },
+    "2024-07-23": {
+      "manifest": "year=2024/month=07/20240723__6e7b99b88b17.manifest.json",
+      "date": "2024-07-23",
+      "state": "PRESENT_SIZE_MATCHED",
+      "claimed_bytes": 165041,
+      "filesystem_bytes": 165041,
+      "payload_relative": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240723__6e7b99b88b17.zip",
+      "claim_format": "UDIFF_URL_CLAIM",
+      "source_mode": "immutable_versioned",
+      "original_filename_claim": null,
+      "lineage": "UNVERIFIED",
+      "era_state": "REFERENCE_PENDING",
+      "payload_hash_verified": false,
+      "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+      "rights": "RIGHTS_PENDING"
+    }
+  },
+  "payload_bytes_read": 0
+}

@@ -1,0 +1,14 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________________ test_w04_external_retained_copy_boundary ___________________
+
+    def test_w04_external_retained_copy_boundary():
+        # Newly created harmless sentinel, never an actual retained incident file.
+>       with pytest.raises((RuntimeError, PermissionError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (<class 'RuntimeError'>, <class 'PermissionError'>)
+
+tests\unit\test_od05w_engineering.py:81: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05w_engineering.py::test_w04_external_retained_copy_boundary
+1 failed in 0.16s

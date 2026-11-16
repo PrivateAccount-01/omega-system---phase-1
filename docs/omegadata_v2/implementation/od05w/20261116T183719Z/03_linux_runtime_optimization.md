@@ -1,0 +1,15 @@
+# Measured scan costs and legitimate corpus distinction
+
+[Windows profile](logs/win314-scan-profile.json), [native Linux profile](logs/linux312-scan-profile.json), [fresh original WSL mount](logs/linux-original-mount-v2.json).
+
+The v2 traversal enumerates each directory once, groups ancestor checks, uses fresh final-file lstat and revalidates directory identities. Windows DirEntry.stat does not supply the identity/link fields needed here; the first implementation failed 14 focused cases and was corrected to use Windows lstat. Linux can use non-following DirEntry stat. A trusted owner-controlled snapshot is required; hostile concurrent mount/ownership changes and race immunity are not certified.
+
+Seed Python-operation counts: Windows v1 42,557 lstat / 388 scandir, v2 25,674 / 194. Native Linux v1 42,541 lstat, v2 15,513 lstat / 194 scandir (DirEntry.stat calls are not included in the Path.lstat counter). These are intercepted Python API counts, **not kernel syscall traces**. Actual stage vectors are retained; no OS-level syscall instrumentation was obtained. New report construction adds work: this measured native seed v2 was 3.87 s versus v1 3.61 s; Windows v2 9.41 s versus v1 8.26 s under concurrent host load. Do not claim every single scan became faster.
+
+The useful repeated-work correction is explicit immutable observation reuse: five accesses run one scan and read 3596 metadata files once, with stat-based invalidation. Measured seed totals: native 4.81 s, Windows 17.40 s, versus five uncached full scans. Returned mappings are freshly decoded. Mutation tests use no cache; an observed metadata/inode/stat change invalidates the observation.
+
+A concurrent Windows 3.14 A run refused cache P03 with INPUT_CHANGED. The differing stat fields were not captured, so its cause remains UNKNOWN; the refusal is not rewritten as a pass. Eight fresh cache snapshot reprobes found no changes and passed. The later unchanged full diagnostic passed P03, and a serialized A run supplies an additional explicit result. No identity check, expected count or time ceiling was weakened. The original failure remains an unresolved canary-filesystem limitation, separate from original archive preservation.
+
+Portable OD05V path/claim tests now have an explicitly labelled native disposable NON_MARKET_CANARY contract: real pinned metadata plus sparse zero files, matching link layout. Their names/assertions remain, but they no longer pretend to be five independent full original mounted scans. Fresh Windows original-host inventory independently establishes the physical counts. No canary contributes a financial observation.
+
+Fresh mounted seed v2 still reached BUDGET after about 30.1 s during enumeration (10,591 entries, zero metadata reads); cache completed in about 2.41 s. Status LINUX_ORIGINAL_MOUNT_FULL_SCAN_PERFORMANCE_BLOCKED remains. The 30-second ceiling was not increased. Native focused/security/regression checks pass separately; this does not turn the mounted scan into PASS.

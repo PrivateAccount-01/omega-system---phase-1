@@ -1,0 +1,288 @@
+{
+  "win314": {
+    "collection": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 4.201137199997902,
+      "start_utc": "2026-11-16T19:20:16.251384+00:00",
+      "end_utc": "2026-11-16T19:20:20.452750+00:00",
+      "command_log": "logs/win314-r3-accepted-collection.json",
+      "stdout_stderr": "logs/win314-r3-accepted-collection.txt"
+    },
+    "focused": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "elapsed_seconds": 1.6098181999986991,
+      "start_utc": "2026-11-16T19:20:21.912975+00:00",
+      "end_utc": "2026-11-16T19:20:23.522880+00:00",
+      "command_log": "logs/win314-r3-accepted-focused.json",
+      "stdout_stderr": "logs/win314-r3-accepted-focused.txt"
+    },
+    "A": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 753,
+        "skipped": 14
+      },
+      "elapsed_seconds": 45.94550279999385,
+      "start_utc": "2026-11-16T19:26:10.829702+00:00",
+      "end_utc": "2026-11-16T19:26:56.776850+00:00",
+      "command_log": "logs/win314-serialized-A.json",
+      "stdout_stderr": "logs/win314-serialized-A.txt"
+    },
+    "full-diagnostic": {
+      "exit_code": 1,
+      "counts": {
+        "passed": 753,
+        "failed": 4,
+        "skipped": 14
+      },
+      "elapsed_seconds": 114.52884469996206,
+      "start_utc": "2026-11-16T19:22:19.677887+00:00",
+      "end_utc": "2026-11-16T19:24:14.212459+00:00",
+      "command_log": "logs/win314-r3-accepted-full-diagnostic.json",
+      "stdout_stderr": "logs/win314-r3-accepted-full-diagnostic.txt"
+    },
+    "ruff": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.3577339999610558,
+      "start_utc": "2026-11-16T19:24:17.287664+00:00",
+      "end_utc": "2026-11-16T19:24:17.645429+00:00",
+      "command_log": "logs/win314-r3-accepted-ruff.json",
+      "stdout_stderr": "logs/win314-r3-accepted-ruff.txt"
+    },
+    "mypy": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 17.73384860000806,
+      "start_utc": "2026-11-16T19:24:18.858305+00:00",
+      "end_utc": "2026-11-16T19:24:36.593055+00:00",
+      "command_log": "logs/win314-r3-accepted-mypy.json",
+      "stdout_stderr": "logs/win314-r3-accepted-mypy.txt"
+    },
+    "pip": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 1.2030545000452548,
+      "start_utc": "2026-11-16T19:24:38.042973+00:00",
+      "end_utc": "2026-11-16T19:24:39.246105+00:00",
+      "command_log": "logs/win314-r3-accepted-pip.json",
+      "stdout_stderr": "logs/win314-r3-accepted-pip.txt"
+    },
+    "compile": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.357449600007385,
+      "start_utc": "2026-11-16T19:24:40.811821+00:00",
+      "end_utc": "2026-11-16T19:24:41.169311+00:00",
+      "command_log": "logs/win314-r3-accepted-compile.json",
+      "stdout_stderr": "logs/win314-r3-accepted-compile.txt"
+    },
+    "environment": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.12895370001206174,
+      "start_utc": "2026-11-16T19:24:42.596624+00:00",
+      "end_utc": "2026-11-16T19:24:42.725600+00:00",
+      "command_log": "logs/win314-r3-accepted-environment.json",
+      "stdout_stderr": "logs/win314-r3-accepted-environment.txt"
+    },
+    "A_initial_concurrent": {
+      "exit_code": 1,
+      "counts": {
+        "passed": 752,
+        "skipped": 14,
+        "failed": 1
+      },
+      "command_log": "logs/win314-r3-accepted-A.json",
+      "state": "FAIL_INPUT_CHANGED_NOT_REWRITTEN"
+    }
+  },
+  "win311": {
+    "collection": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 4.062000000034459,
+      "start_utc": "2026-11-16T19:20:26.229052+00:00",
+      "end_utc": "2026-11-16T19:20:30.289580+00:00",
+      "command_log": "logs/win311-r3-accepted-collection.json",
+      "stdout_stderr": "logs/win311-r3-accepted-collection.txt"
+    },
+    "focused": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "elapsed_seconds": 1.6719999999622814,
+      "start_utc": "2026-11-16T19:20:31.553488+00:00",
+      "end_utc": "2026-11-16T19:20:33.210513+00:00",
+      "command_log": "logs/win311-r3-accepted-focused.json",
+      "stdout_stderr": "logs/win311-r3-accepted-focused.txt"
+    },
+    "A": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 753,
+        "skipped": 14
+      },
+      "elapsed_seconds": 152.46900000004098,
+      "start_utc": "2026-11-16T19:20:34.339137+00:00",
+      "end_utc": "2026-11-16T19:23:06.812956+00:00",
+      "command_log": "logs/win311-r3-accepted-A.json",
+      "stdout_stderr": "logs/win311-r3-accepted-A.txt"
+    },
+    "full-diagnostic": {
+      "exit_code": 1,
+      "counts": {
+        "passed": 753,
+        "failed": 4,
+        "skipped": 14
+      },
+      "elapsed_seconds": 106.65599999995902,
+      "start_utc": "2026-11-16T19:23:09.928468+00:00",
+      "end_utc": "2026-11-16T19:24:56.591750+00:00",
+      "command_log": "logs/win311-r3-accepted-full-diagnostic.json",
+      "stdout_stderr": "logs/win311-r3-accepted-full-diagnostic.txt"
+    },
+    "ruff": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 2.6709999999729916,
+      "start_utc": "2026-11-16T19:24:58.911603+00:00",
+      "end_utc": "2026-11-16T19:25:01.592092+00:00",
+      "command_log": "logs/win311-r3-accepted-ruff.json",
+      "stdout_stderr": "logs/win311-r3-accepted-ruff.txt"
+    },
+    "mypy": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 12.703000000037719,
+      "start_utc": "2026-11-16T19:25:02.613141+00:00",
+      "end_utc": "2026-11-16T19:25:15.314973+00:00",
+      "command_log": "logs/win311-r3-accepted-mypy.json",
+      "stdout_stderr": "logs/win311-r3-accepted-mypy.txt"
+    },
+    "pip": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 1.6099999999860302,
+      "start_utc": "2026-11-16T19:25:16.183880+00:00",
+      "end_utc": "2026-11-16T19:25:17.799515+00:00",
+      "command_log": "logs/win311-r3-accepted-pip.json",
+      "stdout_stderr": "logs/win311-r3-accepted-pip.txt"
+    },
+    "compile": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.26600000000325963,
+      "start_utc": "2026-11-16T19:25:18.648667+00:00",
+      "end_utc": "2026-11-16T19:25:18.925840+00:00",
+      "command_log": "logs/win311-r3-accepted-compile.json",
+      "stdout_stderr": "logs/win311-r3-accepted-compile.txt"
+    },
+    "environment": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.06300000002374873,
+      "start_utc": "2026-11-16T19:25:19.856044+00:00",
+      "end_utc": "2026-11-16T19:25:19.912037+00:00",
+      "command_log": "logs/win311-r3-accepted-environment.json",
+      "stdout_stderr": "logs/win311-r3-accepted-environment.txt"
+    }
+  },
+  "linux312": {
+    "collection": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 4.656087799999995,
+      "start_utc": "2026-11-16T19:20:41.798621+00:00",
+      "end_utc": "2026-11-16T19:20:46.454713+00:00",
+      "command_log": "logs/linux312-r3-accepted-collection.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-collection.txt"
+    },
+    "focused": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "elapsed_seconds": 1.3745707940000216,
+      "start_utc": "2026-11-16T19:20:48.194685+00:00",
+      "end_utc": "2026-11-16T19:20:49.569258+00:00",
+      "command_log": "logs/linux312-r3-accepted-focused.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-focused.txt"
+    },
+    "A": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 762,
+        "skipped": 5
+      },
+      "elapsed_seconds": 82.39213510800002,
+      "start_utc": "2026-11-16T19:20:51.081172+00:00",
+      "end_utc": "2026-11-16T19:22:13.920412+00:00",
+      "command_log": "logs/linux312-r3-accepted-A.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-A.txt"
+    },
+    "full-diagnostic": {
+      "exit_code": 1,
+      "counts": {
+        "passed": 762,
+        "failed": 4,
+        "skipped": 5
+      },
+      "elapsed_seconds": 81.12525878100001,
+      "start_utc": "2026-11-16T19:22:17.803993+00:00",
+      "end_utc": "2026-11-16T19:23:39.930792+00:00",
+      "command_log": "logs/linux312-r3-accepted-full-diagnostic.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-full-diagnostic.txt"
+    },
+    "ruff": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.11260103199998639,
+      "start_utc": "2026-11-16T19:23:42.929952+00:00",
+      "end_utc": "2026-11-16T19:23:43.042547+00:00",
+      "command_log": "logs/linux312-r3-accepted-ruff.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-ruff.txt"
+    },
+    "mypy": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 18.102428637000003,
+      "start_utc": "2026-11-16T19:23:44.539951+00:00",
+      "end_utc": "2026-11-16T19:24:03.162791+00:00",
+      "command_log": "logs/linux312-r3-accepted-mypy.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-mypy.txt"
+    },
+    "pip": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 1.5130570260000127,
+      "start_utc": "2026-11-16T19:24:04.540707+00:00",
+      "end_utc": "2026-11-16T19:24:06.053768+00:00",
+      "command_log": "logs/linux312-r3-accepted-pip.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-pip.txt"
+    },
+    "compile": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.1186972549999723,
+      "start_utc": "2026-11-16T19:24:07.493950+00:00",
+      "end_utc": "2026-11-16T19:24:07.612654+00:00",
+      "command_log": "logs/linux312-r3-accepted-compile.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-compile.txt"
+    },
+    "environment": {
+      "exit_code": 0,
+      "counts": {},
+      "elapsed_seconds": 0.07449496600003158,
+      "start_utc": "2026-11-16T19:24:09.002650+00:00",
+      "end_utc": "2026-11-16T19:24:09.077144+00:00",
+      "command_log": "logs/linux312-r3-accepted-environment.json",
+      "stdout_stderr": "logs/linux312-r3-accepted-environment.txt"
+    }
+  }
+}

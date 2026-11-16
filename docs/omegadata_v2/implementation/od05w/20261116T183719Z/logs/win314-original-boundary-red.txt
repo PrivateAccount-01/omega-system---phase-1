@@ -1,0 +1,16 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________________ test_w04_original_boundary_covered ______________________
+
+    def test_w04_original_boundary_covered():
+        # A benign instruction file proves the boundary without opening a payload.
+        # No actual market file is used to reproduce a guard defect.
+        target = Path(os.environ["OD05W_ORIGINAL_BOUNDARY"]) / "AGENTS.md"
+>       with pytest.raises((RuntimeError, PermissionError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (<class 'RuntimeError'>, <class 'PermissionError'>)
+
+tests\unit\test_od05w_engineering.py:75: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05w_engineering.py::test_w04_original_boundary_covered
+1 failed in 0.18s

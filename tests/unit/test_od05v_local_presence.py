@@ -13,6 +13,10 @@ import pytest
 from od05v_presence_oracle import observe
 
 BASE = Path.cwd() / "od05v_inputs"
+# OD05W contract: these tests consume an explicitly labelled native disposable
+# metadata/sparse-file corpus. Original-host inventory is a separate fresh run.
+# Reuse one frozen observation for unmodified inputs; mutation tests never cache.
+_OBSERVATIONS = {}
 
 
 def api():
@@ -32,6 +36,13 @@ def scan(repo, label, expected=None, **kw):
     from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
 
     pins = expected if expected is not None else groups()[label]["entries"]
+    if expected is None and not kw and os.environ.get("OD05W_CORPUS_CLASS") == "NON_MARKET_CANARY":
+        key = (str(repo), label)
+        if key not in _OBSERVATIONS:
+            _OBSERVATIONS[key] = a.PresenceObservation(
+                repo, label, ExpectedMetadata(tuple(tuple(r) for r in pins)), version=1
+            )
+        return _OBSERVATIONS[key].get()
     return a.scan_presence(
         repo, label, expected=ExpectedMetadata(tuple(tuple(r) for r in pins)), **kw
     )

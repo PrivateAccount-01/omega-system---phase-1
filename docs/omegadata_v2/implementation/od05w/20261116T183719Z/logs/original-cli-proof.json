@@ -1,0 +1,80 @@
+{
+  "class": "LOCAL_META",
+  "results": [
+    {
+      "entry": "audit_local_archive_presence.main",
+      "argv": [
+        "--root",
+        "seed",
+        "--expected-pins",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05w-cli-f8wvxy13\\pins.json"
+      ],
+      "start_utc": "2026-11-16T19:08:23.019865+00:00",
+      "end_utc": "2026-11-16T19:08:27.544993+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 4.524923700024374,
+      "schema_version": "od05w.presence/v2",
+      "counts": {
+        "content_eligible": 0,
+        "hardlinked": 2760,
+        "manifest_present": 3596,
+        "missing_payload": 0,
+        "payload_path_exists": 3596,
+        "present": 3596,
+        "regular_file": 3596,
+        "single_link": 836,
+        "size_matches_manifest": 3596
+      },
+      "refusal": null,
+      "payload_bytes_read": 0
+    },
+    {
+      "entry": "audit_local_archive_presence.main",
+      "argv": [
+        "--root",
+        "seed",
+        "--expected-pins",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05w-cli-f8wvxy13\\pins.json",
+        "--report-version",
+        "1"
+      ],
+      "start_utc": "2026-11-16T19:08:27.545191+00:00",
+      "end_utc": "2026-11-16T19:08:31.750902+00:00",
+      "exit_code": 2,
+      "elapsed_seconds": 4.205521900032181,
+      "schema_version": "od05v.presence/v1",
+      "counts": {
+        "hardlink_refused": 2760,
+        "manifest_present": 3596,
+        "missing_payload": 0,
+        "payload_path_exists": 3596,
+        "present": 836,
+        "regular_file": 3596,
+        "size_matches_manifest": 836,
+        "symlink_or_reparse_refused": 0,
+        "wrong_type": 0
+      },
+      "refusal": null,
+      "payload_bytes_read": 0
+    },
+    {
+      "entry": "audit_local_archive_presence.main",
+      "argv": [
+        "--root",
+        "seed",
+        "--expected-pins",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05w-cli-f8wvxy13\\pins.json",
+        "--payload-integrity"
+      ],
+      "start_utc": "2026-11-16T19:08:31.751035+00:00",
+      "end_utc": "2026-11-16T19:08:31.755811+00:00",
+      "exit_code": 2,
+      "elapsed_seconds": 0.004786600009538233,
+      "schema_version": null,
+      "counts": null,
+      "refusal": "POLICY_PENDING",
+      "payload_bytes_read": 0
+    }
+  ],
+  "guard_denials": {}
+}

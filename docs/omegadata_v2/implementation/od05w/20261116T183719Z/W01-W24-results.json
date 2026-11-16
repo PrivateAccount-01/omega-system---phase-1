@@ -1,0 +1,201 @@
+{
+  "groups": {
+    "W01": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w01_old_helper_and_glob_rejected_before_open"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W02": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w02_exact_allowlist"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W03": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip]",
+        "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.csv]",
+        "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.parquet]",
+        "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.db]",
+        "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[.env]",
+        "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.key]",
+        "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip.py]"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W04": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w04_actual_guard_denials",
+        "tests/unit/test_od05w_engineering.py::test_w04_original_boundary_covered",
+        "tests/unit/test_od05w_engineering.py::test_w04_external_retained_copy_boundary"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "BLOCKED_OS_ISOLATION"
+    },
+    "W05": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w05_hardlinked_copy_source_refused",
+        "tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[private]",
+        "tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[linked_root]"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W06": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w06_historical_incident_immutable"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W07": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w07_hardlink_physically_present",
+        "tests/unit/test_od05w_engineering.py::test_w07_existing_physical_count_defect"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W08": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w08_hardlink_mismatch"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W09": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w09_presence_not_permission"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W10": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w10_fresh_original_ledger"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W11": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w11_historical_claims_unchanged"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W12": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[../x.zip]",
+        "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[//host/share/x.zip]",
+        "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[C:/x.zip]",
+        "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[data/raw/x.zip:ads]",
+        "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[DATA/x.zip]"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W13": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w13_canonical_digest_and_redaction"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W14": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w14_budgets"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W15": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w15_profile_without_limit_relaxation"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W16": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w16_immutable_observation_invalidated"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W17": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w17_native_link_refusal"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W18": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w18_canary_not_financial_evidence"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W19": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w19_inventory_closed_world"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W20": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w20_blocked_input_not_passed"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W21": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w21_diagnostic_failures_preserved"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W22": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w22_integrity_refuses"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W23": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w23_fresh_copy_no_overwrite"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    },
+    "W24": {
+      "nodes": [
+        "tests/unit/test_od05w_engineering.py::test_w24_test_fixture_preserved"
+      ],
+      "software_execution": "39 focused cases pass on all three runtimes",
+      "acceptance": "EXECUTED_WITH_DOCUMENTED_SCOPE"
+    }
+  },
+  "precode_initial": {
+    "failed": 27,
+    "passed": 7
+  },
+  "precode_expanded_count": {
+    "failed": 28,
+    "passed": 7
+  },
+  "later_negative_first": {
+    "original_boundary": "win314-original-boundary-red.json",
+    "copy_root": "win314-copy-root-red.json",
+    "external_boundary": "win314-external-boundary-red.json"
+  },
+  "kernel_isolation": "NOT_ESTABLISHED; Python tests alone cannot close W04"
+}

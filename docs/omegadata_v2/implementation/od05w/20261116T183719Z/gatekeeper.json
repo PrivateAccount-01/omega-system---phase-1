@@ -1,0 +1,25 @@
+{
+  "phase": "OD05W_SAFE_HARNESS_REMEDIATION_AND_ARCHIVE_PRESENCE_CORRECTION_ONLY",
+  "head": "c8e7ff974e6c4a471a002d4807f268dc5d0044b1",
+  "branch": "feature/od01-source-rights",
+  "software_engineering_tests": "FINAL_SCOPED_RUNS_PASS_WITH_RECORDED_SKIPS_AND_PRIOR_CANARY_REFUSAL",
+  "safe_engineering_verdict": "BLOCKED",
+  "blocking_requirement": "W04 host-level filesystem/network/subprocess containment was not established. Exact allowlists and active Python audit hooks are useful tested controls, but are not an OS sandbox and cannot certify hostile native-call/child-process containment. No safety PASS is issued.",
+  "financial_data_verdict": "BLOCKED_REAL_DATA",
+  "focused_cases_per_runtime": 39,
+  "A_suite_cases_per_runtime": 767,
+  "B_cases": "4 BLOCKED_INPUT; actual full diagnostic retains 4 FAIL",
+  "C_cases": "4 BLOCKED_REAL_DATA; not run",
+  "linux_original_mount": "LINUX_ORIGINAL_MOUNT_FULL_SCAN_PERFORMANCE_BLOCKED; 30-second limit unchanged",
+  "historical_incident_review": "PENDING_HUMAN_OWNER_REVIEW; NOT_SELF_APPROVED",
+  "new_original_market_payload_access": "No prohibited read observed; zero opened/copied by the reviewed code/metadata pipelines; not a kernel-level proof",
+  "preservation": "PASS for recorded code/evidence hashes and original metadata dimensions; no payload byte-integrity claim",
+  "commit_push_merge_release_OD06": "NOT_AUTHORIZED_NOT_PERFORMED",
+  "unexplained_canary_stat_refusal": {
+    "initial": "win314-r3-accepted-A.json P03 INPUT_CHANGED, exit 1",
+    "initial_changed_fields": "UNKNOWN_NOT_CAPTURED",
+    "reprobe": "8 fresh cache observations passed without stat changes",
+    "final_scoped_recheck": "win314-serialized-A.json; actual result retained separately",
+    "security_checks_relaxed": false
+  }
+}

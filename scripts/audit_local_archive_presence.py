@@ -24,6 +24,7 @@ def main(argv: list[str] | None = None, *, repo: Path | None = None) -> int:
     parser.add_argument("--dry-run", action="store_true", help="Default; no report writes")
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--payload-integrity", action="store_true")
+    parser.add_argument("--report-version", type=int, choices=(1, 2), default=2)
     args = parser.parse_args(argv)
     repo = repo if repo is not None else Path(__file__).resolve().parents[1]
     try:
@@ -46,7 +47,11 @@ def main(argv: list[str] | None = None, *, repo: Path | None = None) -> int:
         if not args.expected_pins.is_absolute() or args.expected_pins.is_relative_to(repo / "data"):
             raise InventoryError("EXTERNAL_PINS_REQUIRED")
         report = scan_presence(
-            repo, args.root, expected=read_expected(args.expected_pins), source_key=args.source_key
+            repo,
+            args.root,
+            expected=read_expected(args.expected_pins),
+            source_key=args.source_key,
+            version=args.report_version,
         )
         text = json.dumps(report, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
         if dest is not None:
@@ -54,6 +59,8 @@ def main(argv: list[str] | None = None, *, repo: Path | None = None) -> int:
             with (dest / "presence.json").open("x", encoding="utf-8") as stream:
                 stream.write(text + "\n")
         print(text)
+        if args.report_version == 2:
+            return 0 if report["counts"]["size_matches_manifest"] == report["manifest_count"] else 2
         return 0 if report["states"] == {"PRESENT_SIZE_MATCHED": report["manifest_count"]} else 2
     except InventoryError as error:
         print(

@@ -1,0 +1,797 @@
+FFFFFFFFF.F.FFFF..FFFFFFFFFF.FFF.F.                                      [100%]
+================================== FAILURES ===================================
+______________ test_w01_old_helper_and_glob_rejected_before_open ______________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w01_old_helper_and_glob_r0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000027671800050>
+
+    def test_w01_old_helper_and_glob_rejected_before_open(tmp_path, monkeypatch):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+__________________________ test_w02_exact_allowlist ___________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w02_exact_allowlist0')
+
+    def test_w02_exact_allowlist(tmp_path):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_w03_denied_inside_allowed_tree[x.zip] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w03_denied_inside_allowed0')
+name = 'x.zip'
+
+    @pytest.mark.parametrize("name", ["x.zip", "x.csv", "x.parquet", "x.db", ".env", "x.key", "x.zip.py"])
+    def test_w03_denied_inside_allowed_tree(tmp_path, name):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_w03_denied_inside_allowed_tree[x.csv] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w03_denied_inside_allowed1')
+name = 'x.csv'
+
+    @pytest.mark.parametrize("name", ["x.zip", "x.csv", "x.parquet", "x.db", ".env", "x.key", "x.zip.py"])
+    def test_w03_denied_inside_allowed_tree(tmp_path, name):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_______________ test_w03_denied_inside_allowed_tree[x.parquet] ________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w03_denied_inside_allowed2')
+name = 'x.parquet'
+
+    @pytest.mark.parametrize("name", ["x.zip", "x.csv", "x.parquet", "x.db", ".env", "x.key", "x.zip.py"])
+    def test_w03_denied_inside_allowed_tree(tmp_path, name):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+__________________ test_w03_denied_inside_allowed_tree[x.db] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w03_denied_inside_allowed3')
+name = 'x.db'
+
+    @pytest.mark.parametrize("name", ["x.zip", "x.csv", "x.parquet", "x.db", ".env", "x.key", "x.zip.py"])
+    def test_w03_denied_inside_allowed_tree(tmp_path, name):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+__________________ test_w03_denied_inside_allowed_tree[.env] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w03_denied_inside_allowed4')
+name = '.env'
+
+    @pytest.mark.parametrize("name", ["x.zip", "x.csv", "x.parquet", "x.db", ".env", "x.key", "x.zip.py"])
+    def test_w03_denied_inside_allowed_tree(tmp_path, name):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_w03_denied_inside_allowed_tree[x.key] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w03_denied_inside_allowed5')
+name = 'x.key'
+
+    @pytest.mark.parametrize("name", ["x.zip", "x.csv", "x.parquet", "x.db", ".env", "x.key", "x.zip.py"])
+    def test_w03_denied_inside_allowed_tree(tmp_path, name):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+________________ test_w03_denied_inside_allowed_tree[x.zip.py] ________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w03_denied_inside_allowed6')
+name = 'x.zip.py'
+
+    @pytest.mark.parametrize("name", ["x.zip", "x.csv", "x.parquet", "x.db", ".env", "x.key", "x.zip.py"])
+    def test_w03_denied_inside_allowed_tree(tmp_path, name):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+___________________ test_w05_hardlinked_copy_source_refused ___________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w05_hardlinked_copy_sourc0')
+
+    def test_w05_hardlinked_copy_source_refused(tmp_path):
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+____________________ test_w07_hardlink_physically_present _____________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w07_hardlink_physically_p0')
+
+    def test_w07_hardlink_physically_present(tmp_path):
+        repo, _, payload, pins = fixture(tmp_path)
+        os.link(payload, tmp_path / "second-link")
+        # Existing v1 defect is executable independently of the absent v2 API.
+        old = presence().scan_presence(repo, "seed", expected=presence().ExpectedMetadata(tuple(pins)))
+        assert old["counts"]["regular_file"] == 1
+>       row = scan(repo, pins)["rows"][0]
+              ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w07_hardlink_physically_p0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+___________________ test_w07_existing_physical_count_defect ___________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w07_existing_physical_cou0')
+
+    def test_w07_existing_physical_count_defect(tmp_path):
+        repo, _, payload, pins = fixture(tmp_path)
+        os.link(payload, tmp_path / "second-link")
+        kwargs = {"version": 2} if hasattr(presence(), "PresenceObservation") else {}
+        result = presence().scan_presence(repo, "seed", expected=presence().ExpectedMetadata(tuple(pins)), **kwargs)
+>       assert result["counts"]["present"] == result["counts"]["size_matches_manifest"] == 1
+E       assert 0 == 1
+
+tests\unit\test_od05w_engineering.py:99: AssertionError
+_________________________ test_w08_hardlink_mismatch __________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w08_hardlink_mismatch0')
+
+    def test_w08_hardlink_mismatch(tmp_path):
+        repo, _, payload, pins = fixture(tmp_path)
+        os.link(payload, tmp_path / "link")
+        with payload.open("r+b") as stream:
+            stream.truncate(1)
+>       row = scan(repo, pins)["rows"][0]
+              ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w08_hardlink_mismatch0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+______________________ test_w09_presence_not_permission _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w09_presence_not_permissi0')
+
+    def test_w09_presence_not_permission(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+>       result = scan(repo, pins)
+                 ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w09_presence_not_permissi0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+_______________________ test_w12_unsafe_paths[../x.zip] _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths____x_zip0')
+claim = '../x.zip'
+
+    @pytest.mark.parametrize("claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"])
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text()); body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths____x_zip0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', '790f84147da4e7e3fed0a12e9642a09e747f480af59863f3704c96379fda320d', 875)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+__________________ test_w12_unsafe_paths[//host/share/x.zip] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths___host_s0')
+claim = '//host/share/x.zip'
+
+    @pytest.mark.parametrize("claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"])
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text()); body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths___host_s0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'b0a16c9a145dbb0fd34c4b3cf04ff3a139a29fd6c20079f76f2c2b38ce066d8f', 885)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+_______________________ test_w12_unsafe_paths[C:/x.zip] _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths_C__x_zip0')
+claim = 'C:/x.zip'
+
+    @pytest.mark.parametrize("claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"])
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text()); body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths_C__x_zip0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'd9aa20975e37d040ac4f6bfbde150535d8d92296a5127de34b17f3e2cdb9d468', 875)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+__________________ test_w12_unsafe_paths[data/raw/x.zip:ads] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths_data_raw0')
+claim = 'data/raw/x.zip:ads'
+
+    @pytest.mark.parametrize("claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"])
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text()); body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths_data_raw0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'a660406cc9561331555a9b80298005a73c30499bef079f68ee7eff81e97b57f0', 885)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+______________________ test_w12_unsafe_paths[DATA/x.zip] ______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths_DATA_x_z0')
+claim = 'DATA/x.zip'
+
+    @pytest.mark.parametrize("claim", ["../x.zip", "//host/share/x.zip", "C:/x.zip", "data/raw/x.zip:ads", "DATA/x.zip"])
+    def test_w12_unsafe_paths(tmp_path, claim):
+        repo, meta, _, _ = fixture(tmp_path)
+        body = json.loads(meta.read_text()); body["artifact_path"] = claim
+        meta.write_text(json.dumps(body))
+>       assert scan(repo, repin(meta, repo))["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w12_unsafe_paths_DATA_x_z0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', '62657b55d9941feeac6a05f53638de8ae4b14a85fe6aa797f158f6cf45859eed', 877)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+___________________ test_w13_canonical_digest_and_redaction ___________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w13_canonical_digest_and_0')
+
+    def test_w13_canonical_digest_and_redaction(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+>       a, b = scan(repo, pins), scan(repo, list(reversed(pins)))
+               ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:145: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w13_canonical_digest_and_0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+______________________________ test_w14_budgets _______________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w14_budgets0')
+
+    def test_w14_budgets(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+        with pytest.raises(presence().InventoryError, match="BUDGET"):
+>           scan(repo, pins, limits=presence().ScanLimits(max_entries=1))
+
+tests\unit\test_od05w_engineering.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w14_budgets0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018)]
+kw = {'limits': ScanLimits(max_files=5000, max_entries=1, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+__________________ test_w15_profile_without_limit_relaxation __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w15_profile_without_limit0')
+
+    def test_w15_profile_without_limit_relaxation(tmp_path):
+        repo, _, _, pins = fixture(tmp_path)
+>       profile = {}; scan(repo, pins, profile=profile)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w15_profile_without_limit0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'af73b255332b36edbc3d8c3167c38afdb7daefea1214700961b57892f2a5772a', 1018)]
+kw = {'profile': {}}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+_________________ test_w16_immutable_observation_invalidated __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w16_immutable_observation0')
+
+    def test_w16_immutable_observation_invalidated(tmp_path):
+        repo, meta, _, pins = fixture(tmp_path)
+>       observation = presence().PresenceObservation(repo, "seed", presence().ExpectedMetadata(tuple(pins)))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'omegadata.parsers.local_archive_presence' has no attribute 'PresenceObservation'
+
+tests\unit\test_od05w_engineering.py:168: AttributeError
+________________________ test_w17_native_link_refusal _________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w17_native_link_refusal0')
+
+    def test_w17_native_link_refusal(tmp_path):
+        repo, meta, payload, pins = fixture(tmp_path)
+        target = tmp_path / "NON_MARKET_CANARY"; target.touch()
+        if os.name == "nt":
+            import _winapi
+            link = payload.parent / "junction"
+            _winapi.CreateJunction(str(tmp_path), str(link))
+            body = json.loads(meta.read_text())
+            body["artifact_path"] = link.relative_to(repo).as_posix() + "/NON_MARKET_CANARY.zip"
+            meta.write_text(json.dumps(body)); pins = repin(meta, repo)
+        else:
+            payload.unlink(); payload.symlink_to(target)
+>       assert scan(repo, pins)["rows"][0]["path_exists"] is False
+               ^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:188: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w17_native_link_refusal0/repo')
+pins = [('year=2011/month=06/20110622__1eba7f9259b5.manifest.json', 'aae7c43d4ce6f308f9315be0a9c40b5ecf072b1f934cfe87cce789b132c8b55e', 968)]
+kw = {}
+ExpectedMetadata = <class 'omegadata.parsers.archive_candidate_inventory.ExpectedMetadata'>
+
+    def scan(repo, pins, **kw):
+        from omegadata.parsers.archive_candidate_inventory import ExpectedMetadata
+>       return presence().scan_presence(repo, "seed", expected=ExpectedMetadata(tuple(pins)), version=2, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: scan_presence() got an unexpected keyword argument 'version'
+
+tests\unit\test_od05w_engineering.py:26: TypeError
+_______________________ test_w19_inventory_closed_world _______________________
+
+    def test_w19_inventory_closed_world():
+>       h = harness()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:197: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______________________ test_w20_blocked_input_not_passed ______________________
+
+    def test_w20_blocked_input_not_passed():
+>       assert harness().blocked_inputs({"b": "B", "a": "A", "c": "C"}) == {
+               ^^^^^^^^^
+            "b": "BLOCKED_INPUT", "c": "BLOCKED_REAL_DATA"}
+
+tests\unit\test_od05w_engineering.py:204: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+___________________ test_w21_diagnostic_failures_preserved ____________________
+
+    def test_w21_diagnostic_failures_preserved():
+>       result = harness().gate_summary({"passed": 1, "failed": 4}, engineering_exit=0)
+                 ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______________________ test_w23_fresh_copy_no_overwrite _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od05w-run-lco9mfdh/pytest/test_w23_fresh_copy_no_overwri0')
+
+    def test_w23_fresh_copy_no_overwrite(tmp_path):
+>       h = harness(); source = tmp_path/"source"; source.mkdir()
+            ^^^^^^^^^
+
+tests\unit\test_od05w_engineering.py:219: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05w_engineering.py:17: in harness
+    return importlib.import_module("od05w_safe_harness")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'od05w_safe_harness'
+import_ = <function _gcd_import at 0x000002766CBBBE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'od05w_safe_harness'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05w_engineering.py::test_w01_old_helper_and_glob_rejected_before_open
+FAILED tests/unit/test_od05w_engineering.py::test_w02_exact_allowlist - Modul...
+FAILED tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.csv]
+FAILED tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.parquet]
+FAILED tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.db]
+FAILED tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[.env]
+FAILED tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.key]
+FAILED tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip.py]
+FAILED tests/unit/test_od05w_engineering.py::test_w05_hardlinked_copy_source_refused
+FAILED tests/unit/test_od05w_engineering.py::test_w07_hardlink_physically_present
+FAILED tests/unit/test_od05w_engineering.py::test_w07_existing_physical_count_defect
+FAILED tests/unit/test_od05w_engineering.py::test_w08_hardlink_mismatch - Typ...
+FAILED tests/unit/test_od05w_engineering.py::test_w09_presence_not_permission
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[../x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[//host/share/x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[C:/x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[data/raw/x.zip:ads]
+FAILED tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[DATA/x.zip]
+FAILED tests/unit/test_od05w_engineering.py::test_w13_canonical_digest_and_redaction
+FAILED tests/unit/test_od05w_engineering.py::test_w14_budgets - TypeError: sc...
+FAILED tests/unit/test_od05w_engineering.py::test_w15_profile_without_limit_relaxation
+FAILED tests/unit/test_od05w_engineering.py::test_w16_immutable_observation_invalidated
+FAILED tests/unit/test_od05w_engineering.py::test_w17_native_link_refusal - T...
+FAILED tests/unit/test_od05w_engineering.py::test_w19_inventory_closed_world
+FAILED tests/unit/test_od05w_engineering.py::test_w20_blocked_input_not_passed
+FAILED tests/unit/test_od05w_engineering.py::test_w21_diagnostic_failures_preserved
+FAILED tests/unit/test_od05w_engineering.py::test_w23_fresh_copy_no_overwrite
+28 failed, 7 passed in 0.96s
