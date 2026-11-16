@@ -1,0 +1,114 @@
+{
+  "first_three": [
+    {
+      "manifest": "year=2011/month=06/20110622__1eba7f9259b5.manifest.json",
+      "date": "2011-06-22",
+      "state": "HARDLINK_REFUSED",
+      "claimed_bytes": 53301,
+      "filesystem_bytes": 53301,
+      "payload_relative": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.zip",
+      "claim_format": "LEGACY_FILENAME_CLAIM",
+      "source_mode": "immutable_seed_cache",
+      "original_filename_claim": "cm22JUN2011bhav.csv.zip",
+      "lineage": "PHASE2_REPOSITORY_CLAIM",
+      "era_state": "REFERENCE_PENDING",
+      "payload_hash_verified": false,
+      "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+      "rights": "RIGHTS_PENDING"
+    },
+    {
+      "manifest": "year=2020/month=01/20200102__b3cdc49a3f68.manifest.json",
+      "date": "2020-01-02",
+      "state": "PRESENT_SIZE_MATCHED",
+      "claimed_bytes": 69955,
+      "filesystem_bytes": 69955,
+      "payload_relative": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2020/month=01/20200102__b3cdc49a3f68.zip",
+      "claim_format": "LEGACY_FILENAME_CLAIM",
+      "source_mode": "immutable_seed_cache",
+      "original_filename_claim": "cm02JAN2020bhav.csv.zip",
+      "lineage": "PHASE2_REPOSITORY_CLAIM",
+      "era_state": "ERA_CONFLICT_2020_REFERENCE_PENDING",
+      "payload_hash_verified": false,
+      "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+      "rights": "RIGHTS_PENDING"
+    },
+    {
+      "manifest": "year=2024/month=07/20240723__6e7b99b88b17.manifest.json",
+      "date": "2024-07-23",
+      "state": "PRESENT_SIZE_MATCHED",
+      "claimed_bytes": 165041,
+      "filesystem_bytes": 165041,
+      "payload_relative": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240723__6e7b99b88b17.zip",
+      "claim_format": "UDIFF_URL_CLAIM",
+      "source_mode": "immutable_versioned",
+      "original_filename_claim": null,
+      "lineage": "UNVERIFIED",
+      "era_state": "REFERENCE_PENDING",
+      "payload_hash_verified": false,
+      "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+      "rights": "RIGHTS_PENDING"
+    }
+  ],
+  "groups": {
+    "seed": {
+      "2011": {
+        "present": 27,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2019": {
+        "present": 57,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2020-01": {
+        "present": 5,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2024-06": {
+        "present": 5,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2024-07": {
+        "present": 5,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2025": {
+        "present": 57,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2026": {
+        "present": 10,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      }
+    },
+    "cache": {
+      "2011": {
+        "present": 0,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2019": {
+        "present": 0,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2020-01": {
+        "present": 0,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2024-06": {
+        "present": 0,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2024-07": {
+        "present": 5,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2025": {
+        "present": 6,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      },
+      "2026": {
+        "present": 9,
+        "content_state": "ABSENT_OR_UNCHECKED"
+      }
+    }
+  }
+}

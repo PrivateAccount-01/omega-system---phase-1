@@ -1,0 +1,82 @@
+{
+  "command": [
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\verification_runner.py",
+    "win311-safe-guard",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-safe-um1h25jw\\repo",
+    "pytest",
+    "-q",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\guard_probe.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-safe-um1h25jw\\repo",
+  "baseline": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T17:48:09.879994+00:00",
+  "end_utc": "2026-11-16T17:48:10.630243+00:00",
+  "elapsed_seconds": 0.75,
+  "exit_code": 0,
+  "output": "win311-safe-guard.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-kr9ap9sk",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-safe-um1h25jw\\repo",
+  "guard_denials": {
+    "DNS": 1,
+    "SOCKET": 1,
+    "UDP": 1,
+    "SUBPROCESS": 1,
+    "PROTECTED_WRITE": 1,
+    "SIGNING_READ": 1,
+    "CREDENTIAL_READ": 1,
+    "ORIGINAL_MARKET_PAYLOAD_READ": 1
+  },
+  "test_reports": [
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py::test_dns_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py::test_tcp_udp_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py::test_process_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py::test_disposable_copy_write_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py::test_fictional_signing_read_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py::test_fictional_credential_read_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py::test_original_market_payload_read_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 7
+  }
+}

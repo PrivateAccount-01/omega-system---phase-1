@@ -1,0 +1,344 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+_______________ test_p13_late_nonstring_original_claim[value0] ________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin0')
+value = []
+
+    @pytest.mark.parametrize("value", [[], {}, 7, True])
+    def test_p13_late_nonstring_original_claim(tmp_path, value):
+        repo, path, payload, pins = fixture(tmp_path)
+        body = json.loads(path.read_text())
+        body["original_filename"] = value
+        path.write_text(json.dumps(body))
+>       row = scan(repo, "seed", repin(path, repo))["rows"][0]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:352: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src\omegadata\parsers\local_archive_presence.py:231: in scan_presence
+    rows.append(_row(repo, root, name, raw, names))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin0/repo')
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin0/repo/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+name = 'year=2011/month=06/20110622__1eba7f9259b5.manifest.json'
+raw = b'{"source_key": "NSE_EQUITY_BHAVCOPY", "as_of": "2011-06-22", "checksum": "1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json"}'
+names = {}
+
+    def _row(
+        repo: Path, root: Path, name: str, raw: bytes, names: dict[Path, frozenset[str]]
+    ) -> dict[str, Any]:
+        row: dict[str, Any] = {
+            "manifest": name,
+            "date": None,
+            "state": "MALFORMED_METADATA",
+            "claimed_bytes": None,
+            "filesystem_bytes": None,
+            "payload_relative": None,
+            "claim_format": "UNKNOWN",
+            "source_mode": "UNKNOWN",
+            "original_filename_claim": None,
+            "lineage": "UNVERIFIED",
+            "era_state": "REFERENCE_PENDING",
+            "payload_hash_verified": False,
+            "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+            "rights": "RIGHTS_PENDING",
+        }
+        try:
+            candidate = parse_metadata(raw, name)
+            body = json_object(raw, 65536)
+            row.update(date=candidate.business_date, source_mode=candidate.storage_mode)
+            claim = body.get("artifact_path")
+            if not isinstance(claim, str):
+                raise InventoryError("PATH_UNSAFE")
+            claim = relative_name(claim.replace("\\", "/"))
+            prefix = root.relative_to(repo).as_posix() + "/"
+            if not claim.startswith(prefix) or not claim.endswith(".zip"):
+                raise InventoryError("PATH_UNSAFE")
+            claimed_bytes = body.get("bytes_downloaded")
+            if type(claimed_bytes) is not int or not 0 < claimed_bytes <= 16 * 1024 * 1024:
+                raise InventoryError("MALFORMED_METADATA")
+            row.update(payload_relative=claim, claimed_bytes=claimed_bytes)
+            original = body.get("original_filename")
+            if isinstance(original, str) and re.fullmatch(
+                r"cm\d{2}[A-Z]{3}\d{4}bhav\.csv\.zip", original
+            ):
+                row.update(claim_format="LEGACY_FILENAME_CLAIM", original_filename_claim=original)
+            elif isinstance(body.get("used_url"), str) and re.fullmatch(
+                r"https://nsearchives\.nseindia\.com/content/cm/BhavCopy_NSE_CM_0_0_0_\d{8}_F_0000\.csv\.zip",
+                body["used_url"],
+            ):
+                row["claim_format"] = "UDIFF_URL_CLAIM"
+            if (
+                body.get("source_repo_url")
+                == "https://github.com/PrivateAccount-01/omega-system---phase-2"
+                and original is not None
+>               and body.get("source_repo_relative_path") == "data/raw/bhavcopy/" + original
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                and row["claim_format"] == "LEGACY_FILENAME_CLAIM"
+            ):
+E           TypeError: can only concatenate str (not "list") to str
+
+src\omegadata\parsers\local_archive_presence.py:183: TypeError
+_______________ test_p13_late_nonstring_original_claim[value1] ________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin1')
+value = {}
+
+    @pytest.mark.parametrize("value", [[], {}, 7, True])
+    def test_p13_late_nonstring_original_claim(tmp_path, value):
+        repo, path, payload, pins = fixture(tmp_path)
+        body = json.loads(path.read_text())
+        body["original_filename"] = value
+        path.write_text(json.dumps(body))
+>       row = scan(repo, "seed", repin(path, repo))["rows"][0]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:352: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src\omegadata\parsers\local_archive_presence.py:231: in scan_presence
+    rows.append(_row(repo, root, name, raw, names))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin1/repo')
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin1/repo/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+name = 'year=2011/month=06/20110622__1eba7f9259b5.manifest.json'
+raw = b'{"source_key": "NSE_EQUITY_BHAVCOPY", "as_of": "2011-06-22", "checksum": "1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json"}'
+names = {}
+
+    def _row(
+        repo: Path, root: Path, name: str, raw: bytes, names: dict[Path, frozenset[str]]
+    ) -> dict[str, Any]:
+        row: dict[str, Any] = {
+            "manifest": name,
+            "date": None,
+            "state": "MALFORMED_METADATA",
+            "claimed_bytes": None,
+            "filesystem_bytes": None,
+            "payload_relative": None,
+            "claim_format": "UNKNOWN",
+            "source_mode": "UNKNOWN",
+            "original_filename_claim": None,
+            "lineage": "UNVERIFIED",
+            "era_state": "REFERENCE_PENDING",
+            "payload_hash_verified": False,
+            "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+            "rights": "RIGHTS_PENDING",
+        }
+        try:
+            candidate = parse_metadata(raw, name)
+            body = json_object(raw, 65536)
+            row.update(date=candidate.business_date, source_mode=candidate.storage_mode)
+            claim = body.get("artifact_path")
+            if not isinstance(claim, str):
+                raise InventoryError("PATH_UNSAFE")
+            claim = relative_name(claim.replace("\\", "/"))
+            prefix = root.relative_to(repo).as_posix() + "/"
+            if not claim.startswith(prefix) or not claim.endswith(".zip"):
+                raise InventoryError("PATH_UNSAFE")
+            claimed_bytes = body.get("bytes_downloaded")
+            if type(claimed_bytes) is not int or not 0 < claimed_bytes <= 16 * 1024 * 1024:
+                raise InventoryError("MALFORMED_METADATA")
+            row.update(payload_relative=claim, claimed_bytes=claimed_bytes)
+            original = body.get("original_filename")
+            if isinstance(original, str) and re.fullmatch(
+                r"cm\d{2}[A-Z]{3}\d{4}bhav\.csv\.zip", original
+            ):
+                row.update(claim_format="LEGACY_FILENAME_CLAIM", original_filename_claim=original)
+            elif isinstance(body.get("used_url"), str) and re.fullmatch(
+                r"https://nsearchives\.nseindia\.com/content/cm/BhavCopy_NSE_CM_0_0_0_\d{8}_F_0000\.csv\.zip",
+                body["used_url"],
+            ):
+                row["claim_format"] = "UDIFF_URL_CLAIM"
+            if (
+                body.get("source_repo_url")
+                == "https://github.com/PrivateAccount-01/omega-system---phase-2"
+                and original is not None
+>               and body.get("source_repo_relative_path") == "data/raw/bhavcopy/" + original
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                and row["claim_format"] == "LEGACY_FILENAME_CLAIM"
+            ):
+E           TypeError: can only concatenate str (not "dict") to str
+
+src\omegadata\parsers\local_archive_presence.py:183: TypeError
+__________________ test_p13_late_nonstring_original_claim[7] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin2')
+value = 7
+
+    @pytest.mark.parametrize("value", [[], {}, 7, True])
+    def test_p13_late_nonstring_original_claim(tmp_path, value):
+        repo, path, payload, pins = fixture(tmp_path)
+        body = json.loads(path.read_text())
+        body["original_filename"] = value
+        path.write_text(json.dumps(body))
+>       row = scan(repo, "seed", repin(path, repo))["rows"][0]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:352: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src\omegadata\parsers\local_archive_presence.py:231: in scan_presence
+    rows.append(_row(repo, root, name, raw, names))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin2/repo')
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin2/repo/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+name = 'year=2011/month=06/20110622__1eba7f9259b5.manifest.json'
+raw = b'{"source_key": "NSE_EQUITY_BHAVCOPY", "as_of": "2011-06-22", "checksum": "1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json"}'
+names = {}
+
+    def _row(
+        repo: Path, root: Path, name: str, raw: bytes, names: dict[Path, frozenset[str]]
+    ) -> dict[str, Any]:
+        row: dict[str, Any] = {
+            "manifest": name,
+            "date": None,
+            "state": "MALFORMED_METADATA",
+            "claimed_bytes": None,
+            "filesystem_bytes": None,
+            "payload_relative": None,
+            "claim_format": "UNKNOWN",
+            "source_mode": "UNKNOWN",
+            "original_filename_claim": None,
+            "lineage": "UNVERIFIED",
+            "era_state": "REFERENCE_PENDING",
+            "payload_hash_verified": False,
+            "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+            "rights": "RIGHTS_PENDING",
+        }
+        try:
+            candidate = parse_metadata(raw, name)
+            body = json_object(raw, 65536)
+            row.update(date=candidate.business_date, source_mode=candidate.storage_mode)
+            claim = body.get("artifact_path")
+            if not isinstance(claim, str):
+                raise InventoryError("PATH_UNSAFE")
+            claim = relative_name(claim.replace("\\", "/"))
+            prefix = root.relative_to(repo).as_posix() + "/"
+            if not claim.startswith(prefix) or not claim.endswith(".zip"):
+                raise InventoryError("PATH_UNSAFE")
+            claimed_bytes = body.get("bytes_downloaded")
+            if type(claimed_bytes) is not int or not 0 < claimed_bytes <= 16 * 1024 * 1024:
+                raise InventoryError("MALFORMED_METADATA")
+            row.update(payload_relative=claim, claimed_bytes=claimed_bytes)
+            original = body.get("original_filename")
+            if isinstance(original, str) and re.fullmatch(
+                r"cm\d{2}[A-Z]{3}\d{4}bhav\.csv\.zip", original
+            ):
+                row.update(claim_format="LEGACY_FILENAME_CLAIM", original_filename_claim=original)
+            elif isinstance(body.get("used_url"), str) and re.fullmatch(
+                r"https://nsearchives\.nseindia\.com/content/cm/BhavCopy_NSE_CM_0_0_0_\d{8}_F_0000\.csv\.zip",
+                body["used_url"],
+            ):
+                row["claim_format"] = "UDIFF_URL_CLAIM"
+            if (
+                body.get("source_repo_url")
+                == "https://github.com/PrivateAccount-01/omega-system---phase-2"
+                and original is not None
+>               and body.get("source_repo_relative_path") == "data/raw/bhavcopy/" + original
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                and row["claim_format"] == "LEGACY_FILENAME_CLAIM"
+            ):
+E           TypeError: can only concatenate str (not "int") to str
+
+src\omegadata\parsers\local_archive_presence.py:183: TypeError
+________________ test_p13_late_nonstring_original_claim[True] _________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin3')
+value = True
+
+    @pytest.mark.parametrize("value", [[], {}, 7, True])
+    def test_p13_late_nonstring_original_claim(tmp_path, value):
+        repo, path, payload, pins = fixture(tmp_path)
+        body = json.loads(path.read_text())
+        body["original_filename"] = value
+        path.write_text(json.dumps(body))
+>       row = scan(repo, "seed", repin(path, repo))["rows"][0]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:352: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src\omegadata\parsers\local_archive_presence.py:231: in scan_presence
+    rows.append(_row(repo, root, name, raw, names))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin3/repo')
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-actr4psi/pytest/test_p13_late_nonstring_origin3/repo/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+name = 'year=2011/month=06/20110622__1eba7f9259b5.manifest.json'
+raw = b'{"source_key": "NSE_EQUITY_BHAVCOPY", "as_of": "2011-06-22", "checksum": "1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json"}'
+names = {}
+
+    def _row(
+        repo: Path, root: Path, name: str, raw: bytes, names: dict[Path, frozenset[str]]
+    ) -> dict[str, Any]:
+        row: dict[str, Any] = {
+            "manifest": name,
+            "date": None,
+            "state": "MALFORMED_METADATA",
+            "claimed_bytes": None,
+            "filesystem_bytes": None,
+            "payload_relative": None,
+            "claim_format": "UNKNOWN",
+            "source_mode": "UNKNOWN",
+            "original_filename_claim": None,
+            "lineage": "UNVERIFIED",
+            "era_state": "REFERENCE_PENDING",
+            "payload_hash_verified": False,
+            "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+            "rights": "RIGHTS_PENDING",
+        }
+        try:
+            candidate = parse_metadata(raw, name)
+            body = json_object(raw, 65536)
+            row.update(date=candidate.business_date, source_mode=candidate.storage_mode)
+            claim = body.get("artifact_path")
+            if not isinstance(claim, str):
+                raise InventoryError("PATH_UNSAFE")
+            claim = relative_name(claim.replace("\\", "/"))
+            prefix = root.relative_to(repo).as_posix() + "/"
+            if not claim.startswith(prefix) or not claim.endswith(".zip"):
+                raise InventoryError("PATH_UNSAFE")
+            claimed_bytes = body.get("bytes_downloaded")
+            if type(claimed_bytes) is not int or not 0 < claimed_bytes <= 16 * 1024 * 1024:
+                raise InventoryError("MALFORMED_METADATA")
+            row.update(payload_relative=claim, claimed_bytes=claimed_bytes)
+            original = body.get("original_filename")
+            if isinstance(original, str) and re.fullmatch(
+                r"cm\d{2}[A-Z]{3}\d{4}bhav\.csv\.zip", original
+            ):
+                row.update(claim_format="LEGACY_FILENAME_CLAIM", original_filename_claim=original)
+            elif isinstance(body.get("used_url"), str) and re.fullmatch(
+                r"https://nsearchives\.nseindia\.com/content/cm/BhavCopy_NSE_CM_0_0_0_\d{8}_F_0000\.csv\.zip",
+                body["used_url"],
+            ):
+                row["claim_format"] = "UDIFF_URL_CLAIM"
+            if (
+                body.get("source_repo_url")
+                == "https://github.com/PrivateAccount-01/omega-system---phase-2"
+                and original is not None
+>               and body.get("source_repo_relative_path") == "data/raw/bhavcopy/" + original
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                and row["claim_format"] == "LEGACY_FILENAME_CLAIM"
+            ):
+E           TypeError: can only concatenate str (not "bool") to str
+
+src\omegadata\parsers\local_archive_presence.py:183: TypeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value0]
+FAILED tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value1]
+FAILED tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[7]
+FAILED tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[True]
+4 failed, 36 deselected in 0.94s

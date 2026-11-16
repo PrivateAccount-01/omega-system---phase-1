@@ -1,0 +1,74 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05v/20261116T172401Z/verification_runner.py",
+    "linux312-safe-full",
+    "/home/parilrupani/omega-od05v-safe-6b_00nlf/repo",
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata",
+    "--cov-branch",
+    "--cov-report=term-missing"
+  ],
+  "cwd": "/home/parilrupani/omega-od05v-safe-6b_00nlf/repo",
+  "baseline": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-16T17:52:41.657358+00:00",
+  "end_utc": "2026-11-16T17:59:35.133667+00:00",
+  "elapsed_seconds": 395.17239679700003,
+  "exit_code": 1,
+  "output": "linux312-safe-full.txt",
+  "sandbox": "/tmp/omega-od02v-tests-sp3vh8ha",
+  "root": "/home/parilrupani/omega-od05v-safe-6b_00nlf/repo",
+  "guard_denials": {
+    "DNS": 2,
+    "SUBPROCESS": 3,
+    "PROTECTED_WRITE": 6,
+    "SOCKET": 1,
+    "UDP": 1
+  },
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 718,
+    "failed": 9,
+    "skipped": 5
+  }
+}
+3-84, 88->93, 90->93, 95->exit, 98->exit
+src/omegadata/track_b/corporate_actions.py               160     26     56     10    81%   71-78, 139, 157, 234, 271, 281-282, 332-359, 369, 377, 386-387, 390, 402, 436
+src/omegadata/track_b/cross_source_validation.py         238     27     88     17    85%   99-114, 206, 212-213, 217-221, 224, 229, 232->241, 239->241, 344, 449, 454-470, 475-478, 524, 530, 570, 586, 709
+src/omegadata/track_b/discontinuity.py                   162      6     62      9    93%   57->60, 63->66, 87, 130, 133, 143->112, 172, 205, 211
+src/omegadata/track_b/isin_master.py                      80     14     22      5    79%   68, 72, 84->94, 104-111, 122-130, 150, 179-188, 201
+src/omegadata/track_b/manual_review.py                   248     31     72     21    83%   54, 66, 106-119, 121-124, 143, 189-191, 273, 304->306, 313-326, 356, 374-375, 386, 421, 426, 428, 434, 436, 438, 440, 446, 451->453
+src/omegadata/track_b/matching_policy.py                  33      1      6      2    92%   49, 52->54
+src/omegadata/track_b/publication.py                     118     29     42      8    71%   40, 45-55, 81, 110-111, 113, 115-116, 117->101, 132->123, 138-142, 150, 162-166
+src/omegadata/track_b/release_manager.py                 225     67     36      7    65%   61, 108, 112-117, 127-130, 138->140, 143-189, 192-216, 232-233, 236, 334-348, 351-376, 379-402, 405-420, 423-450, 501->506, 507-511, 558-565, 588, 591
+src/omegadata/track_b/release_readiness.py               193     12     58     13    89%   40, 65-66, 188, 193->200, 199, 203-206, 357->370, 370->380, 459->465, 505->507, 513, 516, 526, 541
+src/omegadata/track_b/review_policy.py                    55      3     12      3    91%   52->71, 55, 91-92
+src/omegadata/track_b/tolerance_policy.py                 52      3     16      5    88%   73->88, 76, 100, 104, 107->109
+src/omegadata/track_b/universe_manager.py                220     81     78     15    58%   84, 105-113, 181-182, 188-189, 195, 211-223, 229->232, 238, 242, 245->240, 258-285, 305, 323-414, 431, 435, 439, 443-454
+src/omegadata/verification/__init__.py                     0      0      0      0   100%
+src/omegadata/verification/audit.py                       71     46     22      0    27%   27, 31, 35-38, 42-61, 65-77, 88-94, 106, 265-273
+--------------------------------------------------------------------------------------------------
+TOTAL                                                   6867   1006   2100    383    82%
+Coverage JSON written to file /tmp/omega-od02v-tests-sp3vh8ha/coverage.json
+=========================== short test summary info ============================
+SKIPPED [2] tests/unit/test_od01r_rights_hardening.py:171: Windows junction test
+SKIPPED [1] tests/unit/test_od05r_reference_evidence.py:329: Windows junction; Linux file-link counterpart required
+SKIPPED [1] tests/unit/test_od05t_archive_inventory.py:179: Windows junction; Linux directory-link counterpart required
+SKIPPED [1] tests/unit/test_od05v_local_presence.py:158: Windows junction counterpart exercised on Windows
+FAILED tests/unit/test_adjustment_reference_corpus.py::test_reference_corpus_official_nse_source_pack_cases
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P02]
+FAILED tests/unit/test_od05v_local_presence.py::test_p04_full_independent_count_oracle
+FAILED tests/unit/test_od05v_local_presence.py::test_p15_2020_conflict_no_route_change
+FAILED tests/unit/test_od05v_local_presence.py::test_p16_lineage_claims_not_authentication
+FAILED tests/unit/test_universe_manager.py::test_seed_pack_backfill_reproduces_reference_snapshots
+FAILED tests/unit/test_universe_manager.py::test_seed_pack_preserves_knowledge_vs_effective_date_semantics
+FAILED tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+9 failed, 718 passed, 5 skipped, 4 deselected, 1 warning in 392.57s (0:06:32)
+

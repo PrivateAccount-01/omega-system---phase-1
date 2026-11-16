@@ -1,0 +1,24 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________ test_p08_late_non_directory_parent_not_counted_as_payload __________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s3zgu5pv/pytest/test_p08_late_non_directory_pa0')
+
+    def test_p08_late_non_directory_parent_not_counted_as_payload(tmp_path):
+        repo, path, payload, pins = fixture(tmp_path)
+        blocker = payload.parent / "blocker"
+        blocker.touch()
+        body = json.loads(path.read_text())
+        body["artifact_path"] = blocker.relative_to(repo).as_posix() + "/unreachable.zip"
+        path.write_text(json.dumps(body))
+        report = scan(repo, "seed", repin(path, repo))
+>       assert report["rows"][0]["state"] == "PATH_UNSAFE"
+E       AssertionError: assert 'WRONG_TYPE' == 'PATH_UNSAFE'
+E         
+E         - PATH_UNSAFE
+E         + WRONG_TYPE
+
+tests\unit\test_od05v_local_presence.py:365: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_late_non_directory_parent_not_counted_as_payload
+1 failed, 40 deselected in 0.57s

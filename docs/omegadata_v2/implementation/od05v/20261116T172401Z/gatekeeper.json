@@ -1,0 +1,19 @@
+{
+  "phase": "OD05V_LOCAL_ARCHIVE_DISCOVERY_AND_RIGHTS_GATED_REAL_DATA_DIAGNOSTICS_ONLY",
+  "head": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "branch": "feature/od01-source-rights",
+  "file_presence_verdict": "OD05V_FILE_PRESENCE_BLOCKED",
+  "overall_verdict": "BLOCKED",
+  "full_regression": "See actual failures and rights-restricted inputs; no blanket PASS",
+  "windows_presence_tests": "P01-P18 execute successfully with one OS symlink privilege skip per Windows runtime",
+  "linux_presence_tests": "Five BUDGET failures on the mounted original seed tree; native security/canary tests reported separately",
+  "payload_integrity": "PAYLOAD_INTEGRITY_NOT_RUN_RIGHTS_PENDING",
+  "financial_rows": "REAL_ROW_VALIDATION_NOT_RUN_RIGHTS_PENDING",
+  "publisher_origin": "PUBLISHER_ORIGIN_UNVERIFIED",
+  "financial_correctness": "FINANCIAL_CORRECTNESS_NOT_PROVEN",
+  "setup_deviation": "NOT_SELF_APPROVED; requires owner review; see logs/setup-deviation.json",
+  "independence": "Same-agent procedural review and separately implemented stat oracle; not human financial review",
+  "production_release": "NOT_AUTHORIZED",
+  "OD06": "NOT_AUTHORIZED",
+  "next_owner_action": "Provide applicable exact-file private inspection permission and nominate the bounded file/operations; separately review the recorded setup deviation. No price transcription required before permitted review."
+}

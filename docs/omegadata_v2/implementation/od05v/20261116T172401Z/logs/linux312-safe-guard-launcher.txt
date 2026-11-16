@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05v/20261116T172401Z/verification_runner.py",
+    "linux312-safe-guard",
+    "/home/parilrupani/omega-od05v-safe-6b_00nlf/repo",
+    "pytest",
+    "-q",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05v/20261116T172401Z/guard_probe.py"
+  ],
+  "cwd": "/home/parilrupani/omega-od05v-safe-6b_00nlf/repo",
+  "baseline": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-16T17:59:36.921652+00:00",
+  "end_utc": "2026-11-16T17:59:38.797456+00:00",
+  "elapsed_seconds": 1.8758125520000704,
+  "exit_code": 0,
+  "output": "linux312-safe-guard.txt",
+  "sandbox": "/tmp/omega-od02v-tests-qy71nc9t",
+  "root": "/home/parilrupani/omega-od05v-safe-6b_00nlf/repo",
+  "guard_denials": {
+    "DNS": 1,
+    "SOCKET": 1,
+    "UDP": 1,
+    "SUBPROCESS": 1,
+    "PROTECTED_WRITE": 1,
+    "SIGNING_READ": 1,
+    "CREDENTIAL_READ": 1,
+    "ORIGINAL_MARKET_PAYLOAD_READ": 1
+  },
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 7
+  }
+}
+.......                                                                  [100%]
+7 passed in 1.23s
+

@@ -1,0 +1,82 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\verification_runner.py",
+    "win314-parent-red",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-safe-um1h25jw\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05v_local_presence.py",
+    "-k",
+    "late_non_directory"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-safe-um1h25jw\\repo",
+  "baseline": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T17:40:40.294596+00:00",
+  "end_utc": "2026-11-16T17:40:42.641067+00:00",
+  "elapsed_seconds": 2.3464470999897458,
+  "exit_code": 1,
+  "output": "win314-parent-red.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-d682xmzn",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-safe-um1h25jw\\repo",
+  "guard_denials": {
+    "RAW_PAYLOAD_READ": 1
+  },
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_late_non_directory_parent_not_counted_as_payload",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-d682xmzn/pytest/test_p08_late_non_directory_pa0')\n\n    def test_p08_late_non_directory_parent_not_counted_as_payload(tmp_path):\n>       repo, path, payload, pins = fixture(tmp_path)\n                                    ^^^^^^^^^^^^^^^^^\n\ntests\\unit\\test_od05v_local_presence.py:358: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\ntests\\unit\\test_od05v_local_presence.py:52: in fixture\n    payload.touch()\n..\\..\\..\\..\\..\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\Lib\\pathlib\\__init__.py:1003: in touch\n    fd = os.open(self, flags, mode)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nE:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\verification_runner.py:98: in descriptor_open\n    try:return original_open(path,flags,mode,dir_fd=dir_fd)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\verification_runner.py:118: in audit\n    if 'data' in p.parts and any(part in {'raw','seed_raw'} for part in p.parts) and not p.name.endswith('.manifest.json'):deny(\"RAW_PAYLOAD_READ\")\n                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nkind = 'RAW_PAYLOAD_READ'\n\n    def deny(kind):\n        denials[kind]+=1\n>       raise RuntimeError(\"OD02V_BLOCKED_\"+kind)\nE       RuntimeError: OD02V_BLOCKED_RAW_PAYLOAD_READ\n\nE:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\verification_runner.py:56: RuntimeError"
+    }
+  ],
+  "deselected": [
+    "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]",
+    "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P02]",
+    "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P03]",
+    "tests/unit/test_od05v_local_presence.py::test_p04_full_independent_count_oracle",
+    "tests/unit/test_od05v_local_presence.py::test_p05_missing_payload",
+    "tests/unit/test_od05v_local_presence.py::test_p06_wrong_claimed_size",
+    "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[directory]",
+    "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[extension]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[../escape.zip]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[/escape.zip]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[C:/secret.zip]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[//host/share/x.zip]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/x.zip:secret]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/../x.zip]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip]",
+    "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip]",
+    "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[symlink]",
+    "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[hardlink]",
+    "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]",
+    "tests/unit/test_od05v_local_presence.py::test_p10_scope[root]",
+    "tests/unit/test_od05v_local_presence.py::test_p10_scope[feed]",
+    "tests/unit/test_od05v_local_presence.py::test_p10_scope[source]",
+    "tests/unit/test_od05v_local_presence.py::test_p11_no_payload_open",
+    "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[PENDING_REVIEW]",
+    "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[DENIED]",
+    "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[REVOKED]",
+    "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[EXPIRED]",
+    "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[missing]",
+    "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[unknown]",
+    "tests/unit/test_od05v_local_presence.py::test_p13_redaction",
+    "tests/unit/test_od05v_local_presence.py::test_p14_duplicate_observations_and_nonvacuity",
+    "tests/unit/test_od05v_local_presence.py::test_p15_2020_conflict_no_route_change",
+    "tests/unit/test_od05v_local_presence.py::test_p16_lineage_claims_not_authentication",
+    "tests/unit/test_od05v_local_presence.py::test_p17_determinism_and_bounds",
+    "tests/unit/test_od05v_local_presence.py::test_p18_cli_dryrun_fresh_output_and_preservation",
+    "tests/unit/test_od05v_local_presence.py::test_p18_pin_mismatch_and_corpus",
+    "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value0]",
+    "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value1]",
+    "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[7]",
+    "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[True]"
+  ],
+  "symlink_observations": [],
+  "call_counts": {
+    "failed": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "url": "https://api.github.com/repos/PrivateAccount-01/omega-system---phase-2/contents/renaissance/data/bhavcopy_ingestor.py?ref=master",
+  "git_blob_id": "6663821166fb913b0311b650438f0d5f626eacc0",
+  "scope": "Code consultation only; no remote market blob or sample content fetched",
+  "observations": [
+    "Historical URL builder uses archives.nseindia.com/content/historical/EQUITIES/{year}/{upper_month}/cm{day}{upper_month}{year}bhav.csv.zip.",
+    "Legacy reader selects first ZIP member and filters EQ; it is not reused as a trusted validator.",
+    "Recent fallback uses indices/ind_close_all rather than a proved CM replacement; no adoption or execution authorized."
+  ],
+  "executed": false,
+  "publisher_receipt": false,
+  "rights_grant": false
+}

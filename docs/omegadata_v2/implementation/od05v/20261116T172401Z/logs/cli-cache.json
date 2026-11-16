@@ -1,0 +1,36 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\scripts\\audit_local_archive_presence.py",
+    "--root",
+    "cache",
+    "--expected-pins",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-cli-vig9ijbm\\pins.json",
+    "--output-dir",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-cli-vig9ijbm\\report"
+  ],
+  "guarded_worker": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\cli_probe.py",
+    "cache"
+  ],
+  "cwd": "E:\\omega system - phase 1",
+  "start_utc": "2026-11-16T17:37:47.389363+00:00",
+  "end_utc": "2026-11-16T17:37:47.551651+00:00",
+  "exit_code": 0,
+  "counts": {
+    "hardlink_refused": 0,
+    "manifest_present": 30,
+    "missing_payload": 0,
+    "payload_path_exists": 30,
+    "present": 30,
+    "regular_file": 30,
+    "size_matches_manifest": 30,
+    "symlink_or_reparse_refused": 0,
+    "wrong_type": 0
+  },
+  "fresh_external_output": true,
+  "payload_bytes_read": 0
+}

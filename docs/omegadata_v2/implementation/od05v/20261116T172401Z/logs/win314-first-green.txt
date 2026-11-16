@@ -1,0 +1,21 @@
+F...............s...................                                     [100%]
+================================== FAILURES ===================================
+______________________ test_p01_p03_real_candidates[P01] ______________________
+
+label = 'seed', day = '2011-06-22', size = 53301
+
+    @pytest.mark.parametrize("label,day,size", [("seed", "2011-06-22", 53301), ("seed", "2020-01-02", 69955), ("cache", "2024-07-23", 165041)], ids=["P01", "P02", "P03"])
+    def test_p01_p03_real_candidates(label, day, size):
+        report = scan(original(), label)
+        row = next(r for r in report["rows"] if r["date"] == day)
+>       assert row["state"] == "PRESENT_SIZE_MATCHED"
+E       AssertionError: assert 'HARDLINK_REFUSED' == 'PRESENT_SIZE_MATCHED'
+E         
+E         - PRESENT_SIZE_MATCHED
+E         + HARDLINK_REFUSED
+
+tests\unit\test_od05v_local_presence.py:66: AssertionError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\unit\test_od05v_local_presence.py:150: OS link privilege unavailable: 22
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]
+1 failed, 34 passed, 1 skipped in 108.06s (0:01:48)

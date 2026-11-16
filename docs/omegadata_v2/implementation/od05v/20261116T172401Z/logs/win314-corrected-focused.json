@@ -1,0 +1,248 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05v\\20261116T172401Z\\verification_runner.py",
+    "win314-corrected-focused",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-copy-yxgdx7it\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05v_local_presence.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-copy-yxgdx7it\\repo",
+  "baseline": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T17:32:10.233560+00:00",
+  "end_utc": "2026-11-16T17:33:26.938566+00:00",
+  "elapsed_seconds": 76.70494479994522,
+  "exit_code": 0,
+  "output": "win314-corrected-focused.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-7y6pay4i",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05v-copy-yxgdx7it\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P02]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P03]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p04_full_independent_count_oracle",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p05_missing_payload",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p06_wrong_claimed_size",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[directory]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[extension]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[../escape.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[/escape.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[C:/secret.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[//host/share/x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/x.zip:secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/../x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[symlink]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05v-copy-yxgdx7it\\\\repo\\\\tests\\\\unit\\\\test_od05v_local_presence.py', 181, 'Skipped: OS link privilege unavailable: 22')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[hardlink]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[root]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[feed]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[source]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p11_no_payload_open",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[PENDING_REVIEW]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[EXPIRED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[missing]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[unknown]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_redaction",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p14_duplicate_observations_and_nonvacuity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p15_2020_conflict_no_route_change",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p16_lineage_claims_not_authentication",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p17_determinism_and_bounds",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p18_cli_dryrun_fresh_output_and_preservation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p18_pin_mismatch_and_corpus",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 35,
+    "skipped": 1
+  }
+}

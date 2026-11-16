@@ -1,0 +1,78 @@
+{
+  "win314-safe": {
+    "commands": {
+      "environment": 0,
+      "collection": 0,
+      "focused": 0,
+      "full": 1,
+      "guard": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0,
+      "compile": 0
+    },
+    "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "focused": {
+      "passed": 40,
+      "skipped": 1
+    },
+    "full": {
+      "passed": 714,
+      "failed": 4,
+      "skipped": 14
+    },
+    "deselected": 4
+  },
+  "win311-safe": {
+    "commands": {
+      "environment": 0,
+      "collection": 0,
+      "focused": 0,
+      "full": 1,
+      "guard": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0,
+      "compile": 0
+    },
+    "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "focused": {
+      "passed": 40,
+      "skipped": 1
+    },
+    "full": {
+      "passed": 714,
+      "failed": 4,
+      "skipped": 14
+    },
+    "deselected": 4
+  },
+  "linux312-safe": {
+    "commands": {
+      "environment": 0,
+      "collection": 0,
+      "focused": 1,
+      "full": 1,
+      "guard": 0,
+      "ruff": 0,
+      "mypy": 0,
+      "pip": 0,
+      "compile": 0
+    },
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "focused": {
+      "failed": 5,
+      "passed": 35,
+      "skipped": 1
+    },
+    "full": {
+      "passed": 718,
+      "failed": 9,
+      "skipped": 5
+    },
+    "deselected": 4
+  }
+}

@@ -1,0 +1,207 @@
+FF.F..............s............FF........                                [100%]
+=================================== FAILURES ===================================
+______________________ test_p01_p03_real_candidates[P01] _______________________
+
+label = 'seed', day = '2011-06-22', size = 53301
+
+    @pytest.mark.parametrize(
+        "label,day,size",
+        [("seed", "2011-06-22", 53301), ("seed", "2020-01-02", 69955), ("cache", "2024-07-23", 165041)],
+        ids=["P01", "P02", "P03"],
+    )
+    def test_p01_p03_real_candidates(label, day, size):
+>       report = scan(original(), label)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_od05v_local_presence.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src/omegadata/parsers/local_archive_presence.py:217: in scan_presence
+    if _manifest_names(root, limits, started) != {r[0] for r in expected.files}:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/mnt/e/omega system - phase 1/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+started = 295.12106001
+
+    def _manifest_names(root: Path, limits: ScanLimits, started: float) -> set[str]:
+        names: set[str] = set()
+        stack = [(root, 0)]
+        count = 0
+        aliases: set[str] = set()
+        while stack:
+            directory, depth = stack.pop()
+            if depth > limits.max_depth:
+                raise InventoryError("BUDGET")
+            for path in directory.iterdir():
+                count += 1
+                if count > limits.max_entries or time.monotonic() - started > limits.max_seconds:
+>                   raise InventoryError("BUDGET")
+E                   omegadata.parsers.archive_candidate_inventory.InventoryError: BUDGET
+
+src/omegadata/parsers/local_archive_presence.py:117: InventoryError
+______________________ test_p01_p03_real_candidates[P02] _______________________
+
+label = 'seed', day = '2020-01-02', size = 69955
+
+    @pytest.mark.parametrize(
+        "label,day,size",
+        [("seed", "2011-06-22", 53301), ("seed", "2020-01-02", 69955), ("cache", "2024-07-23", 165041)],
+        ids=["P01", "P02", "P03"],
+    )
+    def test_p01_p03_real_candidates(label, day, size):
+>       report = scan(original(), label)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_od05v_local_presence.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src/omegadata/parsers/local_archive_presence.py:217: in scan_presence
+    if _manifest_names(root, limits, started) != {r[0] for r in expected.files}:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/mnt/e/omega system - phase 1/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+started = 325.360713288
+
+    def _manifest_names(root: Path, limits: ScanLimits, started: float) -> set[str]:
+        names: set[str] = set()
+        stack = [(root, 0)]
+        count = 0
+        aliases: set[str] = set()
+        while stack:
+            directory, depth = stack.pop()
+            if depth > limits.max_depth:
+                raise InventoryError("BUDGET")
+            for path in directory.iterdir():
+                count += 1
+                if count > limits.max_entries or time.monotonic() - started > limits.max_seconds:
+>                   raise InventoryError("BUDGET")
+E                   omegadata.parsers.archive_candidate_inventory.InventoryError: BUDGET
+
+src/omegadata/parsers/local_archive_presence.py:117: InventoryError
+____________________ test_p04_full_independent_count_oracle ____________________
+
+    def test_p04_full_independent_count_oracle():
+        api()
+        frozen = json.loads((BASE / "presence.json").read_text())
+        assert observe(original(), groups()) == frozen
+        for label in ("seed", "cache"):
+>           report = scan(original(), label)
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_od05v_local_presence.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src/omegadata/parsers/local_archive_presence.py:217: in scan_presence
+    if _manifest_names(root, limits, started) != {r[0] for r in expected.files}:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/mnt/e/omega system - phase 1/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+started = 557.690857193
+
+    def _manifest_names(root: Path, limits: ScanLimits, started: float) -> set[str]:
+        names: set[str] = set()
+        stack = [(root, 0)]
+        count = 0
+        aliases: set[str] = set()
+        while stack:
+            directory, depth = stack.pop()
+            if depth > limits.max_depth:
+                raise InventoryError("BUDGET")
+            for path in directory.iterdir():
+                count += 1
+                if count > limits.max_entries or time.monotonic() - started > limits.max_seconds:
+>                   raise InventoryError("BUDGET")
+E                   omegadata.parsers.archive_candidate_inventory.InventoryError: BUDGET
+
+src/omegadata/parsers/local_archive_presence.py:117: InventoryError
+____________________ test_p15_2020_conflict_no_route_change ____________________
+
+    def test_p15_2020_conflict_no_route_change():
+        from datetime import date
+    
+        from omegadata.track_a.source_registry import resolve_era
+    
+>       report = scan(original(), "seed")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_od05v_local_presence.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src/omegadata/parsers/local_archive_presence.py:217: in scan_presence
+    if _manifest_names(root, limits, started) != {r[0] for r in expected.files}:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/mnt/e/omega system - phase 1/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+started = 588.636484549
+
+    def _manifest_names(root: Path, limits: ScanLimits, started: float) -> set[str]:
+        names: set[str] = set()
+        stack = [(root, 0)]
+        count = 0
+        aliases: set[str] = set()
+        while stack:
+            directory, depth = stack.pop()
+            if depth > limits.max_depth:
+                raise InventoryError("BUDGET")
+            for path in directory.iterdir():
+                count += 1
+                if count > limits.max_entries or time.monotonic() - started > limits.max_seconds:
+>                   raise InventoryError("BUDGET")
+E                   omegadata.parsers.archive_candidate_inventory.InventoryError: BUDGET
+
+src/omegadata/parsers/local_archive_presence.py:117: InventoryError
+__________________ test_p16_lineage_claims_not_authentication __________________
+
+    def test_p16_lineage_claims_not_authentication():
+>       row = next(r for r in scan(original(), "seed")["rows"] if r["date"] == "2011-06-22")
+                              ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_od05v_local_presence.py:299: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unit/test_od05v_local_presence.py:35: in scan
+    return a.scan_presence(
+src/omegadata/parsers/local_archive_presence.py:217: in scan_presence
+    if _manifest_names(root, limits, started) != {r[0] for r in expected.files}:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/mnt/e/omega system - phase 1/data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy')
+limits = ScanLimits(max_files=5000, max_entries=20000, max_depth=12, max_file_bytes=65536, max_total_bytes=64000000, max_seconds=30)
+started = 618.784385743
+
+    def _manifest_names(root: Path, limits: ScanLimits, started: float) -> set[str]:
+        names: set[str] = set()
+        stack = [(root, 0)]
+        count = 0
+        aliases: set[str] = set()
+        while stack:
+            directory, depth = stack.pop()
+            if depth > limits.max_depth:
+                raise InventoryError("BUDGET")
+            for path in directory.iterdir():
+                count += 1
+                if count > limits.max_entries or time.monotonic() - started > limits.max_seconds:
+>                   raise InventoryError("BUDGET")
+E                   omegadata.parsers.archive_candidate_inventory.InventoryError: BUDGET
+
+src/omegadata/parsers/local_archive_presence.py:117: InventoryError
+=========================== short test summary info ============================
+SKIPPED [1] tests/unit/test_od05v_local_presence.py:158: Windows junction counterpart exercised on Windows
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P02]
+FAILED tests/unit/test_od05v_local_presence.py::test_p04_full_independent_count_oracle
+FAILED tests/unit/test_od05v_local_presence.py::test_p15_2020_conflict_no_route_change
+FAILED tests/unit/test_od05v_local_presence.py::test_p16_lineage_claims_not_authentication
+5 failed, 35 passed, 1 skipped in 354.27s (0:05:54)

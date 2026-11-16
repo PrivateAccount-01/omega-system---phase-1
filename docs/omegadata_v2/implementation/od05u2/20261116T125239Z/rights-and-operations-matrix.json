@@ -1,0 +1,60 @@
+{
+  "phase": "OD05U2_BOUNDED_REAL_REFERENCE_REVIEW_AND_OFFLINE_COMPARISON_ONLY",
+  "reviewed_head": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "branch": "feature/od01-source-rights",
+  "candidate": "data/raw/nse_equity_bhavcopy/year=2024/month=07/20240723__6e7b99b88b17.zip",
+  "filesystem_metadata": {"length_bytes": 165041, "attributes": "Archive"},
+  "manifest_claims_not_independently_verified": {
+    "source_key": "NSE_EQUITY_BHAVCOPY",
+    "as_of": "2024-07-23",
+    "checksum": "6e7b99b88b177c13b381f3e1653722e44fad75c3d1d5c987c75701196dbf5d7a",
+    "downloaded_at": "2026-04-14T05:59:18.861487+00:00"
+  },
+  "owner_nomination": "NOT_SUPPLIED",
+  "owner_packet": "Unfilled decision template; not authorization or publisher evidence",
+  "private_pack_path_nominated": false,
+  "companion_private_template_present_at_named_root_path": false,
+  "search_scope": "Repository filename inventory and supplied documents only; no arbitrary private/home search",
+  "policy": {"pending": 13, "approved": 0, "candidate_status": "PENDING_REVIEW", "approval_evidence_ref": null, "permitted_operations": []},
+  "operations": {
+    "filesystem_and_adjacent_manifest_metadata": "EXECUTED_NO_PAYLOAD_ACCESS",
+    "market_file_hash": "NOT_AUTHORIZED",
+    "zip_member_inventory": "NOT_AUTHORIZED",
+    "private_original_row_review": "NOT_AUTHORIZED",
+    "temporary_copy": "NOT_AUTHORIZED",
+    "parser_comparison": "NOT_AUTHORIZED",
+    "new_private_retention": "NOT_AUTHORIZED",
+    "derivative_research": "UNRESOLVED",
+    "trading_ai_training_redistribution_publication": "NOT_AUTHORIZED"
+  },
+  "sequence_correction": "Expected rows may be established by an authorized separately identified reviewer AFTER permission-cleared original inspection and BEFORE Omega comparison. Their present absence is not the permission blocker.",
+  "acceptance": {
+    "SOFTWARE_ENGINEERING": "NOT_RUN",
+    "MARKET_PAYLOAD_ACCESS": "NOT_AUTHORIZED",
+    "LOCAL_BYTE_INTEGRITY": "NOT_RUN",
+    "PUBLISHER_PROVENANCE": "UNVERIFIED",
+    "FORMAT_APPLICABILITY_2024": "PENDING",
+    "EXPECTED_ROW_REVIEW": "NOT_SUPPLIED",
+    "REAL_PARSER_COMPARISON": "BLOCKED",
+    "RIGHTS": "UNRESOLVED",
+    "PIT": "UNKNOWN",
+    "PRODUCTION_RELEASE": "NOT_AUTHORIZED"
+  },
+  "checks": {
+    "R01": "METADATA_ONLY_CANDIDATE_EXISTS_ACTUAL_NOMINATION_ABSENT",
+    "R02": "METADATA_ONLY_NO_APPLICABLE_RIGHTS_EVIDENCE_SUPPLIED",
+    "R03_R20": "NOT_RUN_RIGHTS_STOP_RULE",
+    "fresh_regression_lint_type_dependency_checks": "NOT_RUN_NO_APPLICATION_CHANGE_RIGHTS_STOP_RULE",
+    "json_artifact_validation": "Both artifacts parsed using PowerShell ConvertFrom-Json; exit 0. Tracked worktree and index diffs exit 0."
+  },
+  "real_data_scorecard": {"payloads_opened": 0, "payloads_hashed": 0, "rows_inspected": 0, "independently_reviewed_rows": 0, "field_comparisons": 0, "mismatches": null, "completeness": "UNKNOWN", "synthetic_financial_contribution": 0},
+  "preservation": "No application, tests, source policy, market payload, signing material, database, routing or release changed. No commit, push or merge. Original evidence retained.",
+  "command_results": {"git_identity_metadata_and_policy_checks": 0, "public_document_rehash": 0, "powershell_Get_Date_AsUTC_probe": "Parameter unsupported; replaced by DateTime.UtcNow, exit 0", "MSD62424_web_read": "Tool inaccessible; not treated as rights denial or successful document review"},
+  "ready_to_send_enquiry": {
+    "sent": false,
+    "to": "marketdata@nse.co.in",
+    "subject": "Permitted private inspection of July 2024 NSE CM historical bhavcopy",
+    "body": "Dear NSE Data & Analytics Team, please clarify the applicable terms or agreement for a locally held 23 July 2024 CM-UDiFF bhavcopy: private offline hashing, ZIP inspection, bounded independent row review, parser comparison, temporary copies and retention for quantitative data-quality research. Eventual commercial research/model development is possible; please distinguish that use, trading, AI training and redistribution from any noncommercial permission and advise applicable fees. Please also identify the exact July 23 schema/packaging specification and amendments to NSE/MSD/62142 and 62424. No automated acquisition or redistribution is being assumed. Regards, [actual sender]."
+  },
+  "next_action": "Owner to supply actual nomination and applicable publisher-rights evidence with selected private offline inspection operations; use official NSE enquiry if permission cannot be established."
+}

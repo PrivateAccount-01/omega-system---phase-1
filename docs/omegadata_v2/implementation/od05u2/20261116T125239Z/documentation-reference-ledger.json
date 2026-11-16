@@ -1,0 +1,65 @@
+{
+  "phase": "OD05U2_BOUNDED_REAL_REFERENCE_REVIEW_AND_OFFLINE_COMPARISON_ONLY",
+  "reviewed_head": "0d43a43a7df2a997b394269d6a9ebf1e64a00de1",
+  "observed_at_utc": "2026-11-16T12:52:39Z",
+  "documents": [
+    {
+      "id": "NSE/MSD/59875",
+      "date": "2023-12-21",
+      "url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/MSD59875.pdf",
+      "status": "PRIOR_PUBLIC_DOCUMENT_REVIEW",
+      "scope": "Announces website availability of UDiFF documentation and samples following MSD59694; not independent permission for the local market file.",
+      "original_bytes_sha256": null
+    },
+    {
+      "id": "NSE/MSD/62142",
+      "date": "2024-05-22",
+      "url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/MSD62142.zip",
+      "status": "PRIOR_HTTP_200_BYTES_REHASHED_THIS_REVIEW",
+      "prior_retrieval_observation_utc": "2026-11-16T12:34:23Z",
+      "retrieval_time_precision": "Prior local temporary-file creation observation, not exact response receipt time or historical acquisition receipt",
+      "prior_response_redirects": 0,
+      "bytes": 550410,
+      "sha256": "8b6bd3af883d2cd6816b18c041e9ed6e6206095cb54330ecb058b6bf808e5cc1",
+      "annexure_c": {
+        "name": "Annexure C_UDiFF trade and Bhavcopy file formats.xlsx",
+        "bytes": 34106,
+        "sha256": "df42310d84fcf93ec76d0d43a2cf6cb0bb73e1baac4f18a756e945f0276d53da",
+        "scope": "Historical trade/Bhavcopy workbook; prior OpenXML review identified 34 Bhavcopy fields and csv.gz member-interface nomenclature. Final applicability to public July 23 ZIP remains pending."
+      },
+      "limitations": "Main circular full PDF text and all effective amendments not completely reviewed. Nested sample-data archive not opened. No market payload identity established."
+    },
+    {
+      "id": "NSE/MSD/62424",
+      "date": "2024-06-12",
+      "url": "https://nsearchives.nseindia.com/content/circulars/MSD62424.pdf",
+      "status": "UNAVAILABLE_VIA_WEB_TOOL",
+      "sha256": null,
+      "scope": "Referenced by official reports page for July 8 discontinuation. June 24 amendment details and final schema/packaging chain remain unverified; third-party mirrors not used as authentication."
+    },
+    {
+      "url": "https://www.nseindia.com/all-reports/",
+      "observed_final_url": "https://www.nseindia.in/all-reports/",
+      "status": "PUBLIC_PAGE_RECHECKED_VIA_WEB_TOOL",
+      "scope": "Old CM CSV reports discontinued July 8, 2024; successor named CM-UDiFF Common Bhavcopy Final ZIP. Establishes product-family transition only.",
+      "raw_response_sha256": null
+    },
+    {
+      "url": "https://betanseapi.nseindia.com/static/market-data/nse-data-policy",
+      "status": "PUBLIC_PAGE_RECHECKED_VIA_WEB_TOOL",
+      "scope": "Intended-use and agreement policy; no reviewed provision establishing permission for this candidate and purpose supplied.",
+      "raw_response_sha256": null
+    },
+    {
+      "url": "https://betanseapi.nseindia.com/static/market-data/eod-historical-data-subscription",
+      "status": "PUBLIC_PAGE_RECHECKED_VIA_WEB_TOOL",
+      "contact": "marketdata@nse.co.in",
+      "scope": "Official data enquiries/subscription contact; no enquiry sent or subscription purchased.",
+      "raw_response_sha256": null
+    }
+  ],
+  "format_applicability_2024": "PENDING",
+  "current_2026_workbook_applied_to_2024": false,
+  "documentation_evidence_limit": "Web-reader observations are not preserved raw response bytes; no SHA or byte count invented. Prior original-document identities are distinguished from this review's rehashes.",
+  "next_action": "Owner to supply actual nomination and applicable publisher-rights evidence with selected private offline inspection operations; use official NSE enquiry if permission cannot be established."
+}

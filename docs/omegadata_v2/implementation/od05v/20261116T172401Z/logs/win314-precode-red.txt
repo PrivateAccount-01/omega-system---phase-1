@@ -1,0 +1,1223 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                                     [100%]
+================================== FAILURES ===================================
+______________________ test_p01_p03_real_candidates[P01] ______________________
+
+label = 'seed', day = '2011-06-22', size = 53301
+
+    @pytest.mark.parametrize("label,day,size", [("seed", "2011-06-22", 53301), ("seed", "2020-01-02", 69955), ("cache", "2024-07-23", 165041)], ids=["P01", "P02", "P03"])
+    def test_p01_p03_real_candidates(label, day, size):
+>       report = scan(original(), label)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:32: in scan
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______________________ test_p01_p03_real_candidates[P02] ______________________
+
+label = 'seed', day = '2020-01-02', size = 69955
+
+    @pytest.mark.parametrize("label,day,size", [("seed", "2011-06-22", 53301), ("seed", "2020-01-02", 69955), ("cache", "2024-07-23", 165041)], ids=["P01", "P02", "P03"])
+    def test_p01_p03_real_candidates(label, day, size):
+>       report = scan(original(), label)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:32: in scan
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______________________ test_p01_p03_real_candidates[P03] ______________________
+
+label = 'cache', day = '2024-07-23', size = 165041
+
+    @pytest.mark.parametrize("label,day,size", [("seed", "2011-06-22", 53301), ("seed", "2020-01-02", 69955), ("cache", "2024-07-23", 165041)], ids=["P01", "P02", "P03"])
+    def test_p01_p03_real_candidates(label, day, size):
+>       report = scan(original(), label)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:32: in scan
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+___________________ test_p04_full_independent_count_oracle ____________________
+
+    def test_p04_full_independent_count_oracle():
+>       api()
+
+tests\unit\test_od05v_local_presence.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+__________________________ test_p05_missing_payload ___________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p05_missing_payload0')
+
+    def test_p05_missing_payload(tmp_path):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________________ test_p06_wrong_claimed_size _________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p06_wrong_claimed_size0')
+
+    def test_p06_wrong_claimed_size(tmp_path):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p07_wrong_type_or_extension[directory] _________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p07_wrong_type_or_extensi0')
+kind = 'directory'
+
+    @pytest.mark.parametrize("kind", ["directory", "extension"])
+    def test_p07_wrong_type_or_extension(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p07_wrong_type_or_extension[extension] _________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p07_wrong_type_or_extensi1')
+kind = 'extension'
+
+    @pytest.mark.parametrize("kind", ["directory", "extension"])
+    def test_p07_wrong_type_or_extension(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+____________________ test_p08_unsafe_claim[../escape.zip] _____________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim____escap0')
+claim = '../escape.zip'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_____________________ test_p08_unsafe_claim[/escape.zip] ______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim__escape_0')
+claim = '/escape.zip'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+____________________ test_p08_unsafe_claim[C:/secret.zip] _____________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim_C__secre0')
+claim = 'C:/secret.zip'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+__________________ test_p08_unsafe_claim[//host/share/x.zip] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim___host_s0')
+claim = '//host/share/x.zip'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______ test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/x.zip:secret] _______
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim_data_raw0')
+claim = 'data/raw/nse_equity_bhavcopy/x.zip:secret'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+________ test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/../x.zip] _________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim_data_raw1')
+claim = 'data/raw/nse_equity_bhavcopy/../x.zip'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_ test_p08_unsafe_claim[DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip] _
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim_DATA_see0')
+claim = 'DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_ test_p08_unsafe_claim[data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip] _
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p08_unsafe_claim_data_see1')
+claim = 'data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip'
+
+    @pytest.mark.parametrize("claim", ["../escape.zip", "/escape.zip", "C:/secret.zip", "//host/share/x.zip", "data/raw/nse_equity_bhavcopy/x.zip:secret", "data/raw/nse_equity_bhavcopy/../x.zip", "DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip", "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip"])
+    def test_p08_unsafe_claim(tmp_path, claim):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+________________________ test_p09_link_traps[symlink] _________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p09_link_traps_symlink_0')
+kind = 'symlink'
+
+    @pytest.mark.parametrize("kind", ["symlink", "hardlink", "junction"])
+    def test_p09_link_traps(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+________________________ test_p09_link_traps[hardlink] ________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p09_link_traps_hardlink_0')
+kind = 'hardlink'
+
+    @pytest.mark.parametrize("kind", ["symlink", "hardlink", "junction"])
+    def test_p09_link_traps(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+________________________ test_p09_link_traps[junction] ________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p09_link_traps_junction_0')
+kind = 'junction'
+
+    @pytest.mark.parametrize("kind", ["symlink", "hardlink", "junction"])
+    def test_p09_link_traps(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+____________________________ test_p10_scope[root] _____________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p10_scope_root_0')
+kind = 'root'
+
+    @pytest.mark.parametrize("kind", ["root", "feed", "source"])
+    def test_p10_scope(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:157: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+____________________________ test_p10_scope[feed] _____________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p10_scope_feed_0')
+kind = 'feed'
+
+    @pytest.mark.parametrize("kind", ["root", "feed", "source"])
+    def test_p10_scope(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:157: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+___________________________ test_p10_scope[source] ____________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p10_scope_source_0')
+kind = 'source'
+
+    @pytest.mark.parametrize("kind", ["root", "feed", "source"])
+    def test_p10_scope(tmp_path, kind):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:157: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+__________________________ test_p11_no_payload_open ___________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p11_no_payload_open0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024B14623230>
+
+    def test_p11_no_payload_open(tmp_path, monkeypatch):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_____________ test_p12_payload_integrity_refusal[PENDING_REVIEW] ______________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p12_payload_integrity_ref0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024B14620B00>
+state = 'PENDING_REVIEW'
+
+    @pytest.mark.parametrize("state", ["PENDING_REVIEW", "DENIED", "REVOKED", "EXPIRED", "missing", "unknown"])
+    def test_p12_payload_integrity_refusal(tmp_path, monkeypatch, state):
+>       a = api()
+            ^^^^^
+
+tests\unit\test_od05v_local_presence.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p12_payload_integrity_refusal[DENIED] __________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p12_payload_integrity_ref1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024B14769EB0>
+state = 'DENIED'
+
+    @pytest.mark.parametrize("state", ["PENDING_REVIEW", "DENIED", "REVOKED", "EXPIRED", "missing", "unknown"])
+    def test_p12_payload_integrity_refusal(tmp_path, monkeypatch, state):
+>       a = api()
+            ^^^^^
+
+tests\unit\test_od05v_local_presence.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p12_payload_integrity_refusal[REVOKED] _________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p12_payload_integrity_ref2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024B14749E10>
+state = 'REVOKED'
+
+    @pytest.mark.parametrize("state", ["PENDING_REVIEW", "DENIED", "REVOKED", "EXPIRED", "missing", "unknown"])
+    def test_p12_payload_integrity_refusal(tmp_path, monkeypatch, state):
+>       a = api()
+            ^^^^^
+
+tests\unit\test_od05v_local_presence.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p12_payload_integrity_refusal[EXPIRED] _________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p12_payload_integrity_ref3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024B14749BF0>
+state = 'EXPIRED'
+
+    @pytest.mark.parametrize("state", ["PENDING_REVIEW", "DENIED", "REVOKED", "EXPIRED", "missing", "unknown"])
+    def test_p12_payload_integrity_refusal(tmp_path, monkeypatch, state):
+>       a = api()
+            ^^^^^
+
+tests\unit\test_od05v_local_presence.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p12_payload_integrity_refusal[missing] _________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p12_payload_integrity_ref4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024B1476F250>
+state = 'missing'
+
+    @pytest.mark.parametrize("state", ["PENDING_REVIEW", "DENIED", "REVOKED", "EXPIRED", "missing", "unknown"])
+    def test_p12_payload_integrity_refusal(tmp_path, monkeypatch, state):
+>       a = api()
+            ^^^^^
+
+tests\unit\test_od05v_local_presence.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p12_payload_integrity_refusal[unknown] _________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p12_payload_integrity_ref5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024B1476EC50>
+state = 'unknown'
+
+    @pytest.mark.parametrize("state", ["PENDING_REVIEW", "DENIED", "REVOKED", "EXPIRED", "missing", "unknown"])
+    def test_p12_payload_integrity_refusal(tmp_path, monkeypatch, state):
+>       a = api()
+            ^^^^^
+
+tests\unit\test_od05v_local_presence.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_____________________________ test_p13_redaction ______________________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p13_redaction0')
+
+    def test_p13_redaction(tmp_path):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:216: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_______________ test_p14_duplicate_observations_and_nonvacuity ________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p14_duplicate_observation0')
+
+    def test_p14_duplicate_observations_and_nonvacuity(tmp_path):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:225: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+___________________ test_p15_2020_conflict_no_route_change ____________________
+
+    def test_p15_2020_conflict_no_route_change():
+        from datetime import date
+    
+        from omegadata.track_a.source_registry import resolve_era
+    
+>       report = scan(original(), "seed")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:243: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:32: in scan
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_________________ test_p16_lineage_claims_not_authentication __________________
+
+    def test_p16_lineage_claims_not_authentication():
+>       row = next(r for r in scan(original(), "seed")["rows"] if r["date"] == "2011-06-22")
+                              ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:251: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:32: in scan
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_______________________ test_p17_determinism_and_bounds _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p17_determinism_and_bound0')
+
+    def test_p17_determinism_and_bounds(tmp_path):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:258: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______________ test_p18_cli_dryrun_fresh_output_and_preservation ______________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p18_cli_dryrun_fresh_outp0')
+capsys = <_pytest.capture.CaptureFixture object at 0x0000024B146E57F0>
+
+    def test_p18_cli_dryrun_fresh_output_and_preservation(tmp_path, capsys):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:273: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______________________ test_p18_pin_mismatch_and_corpus _______________________
+
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-s1ilqzi0/pytest/test_p18_pin_mismatch_and_corp0')
+
+    def test_p18_pin_mismatch_and_corpus(tmp_path):
+>       repo, path, payload, pins = fixture(tmp_path)
+                                    ^^^^^^^^^^^^^^^^^
+
+tests\unit\test_od05v_local_presence.py:290: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_od05v_local_presence.py:40: in fixture
+    a = api()
+        ^^^^^
+tests\unit\test_od05v_local_presence.py:20: in api
+    return importlib.import_module("omegadata.parsers.local_archive_presence")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'omegadata.parsers.local_archive_presence'
+import_ = <function _gcd_import at 0x0000024B1043BE20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'omegadata.parsers.local_archive_presence'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P02]
+FAILED tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P03]
+FAILED tests/unit/test_od05v_local_presence.py::test_p04_full_independent_count_oracle
+FAILED tests/unit/test_od05v_local_presence.py::test_p05_missing_payload - Mo...
+FAILED tests/unit/test_od05v_local_presence.py::test_p06_wrong_claimed_size
+FAILED tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[directory]
+FAILED tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[extension]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[../escape.zip]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[/escape.zip]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[C:/secret.zip]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[//host/share/x.zip]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/x.zip:secret]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/../x.zip]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip]
+FAILED tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip]
+FAILED tests/unit/test_od05v_local_presence.py::test_p09_link_traps[symlink]
+FAILED tests/unit/test_od05v_local_presence.py::test_p09_link_traps[hardlink]
+FAILED tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]
+FAILED tests/unit/test_od05v_local_presence.py::test_p10_scope[root] - Module...
+FAILED tests/unit/test_od05v_local_presence.py::test_p10_scope[feed] - Module...
+FAILED tests/unit/test_od05v_local_presence.py::test_p10_scope[source] - Modu...
+FAILED tests/unit/test_od05v_local_presence.py::test_p11_no_payload_open - Mo...
+FAILED tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[PENDING_REVIEW]
+FAILED tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[DENIED]
+FAILED tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[REVOKED]
+FAILED tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[EXPIRED]
+FAILED tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[missing]
+FAILED tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[unknown]
+FAILED tests/unit/test_od05v_local_presence.py::test_p13_redaction - ModuleNo...
+FAILED tests/unit/test_od05v_local_presence.py::test_p14_duplicate_observations_and_nonvacuity
+FAILED tests/unit/test_od05v_local_presence.py::test_p15_2020_conflict_no_route_change
+FAILED tests/unit/test_od05v_local_presence.py::test_p16_lineage_claims_not_authentication
+FAILED tests/unit/test_od05v_local_presence.py::test_p17_determinism_and_bounds
+FAILED tests/unit/test_od05v_local_presence.py::test_p18_cli_dryrun_fresh_output_and_preservation
+FAILED tests/unit/test_od05v_local_presence.py::test_p18_pin_mismatch_and_corpus
+36 failed in 1.09s
