@@ -1,0 +1,56 @@
+{
+  "command": [
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05_impl\\20261115T201333Z\\verification_runner.py",
+    "win311-final-full",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata",
+    "--cov-branch",
+    "--cov-report=term-missing"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+  "baseline": "bf6f4894c9e5237e8c1a44b625c66b8a420b4aad",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T20:22:06.790048+00:00",
+  "end_utc": "2026-11-15T20:22:13.583634+00:00",
+  "elapsed_seconds": 6.796999999962281,
+  "exit_code": 2,
+  "output": "win311-final-full.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-j8dwmpv8",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+  "guard_denials": {},
+  "symlink_observations": [],
+  "call_counts": {}
+}
+
+=================================== ERRORS ====================================
+____________ ERROR collecting tests/unit/test_pipeline_and_api.py _____________
+tests\unit\test_pipeline_and_api.py:16: in <module>
+    from omegadata.api import main as api_main
+src\omegadata\api\main.py:60: in <module>
+    app.mount("/terminal-assets", StaticFiles(directory=str(UI_DIR)), name="terminal-assets")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\omega-od02v-copy-78jr_vg3\venv311\Lib\site-packages\starlette\staticfiles.py:56: in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+E   RuntimeError: Directory 'C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-qch8qzjh\repo\src\omegadata\ui' does not exist
+___________ ERROR collecting tests/unit/test_validation_policies.py ___________
+tests\unit\test_validation_policies.py:12: in <module>
+    from omegadata.api.main import app
+src\omegadata\api\main.py:60: in <module>
+    app.mount("/terminal-assets", StaticFiles(directory=str(UI_DIR)), name="terminal-assets")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\omega-od02v-copy-78jr_vg3\venv311\Lib\site-packages\starlette\staticfiles.py:56: in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+E   RuntimeError: Directory 'C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-qch8qzjh\repo\src\omegadata\ui' does not exist
+=========================== short test summary info ===========================
+ERROR tests/unit/test_pipeline_and_api.py - RuntimeError: Directory 'C:\Users...
+ERROR tests/unit/test_validation_policies.py - RuntimeError: Directory 'C:\Us...
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+4 deselected, 2 errors in 5.03s
+

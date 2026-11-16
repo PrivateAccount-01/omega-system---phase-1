@@ -1,0 +1,140 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> src\omegadata\parsers\dispatch.py:2:1
+   |
+ 1 |   """Explicit synthetic entry point and optional rights-aware pinned archive facade."""
+ 2 | / from __future__ import annotations
+ 3 | |
+ 4 | | import hashlib
+ 5 | | import re
+ 6 | | from dataclasses import replace
+ 7 | | from datetime import date
+ 8 | |
+ 9 | | from omegadata.parsers.contracts import Limits, ParserError, ParseRequest, ParseResult
+10 | | from omegadata.parsers.nse_cm import decode, digest
+11 | | from omegadata.parsers.reference_registry import select
+12 | | from omegadata.track_a.raw_archive import RawArchive
+13 | | from omegadata.track_a.source_rights import SourceOperation
+   | |___________________________________________________________^
+   |
+help: Organize imports
+
+B008 Do not perform function call `Limits` in argument defaults; instead, perform the call within the function, or read the default from a module-level singleton variable
+  --> src\omegadata\parsers\dispatch.py:16:63
+   |
+16 | def parse(raw: bytes, request: ParseRequest, limits: Limits = Limits()) -> ParseResult:
+   |                                                               ^^^^^^^^
+17 |     if type(raw) is not bytes:
+18 |         raise TypeError('BYTES_REQUIRED')
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src\omegadata\parsers\nse_cm.py:2:1
+   |
+ 1 |   """Strict bounded illustrative CSV/ZIP decoding. No I/O, clock or locale."""
+ 2 | / from __future__ import annotations
+ 3 | |
+ 4 | | import csv
+ 5 | | import hashlib
+ 6 | | import io
+ 7 | | import json
+ 8 | | import re
+ 9 | | import stat
+10 | | import zipfile
+11 | | import zlib
+12 | | from datetime import date
+13 | | from decimal import Decimal
+14 | |
+15 | | from omegadata.parsers.contracts import Limits, ParsedBar, ParserError, ParseRequest
+16 | | from omegadata.parsers.reference_registry import LEGACY, Profile
+   | |________________________________________________________________^
+   |
+help: Organize imports
+
+C401 Unnecessary generator (rewrite as a set comprehension)
+   --> src\omegadata\parsers\nse_cm.py:115:16
+    |
+113 |         if not header or len(header) > 64 or any(not h or len(h) > 128 or h != h.strip() for h in header):
+114 |             raise ParserError('HEADER_MISSING')
+115 |         if len(set(h.casefold() for h in header)) != len(header):
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+116 |             raise ParserError('HEADER_DUPLICATE')
+117 |         if not set(profile.columns).issubset(header):
+    |
+help: Rewrite as a set comprehension
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> src\omegadata\parsers\reference_registry.py:2:1
+  |
+1 |   """Fixed illustrative profiles, not official exchange format specifications."""
+2 | / from __future__ import annotations
+3 | |
+4 | | from dataclasses import dataclass
+5 | |
+6 | | from omegadata.parsers.contracts import ParserError, ParseRequest
+  | |_________________________________________________________________^
+  |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\unit\test_od05_era_parsing.py:2:1
+   |
+ 1 |   """OD05 T01–T32 SYNTHETIC_TEST_ONLY. REF cases separately blocked in matrix."""
+ 2 | / from __future__ import annotations
+ 3 | |
+ 4 | | import hashlib
+ 5 | | import io
+ 6 | | import stat
+ 7 | | import time
+ 8 | | import zipfile
+ 9 | | from dataclasses import FrozenInstanceError, replace
+10 | | from datetime import date
+11 | | from decimal import Decimal, localcontext
+12 | |
+13 | | import pytest
+14 | |
+15 | | from od05_oracle import LEGACY, MODERN, check, expected_digest, require_corpus
+   | |______________________________________________________________________________^
+   |
+help: Organize imports
+
+C408 Unnecessary `dict()` call (rewrite as a literal)
+  --> tests\unit\test_od05_era_parsing.py:27:14
+   |
+26 |   def request(api, raw=LEGACY, **changes):
+27 |       fields = dict(source_key='NSE_EQUITY_BHAVCOPY', requested_business_date=date(2019, 12, 31),
+   |  ______________^
+28 | |                   raw_sha256=hashlib.sha256(raw).hexdigest(), source_mode='SYNTHETIC_TEST_ONLY',
+29 | |                   format_id='legacy-illustrative', parser_version='syn-v1', reference_id='synthetic-v1')
+   | |________________________________________________________________________________________________________^
+30 |       return api[0](**(fields | changes))
+   |
+help: Rewrite as a literal
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> tests\unit\test_od05_era_parsing.py:205:5
+    |
+203 |   @pytest.mark.parametrize('state',['REVOKED','WRONG_PURPOSE'])
+204 |   def test_t25_revocation_scope(api,tmp_path,monkeypatch,synthetic_source_policy_provider,state):
+205 | /     from datetime import UTC, datetime
+206 | |     from omegadata.track_a.raw_archive import RawArchive
+207 | |     from omegadata.track_a.source_rights import SourcePolicy, SourcePolicyError, SourcePolicyRegister
+    | |_____________________________________________________________________________________________________^
+208 |       policies=[]
+209 |       for policy in synthetic_source_policy_provider().policies:
+    |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> tests\unit\test_od05_era_parsing.py:225:5
+    |
+224 |   def test_t23_verified_synthetic_archive(api,tmp_path,synthetic_source_policy_provider):
+225 | /     from datetime import UTC, datetime
+226 | |     from omegadata.track_a.raw_archive import ArchiveError, ObservationRequest, RawArchive
+    | |__________________________________________________________________________________________^
+227 |       service=RawArchive(tmp_path/'archive',policy_provider=synthetic_source_policy_provider)
+228 |       item=service.put(LEGACY,ObservationRequest(source_key='NSE_EQUITY_BHAVCOPY',business_date=date(2019,12,31),
+    |
+help: Organize imports
+
+Found 9 errors.
+[*] 6 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).

@@ -1,0 +1,2216 @@
+{
+  "T01": {
+    "test_ids": [
+      "test_t01_identity",
+      "test_t01_later_expected_count"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[True]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[True]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[True]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T02": {
+    "test_ids": [
+      "test_t02_determinism"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t02_determinism",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t02_determinism",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t02_determinism",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T03": {
+    "test_ids": [
+      "test_t03_revisions"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t03_revisions",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t03_revisions",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t03_revisions",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T04": {
+    "test_ids": [
+      "test_t04_legacy"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t04_legacy",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t04_legacy",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t04_legacy",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T05": {
+    "test_ids": [
+      "test_t05_disputed_dates_explicit_only",
+      "test_t05_later_explicit_synthetic_2020_profile"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_later_explicit_synthetic_2020_profile",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_later_explicit_synthetic_2020_profile",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_later_explicit_synthetic_2020_profile",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T06": {
+    "test_ids": [
+      "test_t06_ambiguity"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t06_ambiguity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t06_ambiguity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t06_ambiguity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T07": {
+    "test_ids": [
+      "test_t07_modern_zip"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t07_modern_zip",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t07_modern_zip",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t07_modern_zip",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T08": {
+    "test_ids": [
+      "test_t08_dispatch"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes0-VERSION_UNSUPPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes1-REFERENCE_PENDING]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes2-FORMAT_UNSUPPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes0-VERSION_UNSUPPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes1-REFERENCE_PENDING]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes2-FORMAT_UNSUPPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes0-VERSION_UNSUPPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes1-REFERENCE_PENDING]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes2-FORMAT_UNSUPPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T09": {
+    "test_ids": [
+      "test_t09_bse"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t09_bse",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t09_bse",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t09_bse",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T10": {
+    "test_ids": [
+      "test_t10_official_flag"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t10_official_flag",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t10_official_flag",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t10_official_flag",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T11": {
+    "test_ids": [
+      "test_t11_headers"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T12": {
+    "test_ids": [
+      "test_t12_csv"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\nbroken,row\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"unterminated\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\\xff\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x\"y\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"x\"trailing\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\nbroken,row\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"unterminated\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\\xff\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x\"y\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"x\"trailing\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\nbroken,row\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"unterminated\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\\xff\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x\"y\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"x\"trailing\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T13": {
+    "test_ids": [
+      "test_t13_zip",
+      "test_t13_later_zip_variants"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[../x.csv-kwargs0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[/x.csv-kwargs1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[C:/x.csv-kwargs2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x\\\\y.csv-kwargs3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[dir/x.csv-kwargs4]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x.zip-kwargs5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[wrong.csv-kwargs6]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs8]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[crc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[encryption]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[codec]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[trailer]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[nested]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[bomb]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[../x.csv-kwargs0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[/x.csv-kwargs1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[C:/x.csv-kwargs2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x\\\\y.csv-kwargs3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[dir/x.csv-kwargs4]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x.zip-kwargs5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[wrong.csv-kwargs6]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs8]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[crc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[encryption]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[codec]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[trailer]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[nested]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[bomb]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[../x.csv-kwargs0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[/x.csv-kwargs1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[C:/x.csv-kwargs2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x\\\\y.csv-kwargs3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[dir/x.csv-kwargs4]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x.zip-kwargs5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[wrong.csv-kwargs6]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs8]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[crc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[encryption]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[codec]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[trailer]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[nested]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[bomb]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T14": {
+    "test_ids": [
+      "test_t14_denial_empty"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[<html>denied</html>]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[{\"denied\":true}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[PK\\x03\\x04truncated]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[<html>denied</html>]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[{\"denied\":true}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[PK\\x03\\x04truncated]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[<html>denied</html>]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[{\"denied\":true}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[PK\\x03\\x04truncated]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T15": {
+    "test_ids": [
+      "test_t15_dates"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t15_dates",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t15_dates",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t15_dates",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T16": {
+    "test_ids": [
+      "test_t16_volume",
+      "test_t16_later_volume_lexeme"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[+1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1.5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1,000]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[9999999999999999999999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1e2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_later_volume_lexeme",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[+1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1.5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1,000]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[9999999999999999999999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1e2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_later_volume_lexeme",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[+1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1.5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1,000]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[9999999999999999999999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1e2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_later_volume_lexeme",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T17": {
+    "test_ids": [
+      "test_t17_exact_decimal_context"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t17_exact_decimal_context",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t17_exact_decimal_context",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t17_exact_decimal_context",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T18": {
+    "test_ids": [
+      "test_t18_prices"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[NaN]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[Infinity]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1_0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1.123456789]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[99999999999999999999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[+1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[ 10]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[NaN]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[Infinity]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1_0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1.123456789]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[99999999999999999999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[+1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[ 10]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[NaN]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[Infinity]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[-1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1_0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1.123456789]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[99999999999999999999999]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[+1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[ 10]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T19": {
+    "test_ids": [
+      "test_t19_identity"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t19_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t19_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t19_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T20": {
+    "test_ids": [
+      "test_t20_text"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t20_text",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t20_text",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t20_text",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T21": {
+    "test_ids": [
+      "test_t21_optional_identity"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t21_optional_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t21_optional_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t21_optional_identity",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T22": {
+    "test_ids": [
+      "test_t22_temporal"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t22_temporal",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t22_temporal",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t22_temporal",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T23": {
+    "test_ids": [
+      "test_t23_raw_and_observation",
+      "test_t23_verified_synthetic_archive",
+      "test_t23_later_in_memory_cannot_claim_archive_pin"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_raw_and_observation",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_verified_synthetic_archive",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_later_in_memory_cannot_claim_archive_pin",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_raw_and_observation",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_verified_synthetic_archive",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_later_in_memory_cannot_claim_archive_pin",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_raw_and_observation",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_verified_synthetic_archive",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_later_in_memory_cannot_claim_archive_pin",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T24": {
+    "test_ids": [
+      "test_t24_origin"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_CACHED_RAW]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_SEED_IMPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_CACHED_RAW]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_SEED_IMPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_CACHED_RAW]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_SEED_IMPORTED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T25": {
+    "test_ids": [
+      "test_t25_rights",
+      "test_t25_revocation_scope",
+      "test_t25_later_archive_purpose_is_mandatory"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_rights",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[REVOKED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[WRONG_PURPOSE]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_later_archive_purpose_is_mandatory",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_rights",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[REVOKED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[WRONG_PURPOSE]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_later_archive_purpose_is_mandatory",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_rights",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[REVOKED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[WRONG_PURPOSE]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_later_archive_purpose_is_mandatory",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T26": {
+    "test_ids": [
+      "test_t26_no_io"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t26_no_io",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t26_no_io",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t26_no_io",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T27": {
+    "test_ids": [
+      "test_t27_oracle_digest"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t27_oracle_digest",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t27_oracle_digest",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t27_oracle_digest",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T28": {
+    "test_ids": [
+      "test_t28_no_production_adapter"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t28_no_production_adapter",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t28_no_production_adapter",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t28_no_production_adapter",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T29": {
+    "test_ids": [
+      "test_t29_newline_metadata"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t29_newline_metadata",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t29_newline_metadata",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t29_newline_metadata",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T30": {
+    "test_ids": [
+      "test_t30_limits",
+      "test_t30_later_plain_csv_expansion_budget"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_limits",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_later_plain_csv_expansion_budget",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_limits",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_later_plain_csv_expansion_budget",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_limits",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_later_plain_csv_expansion_budget",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T31": {
+    "test_ids": [
+      "test_t31_independent_oracle_and_tamper",
+      "test_t31_later_all_fields_modern_and_date"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "BLOCKED_REFERENCE",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_independent_oracle_and_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_later_all_fields_modern_and_date",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_independent_oracle_and_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_later_all_fields_modern_and_date",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_independent_oracle_and_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_later_all_fields_modern_and_date",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "T32": {
+    "test_ids": [
+      "test_t32_replay_vector"
+    ],
+    "synthetic": "PASS_SYNTHETIC",
+    "official_subcase": "NOT_APPLICABLE_WITH_REASON: generic software invariant, no official certification",
+    "baseline": "NEW_API_ABSENT, no old-behavior assertion defect proved",
+    "fresh_results": {
+      "win314-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t32_replay_vector",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t32_replay_vector",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-accepted": [
+        {
+          "nodeid": "tests/unit/test_od05_era_parsing.py::test_t32_replay_vector",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  }
+}

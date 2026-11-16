@@ -1,0 +1,9 @@
+﻿{
+    "command":  ".venv/Scripts/python.exe -B docs/omegadata_v2/implementation/od05_impl/20261115T201333Z/final_check.py",
+    "exit_code":  1,
+    "evidence_class":  "RUN",
+    "stage":  "Self-referencing output link evaluated before creation",
+    "error":  "AssertionError: logs/final-acceptance.json",
+    "recorded_at_utc":  "2026-11-16T08:26:04.4889299Z",
+    "correction":  "Verify all existing links before acceptance; verify own output link after exclusive creation"
+}

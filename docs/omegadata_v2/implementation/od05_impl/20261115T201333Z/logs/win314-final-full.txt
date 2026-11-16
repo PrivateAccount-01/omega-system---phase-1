@@ -1,0 +1,25 @@
+
+=================================== ERRORS ====================================
+____________ ERROR collecting tests/unit/test_pipeline_and_api.py _____________
+tests\unit\test_pipeline_and_api.py:16: in <module>
+    from omegadata.api import main as api_main
+src\omegadata\api\main.py:60: in <module>
+    app.mount("/terminal-assets", StaticFiles(directory=str(UI_DIR)), name="terminal-assets")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E:\omega system - phase 1\.venv\Lib\site-packages\starlette\staticfiles.py:56: in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+E   RuntimeError: Directory 'C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-qch8qzjh\repo\src\omegadata\ui' does not exist
+___________ ERROR collecting tests/unit/test_validation_policies.py ___________
+tests\unit\test_validation_policies.py:12: in <module>
+    from omegadata.api.main import app
+src\omegadata\api\main.py:60: in <module>
+    app.mount("/terminal-assets", StaticFiles(directory=str(UI_DIR)), name="terminal-assets")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E:\omega system - phase 1\.venv\Lib\site-packages\starlette\staticfiles.py:56: in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+E   RuntimeError: Directory 'C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-qch8qzjh\repo\src\omegadata\ui' does not exist
+=========================== short test summary info ===========================
+ERROR tests/unit/test_pipeline_and_api.py - RuntimeError: Directory 'C:\Users...
+ERROR tests/unit/test_validation_policies.py - RuntimeError: Directory 'C:\Us...
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+4 deselected, 2 errors in 3.61s

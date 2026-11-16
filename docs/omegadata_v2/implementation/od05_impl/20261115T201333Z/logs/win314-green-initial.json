@@ -1,0 +1,499 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05_impl\\20261115T201333Z\\verification_runner.py",
+    "win314-green-initial",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05_era_parsing.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+  "baseline": "bf6f4894c9e5237e8c1a44b625c66b8a420b4aad",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T20:18:24.951361+00:00",
+  "end_utc": "2026-11-15T20:18:26.395868+00:00",
+  "elapsed_seconds": 1.444487000000663,
+  "exit_code": 0,
+  "output": "win314-green-initial.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-247t72qi",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t02_determinism",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t03_revisions",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t04_legacy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t06_ambiguity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t07_modern_zip",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes0-VERSION_UNSUPPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes1-REFERENCE_PENDING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes2-FORMAT_UNSUPPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t09_bse",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t10_official_flag",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\nbroken,row\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"unterminated\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\\xff\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x\"y\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"x\"trailing\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[../x.csv-kwargs0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[/x.csv-kwargs1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[C:/x.csv-kwargs2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x\\\\y.csv-kwargs3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[dir/x.csv-kwargs4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x.zip-kwargs5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[wrong.csv-kwargs6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs8]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[<html>denied</html>]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[{\"denied\":true}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[PK\\x03\\x04truncated]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t15_dates",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[-1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[+1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1.5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1,000]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[9999999999999999999999999]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1e2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t17_exact_decimal_context",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[NaN]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[Infinity]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[-1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e999999]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1_0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1.123456789]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[99999999999999999999999]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[+1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[ 10]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t19_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t20_text",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t21_optional_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t22_temporal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_raw_and_observation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_CACHED_RAW]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_SEED_IMPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_rights",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[WRONG_PURPOSE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_verified_synthetic_archive",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t26_no_io",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t27_oracle_digest",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t28_no_production_adapter",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t29_newline_metadata",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_limits",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_independent_oracle_and_tamper",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t32_replay_vector",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 78
+  }
+}

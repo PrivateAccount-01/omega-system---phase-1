@@ -1,0 +1,785 @@
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE [ 92%]
+EEEEEE                                                                   [100%]
+=================================== ERRORS ====================================
+_____________________ ERROR at setup of test_t01_identity _____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________________ ERROR at setup of test_t02_determinism ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________________ ERROR at setup of test_t03_revisions _____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________________ ERROR at setup of test_t04_legacy ______________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________ ERROR at setup of test_t05_disputed_dates_explicit_only[day0] ________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________ ERROR at setup of test_t05_disputed_dates_explicit_only[day1] ________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________ ERROR at setup of test_t05_disputed_dates_explicit_only[day2] ________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________ ERROR at setup of test_t05_disputed_dates_explicit_only[day3] ________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________________ ERROR at setup of test_t06_ambiguity _____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________________ ERROR at setup of test_t07_modern_zip ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______ ERROR at setup of test_t08_dispatch[changes0-VERSION_UNSUPPORTED] ______
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_______ ERROR at setup of test_t08_dispatch[changes1-REFERENCE_PENDING] _______
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______ ERROR at setup of test_t08_dispatch[changes2-FORMAT_UNSUPPORTED] _______
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_______________________ ERROR at setup of test_t09_bse ________________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+__________________ ERROR at setup of test_t10_official_flag ___________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\nbroken,row\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,"unterminated\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\xff\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x"y\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,"x"trailing\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________ ERROR at setup of test_t13_zip[../x.csv-kwargs0] _______________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_______________ ERROR at setup of test_t13_zip[/x.csv-kwargs1] ________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________ ERROR at setup of test_t13_zip[C:/x.csv-kwargs2] _______________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________ ERROR at setup of test_t13_zip[x\\y.csv-kwargs3] _______________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________ ERROR at setup of test_t13_zip[dir/x.csv-kwargs4] ______________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________________ ERROR at setup of test_t13_zip[x.zip-kwargs5] ________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________ ERROR at setup of test_t13_zip[wrong.csv-kwargs6] ______________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________ ERROR at setup of test_t13_zip[synthetic.csv-kwargs7] ____________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________ ERROR at setup of test_t13_zip[synthetic.csv-kwargs8] ____________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+__________________ ERROR at setup of test_t14_denial_empty[] __________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________ ERROR at setup of test_t14_denial_empty[<html>denied</html>] _________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+__________ ERROR at setup of test_t14_denial_empty[{"denied":true}] ___________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________ ERROR at setup of test_t14_denial_empty[PK\x03\x04truncated] _________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_ ERROR at setup of test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n] _
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________________ ERROR at setup of test_t15_dates _______________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________________ ERROR at setup of test_t16_volume[-1] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________________ ERROR at setup of test_t16_volume[+1] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________________ ERROR at setup of test_t16_volume[1.5] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_____________________ ERROR at setup of test_t16_volume[] _____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+__________________ ERROR at setup of test_t16_volume[1,000] ___________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________ ERROR at setup of test_t16_volume[9999999999999999999999999] _________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________________ ERROR at setup of test_t16_volume[1e2] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________ ERROR at setup of test_t17_exact_decimal_context _______________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________________ ERROR at setup of test_t18_prices[NaN] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_________________ ERROR at setup of test_t18_prices[Infinity] _________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________________ ERROR at setup of test_t18_prices[-1] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_________________ ERROR at setup of test_t18_prices[1e999999] _________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________________ ERROR at setup of test_t18_prices[1e1] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________________ ERROR at setup of test_t18_prices[1_0] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_______________ ERROR at setup of test_t18_prices[1.123456789] ________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_________ ERROR at setup of test_t18_prices[99999999999999999999999] __________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________________ ERROR at setup of test_t18_prices[+1] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________________ ERROR at setup of test_t18_prices[ 10] ____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_____________________ ERROR at setup of test_t19_identity _____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_______________________ ERROR at setup of test_t20_text _______________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+________________ ERROR at setup of test_t21_optional_identity _________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_____________________ ERROR at setup of test_t22_temporal _____________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_______________ ERROR at setup of test_t23_raw_and_observation ________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________ ERROR at setup of test_t24_origin[SOURCE_CACHED_RAW] _____________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+___________ ERROR at setup of test_t24_origin[SOURCE_SEED_IMPORTED] ___________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_______ ERROR at setup of test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED] _______
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________________ ERROR at setup of test_t25_rights ______________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________ ERROR at setup of test_t25_revocation_scope[REVOKED] _____________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_________ ERROR at setup of test_t25_revocation_scope[WRONG_PURPOSE] __________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+____________ ERROR at setup of test_t23_verified_synthetic_archive ____________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________________ ERROR at setup of test_t26_no_io _______________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+__________________ ERROR at setup of test_t27_oracle_digest ___________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________ ERROR at setup of test_t28_no_production_adapter _______________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+_________________ ERROR at setup of test_t29_newline_metadata _________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+______________________ ERROR at setup of test_t30_limits ______________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+__________ ERROR at setup of test_t31_independent_oracle_and_tamper ___________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+__________________ ERROR at setup of test_t32_replay_vector ___________________
+
+    @pytest.fixture()
+    def api():
+        # Lazy import lets baseline execute every case and record feature absence.
+>       from omegadata.parsers.contracts import Limits, ParseRequest
+E       ModuleNotFoundError: No module named 'omegadata.parsers'
+
+tests\unit\test_od05_era_parsing.py:21: ModuleNotFoundError
+=========================== short test summary info ===========================
+ERROR tests/unit/test_od05_era_parsing.py::test_t01_identity - ModuleNotFound...
+ERROR tests/unit/test_od05_era_parsing.py::test_t02_determinism - ModuleNotFo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t03_revisions - ModuleNotFoun...
+ERROR tests/unit/test_od05_era_parsing.py::test_t04_legacy - ModuleNotFoundEr...
+ERROR tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day0]
+ERROR tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day1]
+ERROR tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day2]
+ERROR tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day3]
+ERROR tests/unit/test_od05_era_parsing.py::test_t06_ambiguity - ModuleNotFoun...
+ERROR tests/unit/test_od05_era_parsing.py::test_t07_modern_zip - ModuleNotFou...
+ERROR tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes0-VERSION_UNSUPPORTED]
+ERROR tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes1-REFERENCE_PENDING]
+ERROR tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes2-FORMAT_UNSUPPORTED]
+ERROR tests/unit/test_od05_era_parsing.py::test_t09_bse - ModuleNotFoundError...
+ERROR tests/unit/test_od05_era_parsing.py::test_t10_official_flag - ModuleNot...
+ERROR tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\nbroken,row\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,"unterminated\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\xff\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x"y\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,"x"trailing\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[../x.csv-kwargs0] - M...
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[/x.csv-kwargs1] - Mod...
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[C:/x.csv-kwargs2] - M...
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[x\\y.csv-kwargs3] - M...
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[dir/x.csv-kwargs4] - ...
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[x.zip-kwargs5] - Modu...
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[wrong.csv-kwargs6] - ...
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]
+ERROR tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs8]
+ERROR tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[] - ModuleNo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[<html>denied</html>]
+ERROR tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[{"denied":true}]
+ERROR tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[PK\x03\x04truncated]
+ERROR tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\n]
+ERROR tests/unit/test_od05_era_parsing.py::test_t15_dates - ModuleNotFoundErr...
+ERROR tests/unit/test_od05_era_parsing.py::test_t16_volume[-1] - ModuleNotFou...
+ERROR tests/unit/test_od05_era_parsing.py::test_t16_volume[+1] - ModuleNotFou...
+ERROR tests/unit/test_od05_era_parsing.py::test_t16_volume[1.5] - ModuleNotFo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t16_volume[] - ModuleNotFound...
+ERROR tests/unit/test_od05_era_parsing.py::test_t16_volume[1,000] - ModuleNot...
+ERROR tests/unit/test_od05_era_parsing.py::test_t16_volume[9999999999999999999999999]
+ERROR tests/unit/test_od05_era_parsing.py::test_t16_volume[1e2] - ModuleNotFo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t17_exact_decimal_context - M...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[NaN] - ModuleNotFo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[Infinity] - Module...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[-1] - ModuleNotFou...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[1e999999] - Module...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[1e1] - ModuleNotFo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[1_0] - ModuleNotFo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[1.123456789] - Mod...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[99999999999999999999999]
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[+1] - ModuleNotFou...
+ERROR tests/unit/test_od05_era_parsing.py::test_t18_prices[ 10] - ModuleNotFo...
+ERROR tests/unit/test_od05_era_parsing.py::test_t19_identity - ModuleNotFound...
+ERROR tests/unit/test_od05_era_parsing.py::test_t20_text - ModuleNotFoundErro...
+ERROR tests/unit/test_od05_era_parsing.py::test_t21_optional_identity - Modul...
+ERROR tests/unit/test_od05_era_parsing.py::test_t22_temporal - ModuleNotFound...
+ERROR tests/unit/test_od05_era_parsing.py::test_t23_raw_and_observation - Mod...
+ERROR tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_CACHED_RAW]
+ERROR tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_SEED_IMPORTED]
+ERROR tests/unit/test_od05_era_parsing.py::test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED]
+ERROR tests/unit/test_od05_era_parsing.py::test_t25_rights - ModuleNotFoundEr...
+ERROR tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[REVOKED]
+ERROR tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[WRONG_PURPOSE]
+ERROR tests/unit/test_od05_era_parsing.py::test_t23_verified_synthetic_archive
+ERROR tests/unit/test_od05_era_parsing.py::test_t26_no_io - ModuleNotFoundErr...
+ERROR tests/unit/test_od05_era_parsing.py::test_t27_oracle_digest - ModuleNot...
+ERROR tests/unit/test_od05_era_parsing.py::test_t28_no_production_adapter - M...
+ERROR tests/unit/test_od05_era_parsing.py::test_t29_newline_metadata - Module...
+ERROR tests/unit/test_od05_era_parsing.py::test_t30_limits - ModuleNotFoundEr...
+ERROR tests/unit/test_od05_era_parsing.py::test_t31_independent_oracle_and_tamper
+ERROR tests/unit/test_od05_era_parsing.py::test_t32_replay_vector - ModuleNot...
+78 errors in 0.80s

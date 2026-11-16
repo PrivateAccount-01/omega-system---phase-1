@@ -1,0 +1,10 @@
+﻿{
+    "command":  ".venv/Scripts/python.exe -B docs/omegadata_v2/implementation/od05_impl/20261115T201333Z/final_check.py",
+    "exit_code":  1,
+    "evidence_class":  "RUN",
+    "stage":  "Markdown link checker default encoding",
+    "error":  "UnicodeDecodeError: charmap codec cannot decode byte 0x9d in position 1718",
+    "recorded_at_utc":  "2026-11-16T08:25:21.8229275Z",
+    "original_attempt_timestamp":  "Not separately instrumented; tool transcript retained",
+    "correction":  "Read own UTF-8 report files with explicit encoding=utf-8; no application or test change"
+}

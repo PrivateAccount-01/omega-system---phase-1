@@ -1,0 +1,12 @@
+OD05_SYNTHETIC_PARSER_IMPLEMENTATION_ONLY; run 20261115T201333Z. Evaluated 2026-11-16T08:23:11.592393+00:00. Branch feature/od01-source-rights; unchanged local HEAD bf6f4894c9e5237e8c1a44b625c66b8a420b4aad. RUN=new executed checks; TEST/SYN=synthetic fixtures; ARCH=prior evidence; UNK=unverified official semantics. Same-model procedural review, not independent human/financial/legal certification.
+
+# ADR-OD05-SYN-001 — implemented within explicit owner synthetic scope
+
+EXTEND_EXISTING: stdlib csv/zipfile/hashlib/datetime/decimal/dataclasses; existing rights-aware RawArchive facade unchanged. Frozen dataclasses keep the library small; existing Pydantic-backed archive/policy contracts remain in force at the optional facade. No new dependency, transport, writer or infrastructure. The parser package is opt-in by import/function call and unused by old production ingestion. No accepted official-format ADR or release approval is implied.
+
+Pandera: DEFER; no same-corpus exactness/runtime/RSS or current transitive/license/advisory pilot; prior inspected tag metadata is historical, immutable SHA unverified. PyArrow: retain installed existing dependency; DEFER raw-parser role. Existing Python/Pydantic/Arrow installed identities are in per-runtime environment logs. No package install, upstream pin invention, external benchmark or speedup claim. Candidate licensing/security clearance is UNVERIFIED beyond existing recorded metadata. No dependency change justified by popularity.
+
+Resource contract: compressed/raw input <=2,000,000 bytes; decoded bytes <=8,000,000; exactly one synthetic.csv ZIP member, no extraction; ratio<=100, rows<=10,000, headers<=64, header length<=128, field<=4096, identity<=128, price grammar <=12 integer/8 fractional ASCII digits, volume<=2^63-1. User limits can only tighten ceilings. These fixed budgets bound work; targeted checks assert prompt refusal within2seconds, not hardware CPU/memory certification. No independent RSS/throughput pilot was run. Per-command wall times are measured in logs.
+
+Canonical digest includes explicit source/format/parser/reference classification, column manifest and exact numeric/identity/date/ordinal/inert-field content; input raw SHA separately distinguishes lexeme scale, ZIP metadata and line endings. Canonical decimal rendering avoids ambient context rounding. No clock, host path, inferred publication timestamp, corporate action or DB write in core.
+

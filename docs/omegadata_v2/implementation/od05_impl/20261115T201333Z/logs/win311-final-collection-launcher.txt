@@ -1,0 +1,78 @@
+{
+  "command": [
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05_impl\\20261115T201333Z\\verification_runner.py",
+    "win311-final-collection",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+    "pytest",
+    "--collect-only",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+  "baseline": "bf6f4894c9e5237e8c1a44b625c66b8a420b4aad",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-15T20:21:35.755986+00:00",
+  "end_utc": "2026-11-15T20:21:43.803515+00:00",
+  "elapsed_seconds": 8.047000000020489,
+  "exit_code": 2,
+  "output": "win311-final-collection.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-oxjegwkn",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-qch8qzjh\\repo",
+  "guard_denials": {},
+  "symlink_observations": [],
+  "call_counts": {}
+}
+o_tracker_breach_flags
+tests/unit/test_operations_layer.py::test_alert_router_suppressed_without_webhook
+tests/unit/test_operations_layer.py::test_monthly_quality_report_generation
+tests/unit/test_operations_layer.py::test_download_manager_candidate_urls_include_failover
+tests/unit/test_trackb_extreme_edges.py::test_staging_validation_warn_when_bse_missing
+tests/unit/test_trackb_extreme_edges.py::test_staging_validation_date_gap_fail
+tests/unit/test_trackb_extreme_edges.py::test_staging_numeric_payload_warn_band
+tests/unit/test_trackb_extreme_edges.py::test_validation_logs_are_idempotent_on_repeat
+tests/unit/test_trackb_extreme_edges.py::test_adjustment_reverse_split_and_invalid_demerger
+tests/unit/test_trackb_extreme_edges.py::test_unmatched_staging_older_than_48h_is_escalated
+tests/unit/test_trackb_extreme_edges.py::test_validator_treats_bse_only_as_valid_bse_candidate
+tests/unit/test_trackb_extreme_edges.py::test_validator_flags_missing_parameter_on_one_side_of_matched_pair
+tests/unit/test_trackb_extreme_edges.py::test_unmatched_validation_requires_high_similarity_before_type_fail
+tests/unit/test_trackb_extreme_edges.py::test_unmatched_validation_tracks_false_negative_risk
+tests/unit/test_universe_manager.py::test_effective_date_membership_logic
+tests/unit/test_universe_manager.py::test_delisted_removed_from_future_universe
+tests/unit/test_universe_manager.py::test_reconstruction_confidence_pre2010
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_reproduces_reference_snapshots
+tests/unit/test_universe_manager.py::test_seed_pack_preserves_knowledge_vs_effective_date_semantics
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting
+tests/unit/test_universe_manager.py::test_seed_pack_validation_handles_missing_symbol_mapping_without_crashing
+tests/unit/test_universe_manager.py::test_seed_pack_backfill_is_non_destructive_until_validation_passes
+tests/unit/test_universe_manager.py::test_remove_membership_raises_for_missing_active_row
+tests/unit/test_universe_manager.py::test_reconstruct_pre2010_validates_required_columns
+
+=================================== ERRORS ====================================
+____________ ERROR collecting tests/unit/test_pipeline_and_api.py _____________
+tests\unit\test_pipeline_and_api.py:16: in <module>
+    from omegadata.api import main as api_main
+src\omegadata\api\main.py:60: in <module>
+    app.mount("/terminal-assets", StaticFiles(directory=str(UI_DIR)), name="terminal-assets")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\omega-od02v-copy-78jr_vg3\venv311\Lib\site-packages\starlette\staticfiles.py:56: in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+E   RuntimeError: Directory 'C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-qch8qzjh\repo\src\omegadata\ui' does not exist
+___________ ERROR collecting tests/unit/test_validation_policies.py ___________
+tests\unit\test_validation_policies.py:12: in <module>
+    from omegadata.api.main import app
+src\omegadata\api\main.py:60: in <module>
+    app.mount("/terminal-assets", StaticFiles(directory=str(UI_DIR)), name="terminal-assets")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\omega-od02v-copy-78jr_vg3\venv311\Lib\site-packages\starlette\staticfiles.py:56: in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+E   RuntimeError: Directory 'C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-qch8qzjh\repo\src\omegadata\ui' does not exist
+=========================== short test summary info ===========================
+ERROR tests/unit/test_pipeline_and_api.py - RuntimeError: Directory 'C:\Users...
+ERROR tests/unit/test_validation_policies.py - RuntimeError: Directory 'C:\Us...
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+530/534 tests collected (4 deselected), 2 errors in 6.41s
+

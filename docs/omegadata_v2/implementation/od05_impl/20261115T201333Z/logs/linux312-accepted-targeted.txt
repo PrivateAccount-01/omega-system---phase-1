@@ -1,0 +1,16 @@
+........................................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 45%]
+.................ss..................................................... [ 61%]
+........................................................................ [ 76%]
+........................................................................ [ 91%]
+.......................................                                  [100%]
+=============================== warnings summary ===============================
+tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]
+  /usr/lib/python3.12/zipfile/__init__.py:1620: UserWarning: Duplicate name: 'synthetic.csv'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [2] tests/unit/test_od01r_rights_hardening.py:171: Windows junction test
+469 passed, 2 skipped, 1 warning in 7.90s

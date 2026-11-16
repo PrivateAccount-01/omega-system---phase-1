@@ -1,0 +1,10 @@
+OD05_SYNTHETIC_PARSER_IMPLEMENTATION_ONLY; run 20261115T201333Z. Evaluated 2026-11-16T08:23:11.592393+00:00. Branch feature/od01-source-rights; unchanged local HEAD bf6f4894c9e5237e8c1a44b625c66b8a420b4aad. RUN=new executed checks; TEST/SYN=synthetic fixtures; ARCH=prior evidence; UNK=unverified official semantics. Same-model procedural review, not independent human/financial/legal certification.
+
+# Gatekeeper — OD05_SYNTHETIC_TECHNICAL_PASS
+
+G0/G1 supplied by directly attesting human owner; identity matches bf6f489. Complete original32group test file frozen/old-code run before package creation; API absence not declared a legacy defect. Later cases and corrections honestly separate. All94in-scope synthetic cases plus complete guarded three-runtime regression/lint/type/pip/compile pass; exact skip counterparts verified; source/test/fixture hashes agree in every pre-command and runtime manifest. Independent literal/scaled-integer comparator and tamper/missing negatives pass. Original files preserved; signing metadata only; 13pending/0approved policies. No external source request, old application mutation, production integration, signing/release/DB write, merge/commit/push/later phase.
+
+This is SYNTHETIC technical acceptance only. All official reference-dependent subcases remain BLOCKED_REFERENCE; no 32/32official claim, official-data accuracy, lawful source access, PIT/production/release certification or independent human financial/security signoff. Original OD04_BLOCKED remains unchanged. Source-era2020 assumption not repaired; July2024 leads require original authenticated document/sample/reference-use permission and separate routing scope. Remaining inherited P0/P1 and platform/security limits remain in08. PASS valid with [final mechanical verification](logs/final-acceptance.json), not an agent grant of additional authority.
+
+AEF procedures: Maker existing-pattern design, Reviewer adversarial new-code probes, Implementer scoped additive corrections, Gatekeeper exact command/hash/skip/preservation verification, Historian all failures and chronology retained. Same-model roles, not fabricated independent consensus. STOP after OD05.
+

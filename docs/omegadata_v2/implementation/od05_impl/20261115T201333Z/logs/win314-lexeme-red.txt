@@ -1,0 +1,17 @@
+F.                                                                       [100%]
+================================== FAILURES ===================================
+________________________ test_t16_later_volume_lexeme _________________________
+
+api = (<class 'omegadata.parsers.contracts.ParseRequest'>, <class 'omegadata.parsers.contracts.Limits'>, <function parse at 0x000002495B6071C0>, <function parse_archive at 0x000002495BAC4300>)
+
+    def test_t16_later_volume_lexeme(api):
+        result = parse(api, LEGACY.replace(b",0,inert", b",000,inert"))
+        assert result.rows[0].volume == 0
+>       assert result.rows[0].volume_lexeme == "000"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ParsedBar' object has no attribute 'volume_lexeme'
+
+tests\unit\test_od05_era_parsing.py:493: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05_era_parsing.py::test_t16_later_volume_lexeme - At...
+1 failed, 1 passed, 92 deselected in 0.57s

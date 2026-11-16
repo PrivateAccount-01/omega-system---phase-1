@@ -1,0 +1,58 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05_impl/20261115T201333Z/verification_runner.py",
+    "linux312-reviewed-targeted",
+    "/home/parilrupani/omega-od05-b_48ibpa/repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05_era_parsing.py",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "tests/unit/test_od02_acquisition.py",
+    "tests/unit/test_od02v_portability.py",
+    "tests/unit/test_od04_raw_archive.py",
+    "tests/unit/test_od04r_adversarial.py"
+  ],
+  "cwd": "/home/parilrupani/omega-od05-b_48ibpa/repo",
+  "baseline": "bf6f4894c9e5237e8c1a44b625c66b8a420b4aad",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-15T20:23:24.070557+00:00",
+  "end_utc": "2026-11-15T20:23:33.447255+00:00",
+  "elapsed_seconds": 9.376816242000018,
+  "exit_code": 0,
+  "output": "linux312-reviewed-targeted.txt",
+  "sandbox": "/tmp/omega-od02v-tests-b6p1cyxa",
+  "root": "/home/parilrupani/omega-od05-b_48ibpa/repo",
+  "guard_denials": {
+    "DNS": 2,
+    "SUBPROCESS": 2,
+    "PROTECTED_WRITE": 6,
+    "SOCKET": 1,
+    "UDP": 1
+  },
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 467,
+    "skipped": 2
+  }
+}
+........................................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 46%]
+...............ss....................................................... [ 61%]
+........................................................................ [ 76%]
+........................................................................ [ 92%]
+.....................................                                    [100%]
+=============================== warnings summary ===============================
+tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]
+  /usr/lib/python3.12/zipfile/__init__.py:1620: UserWarning: Duplicate name: 'synthetic.csv'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [2] tests/unit/test_od01r_rights_hardening.py:171: Windows junction test
+467 passed, 2 skipped, 1 warning in 8.29s
+
