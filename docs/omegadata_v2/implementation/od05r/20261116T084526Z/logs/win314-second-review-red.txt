@@ -1,0 +1,31 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_________________ test_r09_later_conflicting_field_semantics __________________
+
+api = (<module 'omegadata.parsers.reference_evidence' from 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-code...cal\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo\\src\\omegadata\\parsers\\era_matrix.py'>)
+
+    def test_r09_later_conflicting_field_semantics(api):
+        first = verify(api)
+        changed = verify(api, META | {"reference_id": "syn-doc-2", "semantics": [
+            {"field": "TradDt", "section": "p1", "meaning": "business-date"}]})
+>       assert api[1].build_matrix((first, changed), (date(2020, 1, 1),))[0].state == "CONFLICT"
+E       AssertionError: assert 'OVERLAP' == 'CONFLICT'
+E         
+E         - CONFLICT
+E         + OVERLAP
+
+tests\unit\test_od05r_reference_evidence.py:358: AssertionError
+___________________ test_r19_later_expected_pins_are_frozen ___________________
+
+api = (<module 'omegadata.parsers.reference_evidence' from 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-code...cal\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo\\src\\omegadata\\parsers\\era_matrix.py'>)
+
+    def test_r19_later_expected_pins_are_frozen(api):
+>       with pytest.raises(api[0].ReferenceError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.parsers.reference_evidence.ReferenceError'>
+
+tests\unit\test_od05r_reference_evidence.py:362: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05r_reference_evidence.py::test_r09_later_conflicting_field_semantics
+FAILED tests/unit/test_od05r_reference_evidence.py::test_r19_later_expected_pins_are_frozen
+2 failed, 59 deselected in 0.70s

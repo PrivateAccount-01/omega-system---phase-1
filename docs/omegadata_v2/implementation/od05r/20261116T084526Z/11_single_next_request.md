@@ -1,0 +1,5 @@
+OD05R_REFERENCE_AND_PARSER_VERIFICATION_ONLY; run20261116T084526Z; evaluated 2026-11-16T09:18:44.511483+00:00. Branch feature/od01-source-rights; HEAD 2326936860f64cadf4f4c24a968c073114598b26. RUN=fresh commands; TEST/SYN=synthetic; ARCH=prior evidence; REF-DOC=indexed documentary lead only; UNK=unverified. Same-model procedural review, no independent human/legal/financial certification.
+
+# Exactly one next request
+
+Owner supplies a bounded, lawfully obtained authentic NSE CM reference pack: original versioned publisher documents/annexures and representative dated rows for the disputed2020andJune24–July8,2024boundaries, their original SHA/length/provenance, actual reference-use permissions and independent human-reviewed field/date/unit/identity expectations. This is one corpus-supply/review request, not authorization for live downloads, production routing, release/signing, Git lifecycle or OD06. Until supplied, official cases remain BLOCKED_REFERENCE and the standalone verifier's limited technical result stands. STOP.

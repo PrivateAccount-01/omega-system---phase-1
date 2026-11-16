@@ -1,0 +1,68 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05r/20261116T084526Z/verification_runner.py",
+    "linux312-guard-proof",
+    "/home/parilrupani/omega-od05-l5okb8i2/repo",
+    "pytest",
+    "-q",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05r/20261116T084526Z/guard_probe.py"
+  ],
+  "cwd": "/home/parilrupani/omega-od05-l5okb8i2/repo",
+  "baseline": "2326936860f64cadf4f4c24a968c073114598b26",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-16T09:12:30.146342+00:00",
+  "end_utc": "2026-11-16T09:12:31.160213+00:00",
+  "elapsed_seconds": 1.0138661880000006,
+  "exit_code": 0,
+  "output": "linux312-guard-proof.txt",
+  "sandbox": "/tmp/omega-od02v-tests-z_n7kl_g",
+  "root": "/home/parilrupani/omega-od05-l5okb8i2/repo",
+  "guard_denials": {
+    "DNS": 1,
+    "SOCKET": 1,
+    "UDP": 1,
+    "SUBPROCESS": 1,
+    "PROTECTED_WRITE": 1,
+    "SIGNING_READ": 1
+  },
+  "test_reports": [
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/guard_probe.py::test_dns_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/guard_probe.py::test_tcp_udp_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/guard_probe.py::test_process_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/guard_probe.py::test_disposable_copy_write_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/guard_probe.py::test_fictional_signing_read_guard",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 5
+  }
+}

@@ -1,0 +1,95 @@
+[
+  {
+    "command": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T09:20:06.662434+00:00",
+    "end_utc": "2026-11-16T09:20:06.770564+00:00",
+    "exit_code": 0,
+    "stdout": "feature/od01-source-rights\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T09:20:06.770574+00:00",
+    "end_utc": "2026-11-16T09:20:06.866011+00:00",
+    "exit_code": 0,
+    "stdout": "2326936860f64cadf4f4c24a968c073114598b26\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T09:20:06.866025+00:00",
+    "end_utc": "2026-11-16T09:20:07.013804+00:00",
+    "exit_code": 0,
+    "stdout": "?? .venv-linux/\n?? OMEGADATA_OD05R_REFERENCE_VERIFICATION_CODEX_PROMPT_2026-11-16.md\n?? artifacts/gnupg/openpgp-revocs.d/36B1626F19983C4B8F7C643B26A3DDBB6030631F.rev\n?? artifacts/gnupg/private-keys-v1.d/CC8A0E3CC8C92D4A27115F70CA3DE3DCC3C7CEE1.key\n?? artifacts/gnupg/private-keys-v1.d/E1CF3EA03F1E3F45D57248F5A92D37E1FE153B7A.key\n?? docs/omegadata_v2/implementation/od05r/\n?? src/omegadata/parsers/era_matrix.py\n?? src/omegadata/parsers/reference_evidence.py\n?? tests/unit/od05r_reference_oracle.py\n?? tests/unit/test_od05r_reference_evidence.py\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--name-status"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T09:20:07.013814+00:00",
+    "end_utc": "2026-11-16T09:20:07.148060+00:00",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--name-status"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T09:20:07.148078+00:00",
+    "end_utc": "2026-11-16T09:20:07.262528+00:00",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T09:20:07.262537+00:00",
+    "end_utc": "2026-11-16T09:20:07.463683+00:00",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "merge-base",
+      "main",
+      "HEAD"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T09:20:07.463710+00:00",
+    "end_utc": "2026-11-16T09:20:07.715505+00:00",
+    "exit_code": 0,
+    "stdout": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674\n",
+    "stderr": ""
+  }
+]

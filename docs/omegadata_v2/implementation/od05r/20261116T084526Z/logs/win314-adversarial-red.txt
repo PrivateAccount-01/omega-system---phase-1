@@ -1,0 +1,100 @@
+..............................................s.......FFF..              [100%]
+================================== FAILURES ===================================
+________________________ test_r17_later_root_traversal ________________________
+
+api = (<module 'omegadata.parsers.reference_evidence' from 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-code...cal\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo\\src\\omegadata\\parsers\\era_matrix.py'>)
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-ajdzpp3z/pytest/test_r17_later_root_traversal0')
+
+    def test_r17_later_root_traversal(api,tmp_path):
+        parent=tmp_path/'holder'
+        parent.mkdir()
+        target=tmp_path/'bundle'
+        sha=corpus(target)
+>       with pytest.raises(api[0].ReferenceError,match='PATH_UNSAFE'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.parsers.reference_evidence.ReferenceError'>
+
+tests\unit\test_od05r_reference_evidence.py:229: Failed
+_______________________ test_r02_later_unhashable_file ________________________
+
+api = (<module 'omegadata.parsers.reference_evidence' from 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-code...cal\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo\\src\\omegadata\\parsers\\era_matrix.py'>)
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-ajdzpp3z/pytest/test_r02_later_unhashable_file0')
+
+    def test_r02_later_unhashable_file(api,tmp_path):
+        root=tmp_path/'bundle'
+        sha=corpus(root,META|{'document_file':['document.pdf']})
+        with pytest.raises(api[0].ReferenceError):
+>           api[0].read_bundle(root,pins(api,sha))
+
+tests\unit\test_od05r_reference_evidence.py:237: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-ajdzpp3z/pytest/test_r02_later_unhashable_file0/bundle')
+expected = ExpectedCorpus(index_sha256='0a2e720eba6911b841460ff37e0f0f58324527970b63935296de2cab5a44c10f', expected_references=1, files=(('document.pdf', '0c255ea1ecdea1ea12ee59b5fac44ca60359717f0ee283b2c5e03da8d0d087fc', 67),))
+
+    def read_bundle(root: Path, expected: ExpectedCorpus) -> BundleResult:
+        if not root.is_absolute() or str(root).startswith(('\\\\', '//')) or 'gnupg' in root.parts:
+            raise ReferenceError('PATH_UNSAFE')
+        for parent in (*reversed(root.parents), root):
+            no_links(parent)
+        if not stat.S_ISDIR(no_links(root).st_mode):
+            raise ReferenceError('CORPUS_MISSING')
+        names: set[str] = set()
+        try:
+            with os.scandir(root) as entries:
+                for entry in entries:
+                    filename(entry.name)
+                    no_links(Path(entry.path))
+                    names.add(entry.name)
+                    if len(names) > 33:
+                        raise ReferenceError('BUDGET')
+        except OSError:
+            raise ReferenceError('CORPUS_MISSING') from None
+        if names != {'index.json', *(name for name, _, _ in expected.files)}:
+            raise ReferenceError('CORPUS_MISMATCH')
+        raw = read_file(root / 'index.json', 65_536)
+        digest = hashlib.sha256(raw).hexdigest()
+        if digest != expected.index_sha256:
+            raise ReferenceError('INDEX_HASH_MISMATCH')
+        body = decode(raw)
+        if (not isinstance(body, dict) or set(body) != {'schema_version', 'references'}
+                or body['schema_version'] != 'od05r.bundle/v1' or not isinstance(body['references'], list)
+                or len(body['references']) != expected.expected_references):
+            raise ReferenceError('CORPUS_MISMATCH')
+        blobs = {}
+        for name, pinned, length in expected.files:
+            blob = read_file(root / name, 1_000_000)
+            if len(blob) != length or hashlib.sha256(blob).hexdigest() != pinned:
+                raise ReferenceError('RAW_HASH_MISMATCH')
+            blobs[name] = blob
+        results = []
+        for item in body['references']:
+            if not isinstance(item, dict):
+                raise ReferenceError('REFERENCE_INVALID')
+>           files = {item.get('document_file'), item.get('sample_file')} - {None}
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: cannot use 'list' as a set element (unhashable type: 'list')
+
+src\omegadata\parsers\reference_evidence.py:309: TypeError
+__________________________ test_r19_later_orphan_pin __________________________
+
+api = (<module 'omegadata.parsers.reference_evidence' from 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-code...cal\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo\\src\\omegadata\\parsers\\era_matrix.py'>)
+tmp_path = WindowsPath('C:/Users/Paril Rupani/AppData/Local/Temp/vscode-agent-codex-sandbox-DeDZJD/omega-od02v-tests-ajdzpp3z/pytest/test_r19_later_orphan_pin0')
+
+    def test_r19_later_orphan_pin(api,tmp_path):
+        root=tmp_path/'bundle'
+        sha=corpus(root)
+        (root/'orphan.pdf').write_bytes(DOCUMENT)
+        expected=pins(api,sha,files=(('document.pdf',hashlib.sha256(DOCUMENT).hexdigest(),len(DOCUMENT)),
+            ('orphan.pdf',hashlib.sha256(DOCUMENT).hexdigest(),len(DOCUMENT))))
+>       with pytest.raises(api[0].ReferenceError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.parsers.reference_evidence.ReferenceError'>
+
+tests\unit\test_od05r_reference_evidence.py:246: Failed
+=========================== short test summary info ===========================
+SKIPPED [1] tests\unit\test_od05r_reference_evidence.py:151: File symlink privilege unavailable; paired Linux node required
+FAILED tests/unit/test_od05r_reference_evidence.py::test_r17_later_root_traversal
+FAILED tests/unit/test_od05r_reference_evidence.py::test_r02_later_unhashable_file
+FAILED tests/unit/test_od05r_reference_evidence.py::test_r19_later_orphan_pin
+3 failed, 55 passed, 1 skipped in 0.79s

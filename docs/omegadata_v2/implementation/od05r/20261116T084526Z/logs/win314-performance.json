@@ -1,0 +1,50 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05r\\20261116T084526Z\\verification_runner.py",
+    "win314-performance",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05r-final-5t938nng\\repo",
+    "pytest",
+    "-q",
+    "-s",
+    "E:/omega system - phase 1/docs/omegadata_v2/implementation/od05r/20261116T084526Z/performance_probe.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05r-final-5t938nng\\repo",
+  "baseline": "2326936860f64cadf4f4c24a968c073114598b26",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T09:12:20.421071+00:00",
+  "end_utc": "2026-11-16T09:12:21.228020+00:00",
+  "elapsed_seconds": 0.8069217999582179,
+  "exit_code": 0,
+  "output": "win314-performance.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-e_l68le8",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05r-final-5t938nng\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/performance_probe.py::test_bounded_verification[1024]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/performance_probe.py::test_bounded_verification[16384]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "docs/omegadata_v2/implementation/od05r/20261116T084526Z/performance_probe.py::test_bounded_verification[262144]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 3
+  }
+}

@@ -1,0 +1,3905 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05r\\20261116T084526Z\\verification_runner.py",
+    "win314-reviewed-full",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05r-final-5t938nng\\repo",
+    "pytest",
+    "-q",
+    "-m",
+    "not realdata",
+    "--cov=omegadata",
+    "--cov-branch",
+    "--cov-report=term-missing"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05r-final-5t938nng\\repo",
+  "baseline": "2326936860f64cadf4f4c24a968c073114598b26",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T09:05:39.481990+00:00",
+  "end_utc": "2026-11-16T09:06:55.877520+00:00",
+  "elapsed_seconds": 76.39545960002579,
+  "exit_code": 0,
+  "output": "win314-reviewed-full.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-4devlv5a",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05r-final-5t938nng\\repo",
+  "guard_denials": {
+    "DNS": 2,
+    "SUBPROCESS": 3,
+    "PROTECTED_WRITE": 4,
+    "SOCKET": 1,
+    "UDP": 1
+  },
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_adjustment_engine.py::test_bonus_adjustment_real_case",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_adjustment_engine.py::test_rights_fallback_zero_subscription",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_adjustment_engine.py::test_cumulative_multiple_actions",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_adjustment_engine.py::test_demerger_actuals_finalize_from_preferred_exchange",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_adjustment_reference_corpus.py::test_reference_corpus_official_nse_source_pack_cases",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_adjustment_reference_corpus.py::test_reference_corpus_hand_computed_transformational_cases",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_adjustment_reference_corpus.py::test_reference_corpus_multiple_action_chain_and_demerger_finalization",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_collection_schedule.py::test_due_corporate_action_windows_match_ist_schedule",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_collection_schedule.py::test_confirmation_window_enforced",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_confidence_and_validation.py::test_confidence_floor_and_thresholds",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_confidence_and_validation.py::test_cross_source_price_validation_warn_and_fail",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_confidence_and_validation.py::test_cross_source_price_validation_uses_dynamic_low_liquidity_tolerance",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_confidence_and_validation.py::test_cross_source_price_validation_uses_two_sided_liquidity_not_max_side",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_confidence_and_validation.py::test_cross_source_ca_type_mismatch_creates_review",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_confidence_and_validation.py::test_systematic_disagreement_uses_chronological_order",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_dual_source_high_confidence_confirmation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_required_fields_missing_goes_to_review",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_immutability_correction",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_multiple_actions_same_date_are_paired_by_event_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_parameter_mismatch_queues_review_but_confirms_pair",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_missing_required_fields_block_confirmation_for_matched_pair",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_confirmation_merges_missing_bse_fields_into_confirmed_pair",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_reverse_split_required_fields_are_enforced",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_payload_mismatch_flags_missing_on_one_side",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_corporate_actions.py::test_parser_maps_extended_supported_action_taxonomy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_discontinuity.py::test_category_a_with_matching_action_autoqueues",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_discontinuity.py::test_category_c_ohlc_integrity_fail",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_discontinuity.py::test_exclusion_date_relaxes_thresholds",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_discontinuity.py::test_discontinuity_detection_is_idempotent_on_repeat",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_discontinuity_sector_fallback.py::test_sector_median_beta_fallback_used_for_short_history_stock",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_external_validation_jobs.py::test_monthly_flow_consistency_warn_band",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_external_validation_jobs.py::test_secondary_source_validations_fail_when_outside_tolerance",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_isin_master.py::test_isin_validation_real_values",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_isin_master.py::test_symbol_change_protocol",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_isin_master.py::test_delisting_protocol",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_news_pipeline.py::test_processing_deadlines_follow_spec",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_news_pipeline.py::test_event_impact_cached_in_required_redis_shape",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_pending_default_stops_before_cache_disclosure",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[unknown-UNKNOWN_SOURCE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[missing-MISSING_POLICY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[pending-POLICY_PENDING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[denied-POLICY_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[revoked-POLICY_REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[expired-POLICY_EXPIRED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[expiry_state-POLICY_EXPIRED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[evidence-EVIDENCE_INCOMPLETE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[host-HOST_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[transport-TRANSPORT_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[store-SCOPE_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t01_t11_download_refusals_have_zero_side_effects[future-SCOPE_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t08_fetch_does_not_grant_redistribution",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t09_research_does_not_grant_trade_use",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t12_fake_http_acquisition_preserves_envelope",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t13_latest_revocation_keeps_old_decision_attributable",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[source_entity]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[source_terms_url]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[terms_sha256]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[terms_retrieved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[approval_evidence_ref]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[approved_by]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[approved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[valid_from]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t07_each_missing_approval_evidence_field_is_denied[valid_until]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[created_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[terms_retrieved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[approved_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[valid_from]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[valid_until]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_naive_policy_dates_reject[revoked_at]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_request_timestamp_ambiguity_rejects[2026-01-01]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_request_timestamp_ambiguity_rejects[2026-01-01T12:00:00+05:30]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_request_timestamp_ambiguity_rejects[1760000000]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation7]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation8]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation9]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation10]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_fields_reject[mutation11]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_duplicate_entries_and_unlinked_revisions_reject",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[not json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[{\"schema_version\":\"source-policy/v1\",\"schema_version\":\"source-policy/v1\",\"policies\":[]}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[{\"schema_version\":\"source-policy/v1\",\"policies\":[],\"extra\":true}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t14_malformed_file_denies_before_transport[\\xff\\xfeinvalid encoding]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_EQUITY_BHAVCOPY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_FO_BHAVCOPY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[BSE_EQUITY_BHAVCOPY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_FII_DII]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[INDIA_VIX]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[BSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[GDELT]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[RBI_DBIE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[MOSPI]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[AMFI_MONTHLY_PORTFOLIOS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[NSE_BULK_BLOCK_DEALS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_default_pending_blocks_every_source_before_cache[INSIDER_TRADES]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[foreign.invalid]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[*.example.invalid]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[example.invalid:443]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[https://example.invalid]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t10_evaluator_exact_host_scope[None]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_normalized_dns_and_local_cache_policy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_structural_policy_inconsistencies_are_malformed[changes6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_invalid_register_history_identity_rejects",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t17_optional_pipeline_refusal_does_not_try_later_source",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_allowed_fake_probe_preserves_policy_attribution",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t17_denied_fallback_transport_is_terminal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_missing_policy_file_is_typed_refusal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t15_every_registered_default_is_pending",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t16_revoked_cache_and_seed_do_not_read_payload[False]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t16_revoked_cache_and_seed_do_not_read_payload[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_cache_only_permission_does_not_escalate_on_miss",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t17_policy_refusal_in_fetch_is_not_swallowed",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t18_concurrent_decisions_are_immutable_and_deterministic",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_t18_transport_source_context_is_thread_local",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[probe]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[discover_bse]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[discover_fo]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[stockreach]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[unscoped_request]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[unscoped_urllib]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_all_manager_acquisition_entry_points_fail_closed[unscoped_curl]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_foreign_discovered_host_is_denied_before_client",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_policy_change_is_rechecked_before_operation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01_source_rights.py::test_source_probe_script_checks_policy_before_curl",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:4443/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:80/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:8080/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[http://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[ftp://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[file://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[//example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://user:pass@example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://@example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid@other.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https:///example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:65536/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:-1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:abc/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid:0443/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid../file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid\\\\@other.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://example.invalid%2e/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://exam\\nple.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[ https://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://127.0.0.1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://10.0.0.1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://[::1]/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://[bad/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://localhost/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r01_r03_url_denied_before_client[https://loopback.local/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://example.invalid/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://example.invalid:443/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r04_https_allowed_mock_transport[https://EXAMPLE.INVALID./data?q=http://foreign.invalid:80]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-traversal]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-manifest_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[False-pointer_escape]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od01r_rights_hardening.py', 134, \"Skipped: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_r05_cache_escape_never_op3\\\\\\\\sentinel.bin' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_r05_cache_escape_never_op3\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-traversal]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-manifest_escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r05_cache_escape_never_opens_external_sentinel[True-pointer_escape]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od01r_rights_hardening.py', 134, \"Skipped: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_r05_cache_escape_never_op7\\\\\\\\sentinel.bin' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_r05_cache_escape_never_op7\\\\\\\\seed\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_real_symlink_payload_escape",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od01r_rights_hardening.py', 159, \"Skipped: Real symlink unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_r06_real_symlink_payload_0\\\\\\\\sentinel.bin' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_r06_real_symlink_payload_0\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\linked.bin'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[partition]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[payload_directory]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change7]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change8]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_inconsistent_cache_is_miss[change9]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[[]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[null]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[{bad]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_malformed_manifest_is_miss[{\"checksum\":\"a\",\"checksum\":\"b\"}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[absolute]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[bare]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r07_safe_legacy_cache_compatible[repo_relative]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_corporate_actions]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_endpoints-probe_bse_bhavcopy]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[probe_bse_urls-main]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-main]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r15_manual_diagnostics_disabled_before_side_effects[generate_source_probe_matrix-_run]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_fo_loader_pending_before_db_or_http",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r13_fo_loader_rechecks_after_db_setup",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r09_backfill_policy_refusal_terminal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[orchestrator]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[pipeline]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_production_entry_pending_no_output[scheduled_ca]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[https://example.invalid:4443/x]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_authority_before_curl[http://example.invalid/x]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[False]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r10_probe_bootstrap_scoped_mock_and_refresh[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r12_forged_strings_are_only_technical_consistency",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r08_pending_probe_bootstrap_no_temp_or_subprocess",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r13_bse_discovery_refreshes_before_get",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r13_simultaneous_source_scopes_and_refresh",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r16_harness_blocks_real_side_effects",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[<html>Access Denied</html>-PAYLOAD_HTML_DENIAL]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04truncated-ARCHIVE_INVALID]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\x1c\\xa5[\\xc3{\\x00\\x00\\x00\\x95\\x00\\x00\\x00)\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260409_F_0000.csvM\\xc8\\xcb\\n\\x830\\x14\\x84\\xe1\\xbd\\xcf2B\\x12J\\xc1m5`@b\\xcb9\\x14\\\\x89\\x8d`\\xc5\\xf4B\\x0c\\x14\\xfb\\xf4\\xa5\\xe9\\xa6\\xb3\\xf9\\x86\\x9f\\xc30V\\x11\\x87\\xf9]E\\x182\\x16\\xec\\x96@\\xdb\\xed\\x02rq\\xa3\\xb0\\xa2}\\xde\\x8fav\\xa8\\xa7k\\xb2y%J\\xbf&9z\\x0e\\xc38\\x9d\\x1f>SB\\xeds\\xb1\\xcbE\\x81\\xbf\\xcb\\x9aX\\xfc&A\\x9d\\xe5Z\\xb3)\\xfbo\\xee[\\xdbt\\xd0'H\\x01\\xa9P@J\\x88\\xec\\x03PK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\x1c\\xa5[\\xc3{\\x00\\x00\\x00\\x95\\x00\\x00\\x00)\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260409_F_0000.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00W\\x00\\x00\\x00\\xc2\\x00\\x00\\x00\\x00\\x00-TRADE_DATE_MISMATCH]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xbe\\n\\x95\\x89\\x13\\x00\\x00\\x00\\x11\\x00\\x00\\x00)\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260410_F_0000.csv+/\\xca\\xcfK\\xd7\\xc9HMLI-\\xe22\\xd41\\xe2\\x02\\x00PK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xbe\\n\\x95\\x89\\x13\\x00\\x00\\x00\\x11\\x00\\x00\\x00)\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x00BhavCopy_NSE_CM_0_0_0_20260410_F_0000.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00W\\x00\\x00\\x00Z\\x00\\x00\\x00\\x00\\x00-SCHEMA_UNKNOWN]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\r\\x00\\x00\\x00../escape.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\r\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x00../escape.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00;\\x00\\x00\\x00\\xa6\\x00\\x00\\x00\\x00\\x00-ZIP_ENTRY_UNSAFE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t01_t04_t07_invalid_nse_never_validated[PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x000.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x001.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x002.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x003.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x004.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x005.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x006.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x007.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x008.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x009.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0010.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0011.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0012.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0013.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0014.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0015.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0016.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0017.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0018.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x03\\x04\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x0019.csvM\\xc8M\\x0b\\x82@\\x14\\x85\\xe1\\xbd\\xbf\\xe5\\x08\\xf7\\x0e\\x11\\xb4M\\x07\\x14d,\\xe6\\x12\\xb8\\x12\\x1b\\xc1\\xa4\\xe9\\x83q \\xec\\xd7G\\xd3\\xa6\\xb3y\\x0e\\xaf\\x84a,#\\xf6\\xf3\\xbb\\x8c\\xa8mm \\xee\\x1a\\xecz;\\xc3\\xba\\xb8\\xda\\xb0\\xa0}\\xde\\x0fav\\xa8\\xa6K\\xb2y%\\n\\xbf$%z\\t\\xc38\\x9d\\x1e>S\\xa4\\xb69mr&\\xfc]\\xd1V\\xe87\\x86\\xed\\x8cTZ\\xea\\xa2\\xff\\xe6\\xbe5M\\x07}\\x04\\x13Xa\\x07fP\\xf6\\x01PK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x00\\x00\\x00\\x000.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x9e\\x00\\x00\\x001.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01<\\x01\\x00\\x002.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xda\\x01\\x00\\x003.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01x\\x02\\x00\\x004.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x16\\x03\\x00\\x005.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xb4\\x03\\x00\\x006.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01R\\x04\\x00\\x007.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xf0\\x04\\x00\\x008.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x05\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x8e\\x05\\x00\\x009.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01,\\x06\\x00\\x0010.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xcb\\x06\\x00\\x0011.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01j\\x07\\x00\\x0012.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\t\\x08\\x00\\x0013.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xa8\\x08\\x00\\x0014.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01G\\t\\x00\\x0015.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xe6\\t\\x00\\x0016.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\x85\\n\\x00\\x0017.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01$\\x0b\\x00\\x0018.csvPK\\x01\\x02\\x14\\x00\\x14\\x00\\x00\\x00\\x08\\x00\\x00\\x00!P\\xb4\\xb3\\xcb\\xd1{\\x00\\x00\\x00\\x95\\x00\\x00\\x00\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x80\\x01\\xc3\\x0b\\x00\\x0019.csvPK\\x05\\x06\\x00\\x00\\x00\\x00\\x14\\x00\\x14\\x00\\x06\\x04\\x00\\x00b\\x0c\\x00\\x00\\x00\\x00-ARCHIVE_TOO_LARGE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t05_t06_valid_synthetic_era[True-day0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t05_t06_valid_synthetic_era[False-day1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_denial_not_success[NSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_denial_not_success[BSE_CORPORATE_ACTIONS]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_denial_not_success[INDIA_VIX]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[401-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[403-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[451-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[429-HTTP_RATE_LIMITED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_t13_terminal_status_no_later_candidate[404-HTTP_NOT_FOUND]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_redirect_never_contacts_second_host",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t17_default_external_egress_disabled",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-SCHEMA_UNKNOWN]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PARTIAL_PAYLOAD5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-PAYLOAD_EMPTY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_numeric_date_row_and_header_corruption[<lambda>-TRADE_DATE_MISMATCH]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_t19_expansion_encoding_and_declared_caps",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[/absolute.csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[C:/escape.csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[nested.zip]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t04_archive_unsafe_members[..\\\\escape.csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_content_type_mismatch[application/json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_content_type_mismatch[image/png]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t07_content_type_mismatch[text/csv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t08_bse_synthetic_modern_and_wrong_date[False]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t08_bse_synthetic_modern_and_wrong_date[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[<html>login</html>]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[{\"x\":1,\"x\":2}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[{\"ERROR\":\"missing index\"}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[[]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_strict_errors[{broken]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_not_financially_verified[{\"data\":[{\"value\":1}]}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t09_json_not_financially_verified[[{\"value\":1}]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t11_retry_after_and_typed_public_context",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[download]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[probe]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[bootstrap]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t10_terminal_denial_entire_call_graph[discovery]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t13_transient_retries_bounded_and_recovers",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t13_attempt_cap_stops_candidates_and_profiles",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[https://example.invalid/other]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[https://foreign.invalid/other]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[http://example.invalid/other]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t14_t15_all_redirect_destinations_refused[https://169.254.169.254/latest]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[http://example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://example.invalid:444/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://user:password@example.invalid/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https:///file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://127.0.0.1/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://169.254.169.254/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_t17_unsafe_destination_before_transport[https://[::1]/file]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t17_rebinding_and_env_proxy_never_resolved",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t18_cross_transport_budget_no_cookie_leak",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t18_default_alternate_transports_disabled[urllib]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t18_default_alternate_transports_disabled[curl]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_deadline_includes_backoff",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers0-x-BODY_LIMIT_EXCEEDED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers1-xx-PARTIAL_PAYLOAD]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers2-x-ENCODING_UNSUPPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_transport_limits_before_write[headers3--PAYLOAD_EMPTY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_stream_growth_bounded",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t20_revoked_after_mock_fetch_no_storage",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t21_cache_only_never_fetches",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t22_valid_fetch_cache_hash_and_secret_free_evidence",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t23_concurrent_dates_repeated_candidate_staging",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[403-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[429-HTTP_RATE_LIMITED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[302-REDIRECT_NOT_ALLOWED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[401-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_bootstrap_terminal_and_redirect_budget[451-HTTP_ACCESS_DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t24_probe_strict_validation_and_shared_budget",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_configuration_fails_closed[change5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_missing_and_malformed_configuration",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t16_tls_invalid_is_terminal_no_fallback",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t19_public_invalid_overrides_refuse_before_transport[options5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02_acquisition.py::test_t22_urls_sanitized_and_seed_mode_distinct",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v00_real_file_symlink_capability",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od02v_portability.py', 103, \"Skipped: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v00_real_file_symlink_cap0\\\\\\\\synthetic-target.txt' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v00_real_file_symlink_cap0\\\\\\\\synthetic-link.txt'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v02_real_directory_link_partition_confined[False]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v02_real_directory_link_partition_confined[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[False-broken]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od02v_portability.py', 103, \"Skipped: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at0\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\absent.json' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at0\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[False-loop]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od02v_portability.py', 103, \"Skipped: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at1\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\loop.json' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at1\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[False-retarget]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od02v_portability.py', 103, \"Skipped: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at2\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\safe.json' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at2\\\\\\\\raw\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[True-broken]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od02v_portability.py', 103, \"Skipped: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at3\\\\\\\\seed\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\absent.json' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at3\\\\\\\\seed\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[True-loop]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od02v_portability.py', 103, \"Skipped: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at4\\\\\\\\seed\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\loop.json' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at4\\\\\\\\seed\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v03_file_links_changed_at_lookup_refuse[True-retarget]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od02v_portability.py', 103, \"Skipped: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at5\\\\\\\\seed\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\safe.json' -> 'C:\\\\\\\\Users\\\\\\\\Paril Rupani\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\vscode-agent-codex-sandbox-DeDZJD\\\\\\\\omega-od02v-tests-4devlv5a\\\\\\\\pytest\\\\\\\\test_v03_file_links_changed_at5\\\\\\\\seed\\\\\\\\nse_equity_bhavcopy\\\\\\\\year=2024\\\\\\\\month=01\\\\\\\\20240102.latest.json'\")"
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/token/SYNTHETIC_SECRET/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/api_key/SYNTHETIC_SECRET]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/access_token/SYNTHETIC_SECRET]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/password=SYNTHETIC_SECRET/data]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_credential_shaped_path_redacted[/api/%74oken/SYNTHETIC_SECRET]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_legacy_cache_url_is_redacted",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od02v_portability.py::test_v04_structured_error_context_redacts_path",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[full_hash]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[separate_events]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[existing_corruption]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a06_a12_negative_first_old_storage[partial_failure]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a01_a02_a03_a23_exact_bytes_events_and_historical_replay",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a04_a05_idempotence_conflict_and_frozen_models",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_stage]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_stage]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_object]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[after_observation]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a06_a07_a08_fault_boundaries_recover_without_promoting[before_commit]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a09_a21_thread_writers_and_reader",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[object]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[observation]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[commit]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[length]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[version]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a14_corruption_refuses[duplicate]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_key-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-C:\\\\escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[operation_id-\\\\\\\\server\\\\share]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[source_mode-RELEASE_APPROVED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[observed_at-2026-01-01T00:00:00]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[attempts--1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[origin_ref-../secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_a15_a24_invalid_identity_before_storage[published_at-2000-01-01T00:00:00Z]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[objects]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[observations]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[commits]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_real_directory_link_escape[staging]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_pending_before_write_or_read",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_revocation_before_replay",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_payload_and_total_budget[17]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[28-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[13-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-fsync]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a20_storage_faults_typed_no_success[5-link]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a22_url_confidentiality_and_a24_policy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a17_a18_optin_cache_miss_no_effect",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a17_legacy_facade_is_read_only",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a15_synthetic_cannot_be_relabelled",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[sha256-aaaaaaaaaaaa]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[size-True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a13_strict_object_contract[relative_path-../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a21_reader_during_publication",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_revocation_at_commit_boundary",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a19_metadata_and_entry_budget",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_read_consumer_scope_enforced",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a18_dry_run_migration_and_cli_verifier",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a04_policy_identity_change_is_not_idempotent",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a24_structural_state_requires_actual_validator",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a16_explicit_revoked_or_missing_before_io[MISSING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04_raw_archive.py::test_a12_a23_scan_is_read_only_deterministic_and_refuses_corruption",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[missing-NOT_FOUND]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[empty-EMPTY_ARCHIVE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[staging-EMPTY_ARCHIVE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[orphan-EMPTY_ARCHIVE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[root_file-INTEGRITY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_absence_is_never_verified[commits_file-INTEGRITY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_disappears_after_inventory",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_walk_error_cannot_hide_existing_evidence",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_count_is_external_contract",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[-1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_invalid_expectation[1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[missing]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[staging]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_expected_empty_does_not_hide_incomplete_storage[orphan]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r09_existing_wrong_size_object_refuses_without_overwrite",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r18_independent_link_oracle_and_missing_object",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r18_namespace_mixing_refuses",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r12_marker_link_failure_preserves_existing_evidence",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r01_cli_count_and_read_only",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r14_r15_invalid_contract_before_io[change0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r14_r15_invalid_contract_before_io[change1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r14_r15_invalid_contract_before_io[change2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r14_r15_invalid_contract_before_io[change3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r14_r15_invalid_contract_before_io[change4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r15_source_mismatch_refuses",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od04r_adversarial.py::test_r13_retained_stage_accumulation_is_bounded_read_only",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t02_determinism",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t03_revisions",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t04_legacy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t06_ambiguity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t07_modern_zip",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes0-VERSION_UNSUPPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes1-REFERENCE_PENDING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes2-FORMAT_UNSUPPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t09_bse",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t10_official_flag",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\nbroken,row\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"unterminated\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\\xff\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x\"y\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"x\"trailing\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[../x.csv-kwargs0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[/x.csv-kwargs1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[C:/x.csv-kwargs2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x\\\\y.csv-kwargs3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[dir/x.csv-kwargs4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x.zip-kwargs5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[wrong.csv-kwargs6]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs8]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[<html>denied</html>]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[{\"denied\":true}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[PK\\x03\\x04truncated]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t15_dates",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[-1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[+1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1.5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1,000]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[9999999999999999999999999]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1e2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t17_exact_decimal_context",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[NaN]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[Infinity]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[-1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e999999]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1_0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1.123456789]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[99999999999999999999999]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[+1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[ 10]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t19_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t20_text",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t21_optional_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t22_temporal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_raw_and_observation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_CACHED_RAW]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_SEED_IMPORTED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_rights",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[WRONG_PURPOSE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_verified_synthetic_archive",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t26_no_io",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t27_oracle_digest",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t28_no_production_adapter",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t29_newline_metadata",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_limits",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_independent_oracle_and_tamper",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t32_replay_vector",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_later_in_memory_cannot_claim_archive_pin",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_later_archive_purpose_is_mandatory",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_later_plain_csv_expansion_budget",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[crc]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[encryption]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[codec]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[trailer]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[nested]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[bomb]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_later_all_fields_modern_and_date",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[True]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[-1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_later_volume_lexeme",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_later_explicit_synthetic_2020_profile",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r01_absent_empty",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"reference_id\":\"a\",\"reference_id\":\"b\"}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[[]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"x\":NaN}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r04_paraphrase",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[PENDING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r07_document_not_row",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r08_sample_not_schema",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_conflict",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r10_dates_overlap",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r11_versions",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r13_bse_no_inheritance",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SYNTHETIC_TEST_ONLY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[CACHE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SEED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[MIRROR]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[INDEX_ONLY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://user:secret@example.invalid/doc]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc?token=secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[file:///secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[http://example.invalid/doc]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc#secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[../document.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[/document.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[C:/document.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[\\\\\\\\host\\\\share]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[a\\\\b.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[con.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_real_link",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od05r_reference_evidence.py', 203, 'Skipped: File symlink privilege unavailable; paired Linux node required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r18_budgets",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_pinned_corpus",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r20_deterministic",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r21_pure",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r22_compatibility",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_oracle_and_tamper",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r24_runtime_vector",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_root_traversal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_later_unhashable_file",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_orphan_pin",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_later_sample_tamper",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_later_conflicting_field_semantics",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_expected_pins_are_frozen",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_operations_layer.py::test_slo_tracker_breach_flags",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_operations_layer.py::test_alert_router_suppressed_without_webhook",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_operations_layer.py::test_monthly_quality_report_generation",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_operations_layer.py::test_download_manager_candidate_urls_include_failover",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_api_threshold_enforcement",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_verification_and_terminal_endpoints",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_empty_meeting_rows_are_not_promoted_to_corporate_actions",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_ensure_instrument_is_idempotent_before_flush",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_nse_request_workaround_can_fall_back_to_curl",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_nse_request_workaround_passes_bootstrapped_cookies_to_fallbacks",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_download_manager_reuses_cached_immutable_artifact",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_download_manager_falls_back_to_seed_cache_when_canonical_missing",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_nse_buyback_is_classified_without_unclassified_fallback",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_nse_subject_parsing_extracts_core_corporate_action_parameters",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_side_feed_loaders_persist_structured_rows",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_release_manager_builds_signed_release_artifact",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_run_track_b_preserves_failed_cross_source_validation_penalty",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_run_track_b_requires_explicit_market_proxy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_bhavcopy_loader_preserves_official_ohlc",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_bhavcopy_loader_supports_current_bse_primary_schema",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bhavcopy_loaders_populate_identity_adjusted_fields",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_nse_fo_loader_supports_udiff_zip_payload",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_download_manager_stores_versioned_immutable_artifacts",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_prices_endpoint_requires_canonical_exchange_when_primary_missing",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_prices_endpoint_does_not_mix_exchanges_and_defaults_to_primary_exchange",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_prices_endpoint_excludes_synthetic_market_data_from_non_audit_contexts",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_publication_status_blocks_forward_series_and_reprocess_workflow",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_false_positive_resolution_unblocks_without_reprocess",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_complete_reprocess_requires_pending_request_artifact",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_run_track_a_requires_bse_bhavcopy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_candidate_extraction_uses_live_page_patterns",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_candidate_extraction_supports_relative_paths",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_candidate_detection_allows_bse_subdomains",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_source_registry_primary_format_is_csv",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_zip_payload_validation_checks_contents",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_bse_zip_payload_validation_selects_expected_member_by_date",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_review_policy_cache_reloads_on_file_change",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_skips_configured_holidays",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_treats_special_session_as_trading_day",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_treats_weekend_special_session_as_trading_day",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_degrades_without_explicit_year_coverage",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_coverage_status_warns_near_expiry",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_loads_maintenance_metadata_from_config",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_statuses_include_supported_exchanges_without_coverage",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_missing_config_still_reports_supported_exchange_statuses",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_trading_calendar_invalid_config_reports_invalid_state",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_pipeline_and_api.py::test_manual_review_open_listing_marks_sla_breach",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_staging_validation_warn_when_bse_missing",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_staging_validation_date_gap_fail",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_staging_numeric_payload_warn_band",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_validation_logs_are_idempotent_on_repeat",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_adjustment_reverse_split_and_invalid_demerger",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_unmatched_staging_older_than_48h_is_escalated",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_validator_treats_bse_only_as_valid_bse_candidate",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_validator_flags_missing_parameter_on_one_side_of_matched_pair",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_unmatched_validation_requires_high_similarity_before_type_fail",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_trackb_extreme_edges.py::test_unmatched_validation_tracks_false_negative_risk",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_effective_date_membership_logic",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_delisted_removed_from_future_universe",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_reconstruction_confidence_pre2010",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_backfill_reproduces_reference_snapshots",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_preserves_knowledge_vs_effective_date_semantics",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_validation_handles_missing_symbol_mapping_without_crashing",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_backfill_is_non_destructive_until_validation_passes",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_remove_membership_raises_for_missing_active_row",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_reconstruct_pre2010_validates_required_columns",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_validation_policies.py::test_cross_source_validator_uses_loaded_tolerance_policy",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_validation_policies.py::test_corporate_action_matcher_uses_policy_thresholds",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_validation_policies.py::test_release_readiness_blocks_on_overdue_review",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_validation_policies.py::test_release_readiness_requires_pipeline_success_and_nse_equity_probe",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_validation_policies.py::test_release_readiness_checks_adjusted_ohlcv_and_release_bundle",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_validation_policies.py::test_release_readiness_does_not_treat_instrument_scope_reviews_as_open_release_blockers",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_validation_policies.py::test_manual_review_service_refreshes_existing_instrument_scope_review",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [
+    "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+    "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+  ],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 632,
+    "skipped": 11
+  }
+}

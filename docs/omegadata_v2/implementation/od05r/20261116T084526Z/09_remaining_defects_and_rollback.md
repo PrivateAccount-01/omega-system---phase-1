@@ -1,0 +1,9 @@
+OD05R_REFERENCE_AND_PARSER_VERIFICATION_ONLY; run20261116T084526Z; evaluated 2026-11-16T09:18:44.511483+00:00. Branch feature/od01-source-rights; HEAD 2326936860f64cadf4f4c24a968c073114598b26. RUN=fresh commands; TEST/SYN=synthetic; ARCH=prior evidence; REF-DOC=indexed documentary lead only; UNK=unverified. Same-model procedural review, no independent human/legal/financial certification.
+
+# Remaining defects and rollback
+
+Corrected only newly reproduced defects: traversal root, untyped malformed file list, orphan-pinned files, semantic conflict detection and mutable expected corpus pins. No genuine old-code defect correction was claimed from missing API errors. All original code stays intact.
+
+Inherited P0D01signing-key custody/exposure and P0D04publication/export gate remain OPEN. P1production cash2020route/dated format truth, official identity/series/units/calendar/PITsemantics and fixed Parquet overwriteD03 remain outside this phase. No official parser or route integration until documentA/sampleB and separate routeC authority. Raw source/reference authenticity and legal permission unknown. No acceptance of those risks by synthetic tests or old G0process waiver.
+
+P2limits: same-model reviewer/oracle, shared physical host, partial coverage, no online current advisories/transitive legal audit, conservative ASCII/unescaped URL subset, no authenticated human-review authority-root ingestion implemented, no arbitrary hostile directory-owner/kernel/native-extension/network-FS/power-loss certificate. No row-semantic certification from opaque sample byte hashes. Rollback: stop calling new standalone modules; all original paths are already unchanged. Preserve evidence, original records and historical Gatekeepers. No delete/cleanup/reset/stash/migration/relabeling or old fixture replacement.

@@ -1,0 +1,398 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05r\\20261116T084526Z\\verification_runner.py",
+    "win314-second-review-green",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05r_reference_evidence.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo",
+  "baseline": "2326936860f64cadf4f4c24a968c073114598b26",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T09:02:49.420028+00:00",
+  "end_utc": "2026-11-16T09:02:51.255134+00:00",
+  "elapsed_seconds": 1.835088399995584,
+  "exit_code": 0,
+  "output": "win314-second-review-green.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-grcq3tes",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05-copy-fingbm0z\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r01_absent_empty",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"reference_id\":\"a\",\"reference_id\":\"b\"}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[[]]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"x\":NaN}]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r04_paraphrase",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[PENDING]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[DENIED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r07_document_not_row",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r08_sample_not_schema",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_conflict",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r10_dates_overlap",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r11_versions",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r13_bse_no_inheritance",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SYNTHETIC_TEST_ONLY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[CACHE]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SEED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[MIRROR]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[INDEX_ONLY]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://user:secret@example.invalid/doc]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc?token=secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[file:///secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[http://example.invalid/doc]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc#secret]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes2]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes3]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes4]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes5]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[../document.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[/document.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[C:/document.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[\\\\\\\\host\\\\share]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[a\\\\b.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[con.pdf]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_real_link",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05-copy-fingbm0z\\\\repo\\\\tests\\\\unit\\\\test_od05r_reference_evidence.py', 203, 'Skipped: File symlink privilege unavailable; paired Linux node required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r18_budgets",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_pinned_corpus",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r20_deterministic",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r21_pure",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r22_compatibility",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_oracle_and_tamper",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r24_runtime_vector",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_root_traversal",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_later_unhashable_file",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_orphan_pin",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_later_sample_tamper",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_later_conflicting_field_semantics",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_expected_pins_are_frozen",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 60,
+    "skipped": 1
+  }
+}

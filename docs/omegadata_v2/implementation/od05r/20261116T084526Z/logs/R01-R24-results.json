@@ -1,0 +1,1468 @@
+{
+  "R01": {
+    "test_ids": [
+      "test_r01_absent_empty"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r01_absent_empty",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r01_absent_empty",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r01_absent_empty",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R02": {
+    "test_ids": [
+      "test_r02_json",
+      "test_r02_later_unhashable_file"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"reference_id\":\"a\",\"reference_id\":\"b\"}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[[]]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"x\":NaN}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_later_unhashable_file",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"reference_id\":\"a\",\"reference_id\":\"b\"}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[[]]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"x\":NaN}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_later_unhashable_file",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"reference_id\":\"a\",\"reference_id\":\"b\"}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[[]]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"x\":NaN}]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_later_unhashable_file",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R03": {
+    "test_ids": [
+      "test_r03_identity"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R04": {
+    "test_ids": [
+      "test_r04_paraphrase"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r04_paraphrase",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r04_paraphrase",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r04_paraphrase",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R05": {
+    "test_ids": [
+      "test_r05_no_caller_authority"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R06": {
+    "test_ids": [
+      "test_r06_rights"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[PENDING]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[DENIED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[PENDING]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[DENIED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[PENDING]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[DENIED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R07": {
+    "test_ids": [
+      "test_r07_document_not_row"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r07_document_not_row",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r07_document_not_row",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r07_document_not_row",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R08": {
+    "test_ids": [
+      "test_r08_sample_not_schema"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r08_sample_not_schema",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r08_sample_not_schema",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r08_sample_not_schema",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R09": {
+    "test_ids": [
+      "test_r09_conflict",
+      "test_r09_later_conflicting_field_semantics"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_conflict",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_later_conflicting_field_semantics",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_conflict",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_later_conflicting_field_semantics",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_conflict",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_later_conflicting_field_semantics",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R10": {
+    "test_ids": [
+      "test_r10_dates_overlap"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r10_dates_overlap",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r10_dates_overlap",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r10_dates_overlap",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R11": {
+    "test_ids": [
+      "test_r11_versions"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r11_versions",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r11_versions",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r11_versions",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R12": {
+    "test_ids": [
+      "test_r12_scope"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R13": {
+    "test_ids": [
+      "test_r13_bse_no_inheritance"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r13_bse_no_inheritance",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r13_bse_no_inheritance",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r13_bse_no_inheritance",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R14": {
+    "test_ids": [
+      "test_r14_origin"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SYNTHETIC_TEST_ONLY]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[CACHE]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SEED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[MIRROR]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[INDEX_ONLY]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SYNTHETIC_TEST_ONLY]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[CACHE]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SEED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[MIRROR]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[INDEX_ONLY]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SYNTHETIC_TEST_ONLY]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[CACHE]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SEED]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[MIRROR]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[INDEX_ONLY]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R15": {
+    "test_ids": [
+      "test_r15_secret_redaction"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://user:secret@example.invalid/doc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc?token=secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[file:///secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[http://example.invalid/doc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc#secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://user:secret@example.invalid/doc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc?token=secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[file:///secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[http://example.invalid/doc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc#secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://user:secret@example.invalid/doc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc?token=secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[file:///secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[http://example.invalid/doc]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc#secret]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R16": {
+    "test_ids": [
+      "test_r16_bounds"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes4]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes4]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes0]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes1]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes2]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes3]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes4]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes5]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R17": {
+    "test_ids": [
+      "test_r17_names",
+      "test_r17_real_link",
+      "test_r17_later_root_traversal",
+      "test_r17_later_windows_junction"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[../document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[/document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[C:/document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[\\\\\\\\host\\\\share]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[a\\\\b.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[con.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_real_link",
+          "when": "call",
+          "outcome": "skipped",
+          "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-5t938nng\\\\repo\\\\tests\\\\unit\\\\test_od05r_reference_evidence.py', 203, 'Skipped: File symlink privilege unavailable; paired Linux node required')"
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_root_traversal",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[../document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[/document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[C:/document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[\\\\\\\\host\\\\share]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[a\\\\b.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[con.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_real_link",
+          "when": "call",
+          "outcome": "skipped",
+          "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05r-final-6cyw2le8\\\\repo\\\\tests\\\\unit\\\\test_od05r_reference_evidence.py', 203, 'Skipped: File symlink privilege unavailable; paired Linux node required')"
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_root_traversal",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[../document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[/document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[C:/document.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[\\\\\\\\host\\\\share]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[a\\\\b.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[con.pdf]",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_real_link",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_root_traversal",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+          "when": "call",
+          "outcome": "skipped",
+          "reason": "('/home/parilrupani/omega-od05-l5okb8i2/repo/tests/unit/test_od05r_reference_evidence.py', 329, 'Skipped: Windows junction; Linux file-link counterpart required')"
+        }
+      ]
+    }
+  },
+  "R18": {
+    "test_ids": [
+      "test_r18_budgets"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r18_budgets",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r18_budgets",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r18_budgets",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R19": {
+    "test_ids": [
+      "test_r19_pinned_corpus",
+      "test_r19_later_orphan_pin",
+      "test_r19_later_expected_pins_are_frozen"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_pinned_corpus",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_orphan_pin",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_expected_pins_are_frozen",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_pinned_corpus",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_orphan_pin",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_expected_pins_are_frozen",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_pinned_corpus",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_orphan_pin",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_expected_pins_are_frozen",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R20": {
+    "test_ids": [
+      "test_r20_deterministic"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r20_deterministic",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r20_deterministic",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r20_deterministic",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R21": {
+    "test_ids": [
+      "test_r21_pure"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r21_pure",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r21_pure",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r21_pure",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R22": {
+    "test_ids": [
+      "test_r22_compatibility"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r22_compatibility",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r22_compatibility",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r22_compatibility",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R23": {
+    "test_ids": [
+      "test_r23_oracle_and_tamper",
+      "test_r23_later_sample_tamper"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_oracle_and_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_later_sample_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_oracle_and_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_later_sample_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_oracle_and_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        },
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_later_sample_tamper",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "R24": {
+    "test_ids": [
+      "test_r24_runtime_vector"
+    ],
+    "baseline": "NEW_API_ABSENT (not legacy-defect proof)",
+    "final": "PASS_SYNTHETIC with exact paired platform skips",
+    "runtime_nodes": {
+      "win314-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r24_runtime_vector",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "win311-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r24_runtime_vector",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ],
+      "linux312-reviewed": [
+        {
+          "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r24_runtime_vector",
+          "when": "call",
+          "outcome": "passed",
+          "reason": null
+        }
+      ]
+    }
+  }
+}

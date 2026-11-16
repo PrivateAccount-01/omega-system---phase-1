@@ -1,0 +1,7 @@
+OD05R_REFERENCE_AND_PARSER_VERIFICATION_ONLY; run20261116T084526Z; evaluated 2026-11-16T09:18:44.511483+00:00. Branch feature/od01-source-rights; HEAD 2326936860f64cadf4f4c24a968c073114598b26. RUN=fresh commands; TEST/SYN=synthetic; ARCH=prior evidence; REF-DOC=indexed documentary lead only; UNK=unverified. Same-model procedural review, no independent human/legal/financial certification.
+
+# Exact additive delta
+
+New src/omegadata/parsers/reference_evidence.py: frozen evidence schema, deterministic identity/refusal evaluator, independently pinned corpus contract and safe read-only loader. New era_matrix.py: bounded conflict/overlap/unknown matrix, no source route selection. New tests/unit/test_od05r_reference_evidence.py and od05r_reference_oracle.py:24groups,61parameterized cases, independent literal/hash oracle. [Source SHA ledger](logs/reviewed-source-freeze.json); every runtime's per-command *-inputs.json and [comparison](logs/cross-runtime-inputs.json) establish tested identity.
+
+No existing application/parser/test/oracle/policy/config/CI/dependency/UI/source script modified. The five original OD05 package files, its94case suite and independent oracle remain exact. Public parse/parse_archive semantics and default production flow unchanged; full rights/acquisition/archive/API/storage regressions pass. No route, migration, cached/seed/historical rewrite, production DB/Parquet, release/pointer/signing write. Entry environment/signing/owner prompt retained. New documentation/helpers/logs only under this run. No commit/push/PR/merge.

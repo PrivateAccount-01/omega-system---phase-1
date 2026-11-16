@@ -1,0 +1,490 @@
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                   [100%]
+=================================== ERRORS ====================================
+___________________ ERROR at setup of test_r01_absent_empty ___________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_____________________ ERROR at setup of test_r02_json[{}] _____________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__ ERROR at setup of test_r02_json[{"reference_id":"a","reference_id":"b"}] ___
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_____________________ ERROR at setup of test_r02_json[[]] _____________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_____________________ ERROR at setup of test_r02_json[{] ______________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r02_json[{"x":NaN}] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+________________ ERROR at setup of test_r03_identity[changes0] ________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+________________ ERROR at setup of test_r03_identity[changes1] ________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+____________________ ERROR at setup of test_r04_paraphrase ____________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________ ERROR at setup of test_r05_no_caller_authority[changes0] ___________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________ ERROR at setup of test_r05_no_caller_authority[changes1] ___________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________ ERROR at setup of test_r05_no_caller_authority[changes2] ___________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________ ERROR at setup of test_r05_no_caller_authority[changes3] ___________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r06_rights[PENDING] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r06_rights[DENIED] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r07_document_not_row _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+________________ ERROR at setup of test_r08_sample_not_schema _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_____________________ ERROR at setup of test_r09_conflict _____________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r10_dates_overlap ___________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_____________________ ERROR at setup of test_r11_versions _____________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r12_scope[changes0] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r12_scope[changes1] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r12_scope[changes2] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+________________ ERROR at setup of test_r13_bse_no_inheritance ________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+___________ ERROR at setup of test_r14_origin[SYNTHETIC_TEST_ONLY] ____________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r14_origin[CACHE] ___________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+___________________ ERROR at setup of test_r14_origin[SEED] ___________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r14_origin[MIRROR] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+________________ ERROR at setup of test_r14_origin[INDEX_ONLY] ________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_ ERROR at setup of test_r15_secret_redaction[https://user:secret@example.invalid/doc] _
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_ ERROR at setup of test_r15_secret_redaction[https://example.invalid/doc?token=secret] _
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________ ERROR at setup of test_r15_secret_redaction[file:///secret] _________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+___ ERROR at setup of test_r15_secret_redaction[http://example.invalid/doc] ___
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_ ERROR at setup of test_r15_secret_redaction[https://example.invalid/doc#secret] _
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r16_bounds[changes0] _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r16_bounds[changes1] _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r16_bounds[changes2] _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r16_bounds[changes3] _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r16_bounds[changes4] _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r16_bounds[changes5] _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+______________ ERROR at setup of test_r17_names[../document.pdf] ______________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_______________ ERROR at setup of test_r17_names[/document.pdf] _______________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+______________ ERROR at setup of test_r17_names[C:/document.pdf] ______________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+______________ ERROR at setup of test_r17_names[\\\\host\\share] ______________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_________________ ERROR at setup of test_r17_names[a\\b.pdf] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r17_names[con.pdf] __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+____________________ ERROR at setup of test_r17_real_link _____________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_____________________ ERROR at setup of test_r18_budgets ______________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r19_pinned_corpus ___________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r20_deterministic ___________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+_______________________ ERROR at setup of test_r21_pure _______________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r22_compatibility ___________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+________________ ERROR at setup of test_r23_oracle_and_tamper _________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+__________________ ERROR at setup of test_r24_runtime_vector __________________
+
+    @pytest.fixture()
+    def api():
+>       from omegadata.parsers import era_matrix, reference_evidence
+E       ImportError: cannot import name 'era_matrix' from 'omegadata.parsers' (C:\Users\Paril Rupani\AppData\Local\Temp\vscode-agent-codex-sandbox-DeDZJD\omega-od05-copy-fingbm0z\repo\src\omegadata\parsers\__init__.py)
+
+tests\unit\test_od05r_reference_evidence.py:15: ImportError
+=========================== short test summary info ===========================
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r01_absent_empty - Im...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r02_json[{}] - Import...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r02_json[{"reference_id":"a","reference_id":"b"}]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r02_json[[]] - Import...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r02_json[{] - ImportE...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r02_json[{"x":NaN}]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes0]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes1]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r04_paraphrase - Impo...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes0]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes1]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes2]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes3]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r06_rights[PENDING]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r06_rights[DENIED] - ...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r07_document_not_row
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r08_sample_not_schema
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r09_conflict - Import...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r10_dates_overlap - I...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r11_versions - Import...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes0]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes1]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes2]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r13_bse_no_inheritance
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SYNTHETIC_TEST_ONLY]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r14_origin[CACHE] - I...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SEED] - Im...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r14_origin[MIRROR] - ...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r14_origin[INDEX_ONLY]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://user:secret@example.invalid/doc]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc?token=secret]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[file:///secret]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[http://example.invalid/doc]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc#secret]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes0]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes1]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes2]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes3]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes4]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes5]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r17_names[../document.pdf]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r17_names[/document.pdf]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r17_names[C:/document.pdf]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r17_names[\\\\host\\share]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r17_names[a\\b.pdf]
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r17_names[con.pdf] - ...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r17_real_link - Impor...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r18_budgets - ImportE...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r19_pinned_corpus - I...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r20_deterministic - I...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r21_pure - ImportErro...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r22_compatibility - I...
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r23_oracle_and_tamper
+ERROR tests/unit/test_od05r_reference_evidence.py::test_r24_runtime_vector - ...
+54 errors in 0.77s
