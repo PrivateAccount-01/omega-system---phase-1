@@ -1,0 +1,519 @@
+[
+  {
+    "name": "help",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--help"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:29.487796+00:00",
+    "end_utc": "2026-11-16T10:23:30.347154+00:00",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "stdout_sha256": "87fe899a19039824b8d12b4d7b488d9744e72e39ed165feaa7971bcd63f03d1d",
+    "stdout": "usage: audit_existing_market_archive.py [-h] --manifest-root MANIFEST_ROOT\n                                        --expected-pins EXPECTED_PINS\n                                        [--source-key SOURCE_KEY]\n                                        [--business-date-start BUSINESS_DATE_START]\n                                        [--business-date-end BUSINESS_DATE_END]\n                                        --metadata-only [--dry-run]\n                                        [--require-real-data]\n                                        [--output-dir OUTPUT_DIR]\n\nExplicit metadata-only CLI; no source-data acquisition or financial\nacceptance.\n\noptions:\n  -h, --help            show this help message and exit\n  --manifest-root MANIFEST_ROOT\n  --expected-pins EXPECTED_PINS\n  --source-key SOURCE_KEY\n  --business-date-start BUSINESS_DATE_START\n  --business-date-end BUSINESS_DATE_END\n  --metadata-only\n  --dry-run\n  --require-real-data\n  --output-dir OUTPUT_DIR\n",
+    "stderr": ""
+  },
+  {
+    "name": "invalid",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--unknown"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:30.347324+00:00",
+    "end_utc": "2026-11-16T10:23:31.200398+00:00",
+    "exit_code": 2,
+    "expected_exit_code": 2,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "",
+    "stderr": "usage: audit_existing_market_archive.py [-h] --manifest-root MANIFEST_ROOT\n                                        --expected-pins EXPECTED_PINS\n                                        [--source-key SOURCE_KEY]\n                                        [--business-date-start BUSINESS_DATE_START]\n                                        [--business-date-end BUSINESS_DATE_END]\n                                        --metadata-only [--dry-run]\n                                        [--require-real-data]\n                                        [--output-dir OUTPUT_DIR]\naudit_existing_market_archive.py: error: the following arguments are required: --manifest-root, --expected-pins, --metadata-only\n"
+  },
+  {
+    "name": "dry-run",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--manifest-root",
+      "E:\\omega system - phase 1\\data\\raw\\nse_equity_bhavcopy",
+      "--expected-pins",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\pins.json",
+      "--metadata-only",
+      "--dry-run"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:31.200448+00:00",
+    "end_utc": "2026-11-16T10:23:32.076589+00:00",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "stdout_sha256": "4d651eb304ca00d422c82b1774abb9ba4e3609d0c6be8c196d8880d9b26e3408",
+    "output": {
+      "boundary_dates": {
+        "2019-12-31": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2020-01-01": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2020-01-02": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-21": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-24": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-25": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-04": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-05": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-08": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-09": {
+          "manifest_count": 0,
+          "session_verified": false
+        }
+      },
+      "classification": "METADATA_ONLY_INVENTORY",
+      "dates": {
+        "2024-01-01": 1,
+        "2024-01-02": 1,
+        "2024-01-03": 1,
+        "2024-01-04": 1,
+        "2024-01-05": 1,
+        "2024-01-08": 1,
+        "2024-07-23": 1,
+        "2024-07-24": 1,
+        "2024-07-25": 1,
+        "2024-07-26": 1,
+        "2024-07-29": 1,
+        "2024-12-24": 1,
+        "2024-12-26": 1,
+        "2024-12-27": 1,
+        "2024-12-30": 1,
+        "2025-01-01": 1,
+        "2025-06-23": 1,
+        "2025-06-24": 1,
+        "2025-06-25": 1,
+        "2025-06-26": 1,
+        "2025-06-27": 1,
+        "2026-04-02": 1,
+        "2026-04-06": 1,
+        "2026-04-07": 1,
+        "2026-04-08": 1,
+        "2026-04-09": 1,
+        "2026-04-10": 1,
+        "2026-04-13": 1,
+        "2026-04-17": 1,
+        "2026-04-30": 1
+      },
+      "declared_modes": {
+        "immutable_versioned": 30
+      },
+      "duplicate_metadata_bytes": 0,
+      "errors": [],
+      "malformed_count": 0,
+      "manifest_count": 30,
+      "market_rows_independently_verified": 0,
+      "market_rows_parsed": 0,
+      "metadata_bytes_read": 15300,
+      "metadata_sha256": "bd819991b1b97f17ae1df348b28a02d8f26a2244d8f1b6de873050699ded9d2d",
+      "months": {
+        "2024-01": 6,
+        "2024-07": 5,
+        "2024-12": 4,
+        "2025-01": 1,
+        "2025-06": 5,
+        "2026-04": 9
+      },
+      "official_reference_verified": 0,
+      "payload_bytes_read": 0,
+      "real_data_scorecard": {
+        "authentic_market_files_verified": 0,
+        "coverage": null,
+        "coverage_denominator": null,
+        "market_rows_independently_verified": 0,
+        "mismatches": null,
+        "missing_sessions": null,
+        "rejected_market_records": 0,
+        "status": "BLOCKED_REAL_DATA",
+        "synthetic_acceptance_contribution": 0
+      },
+      "same_date_observations": 0,
+      "schema_version": "od05t.inventory/v1"
+    }
+  },
+  {
+    "name": "real-acceptance-refused",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--manifest-root",
+      "E:\\omega system - phase 1\\data\\raw\\nse_equity_bhavcopy",
+      "--expected-pins",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\pins.json",
+      "--metadata-only",
+      "--dry-run",
+      "--require-real-data"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:32.076872+00:00",
+    "end_utc": "2026-11-16T10:23:32.750559+00:00",
+    "exit_code": 3,
+    "expected_exit_code": 3,
+    "stdout_sha256": "4d651eb304ca00d422c82b1774abb9ba4e3609d0c6be8c196d8880d9b26e3408",
+    "output": {
+      "boundary_dates": {
+        "2019-12-31": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2020-01-01": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2020-01-02": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-21": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-24": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-25": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-04": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-05": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-08": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-09": {
+          "manifest_count": 0,
+          "session_verified": false
+        }
+      },
+      "classification": "METADATA_ONLY_INVENTORY",
+      "dates": {
+        "2024-01-01": 1,
+        "2024-01-02": 1,
+        "2024-01-03": 1,
+        "2024-01-04": 1,
+        "2024-01-05": 1,
+        "2024-01-08": 1,
+        "2024-07-23": 1,
+        "2024-07-24": 1,
+        "2024-07-25": 1,
+        "2024-07-26": 1,
+        "2024-07-29": 1,
+        "2024-12-24": 1,
+        "2024-12-26": 1,
+        "2024-12-27": 1,
+        "2024-12-30": 1,
+        "2025-01-01": 1,
+        "2025-06-23": 1,
+        "2025-06-24": 1,
+        "2025-06-25": 1,
+        "2025-06-26": 1,
+        "2025-06-27": 1,
+        "2026-04-02": 1,
+        "2026-04-06": 1,
+        "2026-04-07": 1,
+        "2026-04-08": 1,
+        "2026-04-09": 1,
+        "2026-04-10": 1,
+        "2026-04-13": 1,
+        "2026-04-17": 1,
+        "2026-04-30": 1
+      },
+      "declared_modes": {
+        "immutable_versioned": 30
+      },
+      "duplicate_metadata_bytes": 0,
+      "errors": [],
+      "malformed_count": 0,
+      "manifest_count": 30,
+      "market_rows_independently_verified": 0,
+      "market_rows_parsed": 0,
+      "metadata_bytes_read": 15300,
+      "metadata_sha256": "bd819991b1b97f17ae1df348b28a02d8f26a2244d8f1b6de873050699ded9d2d",
+      "months": {
+        "2024-01": 6,
+        "2024-07": 5,
+        "2024-12": 4,
+        "2025-01": 1,
+        "2025-06": 5,
+        "2026-04": 9
+      },
+      "official_reference_verified": 0,
+      "payload_bytes_read": 0,
+      "real_data_scorecard": {
+        "authentic_market_files_verified": 0,
+        "coverage": null,
+        "coverage_denominator": null,
+        "market_rows_independently_verified": 0,
+        "mismatches": null,
+        "missing_sessions": null,
+        "rejected_market_records": 0,
+        "status": "BLOCKED_REAL_DATA",
+        "synthetic_acceptance_contribution": 0
+      },
+      "same_date_observations": 0,
+      "schema_version": "od05t.inventory/v1"
+    }
+  },
+  {
+    "name": "populated-output",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--manifest-root",
+      "E:\\omega system - phase 1\\data\\raw\\nse_equity_bhavcopy",
+      "--expected-pins",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\pins.json",
+      "--metadata-only",
+      "--output-dir",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\report"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:32.750785+00:00",
+    "end_utc": "2026-11-16T10:23:33.418715+00:00",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "stdout_sha256": "4d651eb304ca00d422c82b1774abb9ba4e3609d0c6be8c196d8880d9b26e3408",
+    "output": {
+      "boundary_dates": {
+        "2019-12-31": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2020-01-01": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2020-01-02": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-21": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-24": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-06-25": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-04": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-05": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-08": {
+          "manifest_count": 0,
+          "session_verified": false
+        },
+        "2024-07-09": {
+          "manifest_count": 0,
+          "session_verified": false
+        }
+      },
+      "classification": "METADATA_ONLY_INVENTORY",
+      "dates": {
+        "2024-01-01": 1,
+        "2024-01-02": 1,
+        "2024-01-03": 1,
+        "2024-01-04": 1,
+        "2024-01-05": 1,
+        "2024-01-08": 1,
+        "2024-07-23": 1,
+        "2024-07-24": 1,
+        "2024-07-25": 1,
+        "2024-07-26": 1,
+        "2024-07-29": 1,
+        "2024-12-24": 1,
+        "2024-12-26": 1,
+        "2024-12-27": 1,
+        "2024-12-30": 1,
+        "2025-01-01": 1,
+        "2025-06-23": 1,
+        "2025-06-24": 1,
+        "2025-06-25": 1,
+        "2025-06-26": 1,
+        "2025-06-27": 1,
+        "2026-04-02": 1,
+        "2026-04-06": 1,
+        "2026-04-07": 1,
+        "2026-04-08": 1,
+        "2026-04-09": 1,
+        "2026-04-10": 1,
+        "2026-04-13": 1,
+        "2026-04-17": 1,
+        "2026-04-30": 1
+      },
+      "declared_modes": {
+        "immutable_versioned": 30
+      },
+      "duplicate_metadata_bytes": 0,
+      "errors": [],
+      "malformed_count": 0,
+      "manifest_count": 30,
+      "market_rows_independently_verified": 0,
+      "market_rows_parsed": 0,
+      "metadata_bytes_read": 15300,
+      "metadata_sha256": "bd819991b1b97f17ae1df348b28a02d8f26a2244d8f1b6de873050699ded9d2d",
+      "months": {
+        "2024-01": 6,
+        "2024-07": 5,
+        "2024-12": 4,
+        "2025-01": 1,
+        "2025-06": 5,
+        "2026-04": 9
+      },
+      "official_reference_verified": 0,
+      "payload_bytes_read": 0,
+      "real_data_scorecard": {
+        "authentic_market_files_verified": 0,
+        "coverage": null,
+        "coverage_denominator": null,
+        "market_rows_independently_verified": 0,
+        "mismatches": null,
+        "missing_sessions": null,
+        "rejected_market_records": 0,
+        "status": "BLOCKED_REAL_DATA",
+        "synthetic_acceptance_contribution": 0
+      },
+      "same_date_observations": 0,
+      "schema_version": "od05t.inventory/v1"
+    }
+  },
+  {
+    "name": "existing-output-refused",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--manifest-root",
+      "E:\\omega system - phase 1\\data\\raw\\nse_equity_bhavcopy",
+      "--expected-pins",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\pins.json",
+      "--metadata-only",
+      "--output-dir",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\report"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:33.418983+00:00",
+    "end_utc": "2026-11-16T10:23:34.018627+00:00",
+    "exit_code": 2,
+    "expected_exit_code": 2,
+    "stdout_sha256": "dd15ebacb33738b8ba3867ad468b3e18f19792c731811f072050803077aa34ed",
+    "output": {
+      "state": "REFUSED",
+      "reason_code": "OUTPUT_UNSAFE",
+      "payload_bytes_read": 0,
+      "market_rows_parsed": 0,
+      "market_rows_independently_verified": 0,
+      "official_reference_verified": 0
+    }
+  },
+  {
+    "name": "protected-output-refused",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--manifest-root",
+      "E:\\omega system - phase 1\\data\\raw\\nse_equity_bhavcopy",
+      "--expected-pins",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\pins.json",
+      "--metadata-only",
+      "--output-dir",
+      "E:\\omega system - phase 1\\data\\raw\\nse_equity_bhavcopy\\od05t-output-must-not-exist"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:34.018716+00:00",
+    "end_utc": "2026-11-16T10:23:34.676394+00:00",
+    "exit_code": 2,
+    "expected_exit_code": 2,
+    "stdout_sha256": "dd15ebacb33738b8ba3867ad468b3e18f19792c731811f072050803077aa34ed",
+    "output": {
+      "state": "REFUSED",
+      "reason_code": "OUTPUT_UNSAFE",
+      "payload_bytes_read": 0,
+      "market_rows_parsed": 0,
+      "market_rows_independently_verified": 0,
+      "official_reference_verified": 0
+    }
+  },
+  {
+    "name": "unknown-source-refused",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "E:\\omega system - phase 1\\scripts\\audit_existing_market_archive.py",
+      "--manifest-root",
+      "E:\\omega system - phase 1\\data\\raw\\nse_equity_bhavcopy",
+      "--expected-pins",
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-cli-d0us__co\\pins.json",
+      "--metadata-only",
+      "--dry-run",
+      "--source-key",
+      "NSE_FO_BHAVCOPY"
+    ],
+    "cwd": "E:\\omega system - phase 1",
+    "start_utc": "2026-11-16T10:23:34.676503+00:00",
+    "end_utc": "2026-11-16T10:23:35.396206+00:00",
+    "exit_code": 2,
+    "expected_exit_code": 2,
+    "stdout_sha256": "d96073874d97e029f67ffc410fd4c9b3fe040adb1b88e4a350562696b30cecd3",
+    "output": {
+      "state": "REFUSED",
+      "reason_code": "SOURCE_SCOPE",
+      "payload_bytes_read": 0,
+      "market_rows_parsed": 0,
+      "market_rows_independently_verified": 0,
+      "official_reference_verified": 0
+    }
+  }
+]

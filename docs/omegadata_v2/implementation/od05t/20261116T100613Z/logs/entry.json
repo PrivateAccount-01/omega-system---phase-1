@@ -1,0 +1,74 @@
+[
+  {
+    "argv": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "start_utc": "2026-11-16T10:08:22.692525+00:00",
+    "end_utc": "2026-11-16T10:08:22.745614+00:00",
+    "exit_code": 0,
+    "stdout": "feature/od01-source-rights\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "start_utc": "2026-11-16T10:08:22.745627+00:00",
+    "end_utc": "2026-11-16T10:08:22.801486+00:00",
+    "exit_code": 0,
+    "stdout": "db087fb9ee12887d3d9c787b797bb6968ad45440\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff"
+    ],
+    "start_utc": "2026-11-16T10:08:22.801501+00:00",
+    "end_utc": "2026-11-16T10:08:22.867844+00:00",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--cached"
+    ],
+    "start_utc": "2026-11-16T10:08:22.867856+00:00",
+    "end_utc": "2026-11-16T10:08:22.923808+00:00",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "start_utc": "2026-11-16T10:08:22.923842+00:00",
+    "end_utc": "2026-11-16T10:08:22.996008+00:00",
+    "exit_code": 0,
+    "stdout": "?? .venv-linux/\n?? OMEGADATA_OD05T_REAL_DATA_PROVENANCE_TRIAGE_CODEX_MASTER_PROMPT_2026-11-16.md\n?? artifacts/gnupg/openpgp-revocs.d/36B1626F19983C4B8F7C643B26A3DDBB6030631F.rev\n?? artifacts/gnupg/private-keys-v1.d/CC8A0E3CC8C92D4A27115F70CA3DE3DCC3C7CEE1.key\n?? artifacts/gnupg/private-keys-v1.d/E1CF3EA03F1E3F45D57248F5A92D37E1FE153B7A.key\n?? docs/omegadata_v2/implementation/od05t/\n?? tests/unit/od05t_metadata_oracle.py\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "merge-base",
+      "main",
+      "HEAD"
+    ],
+    "start_utc": "2026-11-16T10:08:22.996021+00:00",
+    "end_utc": "2026-11-16T10:08:23.050558+00:00",
+    "exit_code": 0,
+    "stdout": "d4b5a58f0c50dc348e0d4e1150a725cc6fab5674\n",
+    "stderr": ""
+  }
+]

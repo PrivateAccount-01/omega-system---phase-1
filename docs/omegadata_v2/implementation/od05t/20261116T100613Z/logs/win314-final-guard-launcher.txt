@@ -1,0 +1,38 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\verification_runner.py",
+    "win314-final-guard",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+    "pytest",
+    "-q",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\guard_probe.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T10:19:34.964060+00:00",
+  "end_utc": "2026-11-16T10:19:35.776446+00:00",
+  "elapsed_seconds": 0.8123769000521861,
+  "exit_code": 0,
+  "output": "win314-final-guard.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-9lmju8_v",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "guard_denials": {
+    "DNS": 1,
+    "SOCKET": 1,
+    "UDP": 1,
+    "SUBPROCESS": 1,
+    "PROTECTED_WRITE": 1,
+    "SIGNING_READ": 1
+  },
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 5
+  }
+}
+.....                                                                    [100%]
+5 passed in 0.05s
+

@@ -1,0 +1,110 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\verification_runner.py",
+    "win314-review-green",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05t_archive_inventory.py",
+    "-k",
+    "later"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T10:15:49.238339+00:00",
+  "end_utc": "2026-11-16T10:15:50.065297+00:00",
+  "elapsed_seconds": 0.8269448000355624,
+  "exit_code": 0,
+  "output": "win314-review-green.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-vpogykjp",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[12]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[CON.manifest.json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[aux.manifest.json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[a/COM1.manifest.json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [
+    "tests/unit/test_od05t_archive_inventory.py::test_m01_real_count_and_independent_pins",
+    "tests/unit/test_od05t_archive_inventory.py::test_m02_canonical_order_and_frozen_identity",
+    "tests/unit/test_od05t_archive_inventory.py::test_m03_real_source_date_mode_missing_information",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[truncated]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[array]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[binary]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[duplicate]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[oversize]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_mixed_namespace_and_budgets",
+    "tests/unit/test_od05t_archive_inventory.py::test_m05_distinct_observations_and_revisions",
+    "tests/unit/test_od05t_archive_inventory.py::test_m06_never_open_manifest_payload_path",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[../escape]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[//server/share]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[C:\\\\private]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[gnupg]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[.venv]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[file]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[directory]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[hardlink]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_windows_junction",
+    "tests/unit/test_od05t_archive_inventory.py::test_m08_redaction",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[PENDING_REVIEW]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[REVOKED]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[APPROVED]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[UNKNOWN]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m10_payload_checksum_is_claim_only",
+    "tests/unit/test_od05t_archive_inventory.py::test_m11_network_and_original_bytes_unchanged",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[empty]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[missing]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[tamper]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[count]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[missing_pins]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m13_duplicate_and_mutable_pins_refused",
+    "tests/unit/test_od05t_archive_inventory.py::test_m14_actual_boundary_matrix_not_session_proof",
+    "tests/unit/test_od05t_archive_inventory.py::test_m15_scorecard_and_cli_modes",
+    "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[1]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[8]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[32]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m17_cli_help_invalid_and_protected",
+    "tests/unit/test_od05t_archive_inventory.py::test_m18_production_interfaces_unchanged"
+  ],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 6
+  }
+}

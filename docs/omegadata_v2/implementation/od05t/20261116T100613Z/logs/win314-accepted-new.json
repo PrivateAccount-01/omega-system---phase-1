@@ -1,0 +1,320 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\verification_runner.py",
+    "win314-accepted-new",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05t_archive_inventory.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T10:22:50.618505+00:00",
+  "end_utc": "2026-11-16T10:22:58.939566+00:00",
+  "elapsed_seconds": 8.3210403000121,
+  "exit_code": 0,
+  "output": "win314-accepted-new.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-kvi5kkn0",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m01_real_count_and_independent_pins",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m02_canonical_order_and_frozen_identity",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m03_real_source_date_mode_missing_information",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[truncated]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[array]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[binary]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[duplicate]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[oversize]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_mixed_namespace_and_budgets",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m05_distinct_observations_and_revisions",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m06_never_open_manifest_payload_path",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[../escape]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[//server/share]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[C:\\\\private]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[gnupg]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[.venv]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[file]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05t-copy-6uavfd8p\\\\repo\\\\tests\\\\unit\\\\test_od05t_archive_inventory.py', 171, 'Skipped: Real link unavailable: OSError; paired runtime required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[directory]",
+      "when": "call",
+      "outcome": "skipped",
+      "reason": "('C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od05t-copy-6uavfd8p\\\\repo\\\\tests\\\\unit\\\\test_od05t_archive_inventory.py', 171, 'Skipped: Real link unavailable: OSError; paired runtime required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[hardlink]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_windows_junction",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m08_redaction",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[PENDING_REVIEW]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[REVOKED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[APPROVED]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[UNKNOWN]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m10_payload_checksum_is_claim_only",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m11_network_and_original_bytes_unchanged",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[empty]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[missing]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[tamper]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[count]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[missing_pins]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m13_duplicate_and_mutable_pins_refused",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m14_actual_boundary_matrix_not_session_proof",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m15_scorecard_and_cli_modes",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[8]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[32]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m17_cli_help_invalid_and_protected",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m18_production_interfaces_unchanged",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value0]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value1]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[12]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[CON.manifest.json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[aux.manifest.json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[a/COM1.manifest.json]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m06_later_pin_filename_refused_before_open[.env]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m06_later_pin_filename_refused_before_open[private.key]",
+      "when": "call",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 46,
+    "skipped": 2
+  }
+}

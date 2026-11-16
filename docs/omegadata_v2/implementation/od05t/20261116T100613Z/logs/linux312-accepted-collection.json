@@ -1,0 +1,35 @@
+{
+  "command": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05t/20261116T100613Z/verification_runner.py",
+    "linux312-accepted-collection",
+    "/home/parilrupani/omega-od05t-w22901hd/repo",
+    "pytest",
+    "--collect-only",
+    "-q",
+    "-m",
+    "not realdata"
+  ],
+  "cwd": "/home/parilrupani/omega-od05t-w22901hd/repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "start_utc": "2026-11-16T10:22:44.783206+00:00",
+  "end_utc": "2026-11-16T10:22:48.242351+00:00",
+  "elapsed_seconds": 3.4591359379999744,
+  "exit_code": 0,
+  "output": "linux312-accepted-collection.txt",
+  "sandbox": "/tmp/omega-od02v-tests-z1h8f7ze",
+  "root": "/home/parilrupani/omega-od05t-w22901hd/repo",
+  "guard_denials": {},
+  "test_reports": [],
+  "deselected": [
+    "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+    "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+  ],
+  "symlink_observations": [],
+  "call_counts": {}
+}

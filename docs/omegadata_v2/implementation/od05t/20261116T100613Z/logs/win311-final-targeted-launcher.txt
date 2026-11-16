@@ -1,0 +1,52 @@
+{
+  "command": [
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\verification_runner.py",
+    "win311-final-targeted",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-n69228z_\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od01_source_rights.py",
+    "tests/unit/test_od01r_rights_hardening.py",
+    "tests/unit/test_od02_acquisition.py",
+    "tests/unit/test_od02v_portability.py",
+    "tests/unit/test_od04_raw_archive.py",
+    "tests/unit/test_od04r_adversarial.py",
+    "tests/unit/test_od05_era_parsing.py",
+    "tests/unit/test_od05r_reference_evidence.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-n69228z_\\repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T10:18:50.241057+00:00",
+  "end_utc": "2026-11-16T10:19:22.785536+00:00",
+  "elapsed_seconds": 32.54699999996228,
+  "exit_code": 0,
+  "output": "win311-final-targeted.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-n69228z_\\repo",
+  "guard_denials": {
+    "DNS": 2,
+    "SUBPROCESS": 2,
+    "PROTECTED_WRITE": 4,
+    "SOCKET": 1,
+    "UDP": 1
+  },
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 521,
+    "skipped": 11
+  }
+}
+x-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v00_real_file_symlink_cap0\\synthetic-target.txt' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v00_real_file_symlink_cap0\\synthetic-link.txt'
+SKIPPED [1] tests\unit\test_od02v_portability.py:103: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at0\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\absent.json' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at0\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od02v_portability.py:103: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at1\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\loop.json' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at1\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od02v_portability.py:103: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at2\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\safe.json' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at2\\raw\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od02v_portability.py:103: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at3\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\absent.json' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at3\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od02v_portability.py:103: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at4\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\loop.json' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at4\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od02v_portability.py:103: Actual symlink capability unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at5\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\safe.json' -> 'C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-amvc592d\\pytest\\test_v03_file_links_changed_at5\\seed\\nse_equity_bhavcopy\\year=2024\\month=01\\20240102.latest.json'
+SKIPPED [1] tests\unit\test_od05r_reference_evidence.py:203: File symlink privilege unavailable; paired Linux node required
+521 passed, 11 skipped, 1 warning in 31.15s
+

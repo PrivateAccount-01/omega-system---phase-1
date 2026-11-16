@@ -1,0 +1,37 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\verification_runner.py",
+    "win314-accepted-performance",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+    "pytest",
+    "-q",
+    "-s",
+    "tests/unit/test_od05t_archive_inventory.py",
+    "-k",
+    "m16"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T10:24:58.101332+00:00",
+  "end_utc": "2026-11-16T10:25:00.829701+00:00",
+  "elapsed_seconds": 2.728359400003683,
+  "exit_code": 0,
+  "output": "win314-accepted-performance.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-e0fskabt",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "guard_denials": {},
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 3
+  }
+}
+{"real_metadata_files": 1, "seconds": 0.0069982000277377665, "peak_python_bytes": 207165}
+.{"real_metadata_files": 8, "seconds": 0.022117899963632226, "peak_python_bytes": 216575}
+.{"real_metadata_files": 32, "seconds": 0.059620500018354505, "peak_python_bytes": 238678}
+.
+3 passed, 45 deselected in 0.81s
+

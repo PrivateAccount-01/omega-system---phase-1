@@ -1,0 +1,110 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\verification_runner.py",
+    "win314-review-red",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05t_archive_inventory.py",
+    "-k",
+    "later"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T10:15:25.767848+00:00",
+  "end_utc": "2026-11-16T10:15:26.733874+00:00",
+  "elapsed_seconds": 0.9660167999682017,
+  "exit_code": 1,
+  "output": "win314-review-red.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-ebfhz0ug",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "guard_denials": {},
+  "test_reports": [
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value0]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "value = []\n\n    @pytest.mark.parametrize(\"value\", [[], {}, 12])\n    def test_m04_later_wrong_mode_type_is_typed_refusal(value):\n        a = api()\n        body = json.loads(raw())\n        body[\"storage_mode\"] = value\n        with pytest.raises(a.InventoryError, match=\"MALFORMED_METADATA\"):\n>           a.parse_metadata(json.dumps(body).encode(), \"entry.manifest.json\")\n\ntests\\unit\\test_od05t_archive_inventory.py:362: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nraw = b'{\"source_key\": \"NSE_EQUITY_BHAVCOPY\", \"as_of\": \"2011-06-22\", \"checksum\": \"1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path\": \"data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json\"}'\nname = 'entry.manifest.json', source_key = 'NSE_EQUITY_BHAVCOPY'\n\n    def parse_metadata(raw: bytes, name: str, source_key: str = SOURCE_KEY) -> Candidate:\n        relative_name(name)\n        if source_key != SOURCE_KEY:\n            raise InventoryError(\"SOURCE_SCOPE\")\n        body = json_object(raw, 65536)\n        if body.get(\"source_key\") != source_key:\n            raise InventoryError(\"SOURCE_SCOPE\")\n        day = body.get(\"as_of\")\n        try:\n            if not isinstance(day, str) or not re.fullmatch(r\"[0-9]{4}-[0-9]{2}-[0-9]{2}\", day):\n                raise ValueError\n            date.fromisoformat(day)\n        except ValueError:\n            raise InventoryError(\"DATE_METADATA_INVALID\") from None\n        declared_mode = body.get(\"storage_mode\")\n        modes = {\"immutable_seed_cache\": \"SEED_IMPORT_UNVERIFIED\",\n                 \"immutable_versioned\": \"VERSIONED_CACHE_UNVERIFIED\"}\n>       mode = declared_mode if declared_mode in modes else \"MISSING_INFORMATION\"\n                                ^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: cannot use 'list' as a dict key (unhashable type: 'list')\n\nsrc\\omegadata\\parsers\\archive_candidate_inventory.py:168: TypeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value1]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "value = {}\n\n    @pytest.mark.parametrize(\"value\", [[], {}, 12])\n    def test_m04_later_wrong_mode_type_is_typed_refusal(value):\n        a = api()\n        body = json.loads(raw())\n        body[\"storage_mode\"] = value\n        with pytest.raises(a.InventoryError, match=\"MALFORMED_METADATA\"):\n>           a.parse_metadata(json.dumps(body).encode(), \"entry.manifest.json\")\n\ntests\\unit\\test_od05t_archive_inventory.py:362: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nraw = b'{\"source_key\": \"NSE_EQUITY_BHAVCOPY\", \"as_of\": \"2011-06-22\", \"checksum\": \"1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path\": \"data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json\"}'\nname = 'entry.manifest.json', source_key = 'NSE_EQUITY_BHAVCOPY'\n\n    def parse_metadata(raw: bytes, name: str, source_key: str = SOURCE_KEY) -> Candidate:\n        relative_name(name)\n        if source_key != SOURCE_KEY:\n            raise InventoryError(\"SOURCE_SCOPE\")\n        body = json_object(raw, 65536)\n        if body.get(\"source_key\") != source_key:\n            raise InventoryError(\"SOURCE_SCOPE\")\n        day = body.get(\"as_of\")\n        try:\n            if not isinstance(day, str) or not re.fullmatch(r\"[0-9]{4}-[0-9]{2}-[0-9]{2}\", day):\n                raise ValueError\n            date.fromisoformat(day)\n        except ValueError:\n            raise InventoryError(\"DATE_METADATA_INVALID\") from None\n        declared_mode = body.get(\"storage_mode\")\n        modes = {\"immutable_seed_cache\": \"SEED_IMPORT_UNVERIFIED\",\n                 \"immutable_versioned\": \"VERSIONED_CACHE_UNVERIFIED\"}\n>       mode = declared_mode if declared_mode in modes else \"MISSING_INFORMATION\"\n                                ^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: cannot use 'dict' as a dict key (unhashable type: 'dict')\n\nsrc\\omegadata\\parsers\\archive_candidate_inventory.py:168: TypeError"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[12]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "value = 12\n\n    @pytest.mark.parametrize(\"value\", [[], {}, 12])\n    def test_m04_later_wrong_mode_type_is_typed_refusal(value):\n        a = api()\n        body = json.loads(raw())\n        body[\"storage_mode\"] = value\n>       with pytest.raises(a.InventoryError, match=\"MALFORMED_METADATA\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>\n\ntests\\unit\\test_od05t_archive_inventory.py:361: Failed"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[CON.manifest.json]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "name = 'CON.manifest.json'\n\n    @pytest.mark.parametrize(\"name\", [\"CON.manifest.json\", \"aux.manifest.json\", \"a/COM1.manifest.json\"])\n    def test_m07_later_portable_device_names(name):\n        a = api()\n>       with pytest.raises(a.InventoryError, match=\"PATH_UNSAFE\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>\n\ntests\\unit\\test_od05t_archive_inventory.py:368: Failed"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[aux.manifest.json]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "name = 'aux.manifest.json'\n\n    @pytest.mark.parametrize(\"name\", [\"CON.manifest.json\", \"aux.manifest.json\", \"a/COM1.manifest.json\"])\n    def test_m07_later_portable_device_names(name):\n        a = api()\n>       with pytest.raises(a.InventoryError, match=\"PATH_UNSAFE\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>\n\ntests\\unit\\test_od05t_archive_inventory.py:368: Failed"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[a/COM1.manifest.json]",
+      "when": "call",
+      "outcome": "failed",
+      "reason": "name = 'a/COM1.manifest.json'\n\n    @pytest.mark.parametrize(\"name\", [\"CON.manifest.json\", \"aux.manifest.json\", \"a/COM1.manifest.json\"])\n    def test_m07_later_portable_device_names(name):\n        a = api()\n>       with pytest.raises(a.InventoryError, match=\"PATH_UNSAFE\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>\n\ntests\\unit\\test_od05t_archive_inventory.py:368: Failed"
+    }
+  ],
+  "deselected": [
+    "tests/unit/test_od05t_archive_inventory.py::test_m01_real_count_and_independent_pins",
+    "tests/unit/test_od05t_archive_inventory.py::test_m02_canonical_order_and_frozen_identity",
+    "tests/unit/test_od05t_archive_inventory.py::test_m03_real_source_date_mode_missing_information",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[truncated]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[array]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[binary]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[duplicate]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_malformed_metadata[oversize]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m04_mixed_namespace_and_budgets",
+    "tests/unit/test_od05t_archive_inventory.py::test_m05_distinct_observations_and_revisions",
+    "tests/unit/test_od05t_archive_inventory.py::test_m06_never_open_manifest_payload_path",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[../escape]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[//server/share]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[C:\\\\private]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[gnupg]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_unsafe_paths[.venv]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[file]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[directory]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_real_links[hardlink]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m07_windows_junction",
+    "tests/unit/test_od05t_archive_inventory.py::test_m08_redaction",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[PENDING_REVIEW]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[REVOKED]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[APPROVED]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m09_no_self_authorizing_rights[UNKNOWN]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m10_payload_checksum_is_claim_only",
+    "tests/unit/test_od05t_archive_inventory.py::test_m11_network_and_original_bytes_unchanged",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[empty]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[missing]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[tamper]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[count]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m12_nonvacuous_expected_corpus[missing_pins]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m13_duplicate_and_mutable_pins_refused",
+    "tests/unit/test_od05t_archive_inventory.py::test_m14_actual_boundary_matrix_not_session_proof",
+    "tests/unit/test_od05t_archive_inventory.py::test_m15_scorecard_and_cli_modes",
+    "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[1]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[8]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m16_real_metadata_resource_measurement[32]",
+    "tests/unit/test_od05t_archive_inventory.py::test_m17_cli_help_invalid_and_protected",
+    "tests/unit/test_od05t_archive_inventory.py::test_m18_production_interfaces_unchanged"
+  ],
+  "symlink_observations": [],
+  "call_counts": {
+    "failed": 6
+  }
+}

@@ -1,0 +1,140 @@
+FFFFFF                                                                   [100%]
+================================== FAILURES ===================================
+___________ test_m04_later_wrong_mode_type_is_typed_refusal[value0] ___________
+
+value = []
+
+    @pytest.mark.parametrize("value", [[], {}, 12])
+    def test_m04_later_wrong_mode_type_is_typed_refusal(value):
+        a = api()
+        body = json.loads(raw())
+        body["storage_mode"] = value
+        with pytest.raises(a.InventoryError, match="MALFORMED_METADATA"):
+>           a.parse_metadata(json.dumps(body).encode(), "entry.manifest.json")
+
+tests\unit\test_od05t_archive_inventory.py:362: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw = b'{"source_key": "NSE_EQUITY_BHAVCOPY", "as_of": "2011-06-22", "checksum": "1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json"}'
+name = 'entry.manifest.json', source_key = 'NSE_EQUITY_BHAVCOPY'
+
+    def parse_metadata(raw: bytes, name: str, source_key: str = SOURCE_KEY) -> Candidate:
+        relative_name(name)
+        if source_key != SOURCE_KEY:
+            raise InventoryError("SOURCE_SCOPE")
+        body = json_object(raw, 65536)
+        if body.get("source_key") != source_key:
+            raise InventoryError("SOURCE_SCOPE")
+        day = body.get("as_of")
+        try:
+            if not isinstance(day, str) or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", day):
+                raise ValueError
+            date.fromisoformat(day)
+        except ValueError:
+            raise InventoryError("DATE_METADATA_INVALID") from None
+        declared_mode = body.get("storage_mode")
+        modes = {"immutable_seed_cache": "SEED_IMPORT_UNVERIFIED",
+                 "immutable_versioned": "VERSIONED_CACHE_UNVERIFIED"}
+>       mode = declared_mode if declared_mode in modes else "MISSING_INFORMATION"
+                                ^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: cannot use 'list' as a dict key (unhashable type: 'list')
+
+src\omegadata\parsers\archive_candidate_inventory.py:168: TypeError
+___________ test_m04_later_wrong_mode_type_is_typed_refusal[value1] ___________
+
+value = {}
+
+    @pytest.mark.parametrize("value", [[], {}, 12])
+    def test_m04_later_wrong_mode_type_is_typed_refusal(value):
+        a = api()
+        body = json.loads(raw())
+        body["storage_mode"] = value
+        with pytest.raises(a.InventoryError, match="MALFORMED_METADATA"):
+>           a.parse_metadata(json.dumps(body).encode(), "entry.manifest.json")
+
+tests\unit\test_od05t_archive_inventory.py:362: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw = b'{"source_key": "NSE_EQUITY_BHAVCOPY", "as_of": "2011-06-22", "checksum": "1eba7f9259b5638bf09c74bf96a0f66c8ac1c2c41c..._path": "data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/year=2011/month=06/20110622__1eba7f9259b5.manifest.json"}'
+name = 'entry.manifest.json', source_key = 'NSE_EQUITY_BHAVCOPY'
+
+    def parse_metadata(raw: bytes, name: str, source_key: str = SOURCE_KEY) -> Candidate:
+        relative_name(name)
+        if source_key != SOURCE_KEY:
+            raise InventoryError("SOURCE_SCOPE")
+        body = json_object(raw, 65536)
+        if body.get("source_key") != source_key:
+            raise InventoryError("SOURCE_SCOPE")
+        day = body.get("as_of")
+        try:
+            if not isinstance(day, str) or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", day):
+                raise ValueError
+            date.fromisoformat(day)
+        except ValueError:
+            raise InventoryError("DATE_METADATA_INVALID") from None
+        declared_mode = body.get("storage_mode")
+        modes = {"immutable_seed_cache": "SEED_IMPORT_UNVERIFIED",
+                 "immutable_versioned": "VERSIONED_CACHE_UNVERIFIED"}
+>       mode = declared_mode if declared_mode in modes else "MISSING_INFORMATION"
+                                ^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: cannot use 'dict' as a dict key (unhashable type: 'dict')
+
+src\omegadata\parsers\archive_candidate_inventory.py:168: TypeError
+_____________ test_m04_later_wrong_mode_type_is_typed_refusal[12] _____________
+
+value = 12
+
+    @pytest.mark.parametrize("value", [[], {}, 12])
+    def test_m04_later_wrong_mode_type_is_typed_refusal(value):
+        a = api()
+        body = json.loads(raw())
+        body["storage_mode"] = value
+>       with pytest.raises(a.InventoryError, match="MALFORMED_METADATA"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>
+
+tests\unit\test_od05t_archive_inventory.py:361: Failed
+___________ test_m07_later_portable_device_names[CON.manifest.json] ___________
+
+name = 'CON.manifest.json'
+
+    @pytest.mark.parametrize("name", ["CON.manifest.json", "aux.manifest.json", "a/COM1.manifest.json"])
+    def test_m07_later_portable_device_names(name):
+        a = api()
+>       with pytest.raises(a.InventoryError, match="PATH_UNSAFE"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>
+
+tests\unit\test_od05t_archive_inventory.py:368: Failed
+___________ test_m07_later_portable_device_names[aux.manifest.json] ___________
+
+name = 'aux.manifest.json'
+
+    @pytest.mark.parametrize("name", ["CON.manifest.json", "aux.manifest.json", "a/COM1.manifest.json"])
+    def test_m07_later_portable_device_names(name):
+        a = api()
+>       with pytest.raises(a.InventoryError, match="PATH_UNSAFE"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>
+
+tests\unit\test_od05t_archive_inventory.py:368: Failed
+_________ test_m07_later_portable_device_names[a/COM1.manifest.json] __________
+
+name = 'a/COM1.manifest.json'
+
+    @pytest.mark.parametrize("name", ["CON.manifest.json", "aux.manifest.json", "a/COM1.manifest.json"])
+    def test_m07_later_portable_device_names(name):
+        a = api()
+>       with pytest.raises(a.InventoryError, match="PATH_UNSAFE"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'omegadata.parsers.archive_candidate_inventory.InventoryError'>
+
+tests\unit\test_od05t_archive_inventory.py:368: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value0]
+FAILED tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[value1]
+FAILED tests/unit/test_od05t_archive_inventory.py::test_m04_later_wrong_mode_type_is_typed_refusal[12]
+FAILED tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[CON.manifest.json]
+FAILED tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[aux.manifest.json]
+FAILED tests/unit/test_od05t_archive_inventory.py::test_m07_later_portable_device_names[a/COM1.manifest.json]
+6 failed, 40 deselected in 0.33s

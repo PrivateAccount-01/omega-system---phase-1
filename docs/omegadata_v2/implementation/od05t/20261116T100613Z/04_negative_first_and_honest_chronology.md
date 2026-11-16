@@ -1,0 +1,9 @@
+OD-05T | run 20261116T100613Z | branch feature/od01-source-rights | HEAD db087fb9ee12887d3d9c787b797bb6968ad45440.
+
+# Executed negative-first chronology
+
+[Original pre-code freeze](logs/precode-freeze.json) covers all 18 M groups and the stdlib oracle, with original metadata pins independently frozen first. Both application files were absent. First red run: 39 failed plus two fixture errors; pytest's oversized generated metadata parameter ID caused Windows fixture path failure. Short parameter IDs corrected the harness, with [separate pre-code correction freeze](logs/precode-harness-correction-freeze.json), without assertion changes. Corrected red: 40 failed due to missing API, NEW_FEATURE_ABSENT, not a reproduced old bug.
+
+First implementation: 38 pass/2 unavailable-privilege link skips on Windows. Later six adversarial cases reproduced non-string storage-mode handling and portable device-name acceptance; [red](logs/win314-review-red.json) then [green](logs/win314-review-green.json) retained. Later two canary tests reproduced attempted non-JSON pin-name reads; [red](logs/win314-pin-review-red.json) and [green](logs/win314-pin-review-green.json) retained. No actual environment/key contents were read; disposable canaries and monkeypatched pre-open assertions were used.
+
+Final suite has 48 cases and every M01-M18 group executes. Formatting/import cleanup did not weaken expectations. Later cases are not retroactively claimed pre-code. Initial *-final Windows matrices precede the pin-name hardening and are superseded by *-accepted matrices. [Per-node group ledger](logs/M01-M18-results.json), [runtime matrix](logs/runtime-matrix.json) and [R01-R06 status](logs/R01-R06-results.json) preserve separate scopes. No synthetic financial acceptance or fabricated market fixture.

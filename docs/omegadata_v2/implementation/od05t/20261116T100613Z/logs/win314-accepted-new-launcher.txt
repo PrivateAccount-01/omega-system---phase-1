@@ -1,0 +1,34 @@
+{
+  "command": [
+    "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05t\\20261116T100613Z\\verification_runner.py",
+    "win314-accepted-new",
+    "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+    "pytest",
+    "-q",
+    "tests/unit/test_od05t_archive_inventory.py"
+  ],
+  "cwd": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "baseline": "db087fb9ee12887d3d9c787b797bb6968ad45440",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]",
+  "start_utc": "2026-11-16T10:22:50.618505+00:00",
+  "end_utc": "2026-11-16T10:22:58.939566+00:00",
+  "elapsed_seconds": 8.3210403000121,
+  "exit_code": 0,
+  "output": "win314-accepted-new.txt",
+  "sandbox": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-tests-kvi5kkn0",
+  "root": "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05t-copy-6uavfd8p\\repo",
+  "guard_denials": {},
+  "symlink_observations": [],
+  "call_counts": {
+    "passed": 46,
+    "skipped": 2
+  }
+}
+................ss..............................                         [100%]
+=========================== short test summary info ===========================
+SKIPPED [2] tests\unit\test_od05t_archive_inventory.py:171: Real link unavailable: OSError; paired runtime required
+46 passed, 2 skipped in 7.23s
+

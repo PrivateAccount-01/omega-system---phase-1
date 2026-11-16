@@ -1,0 +1,119 @@
+{
+  "utc": "2026-11-16T10:28:44.524909+00:00",
+  "mechanical_checks_passed": true,
+  "gatekeeper": "OD05T_METADATA_TOOL_TECHNICAL_PASS_REAL_DATA_PENDING",
+  "financial_status": "BLOCKED_REAL_DATA",
+  "metadata_manifests": 3626,
+  "actual_market_files_verified": 0,
+  "actual_market_rows_verified": 0,
+  "real_reference_groups_blocked": 6,
+  "new_cases_per_runtime": 48,
+  "source_hashes": {
+    "src/omegadata/parsers/archive_candidate_inventory.py": "f7c6c2a877dbf3f9e97a0704125cd8acde817c50328f6afb56c356d659ea39f8",
+    "scripts/audit_existing_market_archive.py": "e5af90057024fa0b3d4455c0a2be6b4025a859c4d1785d67d5f2efaeb20050d4",
+    "tests/unit/test_od05t_archive_inventory.py": "16560b78226ba89b54680d86c2ffe114fba48456ef2a0a24db1ec5636f276db0",
+    "tests/unit/od05t_metadata_oracle.py": "f919c27fd8b477b89a0837046c1d694747eeb06a6d15ba8c43ef42a8bd5fa3ad"
+  },
+  "original_preservation": {
+    "original_hashed_files": 1806,
+    "changed": [],
+    "phase_owned_oracle_formatting_changes": [
+      "tests/unit/od05t_metadata_oracle.py"
+    ],
+    "original_data_metadata": 11210,
+    "changed_data_metadata": [],
+    "payload_content_hashed": false,
+    "signing_content_read": false
+  },
+  "runtime_results": [
+    {
+      "runtime": "win314",
+      "python": "3.14.3",
+      "platform": "Windows-11-10.0.26300-SP0",
+      "full": {
+        "passed": 678,
+        "skipped": 13
+      },
+      "deselected_realdata": 4,
+      "new_metadata_engineering": {
+        "passed": 46,
+        "skipped": 2
+      },
+      "global_coverage_percent": 82.54711593375214,
+      "new_module_coverage_percent": 84.44444444444444,
+      "quality_exits": {
+        "environment": 0,
+        "collection": 0,
+        "new": 0,
+        "targeted": 0,
+        "full": 0,
+        "guard": 0,
+        "performance": 0,
+        "ruff": 0,
+        "mypy": 0,
+        "pip": 0,
+        "compile": 0
+      }
+    },
+    {
+      "runtime": "win311",
+      "python": "3.11.15",
+      "platform": "Windows-10-10.0.26300-SP0",
+      "full": {
+        "passed": 678,
+        "skipped": 13
+      },
+      "deselected_realdata": 4,
+      "new_metadata_engineering": {
+        "passed": 46,
+        "skipped": 2
+      },
+      "global_coverage_percent": 82.53569388920617,
+      "new_module_coverage_percent": 84.44444444444444,
+      "quality_exits": {
+        "environment": 0,
+        "collection": 0,
+        "new": 0,
+        "targeted": 0,
+        "full": 0,
+        "guard": 0,
+        "performance": 0,
+        "ruff": 0,
+        "mypy": 0,
+        "pip": 0,
+        "compile": 0
+      }
+    },
+    {
+      "runtime": "linux312",
+      "python": "3.12.3",
+      "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "full": {
+        "passed": 687,
+        "skipped": 4
+      },
+      "deselected_realdata": 4,
+      "new_metadata_engineering": {
+        "passed": 47,
+        "skipped": 1
+      },
+      "global_coverage_percent": 82.53569388920617,
+      "new_module_coverage_percent": 84.44444444444444,
+      "quality_exits": {
+        "environment": 0,
+        "collection": 0,
+        "new": 0,
+        "targeted": 0,
+        "full": 0,
+        "guard": 0,
+        "performance": 0,
+        "ruff": 0,
+        "mypy": 0,
+        "pip": 0,
+        "compile": 0
+      }
+    }
+  ],
+  "all_platform_skips_have_passing_peer": true,
+  "committed_pushed_merged": false
+}
