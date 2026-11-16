@@ -1,0 +1,21 @@
+﻿{
+    "reason_codes":  [
+                         "REFERENCE_PACK_ABSENT",
+                         "BLOCKED_REFERENCE",
+                         "BLOCKED_REAL_DATA",
+                         "NEW_SYNTHETIC_MARKET_FIXTURES_NOT_AUTHORIZED"
+                     ],
+    "cwd":  "E:\\omega system - phase 1",
+    "gatekeeper":  "OD05S_BLOCKED",
+    "script_sha256":  "8048e11f5816467bcb6b8cf52cafadef85b2ad6af58d3d85fc2c502253dd9ba5",
+    "meaning":  "Successful metadata inspection, not successful OD05S implementation or financial validation",
+    "end_utc":  "2026-11-16T09:49:11.8968029Z",
+    "argv":  [
+                 "powershell",
+                 "-NoProfile",
+                 "-File",
+                 "E:\\omega system - phase 1\\docs\\omegadata_v2\\implementation\\od05s\\20261116T094756Z\\intake_preflight.ps1"
+             ],
+    "exit_code":  0,
+    "start_utc":  "2026-11-16T09:49:03.1395866Z"
+}
