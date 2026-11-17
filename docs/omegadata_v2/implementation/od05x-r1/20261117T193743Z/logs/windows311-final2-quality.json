@@ -1,0 +1,114 @@
+{
+  "runtime": "win311",
+  "python": "3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]",
+  "operations": [
+    {
+      "operation": "refusal",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\scripts\\od05xr1_windows_backend.py",
+        "--manifest",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05xr1-static-uid4_grf\\not-opened.json",
+        "--manifest-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "--output",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05xr1-static-uid4_grf\\not-created"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-17T19:52:11.501120+00:00",
+      "end_utc": "2026-11-17T19:52:11.976410+00:00",
+      "elapsed_seconds": 0.47529580001719296,
+      "exit_code": 2,
+      "stdout": "{\"state\": \"REFUSED\", \"reason\": \"OS_ISOLATION_CAPABILITY_BLOCKED\", \"manifest_read\": false, \"destination_created\": false, \"copied_files\": 0}\n",
+      "stderr": "",
+      "scope": "TRUSTED_PREFLIGHT_OR_STATIC_ONLY_NOT_ISOLATED_PYTEST"
+    },
+    {
+      "operation": "ruff",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/omegadata",
+        "scripts",
+        "tests"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-17T19:52:11.976712+00:00",
+      "end_utc": "2026-11-17T19:52:12.409745+00:00",
+      "elapsed_seconds": 0.4330457999603823,
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": "",
+      "scope": "TRUSTED_PREFLIGHT_OR_STATIC_ONLY_NOT_ISOLATED_PYTEST"
+    },
+    {
+      "operation": "mypy",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "src/omegadata"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-17T19:52:12.409830+00:00",
+      "end_utc": "2026-11-17T19:52:26.601056+00:00",
+      "elapsed_seconds": 14.191232500015758,
+      "exit_code": 0,
+      "stdout": "Success: no issues found in 58 source files\n",
+      "stderr": "",
+      "scope": "TRUSTED_PREFLIGHT_OR_STATIC_ONLY_NOT_ISOLATED_PYTEST"
+    },
+    {
+      "operation": "pip",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-17T19:52:26.601107+00:00",
+      "end_utc": "2026-11-17T19:52:29.262470+00:00",
+      "elapsed_seconds": 2.6613743000198156,
+      "exit_code": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": "",
+      "scope": "TRUSTED_PREFLIGHT_OR_STATIC_ONLY_NOT_ISOLATED_PYTEST"
+    },
+    {
+      "operation": "compileall",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "compileall",
+        "-q",
+        "src/omegadata",
+        "scripts"
+      ],
+      "cwd": "E:\\omega system - phase 1",
+      "start_utc": "2026-11-17T19:52:29.262519+00:00",
+      "end_utc": "2026-11-17T19:52:30.000895+00:00",
+      "elapsed_seconds": 0.7383876000531018,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "scope": "TRUSTED_PREFLIGHT_OR_STATIC_ONLY_NOT_ISOLATED_PYTEST"
+    }
+  ],
+  "collection": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "pytest_A": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "diagnostic": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "native_denial_probes": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "identity_stress": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "copied_inputs": 0,
+  "financial_rows_verified": 0,
+  "overall": "BLOCKED"
+}

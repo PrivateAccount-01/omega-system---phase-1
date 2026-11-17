@@ -1,0 +1,340 @@
+{
+  "jobs": {
+    "r1": {
+      "command_log": "logs/r1-afb1e01c18-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 33,
+        "skipped": 7
+      },
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/r1-afb1e01c18-manifest.json",
+        "--manifest-sha256",
+        "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/r1-afb1e01c18-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-r1-afb1e01c18/output"
+      ],
+      "start_utc": "2026-11-17T19:51:19.733960+00:00",
+      "end_utc": "2026-11-17T19:51:29.326155+00:00",
+      "elapsed_seconds": 9.59218690299997,
+      "manifest_sha256": "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8"
+    },
+    "collection": {
+      "command_log": "logs/collection-1b63da8043-command.json",
+      "exit_code": 0,
+      "counts": {},
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/collection-1b63da8043-manifest.json",
+        "--manifest-sha256",
+        "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/collection-1b63da8043-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-collection-1b63da8043/output"
+      ],
+      "start_utc": "2026-11-17T19:51:42.488302+00:00",
+      "end_utc": "2026-11-17T19:51:55.163941+00:00",
+      "elapsed_seconds": 12.675638650999986,
+      "manifest_sha256": "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8"
+    },
+    "focused": {
+      "command_log": "logs/focused-25b191a5ae-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 33
+      },
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/focused-25b191a5ae-manifest.json",
+        "--manifest-sha256",
+        "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/focused-25b191a5ae-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-focused-25b191a5ae/output"
+      ],
+      "start_utc": "2026-11-17T19:43:14.608785+00:00",
+      "end_utc": "2026-11-17T19:43:23.512310+00:00",
+      "elapsed_seconds": 8.903516910999983,
+      "manifest_sha256": "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b"
+    },
+    "presence": {
+      "command_log": "logs/presence-19e9128058-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 40,
+        "skipped": 1
+      },
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/presence-19e9128058-manifest.json",
+        "--manifest-sha256",
+        "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/presence-19e9128058-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-presence-19e9128058/output"
+      ],
+      "start_utc": "2026-11-17T19:43:26.745546+00:00",
+      "end_utc": "2026-11-17T19:43:37.439358+00:00",
+      "elapsed_seconds": 10.693819254999994,
+      "manifest_sha256": "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b"
+    },
+    "W": {
+      "command_log": "logs/W-346b2665e1-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/W-346b2665e1-manifest.json",
+        "--manifest-sha256",
+        "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/W-346b2665e1-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-W-346b2665e1/output"
+      ],
+      "start_utc": "2026-11-17T19:43:40.059481+00:00",
+      "end_utc": "2026-11-17T19:43:47.759795+00:00",
+      "elapsed_seconds": 7.700310895000001,
+      "manifest_sha256": "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b"
+    },
+    "A": {
+      "command_log": "logs/A-a01a784dc1-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 828,
+        "skipped": 12
+      },
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/A-a01a784dc1-manifest.json",
+        "--manifest-sha256",
+        "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/A-a01a784dc1-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-A-a01a784dc1/output"
+      ],
+      "start_utc": "2026-11-17T19:51:58.508547+00:00",
+      "end_utc": "2026-11-17T19:52:53.419268+00:00",
+      "elapsed_seconds": 54.91073109199999,
+      "manifest_sha256": "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8"
+    },
+    "diagnostic": {
+      "command_log": "logs/diagnostic-18e2c4e181-command.json",
+      "exit_code": 1,
+      "counts": {
+        "passed": 828,
+        "failed": 4,
+        "skipped": 12
+      },
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/diagnostic-18e2c4e181-manifest.json",
+        "--manifest-sha256",
+        "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/diagnostic-18e2c4e181-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-diagnostic-18e2c4e181/output"
+      ],
+      "start_utc": "2026-11-17T19:52:56.507667+00:00",
+      "end_utc": "2026-11-17T19:53:45.618407+00:00",
+      "elapsed_seconds": 49.11068469200006,
+      "manifest_sha256": "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8"
+    },
+    "mypy": {
+      "command_log": "logs/mypy-137625e66f-command.json",
+      "exit_code": 0,
+      "counts": {},
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/mypy-137625e66f-manifest.json",
+        "--manifest-sha256",
+        "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/mypy-137625e66f-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-mypy-137625e66f/output"
+      ],
+      "start_utc": "2026-11-17T19:45:52.039078+00:00",
+      "end_utc": "2026-11-17T19:46:16.030485+00:00",
+      "elapsed_seconds": 23.991405264000036,
+      "manifest_sha256": "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b"
+    },
+    "pip": {
+      "command_log": "logs/pip-4761d40620-command.json",
+      "exit_code": 0,
+      "counts": {},
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/pip-4761d40620-manifest.json",
+        "--manifest-sha256",
+        "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/pip-4761d40620-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-pip-4761d40620/output"
+      ],
+      "start_utc": "2026-11-17T19:46:18.893977+00:00",
+      "end_utc": "2026-11-17T19:46:29.236889+00:00",
+      "elapsed_seconds": 10.342923220999978,
+      "manifest_sha256": "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b"
+    },
+    "compile": {
+      "command_log": "logs/compile-788d7b713b-command.json",
+      "exit_code": 0,
+      "counts": {},
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/compile-788d7b713b-manifest.json",
+        "--manifest-sha256",
+        "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/compile-788d7b713b-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-compile-788d7b713b/output"
+      ],
+      "start_utc": "2026-11-17T19:46:32.599933+00:00",
+      "end_utc": "2026-11-17T19:46:41.964422+00:00",
+      "elapsed_seconds": 9.364485948000038,
+      "manifest_sha256": "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2"
+    },
+    "environment": {
+      "command_log": "logs/environment-dbdda2823c-command.json",
+      "exit_code": 0,
+      "counts": {},
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/environment-dbdda2823c-manifest.json",
+        "--manifest-sha256",
+        "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/environment-dbdda2823c-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-environment-dbdda2823c/output"
+      ],
+      "start_utc": "2026-11-17T19:46:44.860558+00:00",
+      "end_utc": "2026-11-17T19:46:54.501404+00:00",
+      "elapsed_seconds": 9.640845587000001,
+      "manifest_sha256": "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2"
+    },
+    "profile": {
+      "command_log": "logs/profile-f93194be41-command.json",
+      "exit_code": 0,
+      "counts": {},
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/profile-f93194be41-manifest.json",
+        "--manifest-sha256",
+        "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/profile-f93194be41-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-profile-f93194be41/output"
+      ],
+      "start_utc": "2026-11-17T19:46:57.843649+00:00",
+      "end_utc": "2026-11-17T19:47:09.927306+00:00",
+      "elapsed_seconds": 12.083656738999991,
+      "manifest_sha256": "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2"
+    },
+    "r1type": {
+      "command_log": "logs/r1type-1fa2d620ff-command.json",
+      "exit_code": 0,
+      "counts": {},
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/r1type-1fa2d620ff-manifest.json",
+        "--manifest-sha256",
+        "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8",
+        "--policy",
+        "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/r1type-1fa2d620ff-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od05xr1-r1type-1fa2d620ff/output"
+      ],
+      "start_utc": "2026-11-17T19:51:32.207380+00:00",
+      "end_utc": "2026-11-17T19:51:39.611171+00:00",
+      "elapsed_seconds": 7.40379727200002,
+      "manifest_sha256": "c7721eb907e73e3a70aa8a557651d23714aed99861faf007bc3b6bdcb12a09b8"
+    }
+  },
+  "inventory_counts": {
+    "C": 4,
+    "A": 840,
+    "B": 4
+  },
+  "scope": "Executed before finalization incident; not a safety clearance for that incident",
+  "all_attempts_preserved": 23
+}

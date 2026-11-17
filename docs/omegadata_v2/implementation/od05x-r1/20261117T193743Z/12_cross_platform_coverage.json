@@ -1,0 +1,140 @@
+{
+  "Linux312": {
+    "r1": {
+      "totals": {
+        "covered_lines": 53,
+        "num_statements": 67,
+        "percent_covered": 79.56989247311827,
+        "percent_covered_display": "80",
+        "missing_lines": 14,
+        "excluded_lines": 0,
+        "percent_statements_covered": 79.1044776119403,
+        "percent_statements_covered_display": "79",
+        "num_branches": 26,
+        "num_partial_branches": 5,
+        "covered_branches": 21,
+        "missing_branches": 5,
+        "percent_branches_covered": 80.76923076923077,
+        "percent_branches_covered_display": "81"
+      },
+      "log": "logs/r1-afb1e01c18-coverage.json"
+    },
+    "A": {
+      "totals": {
+        "covered_lines": 6011,
+        "num_statements": 7047,
+        "percent_covered": 81.64879211353049,
+        "percent_covered_display": "82",
+        "missing_lines": 1036,
+        "excluded_lines": 0,
+        "percent_statements_covered": 85.29870867035618,
+        "percent_statements_covered_display": "85",
+        "num_branches": 2184,
+        "num_partial_branches": 408,
+        "covered_branches": 1526,
+        "missing_branches": 658,
+        "percent_branches_covered": 69.87179487179488,
+        "percent_branches_covered_display": "70"
+      },
+      "log": "logs/A-a01a784dc1-coverage.json"
+    },
+    "diagnostic": {
+      "totals": {
+        "covered_lines": 6018,
+        "num_statements": 7047,
+        "percent_covered": 81.77878886361174,
+        "percent_covered_display": "82",
+        "missing_lines": 1029,
+        "excluded_lines": 0,
+        "percent_statements_covered": 85.3980417198808,
+        "percent_statements_covered_display": "85",
+        "num_branches": 2184,
+        "num_partial_branches": 407,
+        "covered_branches": 1531,
+        "missing_branches": 653,
+        "percent_branches_covered": 70.1007326007326,
+        "percent_branches_covered_display": "70"
+      },
+      "log": "logs/diagnostic-18e2c4e181-coverage.json"
+    }
+  },
+  "Windows314": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "Windows311": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "skips": [
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[partition]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[payload_directory]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05r_reference_evidence.py', 329, 'Skipped: Windows junction; Linux file-link counterpart required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_windows_junction",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05t_archive_inventory.py', 179, 'Skipped: Windows junction; Linux directory-link counterpart required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05v_local_presence.py', 169, 'Skipped: Windows junction counterpart exercised on Windows')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN03]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN03: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN04]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN04: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN05]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN05: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN06]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN06: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN15]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN15: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN18]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN18: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN20]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN20: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    }
+  ],
+  "skip_reconciliation": "5 unchanged Windows-specific nodes (counterparts ARCH only), plus 7 explicitly blocked new Windows-native cases; none counted as PASS",
+  "financial_accuracy_contribution": 0,
+  "scope": "A/diagnostic cover omegadata; R1 covers safe adapter contracts, not absent Windows OS controls"
+}

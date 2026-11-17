@@ -1,0 +1,35 @@
+{
+  "phase": "OD05X_WINDOWS_ISOLATION_AND_CROSS_PLATFORM_CLOSURE_ONLY",
+  "branch": "feature/od01-source-rights",
+  "reviewed_HEAD": "e139cd168fb026c77a27bd4b1a87f8a9b180a1ec",
+  "utc": "2026-11-17T20:01:56.574896+00:00",
+  "G1": "PASS_SCOPED_TEST_RESULTS_BEFORE_INCIDENT_ONLY",
+  "G2": "BLOCKED_WINDOWS314_WINDOWS311_ISOLATED_EXECUTION_ABSENT",
+  "G3": "BLOCKED_WINDOWS_BOUNDARY_ABSENT_AND_NEW_TRUSTED_CONTROLLER_INCIDENT",
+  "G4": "BLOCKED_REAL_DATA",
+  "safe_engineering": "BLOCKED",
+  "financial_data_verdict": "BLOCKED_REAL_DATA",
+  "Windows_backend": "Safe admission/validation contracts only; native VM/worker NOT_IMPLEMENTED",
+  "historical_OD05V_incident": "PENDING_HUMAN_OWNER_REVIEW",
+  "new_R1_incident": "PENDING_HUMAN_OWNER_REVIEW; unscoped WSL Git may read/hash tracked payloads; extent UNKNOWN",
+  "payload_access_whole_phase": "UNKNOWN_NOT_INDEPENDENTLY_EXCLUDED; no zero-read certification",
+  "financial_rows_independently_verified": 0,
+  "Windows_INPUT_CHANGED": "INPUT_CHANGED_ROOT_CAUSE_UNKNOWN",
+  "original_WSL_performance": "LINUX_ORIGINAL_MOUNT_FULL_SCAN_PERFORMANCE_BLOCKED; not rerun",
+  "Linux_A": {
+    "passed": 828,
+    "skipped": 12
+  },
+  "full_diagnostic_exit_code": 1,
+  "full_diagnostic": {
+    "passed": 828,
+    "failed": 4,
+    "skipped": 12
+  },
+  "C_executed": 0,
+  "test_evidence": "11_linux312_regression_execution.json",
+  "incident": "logs/finalization-git-safety-incident.json",
+  "next_required_action": "Owner review/disposition of new R1 Git-audit incident before resuming this phase; Windows VM/worker remains separately required",
+  "commit_push_merge_release_sign_OD06": "NOT_PERFORMED",
+  "review_independence": "Same-agent review; no self-approval or independent human clearance claimed"
+}

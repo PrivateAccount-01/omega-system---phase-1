@@ -1,0 +1,16 @@
+{
+    "utc":  "2026-11-17T20:02:52.8237548Z",
+    "HEAD":  "e139cd168fb026c77a27bd4b1a87f8a9b180a1ec",
+    "HEAD_read_scope":  "Git refs only; no worktree diff/status/refresh",
+    "required_outputs":  18,
+    "post_incident_work":  "Existing-log reporting, ref-only identity and phase-evidence sealing only; no tests or original source/data verification",
+    "uncommitted_additions":  [
+                                  "scripts/od05xr1_windows_backend.py",
+                                  "tests/unit/test_od05xr1_windows_contract.py",
+                                  "docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z"
+                              ],
+    "preexisting_environment_and_signing_items":  "Not touched",
+    "incident":  "logs/finalization-git-safety-incident.json",
+    "git_child_termination":  "SIGKILL; finalizer exit1",
+    "no_clearance":  "Payload read/hash extent unknown; no whole-phase zero-read claim"
+}

@@ -1,0 +1,36 @@
+{
+  "recorded_before_incident": true,
+  "prior_evidence_read_at_preflight": {
+    "OD05W": {
+      "files": 361,
+      "sealed_verified": 358
+    },
+    "OD05X": {
+      "files": 386,
+      "sealed_verified": 384
+    }
+  },
+  "code_baseline": "inputs/code-preservation-before.json",
+  "original_stat_counts": {
+    "seed": 3596,
+    "present": 3626,
+    "size_matched": 3626,
+    "hardlinked": 2760,
+    "single_link": 866,
+    "cache": 30
+  },
+  "RUN_to_RUN_stat_changes": [],
+  "ARCH_to_RUN_stat_changes": [],
+  "original_payload_stat_records": 3626,
+  "stat_observation_interval": [
+    "2026-11-17T19:45:35.362358+00:00",
+    "2026-11-17T19:55:08.139385+00:00"
+  ],
+  "raw_byte_integrity": "NOT_VERIFIED; lstat is not content integrity",
+  "finalizer_completed_preservation_assertions_before_failure": "finalize.py reached subsequent git diff assertion, then terminated; no finalizer PASS",
+  "post_incident_original_verification": "NOT_RUN_AFTER_STOP",
+  "original_payload_reads_or_hashes_during_unscoped_Git": "UNKNOWN_NOT_INDEPENDENTLY_EXCLUDED",
+  "incident_copy_access": "No deliberate access; unrestricted Git exposure cannot be independently excluded",
+  "source_policy_signing_release_application_modifications": "None performed by authored R1 changes",
+  "new_source_pins_from_final_A_manifest": "See 04_trusted_input_manifest.json and linked exact manifest; no additional original-source reads after STOP"
+}

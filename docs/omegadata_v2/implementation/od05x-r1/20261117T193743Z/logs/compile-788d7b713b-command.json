@@ -1,0 +1,61 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/compile-788d7b713b-manifest.json",
+    "--manifest-sha256",
+    "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2",
+    "--policy",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/compile-788d7b713b-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od05xr1-compile-788d7b713b/output"
+  ],
+  "cwd": "/mnt/e/omega system - phase 1",
+  "start_utc": "2026-11-17T19:46:32.599933+00:00",
+  "end_utc": "2026-11-17T19:46:41.964422+00:00",
+  "elapsed_seconds": 9.364485948000038,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "job": "compile",
+  "manifest_sha256": "81036e39ddfb6f5d8fb014e2e791a014202bec240876521d724b37ebf925cbb2",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-17T19:46:41.647825+00:00",
+    "end_utc": "2026-11-17T19:46:41.881663+00:00",
+    "elapsed_seconds": 0.2338303269999642,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532221]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od05xr1-compile-788d7b713b/protected-NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "receipts": [
+    {
+      "path": "/home/parilrupani/omega-od05xr1-compile-788d7b713b/output/receipt-f6c926280d2e0700f49e8c1d31c4153b464f299aebeea22f09ec5f2f764506e1.json",
+      "sha256": "f6c926280d2e0700f49e8c1d31c4153b464f299aebeea22f09ec5f2f764506e1",
+      "file_count": 3804
+    }
+  ]
+}

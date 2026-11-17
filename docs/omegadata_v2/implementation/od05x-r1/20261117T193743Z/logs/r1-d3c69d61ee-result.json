@@ -1,0 +1,230 @@
+{
+  "job": "r1",
+  "start_utc": "2026-11-17T19:42:31.514431+00:00",
+  "end_utc": "2026-11-17T19:42:31.597316+00:00",
+  "elapsed_seconds": 0.08288196499999856,
+  "exit_code": 0,
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win01_no_backend_before_input_read",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win02_false_VM_report_refused",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN03]",
+      "outcome": "skipped",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN03: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN04]",
+      "outcome": "skipped",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN04: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN05]",
+      "outcome": "skipped",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN05: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN06]",
+      "outcome": "skipped",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN06: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN15]",
+      "outcome": "skipped",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN15: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN18]",
+      "outcome": "skipped",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN18: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN20]",
+      "outcome": "skipped",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN20: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win07_exact_source_contract[unknown]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win07_exact_source_contract[class]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win07_exact_source_contract[count]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win07_exact_source_contract[duplicate]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win08_changed_hash_refused",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win09_win10_native_identity_contract[reparse]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win09_win10_native_identity_contract[hardlink]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win09_win10_native_identity_contract[volume]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win09_win10_native_identity_contract[directory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[C:ok.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[C:/ok.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[//host/share/ok.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[../ok.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/x.py:ads]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/CON.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/NUL.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/COM1.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/LPT9.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/ok.py.]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/ok.py ]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/x./ok.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_windows_path_hazards[scripts/ok\\\\x.py]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win11_case_alias",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win12_win13_identity_change_refused[before_open]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win12_win13_identity_change_refused[after_open]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win14_fresh_destination",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win16_reviewed_runtime_inventory",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win17_linux_source_contract_retained",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win19_financial_and_incident_gates",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win07_positive_exact_manifest",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_win10_positive_identity_contract",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "counts": {
+    "passed": 33,
+    "skipped": 7
+  },
+  "stdout_stderr": "..sssssss...............................                                 [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/unit/test_od05xr1_windows_contract.py:44: WIN03: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent\nSKIPPED [1] tests/unit/test_od05xr1_windows_contract.py:44: WIN04: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent\nSKIPPED [1] tests/unit/test_od05xr1_windows_contract.py:44: WIN05: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent\nSKIPPED [1] tests/unit/test_od05xr1_windows_contract.py:44: WIN06: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent\nSKIPPED [1] tests/unit/test_od05xr1_windows_contract.py:44: WIN15: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent\nSKIPPED [1] tests/unit/test_od05xr1_windows_contract.py:44: WIN18: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent\nSKIPPED [1] tests/unit/test_od05xr1_windows_contract.py:44: WIN20: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent\n33 passed, 7 skipped in 0.04s\n",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532223]",
+      "net": "net:[4026532228]",
+      "pid": "pid:[4026532226]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od05xr1-r1-d3c69d61ee/protected-NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

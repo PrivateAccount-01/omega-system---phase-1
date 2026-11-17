@@ -1,0 +1,61 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/mypy-137625e66f-manifest.json",
+    "--manifest-sha256",
+    "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b",
+    "--policy",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/mypy-137625e66f-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od05xr1-mypy-137625e66f/output"
+  ],
+  "cwd": "/mnt/e/omega system - phase 1",
+  "start_utc": "2026-11-17T19:45:52.039078+00:00",
+  "end_utc": "2026-11-17T19:46:16.030485+00:00",
+  "elapsed_seconds": 23.991405264000036,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "job": "mypy",
+  "manifest_sha256": "9f67a86527970391be5531059c628ebbfab6fb307702f87583ec27425bb7b46b",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-17T19:46:00.473401+00:00",
+    "end_utc": "2026-11-17T19:46:12.321483+00:00",
+    "elapsed_seconds": 11.848079100999996,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "Success: no issues found in 58 source files\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od05xr1-mypy-137625e66f/protected-NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "receipts": [
+    {
+      "path": "/home/parilrupani/omega-od05xr1-mypy-137625e66f/output/receipt-207dac05a5b957add614cea854624514c8e277cc583dc1e528b78edd9b620ad2.json",
+      "sha256": "207dac05a5b957add614cea854624514c8e277cc583dc1e528b78edd9b620ad2",
+      "file_count": 3804
+    }
+  ]
+}

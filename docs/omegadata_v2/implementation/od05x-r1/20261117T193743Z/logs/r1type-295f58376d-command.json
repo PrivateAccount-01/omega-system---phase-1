@@ -1,0 +1,42 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/r1type-295f58376d-manifest.json",
+    "--manifest-sha256",
+    "755da2f6ad9c546c63e2e38711b3740175666013dc3963a09909ad2f5c43c993",
+    "--policy",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x-r1/20261117T193743Z/logs/r1type-295f58376d-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od05xr1-r1type-295f58376d/output"
+  ],
+  "cwd": "/mnt/e/omega system - phase 1",
+  "start_utc": "2026-11-17T19:48:09.546572+00:00",
+  "end_utc": "2026-11-17T19:48:17.949794+00:00",
+  "elapsed_seconds": 8.403214590000005,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "job": "r1type",
+  "manifest_sha256": "755da2f6ad9c546c63e2e38711b3740175666013dc3963a09909ad2f5c43c993",
+  "worker_result": {
+    "job": "r1type",
+    "exit_code": 1,
+    "stdout_stderr": "scripts/od05xr1_windows_backend.py:48: error: Argument 1 to \"windows_relative\" has incompatible type \"Any | None\"; expected \"str\"  [arg-type]\nFound 1 error in 1 file (checked 1 source file)\n",
+    "start_utc": "2026-11-17T19:48:16.784475+00:00",
+    "end_utc": "2026-11-17T19:48:17.698587+00:00",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "counts": {}
+  },
+  "receipts": [
+    {
+      "path": "/home/parilrupani/omega-od05xr1-r1type-295f58376d/output/receipt-d61db132662ef9c5cb75765a48da6dc1c335b23d9f32073c82f5f804d5e1b55e.json",
+      "sha256": "d61db132662ef9c5cb75765a48da6dc1c335b23d9f32073c82f5f804d5e1b55e",
+      "file_count": 3804
+    }
+  ]
+}
