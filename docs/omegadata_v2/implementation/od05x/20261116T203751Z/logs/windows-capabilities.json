@@ -1,0 +1,61 @@
+{
+  "utc": "2026-11-17T18:22:12.283329+00:00",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "WindowsSandbox": null,
+  "current_token_is_AppContainer": false,
+  "dedicated_VM_operator_configuration": "NOT_SUPPLIED",
+  "restricted_token_ACL_egress_child_policy": "NOT_ESTABLISHED",
+  "API_availability_is_not_enforcement": true,
+  "configuration_changes_or_privileged_installation": false,
+  "verdict": "OS_ISOLATION_CAPABILITY_BLOCKED",
+  "runtime_refusals": [
+    {
+      "runtime": "win314",
+      "argv": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\scripts\\od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-refusal-y2d4h8di\\not-opened.json",
+        "--manifest-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "--policy",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-refusal-y2d4h8di\\not-opened-policy.json",
+        "--output",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-refusal-y2d4h8di\\not-created"
+      ],
+      "exit_code": 2,
+      "stdout": "{\"state\": \"REFUSED\", \"reason\": \"OS_ISOLATION_CAPABILITY_BLOCKED\"}\n",
+      "stderr": "",
+      "elapsed_seconds": 0.36750120006036013,
+      "destination_created": false,
+      "copied_inputs": 0,
+      "suites": "NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win311",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "E:\\omega system - phase 1\\scripts\\od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-refusal-itmoqvg9\\not-opened.json",
+        "--manifest-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "--policy",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-refusal-itmoqvg9\\not-opened-policy.json",
+        "--output",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-refusal-itmoqvg9\\not-created"
+      ],
+      "exit_code": 2,
+      "stdout": "{\"state\": \"REFUSED\", \"reason\": \"OS_ISOLATION_CAPABILITY_BLOCKED\"}\n",
+      "stderr": "",
+      "elapsed_seconds": 0.6271075999829918,
+      "destination_created": false,
+      "copied_inputs": 0,
+      "suites": "NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/pip-4ad066f375e8-manifest.json",
+    "--manifest-sha256",
+    "50f5c338203f858d7b70c6a626e3338798df2f2e64d96156b8822a500d9c4eef",
+    "--policy",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/pip-4ad066f375e8-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od05x-4ad066f375e8/output"
+  ],
+  "start_utc": "2026-11-17T18:52:58.610720+00:00",
+  "end_utc": "2026-11-17T18:53:07.198961+00:00",
+  "elapsed_seconds": 8.588256892999993,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "job": "pip",
+  "worker_result": {
+    "job": "pip",
+    "start_utc": "2026-11-17T18:53:06.473235+00:00",
+    "end_utc": "2026-11-17T18:53:07.125887+00:00",
+    "elapsed_seconds": 0.6526427139999669,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "No broken requirements found.\n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532220]",
+        "net": "net:[4026532225]",
+        "pid": "pid:[4026532223]",
+        "user": "user:[4026532289]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od05x-4ad066f375e8/protected-NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "original_payloads_copied": 0
+}

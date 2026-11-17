@@ -1,0 +1,150 @@
+[
+  {
+    "runtime": "win314",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "scripts",
+      "tests"
+    ],
+    "start_utc": "2026-11-17T18:23:16.668400+00:00",
+    "end_utc": "2026-11-17T18:23:19.804967+00:00",
+    "elapsed_seconds": 3.136583299958147,
+    "exit_code": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  },
+  {
+    "runtime": "win314",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "mypy",
+      "src/omegadata"
+    ],
+    "start_utc": "2026-11-17T18:23:19.805029+00:00",
+    "end_utc": "2026-11-17T18:23:54.594645+00:00",
+    "elapsed_seconds": 34.789634000044316,
+    "exit_code": 0,
+    "stdout": "Success: no issues found in 58 source files\n",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  },
+  {
+    "runtime": "win314",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "start_utc": "2026-11-17T18:23:54.594706+00:00",
+    "end_utc": "2026-11-17T18:24:03.651477+00:00",
+    "elapsed_seconds": 9.056783500011079,
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  },
+  {
+    "runtime": "win314",
+    "argv": [
+      "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "compileall",
+      "-q",
+      "src/omegadata",
+      "scripts"
+    ],
+    "start_utc": "2026-11-17T18:24:03.651517+00:00",
+    "end_utc": "2026-11-17T18:24:04.314061+00:00",
+    "elapsed_seconds": 0.6625576999504119,
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  },
+  {
+    "runtime": "win311",
+    "argv": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "scripts",
+      "tests"
+    ],
+    "start_utc": "2026-11-17T18:24:04.315839+00:00",
+    "end_utc": "2026-11-17T18:24:06.638619+00:00",
+    "elapsed_seconds": 2.322799599962309,
+    "exit_code": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  },
+  {
+    "runtime": "win311",
+    "argv": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "mypy",
+      "src/omegadata"
+    ],
+    "start_utc": "2026-11-17T18:24:06.638680+00:00",
+    "end_utc": "2026-11-17T18:24:32.449523+00:00",
+    "elapsed_seconds": 25.810856400057673,
+    "exit_code": 0,
+    "stdout": "Success: no issues found in 58 source files\n",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  },
+  {
+    "runtime": "win311",
+    "argv": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "start_utc": "2026-11-17T18:24:32.449572+00:00",
+    "end_utc": "2026-11-17T18:24:40.483779+00:00",
+    "elapsed_seconds": 8.034217999898829,
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  },
+  {
+    "runtime": "win311",
+    "argv": [
+      "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "compileall",
+      "-q",
+      "src/omegadata",
+      "scripts"
+    ],
+    "start_utc": "2026-11-17T18:24:40.483816+00:00",
+    "end_utc": "2026-11-17T18:24:41.039392+00:00",
+    "elapsed_seconds": 0.5555884999921545,
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; not approved isolated test-runner acceptance"
+  }
+]

@@ -1,0 +1,470 @@
+{
+  "linux312": {
+    "collection": {
+      "exit_code": 0,
+      "counts": {},
+      "command_log": "logs/collection-633d97f6c3d8-command.json",
+      "start_utc": "2026-11-17T19:02:23.510920+00:00",
+      "elapsed_seconds": 11.062812065000001
+    },
+    "focused": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 33
+      },
+      "command_log": "logs/focused-9cd58d1ec959-command.json",
+      "start_utc": "2026-11-17T18:58:02.785971+00:00",
+      "elapsed_seconds": 8.079783025999998
+    },
+    "presence": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 40,
+        "skipped": 1
+      },
+      "command_log": "logs/presence-deb798d37d88-command.json",
+      "start_utc": "2026-11-17T19:02:38.556164+00:00",
+      "elapsed_seconds": 12.707445100000005
+    },
+    "W": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "command_log": "logs/W-b8fcd09a7384-command.json",
+      "start_utc": "2026-11-17T19:02:55.453585+00:00",
+      "elapsed_seconds": 8.678716610000002
+    },
+    "A": {
+      "exit_code": 0,
+      "counts": {
+        "passed": 795,
+        "skipped": 5
+      },
+      "command_log": "logs/A-26809b35f963-command.json",
+      "start_utc": "2026-11-17T18:58:14.212588+00:00",
+      "elapsed_seconds": 47.911162827000005
+    },
+    "diagnostic": {
+      "exit_code": 1,
+      "counts": {
+        "passed": 795,
+        "failed": 4,
+        "skipped": 5
+      },
+      "command_log": "logs/diagnostic-7a647d1dda07-command.json",
+      "start_utc": "2026-11-17T18:59:05.994764+00:00",
+      "elapsed_seconds": 55.242900628
+    },
+    "mypy": {
+      "exit_code": 0,
+      "counts": {},
+      "command_log": "logs/mypy-1071ae918102-command.json",
+      "start_utc": "2026-11-17T19:03:07.949540+00:00",
+      "elapsed_seconds": 24.562362478000004
+    },
+    "pip": {
+      "exit_code": 0,
+      "counts": {},
+      "command_log": "logs/pip-a77c0b8e1cf3-command.json",
+      "start_utc": "2026-11-17T19:03:36.690907+00:00",
+      "elapsed_seconds": 8.736897941999999
+    },
+    "compile": {
+      "exit_code": 0,
+      "counts": {},
+      "command_log": "logs/compile-44da16697dc2-command.json",
+      "start_utc": "2026-11-17T19:03:49.396694+00:00",
+      "elapsed_seconds": 8.99952951600001
+    },
+    "environment": {
+      "exit_code": 0,
+      "counts": {},
+      "command_log": "logs/environment-04fca85f21db-command.json",
+      "start_utc": "2026-11-17T19:04:02.357679+00:00",
+      "elapsed_seconds": 7.320719965999999
+    },
+    "profile": {
+      "exit_code": 0,
+      "counts": {},
+      "command_log": "logs/profile-1f2fb8b1099a-command.json",
+      "start_utc": "2026-11-17T19:04:13.569324+00:00",
+      "elapsed_seconds": 10.517216243000007
+    }
+  },
+  "Windows_static_checks": [
+    {
+      "runtime": "win314",
+      "kind": "environment",
+      "argv": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import json,platform,sys; print(json.dumps(dict(executable=sys.executable,version=sys.version,platform=platform.platform())))"
+      ],
+      "start_utc": "2026-11-17T19:00:53.045837+00:00",
+      "end_utc": "2026-11-17T19:00:53.426006+00:00",
+      "elapsed_seconds": 0.38018910004757345,
+      "exit_code": 0,
+      "stdout": "{\"executable\": \"E:\\\\omega system - phase 1\\\\.venv\\\\Scripts\\\\python.exe\", \"version\": \"3.14.3 (main, Mar  3 2026, 15:00:44) [MSC v.1944 64 bit (AMD64)]\", \"platform\": \"Windows-11-10.0.26300-SP0\"}\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win314",
+      "kind": "refused-runner",
+      "argv": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-final-static-_f2dupfy\\not-opened.json",
+        "--manifest-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "--policy",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-final-static-_f2dupfy\\not-opened-policy.json",
+        "--output",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-final-static-_f2dupfy\\not-created"
+      ],
+      "start_utc": "2026-11-17T19:00:53.426096+00:00",
+      "end_utc": "2026-11-17T19:00:54.003320+00:00",
+      "elapsed_seconds": 0.5772510999813676,
+      "exit_code": 2,
+      "stdout": "{\"state\": \"REFUSED\", \"reason\": \"OS_ISOLATION_CAPABILITY_BLOCKED\"}\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win314",
+      "kind": "ruff",
+      "argv": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/omegadata",
+        "scripts",
+        "tests"
+      ],
+      "start_utc": "2026-11-17T19:00:54.003407+00:00",
+      "end_utc": "2026-11-17T19:00:54.449468+00:00",
+      "elapsed_seconds": 0.4460748001001775,
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win314",
+      "kind": "mypy",
+      "argv": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "src/omegadata"
+      ],
+      "start_utc": "2026-11-17T19:00:54.449511+00:00",
+      "end_utc": "2026-11-17T19:01:07.166535+00:00",
+      "elapsed_seconds": 12.717038899892941,
+      "exit_code": 0,
+      "stdout": "Success: no issues found in 58 source files\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win314",
+      "kind": "pip",
+      "argv": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "start_utc": "2026-11-17T19:01:07.166580+00:00",
+      "end_utc": "2026-11-17T19:01:08.808774+00:00",
+      "elapsed_seconds": 1.6422082999488339,
+      "exit_code": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win314",
+      "kind": "compileall",
+      "argv": [
+        "E:\\omega system - phase 1\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "compileall",
+        "-q",
+        "src/omegadata",
+        "scripts"
+      ],
+      "start_utc": "2026-11-17T19:01:08.808815+00:00",
+      "end_utc": "2026-11-17T19:01:09.600442+00:00",
+      "elapsed_seconds": 0.7916410000761971,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win311",
+      "kind": "environment",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import json,platform,sys; print(json.dumps(dict(executable=sys.executable,version=sys.version,platform=platform.platform())))"
+      ],
+      "start_utc": "2026-11-17T19:01:09.602002+00:00",
+      "end_utc": "2026-11-17T19:01:10.140513+00:00",
+      "elapsed_seconds": 0.5385279998881742,
+      "exit_code": 0,
+      "stdout": "{\"executable\": \"C:\\\\Users\\\\Paril Rupani\\\\AppData\\\\Local\\\\Temp\\\\vscode-agent-codex-sandbox-DeDZJD\\\\omega-od02v-copy-78jr_vg3\\\\venv311\\\\Scripts\\\\python.exe\", \"version\": \"3.11.15 (main, Mar  3 2026, 14:55:34) [MSC v.1944 64 bit (AMD64)]\", \"platform\": \"Windows-10-10.0.26300-SP0\"}\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win311",
+      "kind": "refused-runner",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-final-static-ndmj76lj\\not-opened.json",
+        "--manifest-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "--policy",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-final-static-ndmj76lj\\not-opened-policy.json",
+        "--output",
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od05x-final-static-ndmj76lj\\not-created"
+      ],
+      "start_utc": "2026-11-17T19:01:10.140563+00:00",
+      "end_utc": "2026-11-17T19:01:10.504853+00:00",
+      "elapsed_seconds": 0.36430530005600303,
+      "exit_code": 2,
+      "stdout": "{\"state\": \"REFUSED\", \"reason\": \"OS_ISOLATION_CAPABILITY_BLOCKED\"}\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win311",
+      "kind": "ruff",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/omegadata",
+        "scripts",
+        "tests"
+      ],
+      "start_utc": "2026-11-17T19:01:10.504900+00:00",
+      "end_utc": "2026-11-17T19:01:12.701266+00:00",
+      "elapsed_seconds": 2.1963809999870136,
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win311",
+      "kind": "mypy",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "src/omegadata"
+      ],
+      "start_utc": "2026-11-17T19:01:12.701314+00:00",
+      "end_utc": "2026-11-17T19:01:24.438478+00:00",
+      "elapsed_seconds": 11.737176499911584,
+      "exit_code": 0,
+      "stdout": "Success: no issues found in 58 source files\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win311",
+      "kind": "pip",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "start_utc": "2026-11-17T19:01:24.438516+00:00",
+      "end_utc": "2026-11-17T19:01:26.710724+00:00",
+      "elapsed_seconds": 2.2722201999276876,
+      "exit_code": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    },
+    {
+      "runtime": "win311",
+      "kind": "compileall",
+      "argv": [
+        "C:\\Users\\Paril Rupani\\AppData\\Local\\Temp\\vscode-agent-codex-sandbox-DeDZJD\\omega-od02v-copy-78jr_vg3\\venv311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "compileall",
+        "-q",
+        "src/omegadata",
+        "scripts"
+      ],
+      "start_utc": "2026-11-17T19:01:26.710761+00:00",
+      "end_utc": "2026-11-17T19:01:27.317761+00:00",
+      "elapsed_seconds": 0.6070159999653697,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_pins": {
+        "scripts/od05x_isolated_runner.py": "982b717e6900d0d698a5acae87bd386072a5fb4eb9856f432ddee164fb7562ee",
+        "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+        "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+        "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+      },
+      "scope": "STATIC/PREFLIGHT_ONLY; Windows pytest remains NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+    }
+  ],
+  "Windows_pytest": {
+    "win314": "NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED",
+    "win311": "NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED"
+  },
+  "linux_ruff": {
+    "argv": [
+      "/usr/bin/bwrap",
+      "--unshare-all",
+      "--die-with-parent",
+      "--new-session",
+      "--cap-drop",
+      "ALL",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--symlink",
+      "usr/lib",
+      "/lib",
+      "--symlink",
+      "usr/lib64",
+      "/lib64",
+      "--ro-bind",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--tmpfs",
+      "/tmp",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/src",
+      "/repo/src",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/scripts",
+      "/repo/scripts",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/tests",
+      "/repo/tests",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/pyproject.toml",
+      "/repo/pyproject.toml",
+      "--chdir",
+      "/repo",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "scripts",
+      "tests"
+    ],
+    "start_utc": "2026-11-17T19:03:53.310307+00:00",
+    "end_utc": "2026-11-17T19:03:53.713884+00:00",
+    "elapsed_seconds": 0.40360303400001385,
+    "exit_code": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": "",
+    "scope": "STATIC_TOOL_ONLY; read-only source and separate filesystem/network namespace; child/native exec policy not certified for this trusted executable job"
+  },
+  "static_tool_caveat": "Windows static tools and Linux Rust Ruff are separate static jobs; they are not full child-execution containment certifications"
+}

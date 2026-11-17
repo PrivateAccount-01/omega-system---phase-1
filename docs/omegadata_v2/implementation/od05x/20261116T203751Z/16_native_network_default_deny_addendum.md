@@ -1,0 +1,9 @@
+# Final adversarial correction, appended after the first seal
+
+The first closure package remains unchanged and valid for its recorded source revision. Final review then tested a remaining network-default concern. A new frozen non-market native probe actually created an AF_NETLINK descriptor and successfully bound a namespace-local Unix address under the earlier policy. No packets or peer connections occurred. listen/accept4 returned ordinary EINVAL rather than policy EPERM. This was an incomplete default-deny policy, not evidence of original-data access.
+
+The minimal correction denies every socket family except AF_UNIX, and additionally denies bind/listen/accept/accept4. Connected socketpair IPC remains permitted. The identical probe changed from exit 1 to exit 0, with all four operations returning EPERM. Every accepted worker now proves twelve native denials before staging. Source hashes, exact commands, before/after errno and unchanged probe source hash are in [the final Gatekeeper](17_gatekeeper_final.json).
+
+Fresh verification after correction again collected 808=A800+B4+C4; X 33 pass, OD05V 40 pass/1 skip, OD05W 39 pass, A795 pass/5 skips exit0, full diagnostic795 pass/4 fail/5 skips exit1 with C4 deselected. Existing B/C source files and assertions remain unchanged. Linux and Windows static quality checks pass; Windows pytest still refuses before copying. Current source and the earlier phase-authored code revision are retained as SHA-verified [code snapshots](source-snapshots/).
+
+This is OD-05X only. The historical incident is not approved, Windows containment and regression remain blocked, original mounted Linux seed performance remains blocked, Windows INPUT_CHANGED cause remains unknown, and real financial validation remains BLOCKED_REAL_DATA. No earlier report, source policy, market file, signing material or release is rewritten.

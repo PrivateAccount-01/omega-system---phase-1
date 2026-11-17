@@ -1,0 +1,13 @@
+# OD-05X runner v1
+
+Trusted source review → exact SHA-pinned manifest → trusted metadata preflight → bubblewrap namespace/root setup → read-only per-file input mounts → irreversible worker seccomp → native denial probes → canonical `stage()` → fresh disposable code/metadata environment → selected offline job → append-only host evidence.
+
+The launcher refuses unsupported platforms before opening its manifest. No historical helper or unrestricted copy fallback exists. Linux uses separate mount/user/PID/network namespaces, a fresh root, explicit runtime/public system read-only mounts, exact read-only source mounts, a fresh writable workspace and dropped capabilities. Original archive roots, retained directories and private directories are not mounted. Runtime support files are broader than the exact application manifest and remain an explicit trust boundary.
+
+The trusted interpreter initializes before loading libseccomp. No input staging or pytest execution occurs during that trusted initialization. The worker then enables no_new_privs, denies exec/fork, non-thread clone, namespace/mount/ptrace and related escape primitives, Internet sockets/connect/send operations. Native canary probes precede staging. Python audit hooks are additional compatibility/defense controls only; they do not support the native-denial claims.
+
+Cross-device source mounts require exact per-file device records. Selection, count, classes, source descriptors, size/hash and final identities are checked. Destination parents must be safe, existing destinations are rejected and receipts are created exclusively with content-addressed names. Receipt digests support subsequent verification; mode 0444 alone is not hardware or privileged-user immutability.
+
+Source roots remain trusted-owner controlled. Namespace/read-only mount protections do not certify a malicious host administrator, host-kernel exploit, arbitrary hostile mount-owner race, hardware durability or Windows isolation. No privileged software installation or host-wide security changes are performed.
+
+Reuse decision: extend the repository's exact-copy vocabulary and existing presence observation rather than replace financial code. Reuse installed bubblewrap 0.9.0 and libseccomp only where measured. No dependency is installed. [Bubblewrap's documented model](https://github.com/containers/bubblewrap/blob/main/README.md) and the [seccomp interface](https://man7.org/linux/man-pages/man2/seccomp.2.html) guide the implementation; documentation is not evidence of local enforcement. Local command logs and native return codes determine the verdict.

@@ -1,0 +1,21 @@
+# OD-05X — BLOCKED / BLOCKED_REAL_DATA
+
+Branch `feature/od01-source-rights`; HEAD `f7ebc463980fd5c1c80961c3e5ecece4e337911a`. Four new source/test paths and this fresh dossier are uncommitted. Existing tracked files are unchanged; pre-existing environment/private untracked files remain excluded and preserved.
+
+Added [trusted launcher](../../../../../scripts/od05x_isolated_runner.py), [worker](../../../../../scripts/od05x_worker_jobs.py), [X01–X18 tests](../../../../../tests/unit/test_od05x_isolation.py) and [native/hash extensions](../../../../../tests/unit/test_od05x_native_extensions.py). The accepted path uses one staging API, exact reviewed manifests, bounded OS-proved metadata batches, fresh destinations, source/descriptor/hash checks, native denial probes and content-addressed receipts. No historical bootstrap fallback remains. See the [architecture addendum](03a_bounded_staging_and_local_IPC_addendum.md).
+
+Fresh Linux 3.12: focused X 33 passed; OD05V 40 passed/1 platform skip; OD05W 39 passed; collection 808 = A800+B4+C4. A: **795 passed/5 skipped, exit 0**. Unchanged full non-realdata diagnostic: **795 passed/4 failed/5 skipped, exit 1**, with exactly B failed and C4 deselected. All failures, the earlier exit-143 stalled A and six-failure diagnostic are retained. [Matrix](10_cross_platform_runtime_matrix.json), [dependency reconciliation](09_test_dependency_reconciliation.json), [negative-first chronology](06_negative_first_X01_X18.md), [coverage](coverage-summary.json).
+
+Windows 3.14/3.11 launchers actually refused with exit 2 before manifest reads/copying. Their collection/focused/A/diagnostic/stress runs are **NOT_RUN_OS_ISOLATION_CAPABILITY_BLOCKED**. Fresh Windows Ruff/mypy/pip/compilation checks exit 0. Linux mypy/pip/compilation exit 0 inside the restricted worker. Linux Rust Ruff exits 0 in a separately scoped static namespace job. Static outcomes do not replace missing full-boundary verification. Archived Windows counterpart skips are not fresh proof.
+
+Actual native Linux errno results: unmounted canary read ENOENT(2), read-only source write EROFS(30), fork/exec/Internet socket/connect/addressed send EPERM(1). Probes precede Python hooks and staging. Local Unix IPC is explicitly allowed and independently controlled; no Internet transport is enabled. Windows native denial probes remain unexecuted. [Native evidence](05_native_denial_probes.json), [capabilities](02_host_isolation_capabilities.json).
+
+Fresh original-host inventory independently reconciles 3,626 paths and size matches (seed3596/cache30; hardlinks2760/single866). Payload inspection remains ineligible. Original WSL seed scanning remains PERFORMANCE_BLOCKED at 30 seconds. Native profiling and known-mutation diagnostics are separate. Historical Windows cause remains UNKNOWN. [Profiles](08_linux_performance_profile.json), [identity investigation](07_filesystem_identity_investigation.md).
+
+Preservation: 168 existing code/metadata identities; 361 prior dossier files including 358 sealed files; 3,626 fresh before/after payload stat identities; 11210 archived-to-current data/artifact/database metadata observations — no changes. These are recorded hashes/stat dimensions, not new original-payload byte-integrity verification. The historical 39-file incident remains pending human review, never self-approved. [Preservation](11_preservation_and_source_hashes.json), [incident status](12_incident_containment_status.md).
+
+**Software regression: BLOCKED for required Windows runs. Host containment: BLOCKED for required Windows controls. Overall safe engineering: BLOCKED. Financial: BLOCKED_REAL_DATA** — zero original payload bytes/hashes or independently verified financial rows; existing robustness fixtures contribute zero financial acceptance. [Gatekeeper](14_gatekeeper.json), [real-data scorecard](real-data-scorecard.json), [risks](13_security_risks_and_rollback.md).
+
+**One next owner action:** provide an operator-approved Windows OS-isolated runner environment/configuration for Python 3.14 and 3.11, covering filesystem access, native child execution and network denial, then rerun only OD05X. This is an engineering environment requirement, not a new publisher-permission request.
+
+STOP after OD-05X. No commit, push, merge, release, signing, production routing change, real acquisition or OD-06.

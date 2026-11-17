@@ -1,0 +1,111 @@
+{
+  "phase": "OD05X_HOST_ISOLATION_AND_ENGINEERING_GATE_CLOSURE_ONLY",
+  "branch": "feature/od01-source-rights",
+  "HEAD": "f7ebc463980fd5c1c80961c3e5ecece4e337911a",
+  "software_regression": "BLOCKED_REQUIRED_WINDOWS_RUNS_NOT_EXECUTED",
+  "Linux_scoped_engineering": "PASS_795_PASS_5_PLATFORM_SKIPS",
+  "host_containment": "BLOCKED_REQUIRED_WINDOWS_BOUNDARY_NOT_ESTABLISHED",
+  "Linux_native_controls": "12_NATIVE_DENIALS_AND_LOCAL_IPC_CONTROL_EXECUTED",
+  "safe_engineering": "BLOCKED",
+  "financial": "BLOCKED_REAL_DATA",
+  "full_diagnostic_exit": 1,
+  "full_diagnostic_failed_B_cases": 4,
+  "C": "4_NOT_RUN",
+  "historical_Windows_identity_cause": "INPUT_CHANGED_ROOT_CAUSE_UNKNOWN",
+  "Linux_original_mount": "LINUX_ORIGINAL_MOUNT_FULL_SCAN_PERFORMANCE_BLOCKED",
+  "OD05V_incident": "PENDING_HUMAN_OWNER_REVIEW_NOT_SELF_APPROVED",
+  "preservation": "PASS_RECORDED_HASHES_AND_METADATA_DIMENSIONS_NO_RAW_BYTE_CLAIM",
+  "next_required_owner_action": "Provide an operator-approved Windows OS-isolated runner configuration/environment for Python 3.14 and 3.11, with filesystem, native child and network denial proofs; rerun only OD05X",
+  "commit_push_merge_release_OD06": "NOT_PERFORMED_NOT_AUTHORIZED",
+  "review_independence": "Same-agent engineering review; kernel probes and separate metadata observations are independent mechanisms, not independent human approval",
+  "utc": "2026-11-17T19:22:06.838203+00:00",
+  "final_source_pins": {
+    "scripts/od05x_isolated_runner.py": "34f24a04bcee4559ebfc94abccb835cf906256192a17a65fc3921b53fc6da3b4",
+    "scripts/od05x_worker_jobs.py": "ef6cbbf55234efb9bf2abffff9cc3147a47cbb682f13cb0934733c874780db6e",
+    "tests/unit/test_od05x_isolation.py": "c4b1e2104c729cc0a83188f8fb473231a4713a870c90e958848c13215e3fb015",
+    "tests/unit/test_od05x_native_extensions.py": "832e026a3889640902e4fe6e0bd2a4e08d90dccee57b70a098f15f0b34cae1dd"
+  },
+  "supersedes": "14_gatekeeper.json for final source identity and native-control revision only; old records/seal unchanged",
+  "network_default": "Only AF_UNIX socket family; bind/listen/accept/accept4/connect/sendmsg denied; addressed sendto denied",
+  "supplementary_negative_first": {
+    "freeze": "logs/network-family-negative-first-freeze.json",
+    "before": "logs/family-2c8c479c07-command.json",
+    "after": "logs/family-558559f83e-command.json",
+    "probe_source_sha256": "c298779545419812bc2fdb55c768aa07748b6c7145a9abfe63a83b196ace5435"
+  },
+  "runtime_matrix": {
+    "collection": {
+      "command_log": "logs/collection-a37aeaa1a9b0-command.json",
+      "exit_code": 0,
+      "counts": {}
+    },
+    "focused": {
+      "command_log": "logs/focused-f5db26df54c4-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 33
+      }
+    },
+    "presence": {
+      "command_log": "logs/presence-2c02d44c90b9-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 40,
+        "skipped": 1
+      }
+    },
+    "W": {
+      "command_log": "logs/W-6c04bf20898e-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      }
+    },
+    "A": {
+      "command_log": "logs/A-ec34724b28ec-command.json",
+      "exit_code": 0,
+      "counts": {
+        "passed": 795,
+        "skipped": 5
+      }
+    },
+    "diagnostic": {
+      "command_log": "logs/diagnostic-05a2c53ac673-command.json",
+      "exit_code": 1,
+      "counts": {
+        "passed": 795,
+        "failed": 4,
+        "skipped": 5
+      }
+    },
+    "mypy": {
+      "command_log": "logs/mypy-53c2b21dc493-command.json",
+      "exit_code": 0,
+      "counts": {}
+    },
+    "pip": {
+      "command_log": "logs/pip-d370ad4da287-command.json",
+      "exit_code": 0,
+      "counts": {}
+    },
+    "compile": {
+      "command_log": "logs/compile-1da02a9ccab4-command.json",
+      "exit_code": 0,
+      "counts": {}
+    },
+    "environment": {
+      "command_log": "logs/environment-13f24efce3af-command.json",
+      "exit_code": 0,
+      "counts": {}
+    },
+    "profile": {
+      "command_log": "logs/profile-53d822651578-command.json",
+      "exit_code": 0,
+      "counts": {}
+    }
+  },
+  "Windows_static": "logs/postseal-windows-quality.json",
+  "Linux_Ruff_static": "logs/linux-static-ruff-hardened.json",
+  "original_seal_files_verified_unchanged": 277,
+  "original_stat_records_verified_unchanged": 3626
+}

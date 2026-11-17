@@ -1,0 +1,70 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/guardlegacy-0a041794c03f-manifest.json",
+    "--manifest-sha256",
+    "aa3e95f736346434e1b9ae70c0fde4b1639da62792ab62d7675cf572cc9c87f7",
+    "--policy",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/guardlegacy-0a041794c03f-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od05x-0a041794c03f/output"
+  ],
+  "start_utc": "2026-11-17T18:55:50.147440+00:00",
+  "end_utc": "2026-11-17T18:55:58.660714+00:00",
+  "elapsed_seconds": 8.513296516999999,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "job": "guardlegacy",
+  "worker_result": {
+    "job": "guardlegacy",
+    "start_utc": "2026-11-17T18:55:57.675973+00:00",
+    "end_utc": "2026-11-17T18:55:58.583766+00:00",
+    "elapsed_seconds": 0.9077911109999999,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_______ test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes ________\n\n    def test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes():\n        assert os.environ.get(\"OD02V_DISPOSABLE_ROOT\"), \"Run only using OD-02V isolated runner\"\n        protected = Path(os.environ[\"OD02V_WORKTREE\"]) / \"must-not-create-od02v.bin\"\n        with pytest.raises(RuntimeError, match=\"BLOCKED\"):\n            socket.getaddrinfo(\"example.invalid\", 443)\n>       with socket.socket() as client, pytest.raises(RuntimeError, match=\"BLOCKED\"):\n             ^^^^^^^^^^^^^^^\n\ntests/unit/test_od02v_portability.py:41: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <socket.socket fd=-1, family=0, type=0, proto=0>\nfamily = <AddressFamily.AF_INET: 2>, type = <SocketKind.SOCK_STREAM: 1>\nproto = 0, fileno = None\n\n    def __init__(self, family=-1, type=-1, proto=-1, fileno=None):\n        # For user code address family and type values are IntEnum members, but\n        # for the underlying _socket.socket they're just integers. The\n        # constructor of _socket.socket converts the given argument to an\n        # integer automatically.\n        if fileno is None:\n            if family == -1:\n                family = AF_INET\n            if type == -1:\n                type = SOCK_STREAM\n            if proto == -1:\n                proto = 0\n>       _socket.socket.__init__(self, family, type, proto, fileno)\nE       PermissionError: [Errno 1] Operation not permitted\n\n/usr/lib/python3.12/socket.py:233: PermissionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od02v_portability.py::test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes\n1 failed in 0.40s\n",
+    "collected": [
+      {
+        "nodeid": "tests/unit/test_od02v_portability.py::test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes",
+        "realdata": false
+      }
+    ],
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od02v_portability.py::test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes",
+        "outcome": "failed",
+        "when": "call",
+        "reason": "def test_v01_guard_denies_dns_tcp_udp_children_and_protected_writes():\n        assert os.environ.get(\"OD02V_DISPOSABLE_ROOT\"), \"Run only using OD-02V isolated runner\"\n        protected = Path(os.environ[\"OD02V_WORKTREE\"]) / \"must-not-create-od02v.bin\"\n        with pytest.raises(RuntimeError, match=\"BLOCKED\"):\n            socket.getaddrinfo(\"example.invalid\", 443)\n>       with socket.socket() as client, pytest.raises(RuntimeError, match=\"BLOCKED\"):\n             ^^^^^^^^^^^^^^^\n\ntests/unit/test_od02v_portability.py:41: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <socket.socket fd=-1, family=0, type=0, proto=0>\nfamily = <AddressFamily.AF_INET: 2>, type = <SocketKind.SOCK_STREAM: 1>\nproto = 0, fileno = None\n\n    def __init__(self, family=-1, type=-1, proto=-1, fileno=None):\n        # For user code address family and type values are IntEnum members, but\n        # for the underlying _socket.socket they're just integers. The\n        # constructor of _socket.socket converts the given argument to an\n        # integer automatically.\n        if fileno is None:\n            if family == -1:\n                family = AF_INET\n            if type == -1:\n                type = SOCK_STREAM\n            if proto == -1:\n                proto = 0\n>       _socket.socket.__init__(self, family, type, proto, fileno)\nE       PermissionError: [Errno 1] Operation not permitted\n\n/usr/lib/python3.12/socket.py:233: PermissionError"
+      }
+    ],
+    "deselected": [],
+    "counts": {
+      "failed": 1
+    },
+    "guard_denials": {
+      "UNLISTED_READ": 1,
+      "NETWORK": 1
+    },
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od05x-0a041794c03f/protected-NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "original_payloads_copied": 0
+}

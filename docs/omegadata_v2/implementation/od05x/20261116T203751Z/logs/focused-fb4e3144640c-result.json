@@ -1,0 +1,364 @@
+{
+  "job": "focused",
+  "start_utc": "2026-11-17T18:40:52.263307+00:00",
+  "end_utc": "2026-11-17T18:40:52.942936+00:00",
+  "elapsed_seconds": 0.6795794209999713,
+  "exit_code": 1,
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": ".............................FFFF                                        [100%]\n=================================== FAILURES ===================================\n___________________ test_x05_x06_direct_native_calls[execve] ___________________\n\nkind = 'execve'\n\n    @pytest.mark.parametrize(\"kind\", [\"execve\", \"tcp_connect\", \"dns_sendto\"])\n    def test_x05_x06_direct_native_calls(kind):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        h.assert_boundary()\n>       result = h.native_probe(kind)\n                 ^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od05x_native_extensions.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'execve'\n\n    def native_probe(kind: str) -> dict[str, Any]:\n        cap = assert_boundary()\n        assert _LIBC is not None\n        ctypes.set_errno(0)\n        if kind == \"read\":\n            value = _LIBC.open(cap[\"outside_canary\"].encode(), os.O_RDONLY)\n        elif kind == \"write\":\n            value = _LIBC.open(b\"/input/scripts/od05x_isolated_runner.py\", os.O_WRONLY)\n        elif kind == \"exec\":\n            value = _LIBC.fork()\n            if value == 0:\n                os._exit(97)\n            if value > 0:\n                os.waitpid(value, 0)\n        elif kind == \"tcp\":\n            value = _LIBC.socket(2, 1, 0)\n        elif kind == \"dns\":\n            value = _LIBC.socket(2, 2, 0)\n        else:\n>           raise ValueError(\"PROBE_SCOPE\")\nE           ValueError: PROBE_SCOPE\n\n/input/scripts/od05x_isolated_runner.py:249: ValueError\n________________ test_x05_x06_direct_native_calls[tcp_connect] _________________\n\nkind = 'tcp_connect'\n\n    @pytest.mark.parametrize(\"kind\", [\"execve\", \"tcp_connect\", \"dns_sendto\"])\n    def test_x05_x06_direct_native_calls(kind):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        h.assert_boundary()\n>       result = h.native_probe(kind)\n                 ^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od05x_native_extensions.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'tcp_connect'\n\n    def native_probe(kind: str) -> dict[str, Any]:\n        cap = assert_boundary()\n        assert _LIBC is not None\n        ctypes.set_errno(0)\n        if kind == \"read\":\n            value = _LIBC.open(cap[\"outside_canary\"].encode(), os.O_RDONLY)\n        elif kind == \"write\":\n            value = _LIBC.open(b\"/input/scripts/od05x_isolated_runner.py\", os.O_WRONLY)\n        elif kind == \"exec\":\n            value = _LIBC.fork()\n            if value == 0:\n                os._exit(97)\n            if value > 0:\n                os.waitpid(value, 0)\n        elif kind == \"tcp\":\n            value = _LIBC.socket(2, 1, 0)\n        elif kind == \"dns\":\n            value = _LIBC.socket(2, 2, 0)\n        else:\n>           raise ValueError(\"PROBE_SCOPE\")\nE           ValueError: PROBE_SCOPE\n\n/input/scripts/od05x_isolated_runner.py:249: ValueError\n_________________ test_x05_x06_direct_native_calls[dns_sendto] _________________\n\nkind = 'dns_sendto'\n\n    @pytest.mark.parametrize(\"kind\", [\"execve\", \"tcp_connect\", \"dns_sendto\"])\n    def test_x05_x06_direct_native_calls(kind):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        h.assert_boundary()\n>       result = h.native_probe(kind)\n                 ^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od05x_native_extensions.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'dns_sendto'\n\n    def native_probe(kind: str) -> dict[str, Any]:\n        cap = assert_boundary()\n        assert _LIBC is not None\n        ctypes.set_errno(0)\n        if kind == \"read\":\n            value = _LIBC.open(cap[\"outside_canary\"].encode(), os.O_RDONLY)\n        elif kind == \"write\":\n            value = _LIBC.open(b\"/input/scripts/od05x_isolated_runner.py\", os.O_WRONLY)\n        elif kind == \"exec\":\n            value = _LIBC.fork()\n            if value == 0:\n                os._exit(97)\n            if value > 0:\n                os.waitpid(value, 0)\n        elif kind == \"tcp\":\n            value = _LIBC.socket(2, 1, 0)\n        elif kind == \"dns\":\n            value = _LIBC.socket(2, 2, 0)\n        else:\n>           raise ValueError(\"PROBE_SCOPE\")\nE           ValueError: PROBE_SCOPE\n\n/input/scripts/od05x_isolated_runner.py:249: ValueError\n___________________ test_x15_new_test_source_pin_is_enforced ___________________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7aa92ad88a70>\n\n    def test_x15_new_test_source_pin_is_enforced(monkeypatch):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        original = Path.read_bytes\n    \n        def changed(path):\n            if path == Path(\"/work/repo/tests/unit/test_od05x_isolation.py\"):\n                return b\"# NON_MARKET_CANARY changed test source\\n\"\n            return original(path)\n    \n        monkeypatch.setattr(Path, \"read_bytes\", changed)\n>       with pytest.raises((AssertionError, ValueError)):\nE       Failed: DID NOT RAISE any of (<class 'AssertionError'>, <class 'ValueError'>)\n\ntests/unit/test_od05x_native_extensions.py:29: Failed\n=========================== short test summary info ============================\nFAILED tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[execve]\nFAILED tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[tcp_connect]\nFAILED tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[dns_sendto]\nFAILED tests/unit/test_od05x_native_extensions.py::test_x15_new_test_source_pin_is_enforced\n4 failed, 29 passed in 0.27s\n",
+  "collected": [
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x01_missing_sandbox_fail_closed",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x02_incorrect_capability_refused",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[read]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[write]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[exec]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[tcp]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[dns]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x07_single_staging_entrypoint",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[hash]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[class]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[count]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[traversal]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[unknown]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[symlink]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[hardlink]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[destination]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[before_open]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[after_read]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x11_no_output_overwrite",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x12_identity_diagnostic",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x13_concurrent_invalidation",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x14_native_not_original",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_unknown_nodes_not_arbitrary_A",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_B_C_preserved",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_preservation_fail_closed",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x18_separate_gatekeeper_axes",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_collected_inventory_and_source_pins",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_original_B_C_identities_preserved",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_fresh_original_stat_reconciliation",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[execve]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[tcp_connect]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[dns_sendto]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x15_new_test_source_pin_is_enforced",
+      "realdata": false
+    }
+  ],
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x01_missing_sandbox_fail_closed",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x02_incorrect_capability_refused",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[read]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[write]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[exec]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[tcp]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[dns]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x07_single_staging_entrypoint",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[hash]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[class]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[count]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[traversal]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[unknown]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[symlink]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[hardlink]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[destination]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[before_open]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[after_read]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x11_no_output_overwrite",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x12_identity_diagnostic",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x13_concurrent_invalidation",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x14_native_not_original",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_unknown_nodes_not_arbitrary_A",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_B_C_preserved",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_preservation_fail_closed",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x18_separate_gatekeeper_axes",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_collected_inventory_and_source_pins",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_original_B_C_identities_preserved",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_fresh_original_stat_reconciliation",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[execve]",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "kind = 'execve'\n\n    @pytest.mark.parametrize(\"kind\", [\"execve\", \"tcp_connect\", \"dns_sendto\"])\n    def test_x05_x06_direct_native_calls(kind):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        h.assert_boundary()\n>       result = h.native_probe(kind)\n                 ^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od05x_native_extensions.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'execve'\n\n    def native_probe(kind: str) -> dict[str, Any]:\n        cap = assert_boundary()\n        assert _LIBC is not None\n        ctypes.set_errno(0)\n        if kind == \"read\":\n            value = _LIBC.open(cap[\"outside_canary\"].encode(), os.O_RDONLY)\n        elif kind == \"write\":\n            value = _LIBC.open(b\"/input/scripts/od05x_isolated_runner.py\", os.O_WRONLY)\n        elif kind == \"exec\":\n            value = _LIBC.fork()\n            if value == 0:\n                os._exit(97)\n            if value > 0:\n                os.waitpid(value, 0)\n        elif kind == \"tcp\":\n            value = _LIBC.socket(2, 1, 0)\n        elif kind == \"dns\":\n            value = _LIBC.socket(2, 2, 0)\n        else:\n>           raise ValueError(\"PROBE_SCOPE\")\nE           ValueError: PROBE_SCOPE\n\n/input/scripts/od05x_isolated_runner.py:249: ValueError"
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[tcp_connect]",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "kind = 'tcp_connect'\n\n    @pytest.mark.parametrize(\"kind\", [\"execve\", \"tcp_connect\", \"dns_sendto\"])\n    def test_x05_x06_direct_native_calls(kind):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        h.assert_boundary()\n>       result = h.native_probe(kind)\n                 ^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od05x_native_extensions.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'tcp_connect'\n\n    def native_probe(kind: str) -> dict[str, Any]:\n        cap = assert_boundary()\n        assert _LIBC is not None\n        ctypes.set_errno(0)\n        if kind == \"read\":\n            value = _LIBC.open(cap[\"outside_canary\"].encode(), os.O_RDONLY)\n        elif kind == \"write\":\n            value = _LIBC.open(b\"/input/scripts/od05x_isolated_runner.py\", os.O_WRONLY)\n        elif kind == \"exec\":\n            value = _LIBC.fork()\n            if value == 0:\n                os._exit(97)\n            if value > 0:\n                os.waitpid(value, 0)\n        elif kind == \"tcp\":\n            value = _LIBC.socket(2, 1, 0)\n        elif kind == \"dns\":\n            value = _LIBC.socket(2, 2, 0)\n        else:\n>           raise ValueError(\"PROBE_SCOPE\")\nE           ValueError: PROBE_SCOPE\n\n/input/scripts/od05x_isolated_runner.py:249: ValueError"
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[dns_sendto]",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "kind = 'dns_sendto'\n\n    @pytest.mark.parametrize(\"kind\", [\"execve\", \"tcp_connect\", \"dns_sendto\"])\n    def test_x05_x06_direct_native_calls(kind):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        h.assert_boundary()\n>       result = h.native_probe(kind)\n                 ^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od05x_native_extensions.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nkind = 'dns_sendto'\n\n    def native_probe(kind: str) -> dict[str, Any]:\n        cap = assert_boundary()\n        assert _LIBC is not None\n        ctypes.set_errno(0)\n        if kind == \"read\":\n            value = _LIBC.open(cap[\"outside_canary\"].encode(), os.O_RDONLY)\n        elif kind == \"write\":\n            value = _LIBC.open(b\"/input/scripts/od05x_isolated_runner.py\", os.O_WRONLY)\n        elif kind == \"exec\":\n            value = _LIBC.fork()\n            if value == 0:\n                os._exit(97)\n            if value > 0:\n                os.waitpid(value, 0)\n        elif kind == \"tcp\":\n            value = _LIBC.socket(2, 1, 0)\n        elif kind == \"dns\":\n            value = _LIBC.socket(2, 2, 0)\n        else:\n>           raise ValueError(\"PROBE_SCOPE\")\nE           ValueError: PROBE_SCOPE\n\n/input/scripts/od05x_isolated_runner.py:249: ValueError"
+    },
+    {
+      "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x15_new_test_source_pin_is_enforced",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7aa92ad88a70>\n\n    def test_x15_new_test_source_pin_is_enforced(monkeypatch):\n        h = importlib.import_module(\"od05x_isolated_runner\")\n        original = Path.read_bytes\n    \n        def changed(path):\n            if path == Path(\"/work/repo/tests/unit/test_od05x_isolation.py\"):\n                return b\"# NON_MARKET_CANARY changed test source\\n\"\n            return original(path)\n    \n        monkeypatch.setattr(Path, \"read_bytes\", changed)\n>       with pytest.raises((AssertionError, ValueError)):\nE       Failed: DID NOT RAISE any of (<class 'AssertionError'>, <class 'ValueError'>)\n\ntests/unit/test_od05x_native_extensions.py:29: Failed"
+    }
+  ],
+  "deselected": [],
+  "counts": {
+    "passed": 29,
+    "failed": 4
+  },
+  "guard_denials": {},
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od05x-fb4e3144640c/protected-NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

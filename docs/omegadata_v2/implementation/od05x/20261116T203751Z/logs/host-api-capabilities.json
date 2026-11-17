@@ -1,0 +1,35 @@
+{
+  "utc": "2026-11-17T19:03:52.732184+00:00",
+  "host": "Windows-11-10.0.26300-SP0",
+  "Windows_API_export_presence_only": {
+    "advapi32": {
+      "CreateRestrictedToken": true,
+      "IsTokenRestricted": true
+    },
+    "userenv": {
+      "CreateAppContainerProfile": true,
+      "DeleteAppContainerProfile": true
+    },
+    "kernel32": {
+      "SetProcessMitigationPolicy": true,
+      "CreateJobObjectW": true
+    }
+  },
+  "exports_are_not_configured_isolation": true,
+  "Linux_tool_identity_command": {
+    "argv": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "dpkg-query",
+      "-W",
+      "bubblewrap",
+      "libseccomp2"
+    ],
+    "exit_code": 0,
+    "stdout": "bubblewrap\t0.9.0-1ubuntu0.3\nlibseccomp2:amd64\t2.5.5-1ubuntu3.1\n",
+    "stderr": "wsl: Failed to translate 'G:\\Scripts\\'\nwsl: Failed to translate 'G:\\'\nwsl: Failed to translate 'D:\\Scripts\\'\nwsl: Failed to translate 'D:\\'\nwsl: Failed to translate 'G:\\Scripts\\'\nwsl: Failed to translate 'G:\\'\nwsl: Failed to translate 'D:\\Scripts\\'\nwsl: Failed to translate 'D:\\'\nwsl: Failed to translate 'G:\\Scripts\\'\nwsl: Failed to translate 'G:\\'\nwsl: Failed to translate 'D:\\Scripts\\'\nwsl: Failed to translate 'D:\\'\nwsl: Failed to translate 'D:\\flutter_sdk\\flutter\\bin'\n"
+  },
+  "system_configuration_or_installation_changed": false
+}

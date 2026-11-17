@@ -1,0 +1,229 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/family-558559f83e-manifest.json",
+    "--manifest-sha256",
+    "a1b6f0e088859059a879fd46bf48876b1b476fd3e5958d57f2ee22ceb600c6f4",
+    "--policy",
+    "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/family-558559f83e-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od05x-family-558559f83e/output"
+  ],
+  "start_utc": "2026-11-17T19:15:07.913227+00:00",
+  "end_utc": "2026-11-17T19:15:08.559122+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "probe_sha256": "c298779545419812bc2fdb55c768aa07748b6c7145a9abfe63a83b196ace5435",
+  "classification": "AFTER_CORRECTION",
+  "launcher-result.json": {
+    "argv": [
+      "/usr/bin/bwrap",
+      "--unshare-all",
+      "--die-with-parent",
+      "--new-session",
+      "--cap-drop",
+      "ALL",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--symlink",
+      "usr/lib",
+      "/lib",
+      "--symlink",
+      "usr/lib64",
+      "/lib64",
+      "--ro-bind",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--bind",
+      "/home/parilrupani/omega-od05x-family-558559f83e/output",
+      "/work",
+      "--dir",
+      "/input",
+      "--dir",
+      "/policy",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/family-558559f83e-manifest.json",
+      "/policy/manifest.json",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/logs/family-558559f83e-policy.json",
+      "/policy/config.json",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/scripts/od05x_isolated_runner.py",
+      "/input/scripts/od05x_isolated_runner.py",
+      "--ro-bind",
+      "/mnt/e/omega system - phase 1/docs/omegadata_v2/implementation/od05x/20261116T203751Z/network_family_probe_job.py",
+      "/input/scripts/od05x_worker_jobs.py",
+      "--remount-ro",
+      "/dev",
+      "--remount-ro",
+      "/proc",
+      "--remount-ro",
+      "/",
+      "--chdir",
+      "/work",
+      "--setenv",
+      "PYTHONDONTWRITEBYTECODE",
+      "1",
+      "--setenv",
+      "PATH",
+      "/usr/bin",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/input/scripts/od05x_isolated_runner.py",
+      "worker"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "family-result.json": {
+    "probes": [
+      {
+        "probe": "non_UNIX_socket_family",
+        "return": -1,
+        "errno": 1,
+        "denied": true
+      },
+      {
+        "probe": "bind",
+        "return": -1,
+        "errno": 1,
+        "denied": true
+      },
+      {
+        "probe": "listen",
+        "return": -1,
+        "errno": 1,
+        "denied": true
+      },
+      {
+        "probe": "accept4",
+        "return": -1,
+        "errno": 1,
+        "denied": true
+      }
+    ],
+    "packets": 0,
+    "peer_connections": 0,
+    "financial_rows": 0,
+    "python_hook": false
+  },
+  "native-probes.json": {
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od05x-family-558559f83e/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "probes": [
+      {
+        "probe": "read",
+        "native_return": -1,
+        "errno": 2,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "write",
+        "native_return": -1,
+        "errno": 30,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "exec",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "tcp",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "dns",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "execve",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "tcp_connect",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "dns_sendto",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "netlink",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "bind",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "listen",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "accept4",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      }
+    ],
+    "local_ipc_control": {
+      "bytes": 16,
+      "errno": 0,
+      "external_network_packets": 0
+    }
+  }
+}

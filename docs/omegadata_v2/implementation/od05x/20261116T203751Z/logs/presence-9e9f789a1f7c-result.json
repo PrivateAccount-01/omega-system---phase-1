@@ -1,0 +1,444 @@
+{
+  "job": "presence",
+  "start_utc": "2026-11-17T18:45:09.231334+00:00",
+  "end_utc": "2026-11-17T18:45:13.051882+00:00",
+  "elapsed_seconds": 3.8205402630000016,
+  "exit_code": 0,
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": "..................s......................                                [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/unit/test_od05v_local_presence.py:169: Windows junction counterpart exercised on Windows\n40 passed, 1 skipped in 3.35s\n",
+  "collected": [
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P02]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P03]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p04_full_independent_count_oracle",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p05_missing_payload",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p06_wrong_claimed_size",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[directory]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[extension]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[../escape.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[/escape.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[C:/secret.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[//host/share/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/x.zip:secret]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/../x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[symlink]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[hardlink]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[root]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[feed]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[source]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p11_no_payload_open",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[PENDING_REVIEW]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[DENIED]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[REVOKED]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[EXPIRED]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[missing]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[unknown]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_redaction",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p14_duplicate_observations_and_nonvacuity",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p15_2020_conflict_no_route_change",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p16_lineage_claims_not_authentication",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p17_determinism_and_bounds",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p18_cli_dryrun_fresh_output_and_preservation",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p18_pin_mismatch_and_corpus",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value0]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value1]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[7]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[True]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_late_non_directory_parent_not_counted_as_payload",
+      "realdata": false
+    }
+  ],
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P01]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P02]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p01_p03_real_candidates[P03]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p04_full_independent_count_oracle",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p05_missing_payload",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p06_wrong_claimed_size",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[directory]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p07_wrong_type_or_extension[extension]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[../escape.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[/escape.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[C:/secret.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[//host/share/x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/x.zip:secret]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/raw/nse_equity_bhavcopy/../x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[DATA/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_unsafe_claim[data/seed_raw/omega_phase2_repo/nse_equity_bhavcopy/con.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[symlink]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[hardlink]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05v_local_presence.py', 169, 'Skipped: Windows junction counterpart exercised on Windows')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[root]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[feed]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p10_scope[source]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p11_no_payload_open",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[PENDING_REVIEW]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[DENIED]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[REVOKED]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[EXPIRED]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[missing]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p12_payload_integrity_refusal[unknown]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_redaction",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p14_duplicate_observations_and_nonvacuity",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p15_2020_conflict_no_route_change",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p16_lineage_claims_not_authentication",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p17_determinism_and_bounds",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p18_cli_dryrun_fresh_output_and_preservation",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p18_pin_mismatch_and_corpus",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value0]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[value1]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[7]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p13_late_nonstring_original_claim[True]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p08_late_non_directory_parent_not_counted_as_payload",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "counts": {
+    "passed": 40,
+    "skipped": 1
+  },
+  "guard_denials": {},
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od05x-9e9f789a1f7c/protected-NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}
