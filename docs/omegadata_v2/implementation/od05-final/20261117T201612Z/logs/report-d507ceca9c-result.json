@@ -1,0 +1,21 @@
+{
+  "job": "report",
+  "exit_code": 0,
+  "counts": {},
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": "{\"schema_version\": \"od05.final-report.receipt/v1\", \"files\": [\"00_final_scope_and_identity.md\", \"01_prior_phase_consolidation.md\", \"02_incident_and_security_boundaries.md\", \"03_parser_implementation_inventory.json\", \"04_supported_source_era_matrix.json\", \"05_schema_contracts_and_error_taxonomy.md\", \"06_negative_first_parser_tests.md\", \"07_focused_test_results.json\", \"08_cross_platform_engineering_matrix.json\", \"09_golden_corpus_coverage.json\", \"10_original_archive_metadata_scorecard.json\", \"11_preservation_and_change_manifest.json\", \"12_unresolved_external_dependencies.md\", \"13_final_gatekeeper.json\", \"14_od06_dependency_contract.md\", \"15_od06_implementation_handoff.md\", \"16_final_report.md\"], \"manifest_sha256\": \"a2298ee8ec0bc71136f37bd1bf2ca60f717bb8d6d2d81ee7f444946f4df15989\", \"sha256\": {\"03_parser_implementation_inventory.json\": \"ddf39b5544264612e0f9338e5a1a0a02efba4512125d437cdff9542f791b4070\", \"04_supported_source_era_matrix.json\": \"18f5ab286e8689a83e6f61cdc27ce059f8b34d8e62c4c83dc5a0439ab3970920\", \"07_focused_test_results.json\": \"76ef6ba2e105332fd2b0346de6ac9dbd20a39237ba492193f468b5648101ec02\", \"08_cross_platform_engineering_matrix.json\": \"8cfb1abfe4e5dc6488328c4e636b37afaad97918c4101f525037b9d6ac65b3ef\", \"09_golden_corpus_coverage.json\": \"d1a80fdb1c42513c3297c45902f83b5b5401222646d1aeac14ad350083a8ab17\", \"10_original_archive_metadata_scorecard.json\": \"1b7451aabb342ee36616e6a6c947c88bc111d06e9be40dd43c70caf381d21191\", \"11_preservation_and_change_manifest.json\": \"7546af81bd2653cda16ad927a54d925f4cd8decc63ad00c35d89a7c3caf2f43d\", \"13_final_gatekeeper.json\": \"50687a87b779e7adede6206730f5c1c7c1412c1c82dde9e3d93ccf01ec31a39c\", \"00_final_scope_and_identity.md\": \"de50d77145e338c287115bb726d5e6e4f49212fb4ca418bee6b356223e4f1413\", \"01_prior_phase_consolidation.md\": \"d101ad9334103193cbdfe6ce143fad15577e84e3b36b1b3b4a406f4bdda3f74b\", \"02_incident_and_security_boundaries.md\": \"9703afaebdc50f440f407f5448f9ba74a5ddd84cd97416bd042e2f7a238f86dd\", \"05_schema_contracts_and_error_taxonomy.md\": \"3b6c887a5aaa374a555be7cccb5864c24a5a5329e11df6751076a7d086c54cea\", \"06_negative_first_parser_tests.md\": \"281a99b25d0ec052e7ffc174e87f601d37b52809534deb7a0a6370ceabfb2516\", \"12_unresolved_external_dependencies.md\": \"e2f5a574a6f18baea5d78e62ac610df712796a0951bba9c8de981c8227a668b1\", \"14_od06_dependency_contract.md\": \"26d4c355a559dc4c1ec1866d316b7051bfa054399e6fef537708ebae4ada8545\", \"15_od06_implementation_handoff.md\": \"0619df536650d66f4b0fa50f9fe03e5334ef8ed3844a38f98005955d493925a5\", \"16_final_report.md\": \"6da18850dce9f92be714e0bea0e3d91eca5f197e88e0a1aa65132bd7a36ba164\"}, \"boundary\": {\"backend\": \"bwrap+seccomp/v1\", \"worker_namespaces\": {\"mnt\": \"mnt:[4026532222]\", \"net\": \"net:[4026532227]\", \"pid\": \"pid:[4026532225]\", \"user\": \"user:[4026532291]\"}, \"outside_canary\": \"/home/parilrupani/omega-od05-final-20261117T201612Z/report-d507ceca9c/NON_MARKET_CANARY\", \"verified\": true, \"source_mounts\": \"EXACT_READ_ONLY\", \"no_new_privs\": true, \"seccomp_mode\": 2}, \"git_calls\": 0, \"original_repository_mounted\": false}",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od05-final-20261117T201612Z/report-d507ceca9c/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

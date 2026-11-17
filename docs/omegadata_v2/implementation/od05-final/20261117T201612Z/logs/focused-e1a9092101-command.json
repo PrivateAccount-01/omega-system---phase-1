@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od05-final-20261117T201612Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/focused-e1a9092101-manifest.json",
+    "--manifest-sha256",
+    "8c4dcecf8ea1a807d24cc225d8a32409b3823baf3651202c2e0ba71d7730a7f1",
+    "--policy",
+    "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/focused-e1a9092101-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od05-final-20261117T201612Z/focused-e1a9092101/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od05-final-20261117T201612Z",
+  "start_utc": "2026-11-17T20:23:53.846449+00:00",
+  "end_utc": "2026-11-17T20:23:53.948229+00:00",
+  "elapsed_seconds": 0.10177779600000036,
+  "exit_code": 2,
+  "stdout": "{\"state\": \"REFUSED\", \"reason\": \"MANIFEST_SCOPE\"}\n",
+  "stderr": "",
+  "worker_result": null,
+  "job": "focused",
+  "source_commit": "dd007c9e33d3d4ffaefe339cb766b428944bcdee",
+  "source_manifest_sha256": "8c4dcecf8ea1a807d24cc225d8a32409b3823baf3651202c2e0ba71d7730a7f1"
+}

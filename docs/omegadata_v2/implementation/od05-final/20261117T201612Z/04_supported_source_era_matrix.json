@@ -1,0 +1,90 @@
+{
+  "implemented_profiles": [
+    {
+      "source_id": "NSE_EQUITY_BHAVCOPY",
+      "source_venue": "NSE_CM",
+      "source_format": "CSV_OR_SINGLE_MEMBER_ZIP",
+      "format_id": "legacy-illustrative",
+      "format_era": "ILLUSTRATIVE_NOT_OFFICIAL",
+      "effective_start": null,
+      "effective_end": null,
+      "schema_version": "od05.illustrative-cm/v1",
+      "parser_version": "syn-v1",
+      "encoding_rules": "UTF8_STRICT_CRLF_OR_LF",
+      "date_rules": "EXACT_REQUESTED_ISO_DATE",
+      "numeric_rules": "Decimal fixed-point 12 integer/8 fraction; nonnegative int64 quantity",
+      "required_columns": [
+        "SYMBOL",
+        "SERIES",
+        "ISIN",
+        "TIMESTAMP",
+        "OPEN",
+        "HIGH",
+        "LOW",
+        "CLOSE",
+        "TOTTRDQTY"
+      ],
+      "optional_columns": [],
+      "nullable_values": [
+        "ISIN"
+      ],
+      "unknown_column_policy": "PRESERVE_NOT_INTERPRETED",
+      "source_authentication_state": "UNVERIFIED",
+      "content_permission_state": "REGRESSION_ONLY_NO_SOURCE_GRANT"
+    },
+    {
+      "source_id": "NSE_EQUITY_BHAVCOPY",
+      "source_venue": "NSE_CM",
+      "source_format": "CSV_OR_SINGLE_MEMBER_ZIP",
+      "format_id": "udiff-illustrative",
+      "format_era": "ILLUSTRATIVE_NOT_OFFICIAL",
+      "effective_start": null,
+      "effective_end": null,
+      "schema_version": "od05.illustrative-cm/v1",
+      "parser_version": "syn-v1",
+      "encoding_rules": "UTF8_STRICT_CRLF_OR_LF",
+      "date_rules": "EXACT_REQUESTED_ISO_DATE",
+      "numeric_rules": "Decimal fixed-point 12 integer/8 fraction; nonnegative int64 quantity",
+      "required_columns": [
+        "TckrSymb",
+        "SctySrs",
+        "ISIN",
+        "TradDt",
+        "BizDt",
+        "OpnPric",
+        "HghPric",
+        "LwPric",
+        "ClsPric",
+        "TtlTradgVol"
+      ],
+      "optional_columns": [],
+      "nullable_values": [
+        "ISIN"
+      ],
+      "unknown_column_policy": "PRESERVE_NOT_INTERPRETED",
+      "source_authentication_state": "UNVERIFIED",
+      "content_permission_state": "REGRESSION_ONLY_NO_SOURCE_GRANT"
+    }
+  ],
+  "registered_acquisition_families": [
+    "NSE_EQUITY_BHAVCOPY",
+    "NSE_FO_BHAVCOPY",
+    "BSE_EQUITY_BHAVCOPY",
+    "NSE_FII_DII",
+    "INDIA_VIX",
+    "NSE_CORPORATE_ACTIONS",
+    "BSE_CORPORATE_ACTIONS",
+    "GDELT",
+    "RBI_DBIE",
+    "MOSPI",
+    "AMFI_MONTHLY_PORTFOLIOS",
+    "NSE_BULK_BLOCK_DEALS",
+    "INSIDER_TRADES"
+  ],
+  "other_families": "Acquisition registration is not versioned pure decoder support; no new JSON/BSE/FO/other financial parser claim",
+  "official_NSE_BSE_eras": "BLOCKED_REFERENCE",
+  "production_2020_and_2024_routes": "UNCHANGED; no inferred cutover",
+  "policy_status_counts": {
+    "PENDING_REVIEW": 13
+  }
+}

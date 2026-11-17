@@ -1,0 +1,41 @@
+{
+    "utc":  "2026-11-17T20:43:39.0234236Z",
+    "note":  "Windows PowerShell ConvertFrom-Json could not parse the full coverage JSON with empty-name context keys. export-verification.json therefore retains a null reporter summary; original coverage bytes and all prior seal entries unchanged. This additive correction uses the native data-free JSON reader; no application/test/original payload operation was rerun.",
+    "actual_prior_command":  "Completed with non-terminating PowerShell metadata-reader error; not a verification-test failure or PASS for reporter summary",
+    "coverage":  {
+                     "parser_scope_totals":  {
+                                                 "covered_lines":  612,
+                                                 "num_statements":  1214,
+                                                 "percent_covered":  48.8399071925754,
+                                                 "percent_covered_display":  "49",
+                                                 "missing_lines":  602,
+                                                 "excluded_lines":  0,
+                                                 "percent_statements_covered":  50.41186161449753,
+                                                 "percent_statements_covered_display":  "50",
+                                                 "num_branches":  510,
+                                                 "num_partial_branches":  40,
+                                                 "covered_branches":  230,
+                                                 "missing_branches":  280,
+                                                 "percent_branches_covered":  45.09803921568628,
+                                                 "percent_branches_covered_display":  "45"
+                                             },
+                     "report_module":  {
+                                           "scripts/od05_final_report.py":  {
+                                                                                "covered_lines":  71,
+                                                                                "num_statements":  83,
+                                                                                "percent_covered":  82.92682926829268,
+                                                                                "percent_covered_display":  "83",
+                                                                                "missing_lines":  12,
+                                                                                "excluded_lines":  0,
+                                                                                "percent_statements_covered":  85.5421686746988,
+                                                                                "percent_statements_covered_display":  "86",
+                                                                                "num_branches":  40,
+                                                                                "num_partial_branches":  9,
+                                                                                "covered_branches":  31,
+                                                                                "missing_branches":  9,
+                                                                                "percent_branches_covered":  77.5,
+                                                                                "percent_branches_covered_display":  "78"
+                                                                            }
+                                       }
+                 }
+}

@@ -1,0 +1,692 @@
+[
+  {
+    "source_file": "src/omegadata/parsers/archive_candidate_inventory.py",
+    "sha256": "f7c6c2a877dbf3f9e97a0704125cd8acde817c50328f6afb56c356d659ea39f8",
+    "functions": [
+      "relative_name",
+      "json_object",
+      "read_expected",
+      "validate_root",
+      "parse_metadata",
+      "scan_metadata",
+      "ledger",
+      "__init__",
+      "__post_init__",
+      "__post_init__",
+      "presence"
+    ],
+    "lines_read": 397
+  },
+  {
+    "source_file": "src/omegadata/parsers/contracts.py",
+    "sha256": "81c8acbcb0348196430024361fc181e14fc64d96181c5758f3525f7875f82d1a",
+    "functions": [
+      "__init__",
+      "__post_init__"
+    ],
+    "lines_read": 115
+  },
+  {
+    "source_file": "src/omegadata/parsers/dispatch.py",
+    "sha256": "7436b5f1c2f833a3b3945b4d90ce6e5badb3af360e76b66823a9087cf1f495ae",
+    "functions": [
+      "parse",
+      "parse_archive"
+    ],
+    "lines_read": 69
+  },
+  {
+    "source_file": "src/omegadata/parsers/era_matrix.py",
+    "sha256": "82637bcc77327d1aa37f31ad154eeceb89f5f44162e1070af3dd734e0022db1c",
+    "functions": [
+      "build_matrix"
+    ],
+    "lines_read": 71
+  },
+  {
+    "source_file": "src/omegadata/parsers/local_archive_presence.py",
+    "sha256": "a93708cc7c5482f901db497e06d6b2fe9826f4a100c75056d42cb8ad9d551652",
+    "functions": [
+      "request_payload_integrity",
+      "_info",
+      "_manifest_names",
+      "_row",
+      "scan_presence",
+      "_identity",
+      "_scan_v2",
+      "budget",
+      "check_directory",
+      "__init__",
+      "get",
+      "_fingerprint",
+      "inspect"
+    ],
+    "lines_read": 597
+  },
+  {
+    "source_file": "src/omegadata/parsers/nse_cm.py",
+    "sha256": "d6c0af6a4225bf1d6c814f116065e8d8c031ab9aeee9fee385ab54c55e580392",
+    "functions": [
+      "unpack",
+      "lexical",
+      "price",
+      "day",
+      "decode",
+      "exact",
+      "digest"
+    ],
+    "lines_read": 233
+  },
+  {
+    "source_file": "src/omegadata/parsers/reference_evidence.py",
+    "sha256": "10eeb156015eaf34f6037ce9e6e32e39e7bfbd566a565306a8b69df4b7c6ab3a",
+    "functions": [
+      "filename",
+      "unique",
+      "decode",
+      "verify_reference",
+      "no_links",
+      "read_file",
+      "read_bundle",
+      "__init__",
+      "name",
+      "url",
+      "utc",
+      "iso_date",
+      "identities",
+      "__post_init__"
+    ],
+    "lines_read": 393
+  },
+  {
+    "source_file": "src/omegadata/parsers/reference_registry.py",
+    "sha256": "24f5590f05eb7b10f985a790a9cb93bc48db13ca490440da2ec8245ec9ecccbf",
+    "functions": [
+      "select"
+    ],
+    "lines_read": 49
+  },
+  {
+    "source_file": "src/omegadata/parsers/__init__.py",
+    "sha256": "e6a6c38b154e80d35a8e53e4ccbe56f1b5cdfa7add947a3cfd1e0e3beb2f6481",
+    "functions": [],
+    "lines_read": 1
+  },
+  {
+    "source_file": "src/omegadata/track_a/acquisition.py",
+    "sha256": "0b1578e270c0b3d89bcc819036d38786967c58b04aa6c4271b63f47796d3472b",
+    "functions": [
+      "failure",
+      "load_limits",
+      "validate_request_options",
+      "safe_url",
+      "check_status",
+      "check_body",
+      "unique_object",
+      "_date",
+      "_csv",
+      "validate_payload",
+      "__init__",
+      "__post_init__",
+      "remaining",
+      "consume",
+      "backoff"
+    ],
+    "lines_read": 462
+  },
+  {
+    "source_file": "src/omegadata/track_a/alerting.py",
+    "sha256": "8e6013e17f528e6cf7d45953dedbec6fa895d11c44d88b71c0f5ccd3dcd3d020",
+    "functions": [
+      "__init__",
+      "_should_send",
+      "route"
+    ],
+    "lines_read": 54
+  },
+  {
+    "source_file": "src/omegadata/track_a/collection_schedule.py",
+    "sha256": "26f6811fb44f4e882cd9b5f36ba19507eef4793875e6b4454e09a9dcc7d8db60",
+    "functions": [
+      "_ensure_aware_utc",
+      "_target_for",
+      "_within_grace",
+      "due_corporate_action_sources",
+      "should_run_corporate_action_confirmation",
+      "require_corporate_action_window",
+      "require_confirmation_window"
+    ],
+    "lines_read": 101
+  },
+  {
+    "source_file": "src/omegadata/track_a/download_manager.py",
+    "sha256": "342bc2528d5ab31a4f951faf7fd8b22e288fa758d90aed40e4d5b83aabecbf91",
+    "functions": [
+      "__init__",
+      "_job_scope",
+      "_source_scope",
+      "_authorize",
+      "_authorize_url",
+      "_load_cached_artifact_from_root",
+      "_load_cached_artifact",
+      "_path_from_manifest",
+      "_read_cache_manifest",
+      "_expected_bse_equity_markers",
+      "_looks_like_bse_equity_url",
+      "_extract_bse_links_from_html",
+      "_is_nse_url",
+      "_is_bse_url",
+      "_is_tls_error",
+      "_is_retryable_nse_request_error",
+      "_header_profiles",
+      "_profile_for_url",
+      "_profile_name",
+      "_hash_content",
+      "_request_once",
+      "_request",
+      "_bootstrap_nse_session",
+      "_request_via_urllib",
+      "_offline_adapter",
+      "_attach_cookie_header",
+      "_request_via_curl",
+      "_request_with_workarounds",
+      "_workarounds_in_job",
+      "_render_url",
+      "_render_pattern",
+      "_extract_bse_equity_urls",
+      "_discover_bse_equity_urls",
+      "_discover_nse_fo_urls",
+      "_candidate_urls",
+      "_validate_csv_header",
+      "_select_bse_equity_zip_member",
+      "_validate_bse_equity_zip_payload",
+      "_validate_nse_fo_zip_payload",
+      "_validate_payload",
+      "_fetch_candidate",
+      "_probe_in_job",
+      "probe_source_candidates",
+      "download",
+      "_download_in_job",
+      "fetch_bse_stockreach_graph",
+      "unique",
+      "__init__",
+      "handle_starttag"
+    ],
+    "lines_read": 1221
+  },
+  {
+    "source_file": "src/omegadata/track_a/kafka_bus.py",
+    "sha256": "064e822372da7942844e84956d8c8856324776610a40d763eb2d47f36157cf9e",
+    "functions": [
+      "__init__",
+      "producer",
+      "consumer"
+    ],
+    "lines_read": 25
+  },
+  {
+    "source_file": "src/omegadata/track_a/monitoring.py",
+    "sha256": "17c08ed57fbc6b6bc26c204139f06c69fa2b7304b41449d72def4fe98853d1d9",
+    "functions": [],
+    "lines_read": 81
+  },
+  {
+    "source_file": "src/omegadata/track_a/news_pipeline.py",
+    "sha256": "00c2bb63fc3d60bb75955a032963bcbb77b5e4030928c14735b010b82cf8dc73",
+    "functions": [
+      "__init__",
+      "processing_deadline_minutes",
+      "relevance_score",
+      "recency_weight",
+      "compute_impact",
+      "build_current_impact",
+      "cache_current_impact"
+    ],
+    "lines_read": 171
+  },
+  {
+    "source_file": "src/omegadata/track_a/orchestration.py",
+    "sha256": "74585a1c94e1599b743dadf4b86f60ad2b180416f58886b38e97fbda0bb4038a",
+    "functions": [
+      "__init__",
+      "storage",
+      "ingest_raw_source",
+      "ingest_tabular_frame"
+    ],
+    "lines_read": 27
+  },
+  {
+    "source_file": "src/omegadata/track_a/quality_reporting.py",
+    "sha256": "78899bd69d201ca01f628ab0cf92f10775e92366ac99cec5bd3aedb4f26e90d1",
+    "functions": [
+      "__init__",
+      "_as_int",
+      "generate",
+      "_prev_month",
+      "_validation_summary",
+      "_corporate_action_coverage",
+      "run_for_previous_month"
+    ],
+    "lines_read": 140
+  },
+  {
+    "source_file": "src/omegadata/track_a/raw_archive.py",
+    "sha256": "8915d06fcfad9edefaaf178ac3b6e1c9c38321ec193575fa3790cf4f2a38544d",
+    "functions": [
+      "canonical",
+      "unique_json",
+      "__init__",
+      "utc",
+      "safe_label",
+      "sanitized",
+      "scope",
+      "path_matches",
+      "identity",
+      "utc",
+      "pairs",
+      "__init__",
+      "_safe",
+      "_mkdir",
+      "_read",
+      "_authorize",
+      "_read_rights",
+      "commit_path",
+      "observation_path",
+      "_id_path",
+      "_lock",
+      "_inventory",
+      "_sync_dir",
+      "_publish",
+      "_step",
+      "put",
+      "_verified",
+      "read_verified",
+      "recover_staging",
+      "scan_verified",
+      "walk_error",
+      "check_root"
+    ],
+    "lines_read": 475
+  },
+  {
+    "source_file": "src/omegadata/track_a/redis_cache.py",
+    "sha256": "92d47576f15b5019d7bd9ba24de15aa2a91d41ce71be7729af211716e25d573a",
+    "functions": [
+      "__init__",
+      "set_json",
+      "get_json"
+    ],
+    "lines_read": 24
+  },
+  {
+    "source_file": "src/omegadata/track_a/slo.py",
+    "sha256": "662ca27802a6ee4f67606728a641066a13286ba3df56eff9d7c974570d14f67a",
+    "functions": [
+      "__init__",
+      "record",
+      "snapshot",
+      "_evict_old"
+    ],
+    "lines_read": 68
+  },
+  {
+    "source_file": "src/omegadata/track_a/source_registry.py",
+    "sha256": "01425a79dd1ef31622f671e7e1dc177f091726f123f88bfb9370bf73eee0b5cb",
+    "functions": [
+      "resolve_era"
+    ],
+    "lines_read": 329
+  },
+  {
+    "source_file": "src/omegadata/track_a/source_rights.py",
+    "sha256": "7f0e74800b4e148f5e2926c0e414983bde5591b93d81a47be07f619b28287fbd",
+    "functions": [
+      "utc_datetime",
+      "normalized_host",
+      "policy_url_host",
+      "decision_record",
+      "_unique_object",
+      "load_policy_register",
+      "authorize_source",
+      "validate_utc",
+      "known_key",
+      "terms_url",
+      "hosts",
+      "intervals_and_sets",
+      "canonical_hash",
+      "exact_source_key",
+      "validate_utc",
+      "__init__",
+      "__init__",
+      "revisions",
+      "evaluate"
+    ],
+    "lines_read": 418
+  },
+  {
+    "source_file": "src/omegadata/track_a/storage.py",
+    "sha256": "62e862f7658a7a9035772d4a832c4434a3f21889a8df3096235358de868c7821",
+    "functions": [
+      "__init__",
+      "store_daily"
+    ],
+    "lines_read": 38
+  },
+  {
+    "source_file": "src/omegadata/track_a/trading_calendar.py",
+    "sha256": "468719b7f9f8be6f384d11b31a91c882cc78a1c5f7a88611319db69b4706ba68",
+    "functions": [
+      "from_config",
+      "year_is_covered",
+      "ensure_year_covered",
+      "is_trading_day",
+      "special_sessions_for_year",
+      "recent_trading_days",
+      "add_business_days",
+      "business_days_between",
+      "coverage_status",
+      "all_coverage_statuses"
+    ],
+    "lines_read": 292
+  },
+  {
+    "source_file": "src/omegadata/track_a/warehouse.py",
+    "sha256": "2c75305ec46e46daaad3e887946205fa11f6ace374ce5a52e095b405888d0d88",
+    "functions": [
+      "_sql_string",
+      "sync_release_manifest"
+    ],
+    "lines_read": 99
+  },
+  {
+    "source_file": "src/omegadata/track_a/__init__.py",
+    "sha256": "e186ffc13b37f6f3c713d94e730803dec4c96af64969d504553dce2805c814ab",
+    "functions": [],
+    "lines_read": 1
+  },
+  {
+    "source_file": "src/omegadata/track_b/adjustment_engine.py",
+    "sha256": "e8e8f65e8d24dcb20a542c5c3dc9e11ae3a84961fd54ad53db14bc2525bda91a",
+    "functions": [
+      "recompute_adjusted_series",
+      "refresh_demerger_actuals",
+      "_compute_factor",
+      "_base_metadata"
+    ],
+    "lines_read": 263
+  },
+  {
+    "source_file": "src/omegadata/track_b/confidence.py",
+    "sha256": "a7e7800c6e925d76f955d148d6cf78d909ff32f69a8b8c77d702c1a1728fc346",
+    "functions": [
+      "_is_non_publishable_synthetic_row",
+      "compute_score",
+      "enforce_context",
+      "filter_records",
+      "monthly_report"
+    ],
+    "lines_read": 131
+  },
+  {
+    "source_file": "src/omegadata/track_b/corporate_actions.py",
+    "sha256": "ea6a3a6164acaba03619feadd59196a2cf234770b442ec6e1ba53718ac24bd5e",
+    "functions": [
+      "__init__",
+      "_validate_required_fields",
+      "_merged_payload",
+      "_review_exists",
+      "_queue_review",
+      "_required_fields_complete",
+      "_required_fields_complete_payload",
+      "add_staging_record",
+      "run_daily_confirmation",
+      "_is_stale_unmatched",
+      "_confirm_pair",
+      "_confirm_single",
+      "_payload_mismatch",
+      "_numerically_close",
+      "apply_correction",
+      "get_active_actions",
+      "get_action_on_date"
+    ],
+    "lines_read": 443
+  },
+  {
+    "source_file": "src/omegadata/track_b/corporate_action_matching.py",
+    "sha256": "74ef262f1532c1d644eb11c70aa7e735f4596a376377bcda44b2baa0cd020cf1",
+    "functions": [
+      "__init__",
+      "event_date",
+      "_numeric_close",
+      "_payload_score",
+      "economic_overlap_count",
+      "has_economic_signal",
+      "relatedness_score",
+      "score_pair",
+      "match_pairs",
+      "best_total"
+    ],
+    "lines_read": 179
+  },
+  {
+    "source_file": "src/omegadata/track_b/corporate_action_parser.py",
+    "sha256": "0204c63039c8531b3dff4a9111fc5d8bc7afca068f471388581ed31338af782e",
+    "functions": [
+      "to_decimal",
+      "map_action_type",
+      "enrich_payload_from_subject"
+    ],
+    "lines_read": 100
+  },
+  {
+    "source_file": "src/omegadata/track_b/cross_source_validation.py",
+    "sha256": "a2603d3c5c92e2a0c67e27c51e19deb17d62d7befc6b3160129ca42d759c2546",
+    "functions": [
+      "__init__",
+      "_audit_key",
+      "_audit_exists",
+      "validate_nse_bse_prices",
+      "_price_tolerance_context",
+      "_price_tolerance",
+      "validate_monthly_flow_consistency",
+      "validate_implied_volatility_spot_check",
+      "validate_secondary_adjusted_price",
+      "validate_corporate_actions",
+      "_event_date",
+      "_date_gap_days",
+      "_compare_numeric",
+      "_persist_categorical_result",
+      "_detect_systematic_disagreement"
+    ],
+    "lines_read": 723
+  },
+  {
+    "source_file": "src/omegadata/track_b/discontinuity.py",
+    "sha256": "fe9226c131b2c8860e138d1e7455802b1382eada07634939b500f1cfb828b3bc",
+    "functions": [
+      "_review_exists",
+      "_estimate_beta",
+      "_compute_beta",
+      "_median",
+      "_integrity_fail",
+      "_build_fallback_betas",
+      "detect",
+      "_persist_event"
+    ],
+    "lines_read": 351
+  },
+  {
+    "source_file": "src/omegadata/track_b/isin_master.py",
+    "sha256": "12e742a70972ee6db85a2a5bcab5a934ee283876c5edfe1b01251f090e1728e4",
+    "functions": [
+      "validate_isin",
+      "create_instrument",
+      "add_ipo_record",
+      "add_cross_listing",
+      "apply_symbol_change",
+      "resolve_symbol",
+      "mark_delisted"
+    ],
+    "lines_read": 220
+  },
+  {
+    "source_file": "src/omegadata/track_b/manual_review.py",
+    "sha256": "deb39d6da317aadf087073e4ff1c9c5e2174fd163379af81febff8e6628bcd91",
+    "functions": [
+      "_repo_root",
+      "__init__",
+      "_fingerprint",
+      "_policy",
+      "_calendar_exchange",
+      "_apply_sla_metadata",
+      "_refresh_review_payload",
+      "_update_review_metrics",
+      "_update_reprocess_metrics",
+      "review_exists",
+      "_find_existing_scope_review",
+      "queue_review",
+      "list_open_reviews",
+      "_queue_reprocess_job",
+      "resolve_review",
+      "complete_reprocess"
+    ],
+    "lines_read": 472
+  },
+  {
+    "source_file": "src/omegadata/track_b/matching_policy.py",
+    "sha256": "6ac95de52f03980b4d2b83125d4404d8fd275fbb47013fca44d80c499f12ac79",
+    "functions": [
+      "invalidate_matching_policy_cache",
+      "_read_policy",
+      "load_matching_policy"
+    ],
+    "lines_read": 56
+  },
+  {
+    "source_file": "src/omegadata/track_b/publication.py",
+    "sha256": "64619f4339ec0c5493949af9aaf8302df00666f7639a1524742367903e701c93",
+    "functions": [
+      "_policy_for_category",
+      "_resolution_decision",
+      "_applies",
+      "_is_active",
+      "active_reviews_for_isin",
+      "blocked_dates",
+      "status_for_row",
+      "evaluate_records",
+      "filter_records"
+    ],
+    "lines_read": 166
+  },
+  {
+    "source_file": "src/omegadata/track_b/release_manager.py",
+    "sha256": "a36e461b09f3c2e79da9185a892445f38c8048a05c0294772263d5c2d0fcb9e3",
+    "functions": [
+      "_repo_root",
+      "_relative_repo_path",
+      "_load_profile_matrix",
+      "__init__",
+      "_sha256",
+      "_dataset_path",
+      "_write_dataset",
+      "_build_release_id",
+      "_gpg_command",
+      "_to_wsl_path",
+      "_gpg_home",
+      "_gpg_args",
+      "_gpg_env",
+      "_ensure_gpg_key",
+      "_sign_manifest",
+      "verify_signature",
+      "_frame_from_rows",
+      "_export_adjusted_equity",
+      "_export_universe",
+      "_export_participant_flows",
+      "_export_indices",
+      "_export_futures_contracts",
+      "_export_futures_eod",
+      "_export_continuous_futures",
+      "_export_options_contracts",
+      "_export_options_eod",
+      "_build_quality_report",
+      "_build_lineage_report",
+      "build_release",
+      "get_release_record",
+      "get_latest_release_record"
+    ],
+    "lines_read": 595
+  },
+  {
+    "source_file": "src/omegadata/track_b/release_readiness.py",
+    "sha256": "32242761d57c80edfd4af756bbd020039fe824e8872bb9d61c8db34ad46ff581",
+    "functions": [
+      "_repo_root",
+      "_read_json",
+      "_probe_summary_score",
+      "_load_best_probe_artifact",
+      "_load_policy",
+      "evaluate",
+      "_resolve_release_record",
+      "_release_checks",
+      "_adjusted_ohlcv_check",
+      "_artifact_check"
+    ],
+    "lines_read": 549
+  },
+  {
+    "source_file": "src/omegadata/track_b/review_policy.py",
+    "sha256": "2d52ad60864009a9bd2d74098e93ee4b4c27fc632ef0fe6b79ca71295749f5ad",
+    "functions": [
+      "_read_policy_set",
+      "invalidate_review_policy_cache",
+      "load_review_policies",
+      "for_category"
+    ],
+    "lines_read": 103
+  },
+  {
+    "source_file": "src/omegadata/track_b/tolerance_policy.py",
+    "sha256": "e647fc41b194367b1228700e8f965f2bc6958ec7f9170260a57d19e0393ce0a2",
+    "functions": [
+      "invalidate_tolerance_policy_cache",
+      "_read_policy",
+      "load_tolerance_policy",
+      "match"
+    ],
+    "lines_read": 111
+  },
+  {
+    "source_file": "src/omegadata/track_b/universe_manager.py",
+    "sha256": "37a36df3cb601a5384a941f95b6ca38b7927e04ffae60084efdede0aacc43cbf",
+    "functions": [
+      "add_membership",
+      "get_universe",
+      "get_upcoming_additions",
+      "reconstruct_pre2010",
+      "remove_membership",
+      "_coerce_seed_pack",
+      "_snapshot_symbols",
+      "_scan_symbol_isin_map",
+      "_seed_symbol_map",
+      "_seed_security_map",
+      "_ensure_instrument",
+      "backfill_from_seed_pack",
+      "validate_seed_pack"
+    ],
+    "lines_read": 486
+  },
+  {
+    "source_file": "src/omegadata/track_b/__init__.py",
+    "sha256": "4ef40357a590f5b1b7dff537fc05ad26dab3b3f3ebfff9b21f3b1d5a8847495c",
+    "functions": [],
+    "lines_read": 1
+  },
+  {
+    "source_file": "src/omegadata/parsers/schema_catalog.py",
+    "sha256": "f46a4fbae673a3dcfa5ddaf85e46dc736971dbf25d7fe852b180d60ba6ad9bf3",
+    "functions": [
+      "supported_formats"
+    ],
+    "lines_read": 38
+  }
+]

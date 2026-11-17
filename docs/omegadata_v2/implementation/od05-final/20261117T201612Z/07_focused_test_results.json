@@ -1,0 +1,180 @@
+{
+  "new_tests": {
+    "command_id": "finalfocus-cfccdfac22-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/finalfocus-cfccdfac22-manifest.json",
+      "--manifest-sha256",
+      "5330462d95838484963f7bc66fe0a786c5ffb34015479d0c196872008c7efb94",
+      "--policy",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/finalfocus-cfccdfac22-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/finalfocus-cfccdfac22/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od05-final-20261117T201612Z",
+    "platform": "Linux WSL/native",
+    "python_version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "dd007c9e33d3d4ffaefe339cb766b428944bcdee",
+    "source_manifest_sha256": "5330462d95838484963f7bc66fe0a786c5ffb34015479d0c196872008c7efb94",
+    "start_utc": "2026-11-17T20:29:48.233103+00:00",
+    "end_utc": "2026-11-17T20:29:50.198608+00:00",
+    "exit_code": 0,
+    "counts": {
+      "passed": 16
+    },
+    "deselected": [],
+    "stdout_stderr_log": "logs/finalfocus-cfccdfac22-command.json",
+    "original_repository_mounted": false
+  },
+  "parser_reference_tests": {
+    "command_id": "parser-2c1d789873-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/parser-2c1d789873-manifest.json",
+      "--manifest-sha256",
+      "5330462d95838484963f7bc66fe0a786c5ffb34015479d0c196872008c7efb94",
+      "--policy",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/parser-2c1d789873-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/parser-2c1d789873/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od05-final-20261117T201612Z",
+    "platform": "Linux WSL/native",
+    "python_version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "dd007c9e33d3d4ffaefe339cb766b428944bcdee",
+    "source_manifest_sha256": "5330462d95838484963f7bc66fe0a786c5ffb34015479d0c196872008c7efb94",
+    "start_utc": "2026-11-17T20:29:50.315337+00:00",
+    "end_utc": "2026-11-17T20:29:52.853667+00:00",
+    "exit_code": 0,
+    "counts": {
+      "passed": 170,
+      "skipped": 1
+    },
+    "deselected": [],
+    "stdout_stderr_log": "logs/parser-2c1d789873-command.json",
+    "original_repository_mounted": false
+  },
+  "X": {
+    "command_id": "focused-8e85ce26fb-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/focused-8e85ce26fb-manifest.json",
+      "--manifest-sha256",
+      "fa774defb0498025f3b6a88c191f19c7754e6297298f6d2920aff882fc3aaca8",
+      "--policy",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/focused-8e85ce26fb-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/focused-8e85ce26fb/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od05-final-20261117T201612Z",
+    "platform": "Linux WSL/native",
+    "python_version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "dd007c9e33d3d4ffaefe339cb766b428944bcdee",
+    "source_manifest_sha256": "fa774defb0498025f3b6a88c191f19c7754e6297298f6d2920aff882fc3aaca8",
+    "start_utc": "2026-11-17T20:26:30.491895+00:00",
+    "end_utc": "2026-11-17T20:26:32.949458+00:00",
+    "exit_code": 0,
+    "counts": {
+      "passed": 33
+    },
+    "deselected": [],
+    "stdout_stderr_log": "logs/focused-8e85ce26fb-command.json",
+    "original_repository_mounted": false
+  },
+  "V": {
+    "command_id": "presence-dca1e47690-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/presence-dca1e47690-manifest.json",
+      "--manifest-sha256",
+      "fa774defb0498025f3b6a88c191f19c7754e6297298f6d2920aff882fc3aaca8",
+      "--policy",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/presence-dca1e47690-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/presence-dca1e47690/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od05-final-20261117T201612Z",
+    "platform": "Linux WSL/native",
+    "python_version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "dd007c9e33d3d4ffaefe339cb766b428944bcdee",
+    "source_manifest_sha256": "fa774defb0498025f3b6a88c191f19c7754e6297298f6d2920aff882fc3aaca8",
+    "start_utc": "2026-11-17T20:26:33.062942+00:00",
+    "end_utc": "2026-11-17T20:26:38.958595+00:00",
+    "exit_code": 0,
+    "counts": {
+      "passed": 40,
+      "skipped": 1
+    },
+    "deselected": [],
+    "stdout_stderr_log": "logs/presence-dca1e47690-command.json",
+    "original_repository_mounted": false
+  },
+  "W": {
+    "command_id": "W-fda8138853-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/W-fda8138853-manifest.json",
+      "--manifest-sha256",
+      "fa774defb0498025f3b6a88c191f19c7754e6297298f6d2920aff882fc3aaca8",
+      "--policy",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/logs/W-fda8138853-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od05-final-20261117T201612Z/W-fda8138853/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od05-final-20261117T201612Z",
+    "platform": "Linux WSL/native",
+    "python_version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "dd007c9e33d3d4ffaefe339cb766b428944bcdee",
+    "source_manifest_sha256": "fa774defb0498025f3b6a88c191f19c7754e6297298f6d2920aff882fc3aaca8",
+    "start_utc": "2026-11-17T20:26:39.078132+00:00",
+    "end_utc": "2026-11-17T20:26:41.754943+00:00",
+    "exit_code": 0,
+    "counts": {
+      "passed": 39
+    },
+    "deselected": [],
+    "stdout_stderr_log": "logs/W-fda8138853-command.json",
+    "original_repository_mounted": false
+  },
+  "R1_actual_A_subset": {
+    "passed": 33,
+    "skipped": 7
+  },
+  "red": {
+    "freeze": {
+      "utc": "2026-11-17T20:22:08.633040+00:00",
+      "sha256": "41c59fc7eaf2c3cab0be36b5f39b94da0fa57245fc104f45358e85c824c42117",
+      "features_absent": [
+        "schema_catalog",
+        "od05_final_report",
+        "ParseResult.failure_code"
+      ]
+    },
+    "log": "logs/finalfocus-86188bcafe-command.json",
+    "counts": {
+      "failed": 15,
+      "passed": 1
+    }
+  },
+  "financial_acceptance": 0
+}

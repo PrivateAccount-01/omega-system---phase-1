@@ -1,0 +1,107 @@
+{
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od05-final-20261117T201612Z/finalfocus-86188bcafe/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  },
+  "probes": [
+    {
+      "probe": "read",
+      "native_return": -1,
+      "errno": 2,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "write",
+      "native_return": -1,
+      "errno": 30,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "exec",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "tcp",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "dns",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "execve",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "tcp_connect",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "dns_sendto",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "netlink",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "bind",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "listen",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    },
+    {
+      "probe": "accept4",
+      "native_return": -1,
+      "errno": 1,
+      "denied": true,
+      "python_hook": false
+    }
+  ],
+  "local_ipc_control": {
+    "bytes": 16,
+    "errno": 0,
+    "external_network_packets": 0
+  }
+}

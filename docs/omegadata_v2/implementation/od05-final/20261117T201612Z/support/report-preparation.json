@@ -1,0 +1,63 @@
+{
+  "utc": "2026-11-17T20:38:45.720412+00:00",
+  "files": [
+    "03_parser_implementation_inventory.json",
+    "04_supported_source_era_matrix.json",
+    "07_focused_test_results.json",
+    "08_cross_platform_engineering_matrix.json",
+    "09_golden_corpus_coverage.json",
+    "10_original_archive_metadata_scorecard.json",
+    "11_preservation_and_change_manifest.json",
+    "13_final_gatekeeper.json",
+    "00_final_scope_and_identity.md",
+    "01_prior_phase_consolidation.md",
+    "02_incident_and_security_boundaries.md",
+    "05_schema_contracts_and_error_taxonomy.md",
+    "06_negative_first_parser_tests.md",
+    "12_unresolved_external_dependencies.md",
+    "14_od06_dependency_contract.md",
+    "15_od06_implementation_handoff.md",
+    "16_final_report.md"
+  ],
+  "manifest_sha256": "a2298ee8ec0bc71136f37bd1bf2ca60f717bb8d6d2d81ee7f444946f4df15989",
+  "input_sha256": "5c9682a5adcda4b251150a9643fc1159c59b82567679083794a20623e44f4b9b",
+  "changes": [
+    {
+      "path": "src/omegadata/parsers/contracts.py",
+      "before_sha256": "2dc704bbc443b8fa11f3bbbae7686a58c49c15ec8cce172a62ecdeba8e9b4c32",
+      "after_sha256": "81c8acbcb0348196430024361fc181e14fc64d96181c5758f3525f7875f82d1a",
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/parsers/dispatch.py",
+      "before_sha256": "02a60e6a98d55f3d064114bf7e9e429e5e8300b54b51c0ddb7affb42b73d2121",
+      "after_sha256": "7436b5f1c2f833a3b3945b4d90ce6e5badb3af360e76b66823a9087cf1f495ae",
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/parsers/nse_cm.py",
+      "before_sha256": "f5f634ca7293c16b131b60fadc768574a4ed69c30a651b4845e1db122f7061a0",
+      "after_sha256": "d6c0af6a4225bf1d6c814f116065e8d8c031ab9aeee9fee385ab54c55e580392",
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/parsers/schema_catalog.py",
+      "before_sha256": null,
+      "after_sha256": "f46a4fbae673a3dcfa5ddaf85e46dc736971dbf25d7fe852b180d60ba6ad9bf3",
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "scripts/od05_final_report.py",
+      "before_sha256": null,
+      "after_sha256": "6c6d5d1e057ec7c4e6467e734d1a26c5a6d64557e6950dd2c0cab8bc8aa104fc",
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od05_final_contracts.py",
+      "before_sha256": null,
+      "after_sha256": "41c59fc7eaf2c3cab0be36b5f39b94da0fa57245fc104f45358e85c824c42117",
+      "applied_to_original_checkout": false
+    }
+  ],
+  "original_access": false
+}

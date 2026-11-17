@@ -1,0 +1,33 @@
+{
+    "record_type":  "OD05_OWNER_IMPLEMENTATION_APPROVAL",
+    "recorded_at_utc":  "2026-11-17T20:46:56.2890366Z",
+    "owner":  "Paril",
+    "role":  "Admin",
+    "authority_basis":  "Explicit owner statement in this conversation",
+    "exact_statement":  "as admin I (Paril) approve the complete OD-05 implementation",
+    "decision":  "APPROVE_DELIVERED_OD05_IMPLEMENTATION",
+    "reviewed_head":  "dd007c9e33d3d4ffaefe339cb766b428944bcdee",
+    "delivered_run":  "20261117T201612Z",
+    "reviewed_artifacts":  [
+                               {
+                                   "relative_path":  "../20261117T201612Z/implementation.patch",
+                                   "sha256":  "9eb0c2a6f8d83706f3ef17b973c25960d321ee6c478af0ae714ce6a18f69ec34"
+                               },
+                               {
+                                   "relative_path":  "../20261117T201612Z/support/code-delivery-manifest.json",
+                                   "sha256":  "28faa817bc1aa3746fdcfcb6cb8c6ae29222a218381fdbaf26a601f8c1e276ea"
+                               },
+                               {
+                                   "relative_path":  "../20261117T201612Z/13_final_gatekeeper.json",
+                                   "sha256":  "50687a87b779e7adede6206730f5c1c7c1412c1c82dde9e3d93ccf01ec31a39c"
+                               }
+                           ],
+    "scope":  "Owner approval of the delivered OD-05 implementation. Does not convert blocked verification into a technical PASS.",
+    "original_checkout_integration":  "NOT_PERFORMED; remains pending incident disposition",
+    "incident_dispositions":  "NOT_SUPPLIED_BY_THIS_STATEMENT",
+    "authentic_source_and_financial_acceptance":  "BLOCKED; no new financial evidence supplied",
+    "windows_requirement_waiver":  "NOT_SUPPLIED",
+    "od06_execution_authorization":  "NOT_SUPPLIED",
+    "commit_push_release_sign_authorization":  "NOT_SUPPLIED",
+    "historical_evidence_and_gatekeeper":  "UNCHANGED"
+}

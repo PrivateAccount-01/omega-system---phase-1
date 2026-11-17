@@ -1,0 +1,29 @@
+{
+  "job": "compile",
+  "start_utc": "2026-11-17T20:28:33.223694+00:00",
+  "end_utc": "2026-11-17T20:28:33.366456+00:00",
+  "elapsed_seconds": 0.14275914500001363,
+  "exit_code": 0,
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": "",
+  "collected": [],
+  "reports": [],
+  "deselected": [],
+  "counts": {},
+  "guard_denials": {},
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532221]",
+      "net": "net:[4026532226]",
+      "pid": "pid:[4026532224]",
+      "user": "user:[4026532290]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od05-final-20261117T201612Z/compile-6cc97871f0/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

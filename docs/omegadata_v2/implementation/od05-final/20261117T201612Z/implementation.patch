@@ -1,0 +1,402 @@
+--- a/src/omegadata/parsers/contracts.py
++++ b/src/omegadata/parsers/contracts.py
+@@ -8,12 +8,34 @@
+ from decimal import Decimal
+ from typing import Literal
+ 
++PUBLIC_FAILURES = {
++    "ERA_UNKNOWN": "PARSER_UNSUPPORTED_ERA",
++    "FORMAT_UNSUPPORTED": "PARSER_UNSUPPORTED_ERA",
++    "VERSION_UNSUPPORTED": "PARSER_UNSUPPORTED_ERA",
++    "REFERENCE_PENDING": "PARSER_SOURCE_UNVERIFIED",
++    "SOURCE_SCOPE_DENIED": "PARSER_SOURCE_UNVERIFIED",
++    "RAW_HASH_MISMATCH": "PARSER_INPUT_CHANGED",
++    "HEADER_MISSING": "PARSER_REQUIRED_COLUMN_MISSING",
++    "HEADER_DUPLICATE": "PARSER_DUPLICATE_COLUMN",
++    "CSV_INVALID": "PARSER_INVALID_CSV",
++    "IDENTITY_AMBIGUOUS": "PARSER_DUPLICATE_OR_INVALID_KEY",
++    "DATE_MISMATCH": "PARSER_WRONG_DATE",
++    "PRICE_INVALID": "PARSER_INVALID_PRICE",
++    "VOLUME_INVALID": "PARSER_INVALID_VOLUME",
++    "ZIP_UNSAFE": "PARSER_ARCHIVE_UNSAFE",
++    "ZIP_INVALID": "PARSER_ARCHIVE_CORRUPT",
++    "ZIP_BUDGET": "PARSER_RESOURCE_LIMIT",
++    "ROW_INVALID": "PARSER_INVALID_ROW",
++    "INTEGRITY": "PARSER_RECORD_COUNT_MISMATCH",
++}
++
+ 
+ class ParserError(ValueError):
+     """Bounded code-only public failure, never payload excerpts."""
+ 
+-    def __init__(self, reason_code: str) -> None:
++    def __init__(self, reason_code: str, *, public_code: str | None = None) -> None:
+         self.reason_code = reason_code
++        self.public_code = public_code or PUBLIC_FAILURES.get(reason_code, "PARSER_UNKNOWN_SCHEMA")
+         super().__init__(reason_code)
+ 
+ 
+@@ -90,3 +112,4 @@
+     reference_id: str = "synthetic-v1"
+     reference_classification: str = "SYNTHETIC_TEST_ONLY"
+     observation_id: str | None = None
++    failure_code: str | None = None
+--- a/src/omegadata/parsers/dispatch.py
++++ b/src/omegadata/parsers/dispatch.py
+@@ -41,7 +41,8 @@
+             format_id=profile.format_id,
+         )
+     except ParserError as error:
+-        return ParseResult("QUARANTINED", actual, reasons=(error.reason_code,))
++        return ParseResult("QUARANTINED", actual, reasons=(error.reason_code,),
++                           failure_code=error.public_code)
+ 
+ 
+ def parse_archive(
+@@ -60,7 +61,8 @@
+     )
+     if observation.request.source_mode != request.source_mode:
+         return ParseResult(
+-            "QUARANTINED", hashlib.sha256(raw).hexdigest(), reasons=("SOURCE_SCOPE_DENIED",)
++            "QUARANTINED", hashlib.sha256(raw).hexdigest(), reasons=("SOURCE_SCOPE_DENIED",),
++            failure_code="PARSER_SOURCE_UNVERIFIED",
+         )
+     return replace(
+         parse(raw, replace(request, observation_id=None)), observation_id=request.observation_id
+--- a/src/omegadata/parsers/nse_cm.py
++++ b/src/omegadata/parsers/nse_cm.py
+@@ -109,7 +109,11 @@
+     try:
+         text = unpack(raw, limits).decode("utf-8", errors="strict")
+     except UnicodeError:
+-        raise ParserError("CSV_INVALID") from None
++        raise ParserError("CSV_INVALID", public_code="PARSER_INVALID_ENCODING") from None
++    if text.lstrip("\ufeff \t\r\n").casefold().startswith(
++        ("<html", "<!doctype html", "<head", "<body")
++    ):
++        raise ParserError("HEADER_MISSING", public_code="PARSER_HTML_CHALLENGE")
+     text = text.replace("\r\n", "\n")
+     if "\r" in text:
+         raise ParserError("CSV_INVALID")
+@@ -131,7 +135,7 @@
+         identities: set[tuple[str, str, str | None, date]] = set()
+         for ordinal, fields in enumerate(reader, 1):
+             if ordinal > limits.max_rows:
+-                raise ParserError("ROW_INVALID")
++                raise ParserError("ROW_INVALID", public_code="PARSER_RESOURCE_LIMIT")
+             if len(fields) != len(header) or any(len(v) > 4096 for v in fields):
+                 raise ParserError("CSV_INVALID")
+             record = dict(zip(header, fields, strict=True))
+@@ -153,7 +157,7 @@
+             lexemes = tuple(record[c] for c in columns[start : start + 4])
+             opening, high, low, close = (price(value) for value in lexemes)
+             if high < max(opening, close, low) or low > min(opening, close, high):
+-                raise ParserError("PRICE_INVALID")
++                raise ParserError("PRICE_INVALID", public_code="PARSER_INVALID_OHLC")
+             volume_token = record[columns[start + 4]]
+             if not re.fullmatch(r"[0-9]{1,19}", volume_token, re.ASCII):
+                 raise ParserError("VOLUME_INVALID")
+--- /dev/null
++++ b/src/omegadata/parsers/schema_catalog.py
+@@ -0,0 +1,38 @@
++"""Explicit implemented decoder contracts, never official era certification.
++
++No calendar routing or rights decision is derived from this catalogue. JSON
++market feeds/BSE/FO are not new OD05-supported decoders merely because the
++production acquisition registry lists them. Their promotion requires evidence.
++"""
++from __future__ import annotations
++
++from typing import Any
++
++from omegadata.parsers.reference_registry import LEGACY, MODERN
++
++
++def supported_formats() -> tuple[dict[str, Any], ...]:
++    """Return fresh metadata values; callers cannot mutate registry state."""
++    return tuple({
++        "source_id": "NSE_EQUITY_BHAVCOPY",
++        "source_venue": "NSE_CM",
++        "source_format": "CSV_OR_SINGLE_MEMBER_ZIP",
++        "format_id": profile.format_id,
++        "format_era": "ILLUSTRATIVE_NOT_AN_OFFICIAL_ERA",
++        "effective_start": None,
++        "effective_end": None,
++        "schema_version": "od05.illustrative-cm/v1",
++        "parser_version": "syn-v1",
++        "encoding_rules": "UTF8_STRICT_CRLF_OR_LF",
++        "date_rules": "EXACT_REQUESTED_ISO_DATE; NO_INTRADAY_TIMESTAMP_ORDER",
++        "numeric_rules": "DECIMAL_FIXED_POINT_12_INTEGER_8_FRACTION; INT64_NONNEGATIVE_VOLUME",
++        "units": "SYNTHETIC_PRICE_AND_INTEGER_QUANTITY",
++        "recognized_columns": list(profile.columns),
++        "required_columns": list(profile.columns),
++        "optional_columns": [],
++        "nullable_values": ["ISIN"],
++        "unknown_column_policy": "PRESERVE_NOT_INTERPRETED",
++        "source_authentication_state": "UNVERIFIED",
++        "content_permission_state": "REGRESSION_ONLY_NO_SOURCE_GRANT",
++        "golden_source_acceptance": "BLOCKED_AUTHENTIC_SOURCE_VALIDATION",
++    } for profile in (LEGACY, MODERN))
+--- /dev/null
++++ b/scripts/od05_final_report.py
+@@ -0,0 +1,118 @@
++"""Pinned data-free evidence renderer, callable only in the live Linux boundary.
++
++No Git, subprocess, directory discovery outside the explicit bundle, dataset
++read, fallback helper, cleanup, clock or financial-approval logic exists here.
++The launcher must mount only the reviewed data-free bundle and public runtime.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++import os
++import re
++import stat
++from pathlib import Path
++from typing import Any
++
++import od05x_isolated_runner as isolation
++
++
++def boundary() -> dict[str, Any]:
++    return isolation.assert_boundary()
++
++
++def _json(raw: bytes) -> Any:
++    def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++        result = {}
++        for key, value in pairs:
++            if key in result:
++                raise ValueError("REPORT_DUPLICATE_KEY")
++            result[key] = value
++        return result
++
++    def constant(value: str) -> Any:
++        raise ValueError("REPORT_JSON_UNSAFE")
++
++    try:
++        return json.loads(raw.decode("utf-8"), object_pairs_hook=unique, parse_constant=constant)
++    except (UnicodeError, RecursionError) as error:
++        raise ValueError("REPORT_JSON_UNSAFE") from error
++
++
++def _read(root: Path, name: str, expected: dict[str, Any] | None) -> bytes:
++    path = root / name
++    before = isolation.identity(path)
++    if not stat.S_ISREG(before[2]) or before[5] != 1 or before[3] > 4_000_000:
++        raise ValueError("REPORT_FILE_UNSAFE")
++    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
++    with os.fdopen(fd, "rb") as stream:
++        if isolation.stat_identity(os.fstat(stream.fileno())) != before:
++            raise ValueError("REPORT_INPUT_CHANGED")
++        raw = stream.read(4_000_001)
++        if isolation.stat_identity(os.fstat(stream.fileno())) != before:
++            raise ValueError("REPORT_INPUT_CHANGED")
++    if isolation.identity(path) != before or len(raw) != before[3]:
++        raise ValueError("REPORT_INPUT_CHANGED")
++    if expected is not None and (
++        set(expected) != {"bytes", "sha256"} or type(expected["bytes"]) is not int
++        or expected["bytes"] != len(raw)
++        or hashlib.sha256(raw).hexdigest() != expected["sha256"]
++    ):
++        raise ValueError("REPORT_PIN_MISMATCH")
++    return raw
++
++
++def render(root: Path, manifest_sha256: str, output: Path,
++           *, capability: dict[str, Any] | None) -> dict[str, Any]:
++    if capability is None or capability != boundary():
++        raise ValueError("REPORT_BOUNDARY_REQUIRED")
++    if (not root.is_absolute() or ".." in root.parts or not root.is_relative_to(Path("/work"))
++            or not re.fullmatch(r"[a-f0-9]{64}", manifest_sha256)):
++        raise ValueError("REPORT_SCOPE")
++    isolation.ancestors(root)
++    original_root = isolation.identity(root)
++    raw = _read(root, "manifest.json", None)
++    if len(raw) > 65536 or hashlib.sha256(raw).hexdigest() != manifest_sha256:
++        raise ValueError("REPORT_MANIFEST_PIN")
++    spec = _json(raw)
++    if (not isinstance(spec, dict) or set(spec) != {"schema_version", "files"}
++            or spec["schema_version"] != "od05.final-report/v1"
++            or not isinstance(spec["files"], dict) or set(spec["files"]) != {"summary.json"}):
++        raise ValueError("REPORT_MANIFEST_SCOPE")
++    # Enumeration is bounded to this already approved, flat input bundle only.
++    with os.scandir(root) as entries:
++        names = set()
++        for entry in entries:
++            names.add(entry.name)
++            if len(names) > 2:
++                raise ValueError("REPORT_UNEXPECTED_INPUT")
++    if names != {"manifest.json", "summary.json"}:
++        raise ValueError("REPORT_UNEXPECTED_INPUT")
++    body = _json(_read(root, "summary.json", spec["files"]["summary.json"]))
++    if (not isinstance(body, dict) or set(body) != {"artifacts"}
++            or not isinstance(body["artifacts"], dict) or not 1 <= len(body["artifacts"]) <= 32):
++        raise ValueError("REPORT_BODY_SCOPE")
++    outputs = {}
++    aliases = set()
++    for name, content in body["artifacts"].items():
++        if (not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9_-]+\.(md|json)", name)
++                or name.casefold() in aliases or name.split(".")[0].casefold() in {"con", "nul", "aux", "prn"}
++                or not isinstance(content, str) or len(content.encode()) > 4_000_000):
++            raise ValueError("REPORT_OUTPUT_SCOPE")
++        aliases.add(name.casefold())
++        outputs[name] = content.encode()
++    if isolation.identity(root) != original_root:
++        raise ValueError("REPORT_INPUT_CHANGED")
++    if (not output.is_absolute() or not output.is_relative_to(Path("/work"))
++            or output.is_relative_to(root) or root.is_relative_to(output)
++            or output.exists() or output.is_symlink() or ".." in output.parts):
++        raise ValueError("REPORT_FRESH_OUTPUT_REQUIRED")
++    isolation.ancestors(output.parent)
++    output.mkdir(mode=0o700)
++    for name, raw in outputs.items():
++        with (output / name).open("xb") as stream:
++            stream.write(raw)
++    return {"schema_version": "od05.final-report.receipt/v1", "files": sorted(outputs),
++            "manifest_sha256": manifest_sha256,
++            "sha256": {n: hashlib.sha256(raw).hexdigest() for n, raw in outputs.items()},
++            "boundary": capability, "git_calls": 0, "original_repository_mounted": False}
+--- /dev/null
++++ b/tests/unit/test_od05_final_contracts.py
+@@ -0,0 +1,139 @@
++"""Final OD05: non-market failures and existing fixture regression only."""
++import hashlib
++import importlib
++import io
++import json
++import os
++import zipfile
++from datetime import date
++from pathlib import Path
++
++import pytest
++
++from omegadata.parsers.contracts import ParseRequest
++from omegadata.parsers.dispatch import parse
++
++
++def request(raw):
++    return ParseRequest("NSE_EQUITY_BHAVCOPY", date(2019, 12, 31),
++                        hashlib.sha256(raw).hexdigest(), "SYNTHETIC_TEST_ONLY",
++                        "legacy-illustrative", "syn-v1", "synthetic-v1")
++
++
++@pytest.mark.parametrize("raw,code", [(b"<html>denied</html>", "PARSER_HTML_CHALLENGE"),
++                                     (b"\xff", "PARSER_INVALID_ENCODING"),
++                                     (b"PKbroken", "PARSER_ARCHIVE_CORRUPT"),
++                                     (b"missing,header\n", "PARSER_REQUIRED_COLUMN_MISSING")])
++def test_final_public_failure_codes(raw, code):
++    result = parse(raw, request(raw))
++    assert result.state == "QUARANTINED" and result.rows == ()
++    assert result.failure_code == code
++
++
++def test_final_existing_fixture_output_retains_versions_and_digest():
++    # Reuse the already frozen regression fixture; generate no new observations.
++    from od05_oracle import LEGACY
++
++    result = parse(LEGACY, request(LEGACY))
++    assert result.failure_code is None
++    assert result.parser_version == "syn-v1" and result.format_id == "legacy-illustrative"
++    assert result.raw_sha256 == hashlib.sha256(LEGACY).hexdigest()
++
++
++def test_final_catalog_has_explicit_authority_and_no_inferred_dates():
++    h = importlib.import_module("omegadata.parsers.schema_catalog")
++    profiles = h.supported_formats()
++    assert {p["format_id"] for p in profiles} == {"legacy-illustrative", "udiff-illustrative"}
++    for p in profiles:
++        assert p["effective_start"] is p["effective_end"] is None
++        assert p["source_authentication_state"] == "UNVERIFIED"
++        assert p["content_permission_state"] == "REGRESSION_ONLY_NO_SOURCE_GRANT"
++        assert p["unknown_column_policy"] == "PRESERVE_NOT_INTERPRETED"
++        assert p["encoding_rules"] == "UTF8_STRICT_CRLF_OR_LF"
++        assert p["schema_version"] and p["required_columns"]
++
++
++def reporting():
++    return importlib.import_module("od05_final_report")
++
++
++def bundle(tmp_path):
++    root = tmp_path / "report-inputs"
++    root.mkdir()
++    body = json.dumps({"artifacts": {"report.md": "# NON_MARKET_CANARY\n"}}).encode()
++    (root / "summary.json").write_bytes(body)
++    spec = {"schema_version": "od05.final-report/v1", "files": {
++        "summary.json": {"sha256": hashlib.sha256(body).hexdigest(), "bytes": len(body)}}}
++    raw = json.dumps(spec).encode()
++    (root / "manifest.json").write_bytes(raw)
++    return root, hashlib.sha256(raw).hexdigest()
++
++
++def test_final_report_requires_actual_boundary_before_input(tmp_path):
++    with pytest.raises(ValueError, match="BOUNDARY"):
++        reporting().render(tmp_path / "not-read", "0" * 64, tmp_path / "out", capability=None)
++
++
++def test_final_report_no_git_or_discovery(tmp_path, monkeypatch):
++    import subprocess
++
++    def forbidden(*args, **kwargs):
++        raise AssertionError("UNSAFE_GIT_REACHED")
++
++    monkeypatch.setattr(subprocess, "check_output", forbidden)
++    monkeypatch.setattr(subprocess, "run", forbidden)
++    # A harmless fake repository is not initialized or queried by Git.
++    (tmp_path / ".git").mkdir()
++    root, pin = bundle(tmp_path)
++    h = reporting()
++    result = h.render(root, pin, tmp_path / "out", capability=h.boundary())
++    assert result["files"] == ["report.md"]
++    assert (tmp_path / "out/report.md").read_text() == "# NON_MARKET_CANARY\n"
++    with pytest.raises(ValueError, match="FRESH"):
++        h.render(root, pin, tmp_path / "out", capability=h.boundary())
++
++
++@pytest.mark.parametrize("attack", ["extra", "symlink", "hardlink", "pin", "path", "command"])
++def test_final_report_fail_closed(tmp_path, attack):
++    root, pin = bundle(tmp_path)
++    if attack == "extra":
++        (root / "unknown.json").write_text("{}")
++    elif attack == "symlink":
++        (root / "summary.json").rename(root / "other.json")
++        (root / "summary.json").symlink_to(root / "other.json")
++    elif attack == "hardlink":
++        os.link(root / "summary.json", tmp_path / "alias.json")
++    elif attack == "pin":
++        (root / "summary.json").write_text("{}")
++    else:
++        name = "../escape.md" if attack == "path" else "report.md"
++        body = {"artifacts": {name: "NON_MARKET_CANARY"}}
++        if attack == "command":
++            body["command"] = ["git", "diff", "--name-only"]
++        raw = json.dumps(body).encode()
++        (root / "summary.json").write_bytes(raw)
++        spec = {"schema_version": "od05.final-report/v1", "files": {"summary.json": {
++            "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}}}
++        raw = json.dumps(spec).encode()
++        (root / "manifest.json").write_bytes(raw)
++        pin = hashlib.sha256(raw).hexdigest()
++    h = reporting()
++    with pytest.raises((ValueError, OSError)):
++        h.render(root, pin, tmp_path / "out", capability=h.boundary())
++    assert not (tmp_path / "out").exists()
++
++
++def test_final_report_native_boundary():
++    import od05x_isolated_runner as h
++
++    assert all(h.native_probe(n)["denied"] for n in ("read", "write", "execve", "tcp", "dns"))
++    assert not Path("/mnt/e").exists()
++
++
++def test_final_nonmarket_archive_failure_has_no_rows():
++    stream = io.BytesIO()
++    with zipfile.ZipFile(stream, "w") as z:
++        z.writestr("../NON_MARKET_CANARY.txt", "NON_MARKET_CANARY")
++    raw = stream.getvalue()
++    result = parse(raw, request(raw))
++    assert result.rows == () and result.failure_code == "PARSER_ARCHIVE_UNSAFE"
