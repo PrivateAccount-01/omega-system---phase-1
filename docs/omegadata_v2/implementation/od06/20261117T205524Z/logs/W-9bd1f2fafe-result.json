@@ -1,0 +1,429 @@
+{
+  "job": "W",
+  "start_utc": "2026-11-17T20:57:38.124137+00:00",
+  "end_utc": "2026-11-17T20:57:38.905607+00:00",
+  "elapsed_seconds": 0.7814621800000054,
+  "exit_code": 0,
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": ".......................................                                  [100%]\n39 passed in 0.32s\n",
+  "collected": [
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w01_old_helper_and_glob_rejected_before_open",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w02_exact_allowlist",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.csv]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.parquet]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.db]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[.env]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.key]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip.py]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_actual_guard_denials",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_original_boundary_covered",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_external_retained_copy_boundary",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_hardlinked_copy_source_refused",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[private]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[linked_root]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w06_historical_incident_immutable",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_hardlink_physically_present",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_existing_physical_count_defect",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w08_hardlink_mismatch",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w09_presence_not_permission",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w10_fresh_original_ledger",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w11_historical_claims_unchanged",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[../x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[//host/share/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[C:/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[data/raw/x.zip:ads]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[DATA/x.zip]",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w13_canonical_digest_and_redaction",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w14_budgets",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w15_profile_without_limit_relaxation",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w16_immutable_observation_invalidated",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w17_native_link_refusal",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w18_canary_not_financial_evidence",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w19_inventory_closed_world",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w20_blocked_input_not_passed",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w21_diagnostic_failures_preserved",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w22_integrity_refuses",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w23_fresh_copy_no_overwrite",
+      "realdata": false
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w24_test_fixture_preserved",
+      "realdata": false
+    }
+  ],
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w01_old_helper_and_glob_rejected_before_open",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w02_exact_allowlist",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.csv]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.parquet]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.db]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[.env]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.key]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w03_denied_inside_allowed_tree[x.zip.py]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_actual_guard_denials",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_original_boundary_covered",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w04_external_retained_copy_boundary",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_hardlinked_copy_source_refused",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[private]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w05_copy_root_ancestors_refused[linked_root]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w06_historical_incident_immutable",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_hardlink_physically_present",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w07_existing_physical_count_defect",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w08_hardlink_mismatch",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w09_presence_not_permission",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w10_fresh_original_ledger",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w11_historical_claims_unchanged",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[../x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[//host/share/x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[C:/x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[data/raw/x.zip:ads]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w12_unsafe_paths[DATA/x.zip]",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w13_canonical_digest_and_redaction",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w14_budgets",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w15_profile_without_limit_relaxation",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w16_immutable_observation_invalidated",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w17_native_link_refusal",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w18_canary_not_financial_evidence",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w19_inventory_closed_world",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w20_blocked_input_not_passed",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w21_diagnostic_failures_preserved",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w22_integrity_refuses",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w23_fresh_copy_no_overwrite",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od05w_engineering.py::test_w24_test_fixture_preserved",
+      "outcome": "passed",
+      "when": "call",
+      "reason": null
+    }
+  ],
+  "deselected": [],
+  "counts": {
+    "passed": 39
+  },
+  "guard_denials": {
+    "SUBPROCESS": 1,
+    "NETWORK": 1,
+    "READ": 2,
+    "WRITE": 1,
+    "UNLISTED_READ": 1
+  },
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/W-9bd1f2fafe/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "G1_OD05_ADOPTION": "PASS_DATA_FREE_SNAPSHOT",
+  "G2_IDENTITY_ENGINEERING": "PASS_CODE_ONLY",
+  "G3_CALENDAR_ENGINEERING": "PASS_CODE_ONLY",
+  "G4_REGRESSION_SAFETY": "PASS_A_WITH_12_EXPLICIT_SKIPS;FULL_DIAGNOSTIC_FAIL_4_B",
+  "G5_CONTAINMENT": "PASS_SCOPED_LINUX;WINDOWS_OS_CAPABILITY_BLOCKED",
+  "G6_FINANCIAL_CORRECTNESS": "BLOCKED_REAL_DATA",
+  "G7_PRODUCTION_INTEGRATION": "BLOCKED_INCIDENT_SOURCE_PLATFORM_GATES",
+  "OD06_CODE_ONLY_ENGINEERING": "PASS",
+  "OD06_OVERALL": "CONDITIONAL",
+  "OD07_AUTHORIZATION": "NOT_GRANTED",
+  "new_unresolved_P0_P1_in_tested_code_only_scope": 0,
+  "legacy_P1_risks": "Unchanged legacy missing knowledge and silent membership drop remain; opt-in APIs quarantine/account",
+  "review_independence": "Same-agent review plus independent executed kernel mechanisms and explicit primitive interval predicate, no human review invented",
+  "original_checkout_integration": false
+}

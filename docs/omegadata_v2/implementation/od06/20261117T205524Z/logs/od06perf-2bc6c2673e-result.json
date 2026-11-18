@@ -1,0 +1,81 @@
+{
+  "job": "od06perf",
+  "exit_code": 0,
+  "counts": {},
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "stdout_stderr": "NON_MARKET_CANARY_ONLY",
+  "claims": 500,
+  "lookups": 1000,
+  "median_seconds": 4.7682000001714187e-05,
+  "p95_seconds": 0.00014811400001235597,
+  "parser_interface_fields": {
+    "ParseRequest": [
+      "source_key",
+      "requested_business_date",
+      "raw_sha256",
+      "source_mode",
+      "format_id",
+      "parser_version",
+      "reference_id",
+      "observation_id",
+      "expected_record_count"
+    ],
+    "ParsedBar": [
+      "symbol",
+      "series",
+      "isin",
+      "source_row_index",
+      "trade_date",
+      "business_date",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "price_lexemes",
+      "unknown_fields",
+      "volume_lexeme",
+      "source_key",
+      "exchange",
+      "scrip_code",
+      "published_at",
+      "units"
+    ],
+    "ParseResult": [
+      "state",
+      "raw_sha256",
+      "rows",
+      "reasons",
+      "semantic_sha256",
+      "source_columns",
+      "source_key",
+      "format_id",
+      "parser_version",
+      "reference_id",
+      "reference_classification",
+      "observation_id",
+      "failure_code"
+    ],
+    "Limits": [
+      "body_bytes",
+      "archive_bytes",
+      "max_rows",
+      "compression_ratio"
+    ]
+  },
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532221]",
+      "net": "net:[4026532226]",
+      "pid": "pid:[4026532224]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/od06perf-2bc6c2673e/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

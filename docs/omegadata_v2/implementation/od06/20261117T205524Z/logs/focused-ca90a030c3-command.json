@@ -1,0 +1,389 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-20261117T205524Z/logs/focused-ca90a030c3-manifest.json",
+    "--manifest-sha256",
+    "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+    "--policy",
+    "/home/parilrupani/omega-od06-20261117T205524Z/logs/focused-ca90a030c3-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-20261117T205524Z/focused-ca90a030c3/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-20261117T205524Z",
+  "start_utc": "2026-11-17T20:57:26.799062+00:00",
+  "end_utc": "2026-11-17T20:57:29.413954+00:00",
+  "elapsed_seconds": 2.614888585000017,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "focused",
+    "start_utc": "2026-11-17T20:57:28.752786+00:00",
+    "end_utc": "2026-11-17T20:57:29.330135+00:00",
+    "elapsed_seconds": 0.5773441819999903,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": ".................................                                        [100%]\n33 passed in 0.19s\n",
+    "collected": [
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x01_missing_sandbox_fail_closed",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x02_incorrect_capability_refused",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[read]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[write]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[exec]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[tcp]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[dns]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x07_single_staging_entrypoint",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[hash]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[class]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[count]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[traversal]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[unknown]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[symlink]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[hardlink]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[destination]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[before_open]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[after_read]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x11_no_output_overwrite",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x12_identity_diagnostic",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x13_concurrent_invalidation",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x14_native_not_original",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_unknown_nodes_not_arbitrary_A",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_B_C_preserved",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_preservation_fail_closed",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x18_separate_gatekeeper_axes",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_collected_inventory_and_source_pins",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_original_B_C_identities_preserved",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_fresh_original_stat_reconciliation",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[execve]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[tcp_connect]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[dns_sendto]",
+        "realdata": false
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x15_new_test_source_pin_is_enforced",
+        "realdata": false
+      }
+    ],
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x01_missing_sandbox_fail_closed",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x02_incorrect_capability_refused",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[read]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[write]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[exec]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[tcp]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x03_x06_native_os_denial[dns]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x07_single_staging_entrypoint",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[hash]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[class]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[count]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[traversal]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x08_manifest_refusal[unknown]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[symlink]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[hardlink]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x09_link_escape_refused[destination]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[before_open]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x10_mutation_refused[after_read]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x11_no_output_overwrite",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x12_identity_diagnostic",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x13_concurrent_invalidation",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x14_native_not_original",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_unknown_nodes_not_arbitrary_A",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_B_C_preserved",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_preservation_fail_closed",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x18_separate_gatekeeper_axes",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x15_collected_inventory_and_source_pins",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x16_original_B_C_identities_preserved",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_isolation.py::test_x17_fresh_original_stat_reconciliation",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[execve]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[tcp_connect]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x05_x06_direct_native_calls[dns_sendto]",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05x_native_extensions.py::test_x15_new_test_source_pin_is_enforced",
+        "outcome": "passed",
+        "when": "call",
+        "reason": null
+      }
+    ],
+    "deselected": [],
+    "counts": {
+      "passed": 33
+    },
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/focused-ca90a030c3/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "focused",
+  "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+  "source_manifest_sha256": "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778"
+}

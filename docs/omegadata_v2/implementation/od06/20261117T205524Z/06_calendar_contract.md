@@ -1,0 +1,5 @@
+# Explicit calendar v1
+SessionClaim: exact exchange/date/type, Asia/Kolkata, calendar version, authority Evidence, independent known bounds, optional open/close, supersession. Unknown hours never filled; supplied hours aware/date-consistent/ordered, CLOSED has none. Immutable tuple ledger, exact dates/exchanges, explicit corrections.
+Query states AUTHORITATIVE_SESSION/VERIFIED_SPECIAL_SESSION/KNOWN_CLOSURE/COVERAGE_UNKNOWN/CONFLICTING_CALENDAR/PROVISIONAL/SOURCE_BLOCKED. Operational labels under CANARY_ONLY describe invariant controls and remain financial_eligible=False, never genuine exchange sessions. Explicit weekend special claim is independent of weekday logic. Missing sessions including weekends/year gaps refuse; no inferred closure. Missing/invalid legacy config unknown, configured coverage provisional.
+add_business_days excludes anchor, nonnegative integer count, explicit coverage for anchor and every examined day, fixed max3660dates. Unknown/conflicting/provisional coverage refuses. Date boundary/consecutive closure/year transition tested only as anonymous software controls; no historical calendar was invented or financially validated.
+

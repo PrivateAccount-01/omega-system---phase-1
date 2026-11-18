@@ -1,0 +1,5 @@
+# Lifecycle contracts
+Version od06.lifecycle/v1 supports LISTING, DELISTING, SYMBOL_CHANGE, SERIES_CHANGE, SUSPENSION, RELISTING, CROSS_LISTING, SECURITY_RECLASSIFICATION, ISSUER_CHANGE, MERGER_IDENTITY_TRANSITION, DEMERGER_IDENTITY_TRANSITION, IDENTIFIER_CORRECTION and SOURCE_SUPERSESSION.
+Events carry IDs, affected identities, Evidence/source/authentication, optional publication/effective/known/ingested times, supersession and validation status. Unknown times stay None. Duplicate IDs, invalid status/parent, branched or non-increasing knowledge, disjoint supersession and contradictory same-time lifecycle events refuse. Suspension is not delisting. Merger/demerger requires multiple affected identities and explicit continuity review, without automatic identity continuity or economics. Relisting can use an explicitly linked new listing.
+Events do not automatically mutate claims or financial records; reviewed claim intervals govern lookup. No actual lifecycle or merger verified in this run.
+

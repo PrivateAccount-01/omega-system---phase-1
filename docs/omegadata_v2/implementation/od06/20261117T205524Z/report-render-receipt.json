@@ -1,0 +1,54 @@
+{
+  "schema_version": "od05.final-report.receipt/v1",
+  "files": [
+    "00_identity_and_scope.md",
+    "01_od05_patch_adoption.json",
+    "02_existing_code_reuse_inventory.md",
+    "03_identity_domain_contracts.md",
+    "04_bitemporal_resolution_contract.md",
+    "05_lifecycle_events.md",
+    "06_calendar_contract.md",
+    "07_negative_first_tests.md",
+    "08_targeted_test_results.json",
+    "09_full_engineering_matrix.json",
+    "10_financial_source_dependencies.json",
+    "11_database_migration_proposal.md",
+    "12_preservation_manifest.json",
+    "13_gatekeeper.json",
+    "14_final_implementation_report.md"
+  ],
+  "manifest_sha256": "93fd11859549c331df1a9caf1655ed9e0def02103e911197d94fc31d32a4a1a5",
+  "sha256": {
+    "00_identity_and_scope.md": "04aec2ff13bad1818b585df89b55ee166c2d2b480951031cb73eaed8988ac035",
+    "01_od05_patch_adoption.json": "03ba82369f569de43ec5296e4d4dca9ecff3cd189a9fc8b8e699f0afba86127c",
+    "02_existing_code_reuse_inventory.md": "19479d7041057d0cdfe2d985b0f727c6ee048b8c823a0af31f03e67696643ca6",
+    "03_identity_domain_contracts.md": "731ab5c80317d5e232e2086bbb65ebf668d8ec04a60de983f5315c5e42ea4d55",
+    "04_bitemporal_resolution_contract.md": "4a9b3702c8cda1d021710ac5219fc9d625421f05aeda177b91bd00513eba5fca",
+    "05_lifecycle_events.md": "96d1827a3d61c09e09358a93e8a7335bf6b7a6bd65a88b8660a32ed9517780a0",
+    "06_calendar_contract.md": "01dcd6990c4b790181d665eba710601e7af054ea4bdbd4875633ee914fead72d",
+    "07_negative_first_tests.md": "20b4089555246710514da01705c4bdbdbdfcf940c0345e9407034cdde4f303b9",
+    "08_targeted_test_results.json": "fd40029458a6cdee7b6294ac48eacd69396a1aac54be212412a6e2dc69c6144e",
+    "09_full_engineering_matrix.json": "66bb12215214d76f5137f4e18d355a9a8a6a7095cd7b464979b6bb168de5eaa0",
+    "10_financial_source_dependencies.json": "9289682e2d172f6423fd86b9d71a4ea56e60d99c7a60565cb480dc0b1b7fa40f",
+    "11_database_migration_proposal.md": "2efaf7efbcea4ec42d7b4a25bb43e929e8674b5de03a9fc795fbcb398b05ac0a",
+    "12_preservation_manifest.json": "20cb1c6a6bafa25923739b30e4f3e9c910a2b4496d7279dd2812ea542beb5d81",
+    "13_gatekeeper.json": "ce3ec68f0593dc00035be2182dfd79e1525c0a43bd766232c2acdb6fb1fb819b",
+    "14_final_implementation_report.md": "57ee16e2f3ce067eb804e441efcd62edf64b297a370e2b042082de700cdb6b7d"
+  },
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/report-76a6c4b07a/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  },
+  "git_calls": 0,
+  "original_repository_mounted": false
+}

@@ -1,0 +1,498 @@
+{
+  "commands": {
+    "od06": {
+      "command_id": "od06-f7bf36b254-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/od06-f7bf36b254-manifest.json",
+        "--manifest-sha256",
+        "a3016f79ea1d17ff4ba38707c680a3a83737f68b4350f4c3f77738049b69a620",
+        "--policy",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/od06-f7bf36b254-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-20261117T205524Z/od06-f7bf36b254/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-20261117T205524Z",
+      "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+      "source_manifest_sha256": "a3016f79ea1d17ff4ba38707c680a3a83737f68b4350f4c3f77738049b69a620",
+      "platform": "Ubuntu WSL native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-17T21:07:24.523378+00:00",
+      "end_utc": "2026-11-17T21:07:29.008790+00:00",
+      "elapsed_seconds": 4.485449736000078,
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "deselected": null,
+      "stdout_stderr_log": "logs/od06-f7bf36b254-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532221]",
+          "net": "net:[4026532295]",
+          "pid": "pid:[4026532293]",
+          "user": "user:[4026532354]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/od06-f7bf36b254/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "parser": {
+      "command_id": "parser-54b3ded3b8-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/parser-54b3ded3b8-manifest.json",
+        "--manifest-sha256",
+        "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+        "--policy",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/parser-54b3ded3b8-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-20261117T205524Z/parser-54b3ded3b8/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-20261117T205524Z",
+      "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+      "source_manifest_sha256": "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+      "platform": "Ubuntu WSL native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-17T20:57:24.104535+00:00",
+      "end_utc": "2026-11-17T20:57:26.693190+00:00",
+      "elapsed_seconds": 2.5886517220000087,
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "deselected": null,
+      "stdout_stderr_log": "logs/parser-54b3ded3b8-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532222]",
+          "net": "net:[4026532227]",
+          "pid": "pid:[4026532225]",
+          "user": "user:[4026532291]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/parser-54b3ded3b8/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "focused": {
+      "command_id": "focused-ca90a030c3-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/focused-ca90a030c3-manifest.json",
+        "--manifest-sha256",
+        "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+        "--policy",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/focused-ca90a030c3-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-20261117T205524Z/focused-ca90a030c3/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-20261117T205524Z",
+      "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+      "source_manifest_sha256": "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+      "platform": "Ubuntu WSL native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-17T20:57:26.799062+00:00",
+      "end_utc": "2026-11-17T20:57:29.413954+00:00",
+      "elapsed_seconds": 2.614888585000017,
+      "exit_code": 0,
+      "counts": {
+        "passed": 33
+      },
+      "deselected": [],
+      "stdout_stderr_log": "logs/focused-ca90a030c3-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532223]",
+          "net": "net:[4026532228]",
+          "pid": "pid:[4026532226]",
+          "user": "user:[4026532293]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/focused-ca90a030c3/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "presence": {
+      "command_id": "presence-71d2002a5d-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/presence-71d2002a5d-manifest.json",
+        "--manifest-sha256",
+        "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+        "--policy",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/presence-71d2002a5d-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-20261117T205524Z/presence-71d2002a5d/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-20261117T205524Z",
+      "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+      "source_manifest_sha256": "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+      "platform": "Ubuntu WSL native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-17T20:57:29.519593+00:00",
+      "end_utc": "2026-11-17T20:57:35.688916+00:00",
+      "elapsed_seconds": 6.169318234000002,
+      "exit_code": 0,
+      "counts": {
+        "passed": 40,
+        "skipped": 1
+      },
+      "deselected": [],
+      "stdout_stderr_log": "logs/presence-71d2002a5d-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532224]",
+          "net": "net:[4026532229]",
+          "pid": "pid:[4026532227]",
+          "user": "user:[4026532295]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/presence-71d2002a5d/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "W": {
+      "command_id": "W-9bd1f2fafe-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/W-9bd1f2fafe-manifest.json",
+        "--manifest-sha256",
+        "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+        "--policy",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/W-9bd1f2fafe-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-20261117T205524Z/W-9bd1f2fafe/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-20261117T205524Z",
+      "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+      "source_manifest_sha256": "dacdcb535d339d42f88c1aa94cb44c500326ef7eaba899c0e0df361fd243b778",
+      "platform": "Ubuntu WSL native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-17T20:57:35.833130+00:00",
+      "end_utc": "2026-11-17T20:57:38.989314+00:00",
+      "elapsed_seconds": 3.1561759129999984,
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "deselected": [],
+      "stdout_stderr_log": "logs/W-9bd1f2fafe-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532222]",
+          "net": "net:[4026532227]",
+          "pid": "pid:[4026532225]",
+          "user": "user:[4026532291]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/W-9bd1f2fafe/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od06perf": {
+      "command_id": "od06perf-2bc6c2673e-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/od06perf-2bc6c2673e-manifest.json",
+        "--manifest-sha256",
+        "7e80b96643d45f38f106eb2bcaca8ff66a10620fcdf6df8e984bef4cc479fc4a",
+        "--policy",
+        "/home/parilrupani/omega-od06-20261117T205524Z/logs/od06perf-2bc6c2673e-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-20261117T205524Z/od06perf-2bc6c2673e/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-20261117T205524Z",
+      "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+      "source_manifest_sha256": "7e80b96643d45f38f106eb2bcaca8ff66a10620fcdf6df8e984bef4cc479fc4a",
+      "platform": "Ubuntu WSL native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-18T06:58:17.993511+00:00",
+      "end_utc": "2026-11-18T06:58:20.695320+00:00",
+      "elapsed_seconds": 2.701800974999969,
+      "exit_code": 0,
+      "counts": {},
+      "deselected": null,
+      "stdout_stderr_log": "logs/od06perf-2bc6c2673e-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532221]",
+          "net": "net:[4026532226]",
+          "pid": "pid:[4026532224]",
+          "user": "user:[4026532291]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/od06perf-2bc6c2673e/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    }
+  },
+  "R1_actual_A": {
+    "passed": 33,
+    "skipped": 7
+  },
+  "coverage": {
+    "od06": {
+      "totals": {
+        "covered_lines": 1019,
+        "num_statements": 7551,
+        "percent_covered": 11.82687468545546,
+        "percent_covered_display": "12",
+        "missing_lines": 6532,
+        "excluded_lines": 0,
+        "percent_statements_covered": 13.494901337571182,
+        "percent_statements_covered_display": "13",
+        "num_branches": 2384,
+        "num_partial_branches": 40,
+        "covered_branches": 156,
+        "missing_branches": 2228,
+        "percent_branches_covered": 6.543624161073826,
+        "percent_branches_covered_display": "7"
+      },
+      "OD06_files": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 221,
+          "num_statements": 244,
+          "percent_covered": 86.51685393258427,
+          "percent_covered_display": "87",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 90.57377049180327,
+          "percent_statements_covered_display": "91",
+          "num_branches": 112,
+          "num_partial_branches": 23,
+          "covered_branches": 87,
+          "missing_branches": 25,
+          "percent_branches_covered": 77.67857142857143,
+          "percent_branches_covered_display": "78"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 128,
+          "num_statements": 136,
+          "percent_covered": 90.96385542168674,
+          "percent_covered_display": "91",
+          "missing_lines": 8,
+          "excluded_lines": 0,
+          "percent_statements_covered": 94.11764705882354,
+          "percent_statements_covered_display": "94",
+          "num_branches": 30,
+          "num_partial_branches": 7,
+          "covered_branches": 23,
+          "missing_branches": 7,
+          "percent_branches_covered": 76.66666666666667,
+          "percent_branches_covered_display": "77"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 102,
+          "num_statements": 114,
+          "percent_covered": 86.47058823529412,
+          "percent_covered_display": "86",
+          "missing_lines": 12,
+          "excluded_lines": 0,
+          "percent_statements_covered": 89.47368421052632,
+          "percent_statements_covered_display": "89",
+          "num_branches": 56,
+          "num_partial_branches": 9,
+          "covered_branches": 45,
+          "missing_branches": 11,
+          "percent_branches_covered": 80.35714285714286,
+          "percent_branches_covered_display": "80"
+        }
+      }
+    },
+    "A": {
+      "totals": {
+        "covered_lines": 6472,
+        "num_statements": 7551,
+        "percent_covered": 82.083543029693,
+        "percent_covered_display": "82",
+        "missing_lines": 1079,
+        "excluded_lines": 0,
+        "percent_statements_covered": 85.71050192027546,
+        "percent_statements_covered_display": "86",
+        "num_branches": 2384,
+        "num_partial_branches": 447,
+        "covered_branches": 1683,
+        "missing_branches": 701,
+        "percent_branches_covered": 70.59563758389261,
+        "percent_branches_covered_display": "71"
+      },
+      "OD06_files": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 221,
+          "num_statements": 244,
+          "percent_covered": 86.51685393258427,
+          "percent_covered_display": "87",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 90.57377049180327,
+          "percent_statements_covered_display": "91",
+          "num_branches": 112,
+          "num_partial_branches": 23,
+          "covered_branches": 87,
+          "missing_branches": 25,
+          "percent_branches_covered": 77.67857142857143,
+          "percent_branches_covered_display": "78"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 128,
+          "num_statements": 136,
+          "percent_covered": 90.96385542168674,
+          "percent_covered_display": "91",
+          "missing_lines": 8,
+          "excluded_lines": 0,
+          "percent_statements_covered": 94.11764705882354,
+          "percent_statements_covered_display": "94",
+          "num_branches": 30,
+          "num_partial_branches": 7,
+          "covered_branches": 23,
+          "missing_branches": 7,
+          "percent_branches_covered": 76.66666666666667,
+          "percent_branches_covered_display": "77"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 102,
+          "num_statements": 114,
+          "percent_covered": 86.47058823529412,
+          "percent_covered_display": "86",
+          "missing_lines": 12,
+          "excluded_lines": 0,
+          "percent_statements_covered": 89.47368421052632,
+          "percent_statements_covered_display": "89",
+          "num_branches": 56,
+          "num_partial_branches": 9,
+          "covered_branches": 45,
+          "missing_branches": 11,
+          "percent_branches_covered": 80.35714285714286,
+          "percent_branches_covered_display": "80"
+        }
+      }
+    }
+  },
+  "performance": {
+    "job": "od06perf",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "NON_MARKET_CANARY_ONLY",
+    "claims": 500,
+    "lookups": 1000,
+    "median_seconds": 4.7682000001714187e-05,
+    "p95_seconds": 0.00014811400001235597,
+    "parser_interface_fields": {
+      "ParseRequest": [
+        "source_key",
+        "requested_business_date",
+        "raw_sha256",
+        "source_mode",
+        "format_id",
+        "parser_version",
+        "reference_id",
+        "observation_id",
+        "expected_record_count"
+      ],
+      "ParsedBar": [
+        "symbol",
+        "series",
+        "isin",
+        "source_row_index",
+        "trade_date",
+        "business_date",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "price_lexemes",
+        "unknown_fields",
+        "volume_lexeme",
+        "source_key",
+        "exchange",
+        "scrip_code",
+        "published_at",
+        "units"
+      ],
+      "ParseResult": [
+        "state",
+        "raw_sha256",
+        "rows",
+        "reasons",
+        "semantic_sha256",
+        "source_columns",
+        "source_key",
+        "format_id",
+        "parser_version",
+        "reference_id",
+        "reference_classification",
+        "observation_id",
+        "failure_code"
+      ],
+      "Limits": [
+        "body_bytes",
+        "archive_bytes",
+        "max_rows",
+        "compression_ratio"
+      ]
+    },
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/od06perf-2bc6c2673e/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "independent_oracle": "128 comparisons against an independently stated interval predicate; anonymous nonmarket records, no financial oracle"
+}

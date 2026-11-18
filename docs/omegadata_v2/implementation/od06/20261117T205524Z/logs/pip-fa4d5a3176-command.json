@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-20261117T205524Z/logs/pip-fa4d5a3176-manifest.json",
+    "--manifest-sha256",
+    "7e80b96643d45f38f106eb2bcaca8ff66a10620fcdf6df8e984bef4cc479fc4a",
+    "--policy",
+    "/home/parilrupani/omega-od06-20261117T205524Z/logs/pip-fa4d5a3176-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-20261117T205524Z/pip-fa4d5a3176/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-20261117T205524Z",
+  "start_utc": "2026-11-18T06:58:04.481074+00:00",
+  "end_utc": "2026-11-18T06:58:13.338141+00:00",
+  "elapsed_seconds": 8.857056334000049,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "pip",
+    "start_utc": "2026-11-18T06:58:12.090453+00:00",
+    "end_utc": "2026-11-18T06:58:13.209128+00:00",
+    "elapsed_seconds": 1.1186665389999462,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "No broken requirements found.\n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532290]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-20261117T205524Z/pip-fa4d5a3176/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "pip",
+  "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+  "source_manifest_sha256": "7e80b96643d45f38f106eb2bcaca8ff66a10620fcdf6df8e984bef4cc479fc4a"
+}

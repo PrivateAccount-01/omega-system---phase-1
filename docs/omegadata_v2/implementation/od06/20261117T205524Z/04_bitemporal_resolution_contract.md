@@ -1,0 +1,5 @@
+# Independent temporal axes
+[valid_from,valid_to) uses business dates; [known_from,known_to) uses aware timestamps. None end is unbounded, None knowledge start is unknown/quarantined. Queries require explicit aware known_at; never infer it from trade date, updated_at, publication date or clock. Exact exchange/symbol/series required. Candidate records deterministic sorted; ambiguity/conflict never resolved by arbitrary tie-break.
+Corrections append a new immutable revision, retain old bytes and derive effective knowledge closure. Parent required, strictly later known_from, matching exchange and exact valid interval, single-successor lineage. Earlier as-known query keeps old claim; later query sees correction. Arbitrary interval repartitioning is not guessed and requires separately modeled revisions.
+Legacy inclusive valid_to converts explicitly by +1day; date.max overflow refuses. Legacy rows do not supply authoritative knowledge/series and remain unverified. No production conversion or migration.
+

@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-20261117T205524Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-20261117T205524Z/logs/diagnostic-587d349726-manifest.json",
+    "--manifest-sha256",
+    "6b1106a1b755ce91a70340d78bb1b4d86f8dfa7e6e034af0ebcb1a854df2949b",
+    "--policy",
+    "/home/parilrupani/omega-od06-20261117T205524Z/logs/diagnostic-587d349726-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-20261117T205524Z/diagnostic-587d349726/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-20261117T205524Z",
+  "start_utc": "2026-11-17T21:04:34.310804+00:00",
+  "end_utc": "2026-11-17T21:04:34.701617+00:00",
+  "elapsed_seconds": 0.3908127400000012,
+  "exit_code": 2,
+  "stdout": "{\"state\": \"REFUSED\", \"reason\": \"PATH_UNSAFE\"}\n",
+  "stderr": "",
+  "worker_result": null,
+  "job": "diagnostic",
+  "source_commit": "07cca6def0748ed0903461d8614e4866959f036f",
+  "source_manifest_sha256": "6b1106a1b755ce91a70340d78bb1b4d86f8dfa7e6e034af0ebcb1a854df2949b"
+}

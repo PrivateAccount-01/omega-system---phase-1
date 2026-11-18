@@ -1,0 +1,4 @@
+# OD06 bounded implementation
+Reviewed branch feature/od01-source-rights HEAD 07cca6def0748ed0903461d8614e4866959f036f, confirmed by ref-only Git. Original mixed worktree content intentionally not refreshed; unknown user work preserved. No unrestricted Git, original data reads, incident disposition, commit/push, release or later phase.
+Current owner invocation authorizes code-only OD06 and six-file OD05 adoption in verified data-free workspace /home/parilrupani/omega-od06-20261117T205524Z/staged2/repo. OD05 approval record scope retained. Canonical stage began from receipt-pinned3804file R1 snapshot; no recursive original copy or original/private/incident/database/Git-object-store mounts. New code is actually applied and tested in this snapshot, not merely a patch; original checkout remains unintegrated.
+

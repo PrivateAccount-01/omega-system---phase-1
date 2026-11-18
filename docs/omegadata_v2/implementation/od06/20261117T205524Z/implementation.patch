@@ -1,0 +1,1540 @@
+--- a/src/omegadata/parsers/contracts.py
++++ b/src/omegadata/parsers/contracts.py
+@@ -8,12 +8,34 @@
+ from decimal import Decimal
+ from typing import Literal
+ 
++PUBLIC_FAILURES = {
++    "ERA_UNKNOWN": "PARSER_UNSUPPORTED_ERA",
++    "FORMAT_UNSUPPORTED": "PARSER_UNSUPPORTED_ERA",
++    "VERSION_UNSUPPORTED": "PARSER_UNSUPPORTED_ERA",
++    "REFERENCE_PENDING": "PARSER_SOURCE_UNVERIFIED",
++    "SOURCE_SCOPE_DENIED": "PARSER_SOURCE_UNVERIFIED",
++    "RAW_HASH_MISMATCH": "PARSER_INPUT_CHANGED",
++    "HEADER_MISSING": "PARSER_REQUIRED_COLUMN_MISSING",
++    "HEADER_DUPLICATE": "PARSER_DUPLICATE_COLUMN",
++    "CSV_INVALID": "PARSER_INVALID_CSV",
++    "IDENTITY_AMBIGUOUS": "PARSER_DUPLICATE_OR_INVALID_KEY",
++    "DATE_MISMATCH": "PARSER_WRONG_DATE",
++    "PRICE_INVALID": "PARSER_INVALID_PRICE",
++    "VOLUME_INVALID": "PARSER_INVALID_VOLUME",
++    "ZIP_UNSAFE": "PARSER_ARCHIVE_UNSAFE",
++    "ZIP_INVALID": "PARSER_ARCHIVE_CORRUPT",
++    "ZIP_BUDGET": "PARSER_RESOURCE_LIMIT",
++    "ROW_INVALID": "PARSER_INVALID_ROW",
++    "INTEGRITY": "PARSER_RECORD_COUNT_MISMATCH",
++}
++
+ 
+ class ParserError(ValueError):
+     """Bounded code-only public failure, never payload excerpts."""
+ 
+-    def __init__(self, reason_code: str) -> None:
++    def __init__(self, reason_code: str, *, public_code: str | None = None) -> None:
+         self.reason_code = reason_code
++        self.public_code = public_code or PUBLIC_FAILURES.get(reason_code, "PARSER_UNKNOWN_SCHEMA")
+         super().__init__(reason_code)
+ 
+ 
+@@ -90,3 +112,4 @@
+     reference_id: str = "synthetic-v1"
+     reference_classification: str = "SYNTHETIC_TEST_ONLY"
+     observation_id: str | None = None
++    failure_code: str | None = None
+--- a/src/omegadata/parsers/dispatch.py
++++ b/src/omegadata/parsers/dispatch.py
+@@ -41,7 +41,8 @@
+             format_id=profile.format_id,
+         )
+     except ParserError as error:
+-        return ParseResult("QUARANTINED", actual, reasons=(error.reason_code,))
++        return ParseResult("QUARANTINED", actual, reasons=(error.reason_code,),
++                           failure_code=error.public_code)
+ 
+ 
+ def parse_archive(
+@@ -60,7 +61,8 @@
+     )
+     if observation.request.source_mode != request.source_mode:
+         return ParseResult(
+-            "QUARANTINED", hashlib.sha256(raw).hexdigest(), reasons=("SOURCE_SCOPE_DENIED",)
++            "QUARANTINED", hashlib.sha256(raw).hexdigest(), reasons=("SOURCE_SCOPE_DENIED",),
++            failure_code="PARSER_SOURCE_UNVERIFIED",
+         )
+     return replace(
+         parse(raw, replace(request, observation_id=None)), observation_id=request.observation_id
+--- a/src/omegadata/parsers/nse_cm.py
++++ b/src/omegadata/parsers/nse_cm.py
+@@ -109,7 +109,11 @@
+     try:
+         text = unpack(raw, limits).decode("utf-8", errors="strict")
+     except UnicodeError:
+-        raise ParserError("CSV_INVALID") from None
++        raise ParserError("CSV_INVALID", public_code="PARSER_INVALID_ENCODING") from None
++    if text.lstrip("\ufeff \t\r\n").casefold().startswith(
++        ("<html", "<!doctype html", "<head", "<body")
++    ):
++        raise ParserError("HEADER_MISSING", public_code="PARSER_HTML_CHALLENGE")
+     text = text.replace("\r\n", "\n")
+     if "\r" in text:
+         raise ParserError("CSV_INVALID")
+@@ -131,7 +135,7 @@
+         identities: set[tuple[str, str, str | None, date]] = set()
+         for ordinal, fields in enumerate(reader, 1):
+             if ordinal > limits.max_rows:
+-                raise ParserError("ROW_INVALID")
++                raise ParserError("ROW_INVALID", public_code="PARSER_RESOURCE_LIMIT")
+             if len(fields) != len(header) or any(len(v) > 4096 for v in fields):
+                 raise ParserError("CSV_INVALID")
+             record = dict(zip(header, fields, strict=True))
+@@ -153,7 +157,7 @@
+             lexemes = tuple(record[c] for c in columns[start : start + 4])
+             opening, high, low, close = (price(value) for value in lexemes)
+             if high < max(opening, close, low) or low > min(opening, close, high):
+-                raise ParserError("PRICE_INVALID")
++                raise ParserError("PRICE_INVALID", public_code="PARSER_INVALID_OHLC")
+             volume_token = record[columns[start + 4]]
+             if not re.fullmatch(r"[0-9]{1,19}", volume_token, re.ASCII):
+                 raise ParserError("VOLUME_INVALID")
+--- /dev/null
++++ b/src/omegadata/parsers/schema_catalog.py
+@@ -0,0 +1,38 @@
++"""Explicit implemented decoder contracts, never official era certification.
++
++No calendar routing or rights decision is derived from this catalogue. JSON
++market feeds/BSE/FO are not new OD05-supported decoders merely because the
++production acquisition registry lists them. Their promotion requires evidence.
++"""
++from __future__ import annotations
++
++from typing import Any
++
++from omegadata.parsers.reference_registry import LEGACY, MODERN
++
++
++def supported_formats() -> tuple[dict[str, Any], ...]:
++    """Return fresh metadata values; callers cannot mutate registry state."""
++    return tuple({
++        "source_id": "NSE_EQUITY_BHAVCOPY",
++        "source_venue": "NSE_CM",
++        "source_format": "CSV_OR_SINGLE_MEMBER_ZIP",
++        "format_id": profile.format_id,
++        "format_era": "ILLUSTRATIVE_NOT_AN_OFFICIAL_ERA",
++        "effective_start": None,
++        "effective_end": None,
++        "schema_version": "od05.illustrative-cm/v1",
++        "parser_version": "syn-v1",
++        "encoding_rules": "UTF8_STRICT_CRLF_OR_LF",
++        "date_rules": "EXACT_REQUESTED_ISO_DATE; NO_INTRADAY_TIMESTAMP_ORDER",
++        "numeric_rules": "DECIMAL_FIXED_POINT_12_INTEGER_8_FRACTION; INT64_NONNEGATIVE_VOLUME",
++        "units": "SYNTHETIC_PRICE_AND_INTEGER_QUANTITY",
++        "recognized_columns": list(profile.columns),
++        "required_columns": list(profile.columns),
++        "optional_columns": [],
++        "nullable_values": ["ISIN"],
++        "unknown_column_policy": "PRESERVE_NOT_INTERPRETED",
++        "source_authentication_state": "UNVERIFIED",
++        "content_permission_state": "REGRESSION_ONLY_NO_SOURCE_GRANT",
++        "golden_source_acceptance": "BLOCKED_AUTHENTIC_SOURCE_VALIDATION",
++    } for profile in (LEGACY, MODERN))
+--- /dev/null
++++ b/scripts/od05_final_report.py
+@@ -0,0 +1,118 @@
++"""Pinned data-free evidence renderer, callable only in the live Linux boundary.
++
++No Git, subprocess, directory discovery outside the explicit bundle, dataset
++read, fallback helper, cleanup, clock or financial-approval logic exists here.
++The launcher must mount only the reviewed data-free bundle and public runtime.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++import os
++import re
++import stat
++from pathlib import Path
++from typing import Any
++
++import od05x_isolated_runner as isolation
++
++
++def boundary() -> dict[str, Any]:
++    return isolation.assert_boundary()
++
++
++def _json(raw: bytes) -> Any:
++    def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++        result = {}
++        for key, value in pairs:
++            if key in result:
++                raise ValueError("REPORT_DUPLICATE_KEY")
++            result[key] = value
++        return result
++
++    def constant(value: str) -> Any:
++        raise ValueError("REPORT_JSON_UNSAFE")
++
++    try:
++        return json.loads(raw.decode("utf-8"), object_pairs_hook=unique, parse_constant=constant)
++    except (UnicodeError, RecursionError) as error:
++        raise ValueError("REPORT_JSON_UNSAFE") from error
++
++
++def _read(root: Path, name: str, expected: dict[str, Any] | None) -> bytes:
++    path = root / name
++    before = isolation.identity(path)
++    if not stat.S_ISREG(before[2]) or before[5] != 1 or before[3] > 4_000_000:
++        raise ValueError("REPORT_FILE_UNSAFE")
++    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
++    with os.fdopen(fd, "rb") as stream:
++        if isolation.stat_identity(os.fstat(stream.fileno())) != before:
++            raise ValueError("REPORT_INPUT_CHANGED")
++        raw = stream.read(4_000_001)
++        if isolation.stat_identity(os.fstat(stream.fileno())) != before:
++            raise ValueError("REPORT_INPUT_CHANGED")
++    if isolation.identity(path) != before or len(raw) != before[3]:
++        raise ValueError("REPORT_INPUT_CHANGED")
++    if expected is not None and (
++        set(expected) != {"bytes", "sha256"} or type(expected["bytes"]) is not int
++        or expected["bytes"] != len(raw)
++        or hashlib.sha256(raw).hexdigest() != expected["sha256"]
++    ):
++        raise ValueError("REPORT_PIN_MISMATCH")
++    return raw
++
++
++def render(root: Path, manifest_sha256: str, output: Path,
++           *, capability: dict[str, Any] | None) -> dict[str, Any]:
++    if capability is None or capability != boundary():
++        raise ValueError("REPORT_BOUNDARY_REQUIRED")
++    if (not root.is_absolute() or ".." in root.parts or not root.is_relative_to(Path("/work"))
++            or not re.fullmatch(r"[a-f0-9]{64}", manifest_sha256)):
++        raise ValueError("REPORT_SCOPE")
++    isolation.ancestors(root)
++    original_root = isolation.identity(root)
++    raw = _read(root, "manifest.json", None)
++    if len(raw) > 65536 or hashlib.sha256(raw).hexdigest() != manifest_sha256:
++        raise ValueError("REPORT_MANIFEST_PIN")
++    spec = _json(raw)
++    if (not isinstance(spec, dict) or set(spec) != {"schema_version", "files"}
++            or spec["schema_version"] != "od05.final-report/v1"
++            or not isinstance(spec["files"], dict) or set(spec["files"]) != {"summary.json"}):
++        raise ValueError("REPORT_MANIFEST_SCOPE")
++    # Enumeration is bounded to this already approved, flat input bundle only.
++    with os.scandir(root) as entries:
++        names = set()
++        for entry in entries:
++            names.add(entry.name)
++            if len(names) > 2:
++                raise ValueError("REPORT_UNEXPECTED_INPUT")
++    if names != {"manifest.json", "summary.json"}:
++        raise ValueError("REPORT_UNEXPECTED_INPUT")
++    body = _json(_read(root, "summary.json", spec["files"]["summary.json"]))
++    if (not isinstance(body, dict) or set(body) != {"artifacts"}
++            or not isinstance(body["artifacts"], dict) or not 1 <= len(body["artifacts"]) <= 32):
++        raise ValueError("REPORT_BODY_SCOPE")
++    outputs = {}
++    aliases = set()
++    for name, content in body["artifacts"].items():
++        if (not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9_-]+\.(md|json)", name)
++                or name.casefold() in aliases or name.split(".")[0].casefold() in {"con", "nul", "aux", "prn"}
++                or not isinstance(content, str) or len(content.encode()) > 4_000_000):
++            raise ValueError("REPORT_OUTPUT_SCOPE")
++        aliases.add(name.casefold())
++        outputs[name] = content.encode()
++    if isolation.identity(root) != original_root:
++        raise ValueError("REPORT_INPUT_CHANGED")
++    if (not output.is_absolute() or not output.is_relative_to(Path("/work"))
++            or output.is_relative_to(root) or root.is_relative_to(output)
++            or output.exists() or output.is_symlink() or ".." in output.parts):
++        raise ValueError("REPORT_FRESH_OUTPUT_REQUIRED")
++    isolation.ancestors(output.parent)
++    output.mkdir(mode=0o700)
++    for name, raw in outputs.items():
++        with (output / name).open("xb") as stream:
++            stream.write(raw)
++    return {"schema_version": "od05.final-report.receipt/v1", "files": sorted(outputs),
++            "manifest_sha256": manifest_sha256,
++            "sha256": {n: hashlib.sha256(raw).hexdigest() for n, raw in outputs.items()},
++            "boundary": capability, "git_calls": 0, "original_repository_mounted": False}
+--- /dev/null
++++ b/tests/unit/test_od05_final_contracts.py
+@@ -0,0 +1,139 @@
++"""Final OD05: non-market failures and existing fixture regression only."""
++import hashlib
++import importlib
++import io
++import json
++import os
++import zipfile
++from datetime import date
++from pathlib import Path
++
++import pytest
++
++from omegadata.parsers.contracts import ParseRequest
++from omegadata.parsers.dispatch import parse
++
++
++def request(raw):
++    return ParseRequest("NSE_EQUITY_BHAVCOPY", date(2019, 12, 31),
++                        hashlib.sha256(raw).hexdigest(), "SYNTHETIC_TEST_ONLY",
++                        "legacy-illustrative", "syn-v1", "synthetic-v1")
++
++
++@pytest.mark.parametrize("raw,code", [(b"<html>denied</html>", "PARSER_HTML_CHALLENGE"),
++                                     (b"\xff", "PARSER_INVALID_ENCODING"),
++                                     (b"PKbroken", "PARSER_ARCHIVE_CORRUPT"),
++                                     (b"missing,header\n", "PARSER_REQUIRED_COLUMN_MISSING")])
++def test_final_public_failure_codes(raw, code):
++    result = parse(raw, request(raw))
++    assert result.state == "QUARANTINED" and result.rows == ()
++    assert result.failure_code == code
++
++
++def test_final_existing_fixture_output_retains_versions_and_digest():
++    # Reuse the already frozen regression fixture; generate no new observations.
++    from od05_oracle import LEGACY
++
++    result = parse(LEGACY, request(LEGACY))
++    assert result.failure_code is None
++    assert result.parser_version == "syn-v1" and result.format_id == "legacy-illustrative"
++    assert result.raw_sha256 == hashlib.sha256(LEGACY).hexdigest()
++
++
++def test_final_catalog_has_explicit_authority_and_no_inferred_dates():
++    h = importlib.import_module("omegadata.parsers.schema_catalog")
++    profiles = h.supported_formats()
++    assert {p["format_id"] for p in profiles} == {"legacy-illustrative", "udiff-illustrative"}
++    for p in profiles:
++        assert p["effective_start"] is p["effective_end"] is None
++        assert p["source_authentication_state"] == "UNVERIFIED"
++        assert p["content_permission_state"] == "REGRESSION_ONLY_NO_SOURCE_GRANT"
++        assert p["unknown_column_policy"] == "PRESERVE_NOT_INTERPRETED"
++        assert p["encoding_rules"] == "UTF8_STRICT_CRLF_OR_LF"
++        assert p["schema_version"] and p["required_columns"]
++
++
++def reporting():
++    return importlib.import_module("od05_final_report")
++
++
++def bundle(tmp_path):
++    root = tmp_path / "report-inputs"
++    root.mkdir()
++    body = json.dumps({"artifacts": {"report.md": "# NON_MARKET_CANARY\n"}}).encode()
++    (root / "summary.json").write_bytes(body)
++    spec = {"schema_version": "od05.final-report/v1", "files": {
++        "summary.json": {"sha256": hashlib.sha256(body).hexdigest(), "bytes": len(body)}}}
++    raw = json.dumps(spec).encode()
++    (root / "manifest.json").write_bytes(raw)
++    return root, hashlib.sha256(raw).hexdigest()
++
++
++def test_final_report_requires_actual_boundary_before_input(tmp_path):
++    with pytest.raises(ValueError, match="BOUNDARY"):
++        reporting().render(tmp_path / "not-read", "0" * 64, tmp_path / "out", capability=None)
++
++
++def test_final_report_no_git_or_discovery(tmp_path, monkeypatch):
++    import subprocess
++
++    def forbidden(*args, **kwargs):
++        raise AssertionError("UNSAFE_GIT_REACHED")
++
++    monkeypatch.setattr(subprocess, "check_output", forbidden)
++    monkeypatch.setattr(subprocess, "run", forbidden)
++    # A harmless fake repository is not initialized or queried by Git.
++    (tmp_path / ".git").mkdir()
++    root, pin = bundle(tmp_path)
++    h = reporting()
++    result = h.render(root, pin, tmp_path / "out", capability=h.boundary())
++    assert result["files"] == ["report.md"]
++    assert (tmp_path / "out/report.md").read_text() == "# NON_MARKET_CANARY\n"
++    with pytest.raises(ValueError, match="FRESH"):
++        h.render(root, pin, tmp_path / "out", capability=h.boundary())
++
++
++@pytest.mark.parametrize("attack", ["extra", "symlink", "hardlink", "pin", "path", "command"])
++def test_final_report_fail_closed(tmp_path, attack):
++    root, pin = bundle(tmp_path)
++    if attack == "extra":
++        (root / "unknown.json").write_text("{}")
++    elif attack == "symlink":
++        (root / "summary.json").rename(root / "other.json")
++        (root / "summary.json").symlink_to(root / "other.json")
++    elif attack == "hardlink":
++        os.link(root / "summary.json", tmp_path / "alias.json")
++    elif attack == "pin":
++        (root / "summary.json").write_text("{}")
++    else:
++        name = "../escape.md" if attack == "path" else "report.md"
++        body = {"artifacts": {name: "NON_MARKET_CANARY"}}
++        if attack == "command":
++            body["command"] = ["git", "diff", "--name-only"]
++        raw = json.dumps(body).encode()
++        (root / "summary.json").write_bytes(raw)
++        spec = {"schema_version": "od05.final-report/v1", "files": {"summary.json": {
++            "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}}}
++        raw = json.dumps(spec).encode()
++        (root / "manifest.json").write_bytes(raw)
++        pin = hashlib.sha256(raw).hexdigest()
++    h = reporting()
++    with pytest.raises((ValueError, OSError)):
++        h.render(root, pin, tmp_path / "out", capability=h.boundary())
++    assert not (tmp_path / "out").exists()
++
++
++def test_final_report_native_boundary():
++    import od05x_isolated_runner as h
++
++    assert all(h.native_probe(n)["denied"] for n in ("read", "write", "execve", "tcp", "dns"))
++    assert not Path("/mnt/e").exists()
++
++
++def test_final_nonmarket_archive_failure_has_no_rows():
++    stream = io.BytesIO()
++    with zipfile.ZipFile(stream, "w") as z:
++        z.writestr("../NON_MARKET_CANARY.txt", "NON_MARKET_CANARY")
++    raw = stream.getvalue()
++    result = parse(raw, request(raw))
++    assert result.rows == () and result.failure_code == "PARSER_ARCHIVE_UNSAFE"
+--- /dev/null
++++ b/src/omegadata/identity.py
+@@ -0,0 +1,331 @@
++"""OD06 opt-in identity ledger v1. No I/O, ORM migration or source promotion.
++
++All intervals are half-open. IDs use immutable record-system keys, never tickers.
++Evidence is supplied by a separately authorized reviewer; this module does not
++establish authenticity. CANARY_ONLY is explicitly nonfinancial software testing.
++"""
++from __future__ import annotations
++
++from dataclasses import dataclass, replace
++from datetime import date, datetime, timedelta
++from typing import Literal, Protocol
++from uuid import NAMESPACE_URL, uuid5
++
++Policy = Literal['STRICT', 'CANARY_ONLY']
++ResolutionState = Literal['RESOLVED', 'UNKNOWN', 'AMBIGUOUS', 'CONFLICTING',
++                          'QUARANTINED', 'SOURCE_BLOCKED']
++
++
++def text(value: str) -> None:
++    if not isinstance(value, str) or not value or value != value.strip() or len(value) > 512:
++        raise ValueError('INVALID_IDENTIFIER')
++    if any(ord(c) < 32 for c in value):
++        raise ValueError('INVALID_IDENTIFIER')
++
++
++def aware(value: datetime | None) -> None:
++    if value is not None and (not isinstance(value, datetime) or value.tzinfo is None
++                              or value.utcoffset() is None):
++        raise ValueError('TIMEZONE_REQUIRED')
++
++
++def query_time(value: datetime) -> None:
++    if not isinstance(value, datetime):
++        raise ValueError('KNOWLEDGE_TIME_REQUIRED')
++    aware(value)
++
++
++def intervals(valid_from: date, valid_to: date | None,
++              known_from: datetime | None, known_to: datetime | None) -> None:
++    if type(valid_from) is not date or (valid_to is not None and type(valid_to) is not date):
++        raise ValueError('DATE_REQUIRED')
++    if valid_to is not None and valid_to <= valid_from:
++        raise ValueError('INVALID_VALID_INTERVAL')
++    aware(known_from)
++    aware(known_to)
++    if known_to is not None and (known_from is None or known_to <= known_from):
++        raise ValueError('INVALID_KNOWLEDGE_INTERVAL')
++
++
++def record_id(kind: str, immutable_record_key: str) -> str:
++    """Caller must persist the immutable ledger key; it is not an official ID."""
++    if kind not in {'issuer', 'security', 'listing', 'claim', 'event', 'evidence'}:
++        raise ValueError('ID_KIND')
++    text(immutable_record_key)
++    return kind + '-' + str(uuid5(NAMESPACE_URL, 'omegadata.identity/v1/' + kind + '/' + immutable_record_key))
++
++
++@dataclass(frozen=True)
++class Evidence:
++    evidence_id: str
++    classification: str
++    authentication: str
++    permission: str
++    review_reference: str | None = None
++
++    def __post_init__(self) -> None:
++        text(self.evidence_id)
++        if self.classification not in {'NON_MARKET_CANARY', 'SOURCE_DOCUMENT', 'UNVERIFIED'}:
++            raise ValueError('EVIDENCE_CLASS')
++        if self.authentication not in {'VERIFIED', 'UNVERIFIED', 'CONFLICTING'}:
++            raise ValueError('EVIDENCE_AUTHENTICATION')
++        if self.permission not in {'PERMITTED', 'PENDING', 'DENIED'}:
++            raise ValueError('EVIDENCE_PERMISSION')
++        if self.review_reference is not None:
++            text(self.review_reference)
++
++    def eligible(self, policy: Policy) -> bool:
++        if policy not in {'STRICT', 'CANARY_ONLY'}:
++            raise ValueError('EVIDENCE_POLICY')
++        if (self.permission != 'PERMITTED' or not self.review_reference
++                or self.authentication == 'CONFLICTING'):
++            return False
++        if policy == 'CANARY_ONLY':
++            return self.classification == 'NON_MARKET_CANARY'
++        return self.classification == 'SOURCE_DOCUMENT' and self.authentication == 'VERIFIED'
++
++
++@dataclass(frozen=True)
++class Issuer:
++    issuer_id: str
++
++    def __post_init__(self) -> None:
++        text(self.issuer_id)
++
++
++@dataclass(frozen=True)
++class Security:
++    security_id: str
++    issuer_id: str | None
++
++    def __post_init__(self) -> None:
++        text(self.security_id)
++        if self.issuer_id is not None:
++            text(self.issuer_id)
++
++
++@dataclass(frozen=True)
++class Listing:
++    listing_id: str
++    security_id: str | None
++    exchange: str
++
++    def __post_init__(self) -> None:
++        text(self.listing_id)
++        text(self.exchange)
++        if self.security_id is not None:
++            text(self.security_id)
++
++
++@dataclass(frozen=True)
++class IdentifierClaim:
++    claim_id: str
++    listing_id: str
++    exchange: str
++    symbol: str
++    series: str
++    valid_from: date
++    valid_to: date | None
++    known_from: datetime | None
++    known_to: datetime | None
++    evidence: Evidence
++    isin: str | None = None
++    supersedes_claim_id: str | None = None
++    lifecycle: str = 'LISTED'
++    version: str = 'od06.identity/v1'
++
++    def __post_init__(self) -> None:
++        for value in (self.claim_id, self.listing_id, self.exchange, self.symbol, self.series):
++            text(value)
++        intervals(self.valid_from, self.valid_to, self.known_from, self.known_to)
++        if self.version != 'od06.identity/v1' or self.lifecycle not in {'LISTED', 'SUSPENDED', 'DELISTED'}:
++            raise ValueError('CLAIM_CONTRACT')
++        if self.isin is not None:
++            from omegadata.track_b.isin_master import ISINMasterService
++            if not ISINMasterService.validate_isin(self.isin):
++                raise ValueError('INVALID_ISIN_SYNTAX_NOT_IDENTITY_PROOF')
++
++
++def revision_ends(records: tuple[IdentifierClaim, ...]) -> dict[str, datetime]:
++    """Append-only supersession derives an upper knowledge bound, preserving bytes."""
++    by_id = {r.claim_id: r for r in records}
++    if len(by_id) != len(records):
++        raise ValueError('DUPLICATE_CLAIM_ID')
++    ends: dict[str, datetime] = {}
++    for r in records:
++        if r.supersedes_claim_id is None:
++            continue
++        old = by_id.get(r.supersedes_claim_id)
++        if (old is None or old.claim_id in ends or old.known_from is None
++                or r.known_from is None or r.known_from <= old.known_from
++                or old.exchange != r.exchange or old.valid_from != r.valid_from
++                or old.valid_to != r.valid_to
++                or (old.known_to is not None and old.known_to < r.known_from)):
++            raise ValueError('INVALID_SUPERSESSION')
++        ends[old.claim_id] = r.known_from
++    return ends
++
++
++@dataclass(frozen=True)
++class Resolution:
++    state: ResolutionState
++    claim_ids: tuple[str, ...] = ()
++    listing_id: str | None = None
++    security_id: str | None = None
++    issuer_id: str | None = None
++    lifecycle: str | None = None
++    financial_eligible: bool = False
++    reason: str | None = None
++    version: str = 'od06.resolution/v1'
++
++
++class IdentityRepository(Protocol):
++    def resolve_listing(self, exchange: str, symbol: str, series: str, valid_at: date,
++                        known_at: datetime, evidence_policy: Policy = 'STRICT') -> Resolution: ...
++
++
++@dataclass(frozen=True)
++class MemoryIdentityRepository:
++    issuers: tuple[Issuer, ...] = ()
++    securities: tuple[Security, ...] = ()
++    listings: tuple[Listing, ...] = ()
++    claims: tuple[IdentifierClaim, ...] = ()
++
++    def __post_init__(self) -> None:
++        if any(type(values) is not tuple for values in
++               (self.issuers, self.securities, self.listings, self.claims)):
++            raise ValueError('IMMUTABLE_LEDGER_REQUIRED')
++        ii = {r.issuer_id for r in self.issuers}
++        ss = {r.security_id for r in self.securities}
++        ll = {r.listing_id for r in self.listings}
++        if len(ii) != len(self.issuers) or len(ss) != len(self.securities) or len(ll) != len(self.listings):
++            raise ValueError('DUPLICATE_ID')
++        if ii & ss or ii & ll or ss & ll:
++            raise ValueError('IDENTITY_KIND_COLLISION')
++        if any(r.issuer_id is not None and r.issuer_id not in ii for r in self.securities):
++            raise ValueError('ISSUER_MISSING')
++        if any(r.security_id is not None and r.security_id not in ss for r in self.listings):
++            raise ValueError('SECURITY_MISSING')
++        listing_map = {r.listing_id: r for r in self.listings}
++        if any(r.listing_id not in ll or listing_map[r.listing_id].exchange != r.exchange for r in self.claims):
++            raise ValueError('LISTING_MISSING_OR_WRONG_EXCHANGE')
++        revision_ends(self.claims)
++
++    def append_correction(self, claim: IdentifierClaim) -> MemoryIdentityRepository:
++        if claim.supersedes_claim_id is None:
++            raise ValueError('SUPERSESSION_REQUIRED')
++        return replace(self, claims=(*self.claims, claim))
++
++    def resolve_listing(self, exchange: str, symbol: str, series: str, valid_at: date,
++                        known_at: datetime, evidence_policy: Policy = 'STRICT') -> Resolution:
++        query_time(known_at)
++        for value in (exchange, symbol, series):
++            text(value)
++        if evidence_policy not in {'STRICT', 'CANARY_ONLY'}:
++            raise ValueError('EVIDENCE_POLICY')
++        if type(valid_at) is not date:
++            raise ValueError('DATE_REQUIRED')
++        ends = revision_ends(self.claims)
++        candidates = tuple(sorted((c for c in self.claims if c.exchange == exchange
++            and c.symbol == symbol and c.series == series and c.valid_from <= valid_at
++            and (c.valid_to is None or valid_at < c.valid_to)
++            and (c.known_from is None or c.known_from <= known_at)
++            and (c.known_to is None or known_at < c.known_to)
++            and (c.claim_id not in ends or known_at < ends[c.claim_id])), key=lambda c: c.claim_id))
++        ids = tuple(c.claim_id for c in candidates)
++        if not candidates:
++            return Resolution('UNKNOWN')
++        if any(c.evidence.permission != 'PERMITTED' for c in candidates):
++            return Resolution('SOURCE_BLOCKED', ids)
++        if any(c.known_from is None or not c.evidence.eligible(evidence_policy) for c in candidates):
++            return Resolution('QUARANTINED', ids, reason='KNOWLEDGE_OR_EVIDENCE_UNVERIFIED')
++        if len({(c.listing_id, c.isin, c.lifecycle) for c in candidates}) > 1:
++            return Resolution('CONFLICTING', ids)
++        if len(candidates) > 1:
++            return Resolution('AMBIGUOUS', ids)
++        c = candidates[0]
++        listing = next(r for r in self.listings if r.listing_id == c.listing_id)
++        security = next((r for r in self.securities if r.security_id == listing.security_id), None)
++        if security is None or security.issuer_id is None:
++            return Resolution('QUARANTINED', ids, reason='IDENTITY_LINK_UNRESOLVED')
++        return Resolution('RESOLVED', ids, listing.listing_id, security.security_id,
++                          security.issuer_id, c.lifecycle, evidence_policy == 'STRICT')
++
++
++EVENT_TYPES = frozenset({'LISTING', 'DELISTING', 'SYMBOL_CHANGE', 'SERIES_CHANGE', 'SUSPENSION',
++    'RELISTING', 'CROSS_LISTING', 'SECURITY_RECLASSIFICATION', 'ISSUER_CHANGE',
++    'MERGER_IDENTITY_TRANSITION', 'DEMERGER_IDENTITY_TRANSITION', 'IDENTIFIER_CORRECTION',
++    'SOURCE_SUPERSESSION'})
++
++
++@dataclass(frozen=True)
++class LifecycleEvent:
++    event_id: str
++    event_type: str
++    affected_identity_ids: tuple[str, ...]
++    evidence: Evidence
++    published_at: datetime | None = None
++    effective_at: datetime | None = None
++    known_from: datetime | None = None
++    ingested_at: datetime | None = None
++    supersedes_event_id: str | None = None
++    validation_status: str = 'UNVERIFIED'
++    continuity_review_reference: str | None = None
++    version: str = 'od06.lifecycle/v1'
++
++    def __post_init__(self) -> None:
++        text(self.event_id)
++        if self.event_type not in EVENT_TYPES or not self.affected_identity_ids:
++            raise ValueError('EVENT_TYPE_OR_IDENTITIES')
++        for identity in self.affected_identity_ids:
++            text(identity)
++        if len(set(self.affected_identity_ids)) != len(self.affected_identity_ids):
++            raise ValueError('DUPLICATE_AFFECTED_ID')
++        for timestamp in (self.published_at, self.effective_at, self.known_from, self.ingested_at):
++            aware(timestamp)
++        if self.validation_status not in {'UNVERIFIED', 'REVIEWED', 'CONFLICTING', 'QUARANTINED'}:
++            raise ValueError('EVENT_VALIDATION_STATUS')
++        if self.version != 'od06.lifecycle/v1':
++            raise ValueError('EVENT_VERSION')
++
++    @property
++    def source_reference(self) -> str:
++        return self.evidence.evidence_id
++
++    @property
++    def source_authentication_state(self) -> str:
++        return self.evidence.authentication
++
++
++def validate_events(events: tuple[LifecycleEvent, ...]) -> tuple[LifecycleEvent, ...]:
++    by_id = {e.event_id: e for e in events}
++    if len(by_id) != len(events):
++        raise ValueError('DUPLICATE_EVENT')
++    superseded: set[str] = set()
++    for event in events:
++        if (event.event_type in {'MERGER_IDENTITY_TRANSITION', 'DEMERGER_IDENTITY_TRANSITION'}
++                and (not event.continuity_review_reference or len(event.affected_identity_ids) < 2)):
++            raise ValueError('CONTINUITY_REVIEW_REQUIRED')
++        if event.supersedes_event_id:
++            old = by_id.get(event.supersedes_event_id)
++            if (old is None or old.event_id in superseded or old.known_from is None
++                    or event.known_from is None or event.known_from <= old.known_from
++                    or not set(old.affected_identity_ids) & set(event.affected_identity_ids)):
++                raise ValueError('EVENT_SUPERSESSION')
++            superseded.add(old.event_id)
++    lifecycle = {'LISTING', 'DELISTING', 'SUSPENSION', 'RELISTING'}
++    for i, left in enumerate(events):
++        for right in events[i+1:]:
++            if (left.effective_at is not None and left.effective_at == right.effective_at
++                    and set(left.affected_identity_ids) & set(right.affected_identity_ids)
++                    and left.event_type in lifecycle and right.event_type in lifecycle
++                    and left.event_type != right.event_type
++                    and left.supersedes_event_id != right.event_id
++                    and right.supersedes_event_id != left.event_id):
++                raise ValueError('CONTRADICTORY_LIFECYCLE_EVENTS')
++    return tuple(sorted(events, key=lambda e: e.event_id))
++
++
++def legacy_exclusive_end(inclusive_end: date | None) -> date | None:
++    """Explicit conversion; date.max cannot be represented and must be reviewed."""
++    return None if inclusive_end is None else inclusive_end + timedelta(days=1)--- /dev/null
++++ b/src/omegadata/identity_adapters.py
+@@ -0,0 +1,238 @@
++"""Opt-in OD06 adapters. Legacy source readers and economic consumers unchanged."""
++from __future__ import annotations
++
++from collections.abc import Mapping
++from dataclasses import dataclass, field
++from datetime import date, datetime
++from pathlib import Path
++from typing import Generic, Literal, TypeVar
++
++from sqlalchemy import or_, select
++from sqlalchemy.orm import Session
++
++from omegadata.db.models import InstrumentMaster, SymbolMap, UniverseMembership
++from omegadata.identity import (
++    Evidence,
++    IdentityRepository,
++    Policy,
++    Resolution,
++    intervals,
++    legacy_exclusive_end,
++    query_time,
++    text,
++)
++from omegadata.parsers.contracts import ParsedBar, ParseResult
++
++T = TypeVar('T')
++FieldState = Literal['PRESENT', 'ABSENT', 'UNVERIFIED', 'CONFLICTING', 'FORBIDDEN']
++
++
++@dataclass(frozen=True)
++class FinancialField(Generic[T]):
++    state: FieldState
++    value: T | None
++
++    def __post_init__(self) -> None:
++        if self.state not in {'PRESENT', 'ABSENT', 'UNVERIFIED', 'CONFLICTING', 'FORBIDDEN'}:
++            raise ValueError('FIELD_STATE')
++        if (self.state == 'ABSENT' and self.value is not None
++                or self.state == 'PRESENT' and self.value is None):
++            raise ValueError('FIELD_VALUE_STATE')
++
++
++@dataclass(frozen=True)
++class IdentityIntake:
++    parser_result: ParseResult
++    original_row: ParsedBar | None
++    known_from: FinancialField[datetime]
++    effective_at: FinancialField[datetime]
++    ingested_at: FinancialField[datetime]
++    source_authentication_status: str = 'UNVERIFIED'
++    source_rights_status: str = 'NOT_ESTABLISHED'
++    financial_eligible: bool = field(default=False, init=False)
++    version: str = 'od06.intake/v1'
++
++
++    @property
++    def fields(self) -> tuple[tuple[str, FinancialField[object]], ...]:
++        """Portable handoff fields, with epistemic status independent of value presence."""
++        r, row = self.parser_result, self.original_row
++        from omegadata.parsers.schema_catalog import supported_formats
++        profile = next((p for p in supported_formats() if p['source_id'] == r.source_key
++                        and p['format_id'] == r.format_id and p['parser_version'] == r.parser_version), None)
++        values: dict[str, object | None] = {
++            'source_id': r.source_key, 'format_era': r.format_id, 'parser_version': r.parser_version,
++            'schema_version': profile['schema_version'] if profile else None,
++            'exchange': row.exchange if row else None, 'source_venue': profile['source_venue'] if profile else None,
++            'trade_date': row.trade_date if row else None,
++            'symbol_as_reported': row.symbol if row else None,
++            'series': row.series if row else None, 'isin_if_available': row.isin if row else None,
++            'instrument_attributes': None, 'source_artifact_identity': r.raw_sha256,
++            'source_row_ordinal': row.source_row_index if row else None,
++            'original_lexemes': row.price_lexemes if row else None,
++            'data_quality_status': r.state, 'reference_classification': r.reference_classification,
++            'source_authentication_status': 'UNVERIFIED', 'source_rights_status': None,
++            'known_from': None, 'effective_at': None, 'ingested_at': None,
++        }
++        code_metadata = {'parser_version', 'schema_version', 'source_artifact_identity',
++                         'data_quality_status', 'reference_classification', 'source_row_ordinal'}
++        return tuple((name, FinancialField('FORBIDDEN' if name == 'source_rights_status' else
++            'ABSENT' if value is None else 'PRESENT' if name in code_metadata else 'UNVERIFIED', value))
++            for name, value in sorted(values.items()))
++
++def intake(result: ParseResult, row: ParsedBar | None) -> IdentityIntake:
++    """Retain upstream objects verbatim. Never infer availability from trade date."""
++    if result.state != 'PARSED_UNVERIFIED' or row is not None and row not in result.rows:
++        raise ValueError('PARSER_INPUT_QUARANTINED_OR_ROW_NOT_IN_RESULT')
++    return IdentityIntake(result, row, FinancialField('ABSENT', None),
++                          FinancialField('ABSENT', None), FinancialField('ABSENT', None))
++
++
++@dataclass(frozen=True)
++class MembershipClaim:
++    membership_id: str
++    index_name: str
++    symbol: str
++    series: str
++    exchange: str
++    valid_from: date
++    valid_to: date | None
++    known_from: datetime | None
++    known_to: datetime | None
++    evidence: Evidence
++    status: str = 'SOURCE_BACKED_UNVERIFIED'
++
++    def __post_init__(self) -> None:
++        for value in (self.membership_id, self.index_name, self.symbol, self.series, self.exchange):
++            text(value)
++        intervals(self.valid_from, self.valid_to, self.known_from, self.known_to)
++        if self.status not in {'OFFICIAL_VERIFIED', 'SOURCE_BACKED_UNVERIFIED',
++                                'RECONSTRUCTED_PROVISIONAL', 'CONFLICTING', 'UNKNOWN'}:
++            raise ValueError('MEMBERSHIP_STATUS')
++
++
++@dataclass(frozen=True)
++class StrictUniverse:
++    resolved_entries: tuple[tuple[MembershipClaim, Resolution], ...]
++    unresolved_memberships: tuple[MembershipClaim, ...]
++    ambiguous_identifiers: tuple[MembershipClaim, ...]
++    source_blocked_entries: tuple[MembershipClaim, ...]
++    selected_count: int
++    coverage_status: str
++    financial_eligible: bool = False
++
++    @property
++    def accounted_count(self) -> int:
++        return sum(map(len, (self.resolved_entries, self.unresolved_memberships,
++                             self.ambiguous_identifiers, self.source_blocked_entries)))
++
++
++def strict_universe(claims: tuple[MembershipClaim, ...], repository: IdentityRepository,
++                    index_name: str, valid_at: date, known_at: datetime,
++                    evidence_policy: Policy = 'STRICT') -> StrictUniverse:
++    query_time(known_at)
++    if evidence_policy not in {'STRICT', 'CANARY_ONLY'}:
++        raise ValueError('EVIDENCE_POLICY')
++    if len({c.membership_id for c in claims}) != len(claims):
++        raise ValueError('DUPLICATE_MEMBERSHIP')
++    selected = tuple(sorted((c for c in claims if c.index_name == index_name
++        and c.valid_from <= valid_at and (c.valid_to is None or valid_at < c.valid_to)
++        and (c.known_from is None or c.known_from <= known_at)
++        and (c.known_to is None or known_at < c.known_to)), key=lambda c: c.membership_id))
++    resolved, unresolved, ambiguous, blocked = [], [], [], []
++    for claim in selected:
++        if claim.evidence.permission != 'PERMITTED':
++            blocked.append(claim)
++            continue
++        if (claim.known_from is None or claim.status != 'OFFICIAL_VERIFIED'
++                or not claim.evidence.eligible(evidence_policy)):
++            unresolved.append(claim)
++            continue
++        result = repository.resolve_listing(claim.exchange, claim.symbol, claim.series,
++                                            valid_at, known_at, evidence_policy)
++        if result.state == 'RESOLVED':
++            resolved.append((claim, result))
++        elif result.state in {'AMBIGUOUS', 'CONFLICTING'}:
++            ambiguous.append(claim)
++        elif result.state == 'SOURCE_BLOCKED':
++            blocked.append(claim)
++        else:
++            unresolved.append(claim)
++    complete = not (unresolved or ambiguous or blocked)
++    return StrictUniverse(tuple(resolved), tuple(unresolved), tuple(ambiguous), tuple(blocked),
++                          len(selected), 'COMPLETE' if complete else 'INCOMPLETE',
++                          bool(selected) and complete and evidence_policy == 'STRICT')
++
++
++@dataclass(frozen=True)
++class LegacyMembershipObservation:
++    membership_id: int
++    isin_as_reported: str
++    master_present: bool
++    status: str
++    reason: str
++    known_from: None = None
++    authoritative: bool = False
++
++
++def legacy_universe_inventory(session: Session, index_name: str,
++                              valid_at: date) -> tuple[LegacyMembershipObservation, ...]:
++    """Read-only opt-in companion to get_universe; accounts for missing masters.
++
++    Legacy added_date/updated_at are NOT evidence of knowledge. No current active
++    or delisting filter is applied. All existing rows remain unverified here.
++    """
++    rows = session.scalars(select(UniverseMembership).where(
++        UniverseMembership.index_name == index_name,
++        UniverseMembership.effective_date <= valid_at,
++        or_(UniverseMembership.removal_effective.is_(None),
++            UniverseMembership.removal_effective > valid_at)).order_by(UniverseMembership.id)).all()
++    return tuple(LegacyMembershipObservation(row.id, row.isin,
++        session.get(InstrumentMaster, row.isin) is not None,
++        'RECONSTRUCTED_PROVISIONAL' if row.source == 'RECONSTRUCTED' else 'SOURCE_BACKED_UNVERIFIED',
++        'KNOWLEDGE_AND_IDENTITY_EVIDENCE_NOT_ESTABLISHED') for row in rows)
++
++
++def source_backfill(raw_root: Path) -> None:
++    """Refuse before any source-directory enumeration or open."""
++    raise PermissionError('SOURCE_DEPENDENT_BACKFILL_BLOCKED')
++
++
++def engineering_gate(results: Mapping[str, int | None]) -> str:
++    """Consume a COMPLETE externally enumerated engineering command set only.
++
++    Financial, incident, platform and production gates are evaluated separately.
++    """
++    if any(code is not None and code != 0 for code in results.values()):
++        return 'FAIL'
++    required = {'focused', 'adoption', 'A', 'ruff', 'mypy', 'pip', 'compile', 'containment'}
++    if set(results) != required or any(code is None for code in results.values()):
++        return 'BLOCKED'
++    return 'PASS'
++
++@dataclass(frozen=True)
++class LegacySymbolObservation:
++    mapping_id: int
++    isin_as_reported: str
++    exchange: str
++    symbol_as_reported: str
++    valid_from: date
++    valid_to_exclusive: date | None
++    known_from: None = None
++    authoritative: bool = False
++    reason: str = 'LEGACY_KNOWLEDGE_AND_SERIES_UNKNOWN'
++
++
++def legacy_symbol_inventory(session: Session, exchange: str, symbol: str,
++                            valid_at: date) -> tuple[LegacySymbolObservation, ...]:
++    """All matches, inclusive legacy end converted explicitly; no first-row choice.
++
++    No issuer/security/listing is fabricated from ISIN. Caller must supply typed,
++    evidence-reviewed claims to the new repository; this view is not such a claim.
++    """
++    rows = session.scalars(select(SymbolMap).where(SymbolMap.exchange == exchange,
++        SymbolMap.symbol == symbol, SymbolMap.valid_from <= valid_at,
++        or_(SymbolMap.valid_to.is_(None), SymbolMap.valid_to >= valid_at))
++        .order_by(SymbolMap.id)).all()
++    return tuple(LegacySymbolObservation(row.id, row.isin, str(row.exchange), row.symbol,
++        row.valid_from, legacy_exclusive_end(row.valid_to)) for row in rows)--- /dev/null
++++ b/src/omegadata/session_calendar.py
+@@ -0,0 +1,148 @@
++"""OD06 explicit, bitemporal session authority adapter; legacy calendar retained.
++No weekdays, hours, holidays or market sessions are generated as source facts.
++"""
++from __future__ import annotations
++
++from dataclasses import dataclass, replace
++from datetime import date, datetime, timedelta
++
++from omegadata.identity import Evidence, Policy, aware, intervals, query_time, text
++from omegadata.track_a.trading_calendar import TradingCalendar
++
++
++@dataclass(frozen=True)
++class SessionClaim:
++    claim_id: str
++    exchange: str
++    session_date: date
++    session_type: str
++    timezone: str
++    calendar_version: str
++    evidence: Evidence
++    known_from: datetime | None
++    known_to: datetime | None
++    opens_at: datetime | None = None
++    closes_at: datetime | None = None
++    supersedes_claim_id: str | None = None
++    version: str = 'od06.session/v1'
++
++    def __post_init__(self) -> None:
++        for value in (self.claim_id, self.exchange, self.calendar_version):
++            text(value)
++        if self.timezone != 'Asia/Kolkata' or self.version != 'od06.session/v1':
++            raise ValueError('SESSION_VERSION_OR_TIMEZONE')
++        if self.session_type not in {'REGULAR', 'SPECIAL', 'CLOSED'}:
++            raise ValueError('SESSION_TYPE')
++        intervals(self.session_date, None, self.known_from, self.known_to)
++        for moment in (self.opens_at, self.closes_at):
++            aware(moment)
++            if moment is not None:
++                from zoneinfo import ZoneInfo
++                if moment.astimezone(ZoneInfo(self.timezone)).date() != self.session_date:
++                    raise ValueError('SESSION_LOCAL_DATE')
++        if self.session_type == 'CLOSED' and (self.opens_at is not None or self.closes_at is not None):
++            raise ValueError('CLOSED_SESSION_HOURS')
++        if self.opens_at is not None and self.closes_at is not None and self.closes_at <= self.opens_at:
++            raise ValueError('SESSION_HOURS')
++
++    @property
++    def authority_reference(self) -> str:
++        return self.evidence.evidence_id
++
++
++def revision_ends(claims: tuple[SessionClaim, ...]) -> dict[str, datetime]:
++    by_id = {c.claim_id: c for c in claims}
++    if len(by_id) != len(claims):
++        raise ValueError('DUPLICATE_SESSION_CLAIM')
++    ends: dict[str, datetime] = {}
++    for c in claims:
++        if c.supersedes_claim_id is None:
++            continue
++        old = by_id.get(c.supersedes_claim_id)
++        if (old is None or old.claim_id in ends or c.known_from is None or old.known_from is None
++                or c.known_from <= old.known_from or old.exchange != c.exchange
++                or old.session_date != c.session_date
++                or old.known_to is not None and old.known_to < c.known_from):
++            raise ValueError('SESSION_SUPERSESSION')
++        ends[old.claim_id] = c.known_from
++    return ends
++
++
++@dataclass(frozen=True)
++class SessionResolution:
++    status: str
++    claims: tuple[SessionClaim, ...] = ()
++    financial_eligible: bool = False
++
++
++@dataclass(frozen=True)
++class VerifiedCalendar:
++    claims: tuple[SessionClaim, ...] = ()
++
++    def __post_init__(self) -> None:
++        if type(self.claims) is not tuple:
++            raise ValueError('IMMUTABLE_CALENDAR_REQUIRED')
++        revision_ends(self.claims)
++
++    def append_correction(self, claim: SessionClaim) -> VerifiedCalendar:
++        if claim.supersedes_claim_id is None:
++            raise ValueError('SESSION_SUPERSESSION_REQUIRED')
++        return replace(self, claims=(*self.claims, claim))
++
++    def query(self, exchange: str, session_date: date, known_at: datetime,
++              evidence_policy: Policy = 'STRICT') -> SessionResolution:
++        query_time(known_at)
++        if type(session_date) is not date:
++            raise ValueError('DATE_REQUIRED')
++        text(exchange)
++        if evidence_policy not in {'STRICT', 'CANARY_ONLY'}:
++            raise ValueError('EVIDENCE_POLICY')
++        ends = revision_ends(self.claims)
++        selected = tuple(sorted((c for c in self.claims if c.exchange == exchange
++            and c.session_date == session_date
++            and (c.known_from is None or c.known_from <= known_at)
++            and (c.known_to is None or known_at < c.known_to)
++            and (c.claim_id not in ends or known_at < ends[c.claim_id])), key=lambda c: c.claim_id))
++        if not selected:
++            return SessionResolution('COVERAGE_UNKNOWN')
++        if any(c.evidence.permission != 'PERMITTED' for c in selected):
++            return SessionResolution('SOURCE_BLOCKED', selected)
++        if len(selected) > 1:
++            return SessionResolution('CONFLICTING_CALENDAR', selected)
++        c = selected[0]
++        if c.known_from is None or not c.evidence.eligible(evidence_policy):
++            return SessionResolution('PROVISIONAL', selected)
++        status = {'REGULAR': 'AUTHORITATIVE_SESSION', 'SPECIAL': 'VERIFIED_SPECIAL_SESSION',
++                  'CLOSED': 'KNOWN_CLOSURE'}[c.session_type]
++        return SessionResolution(status, selected, evidence_policy == 'STRICT')
++
++    def add_business_days(self, exchange: str, anchor_date: date, business_days: int,
++                          known_at: datetime, evidence_policy: Policy = 'STRICT',
++                          *, max_calendar_days: int = 3660) -> date:
++        if (type(business_days) is not int or business_days < 0
++                or type(max_calendar_days) is not int or not 0 < max_calendar_days <= 3660):
++            raise ValueError('ARITHMETIC_BUDGET')
++        anchor = self.query(exchange, anchor_date, known_at, evidence_policy)
++        accepted = {'AUTHORITATIVE_SESSION', 'VERIFIED_SPECIAL_SESSION', 'KNOWN_CLOSURE'}
++        if anchor.status not in accepted:
++            raise ValueError('CALENDAR_COVERAGE_REQUIRED')
++        remaining, current = business_days, anchor_date
++        for _ in range(max_calendar_days):
++            if not remaining:
++                return current
++            current += timedelta(days=1)
++            session = self.query(exchange, current, known_at, evidence_policy)
++            if session.status not in accepted:
++                raise ValueError('CALENDAR_COVERAGE_REQUIRED')
++            if session.status != 'KNOWN_CLOSURE':
++                remaining -= 1
++        if not remaining:
++            return current
++        raise ValueError('CALENDAR_RESOURCE_LIMIT')
++
++
++def legacy_session(calendar: TradingCalendar, exchange: str, candidate: date) -> SessionResolution:
++    """Reuse existing coverage checks, never promote config into authenticated truth."""
++    if calendar.config_state != 'loaded' or not calendar.year_is_covered(exchange, candidate.year):
++        return SessionResolution('COVERAGE_UNKNOWN')
++    return SessionResolution('PROVISIONAL')--- /dev/null
++++ b/tests/unit/test_od06_contracts.py
+@@ -0,0 +1,412 @@
++"""OD06 invariant tests: all identifiers/dates are NON_MARKET_CANARY bookkeeping.
++No real issuer, security, session, mapping or financial correctness is asserted.
++"""
++from dataclasses import replace
++from datetime import UTC, date, datetime, timedelta
++from pathlib import Path
++
++import pytest
++
++D = date(2001, 1, 1)
++K = datetime(2001, 1, 1, tzinfo=UTC)
++
++
++def system():
++    from omegadata import identity as m
++    e = m.Evidence('canary-e', 'NON_MARKET_CANARY', 'UNVERIFIED', 'PERMITTED', 'canary-review')
++    issuer = m.Issuer('issuer-a')
++    security = m.Security('security-a', issuer.issuer_id)
++    listing = m.Listing('listing-a', security.security_id, 'CANARY-X')
++    c = m.IdentifierClaim('claim-a', listing.listing_id, 'CANARY-X', 'TOKEN', 'SERIES',
++                          D, None, K, None, e)
++    repo = m.MemoryIdentityRepository((issuer,), (security,), (listing,), (c,))
++    return m, e, repo, c
++
++
++def resolve(repo, **kw):
++    args = {'exchange':'CANARY-X', 'symbol':'TOKEN', 'series':'SERIES', 'valid_at':D,
++            'known_at':K, 'evidence_policy':'CANARY_ONLY'}
++    args.update(kw)
++    return repo.resolve_listing(**args)
++
++
++@pytest.mark.parametrize('group', [f'I{i:02}' for i in range(1, 21)])
++def test_identity_groups(group):
++    m, e, repo, c = system()
++    if group == 'I01':
++        assert repo.listings[0].security_id == repo.securities[0].security_id
++        assert len({repo.issuers[0].issuer_id, repo.securities[0].security_id,
++                    repo.listings[0].listing_id}) == 3
++        with pytest.raises(ValueError):
++            m.MemoryIdentityRepository(repo.issuers, (), repo.listings, (c,))
++    elif group == 'I02':
++        assert m.record_id('issuer', 'ledger-key') == m.record_id('issuer', 'ledger-key')
++        assert m.record_id('issuer', 'ledger-key') != m.record_id('security', 'ledger-key')
++    elif group == 'I03':
++        old = replace(c, valid_to=D+timedelta(days=2))
++        other = replace(repo.listings[0], listing_id='listing-b')
++        new = replace(c, claim_id='claim-b', listing_id='listing-b', valid_from=old.valid_to)
++        r = m.MemoryIdentityRepository(repo.issuers, repo.securities, (*repo.listings, other), (new, old))
++        assert resolve(r).listing_id == 'listing-a'
++        assert resolve(r, valid_at=new.valid_from).listing_id == 'listing-b'
++    elif group == 'I04':
++        assert resolve(repo, exchange='CANARY-Y').state == 'UNKNOWN'
++    elif group == 'I05':
++        assert resolve(repo, series='OTHER').state == 'UNKNOWN'
++    elif group == 'I06':
++        r = replace(repo, claims=(replace(c, valid_to=D+timedelta(days=1)),))
++        assert resolve(r, valid_at=D+timedelta(days=1)).state == 'UNKNOWN'
++        assert resolve(r, valid_at=D-timedelta(days=1)).state == 'UNKNOWN'
++        with pytest.raises(ValueError):
++            replace(c, valid_to=D)
++    elif group == 'I07':
++        r = replace(repo, claims=(replace(c, known_to=K+timedelta(days=1)),))
++        assert resolve(r, known_at=K+timedelta(days=1)).state == 'UNKNOWN'
++        with pytest.raises(ValueError):
++            resolve(repo, known_at=K.replace(tzinfo=None))
++    elif group == 'I08':
++        assert resolve(repo, known_at=K-timedelta(seconds=1)).state == 'UNKNOWN'
++        assert resolve(replace(repo, claims=(replace(c, known_from=None),))).state == 'QUARANTINED'
++    elif group == 'I09':
++        corrected = replace(c, claim_id='correction', symbol='CORRECTED',
++                            known_from=K+timedelta(days=1), supersedes_claim_id=c.claim_id)
++        r = repo.append_correction(corrected)
++        assert resolve(r).state == 'RESOLVED'
++        assert resolve(r, known_at=corrected.known_from).state == 'UNKNOWN'
++        assert resolve(r, symbol='CORRECTED', known_at=corrected.known_from).state == 'RESOLVED'
++        assert repo.claims == (c,)
++    elif group == 'I10':
++        other = replace(repo.listings[0], listing_id='listing-b')
++        r = m.MemoryIdentityRepository(repo.issuers, repo.securities, (*repo.listings, other),
++                                      (c, replace(c, claim_id='claim-b', listing_id='listing-b')))
++        assert resolve(r).state == 'CONFLICTING'
++        assert resolve(r).listing_id is None
++    elif group == 'I11':
++        r = replace(repo, claims=(c, replace(c, claim_id='duplicate-evidence')))
++        assert resolve(r).state == 'AMBIGUOUS'
++        with pytest.raises(ValueError):
++            replace(repo, claims=(c, c))
++    elif group == 'I12':
++        assert resolve(repo).state == 'RESOLVED'
++        assert c.isin is None
++    elif group == 'I13':
++        from omegadata.track_b.isin_master import ISINMasterService
++        assert not ISINMasterService.validate_isin('NON_MARKET_CANARY')
++        assert resolve(repo, evidence_policy='STRICT').state == 'QUARANTINED'
++        blocked = replace(c, evidence=replace(e, permission='PENDING'))
++        assert resolve(replace(repo, claims=(blocked,))).state == 'SOURCE_BLOCKED'
++    elif group == 'I14':
++        assert resolve(replace(repo, claims=(replace(c, lifecycle='DELISTED'),))).state == 'RESOLVED'
++        assert resolve(repo).financial_eligible is False
++    elif group == 'I15':
++        ev = m.LifecycleEvent('event-a', 'SUSPENSION', ('listing-a',), e, effective_at=None)
++        assert ev.event_type != 'DELISTING'
++        assert m.validate_events((ev,)) == (ev,)
++        r = replace(repo, claims=(replace(c, lifecycle='SUSPENDED'),))
++        assert resolve(r).lifecycle == 'SUSPENDED'
++    elif group == 'I16':
++        for kind in ('MERGER_IDENTITY_TRANSITION', 'DEMERGER_IDENTITY_TRANSITION'):
++            ev = m.LifecycleEvent('event-a', kind, ('security-a',), e)
++            with pytest.raises(ValueError, match='CONTINUITY'):
++                m.validate_events((ev,))
++    elif group == 'I17':
++        with pytest.raises(ValueError):
++            repo.append_correction(replace(c, claim_id='bad', supersedes_claim_id='missing'))
++        correction = replace(c, claim_id='c2', known_from=K+timedelta(days=1), supersedes_claim_id='claim-a')
++        revised = repo.append_correction(correction)
++        with pytest.raises(ValueError):
++            revised.append_correction(replace(correction, claim_id='c3'))
++    elif group == 'I18':
++        from omegadata.identity_adapters import MembershipClaim, strict_universe
++        membership = MembershipClaim('membership-a', 'INDEX_CANARY', 'MISSING', 'SERIES',
++                                     'CANARY-X', D, None, K, None, e)
++        result = strict_universe((membership,), repo, 'INDEX_CANARY', D, K, 'CANARY_ONLY')
++        assert len(result.unresolved_memberships) == 1
++        assert result.selected_count == result.accounted_count == 1
++    elif group == 'I19':
++        from omegadata.identity_adapters import MembershipClaim, strict_universe
++        item = MembershipClaim('member-a', 'INDEX_CANARY', 'TOKEN', 'SERIES', 'CANARY-X',
++                               D, None, K, None, e, status='RECONSTRUCTED_PROVISIONAL')
++        result = strict_universe((item,), repo, 'INDEX_CANARY', D, K, 'CANARY_ONLY')
++        assert not result.resolved_entries
++        assert result.unresolved_memberships[0].status == 'RECONSTRUCTED_PROVISIONAL'
++    elif group == 'I20':
++        from omegadata.identity_adapters import source_backfill
++        with pytest.raises(PermissionError, match='SOURCE_DEPENDENT_BACKFILL_BLOCKED'):
++            source_backfill(Path('/unmounted-original'))
++
++
++def calendar_system():
++    from omegadata import session_calendar as m
++    _, evidence, _, _ = system()
++    claim = m.SessionClaim('session-a', 'CANARY-X', D, 'REGULAR', 'Asia/Kolkata',
++                           'canary-v1', evidence, K, None)
++    return m, claim, m.VerifiedCalendar((claim,))
++
++
++@pytest.mark.parametrize('group', [f'C{i:02}' for i in range(1, 9)])
++def test_calendar_groups(group):
++    m, c, cal = calendar_system()
++    if group == 'C01':
++        assert cal.query('CANARY-X', D, K, 'CANARY_ONLY').status == 'AUTHORITATIVE_SESSION'
++        assert cal.query('CANARY-X', D, K).status == 'PROVISIONAL'
++    elif group == 'C02':
++        assert m.VerifiedCalendar((replace(c, session_type='CLOSED'),)).query(
++            'CANARY-X', D, K, 'CANARY_ONLY').status == 'KNOWN_CLOSURE'
++    elif group == 'C03':
++        # Anonymous date on a weekend: positive control for explicit special claim,
++        # NOT an asserted exchange session.
++        special = replace(c, session_date=date(2001, 1, 6), session_type='SPECIAL')
++        result = m.VerifiedCalendar((special,)).query('CANARY-X', special.session_date, K, 'CANARY_ONLY')
++        assert result.status == 'VERIFIED_SPECIAL_SESSION'
++        assert not result.financial_eligible
++    elif group == 'C04':
++        assert cal.query('CANARY-X', date(2100, 1, 1), K).status == 'COVERAGE_UNKNOWN'
++        assert cal.query('OTHER', D, K).status == 'COVERAGE_UNKNOWN'
++        from omegadata.track_a.trading_calendar import TradingCalendar
++        legacy = TradingCalendar({}, {'CANARY-X': {2001}})
++        assert m.legacy_session(legacy, 'CANARY-X', D).status == 'PROVISIONAL'
++    elif group == 'C05':
++        cal = m.VerifiedCalendar((c, replace(c, claim_id='other', session_type='CLOSED')))
++        assert cal.query('CANARY-X', D, K, 'CANARY_ONLY').status == 'CONFLICTING_CALENDAR'
++    elif group == 'C06':
++        correction = replace(c, claim_id='correction', session_type='CLOSED',
++                             known_from=K+timedelta(days=1), supersedes_claim_id=c.claim_id)
++        revised = cal.append_correction(correction)
++        assert revised.query('CANARY-X', D, K, 'CANARY_ONLY').status == 'AUTHORITATIVE_SESSION'
++        assert revised.query('CANARY-X', D, correction.known_from, 'CANARY_ONLY').status == 'KNOWN_CLOSURE'
++    elif group == 'C07':
++        with pytest.raises(ValueError, match='COVERAGE'):
++            cal.add_business_days('CANARY-X', D, 1, K, 'CANARY_ONLY')
++        assert cal.add_business_days('CANARY-X', D, 0, K, 'CANARY_ONLY') == D
++        with pytest.raises(ValueError):
++            cal.add_business_days('CANARY-X', D, -1, K)
++    elif group == 'C08':
++        with pytest.raises(ValueError):
++            replace(c, timezone='America/New_York')
++        with pytest.raises(ValueError):
++            replace(c, calendar_version='')
++        assert c.opens_at is None and c.closes_at is None
++
++
++@pytest.mark.parametrize('group', [f'G{i:02}' for i in range(1, 6)])
++def test_governance_groups(group):
++    from omegadata.identity_adapters import FinancialField, engineering_gate, intake
++    if group == 'G01':
++        from omegadata.parsers.schema_catalog import supported_formats
++        assert supported_formats()
++    elif group == 'G02':
++        from omegadata.parsers.contracts import (
++            Limits,
++            ParsedBar,
++            ParseRequest,
++            ParserError,
++            ParseResult,
++        )
++        assert all((ParseRequest, ParsedBar, ParseResult, Limits, ParserError))
++    elif group == 'G03':
++        from od05x_isolated_runner import assert_boundary, native_probe
++        assert assert_boundary()['verified']
++        assert native_probe('read')['denied']
++        assert not Path('/mnt/e').exists()
++    elif group == 'G04':
++        from omegadata.parsers.contracts import ParseResult
++        result = intake(ParseResult('PARSED_UNVERIFIED', 'a'*64), None)
++        assert result.known_from.state == 'ABSENT'
++        assert result.financial_eligible is False
++        with pytest.raises(ValueError):
++            FinancialField('PRESENT', None)
++    elif group == 'G05':
++        assert engineering_gate({'focused': 1, 'mypy': 0}) == 'FAIL'
++        assert engineering_gate({}) == 'BLOCKED'
++@pytest.mark.parametrize('case', ['empty', 'order', 'duplicate', 'unknown-link', 'invalid-isin',
++    'bad-policy', 'bad-knowledge', 'event-contradiction', 'bad-event-status', 'inclusive-boundary',
++    'strict-missing', 'universe-conflict', 'legacy-universe', 'legacy-symbols', 'intake-fields',
++    'calendar-unknown-knowledge', 'calendar-exchange', 'calendar-arithmetic', 'calendar-budget',
++    'calendar-invalid-date', 'structural-oracle'])
++def test_adversarial_invariants(case):
++    m, e, repo, c = system()
++    if case == 'empty':
++        assert resolve(m.MemoryIdentityRepository()).state == 'UNKNOWN'
++    elif case == 'order':
++        extra = replace(c, claim_id='other', symbol='ELSE')
++        assert resolve(replace(repo, claims=(c, extra))) == resolve(replace(repo, claims=(extra, c)))
++    elif case == 'duplicate':
++        with pytest.raises(ValueError):
++            replace(repo, issuers=(*repo.issuers, repo.issuers[0]))
++    elif case == 'unknown-link':
++        listing = replace(repo.listings[0], security_id=None)
++        assert resolve(replace(repo, listings=(listing,))).state == 'QUARANTINED'
++    elif case == 'invalid-isin':
++        with pytest.raises(ValueError):
++            replace(c, isin='NON_MARKET_CANARY')
++    elif case == 'bad-policy':
++        with pytest.raises(ValueError):
++            resolve(repo, evidence_policy='ANYTHING')
++    elif case == 'bad-knowledge':
++        with pytest.raises(ValueError):
++            resolve(repo, known_at=None)
++    elif case == 'event-contradiction':
++        first = m.LifecycleEvent('e1', 'SUSPENSION', ('listing-a',), e, effective_at=K)
++        second = replace(first, event_id='e2', event_type='RELISTING')
++        with pytest.raises(ValueError, match='CONTRADICTORY'):
++            m.validate_events((first, second))
++    elif case == 'bad-event-status':
++        with pytest.raises(ValueError):
++            m.LifecycleEvent('e1', 'LISTING', ('listing-a',), e, validation_status='IMPLICIT_PASS')
++    elif case == 'inclusive-boundary':
++        assert m.legacy_exclusive_end(D) == D+timedelta(days=1)
++        assert m.legacy_exclusive_end(None) is None
++        with pytest.raises(OverflowError):
++            m.legacy_exclusive_end(date.max)
++    elif case in {'strict-missing', 'universe-conflict'}:
++        from omegadata.identity_adapters import MembershipClaim, strict_universe
++        item = MembershipClaim('m1', 'INDEX_CANARY', 'MISSING', 'SERIES', 'CANARY-X',
++                               D, None, K, None, e, status='OFFICIAL_VERIFIED')
++        result = strict_universe((item,), repo, 'INDEX_CANARY', D, K, 'CANARY_ONLY')
++        assert len(result.unresolved_memberships) == 1
++        if case == 'universe-conflict':
++            r = replace(repo, claims=(c, replace(c, claim_id='ambiguous')))
++            result = strict_universe((replace(item, symbol='TOKEN'),), r,
++                                     'INDEX_CANARY', D, K, 'CANARY_ONLY')
++            assert len(result.ambiguous_identifiers) == 1
++        assert result.accounted_count == 1 and not result.financial_eligible
++    elif case == 'legacy-universe':
++        from sqlalchemy import create_engine
++        from sqlalchemy.orm import Session
++
++        from omegadata.db.base import Base
++        from omegadata.db.models import UniverseMembership
++        from omegadata.identity_adapters import legacy_universe_inventory
++        engine = create_engine('sqlite:///:memory:')
++        Base.metadata.create_all(engine)
++        with Session(engine) as session:
++            session.add(UniverseMembership(isin='CANARY-NONE', index_name='INDEX_CANARY',
++                added_date=D, effective_date=D, source='RECONSTRUCTED', source_confidence=1))
++            session.flush()
++            rows = legacy_universe_inventory(session, 'INDEX_CANARY', D)
++            assert len(rows) == 1 and not rows[0].master_present
++            assert rows[0].known_from is None and rows[0].status == 'RECONSTRUCTED_PROVISIONAL'
++        engine.dispose()
++    elif case == 'legacy-symbols':
++        from sqlalchemy import create_engine
++        from sqlalchemy.orm import Session
++
++        from omegadata.db.base import Base
++        from omegadata.db.models import SymbolMap
++        from omegadata.domain import Exchange
++        from omegadata.identity_adapters import legacy_symbol_inventory
++        engine = create_engine('sqlite:///:memory:')
++        Base.metadata.create_all(engine)
++        with Session(engine) as session:
++            session.add(SymbolMap(isin='CANARY-NONE', exchange=Exchange.NSE, symbol='CANARY',
++                                  valid_from=D, valid_to=D))
++            session.flush()
++            rows = legacy_symbol_inventory(session, Exchange.NSE, 'CANARY', D)
++            assert len(rows) == 1 and rows[0].valid_to_exclusive == D+timedelta(days=1)
++            assert rows[0].known_from is None and not rows[0].authoritative
++        engine.dispose()
++    elif case == 'intake-fields':
++        from omegadata.identity_adapters import intake
++        from omegadata.parsers.contracts import ParseResult
++        raw = ParseResult('PARSED_UNVERIFIED', 'a'*64)
++        result = intake(raw, None)
++        fields = dict(result.fields)
++        assert result.parser_result is raw
++        assert fields['source_artifact_identity'].state == 'PRESENT'
++        assert fields['source_authentication_status'].state == 'UNVERIFIED'
++        assert fields['symbol_as_reported'].state == 'ABSENT'
++        assert not result.financial_eligible
++        with pytest.raises(ValueError):
++            intake(replace(raw, state='QUARANTINED'), None)
++    elif case.startswith('calendar-'):
++        cm, sc, cal = calendar_system()
++        if case == 'calendar-unknown-knowledge':
++            assert cm.VerifiedCalendar((replace(sc, known_from=None),)).query(
++                'CANARY-X', D, K, 'CANARY_ONLY').status == 'PROVISIONAL'
++            assert cal.query('CANARY-X', D, K-timedelta(seconds=1)).status == 'COVERAGE_UNKNOWN'
++        elif case == 'calendar-exchange':
++            assert cal.query('CANARY-Y', D, K).status == 'COVERAGE_UNKNOWN'
++        elif case == 'calendar-arithmetic':
++            # Nonmarket interval arithmetic includes a calendar-year transition.
++            start = date(2000, 12, 31)
++            claims = tuple(replace(sc, claim_id=f's{i}', session_date=start+timedelta(days=i),
++                session_type='CLOSED' if i in (1, 2) else 'SPECIAL') for i in range(4))
++            assert cm.VerifiedCalendar(claims).add_business_days(
++                'CANARY-X', start, 1, K, 'CANARY_ONLY') == date(2001, 1, 3)
++        elif case == 'calendar-budget':
++            with pytest.raises(ValueError):
++                cal.add_business_days('CANARY-X', D, 1, K, 'CANARY_ONLY', max_calendar_days=4000)
++        elif case == 'calendar-invalid-date':
++            with pytest.raises(ValueError):
++                cal.query('CANARY-X', K, K, 'CANARY_ONLY')
++    elif case == 'structural-oracle':
++        # Independent explicit interval predicate, no resolver-generated expectation.
++        claims = tuple(replace(c, claim_id=f'canary-{i}', symbol=f'TOKEN-{i}',
++            valid_from=D+timedelta(days=i), valid_to=D+timedelta(days=i+2),
++            known_from=K+timedelta(days=i)) for i in range(32))
++        r = replace(repo, claims=claims)
++        for i in range(32):
++            for offset in (-1, 0, 1, 2):
++                actual = resolve(r, symbol=f'TOKEN-{i}', valid_at=D+timedelta(days=i+offset),
++                                 known_at=K+timedelta(days=i))
++                assert (actual.state == 'RESOLVED') == (offset in (0, 1))
++@pytest.mark.parametrize('case', ['immutable-ledger', 'immutable-calendar', 'conflicting-evidence',
++    'bad-evidence-time', 'closed-hours', 'missing-calendar', 'calendar-chain',
++    'identity-chain', 'wrong-exchange-correction', 'financial-gate'])
++def test_review_refusals(case):
++    m, e, repo, c = system()
++    if case == 'immutable-ledger':
++        with pytest.raises(ValueError):
++            m.MemoryIdentityRepository(list(repo.issuers), repo.securities, repo.listings, repo.claims)
++    elif case == 'immutable-calendar':
++        cm, sc, _ = calendar_system()
++        with pytest.raises(ValueError):
++            cm.VerifiedCalendar([sc])
++    elif case == 'conflicting-evidence':
++        contradictory = replace(c, evidence=replace(e, authentication='CONFLICTING'))
++        assert resolve(replace(repo, claims=(contradictory,))).state == 'QUARANTINED'
++    elif case == 'bad-evidence-time':
++        with pytest.raises(ValueError):
++            replace(c, known_from='2001-01-01')
++    elif case == 'closed-hours':
++        _, sc, _ = calendar_system()
++        with pytest.raises(ValueError):
++            replace(sc, session_type='CLOSED', opens_at=K)
++    elif case == 'missing-calendar':
++        from omegadata.session_calendar import legacy_session
++        from omegadata.track_a.trading_calendar import TradingCalendar
++        for state in ('missing', 'invalid'):
++            assert legacy_session(TradingCalendar({}, {}, config_state=state), 'CANARY-X', D).status == 'COVERAGE_UNKNOWN'
++    elif case == 'calendar-chain':
++        cm, sc, cal = calendar_system()
++        corrected = replace(sc, claim_id='c2', known_from=K+timedelta(days=1), supersedes_claim_id=sc.claim_id)
++        revised = cal.append_correction(corrected)
++        with pytest.raises(ValueError):
++            revised.append_correction(replace(corrected, claim_id='c3'))
++        assert cal.claims == (sc,)
++        assert cm.VerifiedCalendar((replace(sc, known_to=K+timedelta(days=1)),)).query(
++            'CANARY-X', D, K+timedelta(days=1), 'CANARY_ONLY').status == 'COVERAGE_UNKNOWN'
++    elif case == 'identity-chain':
++        with pytest.raises(ValueError):
++            repo.append_correction(replace(c, claim_id='c2', supersedes_claim_id=c.claim_id))
++    elif case == 'wrong-exchange-correction':
++        with pytest.raises(ValueError):
++            repo.append_correction(replace(c, claim_id='c2', exchange='OTHER',
++                known_from=K+timedelta(days=1), supersedes_claim_id=c.claim_id))
++    elif case == 'financial-gate':
++        from omegadata.identity_adapters import engineering_gate
++        commands = dict.fromkeys(('focused', 'adoption', 'A', 'ruff', 'mypy', 'pip', 'compile', 'containment'), 0)
++        assert engineering_gate(commands) == 'PASS'
++        assert engineering_gate({**commands, 'A':None}) == 'BLOCKED'
++        assert resolve(repo).financial_eligible is False
++@pytest.mark.parametrize('case', ['unknown-source-venue', 'intake-self-promotion'])
++def test_intake_refuses_promotion(case):
++    from omegadata.identity_adapters import intake
++    from omegadata.parsers.contracts import ParseResult
++    result = intake(ParseResult('PARSED_UNVERIFIED', 'a'*64, source_key='CANARY_UNKNOWN'), None)
++    if case == 'unknown-source-venue':
++        assert dict(result.fields)['source_venue'].state == 'ABSENT'
++    else:
++        with pytest.raises(ValueError):
++            replace(result, financial_eligible=True)
