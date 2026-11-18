@@ -1,0 +1,23 @@
+{
+  "job": "dbrecover",
+  "exit_code": 0,
+  "counts": {},
+  "status": "PASS",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532292]",
+      "net": "net:[4026532297]",
+      "pid": "pid:[4026532295]",
+      "user": "user:[4026532357]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbrecover-0d83106aca/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  },
+  "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+  "pid": 2
+}

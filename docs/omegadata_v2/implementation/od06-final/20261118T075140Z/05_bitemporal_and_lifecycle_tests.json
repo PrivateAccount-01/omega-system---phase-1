@@ -1,0 +1,870 @@
+{
+  "focused": {
+    "command_id": "foundation-a0d9fa67a0-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-manifest.json",
+      "--manifest-sha256",
+      "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "--policy",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/foundation-a0d9fa67a0/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+    "platform": "Ubuntu WSL Linux native data-free snapshot",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+    "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+    "start_utc": "2026-11-18T13:41:46.164323+00:00",
+    "end_utc": "2026-11-18T13:41:54.087790+00:00",
+    "elapsed_seconds": 7.423315350000053,
+    "exit_code": 0,
+    "counts": {
+      "passed": 87
+    },
+    "deselected": null,
+    "stdout_stderr_log": "logs/foundation-a0d9fa67a0-command.json"
+  },
+  "preserved_OD06": {
+    "command_id": "od06-e6577b9b20-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/od06-e6577b9b20-manifest.json",
+      "--manifest-sha256",
+      "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "--policy",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/od06-e6577b9b20-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/od06-e6577b9b20/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+    "platform": "Ubuntu WSL Linux native data-free snapshot",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+    "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+    "start_utc": "2026-11-18T13:41:54.232274+00:00",
+    "end_utc": "2026-11-18T13:41:59.286310+00:00",
+    "elapsed_seconds": 5.0540358329999435,
+    "exit_code": 0,
+    "counts": {
+      "passed": 66
+    },
+    "deselected": null,
+    "stdout_stderr_log": "logs/od06-e6577b9b20-command.json"
+  },
+  "negative_first": [
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[insert-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_insert_memory0')\nmode = 'memory', case = 'insert'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[insert-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_insert_file_0')\nmode = 'file', case = 'insert'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[duplicate-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_duplicate_mem0')\nmode = 'memory', case = 'duplicate'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[duplicate-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_duplicate_fil0')\nmode = 'file', case = 'duplicate'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[idempotent-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_idempotent_me0')\nmode = 'memory', case = 'idempotent'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[idempotent-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_idempotent_fi0')\nmode = 'file', case = 'idempotent'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[restart-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_restart_memor0')\nmode = 'memory', case = 'restart'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[restart-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_restart_file_0')\nmode = 'file', case = 'restart'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[correction-chain-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_correction_ch0')\nmode = 'memory', case = 'correction-chain'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[correction-chain-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_correction_ch1')\nmode = 'file', case = 'correction-chain'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[rollback-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_rollback_memo0')\nmode = 'memory', case = 'rollback'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[rollback-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_rollback_file0')\nmode = 'file', case = 'rollback'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[foreign-key-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_foreign_key_m0')\nmode = 'memory', case = 'foreign-key'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[foreign-key-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_foreign_key_f0')\nmode = 'file', case = 'foreign-key'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[overlap-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_overlap_memor0')\nmode = 'memory', case = 'overlap'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[overlap-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_overlap_file_0')\nmode = 'file', case = 'overlap'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[immutable-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_immutable_mem0')\nmode = 'memory', case = 'immutable'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[immutable-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_immutable_fil0')\nmode = 'file', case = 'immutable'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[version-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_version_memor0')\nmode = 'memory', case = 'version'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[version-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_version_file_0')\nmode = 'file', case = 'version'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[competing-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_competing_mem0')\nmode = 'memory', case = 'competing'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[competing-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_competing_fil0')\nmode = 'file', case = 'competing'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[migration-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_migration_mem0')\nmode = 'memory', case = 'migration'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[migration-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_migration_fil0')\nmode = 'file', case = 'migration'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[history-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_history_memor0')\nmode = 'memory', case = 'history'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[history-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_history_file_0')\nmode = 'file', case = 'history'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[event-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_event_memory_0')\nmode = 'memory', case = 'event'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[event-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_event_file_0')\nmode = 'file', case = 'event'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[calendar-memory]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_calendar_memo0')\nmode = 'memory', case = 'calendar'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[calendar-file]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistence_calendar_file0')\nmode = 'file', case = 'calendar'\n\n    @pytest.mark.parametrize('mode',['memory','file'])\n    @pytest.mark.parametrize('case',['insert','duplicate','idempotent','restart','correction-chain',\n        'rollback','foreign-key','overlap','immutable','version','competing','migration','history','event','calendar'])\n    def test_persistence(tmp_path,mode,case):\n>       from omegadata.identity_repository import PersistentRepository\nE       ModuleNotFoundError: No module named 'omegadata.identity_repository'\n\ntests/unit/test_od06_foundation.py:31: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[plain-labels]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_p0')\ncase = 'plain-labels'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n>           assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\nE           AssertionError: assert 'RESOLVED' != 'RESOLVED'\nE            +  where 'RESOLVED' = Resolution(state='RESOLVED', claim_ids=('claim-a',), listing_id='listing-a', security_id='security-a', issuer_id='issuer-a', lifecycle='LISTED', financial_eligible=True, reason=None, version='od06.resolution/v1').state\nE            +    where Resolution(state='RESOLVED', claim_ids=('claim-a',), listing_id='listing-a', security_id='security-a', issuer_id='issuer-a', lifecycle='LISTED', financial_eligible=True, reason=None, version='od06.resolution/v1') = resolve(MemoryIdentityRepository(issuers=(Issuer(issuer_id='issuer-a'),), securities=(Security(security_id='security-a', issue...iew_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.identity/v1'),)), evidence_policy='STRICT')\nE            +      where MemoryIdentityRepository(issuers=(Issuer(issuer_id='issuer-a'),), securities=(Security(security_id='security-a', issue...iew_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.identity/v1'),)) = replace(MemoryIdentityRepository(issuers=(Issuer(issuer_id='issuer-a'),), securities=(Security(security_id='security-a', issue...iew_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.identity/v1'),)), claims=(IdentifierClaim(claim_id='claim-a', listing_id='listing-a', exchange='CANARY-X', symbol='TOKEN', series='SERIES', val...view_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.identity/v1'),))\n\ntests/unit/test_od06_foundation.py:113: AssertionError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[resolution-write]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_r0')\ncase = 'resolution-write'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n>           with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\nE           Failed: DID NOT RAISE any of (<class 'ValueError'>, <class 'TypeError'>)\n\ntests/unit/test_od06_foundation.py:115: Failed",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[session-write]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_s0')\ncase = 'session-write'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n>           with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\nE           Failed: DID NOT RAISE any of (<class 'ValueError'>, <class 'TypeError'>)\n\ntests/unit/test_od06_foundation.py:118: Failed",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[universe-write]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_u0')\ncase = 'universe-write'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n>           with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\nE           Failed: DID NOT RAISE any of (<class 'ValueError'>, <class 'TypeError'>)\n\ntests/unit/test_od06_foundation.py:122: Failed",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[forged-review]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_f0')\ncase = 'forged-review'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[revoked]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_r1')\ncase = 'revoked'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[missing]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_m0')\ncase = 'missing'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[source-mismatch]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_s1')\ncase = 'source-mismatch'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[wrong-purpose]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_w0')\ncase = 'wrong-purpose'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[unknown-time]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_u1')\ncase = 'unknown-time'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[future-review]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_f1')\ncase = 'future-review'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[conflicting-review]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_c0')\ncase = 'conflicting-review'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[canary-promotion]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_c1')\ncase = 'canary-promotion'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n            with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\n        else:\n>           from omegadata.identity_authority import EvidenceAuthority, claim_digest\nE           ModuleNotFoundError: No module named 'omegadata.identity_authority'\n\ntests/unit/test_od06_foundation.py:130: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[unrelated-correction]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_u2')\ncase = 'unrelated-correction'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n>           with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od06_foundation.py:126: Failed",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[event-list-mutation]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_authority_and_semantics_e0')\ncase = 'event-list-mutation'\n\n    @pytest.mark.parametrize('case',['plain-labels','resolution-write','session-write','universe-write',\n        'forged-review','revoked','missing','source-mismatch','wrong-purpose','unknown-time','future-review',\n        'conflicting-review','canary-promotion','unrelated-correction','event-list-mutation'])\n    def test_authority_and_semantics(tmp_path,case):\n        m,e,r,c=system()\n        if case=='plain-labels':\n            forged=replace(e,classification='SOURCE_DOCUMENT',authentication='VERIFIED')\n            assert resolve(replace(r,claims=(replace(c,evidence=forged),)),evidence_policy='STRICT').state!='RESOLVED'\n        elif case=='resolution-write':\n            with pytest.raises((ValueError,TypeError)):replace(resolve(r),financial_eligible=True)\n        elif case=='session-write':\n            _,_,cal=calendar_system()\n            with pytest.raises((ValueError,TypeError)):replace(cal.query('CANARY-X',D,K,'CANARY_ONLY'),financial_eligible=True)\n        elif case=='universe-write':\n            from omegadata.identity_adapters import strict_universe\n            u=strict_universe((),r,'EMPTY',D,K,'CANARY_ONLY')\n            with pytest.raises((ValueError,TypeError)):replace(u,financial_eligible=True)\n        elif case=='unrelated-correction':\n            other=replace(r.listings[0],listing_id='other-listing')\n            rr=replace(r,listings=(*r.listings,other))\n            with pytest.raises(ValueError):rr.append_correction(replace(c,claim_id='b',listing_id='other-listing',known_from=K+timedelta(days=1),supersedes_claim_id=c.claim_id))\n        elif case=='event-list-mutation':\n>           with pytest.raises(ValueError):m.LifecycleEvent('event','LISTING',['listing-a'],e)\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od06_foundation.py:128: Failed",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[incomplete]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_incom0')\ncase = 'incomplete'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[no-annual-inference]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_no_an0')\ncase = 'no-annual-inference'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[next]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_next_0')\ncase = 'next'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[previous]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_previ0')\ncase = 'previous'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[coverage-persistence]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_cover0')\ncase = 'coverage-persistence'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[later-correction]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_later0')\ncase = 'later-correction'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[time-conflict]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_time_0')\ncase = 'time-conflict'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[revoked-session]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_calendar_completion_revok0')\ncase = 'revoked-session'\n\n    @pytest.mark.parametrize('case',['incomplete','no-annual-inference','next','previous','coverage-persistence',\n        'later-correction','time-conflict','revoked-session'])\n    def test_calendar_completion(tmp_path,case):\n>       from omegadata.session_calendar import CoverageClaim\nE       ImportError: cannot import name 'CoverageClaim' from 'omegadata.session_calendar' (/work/repo/src/omegadata/session_calendar.py)\n\ntests/unit/test_od06_foundation.py:151: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[coverage-not-completeness]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "case = 'coverage-not-completeness'\n\n    @pytest.mark.parametrize('case',['coverage-not-completeness','membership-revision','accounting','removal'])\n    def test_universe_completion(case):\n        from omegadata.identity_adapters import MembershipClaim, strict_universe\n        _,e,r,_=system()\n        a=MembershipClaim('a','INDEX_CANARY','TOKEN','SERIES','CANARY-X',D,None,K,None,e,status='OFFICIAL_VERIFIED')\n        if case=='coverage-not-completeness':\n            result=strict_universe((a,),r,'INDEX_CANARY',D,K,'CANARY_ONLY')\n            assert result.accounted_count==1 and not result.financial_eligible\n>           assert result.authoritative_coverage is False\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           AttributeError: 'StrictUniverse' object has no attribute 'authoritative_coverage'\n\ntests/unit/test_od06_foundation.py:192: AttributeError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[membership-revision]",
+      "test_source_sha256": "5473ce4316047d0a2fe9bcd519084a2869ac923b0bff6d1e632d745de6331f04",
+      "command": "logs/foundation-7e4659a811-command.json",
+      "start_utc": "2026-11-18T07:55:30.970098+00:00",
+      "reason": "case = 'membership-revision'\n\n    @pytest.mark.parametrize('case',['coverage-not-completeness','membership-revision','accounting','removal'])\n    def test_universe_completion(case):\n        from omegadata.identity_adapters import MembershipClaim, strict_universe\n        _,e,r,_=system()\n        a=MembershipClaim('a','INDEX_CANARY','TOKEN','SERIES','CANARY-X',D,None,K,None,e,status='OFFICIAL_VERIFIED')\n        if case=='coverage-not-completeness':\n            result=strict_universe((a,),r,'INDEX_CANARY',D,K,'CANARY_ONLY')\n            assert result.accounted_count==1 and not result.financial_eligible\n            assert result.authoritative_coverage is False\n        elif case=='membership-revision':\n>           b=replace(a,membership_id='b',symbol='MISSING',known_from=K+timedelta(days=1),supersedes_membership_id='a')\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od06_foundation.py:194: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nobj = MembershipClaim(membership_id='a', index_name='INDEX_CANARY', symbol='TOKEN', series='SERIES', exchange='CANARY-X', va...Y', authentication='UNVERIFIED', permission='PERMITTED', review_reference='canary-review'), status='OFFICIAL_VERIFIED')\nchanges = {'evidence': Evidence(evidence_id='canary-e', classification='NON_MARKET_CANARY', authentication='UNVERIFIED', permiss...X', 'index_name': 'INDEX_CANARY', 'known_from': datetime.datetime(2001, 1, 2, 0, 0, tzinfo=datetime.timezone.utc), ...}\nf = Field(name='status',type='str',default='SOURCE_BACKED_UNVERIFIED',default_factory=<dataclasses._MISSING_TYPE object at 0x707dd6e267b0>,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)\n\n    def replace(obj, /, **changes):\n        \"\"\"Return a new object replacing specified fields with new values.\n    \n        This is especially useful for frozen classes.  Example usage::\n    \n          @dataclass(frozen=True)\n          class C:\n              x: int\n              y: int\n    \n          c = C(1, 2)\n          c1 = replace(c, x=3)\n          assert c1.x == 3 and c1.y == 2\n        \"\"\"\n    \n        # We're going to mutate 'changes', but that's okay because it's a\n        # new dict, even if called with 'replace(obj, **my_changes)'.\n    \n        if not _is_dataclass_instance(obj):\n            raise TypeError(\"replace() should be called on dataclass instances\")\n    \n        # It's an error to have init=False fields in 'changes'.\n        # If a field is not in 'changes', read its value from the provided obj.\n    \n        for f in getattr(obj, _FIELDS).values():\n            # Only consider normal fields or InitVars.\n            if f._field_type is _FIELD_CLASSVAR:\n                continue\n    \n            if not f.init:\n                # Error if this field is specified in changes.\n                if f.name in changes:\n                    raise ValueError(f'field {f.name} is declared with '\n                                     'init=False, it cannot be specified with '\n                                     'replace()')\n                continue\n    \n            if f.name not in changes:\n                if f._field_type is _FIELD_INITVAR and f.default is MISSING:\n                    raise ValueError(f\"InitVar {f.name!r} \"\n                                     'must be specified with replace()')\n                changes[f.name] = getattr(obj, f.name)\n    \n        # Create the new object, which calls __init__() and\n        # __post_init__() (if defined), using all of the init fields we've\n        # added and/or left in 'changes'.  If there are values supplied in\n        # changes that aren't fields, this will correctly raise a\n        # TypeError.\n>       return obj.__class__(**changes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: MembershipClaim.__init__() got an unexpected keyword argument 'supersedes_membership_id'\n\n/usr/lib/python3.12/dataclasses.py:1581: TypeError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[authority-original-claim]",
+      "test_source_sha256": "b9c743e012de5d5a1eeffb3cb5d2fa6c7244f58cea499133ad2055b6eb93d882",
+      "command": "logs/foundation-b9b2c4c09f-command.json",
+      "start_utc": "2026-11-18T13:24:30.068600+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistent_review_authori0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76b335ab4e00>\ncase = 'authority-original-claim'\n\n    @pytest.mark.parametrize('case',['authority-original-claim','event-idempotent','unknown-membership',\n        'competing-threads','evidence-id-conflict','session-idempotent','session-competing','query-order',\n        'pinned-tamper','unowned-database','three-step-reversal'])\n    def test_persistent_review(tmp_path,monkeypatch,case):\n        from omegadata.identity_authority import EvidenceAuthority\n        from omegadata.identity_repository import PersistentRepository\n        if case=='pinned-tamper':\n            p=tmp_path/'canary.json';p.write_text('{}')\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,'0'*64)\n            return\n        if case=='unowned-database':\n            from sqlalchemy import create_engine,text\n            p=tmp_path/'legacy.sqlite';engine=create_engine('sqlite:///'+str(p))\n            with engine.begin() as conn:conn.execute(text('CREATE TABLE unrelated_canary (id INTEGER)'))\n            engine.dispose()\n            with pytest.raises(ValueError):PersistentRepository('sqlite:///'+str(p),disposable_root=tmp_path)\n            return\n        db=store(tmp_path,'file');r,c=seed(db)\n        if case=='authority-original-claim':\n            authority=EvidenceAuthority.unconfigured();db.authority=authority\n            seen=[];original=EvidenceAuthority.check_claim\n            def spy(self,claim,known_at,purpose='RESEARCH'):\n                seen.append(claim)\n                return original(self,claim,known_at,purpose)\n            monkeypatch.setattr(EvidenceAuthority,'check_claim',spy)\n            b=replace(c,claim_id='b',known_from=K+timedelta(days=1),supersedes_claim_id='claim-a',symbol='TOKEN-B')\n            db.append_identity_correction(b)\n            db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K)\n>           assert seen==[c]  # Authority digest must bind original stored bytes, not derived closure.\n            ^^^^^^^^^^^^^^^^\nE           AssertionError: assert [IdentifierCl...identity/v1')] == [IdentifierCl...identity/v1')]\nE             \nE             At index 0 diff: IdentifierClaim(claim_id='claim-a', listing_id='listing-a', exchange='CANARY-X', symbol='TOKEN', series='SERIES', valid_from=datetime.date(2001, 1, 1), valid_to=None, known_from=datetime.datetime(2001, 1, 1, 0, 0, tzinfo=datetime.timezone.utc), known_to=datetime.datetime(2001, 1, 2, 0, 0, tzinfo=datetime.timezone.utc), evidence=Evidence(evidence_id='canary-e', classification='NON_MARKET_CANARY', authentication='UNVERIFIED', permission='PERMITTED', review_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.i...\nE             \nE             ...Full output truncated (2 lines hidden), use '-vv' to show\n\ntests/unit/test_od06_foundation.py:235: AssertionError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[event-idempotent]",
+      "test_source_sha256": "b9c743e012de5d5a1eeffb3cb5d2fa6c7244f58cea499133ad2055b6eb93d882",
+      "command": "logs/foundation-b9b2c4c09f-command.json",
+      "start_utc": "2026-11-18T13:24:30.068600+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistent_review_event_i0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76b335b85f70>\ncase = 'event-idempotent'\n\n    @pytest.mark.parametrize('case',['authority-original-claim','event-idempotent','unknown-membership',\n        'competing-threads','evidence-id-conflict','session-idempotent','session-competing','query-order',\n        'pinned-tamper','unowned-database','three-step-reversal'])\n    def test_persistent_review(tmp_path,monkeypatch,case):\n        from omegadata.identity_authority import EvidenceAuthority\n        from omegadata.identity_repository import PersistentRepository\n        if case=='pinned-tamper':\n            p=tmp_path/'canary.json';p.write_text('{}')\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,'0'*64)\n            return\n        if case=='unowned-database':\n            from sqlalchemy import create_engine,text\n            p=tmp_path/'legacy.sqlite';engine=create_engine('sqlite:///'+str(p))\n            with engine.begin() as conn:conn.execute(text('CREATE TABLE unrelated_canary (id INTEGER)'))\n            engine.dispose()\n            with pytest.raises(ValueError):PersistentRepository('sqlite:///'+str(p),disposable_root=tmp_path)\n            return\n        db=store(tmp_path,'file');r,c=seed(db)\n        if case=='authority-original-claim':\n            authority=EvidenceAuthority.unconfigured();db.authority=authority\n            seen=[];original=EvidenceAuthority.check_claim\n            def spy(self,claim,known_at,purpose='RESEARCH'):\n                seen.append(claim)\n                return original(self,claim,known_at,purpose)\n            monkeypatch.setattr(EvidenceAuthority,'check_claim',spy)\n            b=replace(c,claim_id='b',known_from=K+timedelta(days=1),supersedes_claim_id='claim-a',symbol='TOKEN-B')\n            db.append_identity_correction(b)\n            db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K)\n            assert seen==[c]  # Authority digest must bind original stored bytes, not derived closure.\n        elif case=='event-idempotent':\n            m,e,_,_=system();ev=m.LifecycleEvent('ev','LISTING',('listing-a',),e)\n>           db.append_event(ev);db.append_event(ev,idempotent=True)\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od06_foundation.py:238: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/identity_repository.py:262: in append_event\n    validate_events((*old,value))\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nevents = (LifecycleEvent(event_id='ev', event_type='LISTING', affected_identity_ids=('listing-a',), evidence=Evidence(evidence_...persedes_event_id=None, validation_status='UNVERIFIED', continuity_review_reference=None, version='od06.lifecycle/v1'))\n\n    def validate_events(events: tuple[LifecycleEvent, ...]) -> tuple[LifecycleEvent, ...]:\n        by_id = {e.event_id: e for e in events}\n        if len(by_id) != len(events):\n>           raise ValueError('DUPLICATE_EVENT')\nE           ValueError: DUPLICATE_EVENT\n\nsrc/omegadata/identity.py:314: ValueError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[bad-hash]",
+      "test_source_sha256": "b9c743e012de5d5a1eeffb3cb5d2fa6c7244f58cea499133ad2055b6eb93d882",
+      "command": "logs/foundation-b9b2c4c09f-command.json",
+      "start_utc": "2026-11-18T13:24:30.068600+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_pinned_authority_refusals10')\nattack = 'bad-hash'\n\n    @pytest.mark.parametrize('attack',['untrusted','revoked','superseded','missing-id','source-mismatch',\n        'wrong-purpose','unknown-time','future-review','duplicate-review','canary','bad-hash','pending-rights'])\n    def test_pinned_authority_refusals(tmp_path,attack):\n        \"\"\"Hostile metadata labels, never an actual publisher approval or market row.\"\"\"\n        import hashlib\n        import json\n        from omegadata.identity_authority import EvidenceAuthority,claim_digest\n        _,_,_,c=system()\n        source={'source_key':'NSE_EQUITY_BHAVCOPY','artifact_sha256':'a'*64,\n            'publisher_identity':'FORGED_NON_MARKET_CANARY','document_version':'canary-v1',\n            'authentication':'VERIFIED','available_at':K.isoformat()}\n        review={'reviewer_id':'FORGED_NON_MARKET_CANARY','attestation_identity':'canary-review','reviewed_at':K.isoformat()}\n        record={'evidence_id':'test','classification':'AUTHENTIC_SOURCE','claim_sha256':claim_digest(c),\n                'source_record':source,'reviewer_attestation':review}\n        if attack=='revoked':record['revoked']=True\n        if attack=='superseded':record['superseded']=True\n        if attack=='unknown-time':source['available_at']=None\n        if attack=='future-review':review['reviewed_at']=(K+timedelta(days=1)).isoformat()\n        if attack=='canary':record['classification']='NON_MARKET_CANARY'\n        if attack=='bad-hash':source['artifact_sha256']='not-a-sha'\n        rows=[record,record] if attack=='duplicate-review' else [record]\n        raw=json.dumps({'schema_version':'od06.authority/v1','records':rows}).encode()\n        p=tmp_path/'hostile-metadata.json';p.write_bytes(raw)\n        if attack=='duplicate-review':\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,hashlib.sha256(raw).hexdigest())\n            return\n        authority=EvidenceAuthority.from_pinned_bundle(p,hashlib.sha256(raw).hexdigest())\n        supplied=dict(source)\n        if attack=='source-mismatch':supplied['source_key']='OTHER'\n        decision=authority.verify_identity_evidence('missing' if attack=='missing-id' else 'test',supplied,review,\n            'UNSUPPORTED' if attack=='wrong-purpose' else 'RESEARCH',K,claim_digest(c))\n        assert not decision.allowed and not decision.financial_eligible\n        if attack=='pending-rights':assert decision.reason=='SOURCE_RIGHTS_BLOCKED:POLICY_PENDING'\n>       if attack=='bad-hash':assert decision.reason=='PROVENANCE_INCOMPLETE'\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError: assert 'SOURCE_RIGHT...OLICY_PENDING' == 'PROVENANCE_INCOMPLETE'\nE         \nE         - PROVENANCE_INCOMPLETE\nE         + SOURCE_RIGHTS_BLOCKED:POLICY_PENDING\n\ntests/unit/test_od06_foundation.py:311: AssertionError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_unknown_membership_no_inferred_query",
+      "test_source_sha256": "0ce07f0671521616ce9173da46daf67ac482e451d9b93382e6c217c143fbd0e3",
+      "command": "logs/foundation-de5787b2ce-command.json",
+      "start_utc": "2026-11-18T13:26:12.636079+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_unknown_membership_no_inf0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x71e1ef6af6b0>\n\n    def test_unknown_membership_no_inferred_query(tmp_path,monkeypatch):\n        from omegadata import identity_repository as module\n        from omegadata.identity_adapters import MembershipClaim\n        db=store(tmp_path,'file');_,c=seed(db)\n        def forbidden(*args,**kwargs):raise AssertionError('INFERRED_QUERY_TIME')\n        monkeypatch.setattr(module,'strict_universe',forbidden)\n        member=MembershipClaim('unknown','INDEX_CANARY','TOKEN','SERIES','CANARY-X',D,None,None,None,c.evidence)\n>       db.append_membership(member)\n\ntests/unit/test_od06_foundation.py:321: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/identity_repository.py:294: in append_membership\n    strict_universe((*old,value),self._snapshot(conn),value.index_name,value.valid_from,\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nargs = ((MembershipClaim(membership_id='unknown', index_name='INDEX_CANARY', symbol='TOKEN', series='SERIES', exchange='CANAR...Y', datetime.date(2001, 1, 1), datetime.datetime(1900, 1, 1, 0, 0, tzinfo=zoneinfo.ZoneInfo(key='UTC')), 'CANARY_ONLY')\nkwargs = {}\n\n>   def forbidden(*args,**kwargs):raise AssertionError('INFERRED_QUERY_TIME')\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: INFERRED_QUERY_TIME\n\ntests/unit/test_od06_foundation.py:318: AssertionError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_shared_database_worker_contract",
+      "test_source_sha256": "0ce07f0671521616ce9173da46daf67ac482e451d9b93382e6c217c143fbd0e3",
+      "command": "logs/foundation-de5787b2ce-command.json",
+      "start_utc": "2026-11-18T13:26:12.636079+00:00",
+      "reason": "def test_shared_database_worker_contract():\n>       from od06_database_experiments import shared_contract\nE       ModuleNotFoundError: No module named 'od06_database_experiments'\n\ntests/unit/test_od06_foundation.py:326: ModuleNotFoundError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_final_semantic_refusals[unknown-lifecycle]",
+      "test_source_sha256": "0550170ab0a095cd5c3f876297a5e685425713aae2a729f933d05769f4dd181a",
+      "command": "logs/foundation-b4573d93e8-command.json",
+      "start_utc": "2026-11-18T13:30:57.926789+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_final_semantic_refusals_u0')\ncase = 'unknown-lifecycle'\n\n    @pytest.mark.parametrize('case',['unknown-lifecycle','calendar-version'])\n    def test_final_semantic_refusals(tmp_path,case):\n        if case=='unknown-lifecycle':\n            db=store(tmp_path,'file');_,c=seed(db);m,e,_,_=system()\n            db.append_event(m.LifecycleEvent('unknown-event','SUSPENSION',('listing-a',),e,effective_at=K))\n>           assert db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K,'CANARY_ONLY').state=='QUARANTINED'\nE           AssertionError: assert 'RESOLVED' == 'QUARANTINED'\nE             \nE             - QUARANTINED\nE             + RESOLVED\n\ntests/unit/test_od06_foundation.py:334: AssertionError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_final_semantic_refusals[calendar-version]",
+      "test_source_sha256": "0550170ab0a095cd5c3f876297a5e685425713aae2a729f933d05769f4dd181a",
+      "command": "logs/foundation-b4573d93e8-command.json",
+      "start_utc": "2026-11-18T13:30:57.926789+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_final_semantic_refusals_c0')\ncase = 'calendar-version'\n\n    @pytest.mark.parametrize('case',['unknown-lifecycle','calendar-version'])\n    def test_final_semantic_refusals(tmp_path,case):\n        if case=='unknown-lifecycle':\n            db=store(tmp_path,'file');_,c=seed(db);m,e,_,_=system()\n            db.append_event(m.LifecycleEvent('unknown-event','SUSPENSION',('listing-a',),e,effective_at=K))\n            assert db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K,'CANARY_ONLY').state=='QUARANTINED'\n            db.close()\n        else:\n            cm,sc,cal=calendar_system()\n            other=replace(sc,claim_id='v2',calendar_version='canary-v2',session_type='CLOSED')\n            cal=replace(cal,claims=(sc,other))\n>           assert cal.query('CANARY-X',D,K,'CANARY_ONLY',calendar_version='canary-v1').status=='AUTHORITATIVE_SESSION'\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           TypeError: VerifiedCalendar.query() got an unexpected keyword argument 'calendar_version'\n\ntests/unit/test_od06_foundation.py:340: TypeError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_shared_database_worker_contract",
+      "test_source_sha256": "6d81beaef3315a09721b2c8a82c7d4e081f153210ef30fb858a2e869fcfe11a1",
+      "command": "logs/foundation-bb89c97454-command.json",
+      "start_utc": "2026-11-18T13:33:23.896795+00:00",
+      "reason": "def test_shared_database_worker_contract():\n>       from od06_database_experiments import shared_contract\nE         File \"/work/repo/scripts/od06_database_experiments.py\", line 105\nE           except ValueError:\nE           ^^^^^^\nE       SyntaxError: invalid syntax\n\ntests/unit/test_od06_foundation.py:654: SyntaxError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_failed_experiment_stages[failed-init]",
+      "test_source_sha256": "e741cd9e2c014fe0bd056a4f34b00ca9a0a82d7e7cff845e6cde692096eee837",
+      "command": "logs/foundation-e2428b0e3e-command.json",
+      "start_utc": "2026-11-18T13:36:55.215660+00:00",
+      "reason": "case = 'failed-init'\n\n    @pytest.mark.parametrize('case',['failed-init','unproved-crash'])\n    def test_failed_experiment_stages(case):\n>       from od06_database_experiments import experiment_stage_accepted\nE       ImportError: cannot import name 'experiment_stage_accepted' from 'od06_database_experiments' (/work/repo/scripts/od06_database_experiments.py)\n\ntests/unit/test_od06_foundation.py:692: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_failed_experiment_stages[unproved-crash]",
+      "test_source_sha256": "e741cd9e2c014fe0bd056a4f34b00ca9a0a82d7e7cff845e6cde692096eee837",
+      "command": "logs/foundation-e2428b0e3e-command.json",
+      "start_utc": "2026-11-18T13:36:55.215660+00:00",
+      "reason": "case = 'unproved-crash'\n\n    @pytest.mark.parametrize('case',['failed-init','unproved-crash'])\n    def test_failed_experiment_stages(case):\n>       from od06_database_experiments import experiment_stage_accepted\nE       ImportError: cannot import name 'experiment_stage_accepted' from 'od06_database_experiments' (/work/repo/scripts/od06_database_experiments.py)\n\ntests/unit/test_od06_foundation.py:692: ImportError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_unreviewed_anchor_never_grants_financial_eligibility",
+      "test_source_sha256": "16b90d0fe413c894d195cb94f5c18108595cb6a4c793b5b3aecfcc815b45353b",
+      "command": "logs/foundation-55ec6dde4b-command.json",
+      "start_utc": "2026-11-18T13:40:33.492793+00:00",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_unreviewed_anchor_never_g0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77f6179733e0>\n\n    def test_unreviewed_anchor_never_grants_financial_eligibility(tmp_path,monkeypatch):\n        \"\"\"Mock only the rights oracle to isolate authenticity; no policy entry/grant exists.\"\"\"\n        import hashlib\n        import json\n        from types import SimpleNamespace\n        from omegadata import identity_authority as authority_module\n        _,_,_,claim=system()\n        source={'source_key':'NSE_EQUITY_BHAVCOPY','artifact_sha256':'a'*64,\n            'publisher_identity':'FORGED_NON_MARKET_CANARY','document_version':'canary-v1',\n            'authentication':'VERIFIED','available_at':K.isoformat()}\n        review={'reviewer_id':'FORGED_NON_MARKET_CANARY','attestation_identity':'forged','reviewed_at':K.isoformat()}\n        raw=json.dumps({'schema_version':'od06.authority/v1','records':[{'evidence_id':'forged',\n            'classification':'AUTHENTIC_SOURCE','source_record':source,'reviewer_attestation':review,\n            'claim_sha256':authority_module.claim_digest(claim)}]}).encode()\n        p=tmp_path/'hostile-authority.json';p.write_bytes(raw)\n        authority=authority_module.EvidenceAuthority.from_pinned_bundle(p,hashlib.sha256(raw).hexdigest())\n        monkeypatch.setattr(authority_module,'authorize_source',lambda request:SimpleNamespace(allowed=True))\n        result=authority.verify_identity_evidence('forged',source,review,'RESEARCH',K,authority_module.claim_digest(claim))\n>       assert not result.allowed and not result.financial_eligible\nE       AssertionError: assert (not True)\nE        +  where True = AuthorityDecision(allowed=True, reason='VERIFIED_BY_PINNED_AUTHORITY_AND_SOURCE_POLICY', evidence_id='forged', anchor_sha256='82be0b89449cbd11b64c3cc59b53f97e41c1b579acee91c275efba4b2680279c').allowed\n\ntests/unit/test_od06_foundation.py:719: AssertionError",
+      "final_result": "PASS",
+      "final_log": "logs/foundation-a0d9fa67a0-command.json"
+    }
+  ],
+  "contracts": [
+    "Half-open valid/known intervals; missing knowledge quarantines",
+    "A-B-C and reversal preserve historical as-known states",
+    "Same-time/competing/unrelated/missing-parent corrections refuse",
+    "Conflict/ambiguity/source blocking explicit; no active-only filtering",
+    "Unknown lifecycle availability quarantines; lifecycle contradictions refuse",
+    "Merger/demerger cannot auto-merge identities"
+  ],
+  "coverage": {
+    "foundation": {
+      "totals": {
+        "covered_lines": 1571,
+        "num_statements": 8046,
+        "percent_covered": 17.475545522949584,
+        "percent_covered_display": "17",
+        "missing_lines": 6475,
+        "excluded_lines": 11,
+        "percent_statements_covered": 19.52522992791449,
+        "percent_statements_covered_display": "20",
+        "num_branches": 2586,
+        "num_partial_branches": 115,
+        "covered_branches": 287,
+        "missing_branches": 2299,
+        "percent_branches_covered": 11.098221191028616,
+        "percent_branches_covered_display": "11"
+      },
+      "foundation_components": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 202,
+          "num_statements": 251,
+          "percent_covered": 73.6986301369863,
+          "percent_covered_display": "74",
+          "missing_lines": 49,
+          "excluded_lines": 11,
+          "percent_statements_covered": 80.4780876494024,
+          "percent_statements_covered_display": "80",
+          "num_branches": 114,
+          "num_partial_branches": 39,
+          "covered_branches": 67,
+          "missing_branches": 47,
+          "percent_branches_covered": 58.771929824561404,
+          "percent_branches_covered_display": "59"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 120,
+          "num_statements": 151,
+          "percent_covered": 74.60317460317461,
+          "percent_covered_display": "75",
+          "missing_lines": 31,
+          "excluded_lines": 0,
+          "percent_statements_covered": 79.47019867549669,
+          "percent_statements_covered_display": "79",
+          "num_branches": 38,
+          "num_partial_branches": 7,
+          "covered_branches": 21,
+          "missing_branches": 17,
+          "percent_branches_covered": 55.26315789473684,
+          "percent_branches_covered_display": "55"
+        },
+        "src/omegadata/identity_authority.py": {
+          "covered_lines": 116,
+          "num_statements": 139,
+          "percent_covered": 80.0,
+          "percent_covered_display": "80",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 83.45323741007195,
+          "percent_statements_covered_display": "83",
+          "num_branches": 66,
+          "num_partial_branches": 14,
+          "covered_branches": 48,
+          "missing_branches": 18,
+          "percent_branches_covered": 72.72727272727273,
+          "percent_branches_covered_display": "73"
+        },
+        "src/omegadata/identity_repository.py": {
+          "covered_lines": 266,
+          "num_statements": 279,
+          "percent_covered": 92.34828496042216,
+          "percent_covered_display": "92",
+          "missing_lines": 13,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.3405017921147,
+          "percent_statements_covered_display": "95",
+          "num_branches": 100,
+          "num_partial_branches": 16,
+          "covered_branches": 84,
+          "missing_branches": 16,
+          "percent_branches_covered": 84.0,
+          "percent_branches_covered_display": "84"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 122,
+          "num_statements": 169,
+          "percent_covered": 65.33864541832669,
+          "percent_covered_display": "65",
+          "missing_lines": 47,
+          "excluded_lines": 0,
+          "percent_statements_covered": 72.18934911242603,
+          "percent_statements_covered_display": "72",
+          "num_branches": 82,
+          "num_partial_branches": 20,
+          "covered_branches": 42,
+          "missing_branches": 40,
+          "percent_branches_covered": 51.21951219512195,
+          "percent_branches_covered_display": "51"
+        }
+      }
+    },
+    "A": {
+      "totals": {
+        "covered_lines": 6922,
+        "num_statements": 8046,
+        "percent_covered": 82.43039879608729,
+        "percent_covered_display": "82",
+        "missing_lines": 1124,
+        "excluded_lines": 11,
+        "percent_statements_covered": 86.03032562764106,
+        "percent_statements_covered_display": "86",
+        "num_branches": 2586,
+        "num_partial_branches": 486,
+        "covered_branches": 1842,
+        "missing_branches": 744,
+        "percent_branches_covered": 71.22969837587007,
+        "percent_branches_covered_display": "71"
+      },
+      "foundation_components": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 226,
+          "num_statements": 251,
+          "percent_covered": 86.02739726027397,
+          "percent_covered_display": "86",
+          "missing_lines": 25,
+          "excluded_lines": 11,
+          "percent_statements_covered": 90.0398406374502,
+          "percent_statements_covered_display": "90",
+          "num_branches": 114,
+          "num_partial_branches": 24,
+          "covered_branches": 88,
+          "missing_branches": 26,
+          "percent_branches_covered": 77.19298245614036,
+          "percent_branches_covered_display": "77"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 144,
+          "num_statements": 151,
+          "percent_covered": 92.5925925925926,
+          "percent_covered_display": "93",
+          "missing_lines": 7,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.36423841059603,
+          "percent_statements_covered_display": "95",
+          "num_branches": 38,
+          "num_partial_branches": 7,
+          "covered_branches": 31,
+          "missing_branches": 7,
+          "percent_branches_covered": 81.57894736842105,
+          "percent_branches_covered_display": "82"
+        },
+        "src/omegadata/identity_authority.py": {
+          "covered_lines": 116,
+          "num_statements": 139,
+          "percent_covered": 80.0,
+          "percent_covered_display": "80",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 83.45323741007195,
+          "percent_statements_covered_display": "83",
+          "num_branches": 66,
+          "num_partial_branches": 14,
+          "covered_branches": 48,
+          "missing_branches": 18,
+          "percent_branches_covered": 72.72727272727273,
+          "percent_branches_covered_display": "73"
+        },
+        "src/omegadata/identity_repository.py": {
+          "covered_lines": 266,
+          "num_statements": 279,
+          "percent_covered": 92.34828496042216,
+          "percent_covered_display": "92",
+          "missing_lines": 13,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.3405017921147,
+          "percent_statements_covered_display": "95",
+          "num_branches": 100,
+          "num_partial_branches": 16,
+          "covered_branches": 84,
+          "missing_branches": 16,
+          "percent_branches_covered": 84.0,
+          "percent_branches_covered_display": "84"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 149,
+          "num_statements": 169,
+          "percent_covered": 84.4621513944223,
+          "percent_covered_display": "84",
+          "missing_lines": 20,
+          "excluded_lines": 0,
+          "percent_statements_covered": 88.16568047337279,
+          "percent_statements_covered_display": "88",
+          "num_branches": 82,
+          "num_partial_branches": 17,
+          "covered_branches": 63,
+          "missing_branches": 19,
+          "percent_branches_covered": 76.82926829268293,
+          "percent_branches_covered_display": "77"
+        }
+      }
+    }
+  }
+}

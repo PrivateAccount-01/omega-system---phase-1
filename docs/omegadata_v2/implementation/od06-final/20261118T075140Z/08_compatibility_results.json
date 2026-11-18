@@ -1,0 +1,140 @@
+{
+  "consumer_inventory": "support/complete-consumer-inventory-final.json",
+  "existing_tests_unchanged": true,
+  "legacy_models_and_calls_unchanged": true,
+  "final_A": {
+    "command_id": "A-8e3307ea4a-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/A-8e3307ea4a-manifest.json",
+      "--manifest-sha256",
+      "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+      "--policy",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/A-8e3307ea4a-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/A-8e3307ea4a/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+    "platform": "Ubuntu WSL Linux native data-free snapshot",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+    "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+    "start_utc": "2026-11-18T13:42:11.486855+00:00",
+    "end_utc": "2026-11-18T13:43:16.242307+00:00",
+    "elapsed_seconds": 63.54008145199998,
+    "exit_code": 0,
+    "counts": {
+      "passed": 997,
+      "skipped": 12
+    },
+    "deselected": [],
+    "stdout_stderr_log": "logs/A-8e3307ea4a-command.json"
+  },
+  "old_OD06": {
+    "command_id": "od06-e6577b9b20-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/od06-e6577b9b20-manifest.json",
+      "--manifest-sha256",
+      "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "--policy",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/od06-e6577b9b20-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/od06-e6577b9b20/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+    "platform": "Ubuntu WSL Linux native data-free snapshot",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+    "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+    "start_utc": "2026-11-18T13:41:54.232274+00:00",
+    "end_utc": "2026-11-18T13:41:59.286310+00:00",
+    "elapsed_seconds": 5.0540358329999435,
+    "exit_code": 0,
+    "counts": {
+      "passed": 66
+    },
+    "deselected": null,
+    "stdout_stderr_log": "logs/od06-e6577b9b20-command.json"
+  },
+  "parser": {
+    "command_id": "parser-c7874c6229-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/parser-c7874c6229-manifest.json",
+      "--manifest-sha256",
+      "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "--policy",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/parser-c7874c6229-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/parser-c7874c6229/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+    "platform": "Ubuntu WSL Linux native data-free snapshot",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+    "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+    "start_utc": "2026-11-18T13:41:59.420290+00:00",
+    "end_utc": "2026-11-18T13:42:04.967503+00:00",
+    "elapsed_seconds": 5.54721709699993,
+    "exit_code": 0,
+    "counts": {
+      "passed": 170,
+      "skipped": 1
+    },
+    "deselected": null,
+    "stdout_stderr_log": "logs/parser-c7874c6229-command.json"
+  },
+  "V_W_X_R1_in_final_A": {
+    "test_od05v_local_presence.py": {
+      "passed": 40,
+      "skipped": 1
+    },
+    "test_od05w_engineering.py": {
+      "passed": 39
+    },
+    "test_od05x_isolation.py": {
+      "passed": 29
+    },
+    "test_od05x_native_extensions.py": {
+      "passed": 4
+    },
+    "test_od05xr1_windows_contract.py": {
+      "passed": 33,
+      "skipped": 7
+    }
+  },
+  "compatibility_changes": [
+    {
+      "interface": "STRICT evidence resolution",
+      "before": "Caller labels could qualify",
+      "after": "Owner-root and source-policy verified evidence required",
+      "impact": "Intentional fail-closed opt-in correction",
+      "rollback": "Revert only data-free code, never promote old insecure authority"
+    },
+    {
+      "interface": "Financial flags",
+      "before": "Writable dataclass constructor fields",
+      "after": "Init-disabled derived results",
+      "impact": "Explicit manual flag setting now refuses"
+    },
+    {
+      "interface": "Repository/calendar/universe persistence",
+      "before": "Memory-only contracts",
+      "after": "Additive disposable SQLAlchemy repository, optional calendar-version query and membership corrections",
+      "impact": "Legacy production ORM/callers unchanged"
+    }
+  ]
+}

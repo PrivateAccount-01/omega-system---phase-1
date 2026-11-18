@@ -1,0 +1,1177 @@
+{
+  "reviewed_HEAD": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+  "collected": 1017,
+  "classes": {
+    "C": 4,
+    "A": 1009,
+    "B": 4
+  },
+  "final_commands": {
+    "foundation": {
+      "command_id": "foundation-a0d9fa67a0-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-manifest.json",
+        "--manifest-sha256",
+        "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/foundation-a0d9fa67a0/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "start_utc": "2026-11-18T13:41:46.164323+00:00",
+      "end_utc": "2026-11-18T13:41:54.087790+00:00",
+      "elapsed_seconds": 7.423315350000053,
+      "exit_code": 0,
+      "counts": {
+        "passed": 87
+      },
+      "deselected": null,
+      "stdout_stderr_log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    "od06": {
+      "command_id": "od06-e6577b9b20-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/od06-e6577b9b20-manifest.json",
+        "--manifest-sha256",
+        "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/od06-e6577b9b20-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/od06-e6577b9b20/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "start_utc": "2026-11-18T13:41:54.232274+00:00",
+      "end_utc": "2026-11-18T13:41:59.286310+00:00",
+      "elapsed_seconds": 5.0540358329999435,
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "deselected": null,
+      "stdout_stderr_log": "logs/od06-e6577b9b20-command.json"
+    },
+    "parser": {
+      "command_id": "parser-c7874c6229-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/parser-c7874c6229-manifest.json",
+        "--manifest-sha256",
+        "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/parser-c7874c6229-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/parser-c7874c6229/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "start_utc": "2026-11-18T13:41:59.420290+00:00",
+      "end_utc": "2026-11-18T13:42:04.967503+00:00",
+      "elapsed_seconds": 5.54721709699993,
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "deselected": null,
+      "stdout_stderr_log": "logs/parser-c7874c6229-command.json"
+    },
+    "collection": {
+      "command_id": "collection-4c961fdc62-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/collection-4c961fdc62-manifest.json",
+        "--manifest-sha256",
+        "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/collection-4c961fdc62-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/collection-4c961fdc62/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "start_utc": "2026-11-18T13:42:05.079438+00:00",
+      "end_utc": "2026-11-18T13:42:11.359053+00:00",
+      "elapsed_seconds": 6.2796095740000055,
+      "exit_code": 0,
+      "counts": {},
+      "deselected": [],
+      "stdout_stderr_log": "logs/collection-4c961fdc62-command.json"
+    },
+    "A": {
+      "command_id": "A-8e3307ea4a-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/A-8e3307ea4a-manifest.json",
+        "--manifest-sha256",
+        "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/A-8e3307ea4a-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/A-8e3307ea4a/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+      "start_utc": "2026-11-18T13:42:11.486855+00:00",
+      "end_utc": "2026-11-18T13:43:16.242307+00:00",
+      "elapsed_seconds": 63.54008145199998,
+      "exit_code": 0,
+      "counts": {
+        "passed": 997,
+        "skipped": 12
+      },
+      "deselected": [],
+      "stdout_stderr_log": "logs/A-8e3307ea4a-command.json"
+    },
+    "mypy": {
+      "command_id": "mypy-7be98de301-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/mypy-7be98de301-manifest.json",
+        "--manifest-sha256",
+        "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/mypy-7be98de301-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/mypy-7be98de301/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+      "start_utc": "2026-11-18T13:44:19.502073+00:00",
+      "end_utc": "2026-11-18T13:44:39.825502+00:00",
+      "elapsed_seconds": 19.61656635199995,
+      "exit_code": 0,
+      "counts": {},
+      "deselected": [],
+      "stdout_stderr_log": "logs/mypy-7be98de301-command.json"
+    },
+    "pip": {
+      "command_id": "pip-f7642d074c-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/pip-f7642d074c-manifest.json",
+        "--manifest-sha256",
+        "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/pip-f7642d074c-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/pip-f7642d074c/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+      "start_utc": "2026-11-18T13:44:39.949927+00:00",
+      "end_utc": "2026-11-18T13:44:43.262945+00:00",
+      "elapsed_seconds": 3.313014294000027,
+      "exit_code": 0,
+      "counts": {},
+      "deselected": [],
+      "stdout_stderr_log": "logs/pip-f7642d074c-command.json"
+    },
+    "compile": {
+      "command_id": "compile-2037cbf3f2-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/compile-2037cbf3f2-manifest.json",
+        "--manifest-sha256",
+        "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/compile-2037cbf3f2-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/compile-2037cbf3f2/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+      "start_utc": "2026-11-18T13:44:43.376056+00:00",
+      "end_utc": "2026-11-18T13:44:46.134668+00:00",
+      "elapsed_seconds": 2.758609555000021,
+      "exit_code": 0,
+      "counts": {},
+      "deselected": [],
+      "stdout_stderr_log": "logs/compile-2037cbf3f2-command.json"
+    },
+    "foundationperf": {
+      "command_id": "foundationperf-0946c10ec9-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundationperf-0946c10ec9-manifest.json",
+        "--manifest-sha256",
+        "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundationperf-0946c10ec9-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/foundationperf-0946c10ec9/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+      "start_utc": "2026-11-18T13:44:46.243678+00:00",
+      "end_utc": "2026-11-18T13:44:52.216330+00:00",
+      "elapsed_seconds": 5.97263762700004,
+      "exit_code": 0,
+      "counts": {},
+      "deselected": null,
+      "stdout_stderr_log": "logs/foundationperf-0946c10ec9-command.json"
+    },
+    "diagnostic": {
+      "command_id": "diagnostic-b3f3dc4c72-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/diagnostic-b3f3dc4c72-manifest.json",
+        "--manifest-sha256",
+        "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+        "--policy",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/diagnostic-b3f3dc4c72-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od06-final-20261118T075140Z/diagnostic-b3f3dc4c72/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+      "platform": "Ubuntu WSL Linux native data-free snapshot",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+      "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+      "start_utc": "2026-11-18T13:43:16.370699+00:00",
+      "end_utc": "2026-11-18T13:44:19.384859+00:00",
+      "elapsed_seconds": 61.70660695999993,
+      "exit_code": 1,
+      "counts": {
+        "passed": 997,
+        "failed": 4,
+        "skipped": 12
+      },
+      "deselected": [
+        "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+        "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+        "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+        "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+      ],
+      "stdout_stderr_log": "logs/diagnostic-b3f3dc4c72-command.json"
+    }
+  },
+  "ruff": {
+    "argv": [
+      "/usr/bin/bwrap",
+      "--unshare-all",
+      "--die-with-parent",
+      "--new-session",
+      "--cap-drop",
+      "ALL",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--symlink",
+      "usr/lib",
+      "/lib",
+      "--symlink",
+      "usr/lib64",
+      "/lib64",
+      "--ro-bind",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--tmpfs",
+      "/tmp",
+      "--ro-bind",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/src",
+      "/repo/src",
+      "--ro-bind",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts",
+      "/repo/scripts",
+      "--ro-bind",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/tests",
+      "/repo/tests",
+      "--ro-bind",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/pyproject.toml",
+      "/repo/pyproject.toml",
+      "--chdir",
+      "/repo",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "scripts",
+      "tests"
+    ],
+    "start_utc": "2026-11-18T13:41:24.696541+00:00",
+    "end_utc": "2026-11-18T13:41:24.731937+00:00",
+    "elapsed_seconds": 0.035387280000009014,
+    "exit_code": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": "",
+    "scope": "STATIC_ONLY read-only data-free source mounts, no original mount; does not certify child execution policy"
+  },
+  "coverage": {
+    "foundation": {
+      "totals": {
+        "covered_lines": 1571,
+        "num_statements": 8046,
+        "percent_covered": 17.475545522949584,
+        "percent_covered_display": "17",
+        "missing_lines": 6475,
+        "excluded_lines": 11,
+        "percent_statements_covered": 19.52522992791449,
+        "percent_statements_covered_display": "20",
+        "num_branches": 2586,
+        "num_partial_branches": 115,
+        "covered_branches": 287,
+        "missing_branches": 2299,
+        "percent_branches_covered": 11.098221191028616,
+        "percent_branches_covered_display": "11"
+      },
+      "foundation_components": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 202,
+          "num_statements": 251,
+          "percent_covered": 73.6986301369863,
+          "percent_covered_display": "74",
+          "missing_lines": 49,
+          "excluded_lines": 11,
+          "percent_statements_covered": 80.4780876494024,
+          "percent_statements_covered_display": "80",
+          "num_branches": 114,
+          "num_partial_branches": 39,
+          "covered_branches": 67,
+          "missing_branches": 47,
+          "percent_branches_covered": 58.771929824561404,
+          "percent_branches_covered_display": "59"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 120,
+          "num_statements": 151,
+          "percent_covered": 74.60317460317461,
+          "percent_covered_display": "75",
+          "missing_lines": 31,
+          "excluded_lines": 0,
+          "percent_statements_covered": 79.47019867549669,
+          "percent_statements_covered_display": "79",
+          "num_branches": 38,
+          "num_partial_branches": 7,
+          "covered_branches": 21,
+          "missing_branches": 17,
+          "percent_branches_covered": 55.26315789473684,
+          "percent_branches_covered_display": "55"
+        },
+        "src/omegadata/identity_authority.py": {
+          "covered_lines": 116,
+          "num_statements": 139,
+          "percent_covered": 80.0,
+          "percent_covered_display": "80",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 83.45323741007195,
+          "percent_statements_covered_display": "83",
+          "num_branches": 66,
+          "num_partial_branches": 14,
+          "covered_branches": 48,
+          "missing_branches": 18,
+          "percent_branches_covered": 72.72727272727273,
+          "percent_branches_covered_display": "73"
+        },
+        "src/omegadata/identity_repository.py": {
+          "covered_lines": 266,
+          "num_statements": 279,
+          "percent_covered": 92.34828496042216,
+          "percent_covered_display": "92",
+          "missing_lines": 13,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.3405017921147,
+          "percent_statements_covered_display": "95",
+          "num_branches": 100,
+          "num_partial_branches": 16,
+          "covered_branches": 84,
+          "missing_branches": 16,
+          "percent_branches_covered": 84.0,
+          "percent_branches_covered_display": "84"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 122,
+          "num_statements": 169,
+          "percent_covered": 65.33864541832669,
+          "percent_covered_display": "65",
+          "missing_lines": 47,
+          "excluded_lines": 0,
+          "percent_statements_covered": 72.18934911242603,
+          "percent_statements_covered_display": "72",
+          "num_branches": 82,
+          "num_partial_branches": 20,
+          "covered_branches": 42,
+          "missing_branches": 40,
+          "percent_branches_covered": 51.21951219512195,
+          "percent_branches_covered_display": "51"
+        }
+      }
+    },
+    "A": {
+      "totals": {
+        "covered_lines": 6922,
+        "num_statements": 8046,
+        "percent_covered": 82.43039879608729,
+        "percent_covered_display": "82",
+        "missing_lines": 1124,
+        "excluded_lines": 11,
+        "percent_statements_covered": 86.03032562764106,
+        "percent_statements_covered_display": "86",
+        "num_branches": 2586,
+        "num_partial_branches": 486,
+        "covered_branches": 1842,
+        "missing_branches": 744,
+        "percent_branches_covered": 71.22969837587007,
+        "percent_branches_covered_display": "71"
+      },
+      "foundation_components": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 226,
+          "num_statements": 251,
+          "percent_covered": 86.02739726027397,
+          "percent_covered_display": "86",
+          "missing_lines": 25,
+          "excluded_lines": 11,
+          "percent_statements_covered": 90.0398406374502,
+          "percent_statements_covered_display": "90",
+          "num_branches": 114,
+          "num_partial_branches": 24,
+          "covered_branches": 88,
+          "missing_branches": 26,
+          "percent_branches_covered": 77.19298245614036,
+          "percent_branches_covered_display": "77"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 144,
+          "num_statements": 151,
+          "percent_covered": 92.5925925925926,
+          "percent_covered_display": "93",
+          "missing_lines": 7,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.36423841059603,
+          "percent_statements_covered_display": "95",
+          "num_branches": 38,
+          "num_partial_branches": 7,
+          "covered_branches": 31,
+          "missing_branches": 7,
+          "percent_branches_covered": 81.57894736842105,
+          "percent_branches_covered_display": "82"
+        },
+        "src/omegadata/identity_authority.py": {
+          "covered_lines": 116,
+          "num_statements": 139,
+          "percent_covered": 80.0,
+          "percent_covered_display": "80",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 83.45323741007195,
+          "percent_statements_covered_display": "83",
+          "num_branches": 66,
+          "num_partial_branches": 14,
+          "covered_branches": 48,
+          "missing_branches": 18,
+          "percent_branches_covered": 72.72727272727273,
+          "percent_branches_covered_display": "73"
+        },
+        "src/omegadata/identity_repository.py": {
+          "covered_lines": 266,
+          "num_statements": 279,
+          "percent_covered": 92.34828496042216,
+          "percent_covered_display": "92",
+          "missing_lines": 13,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.3405017921147,
+          "percent_statements_covered_display": "95",
+          "num_branches": 100,
+          "num_partial_branches": 16,
+          "covered_branches": 84,
+          "missing_branches": 16,
+          "percent_branches_covered": 84.0,
+          "percent_branches_covered_display": "84"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 149,
+          "num_statements": 169,
+          "percent_covered": 84.4621513944223,
+          "percent_covered_display": "84",
+          "missing_lines": 20,
+          "excluded_lines": 0,
+          "percent_statements_covered": 88.16568047337279,
+          "percent_statements_covered_display": "88",
+          "num_branches": 82,
+          "num_partial_branches": 17,
+          "covered_branches": 63,
+          "missing_branches": 19,
+          "percent_branches_covered": 76.82926829268293,
+          "percent_branches_covered_display": "77"
+        }
+      }
+    }
+  },
+  "A_skips": [
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[partition]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[payload_directory]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05r_reference_evidence.py', 329, 'Skipped: Windows junction; Linux file-link counterpart required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_windows_junction",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05t_archive_inventory.py', 179, 'Skipped: Windows junction; Linux directory-link counterpart required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05v_local_presence.py', 169, 'Skipped: Windows junction counterpart exercised on Windows')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN03]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN03: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN04]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN04: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN05]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN05: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN06]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN06: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN15]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN15: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN18]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN18: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN20]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN20: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    }
+  ],
+  "B_nodes": [
+    "tests/unit/test_adjustment_reference_corpus.py::test_reference_corpus_official_nse_source_pack_cases",
+    "tests/unit/test_universe_manager.py::test_seed_pack_backfill_reproduces_reference_snapshots",
+    "tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting",
+    "tests/unit/test_universe_manager.py::test_seed_pack_preserves_knowledge_vs_effective_date_semantics"
+  ],
+  "C_nodes": [
+    "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+    "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint",
+    "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date"
+  ],
+  "all_attempts": [
+    {
+      "job": "foundation",
+      "exit_code": 1,
+      "counts": {
+        "failed": 55,
+        "passed": 2
+      },
+      "log": "logs/foundation-7e4659a811-command.json"
+    },
+    {
+      "job": "od06",
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "log": "logs/od06-d43a6f3e2f-command.json"
+    },
+    {
+      "job": "parser",
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "log": "logs/parser-225c8d736c-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 0,
+      "counts": {
+        "passed": 57
+      },
+      "log": "logs/foundation-89237ebdc2-command.json"
+    },
+    {
+      "job": "od06",
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "log": "logs/od06-6ddb0310b4-command.json"
+    },
+    {
+      "job": "mypy",
+      "exit_code": 1,
+      "counts": {},
+      "log": "logs/mypy-947aa225e0-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 1,
+      "counts": {
+        "passed": 77,
+        "failed": 3
+      },
+      "log": "logs/foundation-b9b2c4c09f-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 0,
+      "counts": {
+        "passed": 80
+      },
+      "log": "logs/foundation-377c423c96-command.json"
+    },
+    {
+      "job": "mypy",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/mypy-01b5071137-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 1,
+      "counts": {
+        "passed": 80,
+        "failed": 2
+      },
+      "log": "logs/foundation-de5787b2ce-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 0,
+      "counts": {
+        "passed": 82
+      },
+      "log": "logs/foundation-23ee96b6e6-command.json"
+    },
+    {
+      "job": "dbinit",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbinit-6091a44a55-command.json"
+    },
+    {
+      "job": "dbcrash",
+      "exit_code": 247,
+      "counts": null,
+      "log": "logs/dbcrash-dcd342db8b-command.json"
+    },
+    {
+      "job": "dbrecover",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbrecover-29488b782a-command.json"
+    },
+    {
+      "job": "dbcompete-b",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbcompete-b-1e26622a8d-command.json"
+    },
+    {
+      "job": "dbcompete-a",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbcompete-a-1d5b570a2c-command.json"
+    },
+    {
+      "job": "dbfinal",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbfinal-d206ad77b5-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 1,
+      "counts": {
+        "passed": 82,
+        "failed": 2
+      },
+      "log": "logs/foundation-b4573d93e8-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 1,
+      "counts": {
+        "passed": 83,
+        "failed": 1
+      },
+      "log": "logs/foundation-bb89c97454-command.json"
+    },
+    {
+      "job": "od06",
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "log": "logs/od06-21d816c561-command.json"
+    },
+    {
+      "job": "parser",
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "log": "logs/parser-c558c3f6bc-command.json"
+    },
+    {
+      "job": "collection",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/collection-c5c6d713e5-command.json"
+    },
+    {
+      "job": "A",
+      "exit_code": 2,
+      "counts": null,
+      "log": "logs/A-d13301bf58-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 0,
+      "counts": {
+        "passed": 84
+      },
+      "log": "logs/foundation-d4d10ca1f5-command.json"
+    },
+    {
+      "job": "od06",
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "log": "logs/od06-bde9f5c40b-command.json"
+    },
+    {
+      "job": "parser",
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "log": "logs/parser-21bc47f5f8-command.json"
+    },
+    {
+      "job": "focused",
+      "exit_code": 0,
+      "counts": {
+        "passed": 33
+      },
+      "log": "logs/focused-f570ef89ac-command.json"
+    },
+    {
+      "job": "presence",
+      "exit_code": 0,
+      "counts": {
+        "passed": 40,
+        "skipped": 1
+      },
+      "log": "logs/presence-7a77c3980b-command.json"
+    },
+    {
+      "job": "W",
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "log": "logs/W-ae48822545-command.json"
+    },
+    {
+      "job": "collection",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/collection-3a42eb8e38-command.json"
+    },
+    {
+      "job": "dbinit",
+      "exit_code": 2,
+      "counts": null,
+      "log": "logs/dbinit-27f7458cb6-command.json"
+    },
+    {
+      "job": "dbcrash",
+      "exit_code": 1,
+      "counts": null,
+      "log": "logs/dbcrash-4d2d4e7fc2-command.json"
+    },
+    {
+      "job": "dbrecover",
+      "exit_code": 1,
+      "counts": null,
+      "log": "logs/dbrecover-fee8cc085f-command.json"
+    },
+    {
+      "job": "dbcompete-a",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbcompete-a-5fecf06350-command.json"
+    },
+    {
+      "job": "dbcompete-b",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbcompete-b-1d8e2da3a3-command.json"
+    },
+    {
+      "job": "dbfinal",
+      "exit_code": 1,
+      "counts": null,
+      "log": "logs/dbfinal-8d0ece1452-command.json"
+    },
+    {
+      "job": "A",
+      "exit_code": 0,
+      "counts": {
+        "passed": 994,
+        "skipped": 12
+      },
+      "log": "logs/A-a0cf5ab866-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 1,
+      "counts": {
+        "passed": 84,
+        "failed": 2
+      },
+      "log": "logs/foundation-e2428b0e3e-command.json"
+    },
+    {
+      "job": "diagnostic",
+      "exit_code": 1,
+      "counts": {
+        "passed": 994,
+        "failed": 4,
+        "skipped": 12
+      },
+      "log": "logs/diagnostic-0ec5d896bd-command.json"
+    },
+    {
+      "job": "mypy",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/mypy-74b88b1958-command.json"
+    },
+    {
+      "job": "pip",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/pip-5027996c13-command.json"
+    },
+    {
+      "job": "compile",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/compile-aba63d1edd-command.json"
+    },
+    {
+      "job": "foundationperf",
+      "exit_code": 1,
+      "counts": null,
+      "log": "logs/foundationperf-0297922168-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 0,
+      "counts": {
+        "passed": 86
+      },
+      "log": "logs/foundation-a665e02625-command.json"
+    },
+    {
+      "job": "od06",
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "log": "logs/od06-6e92c12331-command.json"
+    },
+    {
+      "job": "parser",
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "log": "logs/parser-5d1ea5e89b-command.json"
+    },
+    {
+      "job": "collection",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/collection-07670272aa-command.json"
+    },
+    {
+      "job": "A",
+      "exit_code": 0,
+      "counts": {
+        "passed": 996,
+        "skipped": 12
+      },
+      "log": "logs/A-2403ba8fe2-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 1,
+      "counts": {
+        "passed": 86,
+        "failed": 1
+      },
+      "log": "logs/foundation-55ec6dde4b-command.json"
+    },
+    {
+      "job": "diagnostic",
+      "exit_code": 1,
+      "counts": {
+        "passed": 996,
+        "failed": 4,
+        "skipped": 12
+      },
+      "log": "logs/diagnostic-ee24f0c1a8-command.json"
+    },
+    {
+      "job": "mypy",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/mypy-325a8c2189-command.json"
+    },
+    {
+      "job": "pip",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/pip-40f6075b77-command.json"
+    },
+    {
+      "job": "foundation",
+      "exit_code": 0,
+      "counts": {
+        "passed": 87
+      },
+      "log": "logs/foundation-a0d9fa67a0-command.json"
+    },
+    {
+      "job": "compile",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/compile-02d3f71d85-command.json"
+    },
+    {
+      "job": "od06",
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "log": "logs/od06-e6577b9b20-command.json"
+    },
+    {
+      "job": "foundationperf",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/foundationperf-22dd50c16a-command.json"
+    },
+    {
+      "job": "parser",
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "log": "logs/parser-c7874c6229-command.json"
+    },
+    {
+      "job": "collection",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/collection-4c961fdc62-command.json"
+    },
+    {
+      "job": "A",
+      "exit_code": 0,
+      "counts": {
+        "passed": 997,
+        "skipped": 12
+      },
+      "log": "logs/A-8e3307ea4a-command.json"
+    },
+    {
+      "job": "dbinit",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbinit-ecf3569b40-command.json"
+    },
+    {
+      "job": "dbcrash",
+      "exit_code": 247,
+      "counts": null,
+      "log": "logs/dbcrash-49eaaa9d3f-command.json"
+    },
+    {
+      "job": "dbrecover",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbrecover-0d83106aca-command.json"
+    },
+    {
+      "job": "dbcompete-a",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbcompete-a-403cb5decb-command.json"
+    },
+    {
+      "job": "dbcompete-b",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbcompete-b-fade9513ec-command.json"
+    },
+    {
+      "job": "dbfinal",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/dbfinal-4b0f5f4c37-command.json"
+    },
+    {
+      "job": "diagnostic",
+      "exit_code": 1,
+      "counts": {
+        "passed": 997,
+        "failed": 4,
+        "skipped": 12
+      },
+      "log": "logs/diagnostic-b3f3dc4c72-command.json"
+    },
+    {
+      "job": "mypy",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/mypy-7be98de301-command.json"
+    },
+    {
+      "job": "pip",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/pip-f7642d074c-command.json"
+    },
+    {
+      "job": "compile",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/compile-2037cbf3f2-command.json"
+    },
+    {
+      "job": "foundationperf",
+      "exit_code": 0,
+      "counts": {},
+      "log": "logs/foundationperf-0946c10ec9-command.json"
+    }
+  ],
+  "Windows314": "NOT_RUN_OS_ISOLATION_UNAVAILABLE",
+  "Windows311": "NOT_RUN_OS_ISOLATION_UNAVAILABLE",
+  "diagnostic_state": "FAIL_4_PRESERVED_SOURCE_DEPENDENCIES;never inferred from A PASS"
+}

@@ -1,0 +1,911 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/parser-225c8d736c-manifest.json",
+    "--manifest-sha256",
+    "95943726daa061c330c5b4e34e68a950cb93b1cf14c07ea06395f474c791daef",
+    "--policy",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/parser-225c8d736c-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/parser-225c8d736c/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+  "start_utc": "2026-11-18T07:55:38.098969+00:00",
+  "end_utc": "2026-11-18T07:55:41.439315+00:00",
+  "elapsed_seconds": 3.340343966999999,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "parser",
+    "exit_code": 0,
+    "counts": {
+      "passed": 170,
+      "skipped": 1
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_identity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t02_determinism",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t03_revisions",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t04_legacy",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_disputed_dates_explicit_only[day3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t06_ambiguity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t07_modern_zip",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes0-VERSION_UNSUPPORTED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes1-REFERENCE_PENDING]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t08_dispatch[changes2-FORMAT_UNSUPPORTED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t09_bse",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t10_official_flag",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,symbol,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,open,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,ISIN\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t11_headers[ SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert\\nbroken,row\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"unterminated\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,inert,extra\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\\xff\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,x\"y\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t12_csv[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n000SYN,EQ,00001234,2019-12-31,10.10,12.20,9.05,11.15,0,\"x\"trailing\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[../x.csv-kwargs0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[/x.csv-kwargs1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[C:/x.csv-kwargs2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x\\\\y.csv-kwargs3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[dir/x.csv-kwargs4]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[x.zip-kwargs5]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[wrong.csv-kwargs6]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs8]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[<html>denied</html>]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[{\"denied\":true}]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[PK\\x03\\x04truncated]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t14_denial_empty[SYMBOL,SERIES,ISIN,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY,NOTE\\n]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t15_dates",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[-1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[+1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1.5]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1,000]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[9999999999999999999999999]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_volume[1e2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t17_exact_decimal_context",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[NaN]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[Infinity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[-1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e999999]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1e1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1_0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[1.123456789]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[99999999999999999999999]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[+1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t18_prices[ 10]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t19_identity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t20_text",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t21_optional_identity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t22_temporal",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_raw_and_observation",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_CACHED_RAW]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[SOURCE_SEED_IMPORTED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t24_origin[PROVIDER_OBSERVED_UNVERIFIED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_rights",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[REVOKED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_revocation_scope[WRONG_PURPOSE]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_verified_synthetic_archive",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t26_no_io",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t27_oracle_digest",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t28_no_production_adapter",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t29_newline_metadata",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_limits",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_independent_oracle_and_tamper",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t32_replay_vector",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t23_later_in_memory_cannot_claim_archive_pin",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t25_later_archive_purpose_is_mandatory",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t30_later_plain_csv_expansion_budget",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[crc]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[encryption]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[codec]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[trailer]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[nested]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t13_later_zip_variants[bomb]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t31_later_all_fields_modern_and_date",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t01_later_expected_count[-1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t16_later_volume_lexeme",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_era_parsing.py::test_t05_later_explicit_synthetic_2020_profile",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r01_absent_empty",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{}]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"reference_id\":\"a\",\"reference_id\":\"b\"}]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[[]]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_json[{\"x\":NaN}]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r03_identity[changes1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r04_paraphrase",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r05_no_caller_authority[changes3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[PENDING]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r06_rights[DENIED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r07_document_not_row",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r08_sample_not_schema",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_conflict",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r10_dates_overlap",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r11_versions",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r12_scope[changes2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r13_bse_no_inheritance",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SYNTHETIC_TEST_ONLY]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[CACHE]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[SEED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[MIRROR]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r14_origin[INDEX_ONLY]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://user:secret@example.invalid/doc]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc?token=secret]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[file:///secret]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[http://example.invalid/doc]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r15_secret_redaction[https://example.invalid/doc#secret]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes4]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r16_bounds[changes5]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[../document.pdf]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[/document.pdf]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[C:/document.pdf]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[\\\\\\\\host\\\\share]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[a\\\\b.pdf]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_names[con.pdf]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_real_link",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r18_budgets",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_pinned_corpus",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r20_deterministic",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r21_pure",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r22_compatibility",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_oracle_and_tamper",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r24_runtime_vector",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_root_traversal",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r02_later_unhashable_file",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_orphan_pin",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+        "outcome": "skipped",
+        "reason": "('/work/repo/tests/unit/test_od05r_reference_evidence.py', 329, 'Skipped: Windows junction; Linux file-link counterpart required')"
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r23_later_sample_tamper",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r09_later_conflicting_field_semantics",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r19_later_expected_pins_are_frozen",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_public_failure_codes[<html>denied</html>-PARSER_HTML_CHALLENGE]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_public_failure_codes[\\xff-PARSER_INVALID_ENCODING]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_public_failure_codes[PKbroken-PARSER_ARCHIVE_CORRUPT]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_public_failure_codes[missing,header\\n-PARSER_REQUIRED_COLUMN_MISSING]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_existing_fixture_output_retains_versions_and_digest",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_catalog_has_explicit_authority_and_no_inferred_dates",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_requires_actual_boundary_before_input",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_no_git_or_discovery",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_fail_closed[extra]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_fail_closed[symlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_fail_closed[hardlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_fail_closed[pin]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_fail_closed[path]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_fail_closed[command]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_report_native_boundary",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od05_final_contracts.py::test_final_nonmarket_archive_failure_has_no_rows",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-18T07:55:39.218269+00:00",
+    "end_utc": "2026-11-18T07:55:41.030535+00:00",
+    "elapsed_seconds": 1.8122739269999997,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 42%]\n........................................................................ [ 84%]\n.......s...................                                              [100%]\n=============================== warnings summary ===============================\ntests/unit/test_od05_era_parsing.py::test_t13_zip[synthetic.csv-kwargs7]\n  /usr/lib/python3.12/zipfile/__init__.py:1620: UserWarning: Duplicate name: 'synthetic.csv'\n    return self._open_to_write(zinfo, force_zip64=force_zip64)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nSKIPPED [1] tests/unit/test_od05r_reference_evidence.py:329: Windows junction; Linux file-link counterpart required\n170 passed, 1 skipped, 1 warning in 0.64s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/parser-225c8d736c/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "parser",
+  "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+  "source_manifest_sha256": "95943726daa061c330c5b4e34e68a950cb93b1cf14c07ea06395f474c791daef"
+}

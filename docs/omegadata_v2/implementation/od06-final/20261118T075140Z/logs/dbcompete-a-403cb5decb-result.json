@@ -1,0 +1,23 @@
+{
+  "job": "dbcompete-a",
+  "exit_code": 0,
+  "counts": {},
+  "status": "COMMITTED",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532293]",
+      "net": "net:[4026532298]",
+      "pid": "pid:[4026532296]",
+      "user": "user:[4026532220]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbcompete-a-403cb5decb/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  },
+  "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+  "pid": 2
+}

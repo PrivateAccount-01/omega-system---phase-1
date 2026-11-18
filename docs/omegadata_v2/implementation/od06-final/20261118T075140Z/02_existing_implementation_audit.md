@@ -1,0 +1,9 @@
+# Audit and reuse
+Reused original pure parser API and all six delivered OD05 files unchanged. Reused OD06 issuer/security/listing and explicit date/knowledge contracts, opt-in adapters and calendar. Corrected: plain-label authority, caller-writable financial flags, unrelated-listing correction, mutable event identity collection, unknown lifecycle handling, missing calendar-version selection, source-bound authority hashing after derived revision closure, event idempotency and missing artifact digest syntax. Actual negative-first records are retained.
+
+SQLAlchemy existing dependency supplies a separate additive Core metadata schema. No new dependencies, distributed services or external calendar library. Existing source-rights authorize_source/PolicyRequest remain the ONLY permission gate; new owner-root register is reference-authenticity trust configuration, not a source permission grant. Existing RawArchive/provenance contracts and raw identities are not bypassed or opened. Identity claims bind exact artifact/document/source/review metadata and exact canonical claim digest.
+
+Complete consumer inventory:156allowed code/instruction files,172 textual references to ISINMasterService/PointInTimeUniverseManager/TradingCalendar/SymbolMap/InstrumentMaster, with file hashes/line contexts in support. Legacy APIs, ORM schema, calendar config, source registry/rights, financial expectations and previous tests unchanged. No raw backfill used by new APIs. Full unchanged B diagnostic attempts remain failures inside unmapped disposable roots; original source contents inaccessible.
+
+Same-agent adversarial review, not independent human consensus. Independent executed checks: SQL constraints/triggers, OS probes, separate-process recovery/competing writers, canonical hashes and explicit interval predicate tests. Founder skill/external products not invented or adopted.
+

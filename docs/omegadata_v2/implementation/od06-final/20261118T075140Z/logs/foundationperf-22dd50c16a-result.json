@@ -1,0 +1,78 @@
+{
+  "job": "foundationperf",
+  "exit_code": 0,
+  "counts": {},
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532224]",
+      "net": "net:[4026532229]",
+      "pid": "pid:[4026532227]",
+      "user": "user:[4026532361]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/foundationperf-22dd50c16a/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  },
+  "stdout_stderr": "NON_MARKET_CANARY_ONLY",
+  "anonymous_claims": 161,
+  "revision_depth": 33,
+  "query_plan": [
+    "(3, 0, 0, 'SEARCH od06_claim USING INDEX od06_claim_lookup (exchange=? AND symbol=? AND series=? AND valid_from<?)')"
+  ],
+  "timings": {
+    "repository_insertion": {
+      "samples": 129,
+      "median_seconds": 0.010595943999987867,
+      "max_seconds": 0.02440177199991922,
+      "p95_seconds": 0.018868705000045338
+    },
+    "single_identity_lookup": {
+      "samples": 40,
+      "median_seconds": 0.008851958499974444,
+      "max_seconds": 0.012789960000077372,
+      "p95_seconds": 0.011026438999920174
+    },
+    "correction_append": {
+      "samples": 32,
+      "median_seconds": 0.019028326000011475,
+      "max_seconds": 0.03420272199991814,
+      "p95_seconds": 0.028983470999946803
+    },
+    "historical_lookup": {
+      "samples": 40,
+      "median_seconds": 0.017463770499944076,
+      "max_seconds": 0.029102818999945157,
+      "p95_seconds": 0.028273447999936252
+    },
+    "large_history_lookup": {
+      "samples": 40,
+      "median_seconds": 0.012187871500032088,
+      "max_seconds": 0.021950505999939196,
+      "p95_seconds": 0.021610220000070512
+    },
+    "calendar_query": {
+      "samples": 40,
+      "median_seconds": 0.00037932850000288454,
+      "max_seconds": 0.001101056000038625,
+      "p95_seconds": 0.0006882110000105968
+    },
+    "transaction_rollback": {
+      "samples": 1,
+      "median_seconds": 0.03275010200002271,
+      "max_seconds": 0.03275010200002271,
+      "p95_seconds": 0.03275010200002271
+    },
+    "restart_recovery": {
+      "samples": 1,
+      "median_seconds": 0.019455399999969814,
+      "max_seconds": 0.019455399999969814,
+      "p95_seconds": 0.019455399999969814
+    }
+  },
+  "history_sha256": "8aa3f42e35501528b4b1b7a7483d59a3f4b9009eb813886e3a427c9617070edc",
+  "limitation": "Small anonymous control corpus, not realistic market scale; append validates complete ledger O(n); indexed lookup loads candidate listing histories only."
+}

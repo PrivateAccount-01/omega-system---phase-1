@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/mypy-01b5071137-manifest.json",
+    "--manifest-sha256",
+    "28abcba725c8625112512866355421a89c1957dd7b5d1b2b6d5378161c484bc8",
+    "--policy",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/mypy-01b5071137-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/mypy-01b5071137/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+  "start_utc": "2026-11-18T13:25:21.746475+00:00",
+  "end_utc": "2026-11-18T13:25:45.461903+00:00",
+  "elapsed_seconds": 23.043191479999997,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-18T13:25:24.535090+00:00",
+    "end_utc": "2026-11-18T13:25:39.287838+00:00",
+    "elapsed_seconds": 14.752766376000004,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "Success: no issues found in 64 source files\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/mypy-01b5071137/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "mypy",
+  "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+  "source_manifest_sha256": "28abcba725c8625112512866355421a89c1957dd7b5d1b2b6d5378161c484bc8"
+}

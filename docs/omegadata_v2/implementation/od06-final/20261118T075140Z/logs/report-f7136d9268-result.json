@@ -1,0 +1,21 @@
+{
+  "job": "report",
+  "exit_code": 0,
+  "counts": {},
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": "{\"schema_version\": \"od05.final-report.receipt/v1\", \"files\": [\"00_scope_and_source_identity.md\", \"01_integrated_code_manifest.json\", \"02_existing_implementation_audit.md\", \"03_persistent_identity_schema.md\", \"04_evidence_authority_contract.md\", \"05_bitemporal_and_lifecycle_tests.json\", \"06_universe_and_calendar_tests.json\", \"07_database_restart_rollback_tests.json\", \"08_compatibility_results.json\", \"09_security_and_boundary_evidence.json\", \"10_full_engineering_matrix.json\", \"11_financial_source_dependencies.json\", \"12_migration_and_rollback.md\", \"13_final_gatekeeper.json\", \"14_od07_dependency_handoff.md\", \"15_final_report.md\", \"16_acceptance_matrix.json\", \"17_preservation_manifest.json\", \"18_negative_first_history.json\", \"19_performance_results.json\"], \"manifest_sha256\": \"03b0575ca338f4c190bd370adf30d3404bdd6c85a03825aa5ca88d366c08bdb7\", \"sha256\": {\"00_scope_and_source_identity.md\": \"ee68f0d576ad40e47d24dfd6395e49385e9eb0c525438132d9e957e6b292eb6e\", \"01_integrated_code_manifest.json\": \"b1bb2f15b5389b340ebbefe5ca80a2bc1cec56d7d7ad562b668a0b2d0d916796\", \"02_existing_implementation_audit.md\": \"929d1938513d7d447e59cdf2808507523d8fc5f414d620febedc51a70e995d42\", \"03_persistent_identity_schema.md\": \"a45a7b1ca6f0cc9b623f9218d0f139a5a3db4814c60bbbc03875043e60416ff4\", \"04_evidence_authority_contract.md\": \"b477828afd6fafd49485111f43637320c9a9143f3efc6a973d50f28b8350457b\", \"05_bitemporal_and_lifecycle_tests.json\": \"ef13b6ffe09c54a58cfd1b0da5c48718b1716a225f00de4b9d6d4a04e3be29aa\", \"06_universe_and_calendar_tests.json\": \"0f9ad60b2304a039f856171f87cd2b9d8fe193d5e487c77eefb751374d59a010\", \"07_database_restart_rollback_tests.json\": \"0823989ff139a61c2f54185dbd7f20870722646cf91a3136f158a2fd20b98284\", \"08_compatibility_results.json\": \"bd76832d0ac7ed94284ebdef0da032a8eeec71d1d25422b2aeb52c3f35739ca0\", \"09_security_and_boundary_evidence.json\": \"63d6b46c8c49934d5972dc3f2da7b47fedb114e2940da099d12ab488aeb26177\", \"10_full_engineering_matrix.json\": \"c4ba556726b1c827b33b78fb9a40ad3b79b96b75e1206f1c1793a275676391f7\", \"11_financial_source_dependencies.json\": \"a7ef283b98386136bccd60201e31c828d99a2b2841ac428aff1262d13b7768a8\", \"12_migration_and_rollback.md\": \"1c45e3af299ed6f5dbcd078a7c92e293bc64755891825e867e21cfbcd0e446bd\", \"13_final_gatekeeper.json\": \"dcf9d1c1e034cc0af3a8d616056b60abb4ae583c82b810f3e32c8d31ff149c50\", \"14_od07_dependency_handoff.md\": \"4b19e1f0de4d1a2f178ab773166c489a5201fd21e7a02ebfc59ddd949b1dcc0f\", \"15_final_report.md\": \"f5bef7c748db81e6be62d96f9975507f2dcc166e84204fb4492c3612d5a711b2\", \"16_acceptance_matrix.json\": \"14ceab4e14de40d24fcf7623bbfb038635b39b4602443229687837bd48b3653e\", \"17_preservation_manifest.json\": \"1065d427a431e9e87919a78197dc5897f1007a268e008df19b50af43d6a96800\", \"18_negative_first_history.json\": \"ec4662743dbf61d09887874d559838a4450a27717c6ab9ff6137ee83909a4d68\", \"19_performance_results.json\": \"819e985aa8c67e4ce8f3aa120c49480529b2c09e808b3a75f17160a69c19fe1e\"}, \"boundary\": {\"backend\": \"bwrap+seccomp/v1\", \"worker_namespaces\": {\"mnt\": \"mnt:[4026532222]\", \"net\": \"net:[4026532227]\", \"pid\": \"pid:[4026532225]\", \"user\": \"user:[4026532291]\"}, \"outside_canary\": \"/home/parilrupani/omega-od06-final-20261118T075140Z/report-f7136d9268/NON_MARKET_CANARY\", \"verified\": true, \"source_mounts\": \"EXACT_READ_ONLY\", \"no_new_privs\": true, \"seccomp_mode\": 2}, \"git_calls\": 0, \"original_repository_mounted\": false}",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/report-f7136d9268/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

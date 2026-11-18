@@ -1,0 +1,50 @@
+{
+  "focused": {
+    "command_id": "foundation-a0d9fa67a0-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-manifest.json",
+      "--manifest-sha256",
+      "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "--policy",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/foundation-a0d9fa67a0/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+    "platform": "Ubuntu WSL Linux native data-free snapshot",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+    "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+    "start_utc": "2026-11-18T13:41:46.164323+00:00",
+    "end_utc": "2026-11-18T13:41:54.087790+00:00",
+    "elapsed_seconds": 7.423315350000053,
+    "exit_code": 0,
+    "counts": {
+      "passed": 87
+    },
+    "deselected": null,
+    "stdout_stderr_log": "logs/foundation-a0d9fa67a0-command.json"
+  },
+  "PIT": [
+    "Every selected membership counted once",
+    "Duplicate IDs/intervals/revision lineage checked",
+    "Unknown masters/ISINs retained, provisional reconstruction never promoted",
+    "Future correction invisible, removal boundary half-open",
+    "Selected-set completeness separate from authoritative source coverage"
+  ],
+  "calendar": [
+    "Explicit regular/closure/weekend controls",
+    "Unknown day/year/partial coverage, no weekday/year completeness inference",
+    "Independent known axis, later corrections and competing claims",
+    "Optional explicit calendar_version query",
+    "Timezone/hours validation; missing hours remain unknown",
+    "Strict previous/next and explicit coverage; unchanged bounded arithmetic",
+    "Persistent sessions/coverage survive reconnect"
+  ],
+  "financial_context": "Anonymous CANARY-X invariant controls only; no actual session or mapping verified"
+}

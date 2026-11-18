@@ -1,0 +1,104 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundationperf-0946c10ec9-manifest.json",
+    "--manifest-sha256",
+    "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f",
+    "--policy",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundationperf-0946c10ec9-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/foundationperf-0946c10ec9/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+  "start_utc": "2026-11-18T13:44:46.243678+00:00",
+  "end_utc": "2026-11-18T13:44:52.216330+00:00",
+  "elapsed_seconds": 5.97263762700004,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "foundationperf",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532220]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/foundationperf-0946c10ec9/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "stdout_stderr": "NON_MARKET_CANARY_ONLY",
+    "anonymous_claims": 161,
+    "revision_depth": 33,
+    "query_plan": [
+      "(3, 0, 0, 'SEARCH od06_claim USING INDEX od06_claim_lookup (exchange=? AND symbol=? AND series=? AND valid_from<?)')"
+    ],
+    "timings": {
+      "repository_insertion": {
+        "samples": 129,
+        "median_seconds": 0.01193336400001499,
+        "max_seconds": 0.026938491999999314,
+        "p95_seconds": 0.01993720299992674
+      },
+      "single_identity_lookup": {
+        "samples": 40,
+        "median_seconds": 0.008802275499988355,
+        "max_seconds": 0.020706442000005154,
+        "p95_seconds": 0.014670038000076602
+      },
+      "correction_append": {
+        "samples": 32,
+        "median_seconds": 0.015579715000001215,
+        "max_seconds": 0.029274055000087174,
+        "p95_seconds": 0.021171583999944232
+      },
+      "historical_lookup": {
+        "samples": 40,
+        "median_seconds": 0.013313590499933525,
+        "max_seconds": 0.023942144999978154,
+        "p95_seconds": 0.021286581000026672
+      },
+      "large_history_lookup": {
+        "samples": 40,
+        "median_seconds": 0.009385269999995671,
+        "max_seconds": 0.019686767000052896,
+        "p95_seconds": 0.015416323000067678
+      },
+      "calendar_query": {
+        "samples": 40,
+        "median_seconds": 0.00026852799999232957,
+        "max_seconds": 0.0008569459999989704,
+        "p95_seconds": 0.0005324130000872174
+      },
+      "transaction_rollback": {
+        "samples": 1,
+        "median_seconds": 0.025544110999931036,
+        "max_seconds": 0.025544110999931036,
+        "p95_seconds": 0.025544110999931036
+      },
+      "restart_recovery": {
+        "samples": 1,
+        "median_seconds": 0.01873501100010344,
+        "max_seconds": 0.01873501100010344,
+        "p95_seconds": 0.01873501100010344
+      }
+    },
+    "history_sha256": "8aa3f42e35501528b4b1b7a7483d59a3f4b9009eb813886e3a427c9617070edc",
+    "limitation": "Small anonymous control corpus, not realistic market scale; append validates complete ledger O(n); indexed lookup loads candidate listing histories only."
+  },
+  "job": "foundationperf",
+  "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+  "source_manifest_sha256": "ff8e01de838141a4fbbe22b61837945733f467d7c7957b9fdf146807188a105f"
+}

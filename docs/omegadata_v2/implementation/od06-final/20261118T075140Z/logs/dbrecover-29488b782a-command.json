@@ -1,0 +1,49 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/launch_shared.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/dbrecover-29488b782a-manifest.json",
+    "--manifest-sha256",
+    "c42c573ca2e2a00a8f745063a1cfa2ead9a1e24a698b578fa9c4d51e2d470d26",
+    "--policy",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/dbrecover-29488b782a-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/dbrecover-29488b782a/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+  "start_utc": "2026-11-18T13:28:24.588942+00:00",
+  "end_utc": "2026-11-18T13:28:26.625024+00:00",
+  "elapsed_seconds": 2.0360742189999996,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "dbrecover",
+    "exit_code": 0,
+    "counts": {},
+    "status": "PASS",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbrecover-29488b782a/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+    "pid": 2
+  },
+  "job": "dbrecover",
+  "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+  "source_manifest_sha256": "c42c573ca2e2a00a8f745063a1cfa2ead9a1e24a698b578fa9c4d51e2d470d26"
+}

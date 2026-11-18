@@ -1,0 +1,424 @@
+{
+  "files": [
+    "00_scope_and_source_identity.md",
+    "01_integrated_code_manifest.json",
+    "02_existing_implementation_audit.md",
+    "03_persistent_identity_schema.md",
+    "04_evidence_authority_contract.md",
+    "05_bitemporal_and_lifecycle_tests.json",
+    "06_universe_and_calendar_tests.json",
+    "07_database_restart_rollback_tests.json",
+    "08_compatibility_results.json",
+    "09_security_and_boundary_evidence.json",
+    "10_full_engineering_matrix.json",
+    "11_financial_source_dependencies.json",
+    "12_migration_and_rollback.md",
+    "13_final_gatekeeper.json",
+    "14_od07_dependency_handoff.md",
+    "16_acceptance_matrix.json",
+    "17_preservation_manifest.json",
+    "18_negative_first_history.json",
+    "19_performance_results.json",
+    "15_final_report.md"
+  ],
+  "phase_changes": [
+    {
+      "path": "config/identity_authority_roots.v1.json",
+      "before_sha256": null,
+      "after_sha256": "85b0b763221cf91f3a83afbd5f22f17740f85f61be57f1156e0e7b7eb96662dd",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": null,
+      "change": "ADDED"
+    },
+    {
+      "path": "scripts/od06_database_experiments.py",
+      "before_sha256": null,
+      "after_sha256": "e589673f17cc6bd03d535c14077f48d50ef485f16a9db00cf08dc9c963b5c783",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": null,
+      "change": "ADDED"
+    },
+    {
+      "path": "scripts/od06_experiment_contract.py",
+      "before_sha256": null,
+      "after_sha256": "0f4207f01b97b6b78c2d99a31b097a6922c27d9001f1c7bc410200995044b975",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": null,
+      "change": "ADDED"
+    },
+    {
+      "path": "src/omegadata/identity.py",
+      "before_sha256": null,
+      "after_sha256": "cac37de6584238f2088381609941ab2ec377306bf3ce92097ca5782f06a8929c",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": "098e76b59f8738f247ce38253f13a3088b3156c29a3c897a0fa00df0899ae756",
+      "change": "MODIFIED"
+    },
+    {
+      "path": "src/omegadata/identity_adapters.py",
+      "before_sha256": null,
+      "after_sha256": "2df613b251e51ba88e208392c0ee930d72201e10e9ac86d89970ed039aed9be7",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": "e330a06b4663668060969dfe01436af3ec59b54e2a91d56e15c7ace976385642",
+      "change": "MODIFIED"
+    },
+    {
+      "path": "src/omegadata/identity_authority.py",
+      "before_sha256": null,
+      "after_sha256": "269718c2f7a9799b66a566b7c2e76ec30bce6ff38eb4bcc61355c21a73bc6f84",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": null,
+      "change": "ADDED"
+    },
+    {
+      "path": "src/omegadata/identity_repository.py",
+      "before_sha256": null,
+      "after_sha256": "ae5e1e6c8ac1bf4513ea1c3654659cd3e0291b9d6614b2f7c65515cbde7dc192",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": null,
+      "change": "ADDED"
+    },
+    {
+      "path": "src/omegadata/session_calendar.py",
+      "before_sha256": null,
+      "after_sha256": "779141af68899f346e159c4e65a6463de4cdc6f478b72eaf226055ec7ab5436d",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": "c84c0a7e43de79a4ee2d7e8ff42c3105e6404ccee1fddb6ccdae81566ce331a2",
+      "change": "MODIFIED"
+    },
+    {
+      "path": "tests/unit/test_od06_foundation.py",
+      "before_sha256": null,
+      "after_sha256": "4596964ceeba8209df47d879542e8ebc91dd4ec6c20272e039d32e23549718af",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "before_phase_sha256": null,
+      "change": "ADDED"
+    }
+  ],
+  "delivery": [
+    {
+      "path": "config/identity_authority_roots.v1.json",
+      "before_sha256": null,
+      "after_sha256": "85b0b763221cf91f3a83afbd5f22f17740f85f61be57f1156e0e7b7eb96662dd",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "scripts/od05_final_report.py",
+      "before_sha256": null,
+      "after_sha256": "6c6d5d1e057ec7c4e6467e734d1a26c5a6d64557e6950dd2c0cab8bc8aa104fc",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "scripts/od06_database_experiments.py",
+      "before_sha256": null,
+      "after_sha256": "e589673f17cc6bd03d535c14077f48d50ef485f16a9db00cf08dc9c963b5c783",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "scripts/od06_experiment_contract.py",
+      "before_sha256": null,
+      "after_sha256": "0f4207f01b97b6b78c2d99a31b097a6922c27d9001f1c7bc410200995044b975",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/identity.py",
+      "before_sha256": null,
+      "after_sha256": "cac37de6584238f2088381609941ab2ec377306bf3ce92097ca5782f06a8929c",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/identity_adapters.py",
+      "before_sha256": null,
+      "after_sha256": "2df613b251e51ba88e208392c0ee930d72201e10e9ac86d89970ed039aed9be7",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/identity_authority.py",
+      "before_sha256": null,
+      "after_sha256": "269718c2f7a9799b66a566b7c2e76ec30bce6ff38eb4bcc61355c21a73bc6f84",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/identity_repository.py",
+      "before_sha256": null,
+      "after_sha256": "ae5e1e6c8ac1bf4513ea1c3654659cd3e0291b9d6614b2f7c65515cbde7dc192",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/parsers/contracts.py",
+      "before_sha256": "2dc704bbc443b8fa11f3bbbae7686a58c49c15ec8cce172a62ecdeba8e9b4c32",
+      "after_sha256": "81c8acbcb0348196430024361fc181e14fc64d96181c5758f3525f7875f82d1a",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/parsers/dispatch.py",
+      "before_sha256": "02a60e6a98d55f3d064114bf7e9e429e5e8300b54b51c0ddb7affb42b73d2121",
+      "after_sha256": "7436b5f1c2f833a3b3945b4d90ce6e5badb3af360e76b66823a9087cf1f495ae",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/parsers/nse_cm.py",
+      "before_sha256": "f5f634ca7293c16b131b60fadc768574a4ed69c30a651b4845e1db122f7061a0",
+      "after_sha256": "d6c0af6a4225bf1d6c814f116065e8d8c031ab9aeee9fee385ab54c55e580392",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/parsers/schema_catalog.py",
+      "before_sha256": null,
+      "after_sha256": "f46a4fbae673a3dcfa5ddaf85e46dc736971dbf25d7fe852b180d60ba6ad9bf3",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/session_calendar.py",
+      "before_sha256": null,
+      "after_sha256": "779141af68899f346e159c4e65a6463de4cdc6f478b72eaf226055ec7ab5436d",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od05_final_contracts.py",
+      "before_sha256": null,
+      "after_sha256": "41c59fc7eaf2c3cab0be36b5f39b94da0fa57245fc104f45358e85c824c42117",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od06_contracts.py",
+      "before_sha256": null,
+      "after_sha256": "de2c432631ddfcc129114dbf183872a2ae41c7e2b9b3aa4d1d13e75e1a0e8933",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od06_foundation.py",
+      "before_sha256": null,
+      "after_sha256": "4596964ceeba8209df47d879542e8ebc91dd4ec6c20272e039d32e23549718af",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false
+    }
+  ],
+  "coverage": {
+    "foundation": {
+      "totals": {
+        "covered_lines": 1571,
+        "num_statements": 8046,
+        "percent_covered": 17.475545522949584,
+        "percent_covered_display": "17",
+        "missing_lines": 6475,
+        "excluded_lines": 11,
+        "percent_statements_covered": 19.52522992791449,
+        "percent_statements_covered_display": "20",
+        "num_branches": 2586,
+        "num_partial_branches": 115,
+        "covered_branches": 287,
+        "missing_branches": 2299,
+        "percent_branches_covered": 11.098221191028616,
+        "percent_branches_covered_display": "11"
+      },
+      "foundation_components": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 202,
+          "num_statements": 251,
+          "percent_covered": 73.6986301369863,
+          "percent_covered_display": "74",
+          "missing_lines": 49,
+          "excluded_lines": 11,
+          "percent_statements_covered": 80.4780876494024,
+          "percent_statements_covered_display": "80",
+          "num_branches": 114,
+          "num_partial_branches": 39,
+          "covered_branches": 67,
+          "missing_branches": 47,
+          "percent_branches_covered": 58.771929824561404,
+          "percent_branches_covered_display": "59"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 120,
+          "num_statements": 151,
+          "percent_covered": 74.60317460317461,
+          "percent_covered_display": "75",
+          "missing_lines": 31,
+          "excluded_lines": 0,
+          "percent_statements_covered": 79.47019867549669,
+          "percent_statements_covered_display": "79",
+          "num_branches": 38,
+          "num_partial_branches": 7,
+          "covered_branches": 21,
+          "missing_branches": 17,
+          "percent_branches_covered": 55.26315789473684,
+          "percent_branches_covered_display": "55"
+        },
+        "src/omegadata/identity_authority.py": {
+          "covered_lines": 116,
+          "num_statements": 139,
+          "percent_covered": 80.0,
+          "percent_covered_display": "80",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 83.45323741007195,
+          "percent_statements_covered_display": "83",
+          "num_branches": 66,
+          "num_partial_branches": 14,
+          "covered_branches": 48,
+          "missing_branches": 18,
+          "percent_branches_covered": 72.72727272727273,
+          "percent_branches_covered_display": "73"
+        },
+        "src/omegadata/identity_repository.py": {
+          "covered_lines": 266,
+          "num_statements": 279,
+          "percent_covered": 92.34828496042216,
+          "percent_covered_display": "92",
+          "missing_lines": 13,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.3405017921147,
+          "percent_statements_covered_display": "95",
+          "num_branches": 100,
+          "num_partial_branches": 16,
+          "covered_branches": 84,
+          "missing_branches": 16,
+          "percent_branches_covered": 84.0,
+          "percent_branches_covered_display": "84"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 122,
+          "num_statements": 169,
+          "percent_covered": 65.33864541832669,
+          "percent_covered_display": "65",
+          "missing_lines": 47,
+          "excluded_lines": 0,
+          "percent_statements_covered": 72.18934911242603,
+          "percent_statements_covered_display": "72",
+          "num_branches": 82,
+          "num_partial_branches": 20,
+          "covered_branches": 42,
+          "missing_branches": 40,
+          "percent_branches_covered": 51.21951219512195,
+          "percent_branches_covered_display": "51"
+        }
+      }
+    },
+    "A": {
+      "totals": {
+        "covered_lines": 6922,
+        "num_statements": 8046,
+        "percent_covered": 82.43039879608729,
+        "percent_covered_display": "82",
+        "missing_lines": 1124,
+        "excluded_lines": 11,
+        "percent_statements_covered": 86.03032562764106,
+        "percent_statements_covered_display": "86",
+        "num_branches": 2586,
+        "num_partial_branches": 486,
+        "covered_branches": 1842,
+        "missing_branches": 744,
+        "percent_branches_covered": 71.22969837587007,
+        "percent_branches_covered_display": "71"
+      },
+      "foundation_components": {
+        "src/omegadata/identity.py": {
+          "covered_lines": 226,
+          "num_statements": 251,
+          "percent_covered": 86.02739726027397,
+          "percent_covered_display": "86",
+          "missing_lines": 25,
+          "excluded_lines": 11,
+          "percent_statements_covered": 90.0398406374502,
+          "percent_statements_covered_display": "90",
+          "num_branches": 114,
+          "num_partial_branches": 24,
+          "covered_branches": 88,
+          "missing_branches": 26,
+          "percent_branches_covered": 77.19298245614036,
+          "percent_branches_covered_display": "77"
+        },
+        "src/omegadata/identity_adapters.py": {
+          "covered_lines": 144,
+          "num_statements": 151,
+          "percent_covered": 92.5925925925926,
+          "percent_covered_display": "93",
+          "missing_lines": 7,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.36423841059603,
+          "percent_statements_covered_display": "95",
+          "num_branches": 38,
+          "num_partial_branches": 7,
+          "covered_branches": 31,
+          "missing_branches": 7,
+          "percent_branches_covered": 81.57894736842105,
+          "percent_branches_covered_display": "82"
+        },
+        "src/omegadata/identity_authority.py": {
+          "covered_lines": 116,
+          "num_statements": 139,
+          "percent_covered": 80.0,
+          "percent_covered_display": "80",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 83.45323741007195,
+          "percent_statements_covered_display": "83",
+          "num_branches": 66,
+          "num_partial_branches": 14,
+          "covered_branches": 48,
+          "missing_branches": 18,
+          "percent_branches_covered": 72.72727272727273,
+          "percent_branches_covered_display": "73"
+        },
+        "src/omegadata/identity_repository.py": {
+          "covered_lines": 266,
+          "num_statements": 279,
+          "percent_covered": 92.34828496042216,
+          "percent_covered_display": "92",
+          "missing_lines": 13,
+          "excluded_lines": 0,
+          "percent_statements_covered": 95.3405017921147,
+          "percent_statements_covered_display": "95",
+          "num_branches": 100,
+          "num_partial_branches": 16,
+          "covered_branches": 84,
+          "missing_branches": 16,
+          "percent_branches_covered": 84.0,
+          "percent_branches_covered_display": "84"
+        },
+        "src/omegadata/session_calendar.py": {
+          "covered_lines": 149,
+          "num_statements": 169,
+          "percent_covered": 84.4621513944223,
+          "percent_covered_display": "84",
+          "missing_lines": 20,
+          "excluded_lines": 0,
+          "percent_statements_covered": 88.16568047337279,
+          "percent_statements_covered_display": "88",
+          "num_branches": 82,
+          "num_partial_branches": 17,
+          "covered_branches": 63,
+          "missing_branches": 19,
+          "percent_branches_covered": 76.82926829268293,
+          "percent_branches_covered_display": "77"
+        }
+      }
+    }
+  },
+  "utc": "2026-11-18T13:50:06.315433+00:00"
+}

@@ -1,0 +1,207 @@
+{
+  "focused": {
+    "command_id": "foundation-a0d9fa67a0-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-manifest.json",
+      "--manifest-sha256",
+      "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+      "--policy",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/foundation-a0d9fa67a0-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od06-final-20261118T075140Z/foundation-a0d9fa67a0/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+    "platform": "Ubuntu WSL Linux native data-free snapshot",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+    "source_manifest_sha256": "5fcc4fbd6e27c490afd5d5a4b04be07f50a33fd4f9a0b7850b9fdbc893cd296f",
+    "start_utc": "2026-11-18T13:41:46.164323+00:00",
+    "end_utc": "2026-11-18T13:41:54.087790+00:00",
+    "elapsed_seconds": 7.423315350000053,
+    "exit_code": 0,
+    "counts": {
+      "passed": 87
+    },
+    "deselected": null,
+    "stdout_stderr_log": "logs/foundation-a0d9fa67a0-command.json"
+  },
+  "accepted_process_experiments": {
+    "utc": "2026-11-18T13:43:48.329069+00:00",
+    "status": "PASS",
+    "shared_canary_root": "/home/parilrupani/omega-od06-final-20261118T075140Z/shared-canary-database-accepted",
+    "records": {
+      "dbinit": {
+        "command_log": "dbinit-ecf3569b40-command.json",
+        "exit_code": 0,
+        "worker_result": {
+          "job": "dbinit",
+          "exit_code": 0,
+          "counts": {},
+          "status": "PASS",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "boundary": {
+            "backend": "bwrap+seccomp/v1",
+            "worker_namespaces": {
+              "mnt": "mnt:[4026532290]",
+              "net": "net:[4026532296]",
+              "pid": "pid:[4026532294]",
+              "user": "user:[4026532355]"
+            },
+            "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbinit-ecf3569b40/NON_MARKET_CANARY",
+            "verified": true,
+            "source_mounts": "EXACT_READ_ONLY",
+            "no_new_privs": true,
+            "seccomp_mode": 2
+          },
+          "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+          "pid": 2
+        },
+        "crash": null
+      },
+      "dbcrash": {
+        "command_log": "dbcrash-49eaaa9d3f-command.json",
+        "exit_code": 247,
+        "worker_result": null,
+        "crash": {
+          "job": "dbcrash",
+          "host_bwrap_pid": 1056,
+          "guest_barrier": {
+            "stage": "UNCOMMITTED_INSERT",
+            "pid": 2
+          },
+          "native_returncode": -9,
+          "controlled_signal": "SIGKILL",
+          "stage": "AFTER_INSERT_BEFORE_COMMIT",
+          "elapsed_seconds": 2.128515380999943,
+          "shared_mount": "/home/parilrupani/omega-od06-final-20261118T075140Z/shared-canary-database-accepted",
+          "original_mounted": false,
+          "market_data": false
+        }
+      },
+      "dbrecover": {
+        "command_log": "dbrecover-0d83106aca-command.json",
+        "exit_code": 0,
+        "worker_result": {
+          "job": "dbrecover",
+          "exit_code": 0,
+          "counts": {},
+          "status": "PASS",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "boundary": {
+            "backend": "bwrap+seccomp/v1",
+            "worker_namespaces": {
+              "mnt": "mnt:[4026532292]",
+              "net": "net:[4026532297]",
+              "pid": "pid:[4026532295]",
+              "user": "user:[4026532357]"
+            },
+            "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbrecover-0d83106aca/NON_MARKET_CANARY",
+            "verified": true,
+            "source_mounts": "EXACT_READ_ONLY",
+            "no_new_privs": true,
+            "seccomp_mode": 2
+          },
+          "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+          "pid": 2
+        },
+        "crash": null
+      },
+      "dbcompete-a": {
+        "command_log": "dbcompete-a-403cb5decb-command.json",
+        "exit_code": 0,
+        "worker_result": {
+          "job": "dbcompete-a",
+          "exit_code": 0,
+          "counts": {},
+          "status": "COMMITTED",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "boundary": {
+            "backend": "bwrap+seccomp/v1",
+            "worker_namespaces": {
+              "mnt": "mnt:[4026532293]",
+              "net": "net:[4026532298]",
+              "pid": "pid:[4026532296]",
+              "user": "user:[4026532220]"
+            },
+            "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbcompete-a-403cb5decb/NON_MARKET_CANARY",
+            "verified": true,
+            "source_mounts": "EXACT_READ_ONLY",
+            "no_new_privs": true,
+            "seccomp_mode": 2
+          },
+          "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+          "pid": 2
+        },
+        "crash": null
+      },
+      "dbcompete-b": {
+        "command_log": "dbcompete-b-fade9513ec-command.json",
+        "exit_code": 0,
+        "worker_result": {
+          "job": "dbcompete-b",
+          "exit_code": 0,
+          "counts": {},
+          "status": "REFUSED_COMPETING_SUCCESSOR",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "boundary": {
+            "backend": "bwrap+seccomp/v1",
+            "worker_namespaces": {
+              "mnt": "mnt:[4026532359]",
+              "net": "net:[4026532364]",
+              "pid": "pid:[4026532362]",
+              "user": "user:[4026532423]"
+            },
+            "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbcompete-b-fade9513ec/NON_MARKET_CANARY",
+            "verified": true,
+            "source_mounts": "EXACT_READ_ONLY",
+            "no_new_privs": true,
+            "seccomp_mode": 2
+          },
+          "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+          "pid": 2
+        },
+        "crash": null
+      },
+      "dbfinal": {
+        "command_log": "dbfinal-4b0f5f4c37-command.json",
+        "exit_code": 0,
+        "worker_result": {
+          "job": "dbfinal",
+          "exit_code": 0,
+          "counts": {},
+          "status": "PASS",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "boundary": {
+            "backend": "bwrap+seccomp/v1",
+            "worker_namespaces": {
+              "mnt": "mnt:[4026532292]",
+              "net": "net:[4026532297]",
+              "pid": "pid:[4026532295]",
+              "user": "user:[4026532358]"
+            },
+            "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/dbfinal-4b0f5f4c37/NON_MARKET_CANARY",
+            "verified": true,
+            "source_mounts": "EXACT_READ_ONLY",
+            "no_new_privs": true,
+            "seccomp_mode": 2
+          },
+          "stdout_stderr": "NON_MARKET_CANARY_SQLITE_ONLY",
+          "pid": 2
+        },
+        "crash": null
+      }
+    },
+    "scope": "Disposable non-market database only; native OS worker restrictions retained"
+  },
+  "in_memory_and_file_backed": true,
+  "atomicity": "Controlled exception rollback and actual separate-process SIGKILL after insert/before commit; subsequent SQLite reopen preserved committed history and excluded uncommitted revision",
+  "concurrency": "Two independent isolated processes, exactly one committed successor and one refused",
+  "foreign_key_and_append_only": "Actual native SQLite constraint/trigger failures asserted as IntegrityError",
+  "migration": "Create/drop/recreate EMPTY additive schema on disposable databases; nonempty rollback refused",
+  "limits": "No hardware power-loss durability or production migration certificate"
+}

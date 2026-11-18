@@ -1,0 +1,430 @@
+{
+  "job": "foundation",
+  "exit_code": 1,
+  "counts": {
+    "passed": 77,
+    "failed": 3
+  },
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[insert-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[insert-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[duplicate-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[duplicate-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[idempotent-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[idempotent-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[restart-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[restart-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[correction-chain-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[correction-chain-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[rollback-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[rollback-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[foreign-key-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[foreign-key-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[overlap-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[overlap-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[immutable-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[immutable-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[version-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[version-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[competing-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[competing-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[migration-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[migration-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[history-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[history-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[event-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[event-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[calendar-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[calendar-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[plain-labels]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[resolution-write]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[session-write]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[universe-write]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[forged-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[revoked]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[missing]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[source-mismatch]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[wrong-purpose]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[unknown-time]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[future-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[conflicting-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[canary-promotion]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[unrelated-correction]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[event-list-mutation]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[incomplete]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[no-annual-inference]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[next]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[previous]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[coverage-persistence]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[later-correction]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[time-conflict]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[revoked-session]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[coverage-not-completeness]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[membership-revision]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[accounting]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[removal]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[authority-original-claim]",
+      "outcome": "failed",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistent_review_authori0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76b335ab4e00>\ncase = 'authority-original-claim'\n\n    @pytest.mark.parametrize('case',['authority-original-claim','event-idempotent','unknown-membership',\n        'competing-threads','evidence-id-conflict','session-idempotent','session-competing','query-order',\n        'pinned-tamper','unowned-database','three-step-reversal'])\n    def test_persistent_review(tmp_path,monkeypatch,case):\n        from omegadata.identity_authority import EvidenceAuthority\n        from omegadata.identity_repository import PersistentRepository\n        if case=='pinned-tamper':\n            p=tmp_path/'canary.json';p.write_text('{}')\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,'0'*64)\n            return\n        if case=='unowned-database':\n            from sqlalchemy import create_engine,text\n            p=tmp_path/'legacy.sqlite';engine=create_engine('sqlite:///'+str(p))\n            with engine.begin() as conn:conn.execute(text('CREATE TABLE unrelated_canary (id INTEGER)'))\n            engine.dispose()\n            with pytest.raises(ValueError):PersistentRepository('sqlite:///'+str(p),disposable_root=tmp_path)\n            return\n        db=store(tmp_path,'file');r,c=seed(db)\n        if case=='authority-original-claim':\n            authority=EvidenceAuthority.unconfigured();db.authority=authority\n            seen=[];original=EvidenceAuthority.check_claim\n            def spy(self,claim,known_at,purpose='RESEARCH'):\n                seen.append(claim)\n                return original(self,claim,known_at,purpose)\n            monkeypatch.setattr(EvidenceAuthority,'check_claim',spy)\n            b=replace(c,claim_id='b',known_from=K+timedelta(days=1),supersedes_claim_id='claim-a',symbol='TOKEN-B')\n            db.append_identity_correction(b)\n            db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K)\n>           assert seen==[c]  # Authority digest must bind original stored bytes, not derived closure.\n            ^^^^^^^^^^^^^^^^\nE           AssertionError: assert [IdentifierCl...identity/v1')] == [IdentifierCl...identity/v1')]\nE             \nE             At index 0 diff: IdentifierClaim(claim_id='claim-a', listing_id='listing-a', exchange='CANARY-X', symbol='TOKEN', series='SERIES', valid_from=datetime.date(2001, 1, 1), valid_to=None, known_from=datetime.datetime(2001, 1, 1, 0, 0, tzinfo=datetime.timezone.utc), known_to=datetime.datetime(2001, 1, 2, 0, 0, tzinfo=datetime.timezone.utc), evidence=Evidence(evidence_id='canary-e', classification='NON_MARKET_CANARY', authentication='UNVERIFIED', permission='PERMITTED', review_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.i...\nE             \nE             ...Full output truncated (2 lines hidden), use '-vv' to show\n\ntests/unit/test_od06_foundation.py:235: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[event-idempotent]",
+      "outcome": "failed",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_persistent_review_event_i0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76b335b85f70>\ncase = 'event-idempotent'\n\n    @pytest.mark.parametrize('case',['authority-original-claim','event-idempotent','unknown-membership',\n        'competing-threads','evidence-id-conflict','session-idempotent','session-competing','query-order',\n        'pinned-tamper','unowned-database','three-step-reversal'])\n    def test_persistent_review(tmp_path,monkeypatch,case):\n        from omegadata.identity_authority import EvidenceAuthority\n        from omegadata.identity_repository import PersistentRepository\n        if case=='pinned-tamper':\n            p=tmp_path/'canary.json';p.write_text('{}')\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,'0'*64)\n            return\n        if case=='unowned-database':\n            from sqlalchemy import create_engine,text\n            p=tmp_path/'legacy.sqlite';engine=create_engine('sqlite:///'+str(p))\n            with engine.begin() as conn:conn.execute(text('CREATE TABLE unrelated_canary (id INTEGER)'))\n            engine.dispose()\n            with pytest.raises(ValueError):PersistentRepository('sqlite:///'+str(p),disposable_root=tmp_path)\n            return\n        db=store(tmp_path,'file');r,c=seed(db)\n        if case=='authority-original-claim':\n            authority=EvidenceAuthority.unconfigured();db.authority=authority\n            seen=[];original=EvidenceAuthority.check_claim\n            def spy(self,claim,known_at,purpose='RESEARCH'):\n                seen.append(claim)\n                return original(self,claim,known_at,purpose)\n            monkeypatch.setattr(EvidenceAuthority,'check_claim',spy)\n            b=replace(c,claim_id='b',known_from=K+timedelta(days=1),supersedes_claim_id='claim-a',symbol='TOKEN-B')\n            db.append_identity_correction(b)\n            db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K)\n            assert seen==[c]  # Authority digest must bind original stored bytes, not derived closure.\n        elif case=='event-idempotent':\n            m,e,_,_=system();ev=m.LifecycleEvent('ev','LISTING',('listing-a',),e)\n>           db.append_event(ev);db.append_event(ev,idempotent=True)\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od06_foundation.py:238: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/identity_repository.py:262: in append_event\n    validate_events((*old,value))\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nevents = (LifecycleEvent(event_id='ev', event_type='LISTING', affected_identity_ids=('listing-a',), evidence=Evidence(evidence_...persedes_event_id=None, validation_status='UNVERIFIED', continuity_review_reference=None, version='od06.lifecycle/v1'))\n\n    def validate_events(events: tuple[LifecycleEvent, ...]) -> tuple[LifecycleEvent, ...]:\n        by_id = {e.event_id: e for e in events}\n        if len(by_id) != len(events):\n>           raise ValueError('DUPLICATE_EVENT')\nE           ValueError: DUPLICATE_EVENT\n\nsrc/omegadata/identity.py:314: ValueError"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[unknown-membership]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[competing-threads]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[evidence-id-conflict]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[session-idempotent]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[session-competing]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[query-order]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[pinned-tamper]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[unowned-database]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[three-step-reversal]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[untrusted]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[revoked]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[superseded]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[missing-id]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[source-mismatch]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[wrong-purpose]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[unknown-time]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[future-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[duplicate-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[canary]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[bad-hash]",
+      "outcome": "failed",
+      "reason": "tmp_path = PosixPath('/work/job/tmp/test_pinned_authority_refusals10')\nattack = 'bad-hash'\n\n    @pytest.mark.parametrize('attack',['untrusted','revoked','superseded','missing-id','source-mismatch',\n        'wrong-purpose','unknown-time','future-review','duplicate-review','canary','bad-hash','pending-rights'])\n    def test_pinned_authority_refusals(tmp_path,attack):\n        \"\"\"Hostile metadata labels, never an actual publisher approval or market row.\"\"\"\n        import hashlib\n        import json\n        from omegadata.identity_authority import EvidenceAuthority,claim_digest\n        _,_,_,c=system()\n        source={'source_key':'NSE_EQUITY_BHAVCOPY','artifact_sha256':'a'*64,\n            'publisher_identity':'FORGED_NON_MARKET_CANARY','document_version':'canary-v1',\n            'authentication':'VERIFIED','available_at':K.isoformat()}\n        review={'reviewer_id':'FORGED_NON_MARKET_CANARY','attestation_identity':'canary-review','reviewed_at':K.isoformat()}\n        record={'evidence_id':'test','classification':'AUTHENTIC_SOURCE','claim_sha256':claim_digest(c),\n                'source_record':source,'reviewer_attestation':review}\n        if attack=='revoked':record['revoked']=True\n        if attack=='superseded':record['superseded']=True\n        if attack=='unknown-time':source['available_at']=None\n        if attack=='future-review':review['reviewed_at']=(K+timedelta(days=1)).isoformat()\n        if attack=='canary':record['classification']='NON_MARKET_CANARY'\n        if attack=='bad-hash':source['artifact_sha256']='not-a-sha'\n        rows=[record,record] if attack=='duplicate-review' else [record]\n        raw=json.dumps({'schema_version':'od06.authority/v1','records':rows}).encode()\n        p=tmp_path/'hostile-metadata.json';p.write_bytes(raw)\n        if attack=='duplicate-review':\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,hashlib.sha256(raw).hexdigest())\n            return\n        authority=EvidenceAuthority.from_pinned_bundle(p,hashlib.sha256(raw).hexdigest())\n        supplied=dict(source)\n        if attack=='source-mismatch':supplied['source_key']='OTHER'\n        decision=authority.verify_identity_evidence('missing' if attack=='missing-id' else 'test',supplied,review,\n            'UNSUPPORTED' if attack=='wrong-purpose' else 'RESEARCH',K,claim_digest(c))\n        assert not decision.allowed and not decision.financial_eligible\n        if attack=='pending-rights':assert decision.reason=='SOURCE_RIGHTS_BLOCKED:POLICY_PENDING'\n>       if attack=='bad-hash':assert decision.reason=='PROVENANCE_INCOMPLETE'\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError: assert 'SOURCE_RIGHT...OLICY_PENDING' == 'PROVENANCE_INCOMPLETE'\nE         \nE         - PROVENANCE_INCOMPLETE\nE         + SOURCE_RIGHTS_BLOCKED:POLICY_PENDING\n\ntests/unit/test_od06_foundation.py:311: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[pending-rights]",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "start_utc": "2026-11-18T13:24:32.485172+00:00",
+  "end_utc": "2026-11-18T13:24:39.150805+00:00",
+  "elapsed_seconds": 6.665634046000001,
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "stdout_stderr": ".........................................................FF............. [ 90%]\n......F.                                                                 [100%]\n=================================== FAILURES ===================================\n_______________ test_persistent_review[authority-original-claim] _______________\n\ntmp_path = PosixPath('/work/job/tmp/test_persistent_review_authori0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76b335ab4e00>\ncase = 'authority-original-claim'\n\n    @pytest.mark.parametrize('case',['authority-original-claim','event-idempotent','unknown-membership',\n        'competing-threads','evidence-id-conflict','session-idempotent','session-competing','query-order',\n        'pinned-tamper','unowned-database','three-step-reversal'])\n    def test_persistent_review(tmp_path,monkeypatch,case):\n        from omegadata.identity_authority import EvidenceAuthority\n        from omegadata.identity_repository import PersistentRepository\n        if case=='pinned-tamper':\n            p=tmp_path/'canary.json';p.write_text('{}')\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,'0'*64)\n            return\n        if case=='unowned-database':\n            from sqlalchemy import create_engine,text\n            p=tmp_path/'legacy.sqlite';engine=create_engine('sqlite:///'+str(p))\n            with engine.begin() as conn:conn.execute(text('CREATE TABLE unrelated_canary (id INTEGER)'))\n            engine.dispose()\n            with pytest.raises(ValueError):PersistentRepository('sqlite:///'+str(p),disposable_root=tmp_path)\n            return\n        db=store(tmp_path,'file');r,c=seed(db)\n        if case=='authority-original-claim':\n            authority=EvidenceAuthority.unconfigured();db.authority=authority\n            seen=[];original=EvidenceAuthority.check_claim\n            def spy(self,claim,known_at,purpose='RESEARCH'):\n                seen.append(claim)\n                return original(self,claim,known_at,purpose)\n            monkeypatch.setattr(EvidenceAuthority,'check_claim',spy)\n            b=replace(c,claim_id='b',known_from=K+timedelta(days=1),supersedes_claim_id='claim-a',symbol='TOKEN-B')\n            db.append_identity_correction(b)\n            db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K)\n>           assert seen==[c]  # Authority digest must bind original stored bytes, not derived closure.\n            ^^^^^^^^^^^^^^^^\nE           AssertionError: assert [IdentifierCl...identity/v1')] == [IdentifierCl...identity/v1')]\nE             \nE             At index 0 diff: IdentifierClaim(claim_id='claim-a', listing_id='listing-a', exchange='CANARY-X', symbol='TOKEN', series='SERIES', valid_from=datetime.date(2001, 1, 1), valid_to=None, known_from=datetime.datetime(2001, 1, 1, 0, 0, tzinfo=datetime.timezone.utc), known_to=datetime.datetime(2001, 1, 2, 0, 0, tzinfo=datetime.timezone.utc), evidence=Evidence(evidence_id='canary-e', classification='NON_MARKET_CANARY', authentication='UNVERIFIED', permission='PERMITTED', review_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.i...\nE             \nE             ...Full output truncated (2 lines hidden), use '-vv' to show\n\ntests/unit/test_od06_foundation.py:235: AssertionError\n___________________ test_persistent_review[event-idempotent] ___________________\n\ntmp_path = PosixPath('/work/job/tmp/test_persistent_review_event_i0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76b335b85f70>\ncase = 'event-idempotent'\n\n    @pytest.mark.parametrize('case',['authority-original-claim','event-idempotent','unknown-membership',\n        'competing-threads','evidence-id-conflict','session-idempotent','session-competing','query-order',\n        'pinned-tamper','unowned-database','three-step-reversal'])\n    def test_persistent_review(tmp_path,monkeypatch,case):\n        from omegadata.identity_authority import EvidenceAuthority\n        from omegadata.identity_repository import PersistentRepository\n        if case=='pinned-tamper':\n            p=tmp_path/'canary.json';p.write_text('{}')\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,'0'*64)\n            return\n        if case=='unowned-database':\n            from sqlalchemy import create_engine,text\n            p=tmp_path/'legacy.sqlite';engine=create_engine('sqlite:///'+str(p))\n            with engine.begin() as conn:conn.execute(text('CREATE TABLE unrelated_canary (id INTEGER)'))\n            engine.dispose()\n            with pytest.raises(ValueError):PersistentRepository('sqlite:///'+str(p),disposable_root=tmp_path)\n            return\n        db=store(tmp_path,'file');r,c=seed(db)\n        if case=='authority-original-claim':\n            authority=EvidenceAuthority.unconfigured();db.authority=authority\n            seen=[];original=EvidenceAuthority.check_claim\n            def spy(self,claim,known_at,purpose='RESEARCH'):\n                seen.append(claim)\n                return original(self,claim,known_at,purpose)\n            monkeypatch.setattr(EvidenceAuthority,'check_claim',spy)\n            b=replace(c,claim_id='b',known_from=K+timedelta(days=1),supersedes_claim_id='claim-a',symbol='TOKEN-B')\n            db.append_identity_correction(b)\n            db.resolve_listing('CANARY-X','TOKEN','SERIES',D,K)\n            assert seen==[c]  # Authority digest must bind original stored bytes, not derived closure.\n        elif case=='event-idempotent':\n            m,e,_,_=system();ev=m.LifecycleEvent('ev','LISTING',('listing-a',),e)\n>           db.append_event(ev);db.append_event(ev,idempotent=True)\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od06_foundation.py:238: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/identity_repository.py:262: in append_event\n    validate_events((*old,value))\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nevents = (LifecycleEvent(event_id='ev', event_type='LISTING', affected_identity_ids=('listing-a',), evidence=Evidence(evidence_...persedes_event_id=None, validation_status='UNVERIFIED', continuity_review_reference=None, version='od06.lifecycle/v1'))\n\n    def validate_events(events: tuple[LifecycleEvent, ...]) -> tuple[LifecycleEvent, ...]:\n        by_id = {e.event_id: e for e in events}\n        if len(by_id) != len(events):\n>           raise ValueError('DUPLICATE_EVENT')\nE           ValueError: DUPLICATE_EVENT\n\nsrc/omegadata/identity.py:314: ValueError\n___________________ test_pinned_authority_refusals[bad-hash] ___________________\n\ntmp_path = PosixPath('/work/job/tmp/test_pinned_authority_refusals10')\nattack = 'bad-hash'\n\n    @pytest.mark.parametrize('attack',['untrusted','revoked','superseded','missing-id','source-mismatch',\n        'wrong-purpose','unknown-time','future-review','duplicate-review','canary','bad-hash','pending-rights'])\n    def test_pinned_authority_refusals(tmp_path,attack):\n        \"\"\"Hostile metadata labels, never an actual publisher approval or market row.\"\"\"\n        import hashlib\n        import json\n        from omegadata.identity_authority import EvidenceAuthority,claim_digest\n        _,_,_,c=system()\n        source={'source_key':'NSE_EQUITY_BHAVCOPY','artifact_sha256':'a'*64,\n            'publisher_identity':'FORGED_NON_MARKET_CANARY','document_version':'canary-v1',\n            'authentication':'VERIFIED','available_at':K.isoformat()}\n        review={'reviewer_id':'FORGED_NON_MARKET_CANARY','attestation_identity':'canary-review','reviewed_at':K.isoformat()}\n        record={'evidence_id':'test','classification':'AUTHENTIC_SOURCE','claim_sha256':claim_digest(c),\n                'source_record':source,'reviewer_attestation':review}\n        if attack=='revoked':record['revoked']=True\n        if attack=='superseded':record['superseded']=True\n        if attack=='unknown-time':source['available_at']=None\n        if attack=='future-review':review['reviewed_at']=(K+timedelta(days=1)).isoformat()\n        if attack=='canary':record['classification']='NON_MARKET_CANARY'\n        if attack=='bad-hash':source['artifact_sha256']='not-a-sha'\n        rows=[record,record] if attack=='duplicate-review' else [record]\n        raw=json.dumps({'schema_version':'od06.authority/v1','records':rows}).encode()\n        p=tmp_path/'hostile-metadata.json';p.write_bytes(raw)\n        if attack=='duplicate-review':\n            with pytest.raises(ValueError):EvidenceAuthority.from_pinned_bundle(p,hashlib.sha256(raw).hexdigest())\n            return\n        authority=EvidenceAuthority.from_pinned_bundle(p,hashlib.sha256(raw).hexdigest())\n        supplied=dict(source)\n        if attack=='source-mismatch':supplied['source_key']='OTHER'\n        decision=authority.verify_identity_evidence('missing' if attack=='missing-id' else 'test',supplied,review,\n            'UNSUPPORTED' if attack=='wrong-purpose' else 'RESEARCH',K,claim_digest(c))\n        assert not decision.allowed and not decision.financial_eligible\n        if attack=='pending-rights':assert decision.reason=='SOURCE_RIGHTS_BLOCKED:POLICY_PENDING'\n>       if attack=='bad-hash':assert decision.reason=='PROVENANCE_INCOMPLETE'\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError: assert 'SOURCE_RIGHT...OLICY_PENDING' == 'PROVENANCE_INCOMPLETE'\nE         \nE         - PROVENANCE_INCOMPLETE\nE         + SOURCE_RIGHTS_BLOCKED:POLICY_PENDING\n\ntests/unit/test_od06_foundation.py:311: AssertionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od06_foundation.py::test_persistent_review[authority-original-claim]\nFAILED tests/unit/test_od06_foundation.py::test_persistent_review[event-idempotent]\nFAILED tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[bad-hash]\n3 failed, 77 passed in 5.06s\n",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/foundation-b9b2c4c09f/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

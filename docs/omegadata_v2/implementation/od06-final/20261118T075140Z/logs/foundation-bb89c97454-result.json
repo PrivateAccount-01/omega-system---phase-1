@@ -1,0 +1,450 @@
+{
+  "job": "foundation",
+  "exit_code": 1,
+  "counts": {
+    "passed": 83,
+    "failed": 1
+  },
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[insert-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[insert-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[duplicate-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[duplicate-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[idempotent-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[idempotent-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[restart-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[restart-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[correction-chain-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[correction-chain-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[rollback-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[rollback-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[foreign-key-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[foreign-key-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[overlap-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[overlap-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[immutable-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[immutable-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[version-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[version-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[competing-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[competing-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[migration-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[migration-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[history-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[history-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[event-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[event-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[calendar-memory]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistence[calendar-file]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[plain-labels]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[resolution-write]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[session-write]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[universe-write]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[forged-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[revoked]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[missing]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[source-mismatch]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[wrong-purpose]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[unknown-time]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[future-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[conflicting-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[canary-promotion]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[unrelated-correction]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_authority_and_semantics[event-list-mutation]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[incomplete]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[no-annual-inference]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[next]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[previous]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[coverage-persistence]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[later-correction]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[time-conflict]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_calendar_completion[revoked-session]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[coverage-not-completeness]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[membership-revision]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[accounting]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_universe_completion[removal]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[authority-original-claim]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[event-idempotent]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[unknown-membership]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[competing-threads]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[evidence-id-conflict]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[session-idempotent]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[session-competing]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[query-order]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[pinned-tamper]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[unowned-database]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_persistent_review[three-step-reversal]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[untrusted]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[revoked]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[superseded]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[missing-id]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[source-mismatch]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[wrong-purpose]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[unknown-time]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[future-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[duplicate-review]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[canary]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[bad-hash]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_pinned_authority_refusals[pending-rights]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_unknown_membership_no_inferred_query",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_shared_database_worker_contract",
+      "outcome": "failed",
+      "reason": "def test_shared_database_worker_contract():\n>       from od06_database_experiments import shared_contract\nE         File \"/work/repo/scripts/od06_database_experiments.py\", line 105\nE           except ValueError:\nE           ^^^^^^\nE       SyntaxError: invalid syntax\n\ntests/unit/test_od06_foundation.py:654: SyntaxError"
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_final_semantic_refusals[unknown-lifecycle]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od06_foundation.py::test_final_semantic_refusals[calendar-version]",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "start_utc": "2026-11-18T13:33:25.651028+00:00",
+  "end_utc": "2026-11-18T13:33:31.803401+00:00",
+  "elapsed_seconds": 6.152371557999999,
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "stdout_stderr": "........................................................................ [ 85%]\n.........F..                                                             [100%]\n=================================== FAILURES ===================================\n_____________________ test_shared_database_worker_contract _____________________\n\n    def test_shared_database_worker_contract():\n>       from od06_database_experiments import shared_contract\nE         File \"/work/repo/scripts/od06_database_experiments.py\", line 105\nE           except ValueError:\nE           ^^^^^^\nE       SyntaxError: invalid syntax\n\ntests/unit/test_od06_foundation.py:654: SyntaxError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od06_foundation.py::test_shared_database_worker_contract\n1 failed, 83 passed in 4.99s\n",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532223]",
+      "net": "net:[4026532228]",
+      "pid": "pid:[4026532226]",
+      "user": "user:[4026532293]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/foundation-bb89c97454/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

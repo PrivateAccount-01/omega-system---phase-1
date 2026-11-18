@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/mypy-947aa225e0-manifest.json",
+    "--manifest-sha256",
+    "535508e1e0ca3fa21dec555063761846366f7260fda2fc6022506ed7a9e8a060",
+    "--policy",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/logs/mypy-947aa225e0-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od06-final-20261118T075140Z/mypy-947aa225e0/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od06-final-20261118T075140Z",
+  "start_utc": "2026-11-18T08:01:02.580531+00:00",
+  "end_utc": "2026-11-18T08:01:18.617994+00:00",
+  "elapsed_seconds": 16.037464865999993,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-18T08:01:04.394884+00:00",
+    "end_utc": "2026-11-18T08:01:14.629142+00:00",
+    "elapsed_seconds": 10.234260727999995,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/identity_authority.py:121: error: Argument 1 to \"fromisoformat\" of \"date\" has incompatible type \"Any | None\"; expected \"str\"  [arg-type]\nsrc/omegadata/identity_repository.py:170: error: \"object\" has no attribute \"issuer_id\"  [attr-defined]\nsrc/omegadata/identity_repository.py:170: error: \"object\" has no attribute \"security_id\"  [attr-defined]\nsrc/omegadata/identity_repository.py:170: error: \"object\" has no attribute \"exchange\"  [attr-defined]\nFound 4 errors in 2 files (checked 64 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532224]",
+        "net": "net:[4026532229]",
+        "pid": "pid:[4026532227]",
+        "user": "user:[4026532295]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od06-final-20261118T075140Z/mypy-947aa225e0/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "mypy",
+  "source_commit": "4e663af492a96a3ff36d61a47c1e213bbf6cd740",
+  "source_manifest_sha256": "535508e1e0ca3fa21dec555063761846366f7260fda2fc6022506ed7a9e8a060"
+}
