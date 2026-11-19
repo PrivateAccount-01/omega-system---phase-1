@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/compile-294949e688-manifest.json",
+    "--manifest-sha256",
+    "586d9d1d302378cf904a1f2540d414688b4731541721e49c31e9c6a0468b643b",
+    "--policy",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/compile-294949e688-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/compile-294949e688/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-final-20261119T175351Z",
+  "start_utc": "2026-11-19T18:19:47.246534+00:00",
+  "end_utc": "2026-11-19T18:19:50.219626+00:00",
+  "elapsed_seconds": 2.9730857349999837,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-19T18:19:50.019993+00:00",
+    "end_utc": "2026-11-19T18:19:50.198458+00:00",
+    "elapsed_seconds": 0.17845521500001382,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-final-20261119T175351Z/compile-294949e688/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "compile",
+  "source_commit": "91a0030094c0132b6a5586ce277ed1e56eb5e396",
+  "source_manifest_sha256": "586d9d1d302378cf904a1f2540d414688b4731541721e49c31e9c6a0468b643b"
+}

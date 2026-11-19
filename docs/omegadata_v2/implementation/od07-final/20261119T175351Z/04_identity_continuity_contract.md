@@ -1,0 +1,4 @@
+# Stable listing continuity; minimal OD07 dependency fix
+MemoryIdentityRepository.resolve_listing_id is an additive opt-in query. It filters valid/knowledge intervals,supersession and stable listing;then reuses existing authority/conflict resolver. Raw identifiers resolve at observation date; subsequent state resolves through that listing,not the oldticker. No ticker guess,ISIN-derived continuity,active-only filter or ORM migration.
+
+Renames and series changes preserve SAME_LISTING_CONTINUITY. Symbol reuse/wrongvenue/ambiguous mapping cannot merge securities. Historical delisted/suspended research data may remain HISTORICALLY_VALID_BUT_NOT_TRADABLE;execution status independently blocks. Missing/unreviewed security conversion remainsIDENTITY_TRANSITION_BLOCKED. Future-known correction excluded from earlier digest. Persistent OD06 repository unchanged;its immutable typed snapshots can feed the existing memory query contract. Lifecycle evidence is not manufactured.

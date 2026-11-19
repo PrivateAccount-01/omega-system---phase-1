@@ -1,0 +1,456 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/od07final-6553f9436e-manifest.json",
+    "--manifest-sha256",
+    "e6f2c4b763dfc78dbe24c4fc7678477a6511134adc9f6fd185e640e710156d32",
+    "--policy",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/od07final-6553f9436e-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/od07final-6553f9436e/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-final-20261119T175351Z",
+  "start_utc": "2026-11-19T18:10:35.076945+00:00",
+  "end_utc": "2026-11-19T18:10:40.164134+00:00",
+  "elapsed_seconds": 5.087171521,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od07final",
+    "exit_code": 1,
+    "counts": {
+      "passed": 74,
+      "failed": 6
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[K01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[K02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[K03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D04]",
+        "outcome": "failed",
+        "reason": "group = 'D04'\ntmp_path = PosixPath('/work/job/tmp/test_targeted_contract_D04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_targeted_contract(group,tmp_path):\n        parts=setup_bound();b,c,x,a,raw,h,p,params,pin,run=parts\n        if group.startswith('R'):\n            change={'R01':{'security_id':'wrong'},'R02':{'listing_id':'wrong'},'R03':{'exchange':'OTHER'},'R04':{'price_basis':'BACKWARD_ADJUSTED'},'R05':{'observation_id':''},'R06':{}}[group]\n            out=calculate(rights_case(**change))\n            assert out.status==('CALCULATED' if group=='R06' else 'BLOCKED_IDENTITY' if group in {'R01','R02','R03'} else 'BLOCKED_EVIDENCE')\n            if group=='R06':assert out.adjusted_price==Decimal(108)\n        elif group=='I01':\n            old=x.identity_repository.claims[0]\n            renamed=replace(old,claim_id='renamed',valid_from=D-timedelta(days=1),symbol='NEW',series='OTHER')\n            repo=replace(x.identity_repository,claims=(replace(old,valid_to=renamed.valid_from),renamed))\n            out=calculate(setup_bound(context=replace(x,identity_repository=repo)))\n            assert out.status=='CALCULATED' and out.identity_status=='SAME_LISTING_CONTINUITY'\n        elif group=='I02':\n            from omegadata.identity import Security, Listing\n            old=x.identity_repository.claims[0]\n            future=replace(old,claim_id='reuse',valid_from=D,symbol='TOKEN',listing_id='other-listing')\n            renamed=replace(old,claim_id='rename',valid_from=D,symbol='NEW')\n            repo=replace(x.identity_repository,securities=(*x.identity_repository.securities,Security('other-security','i')),listings=(*x.identity_repository.listings,Listing('other-listing','other-security','MATH')),claims=(replace(old,valid_to=D),renamed,future))\n            assert calculate(setup_bound(context=replace(x,identity_repository=repo))).status=='CALCULATED'\n            wrong=replace(raw,raw=replace(raw.raw,security_id='other-security',listing_id='other-listing'))\n            assert calculate(setup_bound(raw=wrong,context=replace(x,identity_repository=repo))).status=='BLOCKED_IDENTITY'\n        elif group=='I03':\n            claim=replace(x.identity_repository.claims[0],lifecycle='DELISTED')\n            out=calculate(setup_bound(context=replace(x,identity_repository=replace(x.identity_repository,claims=(claim,)))))\n            assert out.status=='CALCULATED' and out.identity_status=='HISTORICALLY_VALID_BUT_NOT_TRADABLE'\n        elif group=='I04':\n            claim=x.identity_repository.claims[0]\n            repo=replace(x.identity_repository,claims=(replace(claim,valid_to=D),))\n            assert calculate(setup_bound(context=replace(x,identity_repository=repo))).status=='BLOCKED_IDENTITY'\n        elif group=='H01':\n            assert calculate(parts).status=='CALCULATED'\n            assert calculate(setup_bound(history_state='PARTIAL')).status=='BLOCKED_EVIDENCE'\n        elif group=='H02':\n            assert calculate(setup_bound((),history_state='UNKNOWN')).status=='BLOCKED_EVIDENCE'\n            empty=calculate(setup_bound(()))\n            assert empty.status=='CALCULATED' and not empty.publication_eligibility\n        elif group=='H03':\n            altered=replace(h,action_revision_ids=('a','missing'))\n            assert run(replace(pin,history=altered)).status=='CONFLICTING_ACTIONS'\n        elif group=='H04':\n            other=replace(a,action_id='b',sequence=2)\n            parts=setup_bound((replace(a,sequence=1),other))\n            pin=parts[8]\n            bad=replace(pin.history,economic_event_ids=(('a','same-event'),('b','same-event')))\n            assert run(replace(pin,history=bad)).status=='CONFLICTING_ACTIONS'\n        elif group in {'P01','P02','P03','P04'}:\n            from omegadata.adjustments.repository import AdjustmentRepository\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            db.pin_context(pin);out=run(pin)\n            if group=='P01':\n                db.append_bound_result(out,'context');assert db.get_result(out.output_digest)==out.canonical_json\n            else:\n                field={'P02':'raw_observation_digest','P03':'knowledge_cutoff','P04':'identity_snapshot_digest'}[group]\n                import json\n                bindings=json.loads(out.context_bindings);bindings[field]='tampered'\n                bad=replace(out,context_bindings=c.canonical(bindings))\n                with pytest.raises(ValueError):db.append_bound_result(bad,'context')\n        elif group=='E01':\n            exec_policy=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date)\n            out=calculate(setup_bound((),basis=exec_policy))\n            assert out.status=='CALCULATED' and out.raw_price_basis_preserved\n            assert not out.execution_eligibility and not out.publication_eligibility\n        elif group=='E02':\n            claim=replace(x.identity_repository.claims[0],lifecycle='SUSPENDED')\n            repo=replace(x.identity_repository,claims=(claim,))\n            out=calculate(setup_bound((),context=replace(x,identity_repository=repo),basis=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date)))\n            assert out.status=='CALCULATED' and out.tradability_status=='SUSPENDED'\n            assert not out.execution_eligibility\n        elif group=='E03':\n            out=calculate(setup_bound((),basis=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date)))\n            assert out.execution_status.startswith('BLOCKED')\n        elif group=='K01':\n            assert calculate(setup_bound(parameters=())).status=='BLOCKED_KNOWLEDGE'\n        elif group=='K02':\n            future=replace(params[0],known_from=x.known_at+timedelta(seconds=1))\n            assert calculate(setup_bound(parameters=(future,))).status=='BLOCKED_KNOWLEDGE'\n            boundary=replace(future,known_from=x.known_at)\n            assert calculate(setup_bound(parameters=(boundary,))).status=='CALCULATED'\n        elif group=='K03':\n            corrected=replace(a,action_id='b',action_revision=2,supersedes_action_id='a',known_from=x.known_at+timedelta(days=1),parameters=c.Split(Decimal(4)))\n            early=calculate(parts)\n            later_ledger=calculate(setup_bound((a,corrected)))\n            assert early.output_digest==later_ledger.output_digest\n        elif group=='D01':\n            pre=calculate(parts);assert pre.adjusted_price==Decimal(60)\n            on=replace(raw,raw=replace(raw.raw,trade_date=D,price=Decimal(60)))\n            assert calculate(setup_bound(raw=on)).adjusted_price==Decimal(60)\n        elif group=='D02':\n            policy=b.BasisPolicy('PRICE_RETURN','FORWARD_ADJUSTED',D-timedelta(days=1))\n            on=replace(raw,raw=replace(raw.raw,trade_date=D,price=Decimal(60)))\n            assert calculate(setup_bound(raw=on,basis=policy)).adjusted_price==Decimal(120)\n            assert calculate(setup_bound(basis=policy)).adjusted_price==Decimal(120)\n        elif group=='D03':\n            inverse=b.BasisPolicy('PRICE_RETURN','INVERSE_FACTOR_COMPARISON',x.valid_at)\n            assert calculate(setup_bound(basis=inverse)).adjusted_price==Decimal(240)\n            assert calculate(setup_bound(basis=inverse)).adjustment_basis=='INVERSE_FACTOR_COMPARISON'\n        elif group=='D04':\n            other=replace(a,action_id='b',ex_date=D+timedelta(days=1),parameters=c.Bonus(Decimal(1),Decimal(2)))\n>           assert calculate(setup_bound((a,other))).adjusted_price==Decimal(40)\nE           AssertionError: assert None == Decimal('40')\nE            +  where None = BoundResult(calculation=Result(status='UNSUPPORTED_POLICY', reason='ACTION_OR_PARAMETER_CONTRACT_UNSUPPORTED', origina...N_MARKET_STRUCTURAL_CONTROL', execution_eligibility=False, publication_eligibility=False, version='od07.bound-calc/v2').adjusted_price\nE            +    where BoundResult(calculation=Result(status='UNSUPPORTED_POLICY', reason='ACTION_OR_PARAMETER_CONTRACT_UNSUPPORTED', origina...N_MARKET_STRUCTURAL_CONTROL', execution_eligibility=False, publication_eligibility=False, version='od07.bound-calc/v2') = calculate((<module 'omegadata.adjustments.bound_contracts' from '/work/repo/src/omegadata/adjustments/bound_contracts.py'>, <mod...n='od07.basis-policy/v2', economic_event_ids=(('a', 'a'), ('b', 'b')), snapshot_version='od07.action-history/v2'), ...))\nE            +      where (<module 'omegadata.adjustments.bound_contracts' from '/work/repo/src/omegadata/adjustments/bound_contracts.py'>, <mod...n='od07.basis-policy/v2', economic_event_ids=(('a', 'a'), ('b', 'b')), snapshot_version='od07.action-history/v2'), ...) = setup_bound((Action(action_id='a', action_type='SPLIT', security_id='s', listing_id='l', exchange='MATH', evidence=Evidence(eviden...1', action_revision=1, supersedes_action_id=None, review_status='UNVERIFIED', sequence=None, version='od07.action/v1')))\nE            +  and   Decimal('40') = Decimal(40)\n\ntests/unit/test_od07_final.py:145: AssertionError"
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[omitted-action]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[fabricated-empty]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[wrong-raw]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[wrong-profile]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[changed-revision]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[source-artifact]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[knowledge-cutoff]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[missing-calendar]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[identity-snapshot]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[incorrect-factor]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[incomplete-math]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[duplicate-event]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[reused-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[unbound-reference]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[wrong-type]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[wrong-unit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[expired-reference]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[future-reference]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[unknown-parameter-time]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[revoked-parameter]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[incomplete-parameter]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[zero-issue]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[corrected-terms]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[wrong-venue-symbol]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[ambiguous-identity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[reopen-context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[legacy-migration]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[rollback-context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[strict-no-promotion]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2--2-120-BACKWARD_ADJUSTED-60]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-0-60-BACKWARD_ADJUSTED-60]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-1-60-BACKWARD_ADJUSTED-60]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2--2-120-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-0-60-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-1-60-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5--2-120-BACKWARD_ADJUSTED-240]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5-0-240-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5-1-240-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_legacy_rename_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[independent-oracle]",
+        "outcome": "failed",
+        "reason": "case = 'independent-oracle'\ntmp_path = PosixPath('/work/job/tmp/test_semantic_review_independe0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e6bf6b3cbf0>\n\n    @pytest.mark.parametrize('case',['independent-oracle','independent-lineage','valid-session-missing-lot','closed-session','delisted-execution','canary-execution-promotion','future-identity','unreviewed-merger','undefined-forward-rights','schema-version'])\n    def test_semantic_review(case,tmp_path,monkeypatch):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        from omegadata.session_calendar import SessionClaim\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case in {'independent-oracle','independent-lineage'}:\n            from omegadata.adjustments import admission\n            out=run(pin)\n            if case=='independent-oracle':bad=replace(out,calculation=replace(out.calculation,adjusted_price=Decimal(999)))\n            else:\n                link=replace(out.calculation.adjustment_factor_chain[0],source_artifact_id='wrong')\n                bad=replace(out,calculation=replace(out.calculation,adjustment_factor_chain=(link,)))\n            monkeypatch.setattr(admission,'calculate_bound_chain',lambda ignored:bad)\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n>           with pytest.raises(ValueError):db.pin_context(pin)\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_final.py:275: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[independent-lineage]",
+        "outcome": "failed",
+        "reason": "case = 'independent-lineage'\ntmp_path = PosixPath('/work/job/tmp/test_semantic_review_independe1')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e6bf6c92ea0>\n\n    @pytest.mark.parametrize('case',['independent-oracle','independent-lineage','valid-session-missing-lot','closed-session','delisted-execution','canary-execution-promotion','future-identity','unreviewed-merger','undefined-forward-rights','schema-version'])\n    def test_semantic_review(case,tmp_path,monkeypatch):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        from omegadata.session_calendar import SessionClaim\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case in {'independent-oracle','independent-lineage'}:\n            from omegadata.adjustments import admission\n            out=run(pin)\n            if case=='independent-oracle':bad=replace(out,calculation=replace(out.calculation,adjusted_price=Decimal(999)))\n            else:\n                link=replace(out.calculation.adjustment_factor_chain[0],source_artifact_id='wrong')\n                bad=replace(out,calculation=replace(out.calculation,adjustment_factor_chain=(link,)))\n            monkeypatch.setattr(admission,'calculate_bound_chain',lambda ignored:bad)\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n>           with pytest.raises(ValueError):db.pin_context(pin)\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_final.py:275: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[valid-session-missing-lot]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[closed-session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[delisted-execution]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[canary-execution-promotion]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[future-identity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[unreviewed-merger]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[undefined-forward-rights]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[schema-version]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[parameter-time-contradiction]",
+        "outcome": "failed",
+        "reason": "case = 'parameter-time-contradiction'\n\n    @pytest.mark.parametrize('case',['parameter-time-contradiction','unknown-quantity-convention','future-basis'])\n    def test_explicit_temporal_and_execution_scope(case):\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case=='parameter-time-contradiction':\n            a=replace(a,parameter_known_from=x.known_at+timedelta(days=1))\n>           assert calculate(setup_bound((a,))).status=='BLOCKED_KNOWLEDGE'\nE           AssertionError: assert 'CALCULATED' == 'BLOCKED_KNOWLEDGE'\nE             \nE             - BLOCKED_KNOWLEDGE\nE             + CALCULATED\n\ntests/unit/test_od07_final.py:320: AssertionError"
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[unknown-quantity-convention]",
+        "outcome": "failed",
+        "reason": "case = 'unknown-quantity-convention'\n\n    @pytest.mark.parametrize('case',['parameter-time-contradiction','unknown-quantity-convention','future-basis'])\n    def test_explicit_temporal_and_execution_scope(case):\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case=='parameter-time-contradiction':\n            a=replace(a,parameter_known_from=x.known_at+timedelta(days=1))\n            assert calculate(setup_bound((a,))).status=='BLOCKED_KNOWLEDGE'\n        elif case=='future-basis':\n            assert calculate(setup_bound(basis=replace(p,basis_date=x.valid_at+timedelta(days=1)))).status=='BLOCKED_KNOWLEDGE'\n        else:\n            from omegadata.session_calendar import SessionClaim\n            session=SessionClaim('raw','MATH',raw.raw.trade_date,'REGULAR','Asia/Kolkata','cal-v1',a.evidence,K,None)\n            x=replace(x,calendar=replace(x.calendar,claims=(*x.calendar.claims,session)))\n            terms=b.ExecutionConstraints('s','l','MATH',raw.raw.trade_date,K,a.evidence,10,'20','UNREVIEWED_CONVENTION','CANARY_ONLY','CLEAR')\n            bits=setup_bound((),context=x,basis=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date))\n>           assert run(replace(bits[8],execution_constraints=terms)).execution_status=='BLOCKED_EXECUTION_CONSTRAINTS'\nE           AssertionError: assert 'BLOCKED_NON_MARKET_CONTROL' == 'BLOCKED_EXEC...N_CONSTRAINTS'\nE             \nE             - BLOCKED_EXECUTION_CONSTRAINTS\nE             + BLOCKED_NON_MARKET_CONTROL\n\ntests/unit/test_od07_final.py:329: AssertionError"
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[future-basis]",
+        "outcome": "failed",
+        "reason": "case = 'future-basis'\n\n    @pytest.mark.parametrize('case',['parameter-time-contradiction','unknown-quantity-convention','future-basis'])\n    def test_explicit_temporal_and_execution_scope(case):\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case=='parameter-time-contradiction':\n            a=replace(a,parameter_known_from=x.known_at+timedelta(days=1))\n            assert calculate(setup_bound((a,))).status=='BLOCKED_KNOWLEDGE'\n        elif case=='future-basis':\n>           assert calculate(setup_bound(basis=replace(p,basis_date=x.valid_at+timedelta(days=1)))).status=='BLOCKED_KNOWLEDGE'\nE           AssertionError: assert 'CALCULATED' == 'BLOCKED_KNOWLEDGE'\nE             \nE             - BLOCKED_KNOWLEDGE\nE             + CALCULATED\n\ntests/unit/test_od07_final.py:322: AssertionError"
+      }
+    ],
+    "start_utc": "2026-11-19T18:10:36.353728+00:00",
+    "end_utc": "2026-11-19T18:10:39.628522+00:00",
+    "elapsed_seconds": 3.274795308,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "...........................F.......................................FF... [ 90%]\n.....FFF                                                                 [100%]\n=================================== FAILURES ===================================\n_________________________ test_targeted_contract[D04] __________________________\n\ngroup = 'D04'\ntmp_path = PosixPath('/work/job/tmp/test_targeted_contract_D04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_targeted_contract(group,tmp_path):\n        parts=setup_bound();b,c,x,a,raw,h,p,params,pin,run=parts\n        if group.startswith('R'):\n            change={'R01':{'security_id':'wrong'},'R02':{'listing_id':'wrong'},'R03':{'exchange':'OTHER'},'R04':{'price_basis':'BACKWARD_ADJUSTED'},'R05':{'observation_id':''},'R06':{}}[group]\n            out=calculate(rights_case(**change))\n            assert out.status==('CALCULATED' if group=='R06' else 'BLOCKED_IDENTITY' if group in {'R01','R02','R03'} else 'BLOCKED_EVIDENCE')\n            if group=='R06':assert out.adjusted_price==Decimal(108)\n        elif group=='I01':\n            old=x.identity_repository.claims[0]\n            renamed=replace(old,claim_id='renamed',valid_from=D-timedelta(days=1),symbol='NEW',series='OTHER')\n            repo=replace(x.identity_repository,claims=(replace(old,valid_to=renamed.valid_from),renamed))\n            out=calculate(setup_bound(context=replace(x,identity_repository=repo)))\n            assert out.status=='CALCULATED' and out.identity_status=='SAME_LISTING_CONTINUITY'\n        elif group=='I02':\n            from omegadata.identity import Security, Listing\n            old=x.identity_repository.claims[0]\n            future=replace(old,claim_id='reuse',valid_from=D,symbol='TOKEN',listing_id='other-listing')\n            renamed=replace(old,claim_id='rename',valid_from=D,symbol='NEW')\n            repo=replace(x.identity_repository,securities=(*x.identity_repository.securities,Security('other-security','i')),listings=(*x.identity_repository.listings,Listing('other-listing','other-security','MATH')),claims=(replace(old,valid_to=D),renamed,future))\n            assert calculate(setup_bound(context=replace(x,identity_repository=repo))).status=='CALCULATED'\n            wrong=replace(raw,raw=replace(raw.raw,security_id='other-security',listing_id='other-listing'))\n            assert calculate(setup_bound(raw=wrong,context=replace(x,identity_repository=repo))).status=='BLOCKED_IDENTITY'\n        elif group=='I03':\n            claim=replace(x.identity_repository.claims[0],lifecycle='DELISTED')\n            out=calculate(setup_bound(context=replace(x,identity_repository=replace(x.identity_repository,claims=(claim,)))))\n            assert out.status=='CALCULATED' and out.identity_status=='HISTORICALLY_VALID_BUT_NOT_TRADABLE'\n        elif group=='I04':\n            claim=x.identity_repository.claims[0]\n            repo=replace(x.identity_repository,claims=(replace(claim,valid_to=D),))\n            assert calculate(setup_bound(context=replace(x,identity_repository=repo))).status=='BLOCKED_IDENTITY'\n        elif group=='H01':\n            assert calculate(parts).status=='CALCULATED'\n            assert calculate(setup_bound(history_state='PARTIAL')).status=='BLOCKED_EVIDENCE'\n        elif group=='H02':\n            assert calculate(setup_bound((),history_state='UNKNOWN')).status=='BLOCKED_EVIDENCE'\n            empty=calculate(setup_bound(()))\n            assert empty.status=='CALCULATED' and not empty.publication_eligibility\n        elif group=='H03':\n            altered=replace(h,action_revision_ids=('a','missing'))\n            assert run(replace(pin,history=altered)).status=='CONFLICTING_ACTIONS'\n        elif group=='H04':\n            other=replace(a,action_id='b',sequence=2)\n            parts=setup_bound((replace(a,sequence=1),other))\n            pin=parts[8]\n            bad=replace(pin.history,economic_event_ids=(('a','same-event'),('b','same-event')))\n            assert run(replace(pin,history=bad)).status=='CONFLICTING_ACTIONS'\n        elif group in {'P01','P02','P03','P04'}:\n            from omegadata.adjustments.repository import AdjustmentRepository\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            db.pin_context(pin);out=run(pin)\n            if group=='P01':\n                db.append_bound_result(out,'context');assert db.get_result(out.output_digest)==out.canonical_json\n            else:\n                field={'P02':'raw_observation_digest','P03':'knowledge_cutoff','P04':'identity_snapshot_digest'}[group]\n                import json\n                bindings=json.loads(out.context_bindings);bindings[field]='tampered'\n                bad=replace(out,context_bindings=c.canonical(bindings))\n                with pytest.raises(ValueError):db.append_bound_result(bad,'context')\n        elif group=='E01':\n            exec_policy=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date)\n            out=calculate(setup_bound((),basis=exec_policy))\n            assert out.status=='CALCULATED' and out.raw_price_basis_preserved\n            assert not out.execution_eligibility and not out.publication_eligibility\n        elif group=='E02':\n            claim=replace(x.identity_repository.claims[0],lifecycle='SUSPENDED')\n            repo=replace(x.identity_repository,claims=(claim,))\n            out=calculate(setup_bound((),context=replace(x,identity_repository=repo),basis=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date)))\n            assert out.status=='CALCULATED' and out.tradability_status=='SUSPENDED'\n            assert not out.execution_eligibility\n        elif group=='E03':\n            out=calculate(setup_bound((),basis=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date)))\n            assert out.execution_status.startswith('BLOCKED')\n        elif group=='K01':\n            assert calculate(setup_bound(parameters=())).status=='BLOCKED_KNOWLEDGE'\n        elif group=='K02':\n            future=replace(params[0],known_from=x.known_at+timedelta(seconds=1))\n            assert calculate(setup_bound(parameters=(future,))).status=='BLOCKED_KNOWLEDGE'\n            boundary=replace(future,known_from=x.known_at)\n            assert calculate(setup_bound(parameters=(boundary,))).status=='CALCULATED'\n        elif group=='K03':\n            corrected=replace(a,action_id='b',action_revision=2,supersedes_action_id='a',known_from=x.known_at+timedelta(days=1),parameters=c.Split(Decimal(4)))\n            early=calculate(parts)\n            later_ledger=calculate(setup_bound((a,corrected)))\n            assert early.output_digest==later_ledger.output_digest\n        elif group=='D01':\n            pre=calculate(parts);assert pre.adjusted_price==Decimal(60)\n            on=replace(raw,raw=replace(raw.raw,trade_date=D,price=Decimal(60)))\n            assert calculate(setup_bound(raw=on)).adjusted_price==Decimal(60)\n        elif group=='D02':\n            policy=b.BasisPolicy('PRICE_RETURN','FORWARD_ADJUSTED',D-timedelta(days=1))\n            on=replace(raw,raw=replace(raw.raw,trade_date=D,price=Decimal(60)))\n            assert calculate(setup_bound(raw=on,basis=policy)).adjusted_price==Decimal(120)\n            assert calculate(setup_bound(basis=policy)).adjusted_price==Decimal(120)\n        elif group=='D03':\n            inverse=b.BasisPolicy('PRICE_RETURN','INVERSE_FACTOR_COMPARISON',x.valid_at)\n            assert calculate(setup_bound(basis=inverse)).adjusted_price==Decimal(240)\n            assert calculate(setup_bound(basis=inverse)).adjustment_basis=='INVERSE_FACTOR_COMPARISON'\n        elif group=='D04':\n            other=replace(a,action_id='b',ex_date=D+timedelta(days=1),parameters=c.Bonus(Decimal(1),Decimal(2)))\n>           assert calculate(setup_bound((a,other))).adjusted_price==Decimal(40)\nE           AssertionError: assert None == Decimal('40')\nE            +  where None = BoundResult(calculation=Result(status='UNSUPPORTED_POLICY', reason='ACTION_OR_PARAMETER_CONTRACT_UNSUPPORTED', origina...N_MARKET_STRUCTURAL_CONTROL', execution_eligibility=False, publication_eligibility=False, version='od07.bound-calc/v2').adjusted_price\nE            +    where BoundResult(calculation=Result(status='UNSUPPORTED_POLICY', reason='ACTION_OR_PARAMETER_CONTRACT_UNSUPPORTED', origina...N_MARKET_STRUCTURAL_CONTROL', execution_eligibility=False, publication_eligibility=False, version='od07.bound-calc/v2') = calculate((<module 'omegadata.adjustments.bound_contracts' from '/work/repo/src/omegadata/adjustments/bound_contracts.py'>, <mod...n='od07.basis-policy/v2', economic_event_ids=(('a', 'a'), ('b', 'b')), snapshot_version='od07.action-history/v2'), ...))\nE            +      where (<module 'omegadata.adjustments.bound_contracts' from '/work/repo/src/omegadata/adjustments/bound_contracts.py'>, <mod...n='od07.basis-policy/v2', economic_event_ids=(('a', 'a'), ('b', 'b')), snapshot_version='od07.action-history/v2'), ...) = setup_bound((Action(action_id='a', action_type='SPLIT', security_id='s', listing_id='l', exchange='MATH', evidence=Evidence(eviden...1', action_revision=1, supersedes_action_id=None, review_status='UNVERIFIED', sequence=None, version='od07.action/v1')))\nE            +  and   Decimal('40') = Decimal(40)\n\ntests/unit/test_od07_final.py:145: AssertionError\n___________________ test_semantic_review[independent-oracle] ___________________\n\ncase = 'independent-oracle'\ntmp_path = PosixPath('/work/job/tmp/test_semantic_review_independe0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e6bf6b3cbf0>\n\n    @pytest.mark.parametrize('case',['independent-oracle','independent-lineage','valid-session-missing-lot','closed-session','delisted-execution','canary-execution-promotion','future-identity','unreviewed-merger','undefined-forward-rights','schema-version'])\n    def test_semantic_review(case,tmp_path,monkeypatch):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        from omegadata.session_calendar import SessionClaim\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case in {'independent-oracle','independent-lineage'}:\n            from omegadata.adjustments import admission\n            out=run(pin)\n            if case=='independent-oracle':bad=replace(out,calculation=replace(out.calculation,adjusted_price=Decimal(999)))\n            else:\n                link=replace(out.calculation.adjustment_factor_chain[0],source_artifact_id='wrong')\n                bad=replace(out,calculation=replace(out.calculation,adjustment_factor_chain=(link,)))\n            monkeypatch.setattr(admission,'calculate_bound_chain',lambda ignored:bad)\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n>           with pytest.raises(ValueError):db.pin_context(pin)\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_final.py:275: Failed\n__________________ test_semantic_review[independent-lineage] ___________________\n\ncase = 'independent-lineage'\ntmp_path = PosixPath('/work/job/tmp/test_semantic_review_independe1')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e6bf6c92ea0>\n\n    @pytest.mark.parametrize('case',['independent-oracle','independent-lineage','valid-session-missing-lot','closed-session','delisted-execution','canary-execution-promotion','future-identity','unreviewed-merger','undefined-forward-rights','schema-version'])\n    def test_semantic_review(case,tmp_path,monkeypatch):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        from omegadata.session_calendar import SessionClaim\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case in {'independent-oracle','independent-lineage'}:\n            from omegadata.adjustments import admission\n            out=run(pin)\n            if case=='independent-oracle':bad=replace(out,calculation=replace(out.calculation,adjusted_price=Decimal(999)))\n            else:\n                link=replace(out.calculation.adjustment_factor_chain[0],source_artifact_id='wrong')\n                bad=replace(out,calculation=replace(out.calculation,adjustment_factor_chain=(link,)))\n            monkeypatch.setattr(admission,'calculate_bound_chain',lambda ignored:bad)\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n>           with pytest.raises(ValueError):db.pin_context(pin)\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_final.py:275: Failed\n___ test_explicit_temporal_and_execution_scope[parameter-time-contradiction] ___\n\ncase = 'parameter-time-contradiction'\n\n    @pytest.mark.parametrize('case',['parameter-time-contradiction','unknown-quantity-convention','future-basis'])\n    def test_explicit_temporal_and_execution_scope(case):\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case=='parameter-time-contradiction':\n            a=replace(a,parameter_known_from=x.known_at+timedelta(days=1))\n>           assert calculate(setup_bound((a,))).status=='BLOCKED_KNOWLEDGE'\nE           AssertionError: assert 'CALCULATED' == 'BLOCKED_KNOWLEDGE'\nE             \nE             - BLOCKED_KNOWLEDGE\nE             + CALCULATED\n\ntests/unit/test_od07_final.py:320: AssertionError\n___ test_explicit_temporal_and_execution_scope[unknown-quantity-convention] ____\n\ncase = 'unknown-quantity-convention'\n\n    @pytest.mark.parametrize('case',['parameter-time-contradiction','unknown-quantity-convention','future-basis'])\n    def test_explicit_temporal_and_execution_scope(case):\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case=='parameter-time-contradiction':\n            a=replace(a,parameter_known_from=x.known_at+timedelta(days=1))\n            assert calculate(setup_bound((a,))).status=='BLOCKED_KNOWLEDGE'\n        elif case=='future-basis':\n            assert calculate(setup_bound(basis=replace(p,basis_date=x.valid_at+timedelta(days=1)))).status=='BLOCKED_KNOWLEDGE'\n        else:\n            from omegadata.session_calendar import SessionClaim\n            session=SessionClaim('raw','MATH',raw.raw.trade_date,'REGULAR','Asia/Kolkata','cal-v1',a.evidence,K,None)\n            x=replace(x,calendar=replace(x.calendar,claims=(*x.calendar.claims,session)))\n            terms=b.ExecutionConstraints('s','l','MATH',raw.raw.trade_date,K,a.evidence,10,'20','UNREVIEWED_CONVENTION','CANARY_ONLY','CLEAR')\n            bits=setup_bound((),context=x,basis=b.BasisPolicy('EXECUTION','RAW_UNADJUSTED',raw.raw.trade_date))\n>           assert run(replace(bits[8],execution_constraints=terms)).execution_status=='BLOCKED_EXECUTION_CONSTRAINTS'\nE           AssertionError: assert 'BLOCKED_NON_MARKET_CONTROL' == 'BLOCKED_EXEC...N_CONSTRAINTS'\nE             \nE             - BLOCKED_EXECUTION_CONSTRAINTS\nE             + BLOCKED_NON_MARKET_CONTROL\n\ntests/unit/test_od07_final.py:329: AssertionError\n___________ test_explicit_temporal_and_execution_scope[future-basis] ___________\n\ncase = 'future-basis'\n\n    @pytest.mark.parametrize('case',['parameter-time-contradiction','unknown-quantity-convention','future-basis'])\n    def test_explicit_temporal_and_execution_scope(case):\n        b,c,x,a,raw,h,p,params,pin,run=setup_bound()\n        if case=='parameter-time-contradiction':\n            a=replace(a,parameter_known_from=x.known_at+timedelta(days=1))\n            assert calculate(setup_bound((a,))).status=='BLOCKED_KNOWLEDGE'\n        elif case=='future-basis':\n>           assert calculate(setup_bound(basis=replace(p,basis_date=x.valid_at+timedelta(days=1)))).status=='BLOCKED_KNOWLEDGE'\nE           AssertionError: assert 'CALCULATED' == 'BLOCKED_KNOWLEDGE'\nE             \nE             - BLOCKED_KNOWLEDGE\nE             + CALCULATED\n\ntests/unit/test_od07_final.py:322: AssertionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od07_final.py::test_targeted_contract[D04] - Assertion...\nFAILED tests/unit/test_od07_final.py::test_semantic_review[independent-oracle]\nFAILED tests/unit/test_od07_final.py::test_semantic_review[independent-lineage]\nFAILED tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[parameter-time-contradiction]\nFAILED tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[unknown-quantity-convention]\nFAILED tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[future-basis]\n6 failed, 74 passed in 2.08s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-final-20261119T175351Z/od07final-6553f9436e/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "od07final",
+  "source_commit": "91a0030094c0132b6a5586ce277ed1e56eb5e396",
+  "source_manifest_sha256": "e6f2c4b763dfc78dbe24c4fc7678477a6511134adc9f6fd185e640e710156d32"
+}

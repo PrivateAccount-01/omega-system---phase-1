@@ -1,0 +1,4 @@
+# HistorySnapshot od07.action-history/v2
+Immutable declared security/listing/source scope,half-open valid range,explicit knowledge cutoff,complete action revisions/selected digest,coverage/evidence/source/policy versions and reviewed economic-event IDs. COMPLETE_FOR_DECLARED_SCOPE is necessary,not self-authenticating;STRICT coverage requires EvidenceAuthority. PARTIAL/UNKNOWN/CONFLICTING/SOURCE_BLOCKED refuse bound trusted calculation.
+
+Selection verifies exact IDs/hash,scope,parents/supersession,duplicates,known revision and same-day order. Empty mathematical history can calculate only as explicit nonfinancial control;cannot prove no real actions. Repository context pin reconciles full selected history against separately persisted scoped action ledger,including omitted or fabricated-empty chains. Complete external scope still requires authorized authentic coverage evidence. No fuzzy duplicate suppression.

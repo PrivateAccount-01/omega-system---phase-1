@@ -1,0 +1,4 @@
+# Mathematical controls, not market observations
+Literal known answers,independent Fraction reconciliation,no authentic prices/events/securities represented. SplitS2:pre120->backward60;post60->forward120. Ex-date/post observations unchanged on backward postbasis;pre observations unchanged onforward prebasis. ReverseS.5:pre120->backward240;post240->forward120. Split2 thenbonus1per2:factor1/3;120->40,forward40->120. Inverse comparison pre120->240 explicitly differs from conventional forward. RightsN4,R1,P100,S50:TERP90,factor.9;mathematical120->108. Explicitissue0givesfactor.8;120->96.
+
+The independent admission oracle uses Fraction directly rather than the production factor function. Existing100tests retain previous split/bonus/rights/dividend precision,immutability andtemporal vectors. New controls contributezero to authentic financial validation. No source-method certification inferred.

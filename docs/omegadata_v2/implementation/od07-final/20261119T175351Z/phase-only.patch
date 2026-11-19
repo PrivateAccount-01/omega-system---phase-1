@@ -1,0 +1,2283 @@
+--- a/src/omegadata/identity.py
++++ b/src/omegadata/identity.py
+@@ -329,6 +329,44 @@
+         object.__setattr__(result, "financial_eligible", evidence_policy == "STRICT")
+         return result
+ 
++    def resolve_listing_id(
++        self,
++        listing_id: str,
++        valid_at: date,
++        known_at: datetime,
++        evidence_policy: Policy = "STRICT",
++    ) -> Resolution:
++        """OD07 dependency: stable-ID lookup after observation-date symbol resolution."""
++        text(listing_id)
++        query_time(known_at)
++        if type(valid_at) is not date:
++            raise ValueError("DATE_REQUIRED")
++        ends = revision_ends(self.claims)
++        selected = tuple(
++            c
++            for c in self.claims
++            if c.listing_id == listing_id
++            and c.valid_from <= valid_at
++            and (c.valid_to is None or valid_at < c.valid_to)
++            and (c.known_from is None or c.known_from <= known_at)
++            and (c.known_to is None or known_at < c.known_to)
++            and (c.claim_id not in ends or known_at < ends[c.claim_id])
++        )
++        keys = {(c.exchange, c.symbol, c.series) for c in selected}
++        if not keys:
++            return Resolution("UNKNOWN", reason="STABLE_LISTING_COVERAGE_UNKNOWN")
++        if len(keys) != 1:
++            return Resolution(
++                "AMBIGUOUS",
++                tuple(sorted(c.claim_id for c in selected)),
++                reason="OVERLAPPING_STABLE_LISTING_CLAIMS",
++            )
++        exchange, symbol, series = next(iter(keys))
++        result = self.resolve_listing(exchange, symbol, series, valid_at, known_at, evidence_policy)
++        if result.state == "RESOLVED" and result.listing_id != listing_id:
++            return Resolution("CONFLICTING", result.claim_ids)
++        return result
++
+ 
+ EVENT_TYPES = frozenset(
+     {
+--- a/src/omegadata/identity_authority.py
++++ b/src/omegadata/identity_authority.py
+@@ -266,3 +266,26 @@
+             known_at,
+             claim_digest(claim),
+         )
++
++    def snapshot_digest(self) -> str:
++        """OD07 dependency: exact bundle/root/policy identity, not a permission grant."""
++        from omegadata.track_a.source_rights import load_policy_register
++
++        try:
++            policy = load_policy_register().model_dump(mode="json")
++        except ValueError:
++            policy = {"status": "SOURCE_POLICY_UNAVAILABLE"}
++        try:
++            root = hashlib.sha256(OWNER_ROOT_PATH.read_bytes()).hexdigest()
++        except OSError:
++            root = "ROOT_UNAVAILABLE"
++        return hashlib.sha256(
++            canonical(
++                {
++                    "bundle_sha256": hashlib.sha256(self.__raw).hexdigest(),
++                    "bundle_pin": self.__pin,
++                    "owner_root_sha256": root,
++                    "source_policy": policy,
++                }
++            ).encode()
++        ).hexdigest()
+--- a/src/omegadata/adjustments/contracts.py
++++ b/src/omegadata/adjustments/contracts.py
+@@ -17,7 +17,10 @@
+ from decimal import (
+     Context as DecimalContext,
+ )
+-from typing import Any
++from typing import TYPE_CHECKING, Any
++
++if TYPE_CHECKING:
++    from omegadata.adjustments.bound_contracts import ReferenceObservation
+ 
+ from omegadata.identity import Evidence, MemoryIdentityRepository, aware, query_time, text
+ from omegadata.identity_authority import EvidenceAuthority
+@@ -94,7 +97,7 @@
+     existing_shares: Decimal
+     new_shares: Decimal
+     subscription_price: Decimal | None
+-    reference: Reference | None
++    reference: Reference | ReferenceObservation | None
+     currency: str
+     exercise_assumed: bool | None
+ 
+@@ -103,7 +106,7 @@
+ class Dividend:
+     amount: Decimal
+     currency: str
+-    reinvestment: Reference | None
++    reinvestment: Reference | ReferenceObservation | None
+     convention: str | None
+ 
+ 
+@@ -118,7 +121,7 @@
+ class Demerger:
+     successor_security_id: str | None
+     entitlement_ratio: Decimal | None
+-    successor_value: Reference | None
++    successor_value: Reference | ReferenceObservation | None
+ 
+ 
+ @dataclass(frozen=True)
+--- a/src/omegadata/adjustments/temporal.py
++++ b/src/omegadata/adjustments/temporal.py
+@@ -4,6 +4,10 @@
+ 
+ from dataclasses import dataclass
+ from datetime import datetime
++from typing import TYPE_CHECKING
++
++if TYPE_CHECKING:
++    from omegadata.adjustments.bound_contracts import ReferenceObservation
+ 
+ from omegadata.adjustments.contracts import (
+     Action,
+@@ -61,7 +65,7 @@
+     )
+ 
+ 
+-def references(a: Action) -> tuple[Reference, ...]:
++def references(a: Action) -> tuple[Reference | ReferenceObservation, ...]:
+     p = a.parameters
+     ref = (
+         p.reference
+@@ -101,9 +105,13 @@
+         raw.evidence.eligible(mode) if mode == "CANARY_ONLY" else verified(raw, raw.evidence, x)
+     ):
+         return "BLOCKED_EVIDENCE", "RAW_AUTHORITY_NOT_SUPPLIED"
+-    for day in (x.valid_at, raw.trade_date):
+-        result = x.identity_repository.resolve_listing(
+-            raw.exchange, raw.symbol, raw.series, day, x.known_at, mode
++    for day in (raw.trade_date, x.valid_at):
++        result = (
++            x.identity_repository.resolve_listing(
++                raw.exchange, raw.symbol, raw.series, day, x.known_at, mode
++            )
++            if day == raw.trade_date
++            else x.identity_repository.resolve_listing_id(raw.listing_id, day, x.known_at, mode)
+         )
+         if (
+             result.state != "RESOLVED"
+@@ -160,8 +168,8 @@
+             return "BLOCKED_EVIDENCE", "REFERENCE_AUTHORITY_UNKNOWN", ""
+     if isinstance(a.parameters, (Rights, Dividend)) and a.parameters.currency != raw.currency:
+         return "INVALID_PARAMETERS", "ACTION_CURRENCY_MISMATCH", ""
+-    identity = x.identity_repository.resolve_listing(
+-        raw.exchange, raw.symbol, raw.series, x.valid_at, x.known_at, mode
++    identity = x.identity_repository.resolve_listing_id(
++        raw.listing_id, x.valid_at, x.known_at, mode
+     )
+     historical = x.identity_repository.resolve_listing(
+         raw.exchange, raw.symbol, raw.series, raw.trade_date, x.known_at, mode
+--- a/src/omegadata/adjustments/repository.py
++++ b/src/omegadata/adjustments/repository.py
+@@ -29,6 +29,11 @@
+ from sqlalchemy.pool import StaticPool
+ 
+ from omegadata.adjustments import contracts as c
++from omegadata.adjustments.bound_contracts import (
++    BoundResult,
++    PinnedCalculation,
++    ReferenceObservation,
++)
+ from omegadata.adjustments.temporal import select_revisions
+ from omegadata.identity import Evidence
+ 
+@@ -55,7 +60,22 @@
+     Column("result_id", ForeignKey("od07_result.id"), primary_key=True),
+     Column("action_id", ForeignKey("od07_action.id"), primary_key=True),
+ )
+-TYPES = {
++contexts = Table(
++    "od07_calculation_context",
++    M,
++    Column("id", String, primary_key=True),
++    Column("payload", String, nullable=False),
++    Column("digest", String, nullable=False),
++)
++result_context = Table(
++    "od07_result_context",
++    M,
++    Column("result_id", ForeignKey("od07_result.id"), primary_key=True),
++    Column("context_id", ForeignKey("od07_calculation_context.id"), nullable=False),
++)
++LEGACY_TABLES = {"od07_schema", "od07_action", "od07_result", "od07_result_action"}
++
++TYPES: dict[str, Any] = {
+     cls.__name__: cls
+     for cls in (
+         c.Reference,
+@@ -71,6 +91,9 @@
+         Evidence,
+     )
+ }
++
++
++TYPES["ReferenceObservation"] = ReferenceObservation
+ 
+ 
+ def encode(value: Any) -> Any:
+@@ -142,7 +165,7 @@
+             dbapi.execute("PRAGMA busy_timeout=5000")
+ 
+         tables = set(inspect(self.engine).get_table_names())
+-        if tables and tables != set(M.tables):
++        if tables and tables not in (LEGACY_TABLES, set(M.tables)):
+             self.engine.dispose()
+             raise ValueError("UNRELATED_OR_PARTIAL_SCHEMA")
+         self.migrate()
+@@ -161,11 +184,13 @@
+     def migrate(self) -> None:
+         with self.transaction() as connection:
+             M.create_all(connection)
+-            old = connection.scalar(select(version.c.version))
+-            if old is not None and old != "od07.store/v1":
++            old = set(connection.scalars(select(version.c.version)).all())
++            if old - {"od07.store/v1", "od07.store/v2"}:
+                 raise ValueError("STORE_VERSION")
+-            if old is None:
++            if not old:
+                 connection.execute(version.insert().values(version="od07.store/v1"))
++            if "od07.store/v2" not in old:
++                connection.execute(version.insert().values(version="od07.store/v2"))
+             for table in M.tables:
+                 for operation in ("UPDATE", "DELETE"):
+                     connection.exec_driver_sql(
+@@ -177,6 +202,7 @@
+             if (
+                 connection.scalar(select(actions.c.id).limit(1)) is not None
+                 or connection.scalar(select(results.c.id).limit(1)) is not None
++                or connection.scalar(select(contexts.c.id).limit(1)) is not None
+             ):
+                 raise ValueError("POPULATED_HISTORY_ROLLBACK_REFUSED")
+             M.drop_all(connection)
+@@ -296,6 +322,18 @@
+                 break
+             result.append(child)
+         return tuple(result)
++
++    def pin_context(self, pin: PinnedCalculation) -> str:
++        from omegadata.adjustments.admission import pin_context
++
++        return pin_context(self, pin)
++
++    def append_bound_result(
++        self, result: BoundResult, context_id: str, *, expected_result_id: str | None = None
++    ) -> None:
++        from omegadata.adjustments.admission import append_bound_result
++
++        append_bound_result(self, result, context_id, expected_result_id)
+ 
+     def close(self) -> None:
+         self.engine.dispose()
+--- /dev/null
++++ b/src/omegadata/adjustments/bound_contracts.py
+@@ -0,0 +1,279 @@
++"""OD07 v2 bound observation/history/basis contracts. No source grants or I/O."""
++
++from __future__ import annotations
++
++from dataclasses import dataclass, field
++from datetime import date, datetime
++from decimal import Decimal
++
++from omegadata.adjustments import contracts as c
++from omegadata.adjustments.temporal import select_revisions
++from omegadata.identity import Evidence, text
++
++BOUND_VERSION = "od07.bound-calc/v2"
++
++
++@dataclass(frozen=True)
++class ReferenceObservation:
++    original: c.Reference
++    observation_id: str
++    source_record_identity: str
++    source_row_ordinal: int
++    security_id: str
++    listing_id: str
++    exchange: str
++    symbol_as_reported: str
++    series_as_reported: str
++    price_unit: str
++    price_basis: str
++    observation_type: str
++    known_to: datetime | None = None
++    observed_at: datetime | None = None
++    published_at: datetime | None = None
++    reference_version: str = "od07.reference/v2"
++
++    @property
++    def value(self) -> Decimal:
++        return self.original.value
++
++    @property
++    def price_value(self) -> Decimal:
++        return self.original.value
++
++    @property
++    def session_date(self) -> date:
++        return self.original.session_date
++
++    @property
++    def known_from(self) -> datetime | None:
++        return self.original.known_from
++
++    @property
++    def artifact_id(self) -> str:
++        return self.original.artifact_id
++
++    @property
++    def source_artifact_identity(self) -> str:
++        return self.original.artifact_id
++
++    @property
++    def currency(self) -> str:
++        return self.original.currency
++
++    @property
++    def evidence(self) -> Evidence | None:
++        return self.original.evidence
++
++    @property
++    def source_id(self) -> str | None:
++        return self.original.source_id
++
++    @property
++    def source_evidence_id(self) -> str | None:
++        return self.evidence.evidence_id if self.evidence else None
++
++
++@dataclass(frozen=True)
++class RawObservation:
++    raw: c.Raw
++    observation_id: str
++    source_record_identity: str
++    source_row_ordinal: int
++    price_unit: str
++    source_id: str
++    version: str = "od07.raw-observation/v2"
++
++    def __post_init__(self) -> None:
++        for v in (
++            self.observation_id,
++            self.source_record_identity,
++            self.price_unit,
++            self.source_id,
++        ):
++            text(v)
++        if (
++            self.version != "od07.raw-observation/v2"
++            or type(self.source_row_ordinal) is not int
++            or self.source_row_ordinal < 1
++        ):
++            raise ValueError("RAW_OBSERVATION_IDENTITY")
++
++
++@dataclass(frozen=True)
++class ParameterSet:
++    action_revision_id: str
++    parameter_revision: str
++    parameters_digest: str
++    known_from: datetime | None
++    known_to: datetime | None
++    evidence: Evidence
++    version: str = "od07.parameter-availability/v2"
++
++    @classmethod
++    def for_action(
++        cls, action: c.Action, known_from: datetime | None, evidence: Evidence
++    ) -> ParameterSet:
++        # Explicit availability assertion, not authority or an inferred fallback.
++        return cls(
++            action.action_id,
++            action.parameter_version,
++            c.digest(action.parameters),
++            known_from,
++            None,
++            evidence,
++        )
++
++
++@dataclass(frozen=True)
++class HistorySnapshot:
++    history_snapshot_id: str
++    security_id: str
++    listing_id: str | None
++    source_scope: tuple[str, ...]
++    valid_from: date
++    valid_to: date
++    known_at: datetime
++    actions: tuple[c.Action, ...]
++    action_revision_ids: tuple[str, ...]
++    selected_revision_digest: str
++    history_coverage_state: str
++    coverage_reference: Evidence
++    source_evidence_version: str
++    effective_policy_version: str
++    economic_event_ids: tuple[tuple[str, str], ...]
++    snapshot_version: str = "od07.action-history/v2"
++
++    @classmethod
++    def create(
++        cls,
++        identity: str,
++        security: str,
++        listing: str | None,
++        sources: tuple[str, ...],
++        start: date,
++        end: date,
++        known: datetime,
++        actions: tuple[c.Action, ...],
++        state: str,
++        evidence: Evidence,
++        source_version: str,
++        policy_version: str,
++    ) -> HistorySnapshot:
++        selected = select_revisions(actions, known)
++        by_id = {a.action_id: a for a in actions}
++        events = []
++        for a in selected:
++            root = a
++            while root.supersedes_action_id is not None:
++                root = by_id[root.supersedes_action_id]
++            events.append((a.action_id, root.action_id))
++        return cls(
++            identity,
++            security,
++            listing,
++            sources,
++            start,
++            end,
++            known,
++            actions,
++            tuple(a.action_id for a in selected),
++            c.digest(selected),
++            state,
++            evidence,
++            source_version,
++            policy_version,
++            tuple(events),
++        )
++
++
++@dataclass(frozen=True)
++class BasisPolicy:
++    profile: str
++    adjustment_basis: str
++    basis_date: date
++    version: str = "od07.basis-policy/v2"
++
++    def __post_init__(self) -> None:
++        if (
++            self.version != "od07.basis-policy/v2"
++            or self.profile not in {"RAW", "EXECUTION", "PRICE_RETURN", "TOTAL_RETURN", "VOLUME"}
++            or self.adjustment_basis
++            not in {
++                "BACKWARD_ADJUSTED",
++                "FORWARD_ADJUSTED",
++                "INVERSE_FACTOR_COMPARISON",
++                "RAW_UNADJUSTED",
++                "TOTAL_RETURN_INDEX",
++            }
++            or type(self.basis_date) is not date
++        ):
++            raise ValueError("BASIS_POLICY")
++        if self.profile in {"RAW", "EXECUTION"} and self.adjustment_basis != "RAW_UNADJUSTED":
++            raise ValueError("RAW_EXECUTION_BASIS_REQUIRED")
++
++
++@dataclass(frozen=True)
++class ExecutionConstraints:
++    security_id: str
++    listing_id: str
++    exchange: str
++    session_date: date
++    known_from: datetime | None
++    evidence: Evidence
++    lot_size: int | None = None
++    quantity: str | None = None
++    quantity_convention: str | None = None
++    settlement_policy: str | None = None
++    restrictions_status: str = "UNKNOWN"
++    version: str = "od07.execution-constraints/v2"
++
++
++@dataclass(frozen=True)
++class PinnedCalculation:
++    snapshot_id: str
++    raw: RawObservation
++    history: HistorySnapshot
++    policy: BasisPolicy
++    context: c.Context
++    parameters: tuple[ParameterSet, ...]
++    execution_constraints: ExecutionConstraints | None = None
++
++
++@dataclass(frozen=True)
++class BoundResult:
++    calculation: c.Result
++    context_bindings: str
++    adjustment_basis: str
++    basis_date: date
++    identity_status: str = "UNKNOWN"
++    calendar_status: str = "COVERAGE_UNKNOWN"
++    tradability_status: str = "UNKNOWN"
++    execution_status: str = "BLOCKED_UNKNOWN_CONSTRAINTS"
++    verification_class: str = "NON_MARKET_STRUCTURAL_CONTROL"
++    execution_eligibility: bool = field(default=False, init=False)
++    publication_eligibility: bool = field(default=False, init=False)
++    version: str = BOUND_VERSION
++
++    @property
++    def status(self) -> str:
++        return self.calculation.status
++
++    @property
++    def mathematical_calculation_status(self) -> str:
++        return self.calculation.status
++
++    @property
++    def adjusted_price(self) -> Decimal | None:
++        return self.calculation.adjusted_price
++
++    @property
++    def raw_price_basis_preserved(self) -> bool:
++        return self.calculation.original_price_basis == "RAW"
++
++    @property
++    def canonical_json(self) -> str:
++        return c.canonical(self)
++
++    @property
++    def output_digest(self) -> str:
++        return c.digest(self)
+--- /dev/null
++++ b/src/omegadata/adjustments/bound_chain.py
+@@ -0,0 +1,565 @@
++"""Bound OD07 calculation; v1 scalar/inverse comparison API remains compatible."""
++
++from __future__ import annotations
++
++from datetime import datetime
++from decimal import ROUND_HALF_UP, Decimal, DecimalException, Inexact, localcontext
++from typing import Any, NoReturn
++
++from omegadata.adjustments import bound_contracts as b
++from omegadata.adjustments import contracts as c
++from omegadata.adjustments.factors import factor
++from omegadata.adjustments.temporal import references, select_revisions, verified
++from omegadata.identity import Evidence, Resolution, query_time, text
++from omegadata.identity import Policy as EvidencePolicy
++from omegadata.identity_authority import EvidenceAuthority
++from omegadata.session_calendar import VerifiedCalendar
++
++
++class Refusal(ValueError):
++    def __init__(self, status: str, reason: str) -> None:
++        self.status = status
++        self.reason = reason
++        super().__init__(reason)
++
++
++def refuse(status: str, reason: str) -> NoReturn:
++    raise Refusal(status, reason)
++
++
++def mode(x: c.Context) -> EvidencePolicy:
++    return "CANARY_ONLY" if x.mode == "NON_MARKET_MATH" else "STRICT"
++
++
++def evidence_ok(value: Any, evidence: Evidence | None, x: c.Context) -> bool:
++    if evidence is None:
++        return False
++    return (
++        evidence.eligible("CANARY_ONLY")
++        if mode(x) == "CANARY_ONLY"
++        else verified(value, evidence, x)
++    )
++
++
++def available(start: datetime | None, end: datetime | None, x: c.Context) -> None:
++    if start is None:
++        refuse("BLOCKED_KNOWLEDGE", "AVAILABILITY_UNKNOWN")
++    query_time(start)
++    if end is not None:
++        query_time(end)
++    if start > x.known_at or end is not None and x.known_at >= end:
++        refuse("BLOCKED_KNOWLEDGE", "NOT_AVAILABLE_AT_CUTOFF")
++
++
++def active_window(
++    actions: tuple[c.Action, ...], raw: b.RawObservation, p: b.BasisPolicy
++) -> tuple[c.Action, ...]:
++    day = raw.raw.trade_date
++    if p.adjustment_basis == "RAW_UNADJUSTED":
++        return ()
++    if p.adjustment_basis == "TOTAL_RETURN_INDEX":
++        refuse("UNSUPPORTED_POLICY", "INDEX_BASE_AND_COMPLETE_REINVESTMENT_CONVENTION_REQUIRED")
++    if p.adjustment_basis in {"BACKWARD_ADJUSTED", "INVERSE_FACTOR_COMPARISON"}:
++        selected = [a for a in actions if a.ex_date is None or day < a.ex_date <= p.basis_date]
++    else:
++        selected = [a for a in actions if a.ex_date is None or p.basis_date < a.ex_date <= day]
++    for a in selected:
++        peers = [other for other in selected if other.ex_date == a.ex_date]
++        if len(peers) > 1 and (
++            any(v.sequence is None for v in peers) or len({v.sequence for v in peers}) != len(peers)
++        ):
++            refuse("CONFLICTING_ACTIONS", "SAME_DAY_ORDER_UNKNOWN")
++    return tuple(sorted(selected, key=lambda a: (a.ex_date or day, a.sequence or 0, a.action_id)))
++
++
++def validate_history(pin: b.PinnedCalculation) -> tuple[c.Action, ...]:
++    h, x, p, raw = pin.history, pin.context, pin.policy, pin.raw
++    if type(h.actions) is not tuple or len(h.actions) > 128:
++        refuse("CONFLICTING_ACTIONS", "HISTORY_RESOURCE_OR_MUTABILITY")
++    if (
++        h.snapshot_version != "od07.action-history/v2"
++        or h.effective_policy_version != p.version
++        or h.source_evidence_version != x.source_evidence_version
++        or h.known_at != x.known_at
++    ):
++        refuse("BLOCKED_EVIDENCE", "HISTORY_VERSION_OR_CUTOFF_MISMATCH")
++    if (h.security_id, h.listing_id) != (raw.raw.security_id, raw.raw.listing_id):
++        refuse("BLOCKED_IDENTITY", "HISTORY_SCOPE_IDENTITY")
++    if h.history_coverage_state != "COMPLETE_FOR_DECLARED_SCOPE" or not h.coverage_reference:
++        refuse("BLOCKED_EVIDENCE", "COMPLETE_HISTORY_NOT_ESTABLISHED")
++    if (
++        not h.valid_from <= min(raw.raw.trade_date, p.basis_date)
++        or max(raw.raw.trade_date, p.basis_date) >= h.valid_to
++    ):
++        refuse("BLOCKED_EVIDENCE", "HISTORY_INTERVAL_NOT_COVERED")
++    try:
++        selected = select_revisions(h.actions, x.known_at)
++    except ValueError as error:
++        refuse("CONFLICTING_ACTIONS", str(error))
++    if h.action_revision_ids != tuple(
++        a.action_id for a in selected
++    ) or h.selected_revision_digest != c.digest(selected):
++        refuse("CONFLICTING_ACTIONS", "SELECTED_REVISIONS_MISSING_OR_CHANGED")
++    for a in selected:
++        if (
++            a.security_id != h.security_id
++            or a.listing_id is not None
++            and a.listing_id != h.listing_id
++            or a.source_id not in h.source_scope
++            or a.ex_date is not None
++            and not h.valid_from <= a.ex_date < h.valid_to
++        ):
++            refuse("CONFLICTING_ACTIONS", "ACTION_OUTSIDE_HISTORY_SCOPE")
++    event_map = dict(h.economic_event_ids)
++    if (
++        len(event_map) != len(h.economic_event_ids)
++        or set(event_map) != set(h.action_revision_ids)
++        or len(set(event_map.values())) != len(event_map)
++    ):
++        refuse("CONFLICTING_ACTIONS", "DUPLICATE_OR_UNREVIEWED_ECONOMIC_EVENT")
++    if not evidence_ok(h, h.coverage_reference, x):
++        refuse("BLOCKED_EVIDENCE", "HISTORY_COVERAGE_AUTHORITY_BLOCKED")
++    return selected
++
++
++def identity_state(pin: b.PinnedCalculation) -> tuple[str, Resolution, Resolution]:
++    r, x = pin.raw.raw, pin.context
++    past = x.identity_repository.resolve_listing(
++        r.exchange, r.symbol, r.series, r.trade_date, x.known_at, mode(x)
++    )
++    current = x.identity_repository.resolve_listing_id(
++        r.listing_id, pin.policy.basis_date, x.known_at, mode(x)
++    )
++    if any(
++        v.state != "RESOLVED" or v.security_id != r.security_id or v.listing_id != r.listing_id
++        for v in (past, current)
++    ):
++        refuse("BLOCKED_IDENTITY", "IDENTITY_TRANSITION_BLOCKED")
++    status = (
++        "HISTORICALLY_VALID_BUT_NOT_TRADABLE"
++        if current.lifecycle in {"SUSPENDED", "DELISTED"}
++        else "SAME_LISTING_CONTINUITY"
++    )
++    return status, past, current
++
++
++def reference_valid(
++    ref: c.Reference | b.ReferenceObservation, action: c.Action, pin: b.PinnedCalculation
++) -> None:
++    x, r = pin.context, pin.raw
++    if type(ref) is not b.ReferenceObservation:
++        refuse("BLOCKED_IDENTITY", "BOUND_REFERENCE_IDENTITY_REQUIRED")
++    expected_security = (
++        action.parameters.successor_security_id
++        if isinstance(action.parameters, c.Demerger)
++        else action.security_id
++    )
++    if (
++        ref.security_id != expected_security
++        or not isinstance(action.parameters, c.Demerger)
++        and ref.listing_id != r.raw.listing_id
++        or ref.exchange != action.exchange
++    ):
++        refuse("BLOCKED_IDENTITY", "REFERENCE_INSTRUMENT_OR_VENUE_MISMATCH")
++    try:
++        for value in (
++            ref.observation_id,
++            ref.source_record_identity,
++            ref.artifact_id,
++            ref.source_id or "",
++            ref.symbol_as_reported,
++            ref.series_as_reported,
++        ):
++            text(value)
++        if (
++            type(ref.source_row_ordinal) is not int
++            or ref.source_row_ordinal < 1
++            or ref.reference_version != "od07.reference/v2"
++        ):
++            raise ValueError("REFERENCE_VERSION")
++        c.number(ref.value)
++    except (ValueError, TypeError):
++        refuse("BLOCKED_EVIDENCE", "REFERENCE_IDENTITY_OR_VALUE_INVALID")
++    if (
++        ref.price_basis != "RAW_UNADJUSTED"
++        or ref.price_unit != r.price_unit
++        or ref.currency != r.raw.currency
++    ):
++        refuse("BLOCKED_EVIDENCE", "REFERENCE_PRICE_BASIS_OR_UNITS")
++    available(ref.known_from, ref.known_to, x)
++    for stamp in (ref.observed_at, ref.published_at):
++        if stamp is not None:
++            query_time(stamp)
++            if stamp > x.known_at:
++                refuse("BLOCKED_KNOWLEDGE", "REFERENCE_PUBLICATION_OR_OBSERVATION_FUTURE")
++    expected_type = (
++        "RAW_CLOSE"
++        if isinstance(action.parameters, c.Rights)
++        else "REINVESTMENT_PRICE"
++        if isinstance(action.parameters, c.Dividend)
++        else "SUCCESSOR_VALUATION"
++    )
++    if ref.observation_type != expected_type:
++        refuse("BLOCKED_EVIDENCE", "REFERENCE_OBSERVATION_TYPE")
++    resolution = x.identity_repository.resolve_listing(
++        ref.exchange,
++        ref.symbol_as_reported,
++        ref.series_as_reported,
++        ref.session_date,
++        x.known_at,
++        mode(x),
++    )
++    if (
++        resolution.state != "RESOLVED"
++        or resolution.security_id != ref.security_id
++        or resolution.listing_id != ref.listing_id
++    ):
++        refuse("BLOCKED_IDENTITY", "REFERENCE_REPORTED_IDENTITY_UNRESOLVED")
++    if not evidence_ok(ref, ref.evidence, x):
++        refuse("BLOCKED_EVIDENCE", "REFERENCE_AUTHORITY_BLOCKED")
++
++
++def snapshot_bindings(
++    pin: b.PinnedCalculation,
++    selected: tuple[c.Action, ...],
++    identity: tuple[Resolution, Resolution] | None = None,
++) -> dict[str, Any]:
++    x, r, h = pin.context, pin.raw, pin.history
++    known_claims = tuple(
++        v
++        for v in x.identity_repository.claims
++        if v.known_from is None or v.known_from <= x.known_at
++    )
++    identity_records = {
++        "issuers": x.identity_repository.issuers,
++        "securities": x.identity_repository.securities,
++        "listings": x.identity_repository.listings,
++        "claims": known_claims,
++    }
++    calendar = {
++        "claims": tuple(
++            v
++            for v in x.calendar.claims
++            if v.calendar_version == x.calendar_version
++            and (v.known_from is None or v.known_from <= x.known_at)
++        ),
++        "coverage": tuple(
++            v
++            for v in x.calendar.coverage
++            if v.calendar_version == x.calendar_version
++            and (v.known_from is None or v.known_from <= x.known_at)
++        ),
++    }
++    active_ids = {a.action_id for a in selected}
++    history = {
++        "id": h.history_snapshot_id,
++        "security": h.security_id,
++        "listing": h.listing_id,
++        "scope": h.source_scope,
++        "valid_from": h.valid_from,
++        "valid_to": h.valid_to,
++        "known_at": h.known_at,
++        "selected": selected,
++        "known_lineage": tuple(
++            a for a in h.actions if a.known_from is None or a.known_from <= x.known_at
++        ),
++        "coverage": h.history_coverage_state,
++        "coverage_reference": h.coverage_reference,
++        "events": h.economic_event_ids,
++        "version": h.snapshot_version,
++    }
++    authority = x.authority or EvidenceAuthority.unconfigured()
++    return {
++        "raw_observation_identity": r.observation_id,
++        "raw_observation_digest": c.digest(r),
++        "action_history_snapshot_id": h.history_snapshot_id,
++        "action_history_snapshot_digest": c.digest(history),
++        "selected_action_revision_digest": c.digest(active_window(selected, r, pin.policy)),
++        "identity_snapshot_id": c.digest(identity_records),
++        "identity_snapshot_digest": c.digest(identity_records),
++        "identity_resolution_digest": c.digest(identity),
++        "calendar_version": x.calendar_version,
++        "calendar_snapshot_digest": c.digest(calendar),
++        "source_authority_version": x.source_evidence_version,
++        "source_authority_digest": authority.snapshot_digest(),
++        "knowledge_cutoff": x.known_at,
++        "valid_at": x.valid_at,
++        "basis_date": pin.policy.basis_date,
++        "basis_policy": pin.policy,
++        "consumer_policy_version": pin.policy.version,
++        "calculation_algorithm_version": b.BOUND_VERSION,
++        "rounding_policy_version": "decimal80-final-half-up/v1",
++        "parameter_state_digest": c.digest(
++            tuple(v for v in pin.parameters if v.action_revision_id in active_ids)
++        ),
++    }
++
++
++def pin_calculation(
++    snapshot_id: str,
++    raw: b.RawObservation,
++    history: b.HistorySnapshot,
++    policy: b.BasisPolicy,
++    context: c.Context,
++    parameters: tuple[b.ParameterSet, ...] = (),
++    execution_constraints: b.ExecutionConstraints | None = None,
++) -> b.PinnedCalculation:
++    text(snapshot_id)
++    if (
++        type(raw) is not b.RawObservation
++        or type(history) is not b.HistorySnapshot
++        or type(policy) is not b.BasisPolicy
++        or type(parameters) is not tuple
++    ):
++        raise ValueError("PINNED_INPUT_TYPES")
++    return b.PinnedCalculation(
++        snapshot_id, raw, history, policy, context, parameters, execution_constraints
++    )
++
++
++def execution_state(
++    pin: b.PinnedCalculation, past: Resolution | None
++) -> tuple[str, str, str, bool]:
++    r, x = pin.raw.raw, pin.context
++    calendar = x.calendar.query(
++        r.exchange, r.trade_date, x.known_at, mode(x), calendar_version=x.calendar_version
++    )
++    tradability = (past.lifecycle or "UNKNOWN") if past is not None else "UNKNOWN"
++    if tradability != "LISTED":
++        return calendar.status, tradability, "BLOCKED_LIFECYCLE", False
++    if calendar.status not in {"AUTHORITATIVE_SESSION", "VERIFIED_SPECIAL_SESSION"}:
++        return calendar.status, tradability, "BLOCKED_CALENDAR", False
++    terms = pin.execution_constraints
++    if (
++        terms is None
++        or terms.lot_size is None
++        or terms.quantity is None
++        or terms.quantity_convention is None
++        or terms.settlement_policy is None
++    ):
++        return calendar.status, tradability, "BLOCKED_LOT_OR_SETTLEMENT_UNKNOWN", False
++    if (
++        (terms.security_id, terms.listing_id, terms.exchange, terms.session_date)
++        != (r.security_id, r.listing_id, r.exchange, r.trade_date)
++        or terms.restrictions_status != "CLEAR"
++        or terms.quantity_convention != "WHOLE_UNITS"
++        or not terms.settlement_policy
++    ):
++        return calendar.status, tradability, "BLOCKED_EXECUTION_CONSTRAINTS", False
++    try:
++        available(terms.known_from, None, x)
++        if (
++            type(terms.lot_size) is not int
++            or terms.lot_size < 1
++            or Decimal(terms.quantity) <= 0
++            or Decimal(terms.quantity) % terms.lot_size
++        ):
++            raise ValueError("LOT_QUANTITY")
++    except (ValueError, DecimalException):
++        return calendar.status, tradability, "BLOCKED_EXECUTION_CONSTRAINTS", False
++    if not evidence_ok(terms, terms.evidence, x):
++        return calendar.status, tradability, "BLOCKED_EXECUTION_AUTHORITY", False
++    if x.mode != "STRICT":
++        return calendar.status, tradability, "BLOCKED_NON_MARKET_CONTROL", False
++    return calendar.status, tradability, "ELIGIBLE_FOR_DECLARED_CONSTRAINT_SCOPE", True
++
++
++def calculate_bound_chain(pin: b.PinnedCalculation) -> b.BoundResult:
++    x, r, p = pin.context, pin.raw, pin.policy
++    bindings: dict[str, Any] = {}
++    identity_status = "UNKNOWN"
++    past: Resolution | None = None
++    calendar_status = "COVERAGE_UNKNOWN"
++    tradability = "UNKNOWN"
++    exec_status = "BLOCKED_UNKNOWN_CONSTRAINTS"
++    exec_allowed = False
++
++    def output(inner: c.Result) -> b.BoundResult:
++        result = b.BoundResult(
++            inner,
++            c.canonical(bindings),
++            p.adjustment_basis,
++            p.basis_date,
++            identity_status,
++            calendar_status,
++            tradability,
++            exec_status,
++            "NON_MARKET_STRUCTURAL_CONTROL"
++            if x.mode == "NON_MARKET_MATH"
++            else "UNVERIFIED_SOURCE_CALCULATION",
++        )
++        if inner.status == "CALCULATED" and exec_allowed:
++            object.__setattr__(result, "execution_eligibility", True)
++        return result
++
++    try:
++        if p.basis_date > x.valid_at or r.raw.trade_date > x.valid_at:
++            refuse("BLOCKED_KNOWLEDGE", "OBSERVATION_OR_BASIS_AFTER_VALID_HORIZON")
++        selected = validate_history(pin)
++        available(r.raw.known_from, None, x)
++        if not evidence_ok(r, r.raw.evidence, x):
++            refuse("BLOCKED_EVIDENCE", "RAW_OBSERVATION_AUTHORITY_BLOCKED")
++        identity_status, past, current = identity_state(pin)
++        calendar_status, tradability, exec_status, exec_allowed = execution_state(pin, past)
++        window = active_window(selected, r, p)
++        bindings = snapshot_bindings(pin, selected, (past, current))
++        parameters = {v.action_revision_id: v for v in pin.parameters}
++        if len(parameters) != len(pin.parameters):
++            refuse("BLOCKED_KNOWLEDGE", "COMPETING_PARAMETER_REVISIONS")
++        pinned_calendar = VerifiedCalendar(
++            tuple(v for v in x.calendar.claims if v.calendar_version == x.calendar_version),
++            tuple(v for v in x.calendar.coverage if v.calendar_version == x.calendar_version),
++            x.calendar.authority,
++        )
++        links = []
++        legacy_policy = c.Policy(
++            p.profile,
++            "FORWARD"
++            if p.adjustment_basis in {"FORWARD_ADJUSTED", "INVERSE_FACTOR_COMPARISON"}
++            else "BACKWARD",
++        )
++        with localcontext(c.arithmetic_context()) as math:
++            n = d = vn = vd = Decimal(1)
++            for a in window:
++                if (
++                    a.exchange != r.raw.exchange
++                    or a.security_id != r.raw.security_id
++                    or a.listing_id is not None
++                    and a.listing_id != r.raw.listing_id
++                ):
++                    refuse("BLOCKED_IDENTITY", "WRONG_ACTION_IDENTITY")
++                available(a.known_from, a.known_to, x)
++                for stamp in (a.announcement_at, a.published_at, a.parameter_known_from):
++                    if stamp is not None:
++                        query_time(stamp)
++                        if stamp > x.known_at:
++                            refuse("BLOCKED_KNOWLEDGE", "ACTION_PUBLICATION_FUTURE")
++                terms = parameters.get(a.action_id)
++                if (
++                    terms is None
++                    or terms.parameters_digest != c.digest(a.parameters)
++                    or terms.parameter_revision != a.parameter_version
++                    or terms.version != "od07.parameter-availability/v2"
++                ):
++                    refuse("BLOCKED_KNOWLEDGE", "COMPLETE_PARAMETER_AVAILABILITY_REQUIRED")
++                available(terms.known_from, terms.known_to, x)
++                if not evidence_ok(terms, terms.evidence, x):
++                    refuse("BLOCKED_EVIDENCE", "PARAMETER_EVIDENCE_BLOCKED")
++                if a.review_status in {"REVOKED", "CONFLICTING"} or not evidence_ok(
++                    a, a.evidence, x
++                ):
++                    refuse("BLOCKED_EVIDENCE", "ACTION_EVIDENCE_BLOCKED")
++                if p.adjustment_basis == "FORWARD_ADJUSTED" and a.action_type not in {
++                    "SPLIT",
++                    "SPLIT_REVERSE",
++                    "BONUS",
++                }:
++                    refuse("UNSUPPORTED_POLICY", "FORWARD_ECONOMIC_TRANSFORMATION_UNDEFINED")
++                for ref in references(a):
++                    reference_valid(ref, a, pin)
++                if a.ex_date is None:
++                    refuse("BLOCKED_CALENDAR", "EX_DATE_UNKNOWN")
++                session = pinned_calendar.query(
++                    a.exchange, a.ex_date, x.known_at, mode(x), calendar_version=x.calendar_version
++                )
++                if session.status not in {"AUTHORITATIVE_SESSION", "VERIFIED_SPECIAL_SESSION"}:
++                    refuse("BLOCKED_CALENDAR", "ACTION_SESSION_UNVERIFIED")
++                calref = [v.claim_id for v in session.claims]
++                if isinstance(a.parameters, c.Rights):
++                    prior = pinned_calendar.previous_session(
++                        a.exchange, a.ex_date, x.known_at, mode(x)
++                    )
++                    prior_reference = a.parameters.reference
++                    if (
++                        prior_reference is None
++                        or prior_reference.session_date != prior.claims[0].session_date
++                    ):
++                        refuse("BLOCKED_CALENDAR", "REQUIRED_PRIOR_SESSION_OBSERVATION_MISMATCH")
++                    calref.append(prior.claims[0].claim_id)
++                if (
++                    isinstance(a.parameters, c.Dividend)
++                    and a.parameters.reinvestment is not None
++                    and a.parameters.reinvestment.session_date != a.ex_date
++                ):
++                    refuse("BLOCKED_CALENDAR", "REINVESTMENT_SESSION_MISMATCH")
++                f = factor(a.action_type, a.parameters, legacy_policy)
++                if f.status not in {"CALCULATED", "NOT_APPLICABLE"}:
++                    refuse(f.status, f.reason)
++                assert (
++                    f.numerator is not None
++                    and f.denominator is not None
++                    and f.volume_numerator is not None
++                    and f.volume_denominator is not None
++                )
++                n *= f.numerator
++                d *= f.denominator
++                vn *= f.volume_numerator
++                vd *= f.volume_denominator
++                links.append(
++                    c.Link(
++                        a.action_id,
++                        a.source_artifact_identity,
++                        c.digest((past, current)),
++                        c.canonical(calref),
++                        r.observation_id,
++                        b.BOUND_VERSION,
++                        p.profile,
++                        c.canonical(a),
++                        f,
++                        "decimal80-final-half-up/v1",
++                        x.known_at,
++                    )
++                )
++            math.prec = c.PRECISION
++            math.traps[Inexact] = False
++            cumulative = n / d
++            volume_factor = vn / vd
++            price = (
++                r.raw.price
++                if p.profile in {"RAW", "EXECUTION", "VOLUME"}
++                else (r.raw.price * n / d).quantize(
++                    legacy_policy.price_quantum, rounding=ROUND_HALF_UP
++                )
++            )
++            quantity = (
++                r.raw.volume
++                if p.profile in {"RAW", "EXECUTION"}
++                else (r.raw.volume * vn / vd).quantize(
++                    legacy_policy.volume_quantum, rounding=ROUND_HALF_UP
++                )
++            )
++        inner = c.Result(
++            "CALCULATED",
++            "BOUND_MATH_NOT_FINANCIAL_RELEASE",
++            r.observation_id,
++            "RAW",
++            p.profile,
++            tuple(links),
++            cumulative,
++            volume_factor,
++            price,
++            quantity,
++            c.canonical({"bindings": bindings, "raw": r, "selected_actions": window, "policy": p}),
++            version=b.BOUND_VERSION,
++        )
++        return output(inner)
++    except Refusal as error:
++        return output(
++            c.Result(
++                error.status,
++                error.reason,
++                r.observation_id,
++                consumer_profile=p.profile,
++                version=b.BOUND_VERSION,
++            )
++        )
++    except (ValueError, TypeError, DecimalException) as error:
++        return output(
++            c.Result(
++                "INVALID_PARAMETERS",
++                str(error),
++                r.observation_id,
++                consumer_profile=p.profile,
++                version=b.BOUND_VERSION,
++            )
++        )
+--- /dev/null
++++ b/src/omegadata/adjustments/admission.py
+@@ -0,0 +1,344 @@
++"""Independent admission against immutable persisted context, not result.inputs.
++Trusted internal development interface; not protection from arbitrary same-process code.
++"""
++
++from __future__ import annotations
++
++import json
++from typing import TYPE_CHECKING, Any
++
++if TYPE_CHECKING:
++    from omegadata.adjustments.repository import AdjustmentRepository
++
++from sqlalchemy import select
++
++from omegadata.adjustments import bound_contracts as b
++from omegadata.adjustments import contracts as c
++from omegadata.adjustments.bound_chain import calculate_bound_chain, validate_history
++
++
++def pin_context(repository: AdjustmentRepository, pin: b.PinnedCalculation) -> str:
++    from omegadata.adjustments.repository import contexts
++
++    selected = validate_history(pin)
++    outcome = calculate_bound_chain(pin)
++    if outcome.status != "CALCULATED":
++        raise ValueError("CALCULATION_CONTEXT_NOT_ACCEPTABLE:" + outcome.calculation.reason)
++    inputs = reconciliation_inputs(pin, selected)
++    payload = c.canonical(
++        {
++            "reconciliation_inputs": inputs,
++            "context_bindings": json.loads(outcome.context_bindings),
++            "expected_result": json.loads(outcome.canonical_json),
++            "verification_class": outcome.verification_class,
++        }
++    )
++    with repository.transaction() as connection:
++        stored = repository._all(connection)
++        expected = {a.action_id: c.canonical(a) for a in selected}
++        # Reconcile declared complete history against the independently persisted scoped ledger.
++        from omegadata.adjustments.temporal import select_revisions
++
++        scoped = tuple(
++            a
++            for a in stored
++            if a.security_id == pin.history.security_id
++            and (a.listing_id is None or a.listing_id == pin.history.listing_id)
++            and a.source_id in pin.history.source_scope
++            and (a.ex_date is None or pin.history.valid_from <= a.ex_date < pin.history.valid_to)
++        )
++        actual = {
++            a.action_id: c.canonical(a) for a in select_revisions(scoped, pin.context.known_at)
++        }
++        if actual != expected:
++            raise ValueError("PERSISTED_ACTION_HISTORY_INCOMPLETE_OR_CHANGED")
++        independent_reconcile(outcome, inputs, {a.action_id: a for a in stored})
++        old = connection.scalar(select(contexts.c.payload).where(contexts.c.id == pin.snapshot_id))
++        if old is not None:
++            if old != payload:
++                raise ValueError("IMMUTABLE_CONTEXT_ID_REUSED")
++            return pin.snapshot_id
++        connection.execute(
++            contexts.insert().values(
++                id=pin.snapshot_id, payload=payload, digest=c.digest(json.loads(payload))
++            )
++        )
++    return pin.snapshot_id
++
++
++def append_bound_result(
++    repository: AdjustmentRepository,
++    result: b.BoundResult,
++    context_id: str,
++    expected_result_id: str | None = None,
++) -> None:
++    from omegadata.adjustments.repository import contexts, links, result_context, results
++
++    if (
++        type(result) is not b.BoundResult
++        or result.status != "CALCULATED"
++        or result.publication_eligibility
++    ):
++        raise ValueError("BOUND_RESULT_ADMISSION")
++    if expected_result_id is not None and expected_result_id != result.output_digest:
++        raise ValueError("RESULT_DIGEST_IDENTITY_CHANGED")
++    with repository.transaction() as connection:
++        row = (
++            connection.execute(select(contexts).where(contexts.c.id == context_id))
++            .mappings()
++            .first()
++        )
++        if row is None or c.digest(json.loads(row["payload"])) != row["digest"]:
++            raise ValueError("PINNED_CONTEXT_MISSING_OR_CHANGED")
++        pinned = json.loads(row["payload"])
++        if c.canonical(pinned["expected_result"]) != result.canonical_json:
++            raise ValueError("RESULT_DOES_NOT_RECONCILE_WITH_PERSISTED_CONTEXT")
++        # Recheck immutable referenced action bytes independently of result.inputs.
++        stored = {a.action_id: a for a in repository._all(connection)}
++        independent_reconcile(result, pinned["reconciliation_inputs"], stored)
++        for link in result.calculation.adjustment_factor_chain:
++            a = stored.get(link.action_revision_id)
++            if a is None or c.canonical(a) != link.input_parameters:
++                raise ValueError("PERSISTED_ACTION_PROVENANCE_CHANGED")
++        old = connection.scalar(
++            select(results.c.payload).where(results.c.id == result.output_digest)
++        )
++        if old is not None:
++            if old != result.canonical_json:
++                raise ValueError("RESULT_ID_REUSED")
++            linked = connection.scalar(
++                select(result_context.c.context_id).where(
++                    result_context.c.result_id == result.output_digest
++                )
++            )
++            if linked != context_id:
++                raise ValueError("RESULT_CONTEXT_MISMATCH")
++            return
++        connection.execute(
++            results.insert().values(
++                id=result.output_digest, payload=result.canonical_json, digest=result.output_digest
++            )
++        )
++        for link in result.calculation.adjustment_factor_chain:
++            connection.execute(
++                links.insert().values(
++                    result_id=result.output_digest, action_id=link.action_revision_id
++                )
++            )
++        connection.execute(
++            result_context.insert().values(result_id=result.output_digest, context_id=context_id)
++        )
++
++
++def reconciliation_inputs(
++    pin: b.PinnedCalculation, selected: tuple[c.Action, ...]
++) -> dict[str, Any]:
++    """Build from the input pin and actual upstream state, never calculator output."""
++    from omegadata.adjustments.bound_chain import (
++        active_window,
++        execution_state,
++        identity_state,
++        snapshot_bindings,
++    )
++
++    state, past, current = identity_state(pin)
++    calendar, tradability, execution, allowed = execution_state(pin, past)
++    actions = active_window(selected, pin.raw, pin.policy)
++    from omegadata.adjustments.bound_chain import mode
++    from omegadata.session_calendar import VerifiedCalendar
++
++    x = pin.context
++    calendar_snapshot = VerifiedCalendar(
++        tuple(v for v in x.calendar.claims if v.calendar_version == x.calendar_version),
++        tuple(v for v in x.calendar.coverage if v.calendar_version == x.calendar_version),
++        x.calendar.authority,
++    )
++    calendar_links = {}
++    for action in actions:
++        if action.ex_date is None:
++            raise ValueError("INDEPENDENT_EX_DATE_UNKNOWN")
++        session = calendar_snapshot.query(
++            action.exchange,
++            action.ex_date,
++            x.known_at,
++            mode(x),
++            calendar_version=x.calendar_version,
++        )
++        refs = [v.claim_id for v in session.claims]
++        if isinstance(action.parameters, c.Rights):
++            prior = calendar_snapshot.previous_session(
++                action.exchange, action.ex_date, x.known_at, mode(x)
++            )
++            refs.append(prior.claims[0].claim_id)
++        calendar_links[action.action_id] = c.canonical(refs)
++    return {
++        "raw": c.normalized(pin.raw),
++        "policy": c.normalized(pin.policy),
++        "actions": tuple(a.action_id for a in actions),
++        "calendar_links": calendar_links,
++        "bindings": c.normalized(snapshot_bindings(pin, selected, (past, current))),
++        "identity_status": state,
++        "calendar_status": calendar,
++        "tradability_status": tradability,
++        "execution_status": execution,
++        "execution_allowed": allowed,
++        "mode": pin.context.mode,
++    }
++
++
++def independent_reconcile(
++    result: b.BoundResult, inputs: dict[str, Any], stored: dict[str, c.Action]
++) -> None:
++    """Fraction oracle and precise lineage checks independent of factor/chains output."""
++    from decimal import ROUND_HALF_UP, Decimal, Inexact, localcontext
++    from fractions import Fraction
++
++    inner = result.calculation
++    raw = inputs["raw"]
++    policy = inputs["policy"]
++    bindings = inputs["bindings"]
++    if (
++        c.canonical(bindings) != result.context_bindings
++        or inner.consumer_profile != policy["profile"]
++        or inner.original_raw_reference != raw["observation_id"]
++        or inner.original_price_basis != "RAW"
++        or inner.version != b.BOUND_VERSION
++    ):
++        raise ValueError("INDEPENDENT_CONTEXT_MISMATCH")
++    if (
++        result.identity_status,
++        result.calendar_status,
++        result.tradability_status,
++        result.execution_status,
++        result.execution_eligibility,
++    ) != (
++        inputs["identity_status"],
++        inputs["calendar_status"],
++        inputs["tradability_status"],
++        inputs["execution_status"],
++        inputs["execution_allowed"],
++    ):
++        raise ValueError("INDEPENDENT_EXECUTION_STATUS_MISMATCH")
++    if (
++        result.publication_eligibility
++        or inputs["mode"] != "STRICT"
++        and result.execution_eligibility
++    ):
++        raise ValueError("NON_MARKET_FINANCIAL_PROMOTION")
++    identities = list(inputs["actions"])
++    if [link.action_revision_id for link in inner.adjustment_factor_chain] != identities:
++        raise ValueError("INDEPENDENT_REQUIRED_ACTION_SET")
++    actions = [stored[n] for n in identities]
++    expected_inputs = c.canonical(
++        {"bindings": bindings, "raw": raw, "selected_actions": actions, "policy": policy}
++    )
++    if inner.inputs != expected_inputs:
++        raise ValueError("INDEPENDENT_RAW_OR_POLICY_INPUTS")
++    fp = fv = Fraction(1)
++    for a, link in zip(actions, inner.adjustment_factor_chain, strict=True):
++        if (
++            link.source_artifact_id != a.source_artifact_identity
++            or link.input_parameters != c.canonical(a)
++            or c.normalized(link.knowledge_cutoff) != bindings["knowledge_cutoff"]
++            or link.raw_observation_reference != raw["observation_id"]
++            or link.identity_resolution_id != bindings["identity_resolution_digest"]
++            or link.calculation_version != b.BOUND_VERSION
++            or link.consumer_profile != policy["profile"]
++            or link.calendar_reference != inputs["calendar_links"][a.action_id]
++            or link.rounding_policy != bindings["rounding_policy_version"]
++        ):
++            raise ValueError("INDEPENDENT_ACTION_LINEAGE")
++        params = a.parameters
++        n = d = vn = vd = Fraction(1)
++        expected_status = "CALCULATED"
++        if a.action_type in {"SPLIT", "SPLIT_REVERSE"} and isinstance(params, c.Split):
++            d = Fraction(params.multiplier)
++            vn = d
++        elif a.action_type == "BONUS" and isinstance(params, c.Bonus):
++            n = Fraction(params.existing_shares)
++            d = n + Fraction(params.new_shares)
++            vn, vd = d, n
++        elif a.action_type in {"RIGHTS", "RIGHTS_RENOUNCE"} and isinstance(params, c.Rights):
++            if params.reference is None or params.subscription_price is None:
++                raise ValueError("ORACLE_REFERENCE_MISSING")
++            old, new, prior, issue = map(
++                Fraction,
++                (
++                    params.existing_shares,
++                    params.new_shares,
++                    params.reference.value,
++                    params.subscription_price,
++                ),
++            )
++            n, d = old * prior + new * issue, (old + new) * prior
++        elif a.action_type in {"DIVIDEND_CASH", "DIVIDEND_SPECIAL"} and isinstance(
++            params, c.Dividend
++        ):
++            if policy["profile"] == "TOTAL_RETURN":
++                if params.reinvestment is None:
++                    raise ValueError("ORACLE_REINVESTMENT_MISSING")
++                n = Fraction(params.reinvestment.value)
++                d = n + Fraction(params.amount)
++            else:
++                expected_status = "NOT_APPLICABLE"
++        elif isinstance(params, c.Lifecycle):
++            expected_status = "NOT_APPLICABLE"
++        else:
++            raise ValueError("ORACLE_UNSUPPORTED_ECONOMICS")
++        if policy["profile"] in {"RAW", "EXECUTION"}:
++            n = d = vn = vd = Fraction(1)
++        elif policy["profile"] == "VOLUME":
++            n = d = Fraction(1)
++        if policy["adjustment_basis"] in {"FORWARD_ADJUSTED", "INVERSE_FACTOR_COMPARISON"}:
++            n, d, vn, vd = d, n, vd, vn
++        f = link.factor
++        if (
++            f.numerator is None
++            or f.denominator is None
++            or f.volume_numerator is None
++            or f.volume_denominator is None
++            or Fraction(f.numerator) / Fraction(f.denominator) != n / d
++            or Fraction(f.volume_numerator) / Fraction(f.volume_denominator) != vn / vd
++        ):
++            raise ValueError("INDEPENDENT_FACTOR_MISMATCH")
++        with localcontext(c.arithmetic_context()) as factor_context:
++            factor_context.prec = c.PRECISION
++            factor_context.traps[Inexact] = False
++            price_ratio = n / d
++            volume_ratio = vn / vd
++            if (
++                f.status != expected_status
++                or f.price_factor
++                != Decimal(price_ratio.numerator) / Decimal(price_ratio.denominator)
++                or f.volume_factor
++                != Decimal(volume_ratio.numerator) / Decimal(volume_ratio.denominator)
++            ):
++                raise ValueError("INDEPENDENT_DISPLAYED_FACTOR_OR_STATUS")
++        fp *= n / d
++        fv *= vn / vd
++    with localcontext(c.arithmetic_context()) as math:
++        math.prec = c.PRECISION
++        math.traps[Inexact] = False
++
++        def decimal(value: Fraction) -> Decimal:
++            return Decimal(value.numerator) / Decimal(value.denominator)
++
++        price = Decimal(raw["raw"]["price"])
++        volume = Decimal(raw["raw"]["volume"])
++        expected_price = (
++            price
++            if policy["profile"] in {"RAW", "EXECUTION", "VOLUME"}
++            else decimal(Fraction(price) * fp).quantize(Decimal(".000001"), rounding=ROUND_HALF_UP)
++        )
++        expected_volume = (
++            volume
++            if policy["profile"] in {"RAW", "EXECUTION"}
++            else decimal(Fraction(volume) * fv).quantize(Decimal(".0001"), rounding=ROUND_HALF_UP)
++        )
++        if (
++            inner.cumulative_factor,
++            inner.cumulative_volume_factor,
++            inner.adjusted_price,
++            inner.adjusted_volume,
++        ) != (decimal(fp), decimal(fv), expected_price, expected_volume):
++            raise ValueError("INDEPENDENT_NUMERICAL_RECONCILIATION")
+--- /dev/null
++++ b/tests/unit/test_od07_final.py
+@@ -0,0 +1,815 @@
++"""OD07 final: PURE_MATHEMATICAL_TEST / NON_MARKET_STRUCTURAL_CONTROL only."""
++
++from dataclasses import replace
++from datetime import timedelta
++from decimal import Decimal
++
++import pytest
++from test_od07_adjustments import D, K, system
++
++
++def setup_bound(
++    actions=None,
++    *,
++    raw=None,
++    context=None,
++    basis=None,
++    parameters=None,
++    history_state="COMPLETE_FOR_DECLARED_SCOPE",
++):
++    from omegadata.adjustments import bound_contracts as b
++    from omegadata.adjustments.bound_chain import calculate_bound_chain, pin_calculation
++
++    c, x, a, r = system()
++    x = x if context is None else context
++    raw = (
++        b.RawObservation(r, "raw-observation", "raw-record", 1, "PER_TEST_UNIT", "math-source")
++        if raw is None
++        else raw
++    )
++    actions = (a,) if actions is None else actions
++    basis = (
++        b.BasisPolicy("PRICE_RETURN", "BACKWARD_ADJUSTED", x.valid_at) if basis is None else basis
++    )
++    h = b.HistorySnapshot.create(
++        "history",
++        "s",
++        "l",
++        ("math-source",),
++        D - timedelta(days=10),
++        D + timedelta(days=15),
++        x.known_at,
++        actions,
++        history_state,
++        a.evidence,
++        "ev-v1",
++        basis.version,
++    )
++    params = (
++        tuple(b.ParameterSet.for_action(item, K, item.evidence) for item in actions)
++        if parameters is None
++        else parameters
++    )
++    pin = pin_calculation("context", raw, h, basis, x, params)
++    return b, c, x, a, raw, h, basis, params, pin, calculate_bound_chain
++
++
++def reference(a, *, kind="RAW_CLOSE", day=None):
++    from omegadata.adjustments import bound_contracts as b
++    from omegadata.adjustments.contracts import Reference
++
++    day = D - timedelta(days=3) if day is None else day
++    value = Reference(
++        Decimal(100),
++        day,
++        K + timedelta(days=5),
++        "reference-artifact",
++        "MATH_UNIT",
++        a.evidence,
++        "math-source",
++    )
++    return b.ReferenceObservation(
++        value,
++        "reference-observation",
++        "source-record",
++        1,
++        "s",
++        "l",
++        "MATH",
++        "TOKEN",
++        "TEST",
++        "PER_TEST_UNIT",
++        "RAW_UNADJUSTED",
++        kind,
++        observed_at=K,
++        published_at=None,
++    )
++
++
++def rights_case(**kw):
++    c, x, a, r = system()
++    ref = reference(a)
++    ref = replace(ref, **kw)
++    a = replace(
++        a,
++        action_type="RIGHTS",
++        parameters=c.Rights(Decimal(4), Decimal(1), Decimal(50), ref, "MATH_UNIT", True),
++    )
++    return setup_bound((a,))
++
++
++def calculate(parts):
++    b, c, x, a, raw, h, policy, params, pin, run = parts
++    return run(pin)
++
++
++GROUPS = [
++    "R01",
++    "R02",
++    "R03",
++    "R04",
++    "R05",
++    "R06",
++    "I01",
++    "I02",
++    "I03",
++    "I04",
++    "H01",
++    "H02",
++    "H03",
++    "H04",
++    "P01",
++    "P02",
++    "P03",
++    "P04",
++    "E01",
++    "E02",
++    "E03",
++    "K01",
++    "K02",
++    "K03",
++    "D01",
++    "D02",
++    "D03",
++    "D04",
++]
++
++
++@pytest.mark.parametrize("group", GROUPS)
++def test_targeted_contract(group, tmp_path):
++    parts = setup_bound()
++    b, c, x, a, raw, h, p, params, pin, run = parts
++    if group.startswith("R"):
++        change = {
++            "R01": {"security_id": "wrong"},
++            "R02": {"listing_id": "wrong"},
++            "R03": {"exchange": "OTHER"},
++            "R04": {"price_basis": "BACKWARD_ADJUSTED"},
++            "R05": {"observation_id": ""},
++            "R06": {},
++        }[group]
++        out = calculate(rights_case(**change))
++        assert out.status == (
++            "CALCULATED"
++            if group == "R06"
++            else "BLOCKED_IDENTITY"
++            if group in {"R01", "R02", "R03"}
++            else "BLOCKED_EVIDENCE"
++        )
++        if group == "R06":
++            assert out.adjusted_price == Decimal(108)
++    elif group == "I01":
++        old = x.identity_repository.claims[0]
++        renamed = replace(
++            old, claim_id="renamed", valid_from=D - timedelta(days=1), symbol="NEW", series="OTHER"
++        )
++        repo = replace(
++            x.identity_repository, claims=(replace(old, valid_to=renamed.valid_from), renamed)
++        )
++        out = calculate(setup_bound(context=replace(x, identity_repository=repo)))
++        assert out.status == "CALCULATED" and out.identity_status == "SAME_LISTING_CONTINUITY"
++    elif group == "I02":
++        from omegadata.identity import Listing, Security
++
++        old = x.identity_repository.claims[0]
++        future = replace(
++            old, claim_id="reuse", valid_from=D, symbol="TOKEN", listing_id="other-listing"
++        )
++        renamed = replace(old, claim_id="rename", valid_from=D, symbol="NEW")
++        repo = replace(
++            x.identity_repository,
++            securities=(*x.identity_repository.securities, Security("other-security", "i")),
++            listings=(
++                *x.identity_repository.listings,
++                Listing("other-listing", "other-security", "MATH"),
++            ),
++            claims=(replace(old, valid_to=D), renamed, future),
++        )
++        assert (
++            calculate(setup_bound(context=replace(x, identity_repository=repo))).status
++            == "CALCULATED"
++        )
++        wrong = replace(
++            raw, raw=replace(raw.raw, security_id="other-security", listing_id="other-listing")
++        )
++        assert (
++            calculate(setup_bound(raw=wrong, context=replace(x, identity_repository=repo))).status
++            == "BLOCKED_IDENTITY"
++        )
++    elif group == "I03":
++        claim = replace(x.identity_repository.claims[0], lifecycle="DELISTED")
++        out = calculate(
++            setup_bound(
++                context=replace(
++                    x, identity_repository=replace(x.identity_repository, claims=(claim,))
++                )
++            )
++        )
++        assert (
++            out.status == "CALCULATED"
++            and out.identity_status == "HISTORICALLY_VALID_BUT_NOT_TRADABLE"
++        )
++    elif group == "I04":
++        claim = x.identity_repository.claims[0]
++        repo = replace(x.identity_repository, claims=(replace(claim, valid_to=D),))
++        assert (
++            calculate(setup_bound(context=replace(x, identity_repository=repo))).status
++            == "BLOCKED_IDENTITY"
++        )
++    elif group == "H01":
++        assert calculate(parts).status == "CALCULATED"
++        assert calculate(setup_bound(history_state="PARTIAL")).status == "BLOCKED_EVIDENCE"
++    elif group == "H02":
++        assert calculate(setup_bound((), history_state="UNKNOWN")).status == "BLOCKED_EVIDENCE"
++        empty = calculate(setup_bound(()))
++        assert empty.status == "CALCULATED" and not empty.publication_eligibility
++    elif group == "H03":
++        altered = replace(h, action_revision_ids=("a", "missing"))
++        assert run(replace(pin, history=altered)).status == "CONFLICTING_ACTIONS"
++    elif group == "H04":
++        other = replace(a, action_id="b", sequence=2)
++        parts = setup_bound((replace(a, sequence=1), other))
++        pin = parts[8]
++        bad = replace(pin.history, economic_event_ids=(("a", "same-event"), ("b", "same-event")))
++        assert run(replace(pin, history=bad)).status == "CONFLICTING_ACTIONS"
++    elif group in {"P01", "P02", "P03", "P04"}:
++        from omegadata.adjustments.repository import AdjustmentRepository
++
++        db = AdjustmentRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.append_action(a)
++        db.pin_context(pin)
++        out = run(pin)
++        if group == "P01":
++            db.append_bound_result(out, "context")
++            assert db.get_result(out.output_digest) == out.canonical_json
++        else:
++            field = {
++                "P02": "raw_observation_digest",
++                "P03": "knowledge_cutoff",
++                "P04": "identity_snapshot_digest",
++            }[group]
++            import json
++
++            bindings = json.loads(out.context_bindings)
++            bindings[field] = "tampered"
++            bad = replace(out, context_bindings=c.canonical(bindings))
++            with pytest.raises(ValueError):
++                db.append_bound_result(bad, "context")
++    elif group == "E01":
++        exec_policy = b.BasisPolicy("EXECUTION", "RAW_UNADJUSTED", raw.raw.trade_date)
++        out = calculate(setup_bound((), basis=exec_policy))
++        assert out.status == "CALCULATED" and out.raw_price_basis_preserved
++        assert not out.execution_eligibility and not out.publication_eligibility
++    elif group == "E02":
++        claim = replace(x.identity_repository.claims[0], lifecycle="SUSPENDED")
++        repo = replace(x.identity_repository, claims=(claim,))
++        out = calculate(
++            setup_bound(
++                (),
++                context=replace(x, identity_repository=repo),
++                basis=b.BasisPolicy("EXECUTION", "RAW_UNADJUSTED", raw.raw.trade_date),
++            )
++        )
++        assert out.status == "CALCULATED" and out.tradability_status == "SUSPENDED"
++        assert not out.execution_eligibility
++    elif group == "E03":
++        out = calculate(
++            setup_bound((), basis=b.BasisPolicy("EXECUTION", "RAW_UNADJUSTED", raw.raw.trade_date))
++        )
++        assert out.execution_status.startswith("BLOCKED")
++    elif group == "K01":
++        assert calculate(setup_bound(parameters=())).status == "BLOCKED_KNOWLEDGE"
++    elif group == "K02":
++        future = replace(params[0], known_from=x.known_at + timedelta(seconds=1))
++        assert calculate(setup_bound(parameters=(future,))).status == "BLOCKED_KNOWLEDGE"
++        boundary = replace(future, known_from=x.known_at)
++        assert calculate(setup_bound(parameters=(boundary,))).status == "CALCULATED"
++    elif group == "K03":
++        corrected = replace(
++            a,
++            action_id="b",
++            action_revision=2,
++            supersedes_action_id="a",
++            known_from=x.known_at + timedelta(days=1),
++            parameters=c.Split(Decimal(4)),
++        )
++        early = calculate(parts)
++        later_ledger = calculate(setup_bound((a, corrected)))
++        assert early.output_digest == later_ledger.output_digest
++    elif group == "D01":
++        pre = calculate(parts)
++        assert pre.adjusted_price == Decimal(60)
++        on = replace(raw, raw=replace(raw.raw, trade_date=D, price=Decimal(60)))
++        assert calculate(setup_bound(raw=on)).adjusted_price == Decimal(60)
++    elif group == "D02":
++        policy = b.BasisPolicy("PRICE_RETURN", "FORWARD_ADJUSTED", D - timedelta(days=1))
++        on = replace(raw, raw=replace(raw.raw, trade_date=D, price=Decimal(60)))
++        assert calculate(setup_bound(raw=on, basis=policy)).adjusted_price == Decimal(120)
++        assert calculate(setup_bound(basis=policy)).adjusted_price == Decimal(120)
++    elif group == "D03":
++        inverse = b.BasisPolicy("PRICE_RETURN", "INVERSE_FACTOR_COMPARISON", x.valid_at)
++        assert calculate(setup_bound(basis=inverse)).adjusted_price == Decimal(240)
++        assert calculate(setup_bound(basis=inverse)).adjustment_basis == "INVERSE_FACTOR_COMPARISON"
++    elif group == "D04":
++        other = replace(
++            a,
++            action_id="b",
++            action_type="BONUS",
++            ex_date=D + timedelta(days=1),
++            parameters=c.Bonus(Decimal(1), Decimal(2)),
++        )
++        assert calculate(setup_bound((a, other))).adjusted_price == Decimal(40)
++        post = replace(
++            raw, raw=replace(raw.raw, trade_date=D + timedelta(days=1), price=Decimal(40))
++        )
++        assert calculate(
++            setup_bound(
++                (a, other),
++                raw=post,
++                basis=b.BasisPolicy("PRICE_RETURN", "FORWARD_ADJUSTED", D - timedelta(days=1)),
++            )
++        ).adjusted_price == Decimal(120)
++
++
++ADMISSION = [
++    "omitted-action",
++    "fabricated-empty",
++    "wrong-raw",
++    "wrong-profile",
++    "changed-revision",
++    "source-artifact",
++    "knowledge-cutoff",
++    "missing-calendar",
++    "identity-snapshot",
++    "incorrect-factor",
++    "incomplete-math",
++    "duplicate-event",
++    "reused-digest",
++]
++
++
++@pytest.mark.parametrize("case", ADMISSION)
++def test_admission_negative(case, tmp_path):
++    from omegadata.adjustments.repository import AdjustmentRepository
++
++    b, c, x, a, raw, h, p, params, pin, run = setup_bound()
++    db = AdjustmentRepository("sqlite:///:memory:", disposable_root=tmp_path)
++    db.append_action(a)
++    if case in {"omitted-action", "incomplete-math"}:
++        db.append_action(replace(a, action_id="b", ex_date=D + timedelta(days=1)))
++        with pytest.raises(ValueError):
++            db.pin_context(pin)
++        return
++    if case == "fabricated-empty":
++        with pytest.raises(ValueError):
++            db.pin_context(setup_bound(())[8])
++        return
++    if case == "duplicate-event":
++        other = replace(a, action_id="b", sequence=2)
++        bits = setup_bound((replace(a, sequence=1), other))
++        bad = replace(
++            bits[8], history=replace(bits[5], economic_event_ids=(("a", "same"), ("b", "same")))
++        )
++        with pytest.raises(ValueError):
++            db.pin_context(bad)
++        return
++    db.pin_context(pin)
++    out = run(pin)
++    inner = out.calculation
++    if case == "wrong-raw":
++        bad = replace(out, calculation=replace(inner, original_raw_reference="other"))
++    elif case == "wrong-profile":
++        bad = replace(out, calculation=replace(inner, consumer_profile="VOLUME"))
++    elif case in {"changed-revision", "source-artifact", "knowledge-cutoff", "incorrect-factor"}:
++        link = inner.adjustment_factor_chain[0]
++        if case == "changed-revision":
++            link = replace(link, input_parameters="{}")
++        elif case == "source-artifact":
++            link = replace(link, source_artifact_id="other")
++        elif case == "knowledge-cutoff":
++            link = replace(link, knowledge_cutoff=K)
++        else:
++            link = replace(link, factor=replace(link.factor, price_factor=Decimal(9)))
++        bad = replace(out, calculation=replace(inner, adjustment_factor_chain=(link,)))
++    elif case in {"missing-calendar", "identity-snapshot"}:
++        import json
++
++        value = json.loads(out.context_bindings)
++        if case == "missing-calendar":
++            value.pop("calendar_snapshot_digest")
++        else:
++            value["identity_snapshot_digest"] = "forged"
++        bad = replace(out, context_bindings=c.canonical(value))
++    elif case == "reused-digest":
++        db.append_bound_result(out, "context")
++        bad = replace(out, calculation=replace(inner, reason="changed"))
++        with pytest.raises(ValueError):
++            db.append_bound_result(bad, "context", expected_result_id=out.output_digest)
++        assert db.get_result(out.output_digest) == out.canonical_json
++        return
++    with pytest.raises(ValueError):
++        db.append_bound_result(bad, "context")
++
++
++@pytest.mark.parametrize(
++    "case",
++    [
++        "unbound-reference",
++        "wrong-type",
++        "wrong-unit",
++        "expired-reference",
++        "future-reference",
++        "unknown-parameter-time",
++        "revoked-parameter",
++        "incomplete-parameter",
++        "zero-issue",
++        "corrected-terms",
++        "wrong-venue-symbol",
++        "ambiguous-identity",
++        "reopen-context",
++        "legacy-migration",
++        "rollback-context",
++        "strict-no-promotion",
++    ],
++)
++def test_required_boundaries(case, tmp_path):
++    b, c, x, a, raw, h, p, params, pin, run = setup_bound()
++    if case == "unbound-reference":
++        a = replace(
++            a,
++            action_type="RIGHTS",
++            parameters=c.Rights(
++                Decimal(4),
++                Decimal(1),
++                Decimal(50),
++                c.Reference(Decimal(100), D - timedelta(days=3), K, "ref", "MATH_UNIT"),
++                "MATH_UNIT",
++                True,
++            ),
++        )
++        assert calculate(setup_bound((a,))).status == "BLOCKED_IDENTITY"
++    elif case in {"wrong-type", "wrong-unit", "expired-reference", "future-reference"}:
++        kw = {
++            "wrong-type": {"observation_type": "RAW_OPEN"},
++            "wrong-unit": {"price_unit": "OTHER"},
++            "expired-reference": {"known_to": K + timedelta(days=10)},
++            "future-reference": {"published_at": x.known_at + timedelta(seconds=1)},
++        }[case]
++        assert calculate(rights_case(**kw)).status in {"BLOCKED_EVIDENCE", "BLOCKED_KNOWLEDGE"}
++    elif case == "unknown-parameter-time":
++        assert (
++            calculate(setup_bound(parameters=(replace(params[0], known_from=None),))).status
++            == "BLOCKED_KNOWLEDGE"
++        )
++    elif case == "revoked-parameter":
++        e = replace(a.evidence, permission="DENIED")
++        assert (
++            calculate(setup_bound(parameters=(replace(params[0], evidence=e),))).status
++            == "BLOCKED_EVIDENCE"
++        )
++    elif case == "incomplete-parameter":
++        assert (
++            calculate(
++                setup_bound(parameters=(replace(params[0], parameters_digest="other"),))
++            ).status
++            == "BLOCKED_KNOWLEDGE"
++        )
++    elif case == "zero-issue":
++        ref = reference(a)
++        a = replace(
++            a,
++            action_type="RIGHTS",
++            parameters=c.Rights(Decimal(4), Decimal(1), Decimal(0), ref, "MATH_UNIT", True),
++        )
++        assert calculate(setup_bound((a,))).adjusted_price == Decimal(96)
++    elif case == "corrected-terms":
++        a = replace(
++            a,
++            action_type="RIGHTS",
++            parameters=c.Rights(
++                Decimal(4), Decimal(1), Decimal(50), reference(a), "MATH_UNIT", True
++            ),
++        )
++        future = replace(
++            a,
++            action_id="b",
++            action_revision=2,
++            supersedes_action_id="a",
++            known_from=x.known_at + timedelta(days=1),
++            parameters=replace(a.parameters, subscription_price=Decimal(80)),
++        )
++        assert calculate(setup_bound((a, future))).adjusted_price == Decimal(108)
++    elif case == "wrong-venue-symbol":
++        r = replace(raw, raw=replace(raw.raw, exchange="OTHER"))
++        assert calculate(setup_bound(raw=r)).status == "BLOCKED_IDENTITY"
++    elif case == "ambiguous-identity":
++        old = x.identity_repository.claims[0]
++        repo = replace(x.identity_repository, claims=(old, replace(old, claim_id="duplicate")))
++        assert (
++            calculate(setup_bound(context=replace(x, identity_repository=repo))).status
++            == "BLOCKED_IDENTITY"
++        )
++    elif case == "strict-no-promotion":
++        out = calculate(setup_bound(context=replace(x, mode="STRICT")))
++        assert (
++            out.status == "BLOCKED_EVIDENCE"
++            and not out.execution_eligibility
++            and not out.publication_eligibility
++        )
++    else:
++        from omegadata.adjustments.repository import AdjustmentRepository
++
++        url = "sqlite:///" + str(tmp_path / "bound.sqlite")
++        if case == "legacy-migration":
++            from sqlalchemy import create_engine
++
++            from omegadata.adjustments.repository import M, version
++
++            engine = create_engine(url)
++            with engine.begin() as connection:
++                M.create_all(
++                    connection,
++                    tables=[
++                        M.tables[n]
++                        for n in ["od07_schema", "od07_action", "od07_result", "od07_result_action"]
++                    ],
++                )
++                connection.execute(version.insert().values(version="od07.store/v1"))
++            engine.dispose()
++        db = AdjustmentRepository(url, disposable_root=tmp_path)
++        db.append_action(a)
++        db.pin_context(pin)
++        out = run(pin)
++        db.append_bound_result(out, "context")
++        if case == "rollback-context":
++            with pytest.raises(ValueError):
++                db.pin_context(replace(pin, raw=replace(raw, observation_id="different")))
++            assert db.get_result(out.output_digest) == out.canonical_json
++        db.close()
++        db = AdjustmentRepository(url, disposable_root=tmp_path)
++        assert db.get_result(out.output_digest) == out.canonical_json
++
++
++@pytest.mark.parametrize(
++    "multiplier,day,price,basis,want",
++    [
++        ("2", -2, "120", "BACKWARD_ADJUSTED", "60"),
++        ("2", 0, "60", "BACKWARD_ADJUSTED", "60"),
++        ("2", 1, "60", "BACKWARD_ADJUSTED", "60"),
++        ("2", -2, "120", "FORWARD_ADJUSTED", "120"),
++        ("2", 0, "60", "FORWARD_ADJUSTED", "120"),
++        ("2", 1, "60", "FORWARD_ADJUSTED", "120"),
++        ("0.5", -2, "120", "BACKWARD_ADJUSTED", "240"),
++        ("0.5", 0, "240", "FORWARD_ADJUSTED", "120"),
++        ("0.5", 1, "240", "FORWARD_ADJUSTED", "120"),
++    ],
++)
++def test_independent_basis_vectors(multiplier, day, price, basis, want):
++    b, c, x, a, raw, h, p, params, pin, run = setup_bound()
++    a = replace(a, parameters=c.Split(Decimal(multiplier)))
++    raw = replace(
++        raw, raw=replace(raw.raw, trade_date=D + timedelta(days=day), price=Decimal(price))
++    )
++    policy = b.BasisPolicy(
++        "PRICE_RETURN", basis, x.valid_at if basis == "BACKWARD_ADJUSTED" else D - timedelta(days=1)
++    )
++    assert calculate(setup_bound((a,), raw=raw, basis=policy)).adjusted_price == Decimal(want)
++
++
++def test_legacy_rename_reproduction():
++    from omegadata.adjustments.chains import calculate_chain
++
++    c, x, a, r = system()
++    claim = x.identity_repository.claims[0]
++    renamed = replace(claim, claim_id="rename", symbol="NEW", valid_from=D - timedelta(days=1))
++    repo = replace(
++        x.identity_repository, claims=(replace(claim, valid_to=renamed.valid_from), renamed)
++    )
++    assert (
++        calculate_chain(
++            r, (a,), c.Policy("PRICE_RETURN"), replace(x, identity_repository=repo)
++        ).status
++        == "CALCULATED"
++    )
++
++
++@pytest.mark.parametrize(
++    "case",
++    [
++        "independent-oracle",
++        "independent-lineage",
++        "valid-session-missing-lot",
++        "closed-session",
++        "delisted-execution",
++        "canary-execution-promotion",
++        "future-identity",
++        "unreviewed-merger",
++        "undefined-forward-rights",
++        "schema-version",
++    ],
++)
++def test_semantic_review(case, tmp_path, monkeypatch):
++    from omegadata.adjustments.repository import AdjustmentRepository
++    from omegadata.session_calendar import SessionClaim
++
++    b, c, x, a, raw, h, p, params, pin, run = setup_bound()
++    if case in {"independent-oracle", "independent-lineage"}:
++        from omegadata.adjustments import admission
++
++        out = run(pin)
++        if case == "independent-oracle":
++            bad = replace(out, calculation=replace(out.calculation, adjusted_price=Decimal(999)))
++        else:
++            link = replace(out.calculation.adjustment_factor_chain[0], source_artifact_id="wrong")
++            bad = replace(
++                out, calculation=replace(out.calculation, adjustment_factor_chain=(link,))
++            )
++        monkeypatch.setattr(admission, "calculate_bound_chain", lambda ignored: bad)
++        db = AdjustmentRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.append_action(a)
++        with pytest.raises(ValueError):
++            db.pin_context(pin)
++    elif case in {
++        "valid-session-missing-lot",
++        "closed-session",
++        "delisted-execution",
++        "canary-execution-promotion",
++    }:
++        session = SessionClaim(
++            "raw-session",
++            "MATH",
++            raw.raw.trade_date,
++            "CLOSED" if case == "closed-session" else "REGULAR",
++            "Asia/Kolkata",
++            "cal-v1",
++            a.evidence,
++            K,
++            None,
++        )
++        calendar = replace(x.calendar, claims=(*x.calendar.claims, session))
++        if case == "delisted-execution":
++            claim = replace(x.identity_repository.claims[0], lifecycle="DELISTED")
++            x = replace(x, identity_repository=replace(x.identity_repository, claims=(claim,)))
++        parts = setup_bound(
++            (),
++            context=replace(x, calendar=calendar),
++            basis=b.BasisPolicy("EXECUTION", "RAW_UNADJUSTED", raw.raw.trade_date),
++        )
++        pin = parts[8]
++        if case == "canary-execution-promotion":
++            terms = b.ExecutionConstraints(
++                "s",
++                "l",
++                "MATH",
++                raw.raw.trade_date,
++                K,
++                a.evidence,
++                10,
++                "20",
++                "WHOLE_UNITS",
++                "CANARY_ONLY",
++                "CLEAR",
++            )
++            pin = replace(pin, execution_constraints=terms)
++        out = run(pin)
++        assert out.status == "CALCULATED" and not out.execution_eligibility
++        expected = {
++            "valid-session-missing-lot": "BLOCKED_LOT_OR_SETTLEMENT_UNKNOWN",
++            "closed-session": "BLOCKED_CALENDAR",
++            "delisted-execution": "BLOCKED_LIFECYCLE",
++            "canary-execution-promotion": "BLOCKED_NON_MARKET_CONTROL",
++        }[case]
++        assert out.execution_status == expected
++    elif case == "future-identity":
++        old = x.identity_repository.claims[0]
++        correction = replace(
++            old,
++            claim_id="future",
++            symbol="FUTURE",
++            known_from=x.known_at + timedelta(days=1),
++            supersedes_claim_id=old.claim_id,
++        )
++        changed = replace(
++            x, identity_repository=replace(x.identity_repository, claims=(old, correction))
++        )
++        assert calculate(setup_bound(context=changed)).output_digest == run(pin).output_digest
++    elif case == "unreviewed-merger":
++        from omegadata.identity import Listing, Security
++
++        old = x.identity_repository.claims[0]
++        new_listing = Listing("successor-listing", "successor-security", "MATH")
++        successor = replace(old, claim_id="successor", listing_id="successor-listing", valid_from=D)
++        repo = replace(
++            x.identity_repository,
++            securities=(*x.identity_repository.securities, Security("successor-security", "i")),
++            listings=(*x.identity_repository.listings, new_listing),
++            claims=(replace(old, valid_to=D), successor),
++        )
++        assert (
++            calculate(setup_bound(context=replace(x, identity_repository=repo))).status
++            == "BLOCKED_IDENTITY"
++        )
++    elif case == "undefined-forward-rights":
++        bits = rights_case()
++        raw = replace(bits[4], raw=replace(bits[4].raw, trade_date=D, price=Decimal(90)))
++        assert (
++            calculate(
++                setup_bound(
++                    bits[5].actions,
++                    raw=raw,
++                    basis=b.BasisPolicy("PRICE_RETURN", "FORWARD_ADJUSTED", D - timedelta(days=1)),
++                )
++            ).status
++            == "UNSUPPORTED_POLICY"
++        )
++    elif case == "schema-version":
++        from sqlalchemy import create_engine
++
++        from omegadata.adjustments.repository import M, version
++
++        url = "sqlite:///" + str(tmp_path / "unknown.sqlite")
++        engine = create_engine(url)
++        with engine.begin() as connection:
++            M.create_all(connection)
++            connection.execute(version.insert().values(version="unrecognized"))
++        engine.dispose()
++        with pytest.raises(ValueError):
++            AdjustmentRepository(url, disposable_root=tmp_path)
++
++
++@pytest.mark.parametrize(
++    "case", ["parameter-time-contradiction", "unknown-quantity-convention", "future-basis"]
++)
++def test_explicit_temporal_and_execution_scope(case):
++    b, c, x, a, raw, h, p, params, pin, run = setup_bound()
++    if case == "parameter-time-contradiction":
++        a = replace(a, parameter_known_from=x.known_at + timedelta(days=1))
++        assert calculate(setup_bound((a,))).status == "BLOCKED_KNOWLEDGE"
++    elif case == "future-basis":
++        assert (
++            calculate(
++                setup_bound(basis=replace(p, basis_date=x.valid_at + timedelta(days=1)))
++            ).status
++            == "BLOCKED_KNOWLEDGE"
++        )
++    else:
++        from omegadata.session_calendar import SessionClaim
++
++        session = SessionClaim(
++            "raw",
++            "MATH",
++            raw.raw.trade_date,
++            "REGULAR",
++            "Asia/Kolkata",
++            "cal-v1",
++            a.evidence,
++            K,
++            None,
++        )
++        x = replace(x, calendar=replace(x.calendar, claims=(*x.calendar.claims, session)))
++        terms = b.ExecutionConstraints(
++            "s",
++            "l",
++            "MATH",
++            raw.raw.trade_date,
++            K,
++            a.evidence,
++            10,
++            "20",
++            "UNREVIEWED_CONVENTION",
++            "CANARY_ONLY",
++            "CLEAR",
++        )
++        bits = setup_bound(
++            (), context=x, basis=b.BasisPolicy("EXECUTION", "RAW_UNADJUSTED", raw.raw.trade_date)
++        )
++        assert (
++            run(replace(bits[8], execution_constraints=terms)).execution_status
++            == "BLOCKED_EXECUTION_CONSTRAINTS"
++        )
++
++
++@pytest.mark.parametrize(
++    "case", ["price-factor", "volume-factor", "factor-status", "calendar-link"]
++)
++def test_independent_factor_and_calendar_admission(case, tmp_path, monkeypatch):
++    from omegadata.adjustments import admission
++    from omegadata.adjustments.repository import AdjustmentRepository
++
++    b, c, x, a, raw, h, p, params, pin, run = setup_bound()
++    out = run(pin)
++    link = out.calculation.adjustment_factor_chain[0]
++    if case == "price-factor":
++        link = replace(link, factor=replace(link.factor, price_factor=Decimal(999)))
++    elif case == "volume-factor":
++        link = replace(link, factor=replace(link.factor, volume_factor=Decimal(999)))
++    elif case == "factor-status":
++        link = replace(link, factor=replace(link.factor, status="NOT_APPLICABLE"))
++    else:
++        link = replace(link, calendar_reference='["unrelated-session"]')
++    bad = replace(out, calculation=replace(out.calculation, adjustment_factor_chain=(link,)))
++    monkeypatch.setattr(admission, "calculate_bound_chain", lambda ignored: bad)
++    db = AdjustmentRepository("sqlite:///:memory:", disposable_root=tmp_path)
++    db.append_action(a)
++    with pytest.raises(ValueError):
++        db.pin_context(pin)

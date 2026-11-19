@@ -1,0 +1,4 @@
+# Basis is separate from eligibility
+BoundResult reports raw_price_basis_preserved,mathematical status,identity/calendar/tradability/execution states and init-disabled eligibility flags. EXECUTION/RAW requireRAW_UNADJUSTED. Mathematical CALCULATED never by itself means executable or publishable.
+
+Declared execution scope requires actual raw session,listing lifecycle,known evidence-backed security/listing/venue/session constraints,positive integer lot,positive whole-unit lot-multiple quantity,explicit settlement policy andCLEARrestrictions. Unknown calendar,closure,suspension,delisting,unknownlot/settlement/convention or future observation blocks. Anonymous controls alwaysBLOCKED_NON_MARKET_CONTROL even when structurally complete. No order routing,broker integration or invented settlement specification. Positive authentic execution acceptance remainsblocked.

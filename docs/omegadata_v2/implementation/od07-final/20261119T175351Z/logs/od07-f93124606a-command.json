@@ -1,0 +1,555 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/od07-f93124606a-manifest.json",
+    "--manifest-sha256",
+    "586d9d1d302378cf904a1f2540d414688b4731541721e49c31e9c6a0468b643b",
+    "--policy",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/od07-f93124606a-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/od07-f93124606a/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-final-20261119T175351Z",
+  "start_utc": "2026-11-19T18:19:57.805099+00:00",
+  "end_utc": "2026-11-19T18:20:04.990847+00:00",
+  "elapsed_seconds": 6.47859610499998,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od07",
+    "exit_code": 0,
+    "counts": {
+      "passed": 100
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[SPLIT-args0-1/2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[SPLIT-args1-5/1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[BONUS-args2-2/3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[BONUS-args3-1/3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[RIGHTS-args4-9/10]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[RIGHTS-args5-7/10]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[DIVIDEND_CASH-args6-19/20]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[DIVIDEND_SPECIAL-args7-4/5]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M08]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M09]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[zero]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[negative]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[nan]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[infinity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[float]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[bonus-denominator]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[rights-currency]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[rights-exercise]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[dividend-price]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[dividend-time]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[unsupported]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[lifecycle]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[post-ex]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[forward]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[chain-limit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[wrong-security]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[suspended]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[naive]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[unknown-version]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[restart-True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[restart-False]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[duplicate-True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[duplicate-False]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[rollback-True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[rollback-False]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[append-only-True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[append-only-False]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[revisions-True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[revisions-False]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[foreign-key-True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[foreign-key-False]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[migration-True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[migration-False]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[empty-strict]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[empty-denied]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[empty-identity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[expired-action]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[currency-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[nonfinite-action]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[future-reference-date]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[missing-reference-evidence]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[wrong-parameter-version]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[competing-correction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[timezone-reference]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[suspension-constraint]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[strict-labels]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[known-boundary]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[multistep]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[rights-volume]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[dividend-volume]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[no-partial-ledger]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[result-payload-binding]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[quantum-bound]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[context-precision]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_legacy_risk_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[future-ledger-stability]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[persisted-price-tamper]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[persisted-factor-tamper]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[partial-result]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[duplicate-event-economic-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[reverse-direction-type]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[reference-identity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[profile-volume-rights]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[large-result-refusal]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[competing-file-writers]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_sql_and_chain_integrity[native-foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_sql_and_chain_integrity[unrelated-schema]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_sql_and_chain_integrity[persisted-order]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_sql_and_chain_integrity[source-correction-rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_adjustments.py::test_decimal_environment_isolation",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-19T18:20:00.022136+00:00",
+    "end_utc": "2026-11-19T18:20:04.379212+00:00",
+    "elapsed_seconds": 4.357077004000018,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 72%]\n............................                                             [100%]\n100 passed in 2.81s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532292]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-final-20261119T175351Z/od07-f93124606a/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "od07",
+  "source_commit": "91a0030094c0132b6a5586ce277ed1e56eb5e396",
+  "source_manifest_sha256": "586d9d1d302378cf904a1f2540d414688b4731541721e49c31e9c6a0468b643b"
+}

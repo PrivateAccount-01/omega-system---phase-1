@@ -1,0 +1,535 @@
+{
+  "mandatory_families": {
+    "R01": "test_targeted_contract[R01]",
+    "R02": "test_targeted_contract[R02]",
+    "R03": "test_targeted_contract[R03]",
+    "R04": "test_targeted_contract[R04]",
+    "R05": "test_targeted_contract[R05]",
+    "R06": "test_targeted_contract[R06]",
+    "I01": "test_targeted_contract[I01]",
+    "I02": "test_targeted_contract[I02]",
+    "I03": "test_targeted_contract[I03]",
+    "I04": "test_targeted_contract[I04]",
+    "H01": "test_targeted_contract[H01]",
+    "H02": "test_targeted_contract[H02]",
+    "H03": "test_targeted_contract[H03]",
+    "H04": "test_targeted_contract[H04]",
+    "P01": "test_targeted_contract[P01]",
+    "P02": "test_targeted_contract[P02]",
+    "P03": "test_targeted_contract[P03]",
+    "P04": "test_targeted_contract[P04]",
+    "E01": "test_targeted_contract[E01]",
+    "E02": "test_targeted_contract[E02]",
+    "E03": "test_targeted_contract[E03]",
+    "K01": "test_targeted_contract[K01]",
+    "K02": "test_targeted_contract[K02]",
+    "K03": "test_targeted_contract[K03]",
+    "D01": "test_targeted_contract[D01]",
+    "D02": "test_targeted_contract[D02]",
+    "D03": "test_targeted_contract[D03]",
+    "D04": "test_targeted_contract[D04]"
+  },
+  "final_counts": {
+    "passed": 84
+  },
+  "command": {
+    "job": "od07final",
+    "command_id": "od07final-1cee5c5c83-command",
+    "launcher_argv": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od07-final-20261119T175351Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/od07final-1cee5c5c83-manifest.json",
+      "--manifest-sha256",
+      "a21e59c528c0a79593a7083c4890ab232c3cc6110c04ced890cb453960a37d2c",
+      "--policy",
+      "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/od07final-1cee5c5c83-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od07-final-20261119T175351Z/od07final-1cee5c5c83/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od07-final-20261119T175351Z",
+    "platform": "Ubuntu/WSL Linux",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "start_utc": "2026-11-19T18:24:44.903667+00:00",
+    "end_utc": "2026-11-19T18:24:50.389743+00:00",
+    "elapsed_seconds": 5.486064497000001,
+    "exit_code": 0,
+    "counts": {
+      "passed": 84
+    },
+    "stdout_stderr": "logs/od07final-1cee5c5c83-command.json",
+    "input_manifest_sha256": "a21e59c528c0a79593a7083c4890ab232c3cc6110c04ced890cb453960a37d2c",
+    "input_manifest": "logs/od07final-1cee5c5c83-manifest.json"
+  },
+  "chronology": [
+    {
+      "command": "logs/od07final-21feb2214c-command.json",
+      "start_utc": "2026-11-19T18:01:20.250543+00:00",
+      "end_utc": "2026-11-19T18:01:25.816908+00:00",
+      "test_sha256": "87c1937f8e4180e5c5c1cc4c4a41c2beb200b6129427ed7383f6660852d0c999",
+      "exit_code": 1,
+      "counts": {
+        "failed": 67
+      },
+      "failed_nodes": [
+        "tests/unit/test_od07_final.py::test_targeted_contract[R01]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[R02]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[R03]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[R04]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[R05]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[R06]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[I01]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[I02]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[I03]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[I04]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[H01]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[H02]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[H03]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[H04]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[P01]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[P02]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[P03]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[P04]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[E01]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[E02]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[E03]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[K01]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[K02]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[K03]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[D01]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[D02]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[D03]",
+        "tests/unit/test_od07_final.py::test_targeted_contract[D04]",
+        "tests/unit/test_od07_final.py::test_admission_negative[omitted-action]",
+        "tests/unit/test_od07_final.py::test_admission_negative[fabricated-empty]",
+        "tests/unit/test_od07_final.py::test_admission_negative[wrong-raw]",
+        "tests/unit/test_od07_final.py::test_admission_negative[wrong-profile]",
+        "tests/unit/test_od07_final.py::test_admission_negative[changed-revision]",
+        "tests/unit/test_od07_final.py::test_admission_negative[source-artifact]",
+        "tests/unit/test_od07_final.py::test_admission_negative[knowledge-cutoff]",
+        "tests/unit/test_od07_final.py::test_admission_negative[missing-calendar]",
+        "tests/unit/test_od07_final.py::test_admission_negative[identity-snapshot]",
+        "tests/unit/test_od07_final.py::test_admission_negative[incorrect-factor]",
+        "tests/unit/test_od07_final.py::test_admission_negative[incomplete-math]",
+        "tests/unit/test_od07_final.py::test_admission_negative[duplicate-event]",
+        "tests/unit/test_od07_final.py::test_admission_negative[reused-digest]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[unbound-reference]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[wrong-type]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[wrong-unit]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[expired-reference]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[future-reference]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[unknown-parameter-time]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[revoked-parameter]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[incomplete-parameter]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[zero-issue]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[corrected-terms]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[wrong-venue-symbol]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[ambiguous-identity]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[reopen-context]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[legacy-migration]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[rollback-context]",
+        "tests/unit/test_od07_final.py::test_required_boundaries[strict-no-promotion]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[2--2-120-BACKWARD_ADJUSTED-60]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-0-60-BACKWARD_ADJUSTED-60]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-1-60-BACKWARD_ADJUSTED-60]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[2--2-120-FORWARD_ADJUSTED-120]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-0-60-FORWARD_ADJUSTED-120]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-1-60-FORWARD_ADJUSTED-120]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5--2-120-BACKWARD_ADJUSTED-240]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5-0-240-FORWARD_ADJUSTED-120]",
+        "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5-1-240-FORWARD_ADJUSTED-120]",
+        "tests/unit/test_od07_final.py::test_legacy_rename_reproduction"
+      ]
+    },
+    {
+      "command": "logs/od07final-b596aeb364-command.json",
+      "start_utc": "2026-11-19T18:07:21.329801+00:00",
+      "end_utc": "2026-11-19T18:07:26.672238+00:00",
+      "test_sha256": "87c1937f8e4180e5c5c1cc4c4a41c2beb200b6129427ed7383f6660852d0c999",
+      "exit_code": 1,
+      "counts": {
+        "passed": 66,
+        "failed": 1
+      },
+      "failed_nodes": [
+        "tests/unit/test_od07_final.py::test_targeted_contract[D04]"
+      ]
+    },
+    {
+      "command": "logs/od07final-e154be30a1-command.json",
+      "start_utc": "2026-11-19T18:08:58.261650+00:00",
+      "end_utc": "2026-11-19T18:09:03.913506+00:00",
+      "test_sha256": "390c366c7ac392a5eb15d787fb2d0d263e3dbe4e54c0d821dad82594f0a4abdc",
+      "exit_code": 1,
+      "counts": {
+        "passed": 74,
+        "failed": 3
+      },
+      "failed_nodes": [
+        "tests/unit/test_od07_final.py::test_targeted_contract[D04]",
+        "tests/unit/test_od07_final.py::test_semantic_review[independent-oracle]",
+        "tests/unit/test_od07_final.py::test_semantic_review[independent-lineage]"
+      ]
+    },
+    {
+      "command": "logs/od07final-6553f9436e-command.json",
+      "start_utc": "2026-11-19T18:10:35.076945+00:00",
+      "end_utc": "2026-11-19T18:10:40.164134+00:00",
+      "test_sha256": "f1c7c055e116e73c59ad3187135b6e27d00214201080b54d57a80b9dfb41a445",
+      "exit_code": 1,
+      "counts": {
+        "passed": 74,
+        "failed": 6
+      },
+      "failed_nodes": [
+        "tests/unit/test_od07_final.py::test_targeted_contract[D04]",
+        "tests/unit/test_od07_final.py::test_semantic_review[independent-oracle]",
+        "tests/unit/test_od07_final.py::test_semantic_review[independent-lineage]",
+        "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[parameter-time-contradiction]",
+        "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[unknown-quantity-convention]",
+        "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[future-basis]"
+      ]
+    },
+    {
+      "command": "logs/od07final-9033be7c79-command.json",
+      "start_utc": "2026-11-19T18:12:34.436562+00:00",
+      "end_utc": "2026-11-19T18:12:39.466078+00:00",
+      "test_sha256": "4307fb3b2539f998a4100568e8dc04b0df25ee4a7d18ff750763b7ee9e2c53e8",
+      "exit_code": 0,
+      "counts": {
+        "passed": 80
+      },
+      "failed_nodes": []
+    },
+    {
+      "command": "logs/od07final-e42f4a47cf-command.json",
+      "start_utc": "2026-11-19T18:18:27.237899+00:00",
+      "end_utc": "2026-11-19T18:18:33.344247+00:00",
+      "test_sha256": "4307fb3b2539f998a4100568e8dc04b0df25ee4a7d18ff750763b7ee9e2c53e8",
+      "exit_code": 0,
+      "counts": {
+        "passed": 80
+      },
+      "failed_nodes": []
+    },
+    {
+      "command": "logs/od07final-a594380302-command.json",
+      "start_utc": "2026-11-19T18:19:50.354099+00:00",
+      "end_utc": "2026-11-19T18:19:57.707629+00:00",
+      "test_sha256": "4307fb3b2539f998a4100568e8dc04b0df25ee4a7d18ff750763b7ee9e2c53e8",
+      "exit_code": 0,
+      "counts": {
+        "passed": 80
+      },
+      "failed_nodes": []
+    },
+    {
+      "command": "logs/od07final-af4ddd631e-command.json",
+      "start_utc": "2026-11-19T18:24:10.242995+00:00",
+      "end_utc": "2026-11-19T18:24:15.620359+00:00",
+      "test_sha256": "7cfc6ef4cc7a18c0c16e9eb5a9717a64dafd51450b9dbf32649463b394a1b7b5",
+      "exit_code": 1,
+      "counts": {
+        "passed": 80,
+        "failed": 4
+      },
+      "failed_nodes": [
+        "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[price-factor]",
+        "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[volume-factor]",
+        "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[factor-status]",
+        "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[calendar-link]"
+      ]
+    },
+    {
+      "command": "logs/od07final-1cee5c5c83-command.json",
+      "start_utc": "2026-11-19T18:24:44.903667+00:00",
+      "end_utc": "2026-11-19T18:24:50.389743+00:00",
+      "test_sha256": "5d7f730659e7b5e63102727c1a0215c620b0dc48ae4041ee7f90b6856859ceb0",
+      "exit_code": 0,
+      "counts": {
+        "passed": 84
+      },
+      "failed_nodes": []
+    }
+  ],
+  "frozen_sources": {
+    "negative-first-freeze.json": {
+      "utc": "2026-11-19T18:01:19.388008+00:00",
+      "sha256": "87c1937f8e4180e5c5c1cc4c4a41c2beb200b6129427ed7383f6660852d0c999",
+      "application_corrections_started": false,
+      "families": 28
+    },
+    "review-freeze.json": {
+      "utc": "2026-11-19T18:08:57.334145+00:00",
+      "sha256": "390c366c7ac392a5eb15d787fb2d0d263e3dbe4e54c0d821dad82594f0a4abdc",
+      "note": "10 added probes before correction; existing D04 fixture action tag needs correction from SPLIT to BONUS, numerical expectation40 retained"
+    },
+    "scope-freeze.json": {
+      "utc": "2026-11-19T18:10:34.352678+00:00",
+      "sha256": "f1c7c055e116e73c59ad3187135b6e27d00214201080b54d57a80b9dfb41a445"
+    },
+    "factor-review-freeze.json": {
+      "utc": "2026-11-19T18:24:09.506293+00:00",
+      "test_sha256": "7cfc6ef4cc7a18c0c16e9eb5a9717a64dafd51450b9dbf32649463b394a1b7b5",
+      "cases": [
+        "price-factor",
+        "volume-factor",
+        "factor-status",
+        "calendar-link"
+      ],
+      "expected_baseline": "independent admission erroneously permits producer defect; no real data"
+    }
+  },
+  "focused_coverage": {
+    "module_summaries": {
+      "src/omegadata/adjustments/__init__.py": {
+        "covered_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100",
+        "num_branches": 0,
+        "num_partial_branches": 0,
+        "covered_branches": 0,
+        "missing_branches": 0,
+        "percent_branches_covered": 100.0,
+        "percent_branches_covered_display": "100"
+      },
+      "src/omegadata/adjustments/admission.py": {
+        "covered_lines": 118,
+        "num_statements": 160,
+        "percent_covered": 66.94915254237289,
+        "percent_covered_display": "67",
+        "missing_lines": 42,
+        "excluded_lines": 2,
+        "percent_statements_covered": 73.75,
+        "percent_statements_covered_display": "74",
+        "num_branches": 76,
+        "num_partial_branches": 18,
+        "covered_branches": 40,
+        "missing_branches": 36,
+        "percent_branches_covered": 52.63157894736842,
+        "percent_branches_covered_display": "53"
+      },
+      "src/omegadata/adjustments/bound_chain.py": {
+        "covered_lines": 210,
+        "num_statements": 240,
+        "percent_covered": 84.63687150837988,
+        "percent_covered_display": "85",
+        "missing_lines": 30,
+        "excluded_lines": 0,
+        "percent_statements_covered": 87.5,
+        "percent_statements_covered_display": "88",
+        "num_branches": 118,
+        "num_partial_branches": 25,
+        "covered_branches": 93,
+        "missing_branches": 25,
+        "percent_branches_covered": 78.8135593220339,
+        "percent_branches_covered_display": "79"
+      },
+      "src/omegadata/adjustments/bound_contracts.py": {
+        "covered_lines": 169,
+        "num_statements": 177,
+        "percent_covered": 93.65079365079364,
+        "percent_covered_display": "94",
+        "missing_lines": 8,
+        "excluded_lines": 0,
+        "percent_statements_covered": 95.48022598870057,
+        "percent_statements_covered_display": "95",
+        "num_branches": 12,
+        "num_partial_branches": 4,
+        "covered_branches": 8,
+        "missing_branches": 4,
+        "percent_branches_covered": 66.66666666666667,
+        "percent_branches_covered_display": "67"
+      },
+      "src/omegadata/adjustments/chains.py": {
+        "covered_lines": 52,
+        "num_statements": 73,
+        "percent_covered": 66.99029126213593,
+        "percent_covered_display": "67",
+        "missing_lines": 21,
+        "excluded_lines": 0,
+        "percent_statements_covered": 71.23287671232876,
+        "percent_statements_covered_display": "71",
+        "num_branches": 30,
+        "num_partial_branches": 11,
+        "covered_branches": 17,
+        "missing_branches": 13,
+        "percent_branches_covered": 56.666666666666664,
+        "percent_branches_covered_display": "57"
+      },
+      "src/omegadata/adjustments/compatibility.py": {
+        "covered_lines": 0,
+        "num_statements": 13,
+        "percent_covered": 0.0,
+        "percent_covered_display": "0",
+        "missing_lines": 13,
+        "excluded_lines": 0,
+        "percent_statements_covered": 0.0,
+        "percent_statements_covered_display": "0",
+        "num_branches": 0,
+        "num_partial_branches": 0,
+        "covered_branches": 0,
+        "missing_branches": 0,
+        "percent_branches_covered": 100.0,
+        "percent_branches_covered_display": "100"
+      },
+      "src/omegadata/adjustments/contracts.py": {
+        "covered_lines": 229,
+        "num_statements": 252,
+        "percent_covered": 86.0248447204969,
+        "percent_covered_display": "86",
+        "missing_lines": 23,
+        "excluded_lines": 2,
+        "percent_statements_covered": 90.87301587301587,
+        "percent_statements_covered_display": "91",
+        "num_branches": 70,
+        "num_partial_branches": 22,
+        "covered_branches": 48,
+        "missing_branches": 22,
+        "percent_branches_covered": 68.57142857142857,
+        "percent_branches_covered_display": "69"
+      },
+      "src/omegadata/adjustments/factors.py": {
+        "covered_lines": 29,
+        "num_statements": 48,
+        "percent_covered": 54.054054054054056,
+        "percent_covered_display": "54",
+        "missing_lines": 19,
+        "excluded_lines": 0,
+        "percent_statements_covered": 60.416666666666664,
+        "percent_statements_covered_display": "60",
+        "num_branches": 26,
+        "num_partial_branches": 5,
+        "covered_branches": 11,
+        "missing_branches": 15,
+        "percent_branches_covered": 42.30769230769231,
+        "percent_branches_covered_display": "42"
+      },
+      "src/omegadata/adjustments/repository.py": {
+        "covered_lines": 131,
+        "num_statements": 217,
+        "percent_covered": 57.049180327868854,
+        "percent_covered_display": "57",
+        "missing_lines": 86,
+        "excluded_lines": 0,
+        "percent_statements_covered": 60.36866359447004,
+        "percent_statements_covered_display": "60",
+        "num_branches": 88,
+        "num_partial_branches": 11,
+        "covered_branches": 43,
+        "missing_branches": 45,
+        "percent_branches_covered": 48.86363636363637,
+        "percent_branches_covered_display": "49"
+      },
+      "src/omegadata/adjustments/temporal.py": {
+        "covered_lines": 64,
+        "num_statements": 105,
+        "percent_covered": 56.21301775147929,
+        "percent_covered_display": "56",
+        "missing_lines": 41,
+        "excluded_lines": 2,
+        "percent_statements_covered": 60.95238095238095,
+        "percent_statements_covered_display": "61",
+        "num_branches": 64,
+        "num_partial_branches": 21,
+        "covered_branches": 31,
+        "missing_branches": 33,
+        "percent_branches_covered": 48.4375,
+        "percent_branches_covered_display": "48"
+      }
+    },
+    "weighted": {
+      "covered_lines": 1002,
+      "num_statements": 1285,
+      "covered_branches": 291,
+      "num_branches": 484,
+      "statement_percent": 77.97665369649805,
+      "branch_percent": 60.12396694214876
+    },
+    "scope": "New84targeted cases only;alladjustmentsmodules measured;not financial coverage"
+  },
+  "old_suite": {
+    "passed": 100
+  },
+  "combined_exact_source_coverage": {
+    "weighted": {
+      "covered_lines": 1156,
+      "num_statements": 1285,
+      "covered_branches": 372,
+      "num_branches": 484,
+      "statement_percent": 89.96108949416342,
+      "branch_percent": 76.85950413223141
+    },
+    "modules": {
+      "src/omegadata/adjustments/__init__.py": {
+        "covered_lines": 0,
+        "num_statements": 0,
+        "covered_branches": 0,
+        "num_branches": 0
+      },
+      "src/omegadata/adjustments/admission.py": {
+        "covered_lines": 118,
+        "num_statements": 160,
+        "covered_branches": 40,
+        "num_branches": 76
+      },
+      "src/omegadata/adjustments/bound_chain.py": {
+        "covered_lines": 210,
+        "num_statements": 240,
+        "covered_branches": 93,
+        "num_branches": 118
+      },
+      "src/omegadata/adjustments/bound_contracts.py": {
+        "covered_lines": 169,
+        "num_statements": 177,
+        "covered_branches": 8,
+        "num_branches": 12
+      },
+      "src/omegadata/adjustments/chains.py": {
+        "covered_lines": 68,
+        "num_statements": 73,
+        "covered_branches": 28,
+        "num_branches": 30
+      },
+      "src/omegadata/adjustments/compatibility.py": {
+        "covered_lines": 13,
+        "num_statements": 13,
+        "covered_branches": 0,
+        "num_branches": 0
+      },
+      "src/omegadata/adjustments/contracts.py": {
+        "covered_lines": 237,
+        "num_statements": 252,
+        "covered_branches": 54,
+        "num_branches": 70
+      },
+      "src/omegadata/adjustments/factors.py": {
+        "covered_lines": 47,
+        "num_statements": 48,
+        "covered_branches": 25,
+        "num_branches": 26
+      },
+      "src/omegadata/adjustments/repository.py": {
+        "covered_lines": 201,
+        "num_statements": 217,
+        "covered_branches": 72,
+        "num_branches": 88
+      },
+      "src/omegadata/adjustments/temporal.py": {
+        "covered_lines": 93,
+        "num_statements": 105,
+        "covered_branches": 52,
+        "num_branches": 64
+      }
+    },
+    "method": "Set union of executed lines/branches from final84 and unchanged100 suites; same exact source pins, not a separate command or financial metric"
+  }
+}

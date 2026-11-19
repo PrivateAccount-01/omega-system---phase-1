@@ -1,0 +1,4 @@
+# BasisPolicy od07.basis-policy/v2
+BACKWARD_ADJUSTED selects observation_date<ex_date<=basis_date and applies split1/S. FORWARD_ADJUSTED selects basis_date<ex_date<=observation_date and appliesS. Ex-date itself is post-action. INVERSE_FACTOR_COMPARISON explicitly retains oldpre-ex inversion semantics. RAW_UNADJUSTED preserves observations. TOTAL_RETURN_INDEX refuses without a complete index-base/reinvestment methodology.
+
+Basis/observation cannot exceed declared valid horizon. Conventional forward currently supports split,reverse andbonus only;rights/dividend forward requests returnUNSUPPORTED_POLICY rather than invent economic transformations. Existing gross ex-close total-return andprice-return dividend separation retained. Same-day events require explicit unique order. Exactintermediate terms/final versioned Decimal rounding reused;raw unchanged.

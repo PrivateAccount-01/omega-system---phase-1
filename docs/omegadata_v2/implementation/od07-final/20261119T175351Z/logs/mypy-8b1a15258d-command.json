@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/mypy-8b1a15258d-manifest.json",
+    "--manifest-sha256",
+    "9e9fd6a3bd1575b6755f998ea6142b2ad27d4afc0f39bab5861efbfdb817f907",
+    "--policy",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/mypy-8b1a15258d-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/mypy-8b1a15258d/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-final-20261119T175351Z",
+  "start_utc": "2026-11-19T18:12:44.364204+00:00",
+  "end_utc": "2026-11-19T18:13:01.441215+00:00",
+  "elapsed_seconds": 17.077007783,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-19T18:12:46.290193+00:00",
+    "end_utc": "2026-11-19T18:12:56.773795+00:00",
+    "elapsed_seconds": 10.483609198,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/adjustments/bound_contracts.py:35: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:39: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:43: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:47: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:51: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:55: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:59: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:63: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:67: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:71: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:85: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:85: note: Use \"-> None\" if function does not return a value\nsrc/omegadata/adjustments/bound_contracts.py:112: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:144: error: Function is missing a type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:193: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:193: note: Use \"-> None\" if function does not return a value\nsrc/omegadata/adjustments/bound_contracts.py:255: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:259: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:263: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:267: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:271: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_contracts.py:275: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:25: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:43: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:43: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:53: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:53: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:72: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:122: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:143: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:143: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:217: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:217: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:289: error: Function is missing a type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:305: error: Function is missing a type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:352: error: Need type annotation for \"bindings\" (hint: \"bindings: dict[<type>, <type>] = ...\")  [var-annotated]\nsrc/omegadata/adjustments/bound_chain.py:360: error: Function is missing a return type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/bound_chain.py:386: error: Call to untyped function \"execution_state\" in typed context  [no-untyped-call]\nsrc/omegadata/adjustments/bound_chain.py:428: error: Item \"None\" of \"ParameterSet | None\" has no attribute \"known_from\"  [union-attr]\nsrc/omegadata/adjustments/bound_chain.py:428: error: Item \"None\" of \"ParameterSet | None\" has no attribute \"known_to\"  [union-attr]\nsrc/omegadata/adjustments/bound_chain.py:429: error: Item \"None\" of \"ParameterSet | None\" has no attribute \"evidence\"  [union-attr]\nsrc/omegadata/adjustments/bound_chain.py:455: error: Incompatible types in assignment (expression has type \"Reference | ReferenceObservation | None\", variable has type \"Reference | ReferenceObservation\")  [assignment]\nsrc/omegadata/adjustments/bound_chain.py:525: error: Returning Any from function declared to return \"BoundResult\"  [no-any-return]\nsrc/omegadata/adjustments/bound_chain.py:527: error: Returning Any from function declared to return \"BoundResult\"  [no-any-return]\nsrc/omegadata/adjustments/bound_chain.py:537: error: Returning Any from function declared to return \"BoundResult\"  [no-any-return]\nsrc/omegadata/adjustments/repository.py:93: error: Incompatible types in assignment (expression has type \"type[ReferenceObservation]\", target has type \"type[Reference] | type[Split] | type[Bonus] | type[Rights] | type[Dividend] | <6 more items>\")  [assignment]\nsrc/omegadata/adjustments/repository.py:323: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/repository.py:328: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/admission.py:16: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/admission.py:23: error: Call to untyped function \"reconciliation_inputs\" in typed context  [no-untyped-call]\nsrc/omegadata/adjustments/admission.py:51: error: Call to untyped function \"independent_reconcile\" in typed context  [no-untyped-call]\nsrc/omegadata/adjustments/admission.py:65: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/adjustments/admission.py:91: error: Call to untyped function \"independent_reconcile\" in typed context  [no-untyped-call]\nsrc/omegadata/adjustments/admission.py:126: error: Function is missing a type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/admission.py:136: error: Call to untyped function \"execution_state\" in typed context  [no-untyped-call]\nsrc/omegadata/adjustments/admission.py:152: error: Function is missing a type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/admission.py:267: error: Function is missing a type annotation  [no-untyped-def]\nsrc/omegadata/adjustments/admission.py:275: error: Call to untyped function \"decimal\" in typed context  [no-untyped-call]\nsrc/omegadata/adjustments/admission.py:280: error: Call to untyped function \"decimal\" in typed context  [no-untyped-call]\nsrc/omegadata/adjustments/admission.py:287: error: Call to untyped function \"decimal\" in typed context  [no-untyped-call]\nFound 58 errors in 4 files (checked 74 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532292]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-final-20261119T175351Z/mypy-8b1a15258d/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "mypy",
+  "source_commit": "91a0030094c0132b6a5586ce277ed1e56eb5e396",
+  "source_manifest_sha256": "9e9fd6a3bd1575b6755f998ea6142b2ad27d4afc0f39bab5861efbfdb817f907"
+}

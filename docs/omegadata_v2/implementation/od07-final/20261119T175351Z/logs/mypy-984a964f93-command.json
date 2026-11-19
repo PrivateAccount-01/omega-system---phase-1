@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/mypy-984a964f93-manifest.json",
+    "--manifest-sha256",
+    "022cec4ba7b0e249c1cf327269a5ac367fbfd2194189a707d5da2d0df95cf2ea",
+    "--policy",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/logs/mypy-984a964f93-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-final-20261119T175351Z/mypy-984a964f93/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-final-20261119T175351Z",
+  "start_utc": "2026-11-19T18:17:58.766480+00:00",
+  "end_utc": "2026-11-19T18:18:27.117212+00:00",
+  "elapsed_seconds": 27.70553617099999,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-19T18:18:02.082878+00:00",
+    "end_utc": "2026-11-19T18:18:21.980165+00:00",
+    "elapsed_seconds": 19.252097096,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/adjustments/bound_chain.py:329: error: Incompatible return value type (got \"tuple[str, str | None, str, bool]\", expected \"tuple[str, str, str, bool]\")  [return-value]\nFound 1 error in 1 file (checked 74 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532290]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-final-20261119T175351Z/mypy-984a964f93/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "mypy",
+  "source_commit": "91a0030094c0132b6a5586ce277ed1e56eb5e396",
+  "source_manifest_sha256": "022cec4ba7b0e249c1cf327269a5ac367fbfd2194189a707d5da2d0df95cf2ea"
+}

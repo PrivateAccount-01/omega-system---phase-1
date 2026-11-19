@@ -1,0 +1,6 @@
+# Exact upstream state and separate admission
+PinnedCalculation binds raw observation identity/digest,history snapshot/digest/selected revisions,actual identity records/resolution,version-filtered knowncalendar records,source authority bundle/root/policy digest,parameter state,cutoff/valid/basis dates,consumer/algorithm/rounding versions. Authority snapshot is read-only;no policy grant. Future-known action/identity/parameter records do not rewrite an earlier as-known result.
+
+pin_context uses independently persisted action rows and separately derived reconciliation inputs,not result.inputs. Independent Fraction formulas validate individual factors/status,chain arithmetic,final rounding,ordered action set,raw/profile/cutoff/source artifacts,identity andexactcalendar lineage. append_bound_result then requires exact immutable context/result matching and rechecks arithmetic/provenance. Changed raw/revision/source/knowledge/calendar/identity/profile/factor/reused digest refuses atomically.
+
+Legacy append_result remains an unverified mathematical/internal API. v2 nonmarket result publication remainsFalse. This is a trusted internal service,not protection against unrestricted same-process code execution or an attacker controlling the database/filesystem. Caller cannot create financial eligibility merely through labels.
