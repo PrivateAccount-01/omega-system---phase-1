@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/mypy-576147a4b9-manifest.json",
+    "--manifest-sha256",
+    "4cda0d972235cff50a230471c2b7f86cd196e371c6966b08d2469f5e65a800a4",
+    "--policy",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/mypy-576147a4b9-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-20261119T171019Z/mypy-576147a4b9/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+  "start_utc": "2026-11-19T17:19:54.394280+00:00",
+  "end_utc": "2026-11-19T17:20:12.378747+00:00",
+  "elapsed_seconds": 17.984465381999996,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-19T17:19:56.301053+00:00",
+    "end_utc": "2026-11-19T17:20:07.058166+00:00",
+    "elapsed_seconds": 10.757127045999994,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/adjustments/contracts.py:36: error: Argument 1 to \"abs\" has incompatible type \"Literal['n', 'N', 'F'] | int\"; expected \"SupportsAbs[int]\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:42: error: Argument 1 to \"eligible\" of \"Evidence\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:44: error: Argument 6 to \"resolve_listing\" of \"MemoryIdentityRepository\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:61: error: Argument 1 to \"eligible\" of \"Evidence\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:69: error: Argument 6 to \"resolve_listing\" of \"MemoryIdentityRepository\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:70: error: Argument 6 to \"resolve_listing\" of \"MemoryIdentityRepository\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:73: error: Argument 4 to \"query\" of \"VerifiedCalendar\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:79: error: Argument 4 to \"previous_session\" of \"VerifiedCalendar\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/adjustments/temporal.py:81: error: Incompatible types in assignment (expression has type \"Reference | None\", variable has type \"Reference\")  [assignment]\nsrc/omegadata/adjustments/repository.py:55: error: Argument 1 to \"Path\" has incompatible type \"str | None\"; expected \"str | PathLike[str]\"  [arg-type]\nFound 10 errors in 3 files (checked 71 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-20261119T171019Z/mypy-576147a4b9/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "mypy",
+  "source_commit": "47b7f2c5859e36bc40c5970c2316eef3d28211e8",
+  "source_manifest_sha256": "4cda0d972235cff50a230471c2b7f86cd196e371c6966b08d2469f5e65a800a4"
+}

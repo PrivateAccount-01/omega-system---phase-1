@@ -1,0 +1,505 @@
+{
+  "job": "od07",
+  "exit_code": 1,
+  "counts": {
+    "passed": 88,
+    "failed": 7
+  },
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[SPLIT-args0-1/2]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[SPLIT-args1-5/1]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[BONUS-args2-2/3]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[BONUS-args3-1/3]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[RIGHTS-args4-9/10]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[RIGHTS-args5-7/10]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[DIVIDEND_CASH-args6-19/20]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_math_oracle[DIVIDEND_SPECIAL-args7-4/5]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M01]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M05]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M07]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M08]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[M09]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T01]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T02]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T03]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T04]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T05]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T06]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[T07]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C01]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C02]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C03]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C04]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C05]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[C06]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S01]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S02]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S03]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_acceptance[S04]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[zero]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[negative]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[nan]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[infinity]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[float]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[bonus-denominator]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[rights-currency]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[rights-exercise]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[dividend-price]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[dividend-time]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[unsupported]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[lifecycle]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[post-ex]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[forward]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[chain-limit]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[wrong-security]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[suspended]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[naive]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_refusal_and_boundaries[unknown-version]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[restart-True]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[restart-False]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[duplicate-True]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[duplicate-False]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[rollback-True]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[rollback-False]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[append-only-True]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[append-only-False]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[revisions-True]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[revisions-False]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[foreign-key-True]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[foreign-key-False]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[migration-True]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_persistence[migration-False]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[empty-strict]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[empty-denied]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[empty-identity]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[expired-action]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[currency-mismatch]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[nonfinite-action]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[future-reference-date]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[missing-reference-evidence]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[wrong-parameter-version]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[competing-correction]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[timezone-reference]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[suspension-constraint]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[strict-labels]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[known-boundary]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[multistep]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[rights-volume]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[dividend-volume]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[no-partial-ledger]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[result-payload-binding]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[quantum-bound]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_review_refusals[context-precision]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_legacy_risk_reproduction",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[future-ledger-stability]",
+      "outcome": "failed",
+      "reason": "case = 'future-ledger-stability'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_future_le0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n>           assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\nE           AssertionError: assert 'ee999865d42f...ac4d508a11931' == 'f8de91a89944...d0615757ea4d8'\nE             \nE             - f8de91a89944ce11c7de62568723816ac733b48295de56e856fd0615757ea4d8\nE             + ee999865d42fd8557a7be3a6d884f7715d5308b41240aae513cac4d508a11931\n\ntests/unit/test_od07_adjustments.py:306: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[persisted-price-tamper]",
+      "outcome": "failed",
+      "reason": "case = 'persisted-price-tamper'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_persisted0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n>           with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_adjustments.py:309: Failed"
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[persisted-factor-tamper]",
+      "outcome": "failed",
+      "reason": "case = 'persisted-factor-tamper'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_persisted1')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n>           with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_adjustments.py:313: Failed"
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[partial-result]",
+      "outcome": "failed",
+      "reason": "case = 'partial-result'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_partial_r0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n>           with pytest.raises(ValueError):c.Result('CALCULATED','bad')\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_adjustments.py:315: Failed"
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[duplicate-event-economic-key]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[reverse-direction-type]",
+      "outcome": "failed",
+      "reason": "case = 'reverse-direction-type'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_reverse_d0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n            with pytest.raises(ValueError):c.Result('CALCULATED','bad')\n        elif case=='duplicate-event-economic-key':\n            # Two separate revisions must have explicit ordering; economic uniqueness is not guessed.\n            b=replace(a,action_id='b')\n            assert chain((a,b)).status=='CONFLICTING_ACTIONS'\n        elif case=='reverse-direction-type':\n            from omegadata.adjustments.factors import factor\n>           assert factor('SPLIT_REVERSE',c.Split(Decimal(2)),c.Policy('PRICE_RETURN')).status=='INVALID_PARAMETERS'\nE           AssertionError: assert 'CALCULATED' == 'INVALID_PARAMETERS'\nE             \nE             - INVALID_PARAMETERS\nE             + CALCULATED\n\ntests/unit/test_od07_adjustments.py:322: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[reference-identity]",
+      "outcome": "failed",
+      "reason": "case = 'reference-identity'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_reference0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n            with pytest.raises(ValueError):c.Result('CALCULATED','bad')\n        elif case=='duplicate-event-economic-key':\n            # Two separate revisions must have explicit ordering; economic uniqueness is not guessed.\n            b=replace(a,action_id='b')\n            assert chain((a,b)).status=='CONFLICTING_ACTIONS'\n        elif case=='reverse-direction-type':\n            from omegadata.adjustments.factors import factor\n            assert factor('SPLIT_REVERSE',c.Split(Decimal(2)),c.Policy('PRICE_RETURN')).status=='INVALID_PARAMETERS'\n        elif case=='reference-identity':\n            p=c.Rights(Decimal(4),Decimal(1),Decimal(50),c.Reference(Decimal(100),D-timedelta(days=3),K,'','MATH_UNIT'),'MATH_UNIT',True)\n>           assert chain((replace(a,action_type='RIGHTS',parameters=p),)).status=='INVALID_PARAMETERS'\nE           AssertionError: assert 'CALCULATED' == 'INVALID_PARAMETERS'\nE             \nE             - INVALID_PARAMETERS\nE             + CALCULATED\n\ntests/unit/test_od07_adjustments.py:325: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[profile-volume-rights]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[large-result-refusal]",
+      "outcome": "failed",
+      "reason": "case = 'large-result-refusal'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_large_res0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n            with pytest.raises(ValueError):c.Result('CALCULATED','bad')\n        elif case=='duplicate-event-economic-key':\n            # Two separate revisions must have explicit ordering; economic uniqueness is not guessed.\n            b=replace(a,action_id='b')\n            assert chain((a,b)).status=='CONFLICTING_ACTIONS'\n        elif case=='reverse-direction-type':\n            from omegadata.adjustments.factors import factor\n            assert factor('SPLIT_REVERSE',c.Split(Decimal(2)),c.Policy('PRICE_RETURN')).status=='INVALID_PARAMETERS'\n        elif case=='reference-identity':\n            p=c.Rights(Decimal(4),Decimal(1),Decimal(50),c.Reference(Decimal(100),D-timedelta(days=3),K,'','MATH_UNIT'),'MATH_UNIT',True)\n            assert chain((replace(a,action_type='RIGHTS',parameters=p),)).status=='INVALID_PARAMETERS'\n        elif case=='profile-volume-rights':\n            from omegadata.adjustments.factors import factor\n            p=c.Rights(Decimal(4),Decimal(1),Decimal(50),c.Reference(Decimal(100),D,K,'ref','MATH_UNIT'),'MATH_UNIT',True)\n            assert factor('RIGHTS',p,c.Policy('VOLUME')).volume_factor==1\n        elif case=='large-result-refusal':\n            many=tuple(replace(a,action_id=str(i),ex_date=D,sequence=i,parameters=c.Split(Decimal('1e-64'))) for i in range(100))\n>           assert chain(many).status=='INVALID_PARAMETERS'\n                   ^^^^^^^^^^^\n\ntests/unit/test_od07_adjustments.py:332: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_od07_adjustments.py:33: in chain\n    return calculate_chain(r if raw is None else raw,(a,) if actions is None else actions,c.Policy(profile,direction=direction),x if ctx is None else ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nraw = Raw(artifact_id='raw-math', security_id='s', listing_id='l', exchange='MATH', symbol='TOKEN', series='TEST', trade_dat...ARY', authentication='UNVERIFIED', permission='PERMITTED', review_reference='math-review'), original_price_basis='RAW')\nactions = (Action(action_id='0', action_type='SPLIT', security_id='s', listing_id='l', exchange='MATH', evidence=Evidence(eviden..., action_revision=1, supersedes_action_id=None, review_status='UNVERIFIED', sequence=5, version='od07.action/v1'), ...)\npolicy = Policy(profile='PRICE_RETURN', direction='BACKWARD', version='od07.policy/v1', price_quantum=Decimal('0.000001'), volume_quantum=Decimal('0.0001'))\nx = Context(valid_at=datetime.date(2001, 1, 9), known_at=datetime.datetime(2001, 1, 21, 0, 0, tzinfo=datetime.timezone.utc...UNVERIFIED', permission='PERMITTED', review_reference='math-review'), calendar_version='cal-v1', status='COMPLETE'),)))\n\n    def calculate_chain(raw: Raw, actions: tuple[Action,...], policy: Policy, x: Context) -> Result:\n        for action in actions:\n            for reference in references(action):\n                if reference.known_from is not None:query_time(reference.known_from)\n        try:inputs=canonical({\"raw\":raw,\"actions\":tuple(sorted(actions,key=lambda a:a.action_id)),\"policy\":policy,\"valid_at\":x.valid_at,\"known_at\":x.known_at,\"identity_version\":x.identity_version,\"source_evidence_version\":x.source_evidence_version,\"calendar_version\":x.calendar_version,\"mode\":x.mode})\n        except (ValueError,TypeError):return Result(\"INVALID_PARAMETERS\",\"NONFINITE_OR_INVALID_INPUT\",raw.artifact_id,consumer_profile=policy.profile)\n        def blocked(status: str, reason: str) -> Result:\n            return Result(status,reason,raw.artifact_id,raw.original_price_basis,policy.profile,inputs=inputs)\n        if len(actions)>128:return blocked(\"CONFLICTING_ACTIONS\",\"ACTION_RESOURCE_LIMIT\")\n        if raw.trade_date>x.valid_at or raw.known_from is None or raw.known_from>x.known_at:return blocked(\"BLOCKED_KNOWLEDGE\",\"RAW_NOT_AVAILABLE_AT_QUERY\")\n        status,reason=raw_eligibility(raw,x,execution=policy.profile==\"EXECUTION\")\n        if status!=\"CALCULATED\":return blocked(status,reason)\n        try:selected=select_revisions(actions,x.known_at)\n        except ValueError as e:return blocked(\"CONFLICTING_ACTIONS\",str(e))\n        # A directly requested future-only revision is a refusal, never silently accepted as complete.\n        roots={a.action_id for a in actions if a.supersedes_action_id is None}\n        if any(a.known_from is not None and a.known_from>x.known_at and a.action_id in roots for a in actions):return blocked(\"BLOCKED_KNOWLEDGE\",\"REQUESTED_EVENT_NOT_YET_KNOWN\")\n        if any(a.known_to is not None and a.known_to<=x.known_at and not any(b.supersedes_action_id==a.action_id and b.known_from is not None and b.known_from<=x.known_at for b in actions) for a in actions):return blocked(\"BLOCKED_KNOWLEDGE\",\"EXPIRED_ACTION_WITHOUT_KNOWN_SUCCESSOR\")\n        applicable=[a for a in selected if a.ex_date is None or raw.trade_date<a.ex_date<=x.valid_at]\n        for a in applicable:\n            peers=[b for b in applicable if b.ex_date==a.ex_date]\n            if len(peers)>1 and (any(b.sequence is None for b in peers) or len({b.sequence for b in peers})!=len(peers)):return blocked(\"CONFLICTING_ACTIONS\",\"SAME_DAY_ORDER_NOT_ESTABLISHED\")\n        ordered=sorted(applicable,key=lambda a:(a.ex_date or raw.trade_date,a.sequence or 0,a.action_id))\n        links=[]\n        with localcontext() as math:\n            # Bounded 128 inputs * <=64 digits/exponents: exact multiplication before one division.\n            math.prec=20480\n            n=d=vn=vd=Decimal(1)\n            for a in ordered:\n                if policy.profile==\"EXECUTION\" and a.action_type in {\"SUSPENSION\",\"DELISTING\",\"DELISTING_VOLUNTARY\",\"DELISTING_REGULATORY\"}:return blocked(\"BLOCKED_IDENTITY\",\"LIFECYCLE_EXECUTION_CONSTRAINT\")\n                status,identity_ref,calendar_ref=eligibility(a,raw,x)\n                if status!=\"CALCULATED\":return blocked(status,identity_ref)\n                f=factor(a.action_type,a.parameters,policy)\n                if f.status not in {\"CALCULATED\",\"NOT_APPLICABLE\"}:return blocked(f.status,f.reason)\n                if None in (f.numerator,f.denominator,f.volume_numerator,f.volume_denominator):return blocked(\"INVALID_PARAMETERS\",\"INCOMPLETE_FACTOR\")\n                assert f.numerator is not None and f.denominator is not None and f.volume_numerator is not None and f.volume_denominator is not None\n                n*=f.numerator;d*=f.denominator;vn*=f.volume_numerator;vd*=f.volume_denominator\n                links.append(Link(a.action_id,a.source_artifact_identity,identity_ref,calendar_ref,raw.artifact_id,VERSION,policy.profile,canonical(a),f,\"decimal80-final-half-up/v1\",x.known_at))\n            math.prec=PRECISION\n            cumulative=n/d;volume=vn/vd\n>           price=raw.price if policy.profile in {\"RAW\",\"EXECUTION\",\"VOLUME\"} else (raw.price*n/d).quantize(policy.price_quantum,rounding=ROUND_HALF_UP)\n                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           decimal.InvalidOperation: [<class 'decimal.InvalidOperation'>]\n\nsrc/omegadata/adjustments/chains.py:48: InvalidOperation"
+    },
+    {
+      "nodeid": "tests/unit/test_od07_adjustments.py::test_final_integrity[competing-file-writers]",
+      "outcome": "passed",
+      "reason": null
+    }
+  ],
+  "start_utc": "2026-11-19T17:20:42.599088+00:00",
+  "end_utc": "2026-11-19T17:20:45.447319+00:00",
+  "elapsed_seconds": 2.848231792999968,
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "stdout_stderr": "........................................................................ [ 75%]\n.............FFFF.FF.F.                                                  [100%]\n=================================== FAILURES ===================================\n________________ test_final_integrity[future-ledger-stability] _________________\n\ncase = 'future-ledger-stability'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_future_le0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n>           assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\nE           AssertionError: assert 'ee999865d42f...ac4d508a11931' == 'f8de91a89944...d0615757ea4d8'\nE             \nE             - f8de91a89944ce11c7de62568723816ac733b48295de56e856fd0615757ea4d8\nE             + ee999865d42fd8557a7be3a6d884f7715d5308b41240aae513cac4d508a11931\n\ntests/unit/test_od07_adjustments.py:306: AssertionError\n_________________ test_final_integrity[persisted-price-tamper] _________________\n\ncase = 'persisted-price-tamper'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_persisted0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n>           with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_adjustments.py:309: Failed\n________________ test_final_integrity[persisted-factor-tamper] _________________\n\ncase = 'persisted-factor-tamper'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_persisted1')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n>           with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_adjustments.py:313: Failed\n_____________________ test_final_integrity[partial-result] _____________________\n\ncase = 'partial-result'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_partial_r0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n>           with pytest.raises(ValueError):c.Result('CALCULATED','bad')\nE           Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od07_adjustments.py:315: Failed\n_________________ test_final_integrity[reverse-direction-type] _________________\n\ncase = 'reverse-direction-type'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_reverse_d0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n            with pytest.raises(ValueError):c.Result('CALCULATED','bad')\n        elif case=='duplicate-event-economic-key':\n            # Two separate revisions must have explicit ordering; economic uniqueness is not guessed.\n            b=replace(a,action_id='b')\n            assert chain((a,b)).status=='CONFLICTING_ACTIONS'\n        elif case=='reverse-direction-type':\n            from omegadata.adjustments.factors import factor\n>           assert factor('SPLIT_REVERSE',c.Split(Decimal(2)),c.Policy('PRICE_RETURN')).status=='INVALID_PARAMETERS'\nE           AssertionError: assert 'CALCULATED' == 'INVALID_PARAMETERS'\nE             \nE             - INVALID_PARAMETERS\nE             + CALCULATED\n\ntests/unit/test_od07_adjustments.py:322: AssertionError\n___________________ test_final_integrity[reference-identity] ___________________\n\ncase = 'reference-identity'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_reference0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n            with pytest.raises(ValueError):c.Result('CALCULATED','bad')\n        elif case=='duplicate-event-economic-key':\n            # Two separate revisions must have explicit ordering; economic uniqueness is not guessed.\n            b=replace(a,action_id='b')\n            assert chain((a,b)).status=='CONFLICTING_ACTIONS'\n        elif case=='reverse-direction-type':\n            from omegadata.adjustments.factors import factor\n            assert factor('SPLIT_REVERSE',c.Split(Decimal(2)),c.Policy('PRICE_RETURN')).status=='INVALID_PARAMETERS'\n        elif case=='reference-identity':\n            p=c.Rights(Decimal(4),Decimal(1),Decimal(50),c.Reference(Decimal(100),D-timedelta(days=3),K,'','MATH_UNIT'),'MATH_UNIT',True)\n>           assert chain((replace(a,action_type='RIGHTS',parameters=p),)).status=='INVALID_PARAMETERS'\nE           AssertionError: assert 'CALCULATED' == 'INVALID_PARAMETERS'\nE             \nE             - INVALID_PARAMETERS\nE             + CALCULATED\n\ntests/unit/test_od07_adjustments.py:325: AssertionError\n__________________ test_final_integrity[large-result-refusal] __________________\n\ncase = 'large-result-refusal'\ntmp_path = PosixPath('/work/job/tmp/test_final_integrity_large_res0')\n\n    @pytest.mark.parametrize('case',['future-ledger-stability','persisted-price-tamper','persisted-factor-tamper','partial-result','duplicate-event-economic-key','reverse-direction-type','reference-identity','profile-volume-rights','large-result-refusal','competing-file-writers'])\n    def test_final_integrity(case,tmp_path):\n        from omegadata.adjustments.repository import AdjustmentRepository\n        c,x,a,r=system()\n        if case=='future-ledger-stability':\n            b=replace(a,action_id='b',supersedes_action_id='a',action_revision=2,known_from=K+timedelta(days=10))\n            early=replace(x,known_at=K+timedelta(days=9))\n            assert chain((a,),ctx=early).output_digest==chain((a,b),ctx=early).output_digest\n        elif case=='persisted-price-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            with pytest.raises(ValueError):db.append_result(replace(chain(),adjusted_price=Decimal(999)),('a',))\n        elif case=='persisted-factor-tamper':\n            db=AdjustmentRepository('sqlite:///:memory:',disposable_root=tmp_path);db.append_action(a)\n            out=chain();link=replace(out.adjustment_factor_chain[0],factor=replace(out.adjustment_factor_chain[0].factor,numerator=Decimal(9)))\n            with pytest.raises(ValueError):db.append_result(replace(out,adjustment_factor_chain=(link,)),('a',))\n        elif case=='partial-result':\n            with pytest.raises(ValueError):c.Result('CALCULATED','bad')\n        elif case=='duplicate-event-economic-key':\n            # Two separate revisions must have explicit ordering; economic uniqueness is not guessed.\n            b=replace(a,action_id='b')\n            assert chain((a,b)).status=='CONFLICTING_ACTIONS'\n        elif case=='reverse-direction-type':\n            from omegadata.adjustments.factors import factor\n            assert factor('SPLIT_REVERSE',c.Split(Decimal(2)),c.Policy('PRICE_RETURN')).status=='INVALID_PARAMETERS'\n        elif case=='reference-identity':\n            p=c.Rights(Decimal(4),Decimal(1),Decimal(50),c.Reference(Decimal(100),D-timedelta(days=3),K,'','MATH_UNIT'),'MATH_UNIT',True)\n            assert chain((replace(a,action_type='RIGHTS',parameters=p),)).status=='INVALID_PARAMETERS'\n        elif case=='profile-volume-rights':\n            from omegadata.adjustments.factors import factor\n            p=c.Rights(Decimal(4),Decimal(1),Decimal(50),c.Reference(Decimal(100),D,K,'ref','MATH_UNIT'),'MATH_UNIT',True)\n            assert factor('RIGHTS',p,c.Policy('VOLUME')).volume_factor==1\n        elif case=='large-result-refusal':\n            many=tuple(replace(a,action_id=str(i),ex_date=D,sequence=i,parameters=c.Split(Decimal('1e-64'))) for i in range(100))\n>           assert chain(many).status=='INVALID_PARAMETERS'\n                   ^^^^^^^^^^^\n\ntests/unit/test_od07_adjustments.py:332: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_od07_adjustments.py:33: in chain\n    return calculate_chain(r if raw is None else raw,(a,) if actions is None else actions,c.Policy(profile,direction=direction),x if ctx is None else ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nraw = Raw(artifact_id='raw-math', security_id='s', listing_id='l', exchange='MATH', symbol='TOKEN', series='TEST', trade_dat...ARY', authentication='UNVERIFIED', permission='PERMITTED', review_reference='math-review'), original_price_basis='RAW')\nactions = (Action(action_id='0', action_type='SPLIT', security_id='s', listing_id='l', exchange='MATH', evidence=Evidence(eviden..., action_revision=1, supersedes_action_id=None, review_status='UNVERIFIED', sequence=5, version='od07.action/v1'), ...)\npolicy = Policy(profile='PRICE_RETURN', direction='BACKWARD', version='od07.policy/v1', price_quantum=Decimal('0.000001'), volume_quantum=Decimal('0.0001'))\nx = Context(valid_at=datetime.date(2001, 1, 9), known_at=datetime.datetime(2001, 1, 21, 0, 0, tzinfo=datetime.timezone.utc...UNVERIFIED', permission='PERMITTED', review_reference='math-review'), calendar_version='cal-v1', status='COMPLETE'),)))\n\n    def calculate_chain(raw: Raw, actions: tuple[Action,...], policy: Policy, x: Context) -> Result:\n        for action in actions:\n            for reference in references(action):\n                if reference.known_from is not None:query_time(reference.known_from)\n        try:inputs=canonical({\"raw\":raw,\"actions\":tuple(sorted(actions,key=lambda a:a.action_id)),\"policy\":policy,\"valid_at\":x.valid_at,\"known_at\":x.known_at,\"identity_version\":x.identity_version,\"source_evidence_version\":x.source_evidence_version,\"calendar_version\":x.calendar_version,\"mode\":x.mode})\n        except (ValueError,TypeError):return Result(\"INVALID_PARAMETERS\",\"NONFINITE_OR_INVALID_INPUT\",raw.artifact_id,consumer_profile=policy.profile)\n        def blocked(status: str, reason: str) -> Result:\n            return Result(status,reason,raw.artifact_id,raw.original_price_basis,policy.profile,inputs=inputs)\n        if len(actions)>128:return blocked(\"CONFLICTING_ACTIONS\",\"ACTION_RESOURCE_LIMIT\")\n        if raw.trade_date>x.valid_at or raw.known_from is None or raw.known_from>x.known_at:return blocked(\"BLOCKED_KNOWLEDGE\",\"RAW_NOT_AVAILABLE_AT_QUERY\")\n        status,reason=raw_eligibility(raw,x,execution=policy.profile==\"EXECUTION\")\n        if status!=\"CALCULATED\":return blocked(status,reason)\n        try:selected=select_revisions(actions,x.known_at)\n        except ValueError as e:return blocked(\"CONFLICTING_ACTIONS\",str(e))\n        # A directly requested future-only revision is a refusal, never silently accepted as complete.\n        roots={a.action_id for a in actions if a.supersedes_action_id is None}\n        if any(a.known_from is not None and a.known_from>x.known_at and a.action_id in roots for a in actions):return blocked(\"BLOCKED_KNOWLEDGE\",\"REQUESTED_EVENT_NOT_YET_KNOWN\")\n        if any(a.known_to is not None and a.known_to<=x.known_at and not any(b.supersedes_action_id==a.action_id and b.known_from is not None and b.known_from<=x.known_at for b in actions) for a in actions):return blocked(\"BLOCKED_KNOWLEDGE\",\"EXPIRED_ACTION_WITHOUT_KNOWN_SUCCESSOR\")\n        applicable=[a for a in selected if a.ex_date is None or raw.trade_date<a.ex_date<=x.valid_at]\n        for a in applicable:\n            peers=[b for b in applicable if b.ex_date==a.ex_date]\n            if len(peers)>1 and (any(b.sequence is None for b in peers) or len({b.sequence for b in peers})!=len(peers)):return blocked(\"CONFLICTING_ACTIONS\",\"SAME_DAY_ORDER_NOT_ESTABLISHED\")\n        ordered=sorted(applicable,key=lambda a:(a.ex_date or raw.trade_date,a.sequence or 0,a.action_id))\n        links=[]\n        with localcontext() as math:\n            # Bounded 128 inputs * <=64 digits/exponents: exact multiplication before one division.\n            math.prec=20480\n            n=d=vn=vd=Decimal(1)\n            for a in ordered:\n                if policy.profile==\"EXECUTION\" and a.action_type in {\"SUSPENSION\",\"DELISTING\",\"DELISTING_VOLUNTARY\",\"DELISTING_REGULATORY\"}:return blocked(\"BLOCKED_IDENTITY\",\"LIFECYCLE_EXECUTION_CONSTRAINT\")\n                status,identity_ref,calendar_ref=eligibility(a,raw,x)\n                if status!=\"CALCULATED\":return blocked(status,identity_ref)\n                f=factor(a.action_type,a.parameters,policy)\n                if f.status not in {\"CALCULATED\",\"NOT_APPLICABLE\"}:return blocked(f.status,f.reason)\n                if None in (f.numerator,f.denominator,f.volume_numerator,f.volume_denominator):return blocked(\"INVALID_PARAMETERS\",\"INCOMPLETE_FACTOR\")\n                assert f.numerator is not None and f.denominator is not None and f.volume_numerator is not None and f.volume_denominator is not None\n                n*=f.numerator;d*=f.denominator;vn*=f.volume_numerator;vd*=f.volume_denominator\n                links.append(Link(a.action_id,a.source_artifact_identity,identity_ref,calendar_ref,raw.artifact_id,VERSION,policy.profile,canonical(a),f,\"decimal80-final-half-up/v1\",x.known_at))\n            math.prec=PRECISION\n            cumulative=n/d;volume=vn/vd\n>           price=raw.price if policy.profile in {\"RAW\",\"EXECUTION\",\"VOLUME\"} else (raw.price*n/d).quantize(policy.price_quantum,rounding=ROUND_HALF_UP)\n                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           decimal.InvalidOperation: [<class 'decimal.InvalidOperation'>]\n\nsrc/omegadata/adjustments/chains.py:48: InvalidOperation\n=========================== short test summary info ============================\nFAILED tests/unit/test_od07_adjustments.py::test_final_integrity[future-ledger-stability]\nFAILED tests/unit/test_od07_adjustments.py::test_final_integrity[persisted-price-tamper]\nFAILED tests/unit/test_od07_adjustments.py::test_final_integrity[persisted-factor-tamper]\nFAILED tests/unit/test_od07_adjustments.py::test_final_integrity[partial-result]\nFAILED tests/unit/test_od07_adjustments.py::test_final_integrity[reverse-direction-type]\nFAILED tests/unit/test_od07_adjustments.py::test_final_integrity[reference-identity]\nFAILED tests/unit/test_od07_adjustments.py::test_final_integrity[large-result-refusal]\n7 failed, 88 passed in 1.65s\n",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od07-20261119T171019Z/od07-b17432b1aa/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

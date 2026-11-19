@@ -1,0 +1,14 @@
+# OD07 engineering PASS;authentic financial/production BLOCKED
+Reviewed47b7f2c5859e36bc40c5970c2316eef3d28211e8,feature/od01-source-rights. Applied only in/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo. Exact16upstream adoption,eight new files(seven modules and100case tests),all3817upstream files preserved. Combined24file delivery/patch provided,not original application integration.
+
+Typed immutable revisions,split/reverse/bonus/rightsTERP,distinct raw/execution/price-return/gross-ex-close-total-return/volume profiles,fully pinned Decimal context,exact factor terms,verified prior-session/identity/authority refusal,PIT corrections and deterministic immutable digests. Four-table append-only SQLAlchemy store with reopen,rollback,nativeFK,competing-writer,stored arithmetic/factor/order tests. Legacy APIs/expectations unchanged;read-only adapter retains unknown knowledge.
+
+FinalLinux3.12:100OD07PASS. Collection1117=A1109+B4+C4. A1097passed12skipped,exit0. Unchanged diagnostic1097passed4failed12skipped,C4deselected,exit1. Ruff/mypy/pip/compileexit0. Earlier session OD06focused66PASS,foundation87PASS,parser170PASS1skip;finalA reruns these with final source pins. Twelve skips=five Windows-specific plusseven explicitly blocked Windows-native controls. Windows runtimesNOT_RUN,noLinux-based certification.
+
+Focused coverage92.80%statements/82.61%branches;per-module/counts in09. Linux bwrap namespaces,read-only exact staging,dropped capabilities,no_new_privs,seccomp2;12native denials andIPCpositivecontrol. ReadENOENT is unmounted harmless-canary nonexposure,notACLproof;writeEROFS,exec/networkEPERM. Original market/incident/credential roots unmapped. Reporting uses unchanged isolated pinned-bundle renderer,noGit or mixed-checkout discovery.
+
+Actual negative-first sources/failures preserved,including initial63missing-feature failures,review/integrity/order and ambient Decimal defects. All corrected within this execution;no manufactured red history or independent human approval claimed. Zero new unresolvedP0/P1 in tested opt-in scope. Legacy risks remain behind integration block.
+
+Actual independently verified financial observations/actions/comparisons:0. Mathematical vectors contributezero. Multi-security scalar allocation remainsUNSUPPORTED_POLICY/BLOCKED_INPUT pending reviewed terms/method. Caller labels cannot grant source authority. Historical presence remainsARCHmetadataonly,notZIP/hash/row acceptance. Incidents pendinghumanreview,R1extentunknown,Windows and original-mounted performance limits unchanged.
+
+Gatekeeper:code-only engineeringPASS,authenticfinancialBLOCKED_REAL_DATA,productionBLOCKED. OD08code-onlycontractREADY,executionNOT_GRANTED. No commit,push,merge,release,signing,trading,restricted-source access or OD08. Nextaction:ownerreview and explicit boundedOD08authorization.

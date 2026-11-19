@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/compile-043d9f761b-manifest.json",
+    "--manifest-sha256",
+    "4cda0d972235cff50a230471c2b7f86cd196e371c6966b08d2469f5e65a800a4",
+    "--policy",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/compile-043d9f761b-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-20261119T171019Z/compile-043d9f761b/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+  "start_utc": "2026-11-19T17:20:15.150357+00:00",
+  "end_utc": "2026-11-19T17:20:17.162333+00:00",
+  "elapsed_seconds": 2.0119730530000197,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-19T17:20:16.993788+00:00",
+    "end_utc": "2026-11-19T17:20:17.142831+00:00",
+    "elapsed_seconds": 0.14903480499998523,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532225]",
+        "net": "net:[4026532230]",
+        "pid": "pid:[4026532228]",
+        "user": "user:[4026532223]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-20261119T171019Z/compile-043d9f761b/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "compile",
+  "source_commit": "47b7f2c5859e36bc40c5970c2316eef3d28211e8",
+  "source_manifest_sha256": "4cda0d972235cff50a230471c2b7f86cd196e371c6966b08d2469f5e65a800a4"
+}

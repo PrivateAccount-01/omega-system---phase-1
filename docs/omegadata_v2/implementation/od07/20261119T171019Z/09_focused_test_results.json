@@ -1,0 +1,315 @@
+{
+  "final_focused": {
+    "command_id": "od07-c06e2b5716-command",
+    "launcher_argv": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od07-20261119T171019Z/logs/od07-c06e2b5716-manifest.json",
+      "--manifest-sha256",
+      "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+      "--policy",
+      "/home/parilrupani/omega-od07-20261119T171019Z/logs/od07-c06e2b5716-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od07-20261119T171019Z/od07-c06e2b5716/output"
+    ],
+    "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+    "job": "od07",
+    "platform": "Linux/WSL Ubuntu",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "start_utc": "2026-11-19T17:32:34.543225+00:00",
+    "end_utc": "2026-11-19T17:32:38.774946+00:00",
+    "exit_code": 0,
+    "elapsed_seconds": 4.231714930999999,
+    "counts": {
+      "passed": 100
+    },
+    "stdout_stderr": "logs/od07-c06e2b5716-command.json",
+    "input_manifest": "logs/od07-c06e2b5716-manifest.json",
+    "input_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+  },
+  "required_families": {
+    "M01": "test_acceptance[M01] + decimal_environment",
+    "M02": "math_oracle[SPLIT] + forward",
+    "M03": "math_oracle[BONUS]",
+    "M04": "math_oracle[RIGHTS]",
+    "M05": "test_acceptance[M05]",
+    "M06": "math_oracle[DIVIDEND]",
+    "M07": "test_acceptance[M07]",
+    "M08": "test_acceptance[M08] + volume controls",
+    "M09": "test_acceptance[M09]",
+    "S05": "test_persistence + native SQL + competing writers",
+    "T01": "test_acceptance[T01]",
+    "T02": "test_acceptance[T02]",
+    "T03": "test_acceptance[T03]",
+    "T04": "test_acceptance[T04]",
+    "T05": "test_acceptance[T05]",
+    "T06": "test_acceptance[T06]",
+    "T07": "test_acceptance[T07]",
+    "C01": "test_acceptance[C01]",
+    "C02": "test_acceptance[C02]",
+    "C03": "test_acceptance[C03]",
+    "C04": "test_acceptance[C04]",
+    "C05": "test_acceptance[C05]",
+    "C06": "test_acceptance[C06]",
+    "S01": "test_acceptance[S01]",
+    "S02": "test_acceptance[S02]",
+    "S03": "test_acceptance[S03]",
+    "S04": "test_acceptance[S04]"
+  },
+  "coverage": {
+    "modules": {
+      "src/omegadata/adjustments/__init__.py": {
+        "covered_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100",
+        "num_branches": 0,
+        "num_partial_branches": 0,
+        "covered_branches": 0,
+        "missing_branches": 0,
+        "percent_branches_covered": 100.0,
+        "percent_branches_covered_display": "100"
+      },
+      "src/omegadata/adjustments/chains.py": {
+        "covered_lines": 68,
+        "num_statements": 73,
+        "percent_covered": 93.20388349514563,
+        "percent_covered_display": "93",
+        "missing_lines": 5,
+        "excluded_lines": 0,
+        "percent_statements_covered": 93.15068493150685,
+        "percent_statements_covered_display": "93",
+        "num_branches": 30,
+        "num_partial_branches": 2,
+        "covered_branches": 28,
+        "missing_branches": 2,
+        "percent_branches_covered": 93.33333333333333,
+        "percent_branches_covered_display": "93"
+      },
+      "src/omegadata/adjustments/compatibility.py": {
+        "covered_lines": 13,
+        "num_statements": 13,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100",
+        "num_branches": 0,
+        "num_partial_branches": 0,
+        "covered_branches": 0,
+        "missing_branches": 0,
+        "percent_branches_covered": 100.0,
+        "percent_branches_covered_display": "100"
+      },
+      "src/omegadata/adjustments/contracts.py": {
+        "covered_lines": 237,
+        "num_statements": 252,
+        "percent_covered": 90.37267080745342,
+        "percent_covered_display": "90",
+        "missing_lines": 15,
+        "excluded_lines": 0,
+        "percent_statements_covered": 94.04761904761905,
+        "percent_statements_covered_display": "94",
+        "num_branches": 70,
+        "num_partial_branches": 16,
+        "covered_branches": 54,
+        "missing_branches": 16,
+        "percent_branches_covered": 77.14285714285714,
+        "percent_branches_covered_display": "77"
+      },
+      "src/omegadata/adjustments/factors.py": {
+        "covered_lines": 47,
+        "num_statements": 48,
+        "percent_covered": 97.29729729729729,
+        "percent_covered_display": "97",
+        "missing_lines": 1,
+        "excluded_lines": 0,
+        "percent_statements_covered": 97.91666666666667,
+        "percent_statements_covered_display": "98",
+        "num_branches": 26,
+        "num_partial_branches": 1,
+        "covered_branches": 25,
+        "missing_branches": 1,
+        "percent_branches_covered": 96.15384615384616,
+        "percent_branches_covered_display": "96"
+      },
+      "src/omegadata/adjustments/repository.py": {
+        "covered_lines": 187,
+        "num_statements": 204,
+        "percent_covered": 88.27586206896552,
+        "percent_covered_display": "88",
+        "missing_lines": 17,
+        "excluded_lines": 0,
+        "percent_statements_covered": 91.66666666666667,
+        "percent_statements_covered_display": "92",
+        "num_branches": 86,
+        "num_partial_branches": 15,
+        "covered_branches": 69,
+        "missing_branches": 17,
+        "percent_branches_covered": 80.23255813953489,
+        "percent_branches_covered_display": "80"
+      },
+      "src/omegadata/adjustments/temporal.py": {
+        "covered_lines": 92,
+        "num_statements": 104,
+        "percent_covered": 85.71428571428571,
+        "percent_covered_display": "86",
+        "missing_lines": 12,
+        "excluded_lines": 0,
+        "percent_statements_covered": 88.46153846153847,
+        "percent_statements_covered_display": "88",
+        "num_branches": 64,
+        "num_partial_branches": 10,
+        "covered_branches": 52,
+        "missing_branches": 12,
+        "percent_branches_covered": 81.25,
+        "percent_branches_covered_display": "81"
+      }
+    },
+    "weighted": {
+      "covered_lines": 644,
+      "num_statements": 694,
+      "covered_branches": 228,
+      "num_branches": 276,
+      "statement_percent": 92.79538904899135,
+      "branch_percent": 82.6086956521739
+    },
+    "scope": "Focused OD07 engineering only"
+  },
+  "earlier_session_upstream_focused": {
+    "od06": {
+      "counts": {
+        "passed": 66
+      },
+      "command": "logs/od06-135ff558ed-command.json"
+    },
+    "foundation": {
+      "counts": {
+        "passed": 87
+      },
+      "command": "logs/foundation-4055a80ee0-command.json"
+    },
+    "parser": {
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "command": "logs/parser-3f3ed046ab-command.json"
+    }
+  },
+  "final_A_by_test_file": {
+    "tests/unit/test_adjustment_engine.py": {
+      "passed": 4
+    },
+    "tests/unit/test_adjustment_reference_corpus.py": {
+      "passed": 2
+    },
+    "tests/unit/test_collection_schedule.py": {
+      "passed": 2
+    },
+    "tests/unit/test_confidence_and_validation.py": {
+      "passed": 6
+    },
+    "tests/unit/test_corporate_actions.py": {
+      "passed": 10
+    },
+    "tests/unit/test_discontinuity.py": {
+      "passed": 4
+    },
+    "tests/unit/test_discontinuity_sector_fallback.py": {
+      "passed": 1
+    },
+    "tests/unit/test_external_validation_jobs.py": {
+      "passed": 2
+    },
+    "tests/unit/test_isin_master.py": {
+      "passed": 3
+    },
+    "tests/unit/test_news_pipeline.py": {
+      "passed": 2
+    },
+    "tests/unit/test_od01_source_rights.py": {
+      "passed": 100
+    },
+    "tests/unit/test_od01r_rights_hardening.py": {
+      "passed": 76,
+      "skipped": 2
+    },
+    "tests/unit/test_od02_acquisition.py": {
+      "passed": 97
+    },
+    "tests/unit/test_od02v_portability.py": {
+      "passed": 17
+    },
+    "tests/unit/test_od04_raw_archive.py": {
+      "passed": 58
+    },
+    "tests/unit/test_od04r_adversarial.py": {
+      "passed": 27
+    },
+    "tests/unit/test_od05_era_parsing.py": {
+      "passed": 94
+    },
+    "tests/unit/test_od05_final_contracts.py": {
+      "passed": 16
+    },
+    "tests/unit/test_od05r_reference_evidence.py": {
+      "passed": 60,
+      "skipped": 1
+    },
+    "tests/unit/test_od05t_archive_inventory.py": {
+      "passed": 47,
+      "skipped": 1
+    },
+    "tests/unit/test_od05v_local_presence.py": {
+      "passed": 40,
+      "skipped": 1
+    },
+    "tests/unit/test_od05w_engineering.py": {
+      "passed": 39
+    },
+    "tests/unit/test_od05x_isolation.py": {
+      "passed": 29
+    },
+    "tests/unit/test_od05x_native_extensions.py": {
+      "passed": 4
+    },
+    "tests/unit/test_od05xr1_windows_contract.py": {
+      "passed": 33,
+      "skipped": 7
+    },
+    "tests/unit/test_od06_contracts.py": {
+      "passed": 66
+    },
+    "tests/unit/test_od06_foundation.py": {
+      "passed": 87
+    },
+    "tests/unit/test_od07_adjustments.py": {
+      "passed": 100
+    },
+    "tests/unit/test_operations_layer.py": {
+      "passed": 4
+    },
+    "tests/unit/test_pipeline_and_api.py": {
+      "passed": 43
+    },
+    "tests/unit/test_trackb_extreme_edges.py": {
+      "passed": 10
+    },
+    "tests/unit/test_universe_manager.py": {
+      "passed": 7
+    },
+    "tests/unit/test_validation_policies.py": {
+      "passed": 7
+    }
+  }
+}

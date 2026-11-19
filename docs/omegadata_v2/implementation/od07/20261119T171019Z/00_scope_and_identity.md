@@ -1,0 +1,6 @@
+# OD07 code-only implementation
+Repository PrivateAccount-01/omega-system---phase-1, branch feature/od01-source-rights, reviewed local/remote HEAD 47b7f2c5859e36bc40c5970c2316eef3d28211e8. Ref-only Git verified; original mixed worktree content refresh prohibited and not performed. Original worktree contents/untracked files not scanned. No reset, integration, commit or push.
+
+Applied development snapshot: /home/parilrupani/omega-od07-20261119T171019Z/staged2/repo. Snapshot manifest digest 3f9859cc61a0f59939a90b5bc007dffa8ba8620c4c9080e0e49b97522d7f85b6; 3825 permitted files. Sixteen sealed upstream files adopted with exact before/after checks through unchanged canonical Linux stage. All572sealed prior evidence files verified/read. Eight new OD07 code/test files; all3817upstream hashes unchanged. Code runs at normal module paths in this safe snapshot. Combined24file delivery and patch are for future separately authorized integration, not installed original checkout.
+
+Mathematical vectors and anonymous invariant inputs only. No authentic financial observations or securities generated/validated. No original market bytes, incident copies, credentials, databases or signing assets read/copied/mounted. No OD08 execution.

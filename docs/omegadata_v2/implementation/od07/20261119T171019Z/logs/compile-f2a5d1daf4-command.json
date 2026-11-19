@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/compile-f2a5d1daf4-manifest.json",
+    "--manifest-sha256",
+    "a094c9899f44b1714a53fff5ca61b4b17c911319ea0ff4566dc23117a1f99018",
+    "--policy",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/compile-f2a5d1daf4-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-20261119T171019Z/compile-f2a5d1daf4/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+  "start_utc": "2026-11-19T17:26:42.372861+00:00",
+  "end_utc": "2026-11-19T17:26:44.655803+00:00",
+  "elapsed_seconds": 2.2829353649999575,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-19T17:26:44.473891+00:00",
+    "end_utc": "2026-11-19T17:26:44.636944+00:00",
+    "elapsed_seconds": 0.16304761700007475,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-20261119T171019Z/compile-f2a5d1daf4/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "compile",
+  "source_commit": "47b7f2c5859e36bc40c5970c2316eef3d28211e8",
+  "source_manifest_sha256": "a094c9899f44b1714a53fff5ca61b4b17c911319ea0ff4566dc23117a1f99018"
+}

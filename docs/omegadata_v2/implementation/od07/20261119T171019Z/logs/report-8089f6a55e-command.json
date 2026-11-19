@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/report-8089f6a55e-manifest.json",
+    "--manifest-sha256",
+    "7feeb178234c3bd5cef19126c76dca81d978437c96351bf66ce54d21d461c9c8",
+    "--policy",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/report-8089f6a55e-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-20261119T171019Z/report-8089f6a55e/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+  "start_utc": "2026-11-19T17:39:05.272618+00:00",
+  "end_utc": "2026-11-19T17:39:06.244699+00:00",
+  "elapsed_seconds": 0.9720731010000065,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "report",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "{\"schema_version\": \"od05.final-report.receipt/v1\", \"files\": [\"00_scope_and_identity.md\", \"01_upstream_code_manifest.json\", \"02_existing_engine_audit.md\", \"03_corporate_action_contracts.md\", \"04_adjustment_profiles.md\", \"05_independent_math_vectors.md\", \"06_temporal_eligibility.md\", \"07_adjustment_chain.md\", \"08_negative_first_tests.md\", \"09_focused_test_results.json\", \"10_full_engineering_matrix.json\", \"11_persistence_and_rollback.md\", \"12_compatibility_results.json\", \"13_source_dependencies.json\", \"14_preservation_manifest.json\", \"15_gatekeeper.json\", \"16_od08_handoff.md\", \"17_final_report.md\", \"18_acceptance_matrix.json\", \"19_review_and_limits.json\"], \"manifest_sha256\": \"1d86f6c87c40792649924cbd01ed0e61123f7af5bbd351facaa0a4e07654e1aa\", \"sha256\": {\"00_scope_and_identity.md\": \"11139dd1c1bdd2389036c521e2e3e82575c5d0f0326bced0516a56442c150d80\", \"01_upstream_code_manifest.json\": \"06f09250ad97c3f43de0927965d6c51fa77e5f0280a0cf0ab6167da1a283ac91\", \"02_existing_engine_audit.md\": \"5e23f6e832f0a9a48d913835224b59a5c8f8484f93143695f18a00e08c87c9a9\", \"03_corporate_action_contracts.md\": \"da05b414508df194d33db86ff8604f05508a65cb965c8c2efb9cc204a3320054\", \"04_adjustment_profiles.md\": \"330767882e81b26855b777aab6c818f1311bd65d75c115cbaa3b19acaf90b1e6\", \"05_independent_math_vectors.md\": \"21b850988bc4a5c4725df4bce4dd1799786a82d40ef14154f558f7c45e83bcfc\", \"06_temporal_eligibility.md\": \"94adf433137e8a72cb732d32652043a8d97462f3ff81cae3bc5b7f8f32277e95\", \"07_adjustment_chain.md\": \"deb8d65673084e1fb39bec1029c62bbef0c786b27a5a89964d0ce25d521ae93d\", \"08_negative_first_tests.md\": \"4151793e70df27f6fd77c90cfe63c403fb9c0684e44b96b949a0800e2cc97b6b\", \"09_focused_test_results.json\": \"7bcd8ca651685ec7f4d44eb43ba929d37d56119852f19a53140d71869082421c\", \"10_full_engineering_matrix.json\": \"0134f0905205625fda3802b2140a9534876aa99b33e55dab3e2ae33bd30207c9\", \"11_persistence_and_rollback.md\": \"f19b0523f57cdc9e8b7a403fbe8a5eb9ce931ac30d690252da699c6360639716\", \"12_compatibility_results.json\": \"a748d806bc21847dee88d041a10c5c127a2041df9a65fe2eb8fa03c3af3b6be0\", \"13_source_dependencies.json\": \"d993808f4e0f2f535515efed0db07bedaadb1288a373f3782a7d9aac60d0ef3b\", \"14_preservation_manifest.json\": \"ab89ef3c26917b985d77d16e2bcc49072abe348ea92d1007b5483b12fe027114\", \"15_gatekeeper.json\": \"32a4992c7e3df854567f4aa2fc47aec357cb8467a3fa43be08776c61e514aa1e\", \"16_od08_handoff.md\": \"baca7188b2fecd0d3052759efabec4cd337aac91f802a0ad70dc73d4b10504ec\", \"17_final_report.md\": \"0c5472e2011f70279bcf963aaa03ab6a57a96fc7eb4af000e822e1777bd1e9d4\", \"18_acceptance_matrix.json\": \"d66ac1953a01cd18fade4f8514f081a2e5394e51b1e6aa655c0905f4c473a7f5\", \"19_review_and_limits.json\": \"2ca0eea73ddf35adbc26a0e169d337e1dbb24cca39de1a68cf671945d9912259\"}, \"boundary\": {\"backend\": \"bwrap+seccomp/v1\", \"worker_namespaces\": {\"mnt\": \"mnt:[4026532222]\", \"net\": \"net:[4026532227]\", \"pid\": \"pid:[4026532225]\", \"user\": \"user:[4026532291]\"}, \"outside_canary\": \"/home/parilrupani/omega-od07-20261119T171019Z/report-8089f6a55e/NON_MARKET_CANARY\", \"verified\": true, \"source_mounts\": \"EXACT_READ_ONLY\", \"no_new_privs\": true, \"seccomp_mode\": 2}, \"git_calls\": 0, \"original_repository_mounted\": false}",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-20261119T171019Z/report-8089f6a55e/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "report",
+  "source_commit": "47b7f2c5859e36bc40c5970c2316eef3d28211e8",
+  "source_manifest_sha256": "7feeb178234c3bd5cef19126c76dca81d978437c96351bf66ce54d21d461c9c8"
+}

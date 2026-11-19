@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/pip-689d58418a-manifest.json",
+    "--manifest-sha256",
+    "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+    "--policy",
+    "/home/parilrupani/omega-od07-20261119T171019Z/logs/pip-689d58418a-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od07-20261119T171019Z/pip-689d58418a/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+  "start_utc": "2026-11-19T17:34:38.250720+00:00",
+  "end_utc": "2026-11-19T17:34:42.757800+00:00",
+  "elapsed_seconds": 4.507072545,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "pip",
+    "start_utc": "2026-11-19T17:34:41.558572+00:00",
+    "end_utc": "2026-11-19T17:34:42.642524+00:00",
+    "elapsed_seconds": 1.0839293409999868,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "No broken requirements found.\n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od07-20261119T171019Z/pip-689d58418a/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "pip",
+  "source_commit": "47b7f2c5859e36bc40c5970c2316eef3d28211e8",
+  "source_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+}

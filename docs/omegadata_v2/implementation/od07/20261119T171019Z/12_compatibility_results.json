@@ -1,0 +1,115 @@
+{
+  "legacy_sources_unchanged": true,
+  "upstream_preserved_files": 3817,
+  "inventory": "support/legacy-audit-source-inventory.json",
+  "adapter": "src/omegadata/adjustments/compatibility.py:legacy_action",
+  "behavior": "Read-only snapshot; unknown knowledge retained; confirmation cannot self-promote; BLOCKED_EVIDENCE",
+  "actual_A_by_file": {
+    "tests/unit/test_adjustment_engine.py": {
+      "passed": 4
+    },
+    "tests/unit/test_adjustment_reference_corpus.py": {
+      "passed": 2
+    },
+    "tests/unit/test_collection_schedule.py": {
+      "passed": 2
+    },
+    "tests/unit/test_confidence_and_validation.py": {
+      "passed": 6
+    },
+    "tests/unit/test_corporate_actions.py": {
+      "passed": 10
+    },
+    "tests/unit/test_discontinuity.py": {
+      "passed": 4
+    },
+    "tests/unit/test_discontinuity_sector_fallback.py": {
+      "passed": 1
+    },
+    "tests/unit/test_external_validation_jobs.py": {
+      "passed": 2
+    },
+    "tests/unit/test_isin_master.py": {
+      "passed": 3
+    },
+    "tests/unit/test_news_pipeline.py": {
+      "passed": 2
+    },
+    "tests/unit/test_od01_source_rights.py": {
+      "passed": 100
+    },
+    "tests/unit/test_od01r_rights_hardening.py": {
+      "passed": 76,
+      "skipped": 2
+    },
+    "tests/unit/test_od02_acquisition.py": {
+      "passed": 97
+    },
+    "tests/unit/test_od02v_portability.py": {
+      "passed": 17
+    },
+    "tests/unit/test_od04_raw_archive.py": {
+      "passed": 58
+    },
+    "tests/unit/test_od04r_adversarial.py": {
+      "passed": 27
+    },
+    "tests/unit/test_od05_era_parsing.py": {
+      "passed": 94
+    },
+    "tests/unit/test_od05_final_contracts.py": {
+      "passed": 16
+    },
+    "tests/unit/test_od05r_reference_evidence.py": {
+      "passed": 60,
+      "skipped": 1
+    },
+    "tests/unit/test_od05t_archive_inventory.py": {
+      "passed": 47,
+      "skipped": 1
+    },
+    "tests/unit/test_od05v_local_presence.py": {
+      "passed": 40,
+      "skipped": 1
+    },
+    "tests/unit/test_od05w_engineering.py": {
+      "passed": 39
+    },
+    "tests/unit/test_od05x_isolation.py": {
+      "passed": 29
+    },
+    "tests/unit/test_od05x_native_extensions.py": {
+      "passed": 4
+    },
+    "tests/unit/test_od05xr1_windows_contract.py": {
+      "passed": 33,
+      "skipped": 7
+    },
+    "tests/unit/test_od06_contracts.py": {
+      "passed": 66
+    },
+    "tests/unit/test_od06_foundation.py": {
+      "passed": 87
+    },
+    "tests/unit/test_od07_adjustments.py": {
+      "passed": 100
+    },
+    "tests/unit/test_operations_layer.py": {
+      "passed": 4
+    },
+    "tests/unit/test_pipeline_and_api.py": {
+      "passed": 43
+    },
+    "tests/unit/test_trackb_extreme_edges.py": {
+      "passed": 10
+    },
+    "tests/unit/test_universe_manager.py": {
+      "passed": 7
+    },
+    "tests/unit/test_validation_policies.py": {
+      "passed": 7
+    }
+  },
+  "operational_DB_touched": false,
+  "legacy_recompute_refresh_auto_invoked": false
+}

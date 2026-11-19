@@ -1,0 +1,410 @@
+{
+  "collection": 1117,
+  "classes": {
+    "C": 4,
+    "A": 1109,
+    "B": 4
+  },
+  "commands": [
+    {
+      "command_id": "collection-31006c1cf1-command",
+      "launcher_argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/collection-31006c1cf1-manifest.json",
+        "--manifest-sha256",
+        "76f88620da8dde2185a299d3066361eecffb8ad03fad362a168e48f073603f19",
+        "--policy",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/collection-31006c1cf1-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od07-20261119T171019Z/collection-31006c1cf1/output"
+      ],
+      "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+      "job": "collection",
+      "platform": "Linux/WSL Ubuntu",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "start_utc": "2026-11-19T17:32:28.287279+00:00",
+      "end_utc": "2026-11-19T17:32:34.132603+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 5.845325387999999,
+      "counts": {},
+      "stdout_stderr": "logs/collection-31006c1cf1-command.json",
+      "input_manifest": "logs/collection-31006c1cf1-manifest.json",
+      "input_manifest_sha256": "76f88620da8dde2185a299d3066361eecffb8ad03fad362a168e48f073603f19"
+    },
+    {
+      "command_id": "od07-c06e2b5716-command",
+      "launcher_argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/od07-c06e2b5716-manifest.json",
+        "--manifest-sha256",
+        "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+        "--policy",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/od07-c06e2b5716-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od07-20261119T171019Z/od07-c06e2b5716/output"
+      ],
+      "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+      "job": "od07",
+      "platform": "Linux/WSL Ubuntu",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "start_utc": "2026-11-19T17:32:34.543225+00:00",
+      "end_utc": "2026-11-19T17:32:38.774946+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 4.231714930999999,
+      "counts": {
+        "passed": 100
+      },
+      "stdout_stderr": "logs/od07-c06e2b5716-command.json",
+      "input_manifest": "logs/od07-c06e2b5716-manifest.json",
+      "input_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+    },
+    {
+      "command_id": "A-6c6c8ff300-command",
+      "launcher_argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/A-6c6c8ff300-manifest.json",
+        "--manifest-sha256",
+        "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+        "--policy",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/A-6c6c8ff300-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od07-20261119T171019Z/A-6c6c8ff300/output"
+      ],
+      "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+      "job": "A",
+      "platform": "Linux/WSL Ubuntu",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "start_utc": "2026-11-19T17:32:38.859307+00:00",
+      "end_utc": "2026-11-19T17:33:26.198818+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 46.75511417199999,
+      "counts": {
+        "passed": 1097,
+        "skipped": 12
+      },
+      "stdout_stderr": "logs/A-6c6c8ff300-command.json",
+      "input_manifest": "logs/A-6c6c8ff300-manifest.json",
+      "input_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+    },
+    {
+      "command_id": "diagnostic-9980e99958-command",
+      "launcher_argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/diagnostic-9980e99958-manifest.json",
+        "--manifest-sha256",
+        "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+        "--policy",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/diagnostic-9980e99958-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od07-20261119T171019Z/diagnostic-9980e99958/output"
+      ],
+      "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+      "job": "diagnostic",
+      "platform": "Linux/WSL Ubuntu",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "start_utc": "2026-11-19T17:33:26.331970+00:00",
+      "end_utc": "2026-11-19T17:34:17.405688+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 49.77746414400001,
+      "counts": {
+        "passed": 1097,
+        "failed": 4,
+        "skipped": 12
+      },
+      "stdout_stderr": "logs/diagnostic-9980e99958-command.json",
+      "input_manifest": "logs/diagnostic-9980e99958-manifest.json",
+      "input_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+    },
+    {
+      "command_id": "mypy-9f4e498b44-command",
+      "launcher_argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/mypy-9f4e498b44-manifest.json",
+        "--manifest-sha256",
+        "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+        "--policy",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/mypy-9f4e498b44-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od07-20261119T171019Z/mypy-9f4e498b44/output"
+      ],
+      "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+      "job": "mypy",
+      "platform": "Linux/WSL Ubuntu",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "start_utc": "2026-11-19T17:34:17.525317+00:00",
+      "end_utc": "2026-11-19T17:34:37.395622+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 19.870303758000006,
+      "counts": {},
+      "stdout_stderr": "logs/mypy-9f4e498b44-command.json",
+      "input_manifest": "logs/mypy-9f4e498b44-manifest.json",
+      "input_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+    },
+    {
+      "command_id": "pip-689d58418a-command",
+      "launcher_argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/pip-689d58418a-manifest.json",
+        "--manifest-sha256",
+        "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+        "--policy",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/pip-689d58418a-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od07-20261119T171019Z/pip-689d58418a/output"
+      ],
+      "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+      "job": "pip",
+      "platform": "Linux/WSL Ubuntu",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "start_utc": "2026-11-19T17:34:38.250720+00:00",
+      "end_utc": "2026-11-19T17:34:42.757800+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 4.507072545,
+      "counts": {},
+      "stdout_stderr": "logs/pip-689d58418a-command.json",
+      "input_manifest": "logs/pip-689d58418a-manifest.json",
+      "input_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+    },
+    {
+      "command_id": "compile-6def8fbc90-command",
+      "launcher_argv": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/compile-6def8fbc90-manifest.json",
+        "--manifest-sha256",
+        "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42",
+        "--policy",
+        "/home/parilrupani/omega-od07-20261119T171019Z/logs/compile-6def8fbc90-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od07-20261119T171019Z/compile-6def8fbc90/output"
+      ],
+      "cwd": "/home/parilrupani/omega-od07-20261119T171019Z",
+      "job": "compile",
+      "platform": "Linux/WSL Ubuntu",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "start_utc": "2026-11-19T17:34:42.906078+00:00",
+      "end_utc": "2026-11-19T17:34:45.886598+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.980511691000004,
+      "counts": {},
+      "stdout_stderr": "logs/compile-6def8fbc90-command.json",
+      "input_manifest": "logs/compile-6def8fbc90-manifest.json",
+      "input_manifest_sha256": "04f92e2198be13da0fe84a5f2780c652f7388edd1845ea4e2b7d5a2c9a523a42"
+    },
+    {
+      "job": "ruff",
+      "command": [
+        "/usr/bin/bwrap",
+        "--unshare-all",
+        "--die-with-parent",
+        "--new-session",
+        "--cap-drop",
+        "ALL",
+        "--clearenv",
+        "--ro-bind",
+        "/usr",
+        "/usr",
+        "--symlink",
+        "usr/lib",
+        "/lib",
+        "--symlink",
+        "usr/lib64",
+        "/lib64",
+        "--ro-bind",
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+        "--proc",
+        "/proc",
+        "--dev",
+        "/dev",
+        "--tmpfs",
+        "/tmp",
+        "--ro-bind",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/src",
+        "/repo/src",
+        "--ro-bind",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/scripts",
+        "/repo/scripts",
+        "--ro-bind",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/tests",
+        "/repo/tests",
+        "--ro-bind",
+        "/home/parilrupani/omega-od07-20261119T171019Z/staged2/repo/pyproject.toml",
+        "/repo/pyproject.toml",
+        "--chdir",
+        "/repo",
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/ruff",
+        "check",
+        "--no-cache",
+        "src/omegadata",
+        "scripts",
+        "tests"
+      ],
+      "exit_code": 0,
+      "stdout_stderr": "logs/static-ruff-173446.json",
+      "scope": "STATIC_ONLY read-only data-free source mounts, no original mount; does not certify child execution policy"
+    }
+  ],
+  "A": {
+    "passed": 1097,
+    "skipped": 12
+  },
+  "unchanged_diagnostic": {
+    "passed": 1097,
+    "failed": 4,
+    "skipped": 12
+  },
+  "diagnostic_exit": 1,
+  "B_failures": [
+    {
+      "nodeid": "tests/unit/test_adjustment_reference_corpus.py::test_reference_corpus_official_nse_source_pack_cases",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "db_session = <sqlalchemy.orm.session.Session object at 0x735fd80b1ac0>\n\n    def test_reference_corpus_official_nse_source_pack_cases(db_session) -> None:\n        corpus = json.loads(FIXTURE_PATH.read_text(encoding=\"utf-8\"))\n        assert corpus[\"case_count\"] == len(corpus[\"cases\"])\n        assert corpus[\"case_count\"] >= 10\n        assert corpus[\"transformational_case_count\"] >= 3\n    \n        for case in corpus[\"cases\"]:\n            assert case[\"label\"]\n>           assert (PROJECT_ROOT / case[\"snapshot_path\"]).exists()\nE           AssertionError: assert False\nE            +  where False = exists()\nE            +    where exists = (PosixPath('/work/repo') / 'data/raw/nse_corporate_actions/year=2026/month=03/20260319.bin').exists\n\ntests/unit/test_adjustment_reference_corpus.py:98: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_backfill_reproduces_reference_snapshots",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "db_session = <sqlalchemy.orm.session.Session object at 0x735fd0fa40b0>\n\n    def test_seed_pack_backfill_reproduces_reference_snapshots(db_session) -> None:\n        manager = PointInTimeUniverseManager()\n        pack = json.loads(SEED_PACK_PATH.read_text(encoding=\"utf-8\"))\n    \n>       loaded = manager.backfill_from_seed_pack(\n            db_session,\n            pack,\n            raw_root=PROJECT_ROOT / \"data\" / \"raw\",\n        )\n\ntests/unit/test_universe_manager.py:108: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.track_b.universe_manager.PointInTimeUniverseManager object at 0x735fd1204ef0>\nsession = <sqlalchemy.orm.session.Session object at 0x735fd0fa40b0>\nseed_pack = {'description': 'Versioned point-in-time NIFTY50 universe seed pack built from official SEBI bulletin component tables... 'Bajaj Auto Ltd.', 'symbol': 'BAJAJ-AUTO'}, ...], 'effective_date': '2025-02-28', 'index_name': 'NIFTY50', ...}], ...}\n\n    def backfill_from_seed_pack(\n        self,\n        session: Session,\n        seed_pack: dict[str, object] | str | Path,\n        *,\n        raw_root: str | Path = \"data/raw\",\n    ) -> int:\n        pack = self._coerce_seed_pack(seed_pack)\n        snapshots = pack.get(\"snapshots\", [])\n        if not isinstance(snapshots, list) or not snapshots:\n            raise ValueError(\"Universe seed pack must contain non-empty snapshots\")\n    \n        raw_path = Path(raw_root)\n        symbol_to_isin = self._seed_symbol_map(pack, raw_path)\n        security_master = self._seed_security_map(pack)\n        validation = self.validate_seed_pack(\n            session,\n            pack,\n            raw_root=raw_path,\n            preview_only=True,\n        )\n        validation_errors = [error for result in validation for error in result.errors]\n        if validation_errors:\n>           raise ValueError(\n                \"Universe seed pack validation failed before applying destructive changes: \"\n                + \"; \".join(validation_errors)\n            )\nE           ValueError: Universe seed pack validation failed before applying destructive changes: NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ACC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for AMBUJACEM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BANKBARODA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BHEL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BOSCHLTD; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for IDEA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for LT; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for LUPIN; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for PNB; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TATAPOWER; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for YESBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for IOC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for LT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for YESBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for IOC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for LT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SHREECEM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for APOLLOHOSP; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for DIVISLAB; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HDFCLIFE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for LT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SBILIFE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SHREECEM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TATACONSUM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ADANIENT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for APOLLOHOSP; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HDFCLIFE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for LT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SBILIFE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SHRIRAMFIN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TATACONSUM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TRENT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for WIPRO\n\nsrc/omegadata/track_b/universe_manager.py:318: ValueError"
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_preserves_knowledge_vs_effective_date_semantics",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "db_session = <sqlalchemy.orm.session.Session object at 0x735fd155f5c0>\n\n    def test_seed_pack_preserves_knowledge_vs_effective_date_semantics(db_session) -> None:\n        manager = PointInTimeUniverseManager()\n        pack = json.loads(SEED_PACK_PATH.read_text(encoding=\"utf-8\"))\n>       manager.backfill_from_seed_pack(\n            db_session,\n            pack,\n            raw_root=PROJECT_ROOT / \"data\" / \"raw\",\n        )\n\ntests/unit/test_universe_manager.py:128: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.track_b.universe_manager.PointInTimeUniverseManager object at 0x735fd0f9bcb0>\nsession = <sqlalchemy.orm.session.Session object at 0x735fd155f5c0>\nseed_pack = {'description': 'Versioned point-in-time NIFTY50 universe seed pack built from official SEBI bulletin component tables... 'Bajaj Auto Ltd.', 'symbol': 'BAJAJ-AUTO'}, ...], 'effective_date': '2025-02-28', 'index_name': 'NIFTY50', ...}], ...}\n\n    def backfill_from_seed_pack(\n        self,\n        session: Session,\n        seed_pack: dict[str, object] | str | Path,\n        *,\n        raw_root: str | Path = \"data/raw\",\n    ) -> int:\n        pack = self._coerce_seed_pack(seed_pack)\n        snapshots = pack.get(\"snapshots\", [])\n        if not isinstance(snapshots, list) or not snapshots:\n            raise ValueError(\"Universe seed pack must contain non-empty snapshots\")\n    \n        raw_path = Path(raw_root)\n        symbol_to_isin = self._seed_symbol_map(pack, raw_path)\n        security_master = self._seed_security_map(pack)\n        validation = self.validate_seed_pack(\n            session,\n            pack,\n            raw_root=raw_path,\n            preview_only=True,\n        )\n        validation_errors = [error for result in validation for error in result.errors]\n        if validation_errors:\n>           raise ValueError(\n                \"Universe seed pack validation failed before applying destructive changes: \"\n                + \"; \".join(validation_errors)\n            )\nE           ValueError: Universe seed pack validation failed before applying destructive changes: NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ACC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for AMBUJACEM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BANKBARODA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BHEL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BOSCHLTD; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for IDEA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for LT; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for LUPIN; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for PNB; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TATAPOWER; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for YESBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for IOC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for LT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for YESBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for IOC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for LT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SHREECEM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for APOLLOHOSP; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for DIVISLAB; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HDFCLIFE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for LT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SBILIFE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SHREECEM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TATACONSUM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ADANIENT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for APOLLOHOSP; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HDFCLIFE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for LT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SBILIFE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SHRIRAMFIN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TATACONSUM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TRENT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for WIPRO\n\nsrc/omegadata/track_b/universe_manager.py:318: ValueError"
+    },
+    {
+      "nodeid": "tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting",
+      "outcome": "failed",
+      "when": "call",
+      "reason": "tmp_path = PosixPath('/work/job/pytest/test_seed_pack_backfill_works_0')\n\n    def test_seed_pack_backfill_works_with_production_autoflush_setting(tmp_path: Path) -> None:\n        engine = create_engine(f\"sqlite:///{tmp_path / 'prod_like.db'}\")\n        Base.metadata.create_all(bind=engine)\n        session = sessionmaker(bind=engine, autoflush=False, autocommit=False)()\n        manager = PointInTimeUniverseManager()\n        pack = json.loads(SEED_PACK_PATH.read_text(encoding=\"utf-8\"))\n    \n        try:\n>           loaded = manager.backfill_from_seed_pack(\n                session,\n                pack,\n                raw_root=PROJECT_ROOT / \"data\" / \"raw\",\n            )\n\ntests/unit/test_universe_manager.py:160: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.track_b.universe_manager.PointInTimeUniverseManager object at 0x735fd0f5bd10>\nsession = <sqlalchemy.orm.session.Session object at 0x735fd0f5baa0>\nseed_pack = {'description': 'Versioned point-in-time NIFTY50 universe seed pack built from official SEBI bulletin component tables... 'Bajaj Auto Ltd.', 'symbol': 'BAJAJ-AUTO'}, ...], 'effective_date': '2025-02-28', 'index_name': 'NIFTY50', ...}], ...}\n\n    def backfill_from_seed_pack(\n        self,\n        session: Session,\n        seed_pack: dict[str, object] | str | Path,\n        *,\n        raw_root: str | Path = \"data/raw\",\n    ) -> int:\n        pack = self._coerce_seed_pack(seed_pack)\n        snapshots = pack.get(\"snapshots\", [])\n        if not isinstance(snapshots, list) or not snapshots:\n            raise ValueError(\"Universe seed pack must contain non-empty snapshots\")\n    \n        raw_path = Path(raw_root)\n        symbol_to_isin = self._seed_symbol_map(pack, raw_path)\n        security_master = self._seed_security_map(pack)\n        validation = self.validate_seed_pack(\n            session,\n            pack,\n            raw_root=raw_path,\n            preview_only=True,\n        )\n        validation_errors = [error for result in validation for error in result.errors]\n        if validation_errors:\n>           raise ValueError(\n                \"Universe seed pack validation failed before applying destructive changes: \"\n                + \"; \".join(validation_errors)\n            )\nE           ValueError: Universe seed pack validation failed before applying destructive changes: NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ACC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for AMBUJACEM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BANKBARODA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BHEL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BOSCHLTD; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for IDEA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for LT; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for LUPIN; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for PNB; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TATAPOWER; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for YESBANK; NIFTY50 2015-10-31 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for IOC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for LT; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for YESBANK; NIFTY50 2019-11-30 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for GAIL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for IOC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for LT; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SHREECEM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for VEDL; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2020-03-19 missing symbol\u2192ISIN mapping for ZEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for APOLLOHOSP; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for DIVISLAB; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HDFCLIFE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for LT; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SBILIFE; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SHREECEM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TATACONSUM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for UPL; NIFTY50 2022-05-31 missing symbol\u2192ISIN mapping for WIPRO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ADANIENT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ADANIPORTS; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for APOLLOHOSP; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ASIANPAINT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for AXISBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJAJ-AUTO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJAJFINSV; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BAJFINANCE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BHARTIARTL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BPCL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for BRITANNIA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for CIPLA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for COALINDIA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for DRREDDY; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for EICHERMOT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for GRASIM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HCLTECH; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HDFCBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HDFCLIFE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HEROMOTOCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HINDALCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for HINDUNILVR; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ICICIBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for INDUSINDBK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for INFY; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ITC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for JSWSTEEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for KOTAKBANK; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for LT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for M&M; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for MARUTI; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for NESTLEIND; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for NTPC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ONGC; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for POWERGRID; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for RELIANCE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SBILIFE; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SBIN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SHRIRAMFIN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for SUNPHARMA; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TATACONSUM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TATASTEEL; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TCS; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TECHM; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TITAN; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for TRENT; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for ULTRACEMCO; NIFTY50 2025-02-28 missing symbol\u2192ISIN mapping for WIPRO\n\nsrc/omegadata/track_b/universe_manager.py:318: ValueError"
+    }
+  ],
+  "C_not_run": [
+    "tests/integration/test_real_data_sources.py::test_real_gdelt_download",
+    "tests/integration/test_real_data_sources.py::test_real_nse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_bse_equity_download_recent_date",
+    "tests/integration/test_real_data_sources.py::test_real_nse_corporate_actions_endpoint"
+  ],
+  "skips": [
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[partition]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od01r_rights_hardening.py::test_r06_windows_junction_escape[payload_directory]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od01r_rights_hardening.py', 171, 'Skipped: Windows junction test')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05r_reference_evidence.py::test_r17_later_windows_junction",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05r_reference_evidence.py', 329, 'Skipped: Windows junction; Linux file-link counterpart required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05t_archive_inventory.py::test_m07_windows_junction",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05t_archive_inventory.py', 179, 'Skipped: Windows junction; Linux directory-link counterpart required')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05v_local_presence.py::test_p09_link_traps[junction]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05v_local_presence.py', 169, 'Skipped: Windows junction counterpart exercised on Windows')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN03]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN03: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN04]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN04: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN05]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN05: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN06]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN06: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN15]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN15: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN18]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN18: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    },
+    {
+      "nodeid": "tests/unit/test_od05xr1_windows_contract.py::test_windows_native_execution_requires_approved_VM[WIN20]",
+      "outcome": "skipped",
+      "when": "call",
+      "reason": "('/work/repo/tests/unit/test_od05xr1_windows_contract.py', 44, 'Skipped: WIN20: OS_CAPABILITY_BLOCKED; approved Windows VM/worker absent')"
+    }
+  ],
+  "Windows314": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "Windows311": "NOT_RUN_OS_CAPABILITY_BLOCKED",
+  "source_manifest": "support/final-source-manifest.json",
+  "coverage": {
+    "covered_lines": 644,
+    "num_statements": 694,
+    "covered_branches": 228,
+    "num_branches": 276,
+    "statement_percent": 92.79538904899135,
+    "branch_percent": 82.6086956521739
+  },
+  "failed_attempts_preserved": true
+}

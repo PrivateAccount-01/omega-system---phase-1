@@ -1,0 +1,29 @@
+{
+  "job": "mypy",
+  "start_utc": "2026-11-19T17:29:14.350156+00:00",
+  "end_utc": "2026-11-19T17:29:26.142111+00:00",
+  "elapsed_seconds": 11.791950633000056,
+  "exit_code": 0,
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": "Success: no issues found in 71 source files\n \n",
+  "collected": [],
+  "reports": [],
+  "deselected": [],
+  "counts": {},
+  "guard_denials": {},
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532290]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od07-20261119T171019Z/mypy-ac98c31437/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

@@ -1,0 +1,6 @@
+# Additive SQLite od07.store/v1
+SQLAlchemy reused,no dependency added. Four tables:od07_schema,od07_action(unique parent FK),od07_result(canonical digest),od07_result_action(composite result/action FKs). Typed canonical action payload and SHA256 verified on read. Append-only UPDATE/DELETE triggers. BEGIN IMMEDIATE,atomic commit/rollback,idempotent identical retries,changed duplicate/competing successor refusal. Result validates exact stored action,math,factor,order and references before append.
+
+Actual isolated tests:in-memory/file-backed insert/read,reopen,correction history,duplicates,two competing file-backed connections(one commit/one refusal),interrupted transaction rollback,nativeSQL FK rejection,append-only denial,empty migration/drop/recreate,populated rollback refusal and unrelated-schema rejection. No new OD07 native process-kill or hardware powerloss certification claimed; OD06 evidence remains historical.
+
+Explicit owned disposable_root and SQLite only; path/link escapes/unrelated schema refuse. No legacy ORM or operational DB migration. Production requires separate reviewed ownership,backup/restore,consumer mapping,rehearsal and rollback authorization. Code-only rollback disables opt-in calls/reverts new source while preserving history/evidence; no cleanup or populatedDROP.
