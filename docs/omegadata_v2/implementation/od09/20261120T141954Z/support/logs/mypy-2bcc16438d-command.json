@@ -1,0 +1,53 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-2bcc16438d-manifest.json",
+    "--manifest-sha256",
+    "637790e944999405d262fb2bd9373c77123b6156edb8a985d003414202110d8a",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-2bcc16438d-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/mypy-2bcc16438d/output"
+  ],
+  "start_utc": "2026-11-20T14:57:48.315400+00:00",
+  "end_utc": "2026-11-20T14:58:15.867765+00:00",
+  "seconds": 24.694582056999934,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-20T14:57:52.029100+00:00",
+    "end_utc": "2026-11-20T14:58:07.778560+00:00",
+    "elapsed_seconds": 15.74949945800006,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/reconciliation/tolerances.py:125: error: Name \"date\" is not defined  [name-defined]\nFound 1 error in 1 file (checked 91 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532224]",
+        "net": "net:[4026532229]",
+        "pid": "pid:[4026532227]",
+        "user": "user:[4026532222]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "637790e944999405d262fb2bd9373c77123b6156edb8a985d003414202110d8a"
+}

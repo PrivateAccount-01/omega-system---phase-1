@@ -1,0 +1,214 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-d73d2b196c-manifest.json",
+    "--manifest-sha256",
+    "2d7e480bc331d90233c97c38460afec5062b467842ad3cb34c7b54041782123d",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-d73d2b196c-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/stagea-d73d2b196c/output"
+  ],
+  "start_utc": "2026-11-20T14:29:53.271595+00:00",
+  "end_utc": "2026-11-20T14:30:00.727430+00:00",
+  "seconds": 7.455805201999965,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "stagea",
+    "exit_code": 1,
+    "counts": {
+      "passed": 30,
+      "failed": 2
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_required_observation_cannot_be_omitted",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_intraday_cannot_use_date_only_coverage",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_contradictory_effective_date_refused",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[ANNOUNCEMENT]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[DAILY_CLOSE]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[security]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[listing]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[exchange]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[record]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[volume]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[basis]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[missing_pin]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[correct]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[duplicate]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[conflict]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[unrelated]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[partial]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[-1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_wrong_intraday_transition_identity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_announced_future_event_needs_no_completed_session",
+        "outcome": "failed",
+        "reason": "def test_announced_future_event_needs_no_completed_session():\n        from omegadata.universe.temporal import availability\n        c,x,m,cov,p,run=setup_case()\n        o=observation(x,observation_type='ANNOUNCEMENT',economic_effective_time=K+timedelta(days=2),interval_completed_at=None)\n>       assert availability(o,K,c.AvailabilityPolicy(),x)=='AVAILABLE'\nE       AssertionError: assert 'BLOCKED_AVAILABILITY' == 'AVAILABLE'\nE         \nE         - AVAILABLE\nE         + BLOCKED_AVAILABILITY\n\ntests/unit/test_od08_dependencies.py:290: AssertionError"
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_required_set_ignores_out_of_window",
+        "outcome": "failed",
+        "reason": "tmp_path = PosixPath('/work/job/tmp/test_liquidity_required_set_ig0')\n\n    def test_liquidity_required_set_ignores_out_of_window(tmp_path):\n        from omegadata.universe.repository import UniverseRepository\n        c,x,m,lp=liquid_case()\n        old=observation(x,observation_id='old',session_date=D-timedelta(days=10))\n        o=observation(x)\n        p=c.EligibilityPolicy('window','LIQUIDITY',require_observations=True,liquidity_policy=lp)\n        stored=replace(x,observations=(o,old));db=UniverseRepository('sqlite:///:memory:',disposable_root=tmp_path)\n        db.seed_context(stored,p)\n>       db.pin_context('window',replace(x,observations=(o,)),D+timedelta(days=2),K+timedelta(days=3),p)\n\ntests/unit/test_od08_dependencies.py:301: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/universe/repository.py:419: in pin_context\n    self._reconcile(con, x, day, cutoff, policy, expected)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.universe.repository.UniverseRepository object at 0x7c6ccbc8bd10>\ncon = <sqlalchemy.engine.base.Connection object at 0x7c6ccb989250>\nx = UniverseContext(source_snapshot_id='source-pin', definition=UniverseDefinition(universe_id='CONTROL_SCOPE', universe_n...ment_pin=None, version='od08.availability/v1'),), mode='CANARY_ONLY', calendar_version=None, version='od08.context/v1')\nday = datetime.date(2001, 1, 3)\ncutoff = datetime.datetime(2001, 1, 4, 0, 0, tzinfo=datetime.timezone.utc)\np = EligibilityPolicy(policy_version='window', view='LIQUIDITY', require_observations=True, liquidity_policy=LiquidityPoli...RICT', bound=None, evidence=None, semantics_reference=None), observation_contract_version='v1', observation_scope=None)\nout = UniverseSnapshot(universe_id='CONTROL_SCOPE', definition_version='od08.definition/v1', valid_at=datetime.date(2001, 1,...lity-v1', liquidity_policy_version='v', financial_accepted=False, execution_accepted=False, version='od08.snapshot/v1')\n\n    def _reconcile(\n        self,\n        con: Connection,\n        x: c.UniverseContext,\n        day: date | datetime,\n        cutoff: datetime,\n        p: c.EligibilityPolicy,\n        out: c.UniverseSnapshot,\n    ) -> None:\n        if (\n            self._selected_sql(con, x.definition.universe_id, day, cutoff)\n            != out.selected_revision_ids\n        ):\n            raise ValueError(\"INDEPENDENT_SQL_SELECTED_MEMBERS_MISMATCH\")\n        selected = set(out.selected_revision_ids)\n        if (\n            len(out.decisions) != len(selected)\n            or {v.revision_id for v in out.decisions} != selected\n            or out.decision_digest != ac.digest(out.decisions)\n        ):\n            raise ValueError(\"INDEPENDENT_DECISION_ACCOUNTING\")\n        allrows = self._rows(con, members)\n        stored = {\n            r.revision_id: r\n            for r in allrows\n            if r.universe_id == x.definition.universe_id\n            and (r.claim.known_from is None or r.claim.known_from <= cutoff)\n        }\n        supplied = {\n            r.revision_id: r\n            for r in x.memberships\n            if r.universe_id == x.definition.universe_id\n            and (r.claim.known_from is None or r.claim.known_from <= cutoff)\n        }\n        if pack(stored) != pack(supplied):\n            raise ValueError(\"MEMBERSHIP_LEDGER_OMITTED_OR_CHANGED\")\n        if con.scalar(\n            select(definitions.c.payload).where(definitions.c.id == ac.digest(x.definition))\n        ) != pack(x.definition) or con.scalar(\n            select(policies.c.payload).where(policies.c.id == p.policy_version)\n        ) != pack(p):\n            raise ValueError(\"DEFINITION_OR_POLICY_NOT_PINNED\")\n        persisted_coverage = {\n            v.coverage_id: v\n            for v in self._rows(con, coverages)\n            if v.universe_id == x.definition.universe_id\n            and (v.known_from is None or v.known_from <= cutoff)\n        }\n        supplied_coverage = {\n            v.coverage_id: v\n            for v in x.coverage\n            if v.universe_id == x.definition.universe_id\n            and (v.known_from is None or v.known_from <= cutoff)\n        }\n        if pack(persisted_coverage) != pack(supplied_coverage):\n            raise ValueError(\"COVERAGE_LEDGER_OMITTED_OR_CHANGED\")\n        if p.view != \"MEMBERSHIP\" and (\n            p.require_observations or p.liquidity_policy is not None or p.require_adjustment\n        ):\n            listing_scope = {d.listing_id for d in out.decisions if d.listing_id is not None}\n            scope = p.observation_scope\n            if scope is not None and (\n                scope.universe_id != x.definition.universe_id\n                or not set(scope.listings).issubset(listing_scope)\n            ):\n                raise ValueError(\"OBSERVATION_SET_SCOPE\")\n    \n            def relevant(o: c.AvailabilityObservation) -> bool:\n                if (\n                    o.listing_id not in listing_scope\n                    or o.source_id not in x.definition.source_scope\n                    or o.session_date > business_day(day)\n                    or o.known_from is not None\n                    and o.known_from > cutoff\n                ):\n                    return False\n                if scope is not None:\n                    return (\n                        o.listing_id in scope.listings\n                        and o.observation_type in scope.observation_types\n                        and o.session_date in scope.sessions\n                        and o.source_id in scope.source_scope\n                        and o.observation_id not in scope.explicitly_excluded_ids\n                    )\n                return True\n    \n            stored_obs = {o.observation_id: o for o in self._rows(con, observations) if relevant(o)}\n            supplied_obs = {o.observation_id: o for o in x.observations if relevant(o)}\n            if len(supplied_obs) != sum(relevant(o) for o in x.observations) or pack(\n                stored_obs\n            ) != pack(supplied_obs):\n>               raise ValueError(\"OBSERVATION_SET_OMITTED_DUPLICATE_OR_CHANGED\")\nE               ValueError: OBSERVATION_SET_OMITTED_DUPLICATE_OR_CHANGED\n\nsrc/omegadata/universe/repository.py:520: ValueError"
+      }
+    ],
+    "start_utc": "2026-11-20T14:29:55.535781+00:00",
+    "end_utc": "2026-11-20T14:29:59.811520+00:00",
+    "elapsed_seconds": 4.275744585999973,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "..............................FF                                         [100%]\n=================================== FAILURES ===================================\n____________ test_announced_future_event_needs_no_completed_session ____________\n\n    def test_announced_future_event_needs_no_completed_session():\n        from omegadata.universe.temporal import availability\n        c,x,m,cov,p,run=setup_case()\n        o=observation(x,observation_type='ANNOUNCEMENT',economic_effective_time=K+timedelta(days=2),interval_completed_at=None)\n>       assert availability(o,K,c.AvailabilityPolicy(),x)=='AVAILABLE'\nE       AssertionError: assert 'BLOCKED_AVAILABILITY' == 'AVAILABLE'\nE         \nE         - AVAILABLE\nE         + BLOCKED_AVAILABILITY\n\ntests/unit/test_od08_dependencies.py:290: AssertionError\n______________ test_liquidity_required_set_ignores_out_of_window _______________\n\ntmp_path = PosixPath('/work/job/tmp/test_liquidity_required_set_ig0')\n\n    def test_liquidity_required_set_ignores_out_of_window(tmp_path):\n        from omegadata.universe.repository import UniverseRepository\n        c,x,m,lp=liquid_case()\n        old=observation(x,observation_id='old',session_date=D-timedelta(days=10))\n        o=observation(x)\n        p=c.EligibilityPolicy('window','LIQUIDITY',require_observations=True,liquidity_policy=lp)\n        stored=replace(x,observations=(o,old));db=UniverseRepository('sqlite:///:memory:',disposable_root=tmp_path)\n        db.seed_context(stored,p)\n>       db.pin_context('window',replace(x,observations=(o,)),D+timedelta(days=2),K+timedelta(days=3),p)\n\ntests/unit/test_od08_dependencies.py:301: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/universe/repository.py:419: in pin_context\n    self._reconcile(con, x, day, cutoff, policy, expected)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.universe.repository.UniverseRepository object at 0x7c6ccbc8bd10>\ncon = <sqlalchemy.engine.base.Connection object at 0x7c6ccb989250>\nx = UniverseContext(source_snapshot_id='source-pin', definition=UniverseDefinition(universe_id='CONTROL_SCOPE', universe_n...ment_pin=None, version='od08.availability/v1'),), mode='CANARY_ONLY', calendar_version=None, version='od08.context/v1')\nday = datetime.date(2001, 1, 3)\ncutoff = datetime.datetime(2001, 1, 4, 0, 0, tzinfo=datetime.timezone.utc)\np = EligibilityPolicy(policy_version='window', view='LIQUIDITY', require_observations=True, liquidity_policy=LiquidityPoli...RICT', bound=None, evidence=None, semantics_reference=None), observation_contract_version='v1', observation_scope=None)\nout = UniverseSnapshot(universe_id='CONTROL_SCOPE', definition_version='od08.definition/v1', valid_at=datetime.date(2001, 1,...lity-v1', liquidity_policy_version='v', financial_accepted=False, execution_accepted=False, version='od08.snapshot/v1')\n\n    def _reconcile(\n        self,\n        con: Connection,\n        x: c.UniverseContext,\n        day: date | datetime,\n        cutoff: datetime,\n        p: c.EligibilityPolicy,\n        out: c.UniverseSnapshot,\n    ) -> None:\n        if (\n            self._selected_sql(con, x.definition.universe_id, day, cutoff)\n            != out.selected_revision_ids\n        ):\n            raise ValueError(\"INDEPENDENT_SQL_SELECTED_MEMBERS_MISMATCH\")\n        selected = set(out.selected_revision_ids)\n        if (\n            len(out.decisions) != len(selected)\n            or {v.revision_id for v in out.decisions} != selected\n            or out.decision_digest != ac.digest(out.decisions)\n        ):\n            raise ValueError(\"INDEPENDENT_DECISION_ACCOUNTING\")\n        allrows = self._rows(con, members)\n        stored = {\n            r.revision_id: r\n            for r in allrows\n            if r.universe_id == x.definition.universe_id\n            and (r.claim.known_from is None or r.claim.known_from <= cutoff)\n        }\n        supplied = {\n            r.revision_id: r\n            for r in x.memberships\n            if r.universe_id == x.definition.universe_id\n            and (r.claim.known_from is None or r.claim.known_from <= cutoff)\n        }\n        if pack(stored) != pack(supplied):\n            raise ValueError(\"MEMBERSHIP_LEDGER_OMITTED_OR_CHANGED\")\n        if con.scalar(\n            select(definitions.c.payload).where(definitions.c.id == ac.digest(x.definition))\n        ) != pack(x.definition) or con.scalar(\n            select(policies.c.payload).where(policies.c.id == p.policy_version)\n        ) != pack(p):\n            raise ValueError(\"DEFINITION_OR_POLICY_NOT_PINNED\")\n        persisted_coverage = {\n            v.coverage_id: v\n            for v in self._rows(con, coverages)\n            if v.universe_id == x.definition.universe_id\n            and (v.known_from is None or v.known_from <= cutoff)\n        }\n        supplied_coverage = {\n            v.coverage_id: v\n            for v in x.coverage\n            if v.universe_id == x.definition.universe_id\n            and (v.known_from is None or v.known_from <= cutoff)\n        }\n        if pack(persisted_coverage) != pack(supplied_coverage):\n            raise ValueError(\"COVERAGE_LEDGER_OMITTED_OR_CHANGED\")\n        if p.view != \"MEMBERSHIP\" and (\n            p.require_observations or p.liquidity_policy is not None or p.require_adjustment\n        ):\n            listing_scope = {d.listing_id for d in out.decisions if d.listing_id is not None}\n            scope = p.observation_scope\n            if scope is not None and (\n                scope.universe_id != x.definition.universe_id\n                or not set(scope.listings).issubset(listing_scope)\n            ):\n                raise ValueError(\"OBSERVATION_SET_SCOPE\")\n    \n            def relevant(o: c.AvailabilityObservation) -> bool:\n                if (\n                    o.listing_id not in listing_scope\n                    or o.source_id not in x.definition.source_scope\n                    or o.session_date > business_day(day)\n                    or o.known_from is not None\n                    and o.known_from > cutoff\n                ):\n                    return False\n                if scope is not None:\n                    return (\n                        o.listing_id in scope.listings\n                        and o.observation_type in scope.observation_types\n                        and o.session_date in scope.sessions\n                        and o.source_id in scope.source_scope\n                        and o.observation_id not in scope.explicitly_excluded_ids\n                    )\n                return True\n    \n            stored_obs = {o.observation_id: o for o in self._rows(con, observations) if relevant(o)}\n            supplied_obs = {o.observation_id: o for o in x.observations if relevant(o)}\n            if len(supplied_obs) != sum(relevant(o) for o in x.observations) or pack(\n                stored_obs\n            ) != pack(supplied_obs):\n>               raise ValueError(\"OBSERVATION_SET_OMITTED_DUPLICATE_OR_CHANGED\")\nE               ValueError: OBSERVATION_SET_OMITTED_DUPLICATE_OR_CHANGED\n\nsrc/omegadata/universe/repository.py:520: ValueError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od08_dependencies.py::test_announced_future_event_needs_no_completed_session\nFAILED tests/unit/test_od08_dependencies.py::test_liquidity_required_set_ignores_out_of_window\n2 failed, 30 passed in 2.38s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "2d7e480bc331d90233c97c38460afec5062b467842ad3cb34c7b54041782123d"
+}

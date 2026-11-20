@@ -1,0 +1,143 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-91c5176365-manifest.json",
+    "--manifest-sha256",
+    "8905bddc68ebd56051bdcd13ab4ba875a72e46de5d9676041b8a8ab9acc03389",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-91c5176365-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/stagea-91c5176365/output"
+  ],
+  "start_utc": "2026-11-20T14:24:08.459527+00:00",
+  "end_utc": "2026-11-20T14:24:17.509123+00:00",
+  "seconds": 9.049488204999989,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "stagea",
+    "exit_code": 0,
+    "counts": {
+      "passed": 18
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_required_observation_cannot_be_omitted",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_intraday_cannot_use_date_only_coverage",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_contradictory_effective_date_refused",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[ANNOUNCEMENT]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[DAILY_CLOSE]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[security]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[listing]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[exchange]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[record]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[volume]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[basis]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[missing_pin]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[correct]",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-20T14:24:11.177473+00:00",
+    "end_utc": "2026-11-20T14:24:16.608424+00:00",
+    "elapsed_seconds": 5.430940461000034,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "..................                                                       [100%]\n18 passed in 2.78s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "8905bddc68ebd56051bdcd13ab4ba875a72e46de5d9676041b8a8ab9acc03389"
+}

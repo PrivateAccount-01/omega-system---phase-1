@@ -1,0 +1,45 @@
+{
+  "gates": {
+    "OD08_TARGETED_DEPENDENCY_GATE": "PASS",
+    "OD09_UPSTREAM_ADOPTION": "PASS",
+    "OD09_COMPARABILITY": "PASS",
+    "OD09_DISCREPANCY_MATHEMATICS": "PASS",
+    "OD09_TOLERANCE_ENGINEERING": "PASS",
+    "OD09_ANOMALY_ENGINEERING": "PASS",
+    "OD09_HARD_BLOCK_ENFORCEMENT": "PASS",
+    "OD09_SOURCE_LINEAGE": "PASS",
+    "OD09_REVIEW_ENGINEERING": "PASS",
+    "OD09_CORRECTION_ENGINEERING": "PASS",
+    "OD09_REPROCESS_CONTRACT": "PASS",
+    "OD09_PERSISTENCE": "PASS",
+    "OD09_COMPATIBILITY": "PASS",
+    "OD09_ENGINEERING_OVERALL": "PASS",
+    "OD09_AUTHENTIC_RECONCILIATION": "BLOCKED_REAL_DATA",
+    "OD09_AUTHENTIC_CALIBRATION": "BLOCKED_REAL_DATA",
+    "OD09_INDEPENDENT_FINANCIAL_REVIEW": "BLOCKED_INPUT",
+    "OD09_PRODUCTION_INTEGRATION": "BLOCKED",
+    "OD10_CODE_ONLY_READINESS": "READY",
+    "OD10_EXECUTION_AUTHORIZATION": "NOT_GRANTED"
+  },
+  "engineering_scope": "Tested opt-in Linux code-only development. No financial/production acceptance.",
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_digest": "91612e64f4a44557d6cdb3c72b10ee8b1b997addf16054f3703fbe5c58a9a4c1",
+  "same_agent_engineering_review": true,
+  "independent_human_acceptance": false,
+  "new_unresolved_P0_P1_in_tested_scope": 0,
+  "financial_rows_inspected": 0,
+  "financial_rows_independently_verified": 0,
+  "windows_native": "OS_CAPABILITY_BLOCKED (historical, not rerun)",
+  "incidents": {
+    "OD05V": "PENDING_HUMAN_OWNER_REVIEW",
+    "OD05XR1": "PENDING_HUMAN_OWNER_REVIEW",
+    "OD05XR1_PAYLOAD_ACCESS": "UNKNOWN_NOT_INDEPENDENTLY_EXCLUDED"
+  },
+  "limitations": [
+    "Actual trusted human approval/completion positive path not exercised without supplied authority.",
+    "Measured coverage is not exhaustive path certification.",
+    "Two-connection/thread competition tested, not cross-process crash-kill durability.",
+    "No same-process privileged tamper-resistance claimed."
+  ],
+  "overall": "CONDITIONAL_CODE_ONLY_DELIVERY_EXTERNAL_ACCEPTANCE_BLOCKED"
+}

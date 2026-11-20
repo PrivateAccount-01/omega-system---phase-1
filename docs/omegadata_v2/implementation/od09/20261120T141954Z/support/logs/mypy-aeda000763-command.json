@@ -1,0 +1,55 @@
+{
+  "cwd": "/home/parilrupani/omega-od09-20261120T141954Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-aeda000763-manifest.json",
+    "--manifest-sha256",
+    "8ada76479909a912b312270f16d227c0eb70b051a3d6e7108087d1203bacfdb4",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-aeda000763-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/mypy-aeda000763/output"
+  ],
+  "start_utc": "2026-11-20T15:27:56.421171+00:00",
+  "end_utc": "2026-11-20T15:28:17.325157+00:00",
+  "seconds": 18.607184819999986,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-20T15:27:58.375365+00:00",
+    "end_utc": "2026-11-20T15:28:12.482005+00:00",
+    "elapsed_seconds": 11.80983252499999,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "Success: no issues found in 92 source files\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532219]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "8ada76479909a912b312270f16d227c0eb70b051a3d6e7108087d1203bacfdb4"
+}

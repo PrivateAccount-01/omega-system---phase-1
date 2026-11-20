@@ -1,0 +1,429 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/od09-431aec7fd1-manifest.json",
+    "--manifest-sha256",
+    "217d09ddb00aa56b6813b7f0b1ee9de54c91cb5495e6385bbe937c5f053846c7",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/od09-431aec7fd1-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/od09-431aec7fd1/output"
+  ],
+  "start_utc": "2026-11-20T15:02:38.991186+00:00",
+  "end_utc": "2026-11-20T15:02:44.690192+00:00",
+  "seconds": 5.698991714999998,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od09",
+    "exit_code": 1,
+    "counts": {
+      "passed": 74,
+      "failed": 1
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[C08]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[M01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[M02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[M03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[M04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[T01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[T02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[T03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[N01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[N02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[N03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[N04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[N05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[G01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[G02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[G03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[G04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[R04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[R05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[R06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[P01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[P02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[P03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[P04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_od09_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_literal_metric_oracle[ABSOLUTE-3-2-expected0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_literal_metric_oracle[SIGNED-2-3-expected1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_literal_metric_oracle[REFERENCE_RELATIVE-1-3-expected2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_literal_metric_oracle[SYMMETRIC_RELATIVE-3-1-expected3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_literal_metric_oracle[RATIO_DIFFERENCE-3-2-expected4]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_literal_metric_oracle[TICK-3-2-expected5]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_review_persistence_and_competing_children[memory]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_review_persistence_and_competing_children[file]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_review_scope_cannot_target_unrelated_listing",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_anomaly_admission_cannot_accept_arbitrary_claim",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_independent_persisted_admission[missing]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_independent_persisted_admission[wrong_scope]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_independent_persisted_admission[wrong_policy]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_independent_persisted_admission[wrong_cutoff]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_independent_persisted_admission[wrong_source]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_independent_persisted_admission[different_context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_independent_persisted_admission[omitted_result]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[SOURCE_RIGHTS_DENIED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[UNKNOWN_IDENTITY]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[WRONG_PRICE_BASIS]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[FUTURE_INFORMATION]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[UNRESOLVED_CRITICAL_ANOMALY]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[INCOMPLETE_REQUIRED_HISTORY]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[UNVERIFIED_CORRECTION]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_confidence_never_overrides_hard_requirement[REPROCESS_NOT_COMPLETED]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_candidate_accounting_no_cartesian_overwrite",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_pure_calibration_independent_literal_answers",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_sql_atomic_rollback_and_foreign_key",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_reprocess_refuses_unchanged_old_output_identity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_reprocess_exact_replacement_and_false_verified_refusal",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_context_identity_computed_once_per_reconciliation",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_cross_venue_positive_requires_explicit_policy_and_identity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_caller_claimed_source_approval_fails_closed",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_matching_budget_malformed_is_typed[True]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_matching_budget_malformed_is_typed[unbounded]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_zero_denominator_cannot_be_pass",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_upstream_universe_completion_proof_is_replayed",
+        "outcome": "failed",
+        "reason": "def test_upstream_universe_completion_proof_is_replayed():\n>       from omegadata.reconciliation.dependencies import UpstreamProof,verify_upstream\nE       ModuleNotFoundError: No module named 'omegadata.reconciliation.dependencies'\n\ntests/unit/test_od09_reconciliation.py:849: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od09_reconciliation.py::test_missing_downstream_proof_blocks_reprocess_context",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-20T15:02:40.370187+00:00",
+    "end_utc": "2026-11-20T15:02:44.099328+00:00",
+    "elapsed_seconds": 3.729144495,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 96%]\n.F.                                                                      [100%]\n=================================== FAILURES ===================================\n_____________ test_upstream_universe_completion_proof_is_replayed ______________\n\n    def test_upstream_universe_completion_proof_is_replayed():\n>       from omegadata.reconciliation.dependencies import UpstreamProof,verify_upstream\nE       ModuleNotFoundError: No module named 'omegadata.reconciliation.dependencies'\n\ntests/unit/test_od09_reconciliation.py:849: ModuleNotFoundError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od09_reconciliation.py::test_upstream_universe_completion_proof_is_replayed\n1 failed, 74 passed in 2.37s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "217d09ddb00aa56b6813b7f0b1ee9de54c91cb5495e6385bbe937c5f053846c7"
+}

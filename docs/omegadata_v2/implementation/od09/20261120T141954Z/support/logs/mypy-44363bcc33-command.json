@@ -1,0 +1,53 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-44363bcc33-manifest.json",
+    "--manifest-sha256",
+    "602e991c954a3f9ec7fd29d148b0e25e24fb5d06d92e85bf4dd02ff79f50c3a6",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-44363bcc33-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/mypy-44363bcc33/output"
+  ],
+  "start_utc": "2026-11-20T14:54:18.875800+00:00",
+  "end_utc": "2026-11-20T14:54:59.804529+00:00",
+  "seconds": 38.00391713499994,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-20T14:54:23.055185+00:00",
+    "end_utc": "2026-11-20T14:54:53.533038+00:00",
+    "elapsed_seconds": 27.553042903000005,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/reconciliation/tolerances.py:124: error: Function is missing a type annotation for one or more parameters  [no-untyped-def]\nsrc/omegadata/reconciliation/engine.py:141: error: Incompatible types in assignment (expression has type \"PinnedCalculation | None\", variable has type \"AvailabilityObservation\")  [assignment]\nsrc/omegadata/reconciliation/engine.py:145: error: \"AvailabilityObservation\" has no attribute \"policy\"  [attr-defined]\nsrc/omegadata/reconciliation/engine.py:145: error: \"AvailabilityObservation\" has no attribute \"history\"  [attr-defined]\nsrc/omegadata/reconciliation/engine.py:145: error: \"AvailabilityObservation\" has no attribute \"context\"  [attr-defined]\nsrc/omegadata/reconciliation/engine.py:176: error: Incompatible types in assignment (expression has type \"tuple[str, ...]\", variable has type \"tuple[str]\")  [assignment]\nsrc/omegadata/reconciliation/engine.py:189: error: Incompatible types in assignment (expression has type \"tuple[str, str]\", variable has type \"tuple[str]\")  [assignment]\nsrc/omegadata/reconciliation/engine.py:200: error: Incompatible types in assignment (expression has type \"tuple[str, str]\", variable has type \"tuple[str]\")  [assignment]\nsrc/omegadata/reconciliation/anomalies.py:22: error: Unsupported operand types for > (\"int\" and \"None\")  [operator]\nsrc/omegadata/reconciliation/anomalies.py:22: note: Left operand is of type \"Decimal | None\"\nFound 9 errors in 3 files (checked 91 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "602e991c954a3f9ec7fd29d148b0e25e24fb5d06d92e85bf4dd02ff79f50c3a6"
+}

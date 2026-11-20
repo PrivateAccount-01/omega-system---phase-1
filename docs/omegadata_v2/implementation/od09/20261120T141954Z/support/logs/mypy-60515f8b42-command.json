@@ -1,0 +1,53 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-60515f8b42-manifest.json",
+    "--manifest-sha256",
+    "bbdcc79bec0961e38f899b4ea74b66a1aaec4a84d340871c2aa5ee79cd6103c1",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/mypy-60515f8b42-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/mypy-60515f8b42/output"
+  ],
+  "start_utc": "2026-11-20T14:33:56.800398+00:00",
+  "end_utc": "2026-11-20T14:34:33.001105+00:00",
+  "seconds": 33.65713652199997,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-20T14:34:01.530730+00:00",
+    "end_utc": "2026-11-20T14:34:26.875878+00:00",
+    "elapsed_seconds": 22.801681611999925,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "Success: no issues found in 82 source files\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532220]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532290]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "bbdcc79bec0961e38f899b4ea74b66a1aaec4a84d340871c2aa5ee79cd6103c1"
+}

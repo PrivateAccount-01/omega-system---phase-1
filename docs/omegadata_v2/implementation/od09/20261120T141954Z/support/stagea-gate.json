@@ -1,0 +1,79 @@
+{
+  "OD08_TARGETED_DEPENDENCY_GATE": "PASS",
+  "recorded_utc": "2026-11-20T14:35:22.439765+00:00",
+  "criteria": {
+    "A01": "PASS",
+    "A02": "PASS",
+    "A03": "PASS",
+    "A04": "PASS",
+    "A05": "PASS",
+    "A06": "PASS"
+  },
+  "targeted": 32,
+  "A": {
+    "passed": 1305,
+    "skipped": 12
+  },
+  "original_od08": 92,
+  "od07": [
+    100,
+    84
+  ],
+  "source_changes": [
+    {
+      "path": "src/omegadata/universe/contracts.py",
+      "before_sha256": "1e19e5cefd78101e52ee88f4425e760e740ba987b3d815ab9b837412665144aa",
+      "after_sha256": "3cded9e0059e51eeea3bc3810c26e3cd0e3a67d26f0b2dd1ecb020592f345454",
+      "bytes": 14180
+    },
+    {
+      "path": "src/omegadata/universe/eligibility.py",
+      "before_sha256": "e50015983b7824f449895748346efffe19b7384fa13c3d02a030ba7865825ec9",
+      "after_sha256": "c53174944c8c518a8041ca06b97f0b4a86c876b89bdfef74eaf317eccb6adea8",
+      "bytes": 7686
+    },
+    {
+      "path": "src/omegadata/universe/snapshots.py",
+      "before_sha256": "9d3741ff5b869e04b50ff8efc22a0082c5ead7a0df564593fa97ece18b7f9d26",
+      "after_sha256": "e0edf81583ee76ab3f45008dcfdeacb1fe306bee5533654a8fc1dfa14c9e3220",
+      "bytes": 17666
+    },
+    {
+      "path": "src/omegadata/universe/temporal.py",
+      "before_sha256": "f262bef84d7964a24841d3b7f37cd4cfd370fe518e1288119e8f1d3c9f38d0fa",
+      "after_sha256": "47bb54959c6e565c198d414d784082af2fa746e889151a97876565a74db889c6",
+      "bytes": 13228
+    },
+    {
+      "path": "src/omegadata/universe/repository.py",
+      "before_sha256": "9ef653399a5b67a4b0bcd6f28a69ae6d70acd51b070910829b889e232597ee7d",
+      "after_sha256": "22b74592c7762dbdb7e571d3f8fc13bbcdf602f822669930d36372d08f531a93",
+      "bytes": 27069
+    },
+    {
+      "path": "src/omegadata/universe/observation_binding.py",
+      "before_sha256": null,
+      "after_sha256": "28cb36fafdd688eec450f26a2a318fcd0f4fbfb97a91e15d1f8f83263e627668",
+      "bytes": 4092
+    },
+    {
+      "path": "tests/unit/test_od08_dependencies.py",
+      "before_sha256": null,
+      "after_sha256": "5e325d6de2c5bcb952db3d42e06821268fd12cfe55cde5a2de70840780733f5c",
+      "bytes": 10721
+    }
+  ],
+  "evidence": {
+    "stagea": "d00217b94c64d490ddb5ff3059185c7bf5864ca336247004796ec6e9aac42c22",
+    "od08": "d00217b94c64d490ddb5ff3059185c7bf5864ca336247004796ec6e9aac42c22",
+    "od07": "d00217b94c64d490ddb5ff3059185c7bf5864ca336247004796ec6e9aac42c22",
+    "od07final": "d00217b94c64d490ddb5ff3059185c7bf5864ca336247004796ec6e9aac42c22",
+    "A": "bbdcc79bec0961e38f899b4ea74b66a1aaec4a84d340871c2aa5ee79cd6103c1",
+    "mypy": "bbdcc79bec0961e38f899b4ea74b66a1aaec4a84d340871c2aa5ee79cd6103c1",
+    "pip": "bbdcc79bec0961e38f899b4ea74b66a1aaec4a84d340871c2aa5ee79cd6103c1",
+    "compile": "bbdcc79bec0961e38f899b4ea74b66a1aaec4a84d340871c2aa5ee79cd6103c1"
+  },
+  "scope": "Linux data-free engineering only; original helper v1 remains limited; strict consumers require observation contract v2",
+  "financial": "BLOCKED_REAL_DATA",
+  "stage_b_authorized_by_current_invocation": true
+}

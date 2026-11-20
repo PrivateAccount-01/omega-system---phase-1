@@ -1,0 +1,65 @@
+{
+  "dependencies": [
+    {
+      "source": "Authenticated paired source observations",
+      "why_needed": "Equivalent venue/session/field, independent expected discrepancy",
+      "permission": "Existing source-rights registry and exact permitted consumer purpose; no changes made",
+      "reviewer_requirement": "Independent source/domain reviewer",
+      "expected_artifact": "Sealed paired records, definitions, literal expected results",
+      "affected_gate": "OD09_AUTHENTIC_RECONCILIATION",
+      "current_blocker": "NOT_SUPPLIED_OR_UNVERIFIED"
+    },
+    {
+      "source": "Calibration/validation samples",
+      "why_needed": "Market thresholds and real FP/FN",
+      "permission": "Existing source-rights registry and exact permitted consumer purpose; no changes made",
+      "reviewer_requirement": "Independent calibration reviewer",
+      "expected_artifact": "Versioned authorized independent train/validation samples",
+      "affected_gate": "OD09_AUTHENTIC_CALIBRATION",
+      "current_blocker": "NOT_SUPPLIED_OR_UNVERIFIED"
+    },
+    {
+      "source": "Correction/completion attestations",
+      "why_needed": "Accountable review and exact reprocess acceptance",
+      "permission": "Existing source-rights registry and exact permitted consumer purpose; no changes made",
+      "reviewer_requirement": "Authorized human in trusted authority",
+      "expected_artifact": "Exact revised inputs and independent completion record",
+      "affected_gate": "OD09_INDEPENDENT_FINANCIAL_REVIEW",
+      "current_blocker": "NOT_SUPPLIED_OR_UNVERIFIED"
+    },
+    {
+      "source": "Upstream identity/calendar/action/universe references",
+      "why_needed": "Economic identity/session/history/coverage binding",
+      "permission": "Existing source-rights registry and exact permitted consumer purpose; no changes made",
+      "reviewer_requirement": "Independent domain reviewers",
+      "expected_artifact": "Authenticated authorized pinned references",
+      "affected_gate": "OD09_AUTHENTIC_RECONCILIATION",
+      "current_blocker": "NOT_SUPPLIED_OR_UNVERIFIED"
+    },
+    {
+      "source": "Incident dispositions and isolated integration environment",
+      "why_needed": "Permit original/production integration",
+      "permission": "Existing source-rights registry and exact permitted consumer purpose; no changes made",
+      "reviewer_requirement": "Accountable incident owner and operator",
+      "expected_artifact": "OD05V/OD05XR1 decisions and approved platform",
+      "affected_gate": "OD09_PRODUCTION_INTEGRATION",
+      "current_blocker": "NOT_SUPPLIED_OR_UNVERIFIED"
+    }
+  ],
+  "financial_rows_inspected": 0,
+  "financial_rows_verified": 0,
+  "financial_mismatches": null,
+  "missing_sessions": null,
+  "financial_coverage": "NOT_ASSESSED",
+  "archived_metadata_only": {
+    "candidates": 3626,
+    "seed": 3596,
+    "cache": 30,
+    "physically_present": 3626,
+    "size_matched": 3626,
+    "hardlinked": 2760,
+    "single_link": 866,
+    "fresh_scan": false,
+    "authenticity_integrity_financial_acceptance": "NOT_ESTABLISHED"
+  }
+}

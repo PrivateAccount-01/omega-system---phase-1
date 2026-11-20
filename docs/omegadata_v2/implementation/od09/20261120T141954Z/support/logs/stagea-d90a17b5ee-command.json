@@ -1,0 +1,241 @@
+{
+  "cwd": "/home/parilrupani/omega-od09-20261120T141954Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-d90a17b5ee-manifest.json",
+    "--manifest-sha256",
+    "46c07541e9831537e337686385337737401098f8e8ba6bbb038319401446e13f",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-d90a17b5ee-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/stagea-d90a17b5ee/output"
+  ],
+  "start_utc": "2026-11-20T15:38:45.613612+00:00",
+  "end_utc": "2026-11-20T15:38:52.227378+00:00",
+  "seconds": 6.613769353999999,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "stagea",
+    "exit_code": 1,
+    "counts": {
+      "passed": 36,
+      "failed": 1
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_required_observation_cannot_be_omitted",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_intraday_cannot_use_date_only_coverage",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_contradictory_effective_date_refused",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[3]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[ANNOUNCEMENT]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[DAILY_CLOSE]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[security]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[listing]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[exchange]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[record]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[volume]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[basis]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[missing_pin]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[correct]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[duplicate]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[conflict]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[unrelated]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[partial]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[-1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_wrong_intraday_transition_identity",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value0]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value1]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value2]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_announced_future_event_needs_no_completed_session",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_required_set_ignores_out_of_window",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[missing]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[exact]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[different]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_date_only_boundary_does_not_invent_intraday_instant",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale",
+        "outcome": "failed",
+        "reason": "def test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale():\n        from omegadata.universe.eligibility import liquidity\n        c,x,m,p=liquid_case()\n        p=replace(p,lookback_sessions=2,minimum_completed_sessions=2,minimum_observation_coverage=Decimal(1),minimum_median_turnover=Decimal('1E64'))\n        # Literal bounded mathematical scalars, not financial observations:\n        # ((2*10^64 - 10) + (10 - 10^-63))/2 = 10^64 - 5*10^-64.\n        large=Decimal((0,(1,)+(9,)*63,1))\n        small=Decimal((0,(9,)*64,-63))\n        rows=(observation(x,observation_id='a',session_date=D+timedelta(days=1),turnover=large),observation(x,observation_id='b',session_date=D+timedelta(days=2),turnover=small))\n        status,detail=liquidity(m,x,rows,D+timedelta(days=2),K+timedelta(days=3),p)\n>       assert status=='EXCLUDED_BY_POLICY'\nE       AssertionError: assert 'ELIGIBLE' == 'EXCLUDED_BY_POLICY'\nE         \nE         - EXCLUDED_BY_POLICY\nE         + ELIGIBLE\n\ntests/unit/test_od08_dependencies.py:358: AssertionError"
+      }
+    ],
+    "start_utc": "2026-11-20T15:38:47.204415+00:00",
+    "end_utc": "2026-11-20T15:38:51.631660+00:00",
+    "elapsed_seconds": 4.427246004999972,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "....................................F                                    [100%]\n=================================== FAILURES ===================================\n______ test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale _______\n\n    def test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale():\n        from omegadata.universe.eligibility import liquidity\n        c,x,m,p=liquid_case()\n        p=replace(p,lookback_sessions=2,minimum_completed_sessions=2,minimum_observation_coverage=Decimal(1),minimum_median_turnover=Decimal('1E64'))\n        # Literal bounded mathematical scalars, not financial observations:\n        # ((2*10^64 - 10) + (10 - 10^-63))/2 = 10^64 - 5*10^-64.\n        large=Decimal((0,(1,)+(9,)*63,1))\n        small=Decimal((0,(9,)*64,-63))\n        rows=(observation(x,observation_id='a',session_date=D+timedelta(days=1),turnover=large),observation(x,observation_id='b',session_date=D+timedelta(days=2),turnover=small))\n        status,detail=liquidity(m,x,rows,D+timedelta(days=2),K+timedelta(days=3),p)\n>       assert status=='EXCLUDED_BY_POLICY'\nE       AssertionError: assert 'ELIGIBLE' == 'EXCLUDED_BY_POLICY'\nE         \nE         - EXCLUDED_BY_POLICY\nE         + ELIGIBLE\n\ntests/unit/test_od08_dependencies.py:358: AssertionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od08_dependencies.py::test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale\n1 failed, 36 passed in 2.57s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532220]",
+        "net": "net:[4026532225]",
+        "pid": "pid:[4026532223]",
+        "user": "user:[4026532289]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "46c07541e9831537e337686385337737401098f8e8ba6bbb038319401446e13f"
+}

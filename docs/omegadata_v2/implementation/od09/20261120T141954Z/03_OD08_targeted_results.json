@@ -1,0 +1,350 @@
+{
+  "targeted": {
+    "record": "support/logs/stagea-afbd285786-command.json",
+    "sha256": "8eb77b05714a9ffbe05de503146f629339304b76aa83dee8d64a899e39f2bf0e",
+    "launcher_argv": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-afbd285786-manifest.json",
+      "--manifest-sha256",
+      "8554628ba81641bad1240e344ded89cea55a7f269a17a8d4c199ea2988e95fba",
+      "--policy",
+      "/home/parilrupani/omega-od09-20261120T141954Z/logs/stagea-afbd285786-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od09-20261120T141954Z/stagea-afbd285786/output"
+    ],
+    "controller_cwd": "/home/parilrupani/omega-od09-20261120T141954Z",
+    "worker_cwd": "/work/repo",
+    "start_utc": "2026-11-20T17:35:28.641047+00:00",
+    "end_utc": "2026-11-20T17:35:36.777812+00:00",
+    "seconds": 8.136764599000003,
+    "exit_code": 0,
+    "source_manifest_sha256": "8554628ba81641bad1240e344ded89cea55a7f269a17a8d4c199ea2988e95fba",
+    "counts": {
+      "passed": 37
+    },
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "native_probes": "support/jobs/stagea-afbd285786/native-probes.json",
+    "native_denials": 12,
+    "local_ipc_positive": true
+  },
+  "original_od08": {
+    "record": "support/logs/od08-e6520ab520-command.json",
+    "sha256": "38481e7d18f369c7211f2bc0d55d51db9d11e3329b6afdfa33e0e7cd24bfddf3",
+    "launcher_argv": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od09-20261120T141954Z/logs/od08-e6520ab520-manifest.json",
+      "--manifest-sha256",
+      "8554628ba81641bad1240e344ded89cea55a7f269a17a8d4c199ea2988e95fba",
+      "--policy",
+      "/home/parilrupani/omega-od09-20261120T141954Z/logs/od08-e6520ab520-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od09-20261120T141954Z/od08-e6520ab520/output"
+    ],
+    "controller_cwd": "/home/parilrupani/omega-od09-20261120T141954Z",
+    "worker_cwd": "/work/repo",
+    "start_utc": "2026-11-20T17:35:19.587165+00:00",
+    "end_utc": "2026-11-20T17:35:28.446436+00:00",
+    "seconds": 8.85926695500001,
+    "exit_code": 0,
+    "source_manifest_sha256": "8554628ba81641bad1240e344ded89cea55a7f269a17a8d4c199ea2988e95fba",
+    "counts": {
+      "passed": 92
+    },
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "native_probes": "support/jobs/od08-e6520ab520/native-probes.json",
+    "native_denials": 12,
+    "local_ipc_positive": true
+  },
+  "coverage": {
+    "path": "support/jobs/stagea-afbd285786/coverage.json",
+    "sha256": "62a74d4d96cf7d9c1865a8e42b02d1493628ca8415702680a8d2ea676f16ebd9",
+    "scope": "all job measured files",
+    "num_statements": 11407,
+    "covered_lines": 2636,
+    "missing_lines": 8771,
+    "num_branches": 3910,
+    "covered_branches": 479,
+    "missing_branches": 3431,
+    "statement_percent": 23.10861751556062,
+    "branch_percent": 12.250639386189258
+  },
+  "source_changes": [
+    {
+      "path": "src/omegadata/universe/contracts.py",
+      "before_sha256": "1e19e5cefd78101e52ee88f4425e760e740ba987b3d815ab9b837412665144aa",
+      "after_sha256": "3cded9e0059e51eeea3bc3810c26e3cd0e3a67d26f0b2dd1ecb020592f345454",
+      "bytes": 14180,
+      "stage": "A"
+    },
+    {
+      "path": "src/omegadata/universe/temporal.py",
+      "before_sha256": "f262bef84d7964a24841d3b7f37cd4cfd370fe518e1288119e8f1d3c9f38d0fa",
+      "after_sha256": "e2d4d89f9b66df7f928f257ad4651ea95b255b1fce1fe7c0ce8fa3e273a1fbe9",
+      "bytes": 14257,
+      "stage": "A"
+    },
+    {
+      "path": "src/omegadata/universe/eligibility.py",
+      "before_sha256": "e50015983b7824f449895748346efffe19b7384fa13c3d02a030ba7865825ec9",
+      "after_sha256": "1fba01696efce84d0790f93c53a0ffd81da08643a6e79085960afe5cb3a089b5",
+      "bytes": 8018,
+      "stage": "A"
+    },
+    {
+      "path": "src/omegadata/universe/snapshots.py",
+      "before_sha256": "9d3741ff5b869e04b50ff8efc22a0082c5ead7a0df564593fa97ece18b7f9d26",
+      "after_sha256": "e0edf81583ee76ab3f45008dcfdeacb1fe306bee5533654a8fc1dfa14c9e3220",
+      "bytes": 17666,
+      "stage": "A"
+    },
+    {
+      "path": "src/omegadata/universe/repository.py",
+      "before_sha256": "9ef653399a5b67a4b0bcd6f28a69ae6d70acd51b070910829b889e232597ee7d",
+      "after_sha256": "22b74592c7762dbdb7e571d3f8fc13bbcdf602f822669930d36372d08f531a93",
+      "bytes": 27069,
+      "stage": "A"
+    },
+    {
+      "path": "src/omegadata/universe/observation_binding.py",
+      "before_sha256": null,
+      "after_sha256": "28cb36fafdd688eec450f26a2a318fcd0f4fbfb97a91e15d1f8f83263e627668",
+      "bytes": 4092,
+      "stage": "A"
+    },
+    {
+      "path": "tests/unit/test_od08_dependencies.py",
+      "before_sha256": null,
+      "after_sha256": "d14c5138a7eb40326a2016d3b3fa39933756b06235d12c0b31a41ef2a3bfe868",
+      "bytes": 12834,
+      "stage": "A"
+    }
+  ],
+  "input_class": "NON_MARKET_STRUCTURAL_CONTROL / PURE_MATHEMATICAL_TEST",
+  "negative_first": [
+    {
+      "tag": "stagea-4cfd31bac2",
+      "classification": "REPRODUCED_DEFECT_AND_NEW_FEATURE_ABSENT",
+      "reason": "Initial exact-binding API absent; omission, precision, availability, arithmetic defects.",
+      "start_utc": "2026-11-20T14:22:00.306759+00:00",
+      "end_utc": "2026-11-20T14:22:09.859030+00:00",
+      "exit_code": 1,
+      "counts": {
+        "failed": 16,
+        "passed": 2
+      },
+      "test_path": "tests/unit/test_od08_dependencies.py",
+      "test_sha256_before_fix": "829a24b90820af8190b0780c2c7d310305faae1f1a394c967fdc423622947f26",
+      "frozen_source": "support/negative-first/stagea-4cfd31bac2/test_od08_dependencies.py",
+      "invocation": "support/logs/stagea-4cfd31bac2-command.json",
+      "failures": [
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_required_observation_cannot_be_omitted",
+          "outcome": "failed",
+          "reason": "tmp_path = PosixPath('/work/job/tmp/test_required_observation_cann0')\n\n    def test_required_observation_cannot_be_omitted(tmp_path):\n        from omegadata.universe.repository import UniverseRepository\n        c,x,m,cov,p,run=setup_case()\n        p=replace(p,view='RESEARCH',require_observations=True)\n        x=replace(x,observations=(observation(x),))\n        db=UniverseRepository('sqlite:///:memory:',disposable_root=tmp_path)\n        db.seed_context(x,p)\n>       with pytest.raises(ValueError,match='OBSERVATION_SET'):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_dependencies.py:16: Failed"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_intraday_cannot_use_date_only_coverage",
+          "outcome": "failed",
+          "reason": "def test_intraday_cannot_use_date_only_coverage():\n        c,x,m,cov,p,run=setup_case()\n        boundary=K+timedelta(hours=2)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=boundary)\n        x=replace(x,memberships=(m,))\n        out=query(x,day=boundary,known=boundary)\n>       assert out.coverage_state not in {'COMPLETE_VERIFIED','COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE'}\nE       AssertionError: assert 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' not in {'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE', 'COMPLETE_VERIFIED'}\nE        +  where 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' = UniverseSnapshot(universe_id='CONTROL_SCOPE', definition_version='od08.definition/v1', valid_at=datetime.datetime(2001...ity-v1', liquidity_policy_version=None, financial_accepted=False, execution_accepted=False, version='od08.snapshot/v1').coverage_state\n\ntests/unit/test_od08_dependencies.py:26: AssertionError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_contradictory_effective_date_refused",
+          "outcome": "failed",
+          "reason": "def test_contradictory_effective_date_refused():\n        c,x,m,cov,p,run=setup_case()\n>       with pytest.raises(ValueError,match='EFFECTIVE'):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_dependencies.py:31: Failed"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[1]",
+          "outcome": "failed",
+          "reason": "count = 1\n\n    @pytest.mark.parametrize('count',[1,2,3])\n    def test_liquidity_nonterminating_ratio(count):\n        from omegadata.universe.eligibility import liquidity\n        c,x,m,p=liquid_case()\n        rows=tuple(observation(x,observation_id='o'+str(i),session_date=D+timedelta(days=i),volume=Decimal(i+1)) for i in range(count))\n        results=[]\n        for prec in (6,28,60):\n            with localcontext() as ctx:\n                ctx.prec=prec\n>               status,diag=liquidity(m,x,rows,D+timedelta(days=2),K+timedelta(days=3),p)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od08_dependencies.py:54: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmember = MembershipRevision(claim=MembershipClaim(membership_id='m-a', index_name='CONTROL_SCOPE', symbol='TOKEN', series='SERI...mber=1, effective_convention='SOURCE_DATE', version='od08.membership/v1', effective_at=None, removal_effective_at=None)\nx = UniverseContext(source_snapshot_id='source-pin', definition=UniverseDefinition(universe_id='CONTROL_SCOPE', universe_n...sion='v', status='COMPLETE'),)), observations=(), mode='CANARY_ONLY', calendar_version=None, version='od08.context/v1')\nobservations = (AvailabilityObservation(observation_id='o0', observation_type='CONTROL_ONLY', listing_id='listing-a', session_date=da..., volume_basis='RAW', record_identity='record', adjustment=None, adjustment_pin=None, version='od08.availability/v1'),)\nday = datetime.date(2001, 1, 3)\ncutoff = datetime.datetime(2001, 1, 4, 0, 0, tzinfo=datetime.timezone.utc)\np = LiquidityPolicy(policy_version='v', lookback_sessions=3, minimum_completed_sessions=1, minimum_average_volume=Decimal(...e=Decimal('0.3'), currency='CONTROL_UNIT', price_unit='CONTROL_ONLY', price_basis='RAW_UNADJUSTED', volume_basis='RAW')\n\n    def liquidity(\n        member: c.MembershipRevision,\n        x: c.UniverseContext,\n        observations: tuple[c.AvailabilityObservation, ...],\n        day: date,\n        cutoff: datetime,\n        p: c.LiquidityPolicy,\n    ) -> tuple[str, dict[str, Any]]:\n        needed = []\n        current = day\n        calendar = x.calendar\n        diagnostics: dict[str, Any] = {}\n        for _ in range(3660):\n            if calendar.coverage_status(member.claim.exchange, current, cutoff, x.mode) != \"COMPLETE\":\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\n                    \"reason\": \"CALENDAR_COVERAGE_UNKNOWN\",\n                    \"date\": current.isoformat(),\n                }\n            session = calendar.query(\n                member.claim.exchange, current, cutoff, x.mode, calendar_version=x.calendar_version\n            )\n            if session.status in {\"AUTHORITATIVE_SESSION\", \"VERIFIED_SPECIAL_SESSION\"}:\n                close = session.claims[0].closes_at\n                if close is None:\n                    return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"SESSION_COMPLETION_UNKNOWN\"}\n                if close <= cutoff:\n                    needed.append(current)\n            elif session.status != \"KNOWN_CLOSURE\":\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"SESSION_UNKNOWN\"}\n            if len(needed) == p.lookback_sessions:\n                break\n            current -= timedelta(days=1)\n        if len(needed) != p.lookback_sessions:\n            return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"WINDOW_BUDGET\"}\n        usable = []\n        missing = []\n        for d in needed:\n            rows = [o for o in observations if o.session_date == d]\n            if len(rows) > 1:\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"DUPLICATE_SESSION\"}\n            if not rows:\n                missing.append(d)\n                continue\n            o = rows[0]\n            if (\n                o.listing_id != member.listing_id\n                or (o.currency, o.price_unit, o.price_basis, o.volume_basis)\n                != (p.currency, p.price_unit, p.price_basis, p.volume_basis)\n                or o.volume is None\n                or o.turnover is None\n                or availability(o, cutoff, c.AvailabilityPolicy(), x) != \"AVAILABLE\"\n            ):\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\n                    \"reason\": \"OBSERVATION_IDENTITY_UNITS_AVAILABILITY_OR_MISSING_VALUE\"\n                }\n            if p.volume_basis != \"RAW\" and (\n                o.adjustment is None\n                or adjustment_eligible(\n                    o.adjustment, o.adjustment_pin, cutoff, \"VOLUME\", o.adjustment.adjustment_basis\n                ).startswith(\"BLOCKED\")\n            ):\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"VOLUME_ADJUSTMENT_CONTEXT_REQUIRED\"}\n            usable.append(o)\n        with localcontext(arithmetic_context()) as math:\n            math.prec = 80\n>           ratio = Decimal(len(usable)) / Decimal(len(needed))\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           decimal.Inexact: [<class 'decimal.Inexact'>]\n\nsrc/omegadata/universe/eligibility.py:104: Inexact"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[2]",
+          "outcome": "failed",
+          "reason": "count = 2\n\n    @pytest.mark.parametrize('count',[1,2,3])\n    def test_liquidity_nonterminating_ratio(count):\n        from omegadata.universe.eligibility import liquidity\n        c,x,m,p=liquid_case()\n        rows=tuple(observation(x,observation_id='o'+str(i),session_date=D+timedelta(days=i),volume=Decimal(i+1)) for i in range(count))\n        results=[]\n        for prec in (6,28,60):\n            with localcontext() as ctx:\n                ctx.prec=prec\n>               status,diag=liquidity(m,x,rows,D+timedelta(days=2),K+timedelta(days=3),p)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od08_dependencies.py:54: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmember = MembershipRevision(claim=MembershipClaim(membership_id='m-a', index_name='CONTROL_SCOPE', symbol='TOKEN', series='SERI...mber=1, effective_convention='SOURCE_DATE', version='od08.membership/v1', effective_at=None, removal_effective_at=None)\nx = UniverseContext(source_snapshot_id='source-pin', definition=UniverseDefinition(universe_id='CONTROL_SCOPE', universe_n...sion='v', status='COMPLETE'),)), observations=(), mode='CANARY_ONLY', calendar_version=None, version='od08.context/v1')\nobservations = (AvailabilityObservation(observation_id='o0', observation_type='CONTROL_ONLY', listing_id='listing-a', session_date=da...', volume_basis='RAW', record_identity='record', adjustment=None, adjustment_pin=None, version='od08.availability/v1'))\nday = datetime.date(2001, 1, 3)\ncutoff = datetime.datetime(2001, 1, 4, 0, 0, tzinfo=datetime.timezone.utc)\np = LiquidityPolicy(policy_version='v', lookback_sessions=3, minimum_completed_sessions=1, minimum_average_volume=Decimal(...e=Decimal('0.3'), currency='CONTROL_UNIT', price_unit='CONTROL_ONLY', price_basis='RAW_UNADJUSTED', volume_basis='RAW')\n\n    def liquidity(\n        member: c.MembershipRevision,\n        x: c.UniverseContext,\n        observations: tuple[c.AvailabilityObservation, ...],\n        day: date,\n        cutoff: datetime,\n        p: c.LiquidityPolicy,\n    ) -> tuple[str, dict[str, Any]]:\n        needed = []\n        current = day\n        calendar = x.calendar\n        diagnostics: dict[str, Any] = {}\n        for _ in range(3660):\n            if calendar.coverage_status(member.claim.exchange, current, cutoff, x.mode) != \"COMPLETE\":\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\n                    \"reason\": \"CALENDAR_COVERAGE_UNKNOWN\",\n                    \"date\": current.isoformat(),\n                }\n            session = calendar.query(\n                member.claim.exchange, current, cutoff, x.mode, calendar_version=x.calendar_version\n            )\n            if session.status in {\"AUTHORITATIVE_SESSION\", \"VERIFIED_SPECIAL_SESSION\"}:\n                close = session.claims[0].closes_at\n                if close is None:\n                    return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"SESSION_COMPLETION_UNKNOWN\"}\n                if close <= cutoff:\n                    needed.append(current)\n            elif session.status != \"KNOWN_CLOSURE\":\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"SESSION_UNKNOWN\"}\n            if len(needed) == p.lookback_sessions:\n                break\n            current -= timedelta(days=1)\n        if len(needed) != p.lookback_sessions:\n            return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"WINDOW_BUDGET\"}\n        usable = []\n        missing = []\n        for d in needed:\n            rows = [o for o in observations if o.session_date == d]\n            if len(rows) > 1:\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"DUPLICATE_SESSION\"}\n            if not rows:\n                missing.append(d)\n                continue\n            o = rows[0]\n            if (\n                o.listing_id != member.listing_id\n                or (o.currency, o.price_unit, o.price_basis, o.volume_basis)\n                != (p.currency, p.price_unit, p.price_basis, p.volume_basis)\n                or o.volume is None\n                or o.turnover is None\n                or availability(o, cutoff, c.AvailabilityPolicy(), x) != \"AVAILABLE\"\n            ):\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\n                    \"reason\": \"OBSERVATION_IDENTITY_UNITS_AVAILABILITY_OR_MISSING_VALUE\"\n                }\n            if p.volume_basis != \"RAW\" and (\n                o.adjustment is None\n                or adjustment_eligible(\n                    o.adjustment, o.adjustment_pin, cutoff, \"VOLUME\", o.adjustment.adjustment_basis\n                ).startswith(\"BLOCKED\")\n            ):\n                return \"BLOCKED_LIQUIDITY_COVERAGE\", {\"reason\": \"VOLUME_ADJUSTMENT_CONTEXT_REQUIRED\"}\n            usable.append(o)\n        with localcontext(arithmetic_context()) as math:\n            math.prec = 80\n>           ratio = Decimal(len(usable)) / Decimal(len(needed))\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           decimal.Inexact: [<class 'decimal.Inexact'>]\n\nsrc/omegadata/universe/eligibility.py:104: Inexact"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[DAILY_CLOSE]",
+          "outcome": "failed",
+          "reason": "kind = 'DAILY_CLOSE'\n\n    @pytest.mark.parametrize('kind',['ANNOUNCEMENT','DAILY_CLOSE'])\n    def test_future_economic_time_is_type_specific(kind):\n        from omegadata.universe.temporal import availability\n        c,x,m,cov,p,run=setup_case()\n        o=observation(x,observation_type=kind,economic_effective_time=K+timedelta(days=1))\n>       assert availability(o,K,c.AvailabilityPolicy(),x)==('AVAILABLE' if kind=='ANNOUNCEMENT' else 'BLOCKED_AVAILABILITY')\nE       AssertionError: assert 'AVAILABLE' == 'BLOCKED_AVAILABILITY'\nE         \nE         - BLOCKED_AVAILABILITY\nE         + AVAILABLE\n\ntests/unit/test_od08_dependencies.py:65: AssertionError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[security]",
+          "outcome": "failed",
+          "reason": "field = 'security'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[listing]",
+          "outcome": "failed",
+          "reason": "field = 'listing'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[exchange]",
+          "outcome": "failed",
+          "reason": "field = 'exchange'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[session]",
+          "outcome": "failed",
+          "reason": "field = 'session'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[record]",
+          "outcome": "failed",
+          "reason": "field = 'record'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[volume]",
+          "outcome": "failed",
+          "reason": "field = 'volume'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[basis]",
+          "outcome": "failed",
+          "reason": "field = 'basis'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[future]",
+          "outcome": "failed",
+          "reason": "field = 'future'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[missing_pin]",
+          "outcome": "failed",
+          "reason": "field = 'missing_pin'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[correct]",
+          "outcome": "failed",
+          "reason": "field = 'correct'\n\n    @pytest.mark.parametrize('field',['security','listing','exchange','session','record','volume','basis','future','missing_pin','correct'])\n    def test_strict_adjustment_binding(field):\n        from test_od07_final import setup_bound\n        from omegadata.adjustments import bound_contracts as bc\n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.adjustments.contracts import digest\n>       from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding\nE       ModuleNotFoundError: No module named 'omegadata.universe.observation_binding'\n\ntests/unit/test_od08_dependencies.py:74: ModuleNotFoundError"
+        }
+      ]
+    },
+    {
+      "tag": "stagea-9f4c60c5da",
+      "classification": "REPRODUCED_DEFECT",
+      "reason": "Precise transition positive control.",
+      "start_utc": "2026-11-20T14:25:31.561753+00:00",
+      "end_utc": "2026-11-20T14:25:36.975121+00:00",
+      "exit_code": 1,
+      "counts": {
+        "passed": 27,
+        "failed": 3
+      },
+      "test_path": "tests/unit/test_od08_dependencies.py",
+      "test_sha256_before_fix": "18f8fd019c85fa6ed5e4da9c7e489c7fe889104ae7f3b76e848e32aa89e6988a",
+      "frozen_source": "support/negative-first/stagea-9f4c60c5da/test_od08_dependencies.py",
+      "invocation": "support/logs/stagea-9f4c60c5da-command.json",
+      "failures": [
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[-1]",
+          "outcome": "failed",
+          "reason": "offset = -1\n\n    @pytest.mark.parametrize('offset',[-1,0,1])\n    def test_exact_intraday_coverage(offset):\n        c,x,m,cov,p,run=setup_case()\n        boundary=K+timedelta(hours=2)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=boundary)\n        transition=c.CoverageTransition(m.revision_id,'security-a','ADD',D,effective_at=boundary)\n        cov=replace(cov,expected_member_identities=(),transitions=(transition,),temporal_precision='TIMESTAMP')\n        x=replace(x,memberships=(m,),coverage=(cov,))\n        out=query(x,day=boundary+timedelta(seconds=offset),known=boundary)\n>       assert out.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE'\nE       AssertionError: assert 'PARTIAL' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE         - COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE\nE         + PARTIAL\n\ntests/unit/test_od08_dependencies.py:120: AssertionError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[0]",
+          "outcome": "failed",
+          "reason": "offset = 0\n\n    @pytest.mark.parametrize('offset',[-1,0,1])\n    def test_exact_intraday_coverage(offset):\n        c,x,m,cov,p,run=setup_case()\n        boundary=K+timedelta(hours=2)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=boundary)\n        transition=c.CoverageTransition(m.revision_id,'security-a','ADD',D,effective_at=boundary)\n        cov=replace(cov,expected_member_identities=(),transitions=(transition,),temporal_precision='TIMESTAMP')\n        x=replace(x,memberships=(m,),coverage=(cov,))\n        out=query(x,day=boundary+timedelta(seconds=offset),known=boundary)\n>       assert out.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE'\nE       AssertionError: assert 'PARTIAL' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE         - COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE\nE         + PARTIAL\n\ntests/unit/test_od08_dependencies.py:120: AssertionError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[1]",
+          "outcome": "failed",
+          "reason": "offset = 1\n\n    @pytest.mark.parametrize('offset',[-1,0,1])\n    def test_exact_intraday_coverage(offset):\n        c,x,m,cov,p,run=setup_case()\n        boundary=K+timedelta(hours=2)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=boundary)\n        transition=c.CoverageTransition(m.revision_id,'security-a','ADD',D,effective_at=boundary)\n        cov=replace(cov,expected_member_identities=(),transitions=(transition,),temporal_precision='TIMESTAMP')\n        x=replace(x,memberships=(m,),coverage=(cov,))\n        out=query(x,day=boundary+timedelta(seconds=offset),known=boundary)\n>       assert out.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE'\nE       AssertionError: assert 'PARTIAL' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE         - COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE\nE         + PARTIAL\n\ntests/unit/test_od08_dependencies.py:120: AssertionError"
+        }
+      ]
+    },
+    {
+      "tag": "stagea-d73d2b196c",
+      "classification": "REPRODUCED_DEFECT",
+      "reason": "Future announcement completion and out-of-window selection.",
+      "start_utc": "2026-11-20T14:29:53.271595+00:00",
+      "end_utc": "2026-11-20T14:30:00.727430+00:00",
+      "exit_code": 1,
+      "counts": {
+        "passed": 30,
+        "failed": 2
+      },
+      "test_path": "tests/unit/test_od08_dependencies.py",
+      "test_sha256_before_fix": "f8e53bfe149a694cd6a2975baae5fd4d7f32cdfd72cef5bf1956592016111d88",
+      "frozen_source": "support/negative-first/stagea-d73d2b196c/test_od08_dependencies.py",
+      "invocation": "support/logs/stagea-d73d2b196c-command.json",
+      "failures": [
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_announced_future_event_needs_no_completed_session",
+          "outcome": "failed",
+          "reason": "def test_announced_future_event_needs_no_completed_session():\n        from omegadata.universe.temporal import availability\n        c,x,m,cov,p,run=setup_case()\n        o=observation(x,observation_type='ANNOUNCEMENT',economic_effective_time=K+timedelta(days=2),interval_completed_at=None)\n>       assert availability(o,K,c.AvailabilityPolicy(),x)=='AVAILABLE'\nE       AssertionError: assert 'BLOCKED_AVAILABILITY' == 'AVAILABLE'\nE         \nE         - AVAILABLE\nE         + BLOCKED_AVAILABILITY\n\ntests/unit/test_od08_dependencies.py:290: AssertionError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_required_set_ignores_out_of_window",
+          "outcome": "failed",
+          "reason": "tmp_path = PosixPath('/work/job/tmp/test_liquidity_required_set_ig0')\n\n    def test_liquidity_required_set_ignores_out_of_window(tmp_path):\n        from omegadata.universe.repository import UniverseRepository\n        c,x,m,lp=liquid_case()\n        old=observation(x,observation_id='old',session_date=D-timedelta(days=10))\n        o=observation(x)\n        p=c.EligibilityPolicy('window','LIQUIDITY',require_observations=True,liquidity_policy=lp)\n        stored=replace(x,observations=(o,old));db=UniverseRepository('sqlite:///:memory:',disposable_root=tmp_path)\n        db.seed_context(stored,p)\n>       db.pin_context('window',replace(x,observations=(o,)),D+timedelta(days=2),K+timedelta(days=3),p)\n\ntests/unit/test_od08_dependencies.py:301: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/universe/repository.py:419: in pin_context\n    self._reconcile(con, x, day, cutoff, policy, expected)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.universe.repository.UniverseRepository object at 0x7c6ccbc8bd10>\ncon = <sqlalchemy.engine.base.Connection object at 0x7c6ccb989250>\nx = UniverseContext(source_snapshot_id='source-pin', definition=UniverseDefinition(universe_id='CONTROL_SCOPE', universe_n...ment_pin=None, version='od08.availability/v1'),), mode='CANARY_ONLY', calendar_version=None, version='od08.context/v1')\nday = datetime.date(2001, 1, 3)\ncutoff = datetime.datetime(2001, 1, 4, 0, 0, tzinfo=datetime.timezone.utc)\np = EligibilityPolicy(policy_version='window', view='LIQUIDITY', require_observations=True, liquidity_policy=LiquidityPoli...RICT', bound=None, evidence=None, semantics_reference=None), observation_contract_version='v1', observation_scope=None)\nout = UniverseSnapshot(universe_id='CONTROL_SCOPE', definition_version='od08.definition/v1', valid_at=datetime.date(2001, 1,...lity-v1', liquidity_policy_version='v', financial_accepted=False, execution_accepted=False, version='od08.snapshot/v1')\n\n    def _reconcile(\n        self,\n        con: Connection,\n        x: c.UniverseContext,\n        day: date | datetime,\n        cutoff: datetime,\n        p: c.EligibilityPolicy,\n        out: c.UniverseSnapshot,\n    ) -> None:\n        if (\n            self._selected_sql(con, x.definition.universe_id, day, cutoff)\n            != out.selected_revision_ids\n        ):\n            raise ValueError(\"INDEPENDENT_SQL_SELECTED_MEMBERS_MISMATCH\")\n        selected = set(out.selected_revision_ids)\n        if (\n            len(out.decisions) != len(selected)\n            or {v.revision_id for v in out.decisions} != selected\n            or out.decision_digest != ac.digest(out.decisions)\n        ):\n            raise ValueError(\"INDEPENDENT_DECISION_ACCOUNTING\")\n        allrows = self._rows(con, members)\n        stored = {\n            r.revision_id: r\n            for r in allrows\n            if r.universe_id == x.definition.universe_id\n            and (r.claim.known_from is None or r.claim.known_from <= cutoff)\n        }\n        supplied = {\n            r.revision_id: r\n            for r in x.memberships\n            if r.universe_id == x.definition.universe_id\n            and (r.claim.known_from is None or r.claim.known_from <= cutoff)\n        }\n        if pack(stored) != pack(supplied):\n            raise ValueError(\"MEMBERSHIP_LEDGER_OMITTED_OR_CHANGED\")\n        if con.scalar(\n            select(definitions.c.payload).where(definitions.c.id == ac.digest(x.definition))\n        ) != pack(x.definition) or con.scalar(\n            select(policies.c.payload).where(policies.c.id == p.policy_version)\n        ) != pack(p):\n            raise ValueError(\"DEFINITION_OR_POLICY_NOT_PINNED\")\n        persisted_coverage = {\n            v.coverage_id: v\n            for v in self._rows(con, coverages)\n            if v.universe_id == x.definition.universe_id\n            and (v.known_from is None or v.known_from <= cutoff)\n        }\n        supplied_coverage = {\n            v.coverage_id: v\n            for v in x.coverage\n            if v.universe_id == x.definition.universe_id\n            and (v.known_from is None or v.known_from <= cutoff)\n        }\n        if pack(persisted_coverage) != pack(supplied_coverage):\n            raise ValueError(\"COVERAGE_LEDGER_OMITTED_OR_CHANGED\")\n        if p.view != \"MEMBERSHIP\" and (\n            p.require_observations or p.liquidity_policy is not None or p.require_adjustment\n        ):\n            listing_scope = {d.listing_id for d in out.decisions if d.listing_id is not None}\n            scope = p.observation_scope\n            if scope is not None and (\n                scope.universe_id != x.definition.universe_id\n                or not set(scope.listings).issubset(listing_scope)\n            ):\n                raise ValueError(\"OBSERVATION_SET_SCOPE\")\n    \n            def relevant(o: c.AvailabilityObservation) -> bool:\n                if (\n                    o.listing_id not in listing_scope\n                    or o.source_id not in x.definition.source_scope\n                    or o.session_date > business_day(day)\n                    or o.known_from is not None\n                    and o.known_from > cutoff\n                ):\n                    return False\n                if scope is not None:\n                    return (\n                        o.listing_id in scope.listings\n                        and o.observation_type in scope.observation_types\n                        and o.session_date in scope.sessions\n                        and o.source_id in scope.source_scope\n                        and o.observation_id not in scope.explicitly_excluded_ids\n                    )\n                return True\n    \n            stored_obs = {o.observation_id: o for o in self._rows(con, observations) if relevant(o)}\n            supplied_obs = {o.observation_id: o for o in x.observations if relevant(o)}\n            if len(supplied_obs) != sum(relevant(o) for o in x.observations) or pack(\n                stored_obs\n            ) != pack(supplied_obs):\n>               raise ValueError(\"OBSERVATION_SET_OMITTED_DUPLICATE_OR_CHANGED\")\nE               ValueError: OBSERVATION_SET_OMITTED_DUPLICATE_OR_CHANGED\n\nsrc/omegadata/universe/repository.py:520: ValueError"
+        }
+      ]
+    },
+    {
+      "tag": "stagea-f2f6cd88f5",
+      "classification": "REPRODUCED_DEFECT",
+      "reason": "Missing/wrong snapshot instant and date-only intraday boundary.",
+      "start_utc": "2026-11-20T15:32:15.152243+00:00",
+      "end_utc": "2026-11-20T15:32:20.785463+00:00",
+      "exit_code": 1,
+      "counts": {
+        "passed": 33,
+        "failed": 3
+      },
+      "test_path": "tests/unit/test_od08_dependencies.py",
+      "test_sha256_before_fix": "0fdab4f085c80e82f90eba0531a29474afd714a383572f8aa737cd7f6e30dbd7",
+      "frozen_source": "support/negative-first/stagea-f2f6cd88f5/test_od08_dependencies.py",
+      "invocation": "support/logs/stagea-f2f6cd88f5-command.json",
+      "failures": [
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[missing]",
+          "outcome": "failed",
+          "reason": "reference_time = 'missing'\n\n    @pytest.mark.parametrize('reference_time',['missing','exact','different'])\n    def test_timestamp_snapshot_requires_exact_reference_instant(reference_time):\n        c,x,m,cov,p,run=setup_case();point=K+timedelta(hours=2)\n        stamp=None if reference_time=='missing' else point if reference_time=='exact' else point+timedelta(seconds=1)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=K)\n        cov=replace(cov,granularity='SNAPSHOT',valid_to=D+timedelta(days=1),temporal_precision='TIMESTAMP',snapshot_at=stamp)\n        result=query(replace(x,memberships=(m,),coverage=(cov,)),day=point,known=point)\n>       assert (result.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE')==(reference_time=='exact')\nE       AssertionError: assert ('COMPLETE_FOR..._MARKET_SCOPE' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE           COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE) == ('missing' == 'exact'\nE         \nE         - exact\nE         + missing)\n\ntests/unit/test_od08_dependencies.py:321: AssertionError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[different]",
+          "outcome": "failed",
+          "reason": "reference_time = 'different'\n\n    @pytest.mark.parametrize('reference_time',['missing','exact','different'])\n    def test_timestamp_snapshot_requires_exact_reference_instant(reference_time):\n        c,x,m,cov,p,run=setup_case();point=K+timedelta(hours=2)\n        stamp=None if reference_time=='missing' else point if reference_time=='exact' else point+timedelta(seconds=1)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=K)\n        cov=replace(cov,granularity='SNAPSHOT',valid_to=D+timedelta(days=1),temporal_precision='TIMESTAMP',snapshot_at=stamp)\n        result=query(replace(x,memberships=(m,),coverage=(cov,)),day=point,known=point)\n>       assert (result.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE')==(reference_time=='exact')\nE       AssertionError: assert ('COMPLETE_FOR..._MARKET_SCOPE' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE           COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE) == ('different' == 'exact'\nE         \nE         - exact\nE         + different)\n\ntests/unit/test_od08_dependencies.py:321: AssertionError"
+        },
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_date_only_boundary_does_not_invent_intraday_instant",
+          "outcome": "failed",
+          "reason": "def test_date_only_boundary_does_not_invent_intraday_instant():\n        c,x,m,cov,p,run=setup_case()\n        result=query(x,day=K+timedelta(hours=2),known=K+timedelta(hours=2))\n>       assert result.coverage_state not in {'COMPLETE_VERIFIED','COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE'}\nE       AssertionError: assert 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' not in {'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE', 'COMPLETE_VERIFIED'}\nE        +  where 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' = UniverseSnapshot(universe_id='CONTROL_SCOPE', definition_version='od08.definition/v1', valid_at=datetime.datetime(2001...ity-v1', liquidity_policy_version=None, financial_accepted=False, execution_accepted=False, version='od08.snapshot/v1').coverage_state\n\ntests/unit/test_od08_dependencies.py:327: AssertionError"
+        }
+      ]
+    },
+    {
+      "tag": "stagea-d90a17b5ee",
+      "classification": "REPRODUCED_DEFECT",
+      "reason": "Median display rounding crossed exact threshold.",
+      "start_utc": "2026-11-20T15:38:45.613612+00:00",
+      "end_utc": "2026-11-20T15:38:52.227378+00:00",
+      "exit_code": 1,
+      "counts": {
+        "passed": 36,
+        "failed": 1
+      },
+      "test_path": "tests/unit/test_od08_dependencies.py",
+      "test_sha256_before_fix": "86f5c74de20c905d18542a5d1daf25d77de3c5db3618610dab477687722848a2",
+      "frozen_source": "support/negative-first/stagea-d90a17b5ee/test_od08_dependencies.py",
+      "invocation": "support/logs/stagea-d90a17b5ee-command.json",
+      "failures": [
+        {
+          "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale",
+          "outcome": "failed",
+          "reason": "def test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale():\n        from omegadata.universe.eligibility import liquidity\n        c,x,m,p=liquid_case()\n        p=replace(p,lookback_sessions=2,minimum_completed_sessions=2,minimum_observation_coverage=Decimal(1),minimum_median_turnover=Decimal('1E64'))\n        # Literal bounded mathematical scalars, not financial observations:\n        # ((2*10^64 - 10) + (10 - 10^-63))/2 = 10^64 - 5*10^-64.\n        large=Decimal((0,(1,)+(9,)*63,1))\n        small=Decimal((0,(9,)*64,-63))\n        rows=(observation(x,observation_id='a',session_date=D+timedelta(days=1),turnover=large),observation(x,observation_id='b',session_date=D+timedelta(days=2),turnover=small))\n        status,detail=liquidity(m,x,rows,D+timedelta(days=2),K+timedelta(days=3),p)\n>       assert status=='EXCLUDED_BY_POLICY'\nE       AssertionError: assert 'ELIGIBLE' == 'EXCLUDED_BY_POLICY'\nE         \nE         - EXCLUDED_BY_POLICY\nE         + ELIGIBLE\n\ntests/unit/test_od08_dependencies.py:358: AssertionError"
+        }
+      ]
+    }
+  ]
+}

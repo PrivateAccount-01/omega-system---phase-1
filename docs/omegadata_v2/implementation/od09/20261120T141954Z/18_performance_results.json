@@ -1,0 +1,198 @@
+{
+  "scope": "Anonymous bookkeeping only, no market-scale claim",
+  "baseline": {
+    "job": "od09perf",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "scale": "NON_MARKET_STRUCTURAL_CONTROL only",
+    "measurements": [
+      {
+        "groups": 10,
+        "observations": 20,
+        "matching_seconds": 0.00011729400000604073,
+        "reconciliation_seconds": 0.2593897070000253,
+        "peak_traced_bytes": 349796,
+        "serialized_bytes": 10661,
+        "digest": "d8762d6b3d2b06bdfef9500b76a69011846ba5056000c8de4877d267b3e72fd3"
+      },
+      {
+        "groups": 40,
+        "observations": 80,
+        "matching_seconds": 0.0001317370000037954,
+        "reconciliation_seconds": 1.980413709000004,
+        "peak_traced_bytes": 1509481,
+        "serialized_bytes": 42701,
+        "digest": "b029430c7a621afdc9105b34c481f5e7293b1e14911e5fbc6bf40215033225d8"
+      },
+      {
+        "groups": 100,
+        "observations": 200,
+        "matching_seconds": 0.00033189700002367317,
+        "reconciliation_seconds": 11.161951968999972,
+        "peak_traced_bytes": 2827090,
+        "serialized_bytes": 106781,
+        "digest": "c127a105758de1384543796e991d47cfac4efee0c37a6648bdf93f4f2652a3b8"
+      }
+    ],
+    "context_insert_and_admit_30_seconds": 1.3561932420000176,
+    "restart_and_replay_seconds": 0.00986810499995272,
+    "query_plan": [
+      [
+        2,
+        0,
+        0,
+        "SEARCH od09_input_index USING COVERING INDEX od09_input_digest (observation_digest=?)"
+      ]
+    ],
+    "stdout_stderr": "No authentic financial data or exchange-scale benchmark",
+    "legacy_or_operational_db_access": false
+  },
+  "after_optimization": {
+    "job": "od09perf",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532289]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "scale": "NON_MARKET_STRUCTURAL_CONTROL only",
+    "measurements": [
+      {
+        "groups": 10,
+        "observations": 20,
+        "matching_seconds": 4.562800006624457e-05,
+        "reconciliation_seconds": 0.01993903599998248,
+        "peak_traced_bytes": 248681,
+        "serialized_bytes": 10661,
+        "digest": "d8762d6b3d2b06bdfef9500b76a69011846ba5056000c8de4877d267b3e72fd3"
+      },
+      {
+        "groups": 40,
+        "observations": 80,
+        "matching_seconds": 0.00016274999995857797,
+        "reconciliation_seconds": 0.06665553300001648,
+        "peak_traced_bytes": 897324,
+        "serialized_bytes": 42701,
+        "digest": "b029430c7a621afdc9105b34c481f5e7293b1e14911e5fbc6bf40215033225d8"
+      },
+      {
+        "groups": 100,
+        "observations": 200,
+        "matching_seconds": 0.0003210549999721479,
+        "reconciliation_seconds": 0.14457704000005833,
+        "peak_traced_bytes": 2192109,
+        "serialized_bytes": 106781,
+        "digest": "c127a105758de1384543796e991d47cfac4efee0c37a6648bdf93f4f2652a3b8"
+      }
+    ],
+    "context_insert_and_admit_30_seconds": 0.8064200100000107,
+    "restart_and_replay_seconds": 0.009322908999934043,
+    "query_plan": [
+      [
+        2,
+        0,
+        0,
+        "SEARCH od09_input_index USING COVERING INDEX od09_input_digest (observation_digest=?)"
+      ]
+    ],
+    "stdout_stderr": "No authentic financial data or exchange-scale benchmark",
+    "legacy_or_operational_db_access": false
+  },
+  "final": {
+    "job": "od09perf",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532220]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "scale": "NON_MARKET_STRUCTURAL_CONTROL only",
+    "measurements": [
+      {
+        "groups": 10,
+        "observations": 20,
+        "matching_seconds": 4.198200002747399e-05,
+        "reconciliation_seconds": 0.01820980400003691,
+        "peak_traced_bytes": 249349,
+        "serialized_bytes": 10661,
+        "digest": "d8762d6b3d2b06bdfef9500b76a69011846ba5056000c8de4877d267b3e72fd3"
+      },
+      {
+        "groups": 40,
+        "observations": 80,
+        "matching_seconds": 0.00021844000002602115,
+        "reconciliation_seconds": 0.06593360200002962,
+        "peak_traced_bytes": 891524,
+        "serialized_bytes": 42701,
+        "digest": "b029430c7a621afdc9105b34c481f5e7293b1e14911e5fbc6bf40215033225d8"
+      },
+      {
+        "groups": 100,
+        "observations": 200,
+        "matching_seconds": 0.0003232630000411518,
+        "reconciliation_seconds": 0.1683484430000135,
+        "peak_traced_bytes": 2191809,
+        "serialized_bytes": 106781,
+        "digest": "c127a105758de1384543796e991d47cfac4efee0c37a6648bdf93f4f2652a3b8"
+      }
+    ],
+    "context_insert_and_admit_30_seconds": 0.5615497179999807,
+    "restart_and_replay_seconds": 0.006906382000011035,
+    "query_plan": [
+      [
+        2,
+        0,
+        0,
+        "SEARCH od09_input_index USING COVERING INDEX od09_input_digest (observation_digest=?)"
+      ]
+    ],
+    "stdout_stderr": "No authentic financial data or exchange-scale benchmark",
+    "legacy_or_operational_db_access": false
+  },
+  "digests_identical": true,
+  "correction": "Compute immutable context/policy/authority digests once, not per pair. Indexed bounded matching.",
+  "unmeasured": "Authenticated market throughput, real calibration quality and sustained production concurrency",
+  "original_scan_budget_seconds": 30,
+  "original_archive_scans": 0,
+  "WSL_original_status": "Historical LINUX_ORIGINAL_MOUNT_FULL_SCAN_PERFORMANCE_BLOCKED retained."
+}

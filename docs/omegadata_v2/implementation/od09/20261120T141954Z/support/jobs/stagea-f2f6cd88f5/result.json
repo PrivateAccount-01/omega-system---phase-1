@@ -1,0 +1,210 @@
+{
+  "job": "stagea",
+  "exit_code": 1,
+  "counts": {
+    "passed": 33,
+    "failed": 3
+  },
+  "reports": [
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_required_observation_cannot_be_omitted",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_intraday_cannot_use_date_only_coverage",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_contradictory_effective_date_refused",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[1]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[2]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_nonterminating_ratio[3]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[ANNOUNCEMENT]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_future_economic_time_is_type_specific[DAILY_CLOSE]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[security]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[listing]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[exchange]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[session]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[record]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[volume]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[basis]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[future]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[missing_pin]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_strict_adjustment_binding[correct]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[duplicate]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[conflict]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[unrelated]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[future]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_observation_set_scope[partial]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[-1]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[0]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_exact_intraday_coverage[1]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_wrong_intraday_transition_identity",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value0]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value1]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_malformed_policy_typed[value2]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_announced_future_event_needs_no_completed_session",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_liquidity_required_set_ignores_out_of_window",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[missing]",
+      "outcome": "failed",
+      "reason": "reference_time = 'missing'\n\n    @pytest.mark.parametrize('reference_time',['missing','exact','different'])\n    def test_timestamp_snapshot_requires_exact_reference_instant(reference_time):\n        c,x,m,cov,p,run=setup_case();point=K+timedelta(hours=2)\n        stamp=None if reference_time=='missing' else point if reference_time=='exact' else point+timedelta(seconds=1)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=K)\n        cov=replace(cov,granularity='SNAPSHOT',valid_to=D+timedelta(days=1),temporal_precision='TIMESTAMP',snapshot_at=stamp)\n        result=query(replace(x,memberships=(m,),coverage=(cov,)),day=point,known=point)\n>       assert (result.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE')==(reference_time=='exact')\nE       AssertionError: assert ('COMPLETE_FOR..._MARKET_SCOPE' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE           COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE) == ('missing' == 'exact'\nE         \nE         - exact\nE         + missing)\n\ntests/unit/test_od08_dependencies.py:321: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[exact]",
+      "outcome": "passed",
+      "reason": null
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[different]",
+      "outcome": "failed",
+      "reason": "reference_time = 'different'\n\n    @pytest.mark.parametrize('reference_time',['missing','exact','different'])\n    def test_timestamp_snapshot_requires_exact_reference_instant(reference_time):\n        c,x,m,cov,p,run=setup_case();point=K+timedelta(hours=2)\n        stamp=None if reference_time=='missing' else point if reference_time=='exact' else point+timedelta(seconds=1)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=K)\n        cov=replace(cov,granularity='SNAPSHOT',valid_to=D+timedelta(days=1),temporal_precision='TIMESTAMP',snapshot_at=stamp)\n        result=query(replace(x,memberships=(m,),coverage=(cov,)),day=point,known=point)\n>       assert (result.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE')==(reference_time=='exact')\nE       AssertionError: assert ('COMPLETE_FOR..._MARKET_SCOPE' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE           COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE) == ('different' == 'exact'\nE         \nE         - exact\nE         + different)\n\ntests/unit/test_od08_dependencies.py:321: AssertionError"
+    },
+    {
+      "nodeid": "tests/unit/test_od08_dependencies.py::test_date_only_boundary_does_not_invent_intraday_instant",
+      "outcome": "failed",
+      "reason": "def test_date_only_boundary_does_not_invent_intraday_instant():\n        c,x,m,cov,p,run=setup_case()\n        result=query(x,day=K+timedelta(hours=2),known=K+timedelta(hours=2))\n>       assert result.coverage_state not in {'COMPLETE_VERIFIED','COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE'}\nE       AssertionError: assert 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' not in {'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE', 'COMPLETE_VERIFIED'}\nE        +  where 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' = UniverseSnapshot(universe_id='CONTROL_SCOPE', definition_version='od08.definition/v1', valid_at=datetime.datetime(2001...ity-v1', liquidity_policy_version=None, financial_accepted=False, execution_accepted=False, version='od08.snapshot/v1').coverage_state\n\ntests/unit/test_od08_dependencies.py:327: AssertionError"
+    }
+  ],
+  "start_utc": "2026-11-20T15:32:16.692017+00:00",
+  "end_utc": "2026-11-20T15:32:20.032505+00:00",
+  "elapsed_seconds": 3.3404949529999994,
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "stdout_stderr": "................................F.FF                                     [100%]\n=================================== FAILURES ===================================\n______ test_timestamp_snapshot_requires_exact_reference_instant[missing] _______\n\nreference_time = 'missing'\n\n    @pytest.mark.parametrize('reference_time',['missing','exact','different'])\n    def test_timestamp_snapshot_requires_exact_reference_instant(reference_time):\n        c,x,m,cov,p,run=setup_case();point=K+timedelta(hours=2)\n        stamp=None if reference_time=='missing' else point if reference_time=='exact' else point+timedelta(seconds=1)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=K)\n        cov=replace(cov,granularity='SNAPSHOT',valid_to=D+timedelta(days=1),temporal_precision='TIMESTAMP',snapshot_at=stamp)\n        result=query(replace(x,memberships=(m,),coverage=(cov,)),day=point,known=point)\n>       assert (result.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE')==(reference_time=='exact')\nE       AssertionError: assert ('COMPLETE_FOR..._MARKET_SCOPE' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE           COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE) == ('missing' == 'exact'\nE         \nE         - exact\nE         + missing)\n\ntests/unit/test_od08_dependencies.py:321: AssertionError\n_____ test_timestamp_snapshot_requires_exact_reference_instant[different] ______\n\nreference_time = 'different'\n\n    @pytest.mark.parametrize('reference_time',['missing','exact','different'])\n    def test_timestamp_snapshot_requires_exact_reference_instant(reference_time):\n        c,x,m,cov,p,run=setup_case();point=K+timedelta(hours=2)\n        stamp=None if reference_time=='missing' else point if reference_time=='exact' else point+timedelta(seconds=1)\n        m=replace(m,effective_convention='EXPLICIT_TIMESTAMP',effective_at=K)\n        cov=replace(cov,granularity='SNAPSHOT',valid_to=D+timedelta(days=1),temporal_precision='TIMESTAMP',snapshot_at=stamp)\n        result=query(replace(x,memberships=(m,),coverage=(cov,)),day=point,known=point)\n>       assert (result.coverage_state=='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE')==(reference_time=='exact')\nE       AssertionError: assert ('COMPLETE_FOR..._MARKET_SCOPE' == 'COMPLETE_FOR..._MARKET_SCOPE'\nE         \nE           COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE) == ('different' == 'exact'\nE         \nE         - exact\nE         + different)\n\ntests/unit/test_od08_dependencies.py:321: AssertionError\n___________ test_date_only_boundary_does_not_invent_intraday_instant ___________\n\n    def test_date_only_boundary_does_not_invent_intraday_instant():\n        c,x,m,cov,p,run=setup_case()\n        result=query(x,day=K+timedelta(hours=2),known=K+timedelta(hours=2))\n>       assert result.coverage_state not in {'COMPLETE_VERIFIED','COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE'}\nE       AssertionError: assert 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' not in {'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE', 'COMPLETE_VERIFIED'}\nE        +  where 'COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE' = UniverseSnapshot(universe_id='CONTROL_SCOPE', definition_version='od08.definition/v1', valid_at=datetime.datetime(2001...ity-v1', liquidity_policy_version=None, financial_accepted=False, execution_accepted=False, version='od08.snapshot/v1').coverage_state\n\ntests/unit/test_od08_dependencies.py:327: AssertionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[missing]\nFAILED tests/unit/test_od08_dependencies.py::test_timestamp_snapshot_requires_exact_reference_instant[different]\nFAILED tests/unit/test_od08_dependencies.py::test_date_only_boundary_does_not_invent_intraday_instant\n3 failed, 33 passed in 1.80s\n",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532222]",
+      "net": "net:[4026532227]",
+      "pid": "pid:[4026532225]",
+      "user": "user:[4026532291]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

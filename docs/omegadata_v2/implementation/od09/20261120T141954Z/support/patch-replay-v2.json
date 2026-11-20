@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "replayed_files": 51,
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/git",
+        "--no-optional-locks",
+        "apply",
+        "--check",
+        "/home/parilrupani/omega-od09-20261120T141954Z/implementation-v2.patch"
+      ],
+      "cwd": "/home/parilrupani/omega-od09-20261120T141954Z/combined-patch-replay-v2",
+      "start_utc": "2026-11-20T17:38:26.026824+00:00",
+      "end_utc": "2026-11-20T17:38:26.032073+00:00",
+      "seconds": 0.005269624999982625,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "--no-optional-locks",
+        "apply",
+        "/home/parilrupani/omega-od09-20261120T141954Z/implementation-v2.patch"
+      ],
+      "cwd": "/home/parilrupani/omega-od09-20261120T141954Z/combined-patch-replay-v2",
+      "start_utc": "2026-11-20T17:38:26.032323+00:00",
+      "end_utc": "2026-11-20T17:38:26.040614+00:00",
+      "seconds": 0.008307715000000826,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "/home/parilrupani/omega-od09-20261120T141954Z/implementation-v2.patch:5240: trailing whitespace.\n\"\"\"Opt-in OD09 reconciliation; no operational or source acquisition side effects.\"\"\"\nwarning: 1 line adds whitespace errors.\n"
+    }
+  ],
+  "original_checkout_accessed": false,
+  "git_object_store_used": false,
+  "source_inputs": "Exact approved code-only before-hash files; corrected EOF-aware unified diff only",
+  "patch_sha256": "63bacbbd70c702b048252f1db90cc4f67c80f3c901096bb7bb97926a4d353bbe"
+}

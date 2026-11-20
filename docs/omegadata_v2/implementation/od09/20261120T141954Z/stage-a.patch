@@ -1,0 +1,998 @@
+--- a/src/omegadata/universe/contracts.py
++++ b/src/omegadata/universe/contracts.py
+@@ -5,6 +5,10 @@
+ from dataclasses import dataclass, field
+ from datetime import date, datetime
+ from decimal import Decimal
++from typing import TYPE_CHECKING
++
++if TYPE_CHECKING:
++    from omegadata.universe.observation_binding import AdjustmentBinding
+ 
+ from omegadata.adjustments.bound_contracts import BoundResult, PinnedCalculation
+ from omegadata.adjustments.contracts import canonical, digest
+@@ -110,6 +114,20 @@
+             or self.effective_convention not in {"SOURCE_DATE", "EXPLICIT_TIMESTAMP", "UNKNOWN"}
+         ):
+             raise ValueError("MEMBERSHIP_VERSION")
++        from zoneinfo import ZoneInfo
++
++        if (
++            self.effective_at is not None
++            and self.effective_at.astimezone(ZoneInfo("Asia/Kolkata")).date()
++            != self.claim.valid_from
++        ):
++            raise ValueError("EFFECTIVE_DATE_TIMESTAMP_MISMATCH")
++        if (
++            self.removal_effective_at is not None
++            and self.removal_effective_at.astimezone(ZoneInfo("Asia/Kolkata")).date()
++            != self.claim.valid_to
++        ):
++            raise ValueError("EFFECTIVE_REMOVAL_MISMATCH")
+         if self.effective_convention == "EXPLICIT_TIMESTAMP" and self.effective_at is None:
+             raise ValueError("EXPLICIT_EFFECTIVE_TIME_REQUIRED")
+         if (
+@@ -126,6 +144,7 @@
+     member_identity: str
+     event_type: str
+     effective_date: date
++    effective_at: datetime | None = None
+ 
+ 
+ @dataclass(frozen=True)
+@@ -150,6 +169,8 @@
+     ending_reference: str | None = None
+     snapshot_identity: str = "declared-reference"
+     version: str = "od08.coverage/v1"
++    temporal_precision: str = "DATE"
++    snapshot_at: datetime | None = None
+ 
+     def __post_init__(self) -> None:
+         if any(
+@@ -213,6 +234,8 @@
+     price_basis: str | None = None
+     volume_basis: str | None = None
+     record_identity: str | None = None
++    adjustment_binding: AdjustmentBinding | None = None
++    price_value: Decimal | None = None
+     adjustment: BoundResult | None = None
+     adjustment_pin: PinnedCalculation | None = None
+     version: str = "od08.availability/v1"
+@@ -230,7 +253,7 @@
+         ):
+             if stamp is not None:
+                 query_time(stamp)
+-        for number in (self.volume, self.turnover):
++        for number in (self.volume, self.turnover, self.price_value):
+             if number is not None and (
+                 type(number) is not Decimal or not number.is_finite() or number < 0
+             ):
+@@ -251,6 +274,19 @@
+     volume_basis: str
+ 
+     def __post_init__(self) -> None:
++        for value in (
++            self.minimum_average_volume,
++            self.minimum_median_turnover,
++            self.minimum_observation_coverage,
++        ):
++            from omegadata.adjustments.contracts import number
++
++            number(value, zero=True)
++        if (
++            type(self.lookback_sessions) is not int
++            or type(self.minimum_completed_sessions) is not int
++        ):
++            raise ValueError("LIQUIDITY_BUDGET")
+         if not 1 <= self.minimum_completed_sessions <= self.lookback_sessions <= 366 or not Decimal(
+             0
+         ) <= self.minimum_observation_coverage <= Decimal(1):
+@@ -262,6 +298,32 @@
+         ):
+             if type(v) is not Decimal or not v.is_finite() or v < 0:
+                 raise ValueError("LIQUIDITY_NUMBER")
++
++
++@dataclass(frozen=True)
++class ObservationScope:
++    universe_id: str
++    listings: tuple[str, ...]
++    observation_types: tuple[str, ...]
++    sessions: tuple[date, ...]
++    source_scope: tuple[str, ...]
++    price_basis: str
++    volume_basis: str
++    explicitly_excluded_ids: tuple[str, ...] = ()
++    version: str = "od08.observation-scope/v2"
++
++    def __post_init__(self) -> None:
++        if self.version != "od08.observation-scope/v2" or any(
++            type(v) is not tuple or len(v) > 10000
++            for v in (
++                self.listings,
++                self.observation_types,
++                self.sessions,
++                self.source_scope,
++                self.explicitly_excluded_ids,
++            )
++        ):
++            raise ValueError("OBSERVATION_SCOPE_BUDGET")
+ 
+ 
+ @dataclass(frozen=True)
+@@ -274,6 +336,8 @@
+     required_basis: str = "BACKWARD_ADJUSTED"
+     require_adjustment: bool = False
+     availability_policy: AvailabilityPolicy = AvailabilityPolicy()
++    observation_contract_version: str = "v1"
++    observation_scope: ObservationScope | None = None
+ 
+     def __post_init__(self) -> None:
+         text(self.policy_version)
+--- a/src/omegadata/universe/eligibility.py
++++ b/src/omegadata/universe/eligibility.py
+@@ -3,12 +3,12 @@
+ from __future__ import annotations
+ 
+ from datetime import date, datetime, timedelta
+-from decimal import Decimal, localcontext
++from decimal import ROUND_HALF_EVEN, Context, Decimal, localcontext
++from fractions import Fraction
+ from typing import Any
+ 
+ from omegadata.adjustments.bound_chain import calculate_bound_chain
+ from omegadata.adjustments.bound_contracts import BOUND_VERSION, BoundResult, PinnedCalculation
+-from omegadata.adjustments.contracts import arithmetic_context
+ from omegadata.universe import contracts as c
+ from omegadata.universe.temporal import availability
+ 
+@@ -91,6 +91,11 @@
+             return "BLOCKED_LIQUIDITY_COVERAGE", {
+                 "reason": "OBSERVATION_IDENTITY_UNITS_AVAILABILITY_OR_MISSING_VALUE"
+             }
++        if p.volume_basis != "RAW" and o.adjustment_binding is not None:
++            from omegadata.universe.observation_binding import validate_binding
++
++            if validate_binding(o, o.adjustment_binding, cutoff).startswith("BLOCKED"):
++                return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "EXACT_VOLUME_BINDING_REQUIRED"}
+         if p.volume_basis != "RAW" and (
+             o.adjustment is None
+             or adjustment_eligible(
+@@ -99,16 +104,28 @@
+         ):
+             return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "VOLUME_ADJUSTMENT_CONTEXT_REQUIRED"}
+         usable.append(o)
+-    with localcontext(arithmetic_context()) as math:
++    with localcontext(Context(prec=80, rounding=ROUND_HALF_EVEN, Emin=-999, Emax=999)) as math:
+         math.prec = 80
+         ratio = Decimal(len(usable)) / Decimal(len(needed))
+-        if len(usable) < p.minimum_completed_sessions or ratio < p.minimum_observation_coverage:
++        if len(usable) < p.minimum_completed_sessions or Fraction(
++            len(usable), len(needed)
++        ) < Fraction(p.minimum_observation_coverage):
+             return "BLOCKED_LIQUIDITY_COVERAGE", {
+                 "reason": "INSUFFICIENT_OBSERVATIONS",
+                 "expected": len(needed),
+                 "actual": len(usable),
+                 "missing": missing,
+             }
++        if not usable:
++            return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "ZERO_OBSERVATIONS"}
++        from omegadata.adjustments.contracts import number
++
++        try:
++            for o in usable:
++                number(o.volume, zero=True)
++                number(o.turnover, zero=True)
++        except (ValueError, ArithmeticError):
++            return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "NUMERIC_RESOURCE_LIMIT"}
+         volumes = [o.volume for o in usable if o.volume is not None]
+         turnovers = sorted(o.turnover for o in usable if o.turnover is not None)
+         average = sum(volumes, Decimal(0)) / Decimal(len(volumes))
+@@ -116,7 +133,14 @@
+         median = (
+             turnovers[n // 2] if n % 2 else (turnovers[n // 2 - 1] + turnovers[n // 2]) / Decimal(2)
+         )
++    median_exact = (
++        Fraction(turnovers[n // 2])
++        if n % 2
++        else (Fraction(turnovers[n // 2 - 1]) + Fraction(turnovers[n // 2])) / 2
++    )
+     diagnostics.update(
++        median_turnover_exact_ratio=(median_exact.numerator, median_exact.denominator),
++        arithmetic_version="od08.liquidity-fraction-decimal80/v2",
+         window=needed,
+         missing=missing,
+         coverage=ratio,
+@@ -125,7 +149,9 @@
+     )
+     return (
+         "ELIGIBLE"
+-        if average >= p.minimum_average_volume and median >= p.minimum_median_turnover
++        if Fraction(sum(Fraction(v) for v in volumes), len(volumes))
++        >= Fraction(p.minimum_average_volume)
++        and median_exact >= Fraction(p.minimum_median_turnover)
+         else "EXCLUDED_BY_POLICY"
+     ), diagnostics
+ 
+--- /dev/null
++++ b/src/omegadata/universe/observation_binding.py
+@@ -0,0 +1,126 @@
++"""Exact field-level OD07 consumption contract; replay is not source authentication."""
++
++from dataclasses import dataclass
++from datetime import date, datetime
++from decimal import Decimal
++
++from omegadata.adjustments.contracts import digest, number
++from omegadata.identity import query_time
++from omegadata.universe.contracts import AvailabilityObservation
++
++
++@dataclass(frozen=True)
++class AdjustmentBinding:
++    availability_observation_id: str
++    source_record_identity: str
++    source_artifact_identity: str
++    security_id: str
++    listing_id: str
++    exchange: str
++    session_date: date
++    raw_observation_id: str
++    raw_observation_digest: str
++    adjustment_context_id: str
++    adjustment_result_digest: str
++    adjustment_profile: str
++    adjustment_basis: str
++    basis_date: date
++    currency: str
++    price_unit: str
++    volume_unit: str
++    consumed_field: str
++    numerical_value: Decimal
++    knowledge_cutoff: datetime
++    version: str = "od08.observation-binding/v2"
++
++
++def validate_binding(
++    o: AvailabilityObservation, b: AdjustmentBinding | None, cutoff: datetime
++) -> str:
++    from omegadata.universe.eligibility import adjustment_eligible
++
++    blocked = "BLOCKED_OBSERVATION_BINDING"
++    if b is None or type(b) is not AdjustmentBinding or b.version != "od08.observation-binding/v2":
++        return blocked
++    pin = o.adjustment_pin
++    result = o.adjustment
++    if pin is None or result is None:
++        return blocked
++    try:
++        query_time(cutoff)
++        query_time(b.knowledge_cutoff)
++        number(b.numerical_value, zero=True)
++        raw = pin.raw.raw
++        if (
++            b.availability_observation_id,
++            b.source_record_identity,
++            b.source_artifact_identity,
++            b.listing_id,
++            b.session_date,
++            b.currency,
++            b.price_unit,
++        ) != (
++            o.observation_id,
++            o.record_identity,
++            o.artifact_identity,
++            o.listing_id,
++            o.session_date,
++            o.currency,
++            o.price_unit,
++        ):
++            return blocked
++        if (
++            b.security_id,
++            b.listing_id,
++            b.exchange,
++            b.session_date,
++            b.source_artifact_identity,
++            b.source_record_identity,
++            b.currency,
++            b.price_unit,
++        ) != (
++            raw.security_id,
++            raw.listing_id,
++            raw.exchange,
++            raw.trade_date,
++            raw.artifact_id,
++            pin.raw.source_record_identity,
++            raw.currency,
++            pin.raw.price_unit,
++        ):
++            return blocked
++        if o.source_id != pin.raw.source_id or (
++            b.raw_observation_id,
++            b.raw_observation_digest,
++            b.adjustment_context_id,
++            b.adjustment_result_digest,
++        ) != (pin.raw.observation_id, digest(pin.raw), pin.snapshot_id, result.output_digest):
++            return blocked
++        if (b.adjustment_profile, b.adjustment_basis, b.basis_date, b.knowledge_cutoff) != (
++            pin.policy.profile,
++            result.adjustment_basis,
++            result.basis_date,
++            pin.context.known_at,
++        ) or b.knowledge_cutoff > cutoff:
++            return blocked
++        if b.consumed_field == "volume":
++            if (
++                b.volume_unit != "SHARES"
++                or b.adjustment_profile != "VOLUME"
++                or o.volume_basis != b.adjustment_basis
++                or b.numerical_value != o.volume
++                or o.volume != result.calculation.adjusted_volume
++            ):
++                return blocked
++        elif b.consumed_field == "price":
++            if (
++                o.price_basis != b.adjustment_basis
++                or o.price_value != b.numerical_value
++                or b.numerical_value != result.adjusted_price
++            ):
++                return blocked
++        else:
++            return blocked
++        return adjustment_eligible(result, pin, cutoff, b.adjustment_profile, b.adjustment_basis)
++    except (ValueError, ArithmeticError, TypeError):
++        return blocked
+--- a/src/omegadata/universe/repository.py
++++ b/src/omegadata/universe/repository.py
+@@ -10,7 +10,7 @@
+ from collections.abc import Iterator
+ from contextlib import contextmanager
+ from dataclasses import fields, is_dataclass, replace
+-from datetime import date, datetime
++from datetime import date, datetime, timedelta
+ from decimal import Decimal
+ from pathlib import Path
+ from typing import Any, cast
+@@ -482,6 +482,76 @@
+         }
+         if pack(persisted_coverage) != pack(supplied_coverage):
+             raise ValueError("COVERAGE_LEDGER_OMITTED_OR_CHANGED")
++        if p.view != "MEMBERSHIP" and (
++            p.require_observations or p.liquidity_policy is not None or p.require_adjustment
++        ):
++            listing_scope = {d.listing_id for d in out.decisions if d.listing_id is not None}
++            scope = p.observation_scope
++            if scope is not None and (
++                scope.universe_id != x.definition.universe_id
++                or not set(scope.listings).issubset(listing_scope)
++            ):
++                raise ValueError("OBSERVATION_SET_SCOPE")
++
++            windows: dict[str, set[date]] = {}
++            if p.liquidity_policy is not None and scope is None:
++                for listing in listing_scope:
++                    exchange = next(
++                        d.claim.exchange for d in x.memberships if d.listing_id == listing
++                    )
++                    needed: set[date] = set()
++                    current = business_day(day)
++                    for _ in range(3660):
++                        if (
++                            x.calendar.coverage_status(exchange, current, cutoff, x.mode)
++                            != "COMPLETE"
++                        ):
++                            raise ValueError("OBSERVATION_SET_WINDOW_UNVERIFIED")
++                        session = x.calendar.query(
++                            exchange, current, cutoff, x.mode, calendar_version=x.calendar_version
++                        )
++                        if session.status in {"AUTHORITATIVE_SESSION", "VERIFIED_SPECIAL_SESSION"}:
++                            close = session.claims[0].closes_at
++                            if close is None:
++                                raise ValueError("OBSERVATION_SET_COMPLETION_UNKNOWN")
++                            if close <= cutoff:
++                                needed.add(current)
++                        elif session.status != "KNOWN_CLOSURE":
++                            raise ValueError("OBSERVATION_SET_SESSION_UNKNOWN")
++                        if len(needed) == p.liquidity_policy.lookback_sessions:
++                            break
++                        current -= timedelta(days=1)
++                    if len(needed) != p.liquidity_policy.lookback_sessions:
++                        raise ValueError("OBSERVATION_SET_WINDOW_BUDGET")
++                    windows[listing] = needed
++
++            def relevant(o: c.AvailabilityObservation) -> bool:
++                if (
++                    o.listing_id not in listing_scope
++                    or o.source_id not in x.definition.source_scope
++                    or o.session_date > business_day(day)
++                    or o.known_from is not None
++                    and o.known_from > cutoff
++                ):
++                    return False
++                if windows and o.session_date not in windows.get(o.listing_id, set()):
++                    return False
++                if scope is not None:
++                    return (
++                        o.listing_id in scope.listings
++                        and o.observation_type in scope.observation_types
++                        and o.session_date in scope.sessions
++                        and o.source_id in scope.source_scope
++                        and o.observation_id not in scope.explicitly_excluded_ids
++                    )
++                return True
++
++            stored_obs = {o.observation_id: o for o in self._rows(con, observations) if relevant(o)}
++            supplied_obs = {o.observation_id: o for o in x.observations if relevant(o)}
++            if len(supplied_obs) != sum(relevant(o) for o in x.observations) or pack(
++                stored_obs
++            ) != pack(supplied_obs):
++                raise ValueError("OBSERVATION_SET_OMITTED_DUPLICATE_OR_CHANGED")
+         inputs_to_check: list[tuple[Table, tuple[Any, ...], str]] = [
+             (coverages, x.coverage, "coverage_id"),
+             (observations, x.observations, "observation_id"),
+--- a/src/omegadata/universe/snapshots.py
++++ b/src/omegadata/universe/snapshots.py
+@@ -221,7 +221,7 @@
+             )
+     actual = tuple(v for v in identities if v is not None)
+     counts = Counter(actual)
+-    state, reconciliation = coverage_reconcile(x, valid_at, known_at, actual, tuple(unresolved))
++    state, reconciliation = coverage_reconcile(x, valid_point, known_at, actual, tuple(unresolved))
+     decisions = []
+     complete = state in {"COMPLETE_VERIFIED", "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"}
+     for r in selected:
+@@ -274,6 +274,20 @@
+                 and o.session_date <= valid_at
+                 and (o.known_from is None or o.known_from <= known_at)
+             )
++            if p.observation_contract_version == "v2" and (
++                p.require_adjustment
++                or p.view == "EXECUTION"
++                or p.liquidity_policy is not None
++                and p.liquidity_policy.volume_basis != "RAW"
++            ):
++                from omegadata.universe.observation_binding import validate_binding
++
++                if not obs or any(
++                    validate_binding(o, o.adjustment_binding, known_at).startswith("BLOCKED")
++                    for o in obs
++                ):
++                    status = "BLOCKED_AVAILABILITY"
++                    reasons.append("EXACT_OBSERVATION_BINDING_REQUIRED")
+             if p.require_observations and (
+                 not obs
+                 or any(
+--- a/src/omegadata/universe/temporal.py
++++ b/src/omegadata/universe/temporal.py
+@@ -174,21 +174,32 @@
+         lower = policy.bound
+     if lower > cutoff or o.known_to is not None and cutoff >= o.known_to:
+         return "BLOCKED_AVAILABILITY"
++    if (
++        o.observation_type not in {"ANNOUNCEMENT", "SCHEDULED_EVENT"}
++        and o.economic_effective_time is not None
++        and o.economic_effective_time > cutoff
++    ):
++        return "BLOCKED_AVAILABILITY"
+     for stamp in (o.observed_at, o.published_at, o.interval_completed_at):
+         if stamp is not None and stamp > cutoff:
+             return "BLOCKED_AVAILABILITY"
+-    if o.interval_completed_at is None:
++    if o.interval_completed_at is None and o.observation_type not in {
++        "ANNOUNCEMENT",
++        "SCHEDULED_EVENT",
++    }:
+         return "BLOCKED_AVAILABILITY"
+     return "AVAILABLE" if authorized(o, x, cutoff) else "BLOCKED_SOURCE_RIGHTS"
+ 
+ 
+ def coverage_reconcile(
+     x: c.UniverseContext,
+-    day: date,
++    day: date | datetime,
+     cutoff: datetime,
+     actual: tuple[str, ...],
+     unresolved: tuple[str, ...],
+ ) -> tuple[str, dict[str, Any]]:
++    point = day
++    day = business_day(point)
+     candidates = tuple(
+         v
+         for v in x.coverage
+@@ -209,6 +220,42 @@
+     if len(candidates) != 1:
+         return "CONFLICTING", diagnostics
+     cov = candidates[0]
++    intraday = any(
++        r.effective_at is not None or r.removal_effective_at is not None
++        for r in visible_revisions(x, cutoff)
++    )
++    if intraday and cov.temporal_precision != "TIMESTAMP":
++        return "PARTIAL", diagnostics
++    if cov.temporal_precision not in {"DATE", "TIMESTAMP"}:
++        return "PARTIAL", diagnostics
++    if cov.temporal_precision == "TIMESTAMP" and not isinstance(point, datetime):
++        return "PARTIAL", diagnostics
++    if cov.temporal_precision == "TIMESTAMP" and any(
++        v.effective_at is None for v in cov.transitions
++    ):
++        return "PARTIAL", diagnostics
++    if isinstance(point, datetime) and cov.temporal_precision == "DATE":
++        date_boundary = any(
++            r.effective_convention != "EXPLICIT_TIMESTAMP"
++            and (r.claim.valid_from == day or r.claim.valid_to == day)
++            for r in visible_revisions(x, cutoff)
++        )
++        if cov.granularity == "SNAPSHOT" or day == cov.valid_from or date_boundary:
++            diagnostics["reason"] = "INTRADAY_PRECISION_NOT_ESTABLISHED"
++            return "PARTIAL", diagnostics
++    if cov.granularity == "SNAPSHOT" and cov.temporal_precision == "TIMESTAMP":
++        try:
++            if cov.snapshot_at is None:
++                return "PARTIAL", diagnostics
++            query_time(cov.snapshot_at)
++            if (
++                not isinstance(point, datetime)
++                or point != cov.snapshot_at
++                or business_day(cov.snapshot_at) != cov.valid_from
++            ):
++                return "PARTIAL", diagnostics
++        except (TypeError, ValueError):
++            return "PARTIAL", diagnostics
+     if (
+         cov.source_id not in x.definition.source_scope
+         or cov.methodology_version != x.definition.methodology_version
+@@ -242,19 +289,51 @@
+             )
+             if ident is None:
+                 continue
+-            if cov.valid_from < r.claim.valid_from < cov.valid_to:
+-                required.append((r.revision_id, ident, "ADD", r.claim.valid_from))
++            if (
++                cov.valid_from < r.claim.valid_from < cov.valid_to
++                or cov.temporal_precision == "TIMESTAMP"
++                and r.effective_at is not None
++                and cov.valid_from == r.claim.valid_from
++            ):
++                required.append(
++                    (
++                        r.revision_id,
++                        ident,
++                        "ADD",
++                        r.claim.valid_from,
++                        r.effective_at if cov.temporal_precision == "TIMESTAMP" else None,
++                    )
++                )
+             if r.claim.valid_to is not None and cov.valid_from < r.claim.valid_to < cov.valid_to:
+-                required.append((r.revision_id, ident, "REMOVE", r.claim.valid_to))
++                required.append(
++                    (
++                        r.revision_id,
++                        ident,
++                        "REMOVE",
++                        r.claim.valid_to,
++                        r.removal_effective_at if cov.temporal_precision == "TIMESTAMP" else None,
++                    )
++                )
+         supplied = [
+-            (v.revision_id, v.member_identity, v.event_type, v.effective_date)
++            (
++                v.revision_id,
++                v.member_identity,
++                v.event_type,
++                v.effective_date,
++                v.effective_at if cov.temporal_precision == "TIMESTAMP" else None,
++            )
+             for v in cov.transitions
+         ]
+         if len(set(supplied)) != len(supplied) or set(supplied) != set(required):
+             return "PARTIAL", diagnostics
+         final = set(expected)
+         for transition in sorted(
+-            cov.transitions, key=lambda v: (v.effective_date, v.event_type, v.revision_id)
++            cov.transitions,
++            key=lambda v: (
++                v.effective_at if cov.temporal_precision == "TIMESTAMP" else v.effective_date,
++                v.event_type,
++                v.revision_id,
++            ),
+         ):
+             if transition.event_type == "ADD":
+                 if transition.member_identity in final:
+@@ -269,9 +348,21 @@
+         if final != set(cov.ending_member_identities):
+             return "CONFLICTING", diagnostics
+         for transition in sorted(
+-            cov.transitions, key=lambda v: (v.effective_date, v.event_type, v.revision_id)
++            cov.transitions,
++            key=lambda v: (
++                v.effective_at if cov.temporal_precision == "TIMESTAMP" else v.effective_date,
++                v.event_type,
++                v.revision_id,
++            ),
+         ):
+-            if transition.effective_date > day:
++            if cov.temporal_precision == "TIMESTAMP":
++                if (
++                    not isinstance(point, datetime)
++                    or transition.effective_at is None
++                    or transition.effective_at > point
++                ):
++                    continue
++            elif transition.effective_date > day:
+                 continue
+             if transition.event_type == "ADD":
+                 expected.add(transition.member_identity)
+--- /dev/null
++++ b/tests/unit/test_od08_dependencies.py
+@@ -0,0 +1,368 @@
++"""NON_MARKET_STRUCTURAL_CONTROL and PURE_MATHEMATICAL_TEST; no source observations."""
++
++from dataclasses import replace
++from datetime import timedelta
++from decimal import Decimal, localcontext
++
++import pytest
++from test_od08_universe import D, K, observation, query, setup_case
++
++
++def test_required_observation_cannot_be_omitted(tmp_path):
++    from omegadata.universe.repository import UniverseRepository
++
++    c, x, m, cov, p, run = setup_case()
++    p = replace(p, view="RESEARCH", require_observations=True)
++    x = replace(x, observations=(observation(x),))
++    db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++    db.seed_context(x, p)
++    with pytest.raises(ValueError, match="OBSERVATION_SET"):
++        db.pin_context("omitted", replace(x, observations=()), D, K, p)
++
++
++def test_intraday_cannot_use_date_only_coverage():
++    c, x, m, cov, p, run = setup_case()
++    boundary = K + timedelta(hours=2)
++    m = replace(m, effective_convention="EXPLICIT_TIMESTAMP", effective_at=boundary)
++    x = replace(x, memberships=(m,))
++    out = query(x, day=boundary, known=boundary)
++    assert out.coverage_state not in {"COMPLETE_VERIFIED", "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"}
++
++
++def test_contradictory_effective_date_refused():
++    c, x, m, cov, p, run = setup_case()
++    with pytest.raises(ValueError, match="EFFECTIVE"):
++        replace(m, effective_convention="EXPLICIT_TIMESTAMP", effective_at=K + timedelta(days=3))
++
++
++def liquid_case():
++    from omegadata.session_calendar import CoverageClaim, SessionClaim, VerifiedCalendar
++
++    c, x, m, cov, p, run = setup_case()
++    sessions = tuple(
++        SessionClaim(
++            "s" + str(i),
++            "CANARY-X",
++            D + timedelta(days=i),
++            "REGULAR",
++            "Asia/Kolkata",
++            "v",
++            x.definition.evidence,
++            K,
++            None,
++            closes_at=K + timedelta(days=i, hours=1),
++        )
++        for i in range(3)
++    )
++    coverage = CoverageClaim(
++        "c", "CANARY-X", D, D + timedelta(days=3), K, None, x.definition.evidence, "v", "COMPLETE"
++    )
++    x = replace(x, calendar=VerifiedCalendar(sessions, (coverage,)))
++    p = c.LiquidityPolicy(
++        "v",
++        3,
++        1,
++        Decimal(0),
++        Decimal(0),
++        Decimal("0.3"),
++        "CONTROL_UNIT",
++        "CONTROL_ONLY",
++        "RAW_UNADJUSTED",
++        "RAW",
++    )
++    return c, x, m, p
++
++
++@pytest.mark.parametrize("count", [1, 2, 3])
++def test_liquidity_nonterminating_ratio(count):
++    from omegadata.universe.eligibility import liquidity
++
++    c, x, m, p = liquid_case()
++    rows = tuple(
++        observation(
++            x,
++            observation_id="o" + str(i),
++            session_date=D + timedelta(days=i),
++            volume=Decimal(i + 1),
++        )
++        for i in range(count)
++    )
++    results = []
++    for prec in (6, 28, 60):
++        with localcontext() as ctx:
++            ctx.prec = prec
++            status, diag = liquidity(m, x, rows, D + timedelta(days=2), K + timedelta(days=3), p)
++            assert status == "ELIGIBLE"
++            results.append(diag)
++    assert results[0] == results[1] == results[2]
++
++
++@pytest.mark.parametrize("kind", ["ANNOUNCEMENT", "DAILY_CLOSE"])
++def test_future_economic_time_is_type_specific(kind):
++    from omegadata.universe.temporal import availability
++
++    c, x, m, cov, p, run = setup_case()
++    o = observation(x, observation_type=kind, economic_effective_time=K + timedelta(days=1))
++    assert availability(o, K, c.AvailabilityPolicy(), x) == (
++        "AVAILABLE" if kind == "ANNOUNCEMENT" else "BLOCKED_AVAILABILITY"
++    )
++
++
++@pytest.mark.parametrize(
++    "field",
++    [
++        "security",
++        "listing",
++        "exchange",
++        "session",
++        "record",
++        "volume",
++        "basis",
++        "future",
++        "missing_pin",
++        "correct",
++    ],
++)
++def test_strict_adjustment_binding(field):
++    from test_od07_final import setup_bound
++
++    from omegadata.adjustments import bound_contracts as bc
++    from omegadata.adjustments.bound_chain import calculate_bound_chain
++    from omegadata.adjustments.contracts import digest
++    from omegadata.universe.contracts import AvailabilityObservation
++    from omegadata.universe.observation_binding import AdjustmentBinding, validate_binding
++
++    parts = setup_bound(basis=bc.BasisPolicy("VOLUME", "BACKWARD_ADJUSTED", D + timedelta(days=5)))
++    pin = parts[8]
++    result = calculate_bound_chain(pin)
++    raw = pin.raw.raw
++    o = AvailabilityObservation(
++        "obs",
++        "CONTROL_ONLY",
++        raw.listing_id,
++        raw.trade_date,
++        None,
++        raw.known_from,
++        None,
++        raw.known_from,
++        None,
++        None,
++        pin.raw.source_id,
++        raw.artifact_id,
++        raw.evidence,
++        interval_completed_at=raw.known_from,
++        record_identity=pin.raw.source_record_identity,
++        volume=result.calculation.adjusted_volume,
++        currency=raw.currency,
++        price_unit=pin.raw.price_unit,
++        price_basis="RAW_UNADJUSTED",
++        volume_basis="BACKWARD_ADJUSTED",
++        adjustment=result,
++        adjustment_pin=pin,
++    )
++    binding = AdjustmentBinding(
++        "obs",
++        pin.raw.source_record_identity,
++        raw.artifact_id,
++        raw.security_id,
++        raw.listing_id,
++        raw.exchange,
++        raw.trade_date,
++        pin.raw.observation_id,
++        digest(pin.raw),
++        pin.snapshot_id,
++        result.output_digest,
++        "VOLUME",
++        result.adjustment_basis,
++        result.basis_date,
++        raw.currency,
++        pin.raw.price_unit,
++        "SHARES",
++        "volume",
++        o.volume,
++        pin.context.known_at,
++    )
++    if field == "security":
++        binding = replace(binding, security_id="other")
++    if field == "listing":
++        o = replace(o, listing_id="other")
++    if field == "exchange":
++        binding = replace(binding, exchange="other")
++    if field == "session":
++        o = replace(o, session_date=D + timedelta(days=9))
++    if field == "record":
++        o = replace(o, record_identity="other")
++    if field == "volume":
++        o = replace(o, volume=o.volume + Decimal(1))
++    if field == "basis":
++        binding = replace(binding, adjustment_basis="FORWARD_ADJUSTED")
++    if field == "future":
++        binding = replace(binding, knowledge_cutoff=pin.context.known_at + timedelta(days=1))
++    if field == "missing_pin":
++        o = replace(o, adjustment_pin=None)
++    assert validate_binding(o, binding, pin.context.known_at) == (
++        "ELIGIBLE_NON_MARKET" if field == "correct" else "BLOCKED_OBSERVATION_BINDING"
++    )
++
++
++@pytest.mark.parametrize("case", ["duplicate", "conflict", "unrelated", "future", "partial"])
++def test_observation_set_scope(case, tmp_path):
++    from omegadata.universe.repository import UniverseRepository
++
++    c, x, m, cov, p, run = setup_case()
++    first = observation(x)
++    p = replace(p, view="RESEARCH", require_observations=True)
++    extra = replace(first, observation_id="extra", volume=Decimal(2))
++    if case == "unrelated":
++        extra = replace(extra, listing_id="other")
++    if case == "future":
++        extra = replace(extra, known_from=K + timedelta(days=1))
++    if case == "partial":
++        scope = c.ObservationScope(
++            x.definition.universe_id,
++            ("listing-a",),
++            ("CONTROL_ONLY",),
++            (D,),
++            ("control-source",),
++            "RAW_UNADJUSTED",
++            "RAW",
++            ("extra",),
++        )
++        p = replace(p, observation_scope=scope)
++    x = replace(x, observations=(first, extra))
++    db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++    db.seed_context(x, p)
++    supplied = replace(x, observations=(first, first) if case == "duplicate" else (first,))
++    if case in {"duplicate", "conflict"}:
++        with pytest.raises(ValueError, match="OBSERVATION_SET"):
++            db.pin_context("pin", supplied, D, K, p)
++    else:
++        db.pin_context("pin", supplied, D, K, p)
++
++
++@pytest.mark.parametrize("offset", [-1, 0, 1])
++def test_exact_intraday_coverage(offset):
++    c, x, m, cov, p, run = setup_case()
++    boundary = K + timedelta(hours=2)
++    m = replace(m, effective_convention="EXPLICIT_TIMESTAMP", effective_at=boundary)
++    transition = c.CoverageTransition(m.revision_id, "security-a", "ADD", D, effective_at=boundary)
++    cov = replace(
++        cov,
++        expected_member_identities=(),
++        transitions=(transition,),
++        temporal_precision="TIMESTAMP",
++    )
++    x = replace(x, memberships=(m,), coverage=(cov,))
++    out = query(x, day=boundary + timedelta(seconds=offset), known=boundary)
++    assert out.coverage_state == "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"
++    assert out.member_identities == (() if offset < 0 else ("security-a",))
++
++
++def test_wrong_intraday_transition_identity():
++    c, x, m, cov, p, run = setup_case()
++    boundary = K + timedelta(hours=2)
++    m = replace(m, effective_convention="EXPLICIT_TIMESTAMP", effective_at=boundary)
++    t = c.CoverageTransition(
++        m.revision_id, "security-a", "ADD", D, effective_at=boundary - timedelta(seconds=1)
++    )
++    cov = replace(
++        cov, expected_member_identities=(), transitions=(t,), temporal_precision="TIMESTAMP"
++    )
++    assert (
++        query(
++            replace(x, memberships=(m,), coverage=(cov,)), day=boundary, known=boundary
++        ).coverage_state
++        != "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"
++    )
++
++
++@pytest.mark.parametrize("value", [Decimal("1E10000"), Decimal("NaN"), Decimal("-1")])
++def test_liquidity_malformed_policy_typed(value):
++    c, x, m, p = liquid_case()
++    with pytest.raises(ValueError):
++        replace(p, minimum_observation_coverage=value)
++
++
++def test_announced_future_event_needs_no_completed_session():
++    from omegadata.universe.temporal import availability
++
++    c, x, m, cov, p, run = setup_case()
++    o = observation(
++        x,
++        observation_type="ANNOUNCEMENT",
++        economic_effective_time=K + timedelta(days=2),
++        interval_completed_at=None,
++    )
++    assert availability(o, K, c.AvailabilityPolicy(), x) == "AVAILABLE"
++
++
++def test_liquidity_required_set_ignores_out_of_window(tmp_path):
++    from omegadata.universe.repository import UniverseRepository
++
++    c, x, m, lp = liquid_case()
++    old = observation(x, observation_id="old", session_date=D - timedelta(days=10))
++    o = observation(x)
++    p = c.EligibilityPolicy("window", "LIQUIDITY", require_observations=True, liquidity_policy=lp)
++    stored = replace(x, observations=(o, old))
++    db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++    db.seed_context(stored, p)
++    db.pin_context(
++        "window", replace(x, observations=(o,)), D + timedelta(days=2), K + timedelta(days=3), p
++    )
++
++
++@pytest.mark.parametrize("reference_time", ["missing", "exact", "different"])
++def test_timestamp_snapshot_requires_exact_reference_instant(reference_time):
++    c, x, m, cov, p, run = setup_case()
++    point = K + timedelta(hours=2)
++    stamp = (
++        None
++        if reference_time == "missing"
++        else point
++        if reference_time == "exact"
++        else point + timedelta(seconds=1)
++    )
++    m = replace(m, effective_convention="EXPLICIT_TIMESTAMP", effective_at=K)
++    cov = replace(
++        cov,
++        granularity="SNAPSHOT",
++        valid_to=D + timedelta(days=1),
++        temporal_precision="TIMESTAMP",
++        snapshot_at=stamp,
++    )
++    result = query(replace(x, memberships=(m,), coverage=(cov,)), day=point, known=point)
++    assert (result.coverage_state == "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE") == (
++        reference_time == "exact"
++    )
++
++
++def test_date_only_boundary_does_not_invent_intraday_instant():
++    c, x, m, cov, p, run = setup_case()
++    result = query(x, day=K + timedelta(hours=2), known=K + timedelta(hours=2))
++    assert result.coverage_state not in {
++        "COMPLETE_VERIFIED",
++        "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE",
++    }
++
++
++def test_liquidity_median_threshold_uses_exact_ratio_at_extreme_scale():
++    from omegadata.universe.eligibility import liquidity
++
++    c, x, m, p = liquid_case()
++    p = replace(
++        p,
++        lookback_sessions=2,
++        minimum_completed_sessions=2,
++        minimum_observation_coverage=Decimal(1),
++        minimum_median_turnover=Decimal("1E64"),
++    )
++    # Literal bounded mathematical scalars, not financial observations:
++    # ((2*10^64 - 10) + (10 - 10^-63))/2 = 10^64 - 5*10^-64.
++    large = Decimal((0, (1,) + (9,) * 63, 1))
++    small = Decimal((0, (9,) * 64, -63))
++    rows = (
++        observation(x, observation_id="a", session_date=D + timedelta(days=1), turnover=large),
++        observation(x, observation_id="b", session_date=D + timedelta(days=2), turnover=small),
++    )
++    status, detail = liquidity(m, x, rows, D + timedelta(days=2), K + timedelta(days=3), p)
++    assert status == "EXCLUDED_BY_POLICY"

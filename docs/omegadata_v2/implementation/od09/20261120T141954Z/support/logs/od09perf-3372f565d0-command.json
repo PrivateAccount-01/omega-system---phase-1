@@ -1,0 +1,89 @@
+{
+  "cwd": "/home/parilrupani/omega-od09-20261120T141954Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/od09perf-3372f565d0-manifest.json",
+    "--manifest-sha256",
+    "8ada76479909a912b312270f16d227c0eb70b051a3d6e7108087d1203bacfdb4",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/od09perf-3372f565d0-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/od09perf-3372f565d0/output"
+  ],
+  "start_utc": "2026-11-20T15:28:23.013426+00:00",
+  "end_utc": "2026-11-20T15:28:25.379535+00:00",
+  "seconds": 2.3661036700000295,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od09perf",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532224]",
+        "net": "net:[4026532229]",
+        "pid": "pid:[4026532227]",
+        "user": "user:[4026532295]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "scale": "NON_MARKET_STRUCTURAL_CONTROL only",
+    "measurements": [
+      {
+        "groups": 10,
+        "observations": 20,
+        "matching_seconds": 3.619799997522932e-05,
+        "reconciliation_seconds": 0.01493795900000805,
+        "peak_traced_bytes": 249749,
+        "serialized_bytes": 10661,
+        "digest": "d8762d6b3d2b06bdfef9500b76a69011846ba5056000c8de4877d267b3e72fd3"
+      },
+      {
+        "groups": 40,
+        "observations": 80,
+        "matching_seconds": 8.606000000099812e-05,
+        "reconciliation_seconds": 0.048874275000002854,
+        "peak_traced_bytes": 897524,
+        "serialized_bytes": 42701,
+        "digest": "b029430c7a621afdc9105b34c481f5e7293b1e14911e5fbc6bf40215033225d8"
+      },
+      {
+        "groups": 100,
+        "observations": 200,
+        "matching_seconds": 0.0002479270000321776,
+        "reconciliation_seconds": 0.10175089699998807,
+        "peak_traced_bytes": 2193909,
+        "serialized_bytes": 106781,
+        "digest": "c127a105758de1384543796e991d47cfac4efee0c37a6648bdf93f4f2652a3b8"
+      }
+    ],
+    "context_insert_and_admit_30_seconds": 0.2735696040000448,
+    "restart_and_replay_seconds": 0.004118564999998853,
+    "query_plan": [
+      [
+        2,
+        0,
+        0,
+        "SEARCH od09_input_index USING COVERING INDEX od09_input_digest (observation_digest=?)"
+      ]
+    ],
+    "stdout_stderr": "No authentic financial data or exchange-scale benchmark",
+    "legacy_or_operational_db_access": false
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "8ada76479909a912b312270f16d227c0eb70b051a3d6e7108087d1203bacfdb4"
+}

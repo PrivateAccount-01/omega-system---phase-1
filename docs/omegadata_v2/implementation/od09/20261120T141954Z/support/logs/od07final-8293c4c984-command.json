@@ -1,0 +1,473 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/od07final-8293c4c984-manifest.json",
+    "--manifest-sha256",
+    "09fd1db87c8c9726d1c62eabada9e172f7e6f8c110be0cccdd21fafe9cf1e917",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/od07final-8293c4c984-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/od07final-8293c4c984/output"
+  ],
+  "start_utc": "2026-11-20T15:10:01.210555+00:00",
+  "end_utc": "2026-11-20T15:10:08.962055+00:00",
+  "seconds": 7.7515021520000005,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od07final",
+    "exit_code": 0,
+    "counts": {
+      "passed": 84
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[R06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[I04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[H04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[P04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[K01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[K02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[K03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_targeted_contract[D04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[omitted-action]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[fabricated-empty]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[wrong-raw]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[wrong-profile]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[changed-revision]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[source-artifact]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[knowledge-cutoff]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[missing-calendar]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[identity-snapshot]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[incorrect-factor]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[incomplete-math]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[duplicate-event]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_admission_negative[reused-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[unbound-reference]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[wrong-type]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[wrong-unit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[expired-reference]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[future-reference]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[unknown-parameter-time]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[revoked-parameter]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[incomplete-parameter]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[zero-issue]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[corrected-terms]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[wrong-venue-symbol]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[ambiguous-identity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[reopen-context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[legacy-migration]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[rollback-context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_required_boundaries[strict-no-promotion]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2--2-120-BACKWARD_ADJUSTED-60]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-0-60-BACKWARD_ADJUSTED-60]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-1-60-BACKWARD_ADJUSTED-60]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2--2-120-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-0-60-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[2-1-60-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5--2-120-BACKWARD_ADJUSTED-240]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5-0-240-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_basis_vectors[0.5-1-240-FORWARD_ADJUSTED-120]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_legacy_rename_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[independent-oracle]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[independent-lineage]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[valid-session-missing-lot]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[closed-session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[delisted-execution]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[canary-execution-promotion]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[future-identity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[unreviewed-merger]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[undefined-forward-rights]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_semantic_review[schema-version]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[parameter-time-contradiction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[unknown-quantity-convention]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_explicit_temporal_and_execution_scope[future-basis]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[price-factor]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[volume-factor]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[factor-status]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od07_final.py::test_independent_factor_and_calendar_admission[calendar-link]",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-20T15:10:03.358803+00:00",
+    "end_utc": "2026-11-20T15:10:08.248029+00:00",
+    "elapsed_seconds": 4.889223014999999,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 85%]\n............                                                             [100%]\n84 passed in 2.82s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532295]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "09fd1db87c8c9726d1c62eabada9e172f7e6f8c110be0cccdd21fafe9cf1e917"
+}

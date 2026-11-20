@@ -1,0 +1,55 @@
+{
+  "cwd": "/home/parilrupani/omega-od09-20261120T141954Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od09-20261120T141954Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/compile-403a5e4832-manifest.json",
+    "--manifest-sha256",
+    "8554628ba81641bad1240e344ded89cea55a7f269a17a8d4c199ea2988e95fba",
+    "--policy",
+    "/home/parilrupani/omega-od09-20261120T141954Z/logs/compile-403a5e4832-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od09-20261120T141954Z/compile-403a5e4832/output"
+  ],
+  "start_utc": "2026-11-20T17:37:01.702133+00:00",
+  "end_utc": "2026-11-20T17:37:06.140084+00:00",
+  "seconds": 4.437947985999983,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-20T17:37:05.748912+00:00",
+    "end_utc": "2026-11-20T17:37:06.095001+00:00",
+    "elapsed_seconds": 0.3460618899999872,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532220]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od09-20261120T141954Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "38c6658a3587b93880fa6ab20e2caf841e7a47ac",
+  "source_manifest_sha256": "8554628ba81641bad1240e344ded89cea55a7f269a17a8d4c199ea2988e95fba"
+}

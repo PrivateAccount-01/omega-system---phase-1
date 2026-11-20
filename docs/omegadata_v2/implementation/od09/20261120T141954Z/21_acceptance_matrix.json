@@ -1,0 +1,145 @@
+{
+  "frozen_criteria": "Current user F01-F23; no additional generalized phase",
+  "scope": "Linux code-only engineering/refusal behavior, not authentic approval",
+  "criteria": [
+    {
+      "id": "F01",
+      "criterion": "Stage A gate",
+      "status": "PASS",
+      "evidence": "04_OD08_dependency_gate.json"
+    },
+    {
+      "id": "F02",
+      "criterion": "Exact upstream adoption",
+      "status": "PASS",
+      "evidence": "01_upstream_adoption_manifest.json"
+    },
+    {
+      "id": "F03",
+      "criterion": "Legacy audit",
+      "status": "PASS",
+      "evidence": "05_existing_reconciliation_audit.md"
+    },
+    {
+      "id": "F04",
+      "criterion": "Typed observations",
+      "status": "PASS",
+      "evidence": "06_observation_contract.md"
+    },
+    {
+      "id": "F05",
+      "criterion": "Economic comparability",
+      "status": "PASS",
+      "evidence": "07_comparability_contract.md"
+    },
+    {
+      "id": "F06",
+      "criterion": "Exact metrics",
+      "status": "PASS",
+      "evidence": "08_independent_discrepancy_vectors.md"
+    },
+    {
+      "id": "F07",
+      "criterion": "Four outcomes",
+      "status": "PASS",
+      "evidence": "16_targeted_test_results.json"
+    },
+    {
+      "id": "F08",
+      "criterion": "Tolerance/calibration contracts",
+      "status": "PASS",
+      "evidence": "09_tolerance_calibration_contract.md"
+    },
+    {
+      "id": "F09",
+      "criterion": "Venue distinctions",
+      "status": "PASS",
+      "evidence": "07_comparability_contract.md"
+    },
+    {
+      "id": "F10",
+      "criterion": "Explainable anomalies",
+      "status": "PASS",
+      "evidence": "10_anomaly_detection_contract.md"
+    },
+    {
+      "id": "F11",
+      "criterion": "Bound corporate-action explanation",
+      "status": "PASS",
+      "evidence": "10_anomaly_detection_contract.md"
+    },
+    {
+      "id": "F12",
+      "criterion": "Independent hard blocks",
+      "status": "PASS",
+      "evidence": "11_confidence_and_hard_blocks.md"
+    },
+    {
+      "id": "F13",
+      "criterion": "Exact lineage",
+      "status": "PASS",
+      "evidence": "06_observation_contract.md"
+    },
+    {
+      "id": "F14",
+      "criterion": "Immutable review",
+      "status": "PASS",
+      "evidence": "12_review_and_correction_contract.md"
+    },
+    {
+      "id": "F15",
+      "criterion": "New correction evidence",
+      "status": "PASS",
+      "evidence": "12_review_and_correction_contract.md"
+    },
+    {
+      "id": "F16",
+      "criterion": "Exact dependency scope",
+      "status": "PASS",
+      "evidence": "13_reprocess_verification_contract.md"
+    },
+    {
+      "id": "F17",
+      "criterion": "Verified completion contract",
+      "status": "PASS",
+      "evidence": "13_reprocess_verification_contract.md"
+    },
+    {
+      "id": "F18",
+      "criterion": "Persistence/restart/rollback",
+      "status": "PASS",
+      "evidence": "14_persistence_and_rollback.md"
+    },
+    {
+      "id": "F19",
+      "criterion": "Independent math/structural tests",
+      "status": "PASS",
+      "evidence": "15_negative_first_tests.md"
+    },
+    {
+      "id": "F20",
+      "criterion": "Legacy regression",
+      "status": "PASS",
+      "evidence": "17_full_engineering_matrix.json"
+    },
+    {
+      "id": "F21",
+      "criterion": "No unresolved P0/P1 in tested scope",
+      "status": "PASS",
+      "evidence": "22_final_gatekeeper.json"
+    },
+    {
+      "id": "F22",
+      "criterion": "External gates retained",
+      "status": "PASS",
+      "evidence": "19_external_dependencies.json"
+    },
+    {
+      "id": "F23",
+      "criterion": "OD10 handoff",
+      "status": "PASS",
+      "evidence": "23_od10_dependency_handoff.md"
+    }
+  ],
+  "source_manifest_digest": "91612e64f4a44557d6cdb3c72b10ee8b1b997addf16054f3703fbe5c58a9a4c1"
+}

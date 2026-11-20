@@ -1,0 +1,361 @@
+[
+  {
+    "path": "src/omegadata/track_b/cross_source_validation.py",
+    "sha256": "a2603d3c5c92e2a0c67e27c51e19deb17d62d7befc6b3160129ca42d759c2546",
+    "functions": [
+      {
+        "name": "__init__",
+        "line": 43
+      },
+      {
+        "name": "_audit_key",
+        "line": 51
+      },
+      {
+        "name": "_audit_exists",
+        "line": 65
+      },
+      {
+        "name": "validate_nse_bse_prices",
+        "line": 116
+      },
+      {
+        "name": "_price_tolerance_context",
+        "line": 198
+      },
+      {
+        "name": "_price_tolerance",
+        "line": 252
+      },
+      {
+        "name": "validate_monthly_flow_consistency",
+        "line": 255
+      },
+      {
+        "name": "validate_implied_volatility_spot_check",
+        "line": 276
+      },
+      {
+        "name": "validate_secondary_adjusted_price",
+        "line": 298
+      },
+      {
+        "name": "validate_corporate_actions",
+        "line": 320
+      },
+      {
+        "name": "_event_date",
+        "line": 564
+      },
+      {
+        "name": "_date_gap_days",
+        "line": 568
+      },
+      {
+        "name": "_compare_numeric",
+        "line": 573
+      },
+      {
+        "name": "_persist_categorical_result",
+        "line": 633
+      },
+      {
+        "name": "_detect_systematic_disagreement",
+        "line": 694
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/track_b/confidence.py",
+    "sha256": "a7e7800c6e925d76f955d148d6cf78d909ff32f69a8b8c77d702c1a1728fc346",
+    "functions": [
+      {
+        "name": "_is_non_publishable_synthetic_row",
+        "line": 39
+      },
+      {
+        "name": "compute_score",
+        "line": 42
+      },
+      {
+        "name": "enforce_context",
+        "line": 74
+      },
+      {
+        "name": "filter_records",
+        "line": 77
+      },
+      {
+        "name": "monthly_report",
+        "line": 98
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/track_b/tolerance_policy.py",
+    "sha256": "e647fc41b194367b1228700e8f965f2bc6958ec7f9170260a57d19e0393ce0a2",
+    "functions": [
+      {
+        "name": "invalidate_tolerance_policy_cache",
+        "line": 64
+      },
+      {
+        "name": "_read_policy",
+        "line": 69
+      },
+      {
+        "name": "load_tolerance_policy",
+        "line": 95
+      },
+      {
+        "name": "match",
+        "line": 27
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/track_b/manual_review.py",
+    "sha256": "deb39d6da317aadf087073e4ff1c9c5e2174fd163379af81febff8e6628bcd91",
+    "functions": [
+      {
+        "name": "_repo_root",
+        "line": 25
+      },
+      {
+        "name": "__init__",
+        "line": 39
+      },
+      {
+        "name": "_fingerprint",
+        "line": 43
+      },
+      {
+        "name": "_policy",
+        "line": 47
+      },
+      {
+        "name": "_calendar_exchange",
+        "line": 51
+      },
+      {
+        "name": "_apply_sla_metadata",
+        "line": 57
+      },
+      {
+        "name": "_refresh_review_payload",
+        "line": 131
+      },
+      {
+        "name": "_update_review_metrics",
+        "line": 148
+      },
+      {
+        "name": "_update_reprocess_metrics",
+        "line": 161
+      },
+      {
+        "name": "review_exists",
+        "line": 169
+      },
+      {
+        "name": "_find_existing_scope_review",
+        "line": 194
+      },
+      {
+        "name": "queue_review",
+        "line": 217
+      },
+      {
+        "name": "list_open_reviews",
+        "line": 293
+      },
+      {
+        "name": "_queue_reprocess_job",
+        "line": 310
+      },
+      {
+        "name": "resolve_review",
+        "line": 345
+      },
+      {
+        "name": "complete_reprocess",
+        "line": 406
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/track_b/review_policy.py",
+    "sha256": "2d52ad60864009a9bd2d74098e93ee4b4c27fc632ef0fe6b79ca71295749f5ad",
+    "functions": [
+      {
+        "name": "_read_policy_set",
+        "line": 47
+      },
+      {
+        "name": "invalidate_review_policy_cache",
+        "line": 77
+      },
+      {
+        "name": "load_review_policies",
+        "line": 83
+      },
+      {
+        "name": "for_category",
+        "line": 30
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/track_b/corporate_action_matching.py",
+    "sha256": "74ef262f1532c1d644eb11c70aa7e735f4596a376377bcda44b2baa0cd020cf1",
+    "functions": [
+      {
+        "name": "__init__",
+        "line": 41
+      },
+      {
+        "name": "event_date",
+        "line": 45
+      },
+      {
+        "name": "_numeric_close",
+        "line": 49
+      },
+      {
+        "name": "_payload_score",
+        "line": 59
+      },
+      {
+        "name": "economic_overlap_count",
+        "line": 77
+      },
+      {
+        "name": "has_economic_signal",
+        "line": 84
+      },
+      {
+        "name": "relatedness_score",
+        "line": 87
+      },
+      {
+        "name": "score_pair",
+        "line": 108
+      },
+      {
+        "name": "match_pairs",
+        "line": 128
+      },
+      {
+        "name": "best_total",
+        "line": 139
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/track_b/discontinuity.py",
+    "sha256": "fe9226c131b2c8860e138d1e7455802b1382eada07634939b500f1cfb828b3bc",
+    "functions": [
+      {
+        "name": "_review_exists",
+        "line": 33
+      },
+      {
+        "name": "_estimate_beta",
+        "line": 52
+      },
+      {
+        "name": "_compute_beta",
+        "line": 68
+      },
+      {
+        "name": "_median",
+        "line": 80
+      },
+      {
+        "name": "_integrity_fail",
+        "line": 90
+      },
+      {
+        "name": "_build_fallback_betas",
+        "line": 97
+      },
+      {
+        "name": "detect",
+        "line": 153
+      },
+      {
+        "name": "_persist_event",
+        "line": 288
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/db/models.py",
+    "sha256": "e2305305c3051999a11e10418e556abda84873464553dd5942c390d977cebd29",
+    "functions": [
+      {
+        "name": "_utc_now",
+        "line": 34
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "src/omegadata/domain.py",
+    "sha256": "cd1c00b0763c034f8a0178195dd2e9a53816e893758e429c0711e35527a7bbba",
+    "functions": [],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  },
+  {
+    "path": "scripts/build_cross_source_tolerance_report.py",
+    "sha256": "e4b9248946d2e1d37c3e5d4accf52a5a7f32eb5bf77dd2768a1d25a2e0244904",
+    "functions": [
+      {
+        "name": "_quantile",
+        "line": 22
+      },
+      {
+        "name": "_recommended_tolerance",
+        "line": 31
+      },
+      {
+        "name": "_count_matches_sqlite",
+        "line": 62
+      },
+      {
+        "name": "_normalize_path",
+        "line": 90
+      },
+      {
+        "name": "_sqlite_display_url",
+        "line": 98
+      },
+      {
+        "name": "_build_summary",
+        "line": 102
+      },
+      {
+        "name": "main",
+        "line": 184
+      }
+    ],
+    "read_as_code_only": true,
+    "executed_against_original_or_operational_data": false
+  }
+]
