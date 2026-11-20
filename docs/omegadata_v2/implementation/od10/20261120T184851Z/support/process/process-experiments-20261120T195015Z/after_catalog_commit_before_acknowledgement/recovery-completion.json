@@ -1,0 +1,261 @@
+{
+  "argv": [
+    "/usr/bin/bwrap",
+    "--unshare-all",
+    "--die-with-parent",
+    "--new-session",
+    "--cap-drop",
+    "ALL",
+    "--clearenv",
+    "--ro-bind",
+    "/usr",
+    "/usr",
+    "--symlink",
+    "usr/lib",
+    "/lib",
+    "--symlink",
+    "usr/lib64",
+    "/lib64",
+    "--ro-bind",
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/process-experiments-20261120T195015Z/after_catalog_commit_before_acknowledgement/recovery",
+    "/work",
+    "--dir",
+    "/input",
+    "--dir",
+    "/policy",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/stage_only-ff41132da4-manifest.json",
+    "/policy/manifest.json",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/process-experiments-20261120T195015Z/after_catalog_commit_before_acknowledgement/recovery-policy.json",
+    "/policy/config.json",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo",
+    "/chunks/0",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "/input/scripts/od05x_isolated_runner.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/worker.py",
+    "/input/scripts/od05x_worker_jobs.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/runtime-inventory.json",
+    "/input/od05x_inputs/runtime-inventory.json",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/tests/unit/test_od10_canonical_storage.py",
+    "/input/tests/unit/test_od10_canonical_storage.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/src/omegadata/canonical_storage/__init__.py",
+    "/input/src/omegadata/canonical_storage/__init__.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/src/omegadata/canonical_storage/contracts.py",
+    "/input/src/omegadata/canonical_storage/contracts.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/src/omegadata/canonical_storage/schema.py",
+    "/input/src/omegadata/canonical_storage/schema.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/src/omegadata/canonical_storage/admission.py",
+    "/input/src/omegadata/canonical_storage/admission.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/src/omegadata/canonical_storage/store.py",
+    "/input/src/omegadata/canonical_storage/store.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/src/omegadata/canonical_storage/query.py",
+    "/input/src/omegadata/canonical_storage/query.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od10_structural_experiments.py",
+    "/input/scripts/od10_structural_experiments.py",
+    "--ro-bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od10_isolated_jobs.py",
+    "/input/scripts/od10_isolated_jobs.py",
+    "--bind",
+    "/home/parilrupani/omega-od10-20261120T184851Z/process-experiments-20261120T195015Z/after_catalog_commit_before_acknowledgement/shared",
+    "/work/shared",
+    "--remount-ro",
+    "/dev",
+    "--remount-ro",
+    "/proc",
+    "--remount-ro",
+    "/",
+    "--chdir",
+    "/work",
+    "--setenv",
+    "PYTHONDONTWRITEBYTECODE",
+    "1",
+    "--setenv",
+    "PATH",
+    "/usr/bin",
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/input/scripts/od05x_isolated_runner.py",
+    "worker"
+  ],
+  "policy_sha256": "17a7996a758421d19cbc889869b9c418403c7f978d75a0791f85b25ca83374ed",
+  "template_sha256": "af237bb7674f70635389b80b5d84e638b98d3e1a846ac1c9c62db41705cc9937",
+  "global_launcher_pid": 4099,
+  "role": {
+    "mode": "recover"
+  },
+  "shared_class": "OD10_NON_MARKET_SHARED/v1",
+  "isolation_weakened": false,
+  "original_mounts_added": false,
+  "start_utc": "2026-11-20T19:51:56.233751+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "end_utc": "2026-11-20T19:51:59.343384+00:00",
+  "result": {
+    "mode": "recover",
+    "start_utc": "2026-11-20T19:51:58.561245+00:00",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "pid_in_namespace": 2,
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532293]",
+        "net": "net:[4026532425]",
+        "pid": "pid:[4026532330]",
+        "user": "user:[4026532544]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "financial_observations": 0,
+    "old_version": "ed14f000cae94510851d2920e4f73282",
+    "new_version": "6b50a96ad363421d86e3071c18f769ba",
+    "retry_recognized": true,
+    "old_bytes_preserved": true,
+    "old_query_rows": 1,
+    "new_query_rows": 1,
+    "orphans": {
+      "uncommitted_objects": [],
+      "uncommitted_manifests": [],
+      "attempts": [
+        "c183764e534b400ab34f1e96346b01ec",
+        "f8107c984db44110abd52ce77fcd2b87"
+      ],
+      "promotion": "NEVER_AUTOMATIC",
+      "cleanup_performed": false
+    },
+    "exit_code": 0,
+    "end_utc": "2026-11-20T19:51:59.127473+00:00",
+    "elapsed_seconds": 0.5662478869999177
+  },
+  "native_probes": {
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532293]",
+        "net": "net:[4026532425]",
+        "pid": "pid:[4026532330]",
+        "user": "user:[4026532544]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "probes": [
+      {
+        "probe": "read",
+        "native_return": -1,
+        "errno": 2,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "write",
+        "native_return": -1,
+        "errno": 30,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "exec",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "tcp",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "dns",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "execve",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "tcp_connect",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "dns_sendto",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "netlink",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "bind",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "listen",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      },
+      {
+        "probe": "accept4",
+        "native_return": -1,
+        "errno": 1,
+        "denied": true,
+        "python_hook": false
+      }
+    ],
+    "local_ipc_control": {
+      "bytes": 16,
+      "errno": 0,
+      "external_network_packets": 0
+    }
+  }
+}

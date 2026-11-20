@@ -1,0 +1,55 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/compile-fb2a9ad378-manifest.json",
+    "--manifest-sha256",
+    "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/compile-fb2a9ad378-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/compile-fb2a9ad378/output"
+  ],
+  "start_utc": "2026-11-20T20:00:10.191368+00:00",
+  "end_utc": "2026-11-20T20:00:12.534182+00:00",
+  "seconds": 2.3428105510000137,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-20T20:00:12.301476+00:00",
+    "end_utc": "2026-11-20T20:00:12.517145+00:00",
+    "elapsed_seconds": 0.21566150599997513,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532221]",
+        "net": "net:[4026532226]",
+        "pid": "pid:[4026532224]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9"
+}

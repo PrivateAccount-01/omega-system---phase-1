@@ -1,0 +1,175 @@
+{
+  "scope": "Tested Linux data-free engineering only",
+  "criteria": [
+    {
+      "id": "F01",
+      "criterion": "Exact51file upstream adoption",
+      "status": "PASS",
+      "evidence": "01_upstream_adoption_manifest.json"
+    },
+    {
+      "id": "F02",
+      "criterion": "Existing storage audit",
+      "status": "PASS",
+      "evidence": "02_existing_storage_audit.md"
+    },
+    {
+      "id": "F03",
+      "criterion": "Evidence-based technology choice",
+      "status": "PASS",
+      "evidence": "03_storage_architecture_decision.md"
+    },
+    {
+      "id": "F04",
+      "criterion": "Versioned canonical domains",
+      "status": "PASS",
+      "evidence": "04_canonical_schema_registry.md"
+    },
+    {
+      "id": "F05",
+      "criterion": "Exact typed roundtrip",
+      "status": "PASS",
+      "evidence": "05_precision_and_type_contract.md"
+    },
+    {
+      "id": "F06",
+      "criterion": "Raw/derived separation",
+      "status": "PASS",
+      "evidence": "06_upstream_admission_contract.md"
+    },
+    {
+      "id": "F07",
+      "criterion": "Upstream exact lineage",
+      "status": "PASS",
+      "evidence": "06_upstream_admission_contract.md"
+    },
+    {
+      "id": "F08",
+      "criterion": "Unsupported promotion refusal",
+      "status": "PASS",
+      "evidence": "17_hard_blocks_and_quarantine.md"
+    },
+    {
+      "id": "F09",
+      "criterion": "Partition/file manifest",
+      "status": "PASS",
+      "evidence": "07_partition_and_file_manifest_contract.md"
+    },
+    {
+      "id": "F10",
+      "criterion": "Independent byte integrity",
+      "status": "PASS",
+      "evidence": "07_partition_and_file_manifest_contract.md"
+    },
+    {
+      "id": "F11",
+      "criterion": "Historical version coexistence",
+      "status": "PASS",
+      "evidence": "08_dataset_version_contract.md"
+    },
+    {
+      "id": "F12",
+      "criterion": "Reader-visible atomic commit",
+      "status": "PASS",
+      "evidence": "09_atomic_commit_protocol.md"
+    },
+    {
+      "id": "F13",
+      "criterion": "Idempotent retry",
+      "status": "PASS",
+      "evidence": "10_concurrency_verification.json"
+    },
+    {
+      "id": "F14",
+      "criterion": "Concurrent writer safety",
+      "status": "PASS",
+      "evidence": "10_concurrency_verification.json"
+    },
+    {
+      "id": "F15",
+      "criterion": "Crash recovery/refusal",
+      "status": "PASS",
+      "evidence": "11_crash_recovery_and_orphan_accounting.md"
+    },
+    {
+      "id": "F16",
+      "criterion": "Exact immutable rollback",
+      "status": "PASS",
+      "evidence": "13_metadata_catalog_and_rollback.md"
+    },
+    {
+      "id": "F17",
+      "criterion": "Versioned lossless evolution",
+      "status": "PASS",
+      "evidence": "12_schema_evolution_contract.md"
+    },
+    {
+      "id": "F18",
+      "criterion": "Transactional catalog",
+      "status": "PASS",
+      "evidence": "13_metadata_catalog_and_rollback.md"
+    },
+    {
+      "id": "F19",
+      "criterion": "Bounded registered dependency impact",
+      "status": "PASS",
+      "evidence": "14_dependency_index_contract.md"
+    },
+    {
+      "id": "F20",
+      "criterion": "Version-pinned PIT query",
+      "status": "PASS",
+      "evidence": "15_PIT_query_contract.md"
+    },
+    {
+      "id": "F21",
+      "criterion": "Query scope/resource limits",
+      "status": "PASS",
+      "evidence": "15_PIT_query_contract.md"
+    },
+    {
+      "id": "F22",
+      "criterion": "Hard blocks/payload rights retained",
+      "status": "PASS",
+      "evidence": "17_hard_blocks_and_quarantine.md"
+    },
+    {
+      "id": "F23",
+      "criterion": "Independent literal/structural controls",
+      "status": "PASS",
+      "evidence": "19_focused_test_results.json"
+    },
+    {
+      "id": "F24",
+      "criterion": "Measured structural performance",
+      "status": "PASS",
+      "evidence": "21_performance_results.json"
+    },
+    {
+      "id": "F25",
+      "criterion": "Full engineering regression",
+      "status": "PASS",
+      "evidence": "20_full_engineering_matrix.json"
+    },
+    {
+      "id": "F26",
+      "criterion": "No unresolved P0/P1 in tested scope",
+      "status": "PASS",
+      "evidence": "25_final_gatekeeper.json"
+    },
+    {
+      "id": "F27",
+      "criterion": "Authentic/production blockers retained",
+      "status": "PASS",
+      "evidence": "22_external_dependencies.json"
+    },
+    {
+      "id": "F28",
+      "criterion": "OD11 dependency handoff",
+      "status": "PASS",
+      "evidence": "26_od11_dependency_handoff.md"
+    }
+  ],
+  "external_acceptance": "BLOCKED_REAL_DATA",
+  "independent_human_acceptance": false
+}

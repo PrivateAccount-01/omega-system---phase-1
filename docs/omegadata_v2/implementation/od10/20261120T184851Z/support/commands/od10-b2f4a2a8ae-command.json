@@ -1,0 +1,530 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-b2f4a2a8ae-manifest.json",
+    "--manifest-sha256",
+    "23beb6de0599e03b3f574ed565b2a7b704f2e21c2b40ae5c822e496b67883e9c",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-b2f4a2a8ae-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10-b2f4a2a8ae/output"
+  ],
+  "start_utc": "2026-11-20T19:31:31.643933+00:00",
+  "end_utc": "2026-11-20T19:31:43.526150+00:00",
+  "seconds": 11.882206545000003,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10",
+    "exit_code": 0,
+    "counts": {
+      "passed": 95
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_legacy_partition_overwrite_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[before_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_file_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_file_write_before_validation]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_validation_before_install]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_install_before_catalog_commit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_catalog_transaction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_catalog_commit_before_acknowledgement]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fixed-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[overflow]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[zero-scale]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fraction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[negative]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[maximum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[durable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[changed-id]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[join]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[immutable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[unknown-root]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[denied]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[metadata-only]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[forged-authority]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[derived-unbound]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[wrong-domain]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[raw-price-field-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_query_projection_aggregate_and_partition_pruning",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_independently_declared_comparison_scope_rejects_metadata_relabel",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_bound_derived_volume_admission_replays_exact_upstream",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[omitted]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unrelated]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[conflict]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unknown-time]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[restart]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_transitive_dependency_index_uses_pinned_metadata",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[symlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[hardlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_canonical_UTC_retry_and_derived_hard_blocks",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_generic_pin_cannot_bypass_required_observation_index",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_dependency_set_cannot_mutate_existing_pin",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-20T19:31:33.074234+00:00",
+    "end_utc": "2026-11-20T19:31:42.682311+00:00",
+    "elapsed_seconds": 9.608080271999995,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 75%]\n.......................                                                  [100%]\n95 passed in 7.73s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "23beb6de0599e03b3f574ed565b2a7b704f2e21c2b40ae5c822e496b67883e9c"
+}

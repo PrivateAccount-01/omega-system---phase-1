@@ -1,0 +1,55 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/mypy-10ae9b0d9b-manifest.json",
+    "--manifest-sha256",
+    "23beb6de0599e03b3f574ed565b2a7b704f2e21c2b40ae5c822e496b67883e9c",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/mypy-10ae9b0d9b-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/mypy-10ae9b0d9b/output"
+  ],
+  "start_utc": "2026-11-20T19:31:43.663024+00:00",
+  "end_utc": "2026-11-20T19:32:04.066734+00:00",
+  "seconds": 20.403710021000023,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-20T19:31:45.856483+00:00",
+    "end_utc": "2026-11-20T19:31:58.992641+00:00",
+    "elapsed_seconds": 13.136180443,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/canonical_storage/contracts.py:107: error: Incompatible types in assignment (expression has type \"str | None\", variable has type \"str\")  [assignment]\nsrc/omegadata/canonical_storage/admission.py:48: error: \"DataclassInstance\" has no attribute \"valid_at\"  [attr-defined]\nsrc/omegadata/canonical_storage/admission.py:48: error: \"DataclassInstance\" has no attribute \"known_at\"  [attr-defined]\nsrc/omegadata/canonical_storage/admission.py:48: error: \"DataclassInstance\" has no attribute \"canonical_json\"  [attr-defined]\nsrc/omegadata/canonical_storage/admission.py:79: error: Unsupported operand types for >= (\"datetime\" and \"None\")  [operator]\nsrc/omegadata/canonical_storage/admission.py:79: note: Left operand is of type \"datetime | None\"\nsrc/omegadata/canonical_storage/admission.py:88: error: Item \"UniverseContext\" of \"PinnedCalculation | UniverseContext\" has no attribute \"context\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:92: error: Item \"UniverseSnapshot\" of \"BoundResult | UniverseSnapshot\" has no attribute \"calculation\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:92: error: Item \"UniverseSnapshot\" of \"BoundResult | UniverseSnapshot\" has no attribute \"adjusted_price\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:93: error: Item \"UniverseContext\" of \"PinnedCalculation | UniverseContext\" has no attribute \"raw\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:95: error: Item \"UniverseContext\" of \"PinnedCalculation | UniverseContext\" has no attribute \"policy\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:102: error: Item \"UniverseContext\" of \"PinnedCalculation | UniverseContext\" has no attribute \"raw\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:102: error: Item \"UniverseContext\" of \"PinnedCalculation | UniverseContext\" has no attribute \"snapshot_id\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:102: error: Item \"UniverseSnapshot\" of \"BoundResult | UniverseSnapshot\" has no attribute \"output_digest\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:102: error: Item \"UniverseContext\" of \"PinnedCalculation | UniverseContext\" has no attribute \"history\"  [union-attr]\nsrc/omegadata/canonical_storage/admission.py:102: error: Item \"UniverseContext\" of \"PinnedCalculation | UniverseContext\" has no attribute \"parameters\"  [union-attr]\nsrc/omegadata/canonical_storage/store.py:87: error: Non-overlapping equality check (left operand type: \"Sequence[Row[Any]]\", right operand type: \"list[tuple[str]]\")  [comparison-overlap]\nsrc/omegadata/canonical_storage/store.py:133: error: Returning Any from function declared to return \"dict[str, Any]\"  [no-any-return]\nsrc/omegadata/canonical_storage/store.py:182: error: Incompatible types in assignment (expression has type \"BufferedReader[_BufferedReaderStream]\", variable has type \"BufferedWriter\")  [assignment]\nsrc/omegadata/canonical_storage/store.py:204: error: Incompatible types in assignment (expression has type \"Observation | None\", variable has type \"Path\")  [assignment]\nsrc/omegadata/canonical_storage/store.py:205: error: \"Path\" has no attribute \"observation_id\"  [attr-defined]\nsrc/omegadata/canonical_storage/store.py:205: error: \"Path\" has no attribute \"known_from\"  [attr-defined]\nsrc/omegadata/canonical_storage/store.py:268: error: Argument 4 to \"pin\" of \"ProvenanceLedger\" has incompatible type \"datetime | None\"; expected \"datetime\"  [arg-type]\nFound 22 errors in 3 files (checked 98 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "23beb6de0599e03b3f574ed565b2a7b704f2e21c2b40ae5c822e496b67883e9c"
+}

@@ -1,0 +1,577 @@
+[
+  {
+    "source_path": "src/omegadata/track_a/storage.py",
+    "sha256": "62e862f7658a7a9035772d4a832c4434a3f21889a8df3096235358de868c7821",
+    "functions": [
+      {
+        "name": "StoredDataset",
+        "line": 13
+      },
+      {
+        "name": "ParquetStorage",
+        "line": 20
+      },
+      {
+        "name": "__init__",
+        "line": 21
+      },
+      {
+        "name": "store_daily",
+        "line": 25
+      }
+    ],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  },
+  {
+    "source_path": "src/omegadata/track_a/warehouse.py",
+    "sha256": "2c75305ec46e46daaad3e887946205fa11f6ace374ce5a52e095b405888d0d88",
+    "functions": [
+      {
+        "name": "WarehouseSyncResult",
+        "line": 11
+      },
+      {
+        "name": "ClickHouseWarehouseSync",
+        "line": 16
+      },
+      {
+        "name": "_sql_string",
+        "line": 18
+      },
+      {
+        "name": "sync_release_manifest",
+        "line": 22
+      }
+    ],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  },
+  {
+    "source_path": "src/omegadata/track_b/release_manager.py",
+    "sha256": "a36e461b09f3c2e79da9185a892445f38c8048a05c0294772263d5c2d0fcb9e3",
+    "functions": [
+      {
+        "name": "ReleaseBuildResult",
+        "line": 36
+      },
+      {
+        "name": "_repo_root",
+        "line": 47
+      },
+      {
+        "name": "_relative_repo_path",
+        "line": 51
+      },
+      {
+        "name": "_load_profile_matrix",
+        "line": 58
+      },
+      {
+        "name": "ReleaseManager",
+        "line": 66
+      },
+      {
+        "name": "__init__",
+        "line": 67
+      },
+      {
+        "name": "_sha256",
+        "line": 74
+      },
+      {
+        "name": "_dataset_path",
+        "line": 77
+      },
+      {
+        "name": "_write_dataset",
+        "line": 82
+      },
+      {
+        "name": "_build_release_id",
+        "line": 92
+      },
+      {
+        "name": "_gpg_command",
+        "line": 96
+      },
+      {
+        "name": "_to_wsl_path",
+        "line": 111
+      },
+      {
+        "name": "_gpg_home",
+        "line": 119
+      },
+      {
+        "name": "_gpg_args",
+        "line": 124
+      },
+      {
+        "name": "_gpg_env",
+        "line": 136
+      },
+      {
+        "name": "_ensure_gpg_key",
+        "line": 142
+      },
+      {
+        "name": "_sign_manifest",
+        "line": 191
+      },
+      {
+        "name": "verify_signature",
+        "line": 218
+      },
+      {
+        "name": "_frame_from_rows",
+        "line": 239
+      },
+      {
+        "name": "_export_adjusted_equity",
+        "line": 242
+      },
+      {
+        "name": "_export_universe",
+        "line": 268
+      },
+      {
+        "name": "_export_participant_flows",
+        "line": 289
+      },
+      {
+        "name": "_export_indices",
+        "line": 307
+      },
+      {
+        "name": "_export_futures_contracts",
+        "line": 333
+      },
+      {
+        "name": "_export_futures_eod",
+        "line": 350
+      },
+      {
+        "name": "_export_continuous_futures",
+        "line": 378
+      },
+      {
+        "name": "_export_options_contracts",
+        "line": 404
+      },
+      {
+        "name": "_export_options_eod",
+        "line": 422
+      },
+      {
+        "name": "_build_quality_report",
+        "line": 452
+      },
+      {
+        "name": "_build_lineage_report",
+        "line": 470
+      },
+      {
+        "name": "build_release",
+        "line": 494
+      },
+      {
+        "name": "get_release_record",
+        "line": 587
+      },
+      {
+        "name": "get_latest_release_record",
+        "line": 590
+      }
+    ],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  },
+  {
+    "source_path": "src/omegadata/track_b/release_readiness.py",
+    "sha256": "32242761d57c80edfd4af756bbd020039fe824e8872bb9d61c8db34ad46ff581",
+    "functions": [
+      {
+        "name": "ReadinessCheck",
+        "line": 20
+      },
+      {
+        "name": "_repo_root",
+        "line": 26
+      },
+      {
+        "name": "_read_json",
+        "line": 30
+      },
+      {
+        "name": "_probe_summary_score",
+        "line": 37
+      },
+      {
+        "name": "_load_best_probe_artifact",
+        "line": 51
+      },
+      {
+        "name": "_load_policy",
+        "line": 76
+      },
+      {
+        "name": "ReleaseReadinessService",
+        "line": 157
+      },
+      {
+        "name": "evaluate",
+        "line": 158
+      },
+      {
+        "name": "_resolve_release_record",
+        "line": 391
+      },
+      {
+        "name": "_release_checks",
+        "line": 406
+      },
+      {
+        "name": "_adjusted_ohlcv_check",
+        "line": 510
+      },
+      {
+        "name": "_artifact_check",
+        "line": 536
+      }
+    ],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  },
+  {
+    "source_path": "src/omegadata/api/main.py",
+    "sha256": "d582f178772a1a0e91dc46255c996cbc2324fc91b3de52c98ab5e7ddfcc182a2",
+    "functions": [
+      {
+        "name": "lifespan",
+        "line": 43
+      },
+      {
+        "name": "PriceOut",
+        "line": 63
+      },
+      {
+        "name": "PriceResponse",
+        "line": 78
+      },
+      {
+        "name": "ReviewOut",
+        "line": 91
+      },
+      {
+        "name": "ReviewResolutionIn",
+        "line": 102
+      },
+      {
+        "name": "ReprocessCompletionIn",
+        "line": 108
+      },
+      {
+        "name": "PublicationBlockOut",
+        "line": 118
+      },
+      {
+        "name": "PublicationStatusOut",
+        "line": 126
+      },
+      {
+        "name": "ReleaseOut",
+        "line": 136
+      },
+      {
+        "name": "_get_db",
+        "line": 151
+      },
+      {
+        "name": "_require_api_key",
+        "line": 159
+      },
+      {
+        "name": "_resolve_exchange",
+        "line": 167
+      },
+      {
+        "name": "_merge_ranges",
+        "line": 179
+      },
+      {
+        "name": "_read_release_dataset",
+        "line": 186
+      },
+      {
+        "name": "_release_record_or_404",
+        "line": 193
+      },
+      {
+        "name": "_release_to_out",
+        "line": 200
+      },
+      {
+        "name": "observe_requests",
+        "line": 217
+      },
+      {
+        "name": "health",
+        "line": 236
+      },
+      {
+        "name": "terminal_ui",
+        "line": 241
+      },
+      {
+        "name": "metrics",
+        "line": 249
+      },
+      {
+        "name": "slo_status",
+        "line": 254
+      },
+      {
+        "name": "implementation_audit",
+        "line": 269
+      },
+      {
+        "name": "implementation_test_results",
+        "line": 277
+      },
+      {
+        "name": "get_prices",
+        "line": 291
+      },
+      {
+        "name": "get_prices_audit",
+        "line": 404
+      },
+      {
+        "name": "get_universe",
+        "line": 457
+      },
+      {
+        "name": "get_open_reviews",
+        "line": 484
+      },
+      {
+        "name": "resolve_review",
+        "line": 502
+      },
+      {
+        "name": "complete_reprocess",
+        "line": 528
+      },
+      {
+        "name": "get_release_readiness",
+        "line": 554
+      },
+      {
+        "name": "get_latest_release",
+        "line": 565
+      },
+      {
+        "name": "get_release",
+        "line": 577
+      },
+      {
+        "name": "get_release_manifest",
+        "line": 582
+      },
+      {
+        "name": "get_release_quality",
+        "line": 588
+      },
+      {
+        "name": "get_release_lineage",
+        "line": 594
+      },
+      {
+        "name": "get_release_quality_alias",
+        "line": 600
+      },
+      {
+        "name": "get_fii_dii",
+        "line": 605
+      },
+      {
+        "name": "get_india_vix",
+        "line": 619
+      },
+      {
+        "name": "get_benchmark_series",
+        "line": 633
+      },
+      {
+        "name": "get_futures",
+        "line": 653
+      },
+      {
+        "name": "get_options",
+        "line": 677
+      },
+      {
+        "name": "publication_status",
+        "line": 703
+      }
+    ],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  },
+  {
+    "source_path": "src/omegadata/db/models.py",
+    "sha256": "e2305305c3051999a11e10418e556abda84873464553dd5942c390d977cebd29",
+    "functions": [
+      {
+        "name": "_utc_now",
+        "line": 34
+      },
+      {
+        "name": "InstrumentMaster",
+        "line": 38
+      },
+      {
+        "name": "SymbolMap",
+        "line": 58
+      },
+      {
+        "name": "SymbolChangeLog",
+        "line": 72
+      },
+      {
+        "name": "DelistingRecord",
+        "line": 87
+      },
+      {
+        "name": "IPORegistry",
+        "line": 99
+      },
+      {
+        "name": "CrossListingMap",
+        "line": 109
+      },
+      {
+        "name": "CorporateActionStaging",
+        "line": 120
+      },
+      {
+        "name": "ConfirmedCorporateAction",
+        "line": 138
+      },
+      {
+        "name": "ManualReviewQueue",
+        "line": 158
+      },
+      {
+        "name": "ReprocessJob",
+        "line": 171
+      },
+      {
+        "name": "PriceRecord",
+        "line": 189
+      },
+      {
+        "name": "ExclusionDate",
+        "line": 217
+      },
+      {
+        "name": "DiscontinuityEvent",
+        "line": 226
+      },
+      {
+        "name": "UniverseMembership",
+        "line": 248
+      },
+      {
+        "name": "ValidationAuditLog",
+        "line": 265
+      },
+      {
+        "name": "ParticipantFlowDaily",
+        "line": 288
+      },
+      {
+        "name": "MarketIndexDaily",
+        "line": 306
+      },
+      {
+        "name": "FuturesContractMaster",
+        "line": 329
+      },
+      {
+        "name": "FuturesEOD",
+        "line": 347
+      },
+      {
+        "name": "ContinuousFutureDaily",
+        "line": 368
+      },
+      {
+        "name": "OptionsContractMaster",
+        "line": 392
+      },
+      {
+        "name": "OptionsEOD",
+        "line": 411
+      },
+      {
+        "name": "ReleaseRecord",
+        "line": 432
+      }
+    ],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  },
+  {
+    "source_path": "src/omegadata/domain.py",
+    "sha256": "cd1c00b0763c034f8a0178195dd2e9a53816e893758e429c0711e35527a7bbba",
+    "functions": [
+      {
+        "name": "InstrumentType",
+        "line": 6
+      },
+      {
+        "name": "Exchange",
+        "line": 22
+      },
+      {
+        "name": "CorporateActionType",
+        "line": 28
+      },
+      {
+        "name": "ConfidenceLevel",
+        "line": 51
+      },
+      {
+        "name": "DiscontinuityCategory",
+        "line": 57
+      },
+      {
+        "name": "ValidationResult",
+        "line": 63
+      },
+      {
+        "name": "QueryContext",
+        "line": 69
+      },
+      {
+        "name": "ReviewBlockScope",
+        "line": 78
+      },
+      {
+        "name": "ReviewDecision",
+        "line": 84
+      },
+      {
+        "name": "PublicationState",
+        "line": 90
+      },
+      {
+        "name": "ReleaseProfile",
+        "line": 95
+      }
+    ],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  },
+  {
+    "source_path": "pyproject.toml",
+    "sha256": "703c87a98af0fcae7263ba42aa6a16a9eb743cf85ae591e71add449551be0f87",
+    "functions": [],
+    "execution": "CODE_INSPECTION_ONLY_EXCEPT_EXPLICIT_NON_MARKET_TESTS"
+  }
+]

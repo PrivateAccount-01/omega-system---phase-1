@@ -1,0 +1,521 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-f7d51be21c-manifest.json",
+    "--manifest-sha256",
+    "9942236ab77a810193cbfb5c92370f29042c301c6425077ce3a9bfe97279e49a",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-f7d51be21c-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10-f7d51be21c/output"
+  ],
+  "start_utc": "2026-11-20T19:27:53.001882+00:00",
+  "end_utc": "2026-11-20T19:28:04.317470+00:00",
+  "seconds": 11.315576211000002,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10",
+    "exit_code": 1,
+    "counts": {
+      "passed": 90,
+      "failed": 3
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_legacy_partition_overwrite_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[before_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_file_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_file_write_before_validation]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_validation_before_install]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_install_before_catalog_commit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_catalog_transaction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_catalog_commit_before_acknowledgement]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fixed-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[overflow]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[zero-scale]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fraction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[negative]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[maximum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[durable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[changed-id]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[join]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[immutable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[unknown-root]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[denied]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[metadata-only]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[forged-authority]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[derived-unbound]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[wrong-domain]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[raw-price-field-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_query_projection_aggregate_and_partition_pruning",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_independently_declared_comparison_scope_rejects_metadata_relabel",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_bound_derived_volume_admission_replays_exact_upstream",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[omitted]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[future]",
+        "outcome": "failed",
+        "reason": "case = 'future'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop1')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n     from omegadata.canonical_storage.admission import ComparisonScope\n     from omegadata.canonical_storage.contracts import StorageError\n     from omegadata.reconciliation.engine import reconcile_context\n     from test_od09_reconciliation import controls\n     _,x,a,b=controls();db=database(tmp_path)\n     scope=ComparisonScope('scope',('control-source',),(a.listing_id,),('close',),D,D+timedelta(days=1),K)\n     if case=='future':b=replace(b,availability=replace(b.availability,known_from=K+timedelta(days=1)))\n     if case=='unknown-time':b=replace(b,availability=replace(b.availability,known_from=None))\n     db.pin_source_observations((a,b));db.pin_comparison_scope(scope)\n     selected=replace(x,right=()) if case in {'omitted','future','unknown-time'} else x\n     if case=='unrelated':db.pin_source_observations((replace(b,field_name='open',availability=replace(b.availability,observation_id='unrelated')),))\n     if case=='conflict':db.pin_source_observations((replace(b,availability=replace(b.availability,observation_id='conflict')),))\n     if case=='restart':db.close();db=database(tmp_path)\n     if case in {'omitted','conflict','unknown-time'}:\n      with pytest.raises(StorageError):db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n     else:\n>     result=db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:340: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/canonical_storage/store.py:334: in admit_comparison_scope\n    return strict_comparison_admission(scope,context,results,ledger,complete=complete)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nscope = ComparisonScope(scope_id='scope', source_ids=('control-source',), listing_ids=('listing-a',), field_names=('close',), ..., 3), known_from=datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc), version='od10.comparison-scope/v1')\ncontext = ComparisonContext(context_id='comparison', left=(Observation(availability=AvailabilityObservation(observation_id='left...pshot_digest=None, universe_snapshot_reference=None, maximum_matches=10000, algorithm_version='od09.reconciliation/v1')\nresults = (ReconciliationResult(reconciliation_id='23c42baeeb81f748f5a3f4b5bf3f42415a060a86a52914b21cb8d297606a2140', context_id...on='od09.reconciliation/v1', financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\nledger = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x7b8398b03b00>\n\n    def strict_comparison_admission(scope:ComparisonScope,context:ComparisonContext,results:tuple[ReconciliationResult,...],ledger:ProvenanceLedger,*,complete:bool)->AdmissionResult:\n>    if scope.known_from>context.known_at:raise StorageError('COMPARISON_SCOPE_FUTURE')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: COMPARISON_SCOPE_FUTURE\n\nsrc/omegadata/canonical_storage/admission.py:123: StorageError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unrelated]",
+        "outcome": "failed",
+        "reason": "case = 'unrelated'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop2')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n     from omegadata.canonical_storage.admission import ComparisonScope\n     from omegadata.canonical_storage.contracts import StorageError\n     from omegadata.reconciliation.engine import reconcile_context\n     from test_od09_reconciliation import controls\n     _,x,a,b=controls();db=database(tmp_path)\n     scope=ComparisonScope('scope',('control-source',),(a.listing_id,),('close',),D,D+timedelta(days=1),K)\n     if case=='future':b=replace(b,availability=replace(b.availability,known_from=K+timedelta(days=1)))\n     if case=='unknown-time':b=replace(b,availability=replace(b.availability,known_from=None))\n     db.pin_source_observations((a,b));db.pin_comparison_scope(scope)\n     selected=replace(x,right=()) if case in {'omitted','future','unknown-time'} else x\n     if case=='unrelated':db.pin_source_observations((replace(b,field_name='open',availability=replace(b.availability,observation_id='unrelated')),))\n     if case=='conflict':db.pin_source_observations((replace(b,availability=replace(b.availability,observation_id='conflict')),))\n     if case=='restart':db.close();db=database(tmp_path)\n     if case in {'omitted','conflict','unknown-time'}:\n      with pytest.raises(StorageError):db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n     else:\n>     result=db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:340: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/canonical_storage/store.py:334: in admit_comparison_scope\n    return strict_comparison_admission(scope,context,results,ledger,complete=complete)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nscope = ComparisonScope(scope_id='scope', source_ids=('control-source',), listing_ids=('listing-a',), field_names=('close',), ..., 3), known_from=datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc), version='od10.comparison-scope/v1')\ncontext = ComparisonContext(context_id='comparison', left=(Observation(availability=AvailabilityObservation(observation_id='left...pshot_digest=None, universe_snapshot_reference=None, maximum_matches=10000, algorithm_version='od09.reconciliation/v1')\nresults = (ReconciliationResult(reconciliation_id='39626f1bcd59f1e38ea6ebcdd6c946dc5deab437a0d8ecb9171cf4eb44498070', context_id...on='od09.reconciliation/v1', financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\nledger = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x7b8398aa6e70>\n\n    def strict_comparison_admission(scope:ComparisonScope,context:ComparisonContext,results:tuple[ReconciliationResult,...],ledger:ProvenanceLedger,*,complete:bool)->AdmissionResult:\n>    if scope.known_from>context.known_at:raise StorageError('COMPARISON_SCOPE_FUTURE')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: COMPARISON_SCOPE_FUTURE\n\nsrc/omegadata/canonical_storage/admission.py:123: StorageError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[conflict]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unknown-time]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[restart]",
+        "outcome": "failed",
+        "reason": "case = 'restart'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop5')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n     from omegadata.canonical_storage.admission import ComparisonScope\n     from omegadata.canonical_storage.contracts import StorageError\n     from omegadata.reconciliation.engine import reconcile_context\n     from test_od09_reconciliation import controls\n     _,x,a,b=controls();db=database(tmp_path)\n     scope=ComparisonScope('scope',('control-source',),(a.listing_id,),('close',),D,D+timedelta(days=1),K)\n     if case=='future':b=replace(b,availability=replace(b.availability,known_from=K+timedelta(days=1)))\n     if case=='unknown-time':b=replace(b,availability=replace(b.availability,known_from=None))\n     db.pin_source_observations((a,b));db.pin_comparison_scope(scope)\n     selected=replace(x,right=()) if case in {'omitted','future','unknown-time'} else x\n     if case=='unrelated':db.pin_source_observations((replace(b,field_name='open',availability=replace(b.availability,observation_id='unrelated')),))\n     if case=='conflict':db.pin_source_observations((replace(b,availability=replace(b.availability,observation_id='conflict')),))\n     if case=='restart':db.close();db=database(tmp_path)\n     if case in {'omitted','conflict','unknown-time'}:\n      with pytest.raises(StorageError):db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n     else:\n>     result=db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:340: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/canonical_storage/store.py:334: in admit_comparison_scope\n    return strict_comparison_admission(scope,context,results,ledger,complete=complete)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nscope = ComparisonScope(scope_id='scope', source_ids=('control-source',), listing_ids=('listing-a',), field_names=('close',), ..., 3), known_from=datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc), version='od10.comparison-scope/v1')\ncontext = ComparisonContext(context_id='comparison', left=(Observation(availability=AvailabilityObservation(observation_id='left...pshot_digest=None, universe_snapshot_reference=None, maximum_matches=10000, algorithm_version='od09.reconciliation/v1')\nresults = (ReconciliationResult(reconciliation_id='39626f1bcd59f1e38ea6ebcdd6c946dc5deab437a0d8ecb9171cf4eb44498070', context_id...on='od09.reconciliation/v1', financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\nledger = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x7b8398858dd0>\n\n    def strict_comparison_admission(scope:ComparisonScope,context:ComparisonContext,results:tuple[ReconciliationResult,...],ledger:ProvenanceLedger,*,complete:bool)->AdmissionResult:\n>    if scope.known_from>context.known_at:raise StorageError('COMPARISON_SCOPE_FUTURE')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: COMPARISON_SCOPE_FUTURE\n\nsrc/omegadata/canonical_storage/admission.py:123: StorageError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_transitive_dependency_index_uses_pinned_metadata",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[symlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[hardlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_canonical_UTC_retry_and_derived_hard_blocks",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-20T19:27:54.296711+00:00",
+    "end_utc": "2026-11-20T19:28:03.545852+00:00",
+    "elapsed_seconds": 9.249145571000001,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 77%]\n............FF..F....                                                    [100%]\n=================================== FAILURES ===================================\n________ test_persisted_comparison_scope_independent_selection[future] _________\n\ncase = 'future'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop1')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n     from omegadata.canonical_storage.admission import ComparisonScope\n     from omegadata.canonical_storage.contracts import StorageError\n     from omegadata.reconciliation.engine import reconcile_context\n     from test_od09_reconciliation import controls\n     _,x,a,b=controls();db=database(tmp_path)\n     scope=ComparisonScope('scope',('control-source',),(a.listing_id,),('close',),D,D+timedelta(days=1),K)\n     if case=='future':b=replace(b,availability=replace(b.availability,known_from=K+timedelta(days=1)))\n     if case=='unknown-time':b=replace(b,availability=replace(b.availability,known_from=None))\n     db.pin_source_observations((a,b));db.pin_comparison_scope(scope)\n     selected=replace(x,right=()) if case in {'omitted','future','unknown-time'} else x\n     if case=='unrelated':db.pin_source_observations((replace(b,field_name='open',availability=replace(b.availability,observation_id='unrelated')),))\n     if case=='conflict':db.pin_source_observations((replace(b,availability=replace(b.availability,observation_id='conflict')),))\n     if case=='restart':db.close();db=database(tmp_path)\n     if case in {'omitted','conflict','unknown-time'}:\n      with pytest.raises(StorageError):db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n     else:\n>     result=db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:340: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/canonical_storage/store.py:334: in admit_comparison_scope\n    return strict_comparison_admission(scope,context,results,ledger,complete=complete)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nscope = ComparisonScope(scope_id='scope', source_ids=('control-source',), listing_ids=('listing-a',), field_names=('close',), ..., 3), known_from=datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc), version='od10.comparison-scope/v1')\ncontext = ComparisonContext(context_id='comparison', left=(Observation(availability=AvailabilityObservation(observation_id='left...pshot_digest=None, universe_snapshot_reference=None, maximum_matches=10000, algorithm_version='od09.reconciliation/v1')\nresults = (ReconciliationResult(reconciliation_id='23c42baeeb81f748f5a3f4b5bf3f42415a060a86a52914b21cb8d297606a2140', context_id...on='od09.reconciliation/v1', financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\nledger = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x7b8398b03b00>\n\n    def strict_comparison_admission(scope:ComparisonScope,context:ComparisonContext,results:tuple[ReconciliationResult,...],ledger:ProvenanceLedger,*,complete:bool)->AdmissionResult:\n>    if scope.known_from>context.known_at:raise StorageError('COMPARISON_SCOPE_FUTURE')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: COMPARISON_SCOPE_FUTURE\n\nsrc/omegadata/canonical_storage/admission.py:123: StorageError\n_______ test_persisted_comparison_scope_independent_selection[unrelated] _______\n\ncase = 'unrelated'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop2')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n     from omegadata.canonical_storage.admission import ComparisonScope\n     from omegadata.canonical_storage.contracts import StorageError\n     from omegadata.reconciliation.engine import reconcile_context\n     from test_od09_reconciliation import controls\n     _,x,a,b=controls();db=database(tmp_path)\n     scope=ComparisonScope('scope',('control-source',),(a.listing_id,),('close',),D,D+timedelta(days=1),K)\n     if case=='future':b=replace(b,availability=replace(b.availability,known_from=K+timedelta(days=1)))\n     if case=='unknown-time':b=replace(b,availability=replace(b.availability,known_from=None))\n     db.pin_source_observations((a,b));db.pin_comparison_scope(scope)\n     selected=replace(x,right=()) if case in {'omitted','future','unknown-time'} else x\n     if case=='unrelated':db.pin_source_observations((replace(b,field_name='open',availability=replace(b.availability,observation_id='unrelated')),))\n     if case=='conflict':db.pin_source_observations((replace(b,availability=replace(b.availability,observation_id='conflict')),))\n     if case=='restart':db.close();db=database(tmp_path)\n     if case in {'omitted','conflict','unknown-time'}:\n      with pytest.raises(StorageError):db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n     else:\n>     result=db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:340: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/canonical_storage/store.py:334: in admit_comparison_scope\n    return strict_comparison_admission(scope,context,results,ledger,complete=complete)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nscope = ComparisonScope(scope_id='scope', source_ids=('control-source',), listing_ids=('listing-a',), field_names=('close',), ..., 3), known_from=datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc), version='od10.comparison-scope/v1')\ncontext = ComparisonContext(context_id='comparison', left=(Observation(availability=AvailabilityObservation(observation_id='left...pshot_digest=None, universe_snapshot_reference=None, maximum_matches=10000, algorithm_version='od09.reconciliation/v1')\nresults = (ReconciliationResult(reconciliation_id='39626f1bcd59f1e38ea6ebcdd6c946dc5deab437a0d8ecb9171cf4eb44498070', context_id...on='od09.reconciliation/v1', financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\nledger = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x7b8398aa6e70>\n\n    def strict_comparison_admission(scope:ComparisonScope,context:ComparisonContext,results:tuple[ReconciliationResult,...],ledger:ProvenanceLedger,*,complete:bool)->AdmissionResult:\n>    if scope.known_from>context.known_at:raise StorageError('COMPARISON_SCOPE_FUTURE')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: COMPARISON_SCOPE_FUTURE\n\nsrc/omegadata/canonical_storage/admission.py:123: StorageError\n________ test_persisted_comparison_scope_independent_selection[restart] ________\n\ncase = 'restart'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop5')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n     from omegadata.canonical_storage.admission import ComparisonScope\n     from omegadata.canonical_storage.contracts import StorageError\n     from omegadata.reconciliation.engine import reconcile_context\n     from test_od09_reconciliation import controls\n     _,x,a,b=controls();db=database(tmp_path)\n     scope=ComparisonScope('scope',('control-source',),(a.listing_id,),('close',),D,D+timedelta(days=1),K)\n     if case=='future':b=replace(b,availability=replace(b.availability,known_from=K+timedelta(days=1)))\n     if case=='unknown-time':b=replace(b,availability=replace(b.availability,known_from=None))\n     db.pin_source_observations((a,b));db.pin_comparison_scope(scope)\n     selected=replace(x,right=()) if case in {'omitted','future','unknown-time'} else x\n     if case=='unrelated':db.pin_source_observations((replace(b,field_name='open',availability=replace(b.availability,observation_id='unrelated')),))\n     if case=='conflict':db.pin_source_observations((replace(b,availability=replace(b.availability,observation_id='conflict')),))\n     if case=='restart':db.close();db=database(tmp_path)\n     if case in {'omitted','conflict','unknown-time'}:\n      with pytest.raises(StorageError):db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n     else:\n>     result=db.admit_comparison_scope('scope',selected,reconcile_context(selected),complete=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:340: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/canonical_storage/store.py:334: in admit_comparison_scope\n    return strict_comparison_admission(scope,context,results,ledger,complete=complete)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nscope = ComparisonScope(scope_id='scope', source_ids=('control-source',), listing_ids=('listing-a',), field_names=('close',), ..., 3), known_from=datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc), version='od10.comparison-scope/v1')\ncontext = ComparisonContext(context_id='comparison', left=(Observation(availability=AvailabilityObservation(observation_id='left...pshot_digest=None, universe_snapshot_reference=None, maximum_matches=10000, algorithm_version='od09.reconciliation/v1')\nresults = (ReconciliationResult(reconciliation_id='39626f1bcd59f1e38ea6ebcdd6c946dc5deab437a0d8ecb9171cf4eb44498070', context_id...on='od09.reconciliation/v1', financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\nledger = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x7b8398858dd0>\n\n    def strict_comparison_admission(scope:ComparisonScope,context:ComparisonContext,results:tuple[ReconciliationResult,...],ledger:ProvenanceLedger,*,complete:bool)->AdmissionResult:\n>    if scope.known_from>context.known_at:raise StorageError('COMPARISON_SCOPE_FUTURE')\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: COMPARISON_SCOPE_FUTURE\n\nsrc/omegadata/canonical_storage/admission.py:123: StorageError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[future]\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unrelated]\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[restart]\n3 failed, 90 passed in 7.59s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "9942236ab77a810193cbfb5c92370f29042c301c6425077ce3a9bfe97279e49a"
+}

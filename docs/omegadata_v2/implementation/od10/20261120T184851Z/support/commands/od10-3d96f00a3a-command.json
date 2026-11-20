@@ -1,0 +1,576 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-3d96f00a3a-manifest.json",
+    "--manifest-sha256",
+    "d10fcab633fe52c7545640cd92a9c0b8b84a191b566b6aadaf40cea3175550dd",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-3d96f00a3a-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10-3d96f00a3a/output"
+  ],
+  "start_utc": "2026-11-20T19:41:10.713739+00:00",
+  "end_utc": "2026-11-20T19:41:22.007990+00:00",
+  "seconds": 11.294242050999998,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10",
+    "exit_code": 1,
+    "counts": {
+      "passed": 102,
+      "failed": 2
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]",
+        "outcome": "failed",
+        "reason": "group = 'L02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L02_0')\n\n    @pytest.mark.parametrize(\"group\", GROUPS)\n    def test_od10_acceptance(group, tmp_path):\n        from omegadata.canonical_storage import schema\n        from omegadata.canonical_storage.contracts import StorageError\n    \n        if group.startswith(\"S\"):\n            row = record()\n            if group == \"S01\":\n                assert schema.from_table(schema.to_table((row,), \"canonical/v1\")) == (row,)\n            elif group == \"S02\":\n                value = Decimal(\"0.\" + \"1\" * 90)\n                coded = schema.encode_decimal(value, \"CALCULATION\")\n                assert (\n                    schema.decode_decimal(coded).as_tuple() == value.as_tuple()\n                    and coded[\"fixed\"] is None\n                )\n            elif group == \"S03\":\n                with pytest.raises(StorageError, match=\"PRECISION\"):\n                    schema.encode_decimal(Decimal(\"1e-90\"), \"RAW\")\n            elif group == \"S04\":\n                rows = (\n                    replace(row, value=None, value_state=\"MISSING\"),\n                    replace(row, observation_revision_id=\"zero\", value=Decimal(0)),\n                )\n                assert [r.value for r in schema.from_table(schema.to_table(rows, \"canonical/v1\"))] == [\n                    None,\n                    Decimal(0),\n                ]\n            elif group == \"S05\":\n                r = replace(row, known_from=K.astimezone(timezone(timedelta(hours=5, minutes=30))))\n                assert schema.from_table(schema.to_table((r,), \"canonical/v1\"))[0].known_from == K\n                with pytest.raises(StorageError):\n                    replace(row, known_from=K.replace(tzinfo=None))\n            elif group == \"S06\":\n                assert (\n                    schema.from_table(schema.to_table((row,), \"canonical/v1\"))[0].listing_id == \"00001\"\n                )\n            return\n        db = database(tmp_path)\n        if group.startswith(\"L\"):\n            from test_od09_reconciliation import controls\n    \n            from omegadata.canonical_storage.admission import (\n                ProvenanceLedger,\n                SourceBinding,\n                admit_comparison,\n            )\n            from omegadata.reconciliation.engine import reconcile_context\n    \n            _, x, left, right = controls()\n            ledger = ProvenanceLedger()\n            if group == \"L01\":\n                from omegadata.parsers.contracts import ParseResult\n    \n                v = ParseResult(\"PARSED_UNVERIFIED\", \"a\" * 64)\n                ref = ledger.pin(\"source_observations\", \"parser-control\", v, K)\n                assert ledger.get(ref) == v and not ledger.financial_eligible(ref)\n            elif group == \"L02\":\n>               a = ledger.pin(\"instrument_identity_revisions\", \"identity\", x.universe.identity, K)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:176: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x75fcb44e0a10>\ndomain = 'instrument_identity_revisions', identity = 'identity'\npayload = MemoryIdentityRepository(issuers=(Issuer(issuer_id='issuer-a'),), securities=(Security(security_id='security-a', issue...iew_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.identity/v1'),))\nknown_from = datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc)\n\n    def pin(\n        self,\n        domain: str,\n        identity: str,\n        payload: Any,\n        known_from: datetime | None,\n        *,\n        context: Any = None,\n    ) -> tuple[str, str, str]:\n        from omegadata.canonical_storage.schema import DOMAINS\n    \n        timestamp(known_from)\n        if domain not in DOMAINS or not is_dataclass(payload) or isinstance(payload, type):\n            raise StorageError(\"UPSTREAM_TYPED_RECORD_REQUIRED\")\n        from omegadata import identity as i, session_calendar as c\n        from omegadata.adjustments.contracts import Action\n        from omegadata.identity_adapters import MembershipClaim\n        from omegadata.parsers.contracts import ParseRequest, ParseResult, ParsedBar\n        from omegadata.reconciliation.anomalies import AnomalyRecord\n        from omegadata.reconciliation.reviews import ReviewRevision, CorrectionRevision, ReprocessRequest, ReprocessCompletion\n        from omegadata.universe.contracts import MembershipRevision, MemberDecision\n        allowed = {\n            \"source_observations\": (ParseRequest, ParseResult, ParsedBar, Observation),\n            \"instrument_identity_revisions\": (i.Issuer,i.Security,i.Listing,i.IdentifierClaim),\n            \"listing_lifecycle\": (i.LifecycleEvent,),\n            \"session_calendar\": (c.SessionClaim,c.CoverageClaim),\n            \"corporate_action_revisions\": (Action,),\n            \"adjustment_results\": (BoundResult,),\n            \"universe_membership_revisions\": (MembershipClaim,MembershipRevision),\n            \"universe_snapshots\": (UniverseSnapshot,),\n            \"universe_member_decisions\": (MemberDecision,),\n            \"reconciliation_results\": (ReconciliationResult,),\n            \"anomaly_records\": (AnomalyRecord,),\n            \"review_revisions\": (ReviewRevision,),\n            \"correction_revisions\": (CorrectionRevision,),\n            \"reprocess_requests\": (ReprocessRequest,),\n            \"reprocess_completions\": (ReprocessCompletion,),\n        }\n        if type(payload) not in allowed.get(domain, ()):\n>           raise StorageError(\"UPSTREAM_TYPE_DOMAIN_MISMATCH\")\nE           omegadata.canonical_storage.contracts.StorageError: UPSTREAM_TYPE_DOMAIN_MISMATCH\n\nsrc/omegadata/canonical_storage/admission.py:100: StorageError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_legacy_partition_overwrite_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[before_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_file_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_file_write_before_validation]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_validation_before_install]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_install_before_catalog_commit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_catalog_transaction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_catalog_commit_before_acknowledgement]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fixed-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[overflow]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[zero-scale]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fraction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[negative]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[maximum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[durable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[changed-id]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[join]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[immutable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[unknown-root]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[denied]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[metadata-only]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[forged-authority]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[derived-unbound]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[wrong-domain]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[raw-price-field-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_query_projection_aggregate_and_partition_pruning",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_independently_declared_comparison_scope_rejects_metadata_relabel",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_bound_derived_volume_admission_replays_exact_upstream",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[omitted]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unrelated]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[conflict]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unknown-time]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[restart]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_transitive_dependency_index_uses_pinned_metadata",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[symlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[hardlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_canonical_UTC_retry_and_derived_hard_blocks",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_generic_pin_cannot_bypass_required_observation_index",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_dependency_set_cannot_mutate_existing_pin",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_manifest_semantics_independently_reconciled[partition_identity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_manifest_semantics_independently_reconciled[minimum_trade_date]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_manifest_semantics_independently_reconciled[maximum_known_from]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_manifest_semantics_independently_reconciled[compression]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_manifest_semantics_independently_reconciled[row_count]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_manifest_semantics_independently_reconciled[relative_path]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_version_identity_cannot_alias_different_manifests_across_catalogs",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_strict_metadata_domain_and_reconciliation_admission",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_actual_stable_identity_metadata_join",
+        "outcome": "failed",
+        "reason": "tmp_path = PosixPath('/work/job/tmp/test_actual_stable_identity_me0')\n\n    def test_actual_stable_identity_metadata_join(tmp_path):\n     from omegadata.identity import Listing\n     from omegadata.canonical_storage.contracts import Query\n     db=database(tmp_path);v=commit(db)\n     listing=Listing('00001','control-security','CANARY-X')\n     ref=db.pin_domain('instrument_identity_revisions','listing-reference',listing,K)\n>    out=db.query_join(query=Query(v,'control-dataset',D,D+timedelta(days=1),K,'RAW_UNADJUSTED','AUDIT'),references=(ref,),join_key='listing_id')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:991: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.canonical_storage.store.CanonicalStore object at 0x75fcb3f94710>\n\n    def query_join(\n        self, *, query: Query, references: tuple[tuple[str, str, str], ...], join_key: str | None = None\n    ) -> dict[str, Any]:\n        if len(references) > 1000 or len(set(references)) != len(references):\n            raise StorageError(\"QUERY_RESOURCE_LIMIT\")\n        if join_key not in {None, \"listing_id\", \"security_id\"}:\n            raise StorageError(\"QUERY_JOIN_KEY_UNSUPPORTED\")\n        rows = self.query(query)\n        metadata = tuple(self.read_domain(ref, query.known_at) for ref in references)\n        joined = []\n        if join_key is not None:\n            for row in rows.rows:\n>               key = getattr(row,join_key)\n                      ^^^^^^^^^^^^^^^^^^^^^\nE               AttributeError: 'dict' object has no attribute 'listing_id'\n\nsrc/omegadata/canonical_storage/store.py:824: AttributeError"
+      }
+    ],
+    "start_utc": "2026-11-20T19:41:12.038797+00:00",
+    "end_utc": "2026-11-20T19:41:21.312808+00:00",
+    "elapsed_seconds": 9.274017080999997,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": ".......F................................................................ [ 69%]\n...............................F                                         [100%]\n=================================== FAILURES ===================================\n__________________________ test_od10_acceptance[L02] ___________________________\n\ngroup = 'L02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L02_0')\n\n    @pytest.mark.parametrize(\"group\", GROUPS)\n    def test_od10_acceptance(group, tmp_path):\n        from omegadata.canonical_storage import schema\n        from omegadata.canonical_storage.contracts import StorageError\n    \n        if group.startswith(\"S\"):\n            row = record()\n            if group == \"S01\":\n                assert schema.from_table(schema.to_table((row,), \"canonical/v1\")) == (row,)\n            elif group == \"S02\":\n                value = Decimal(\"0.\" + \"1\" * 90)\n                coded = schema.encode_decimal(value, \"CALCULATION\")\n                assert (\n                    schema.decode_decimal(coded).as_tuple() == value.as_tuple()\n                    and coded[\"fixed\"] is None\n                )\n            elif group == \"S03\":\n                with pytest.raises(StorageError, match=\"PRECISION\"):\n                    schema.encode_decimal(Decimal(\"1e-90\"), \"RAW\")\n            elif group == \"S04\":\n                rows = (\n                    replace(row, value=None, value_state=\"MISSING\"),\n                    replace(row, observation_revision_id=\"zero\", value=Decimal(0)),\n                )\n                assert [r.value for r in schema.from_table(schema.to_table(rows, \"canonical/v1\"))] == [\n                    None,\n                    Decimal(0),\n                ]\n            elif group == \"S05\":\n                r = replace(row, known_from=K.astimezone(timezone(timedelta(hours=5, minutes=30))))\n                assert schema.from_table(schema.to_table((r,), \"canonical/v1\"))[0].known_from == K\n                with pytest.raises(StorageError):\n                    replace(row, known_from=K.replace(tzinfo=None))\n            elif group == \"S06\":\n                assert (\n                    schema.from_table(schema.to_table((row,), \"canonical/v1\"))[0].listing_id == \"00001\"\n                )\n            return\n        db = database(tmp_path)\n        if group.startswith(\"L\"):\n            from test_od09_reconciliation import controls\n    \n            from omegadata.canonical_storage.admission import (\n                ProvenanceLedger,\n                SourceBinding,\n                admit_comparison,\n            )\n            from omegadata.reconciliation.engine import reconcile_context\n    \n            _, x, left, right = controls()\n            ledger = ProvenanceLedger()\n            if group == \"L01\":\n                from omegadata.parsers.contracts import ParseResult\n    \n                v = ParseResult(\"PARSED_UNVERIFIED\", \"a\" * 64)\n                ref = ledger.pin(\"source_observations\", \"parser-control\", v, K)\n                assert ledger.get(ref) == v and not ledger.financial_eligible(ref)\n            elif group == \"L02\":\n>               a = ledger.pin(\"instrument_identity_revisions\", \"identity\", x.universe.identity, K)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:176: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.canonical_storage.admission.ProvenanceLedger object at 0x75fcb44e0a10>\ndomain = 'instrument_identity_revisions', identity = 'identity'\npayload = MemoryIdentityRepository(issuers=(Issuer(issuer_id='issuer-a'),), securities=(Security(security_id='security-a', issue...iew_reference='canary-review'), isin=None, supersedes_claim_id=None, lifecycle='LISTED', version='od06.identity/v1'),))\nknown_from = datetime.datetime(2020, 1, 3, 0, 0, tzinfo=datetime.timezone.utc)\n\n    def pin(\n        self,\n        domain: str,\n        identity: str,\n        payload: Any,\n        known_from: datetime | None,\n        *,\n        context: Any = None,\n    ) -> tuple[str, str, str]:\n        from omegadata.canonical_storage.schema import DOMAINS\n    \n        timestamp(known_from)\n        if domain not in DOMAINS or not is_dataclass(payload) or isinstance(payload, type):\n            raise StorageError(\"UPSTREAM_TYPED_RECORD_REQUIRED\")\n        from omegadata import identity as i, session_calendar as c\n        from omegadata.adjustments.contracts import Action\n        from omegadata.identity_adapters import MembershipClaim\n        from omegadata.parsers.contracts import ParseRequest, ParseResult, ParsedBar\n        from omegadata.reconciliation.anomalies import AnomalyRecord\n        from omegadata.reconciliation.reviews import ReviewRevision, CorrectionRevision, ReprocessRequest, ReprocessCompletion\n        from omegadata.universe.contracts import MembershipRevision, MemberDecision\n        allowed = {\n            \"source_observations\": (ParseRequest, ParseResult, ParsedBar, Observation),\n            \"instrument_identity_revisions\": (i.Issuer,i.Security,i.Listing,i.IdentifierClaim),\n            \"listing_lifecycle\": (i.LifecycleEvent,),\n            \"session_calendar\": (c.SessionClaim,c.CoverageClaim),\n            \"corporate_action_revisions\": (Action,),\n            \"adjustment_results\": (BoundResult,),\n            \"universe_membership_revisions\": (MembershipClaim,MembershipRevision),\n            \"universe_snapshots\": (UniverseSnapshot,),\n            \"universe_member_decisions\": (MemberDecision,),\n            \"reconciliation_results\": (ReconciliationResult,),\n            \"anomaly_records\": (AnomalyRecord,),\n            \"review_revisions\": (ReviewRevision,),\n            \"correction_revisions\": (CorrectionRevision,),\n            \"reprocess_requests\": (ReprocessRequest,),\n            \"reprocess_completions\": (ReprocessCompletion,),\n        }\n        if type(payload) not in allowed.get(domain, ()):\n>           raise StorageError(\"UPSTREAM_TYPE_DOMAIN_MISMATCH\")\nE           omegadata.canonical_storage.contracts.StorageError: UPSTREAM_TYPE_DOMAIN_MISMATCH\n\nsrc/omegadata/canonical_storage/admission.py:100: StorageError\n__________________ test_actual_stable_identity_metadata_join ___________________\n\ntmp_path = PosixPath('/work/job/tmp/test_actual_stable_identity_me0')\n\n    def test_actual_stable_identity_metadata_join(tmp_path):\n     from omegadata.identity import Listing\n     from omegadata.canonical_storage.contracts import Query\n     db=database(tmp_path);v=commit(db)\n     listing=Listing('00001','control-security','CANARY-X')\n     ref=db.pin_domain('instrument_identity_revisions','listing-reference',listing,K)\n>    out=db.query_join(query=Query(v,'control-dataset',D,D+timedelta(days=1),K,'RAW_UNADJUSTED','AUDIT'),references=(ref,),join_key='listing_id')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:991: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.canonical_storage.store.CanonicalStore object at 0x75fcb3f94710>\n\n    def query_join(\n        self, *, query: Query, references: tuple[tuple[str, str, str], ...], join_key: str | None = None\n    ) -> dict[str, Any]:\n        if len(references) > 1000 or len(set(references)) != len(references):\n            raise StorageError(\"QUERY_RESOURCE_LIMIT\")\n        if join_key not in {None, \"listing_id\", \"security_id\"}:\n            raise StorageError(\"QUERY_JOIN_KEY_UNSUPPORTED\")\n        rows = self.query(query)\n        metadata = tuple(self.read_domain(ref, query.known_at) for ref in references)\n        joined = []\n        if join_key is not None:\n            for row in rows.rows:\n>               key = getattr(row,join_key)\n                      ^^^^^^^^^^^^^^^^^^^^^\nE               AttributeError: 'dict' object has no attribute 'listing_id'\n\nsrc/omegadata/canonical_storage/store.py:824: AttributeError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_actual_stable_identity_metadata_join\n2 failed, 102 passed in 7.64s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "d10fcab633fe52c7545640cd92a9c0b8b84a191b566b6aadaf40cea3175550dd"
+}

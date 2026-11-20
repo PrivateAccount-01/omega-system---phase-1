@@ -1,0 +1,101 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10perf-3cc8dc518b-manifest.json",
+    "--manifest-sha256",
+    "e68fdb8f9d59e863a7aa7b79f86bd3bd4c5e086b4cf3b7b2bdc485309614c5bc",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10perf-3cc8dc518b-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10perf-3cc8dc518b/output"
+  ],
+  "start_utc": "2026-11-20T19:44:13.990945+00:00",
+  "end_utc": "2026-11-20T19:46:28.733826+00:00",
+  "seconds": 134.74294060000003,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10perf",
+    "exit_code": 0,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532228]",
+        "net": "net:[4026532235]",
+        "pid": "pid:[4026532233]",
+        "user": "user:[4026532358]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "duckdb_available": false,
+    "scale_class": "NON_MARKET_BOOKKEEPING_ONLY",
+    "financial_observations": 0,
+    "measurements": [
+      {
+        "records": 1000,
+        "build_seconds": 0.03720576099999562,
+        "write_and_commit_seconds": 0.8146754580000106,
+        "verify_seconds": 0.10401313200003415,
+        "filtered_query_seconds": 0.17899486900000738,
+        "expected_filtered_rows": 10,
+        "actual_filtered_rows": 10,
+        "objects": 1,
+        "parquet_bytes": 22802,
+        "catalog_bytes": 139264,
+        "maximum_rss_kib": 183444,
+        "files_scanned": 1,
+        "files_verified": 1,
+        "manifest_digest": "9381343d2d23002c8c46d393df4177106d189aedd12b2dbc22a54477f1f2afb9",
+        "pyarrow": "23.0.1"
+      },
+      {
+        "records": 10000,
+        "build_seconds": 0.6286500879999721,
+        "write_and_commit_seconds": 9.134255230000008,
+        "verify_seconds": 0.9116650579999828,
+        "filtered_query_seconds": 1.6707867700000065,
+        "expected_filtered_rows": 100,
+        "actual_filtered_rows": 100,
+        "objects": 1,
+        "parquet_bytes": 77645,
+        "catalog_bytes": 139264,
+        "maximum_rss_kib": 315412,
+        "files_scanned": 1,
+        "files_verified": 1,
+        "manifest_digest": "162a8ebfc97c9ddc39ff9dee3e2d30393587dd13dfb4c12e5a7331fbca53fea4",
+        "pyarrow": "23.0.1"
+      },
+      {
+        "records": 100000,
+        "build_seconds": 5.649200317000009,
+        "write_and_commit_seconds": 84.99365426600002,
+        "verify_seconds": 7.815332270999988,
+        "filtered_query_seconds": 18.49685407999999,
+        "expected_filtered_rows": 1000,
+        "actual_filtered_rows": 1000,
+        "objects": 1,
+        "parquet_bytes": 643482,
+        "catalog_bytes": 139264,
+        "maximum_rss_kib": 1581556,
+        "files_scanned": 1,
+        "files_verified": 1,
+        "manifest_digest": "589958b7511d320ebe7f62346cdba677ce7349f78a198c11554f66651d645bd9",
+        "pyarrow": "23.0.1"
+      }
+    ]
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "e68fdb8f9d59e863a7aa7b79f86bd3bd4c5e086b4cf3b7b2bdc485309614c5bc"
+}

@@ -1,0 +1,7 @@
+# Negative-first chronology
+
+Frozen initial F01–F28 criteria and actual red/green logs are preserved in support. First run:52 failed/1 passed, with missing new package and a passing legacy overwrite reproduction. Initial Arrow list child-name incompatibility was corrected to the Parquet-compliant element contract. A new init=False test changed its expected exception class to ValueError, and new strict-scope fixture cutoffs were corrected to their actual existing context date; original frozen versions and failures remain available. No historical financial assertion changed.
+
+Subsequent actual failures drove narrow corrections: retry manifest collision; physical scalar/codec mismatch; zero quantum; immutable typed APIs; source scope/index completeness; dependency pin identity; independent manifest semantics; cross-catalog version identity; wrong-domain metadata; reconciliation replay; stable-ID join; lock-free reader initialization; retained Python audit guard compatibility; and final denied-source metadata payload admission.
+
+All106 focused controls passed after the last functional correction. Earlier failed runs, parser/collection syntax incident in a new source append, and initial CRLF-normalizing patch replay failure are retained. The successful final patch is byte-preserving and EOF-aware. Negative-first evidence is engineering evidence, never authentic financial acceptance. See support/negative-chronology.json.

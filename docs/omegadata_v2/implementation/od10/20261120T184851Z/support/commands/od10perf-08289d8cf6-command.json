@@ -1,0 +1,101 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10perf-08289d8cf6-manifest.json",
+    "--manifest-sha256",
+    "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10perf-08289d8cf6-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10perf-08289d8cf6/output"
+  ],
+  "start_utc": "2026-11-20T19:49:40.329901+00:00",
+  "end_utc": "2026-11-20T19:52:01.674634+00:00",
+  "seconds": 141.34485496700006,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10perf",
+    "exit_code": 0,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532356]",
+        "net": "net:[4026532362]",
+        "pid": "pid:[4026532360]",
+        "user": "user:[4026532421]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "duckdb_available": false,
+    "scale_class": "NON_MARKET_BOOKKEEPING_ONLY",
+    "financial_observations": 0,
+    "measurements": [
+      {
+        "records": 1000,
+        "build_seconds": 0.04883882600006473,
+        "write_and_commit_seconds": 0.6634947709999324,
+        "verify_seconds": 0.13250162700001056,
+        "filtered_query_seconds": 0.10460841499991602,
+        "expected_filtered_rows": 10,
+        "actual_filtered_rows": 10,
+        "objects": 1,
+        "parquet_bytes": 22802,
+        "catalog_bytes": 139264,
+        "maximum_rss_kib": 184160,
+        "files_scanned": 1,
+        "files_verified": 1,
+        "manifest_digest": "d325b8dcb4b83c2e669f67609af58aadc98a5c61682b20f125dd37b970edbf7b",
+        "pyarrow": "23.0.1"
+      },
+      {
+        "records": 10000,
+        "build_seconds": 0.4794465359999549,
+        "write_and_commit_seconds": 7.809643359000006,
+        "verify_seconds": 0.9774408929999936,
+        "filtered_query_seconds": 1.0347784560000264,
+        "expected_filtered_rows": 100,
+        "actual_filtered_rows": 100,
+        "objects": 1,
+        "parquet_bytes": 77645,
+        "catalog_bytes": 139264,
+        "maximum_rss_kib": 314072,
+        "files_scanned": 1,
+        "files_verified": 1,
+        "manifest_digest": "0044ef6925b6580ecf6dd352ce263067025d37907f669d1008dd88762a63ac12",
+        "pyarrow": "23.0.1"
+      },
+      {
+        "records": 100000,
+        "build_seconds": 5.274967873999913,
+        "write_and_commit_seconds": 96.69069554700002,
+        "verify_seconds": 11.44568855600005,
+        "filtered_query_seconds": 12.791777598000067,
+        "expected_filtered_rows": 1000,
+        "actual_filtered_rows": 1000,
+        "objects": 1,
+        "parquet_bytes": 643482,
+        "catalog_bytes": 139264,
+        "maximum_rss_kib": 1597552,
+        "files_scanned": 1,
+        "files_verified": 1,
+        "manifest_digest": "03a89b8b76ad3c9cfd3e435283c27353eb18c3a2fb9ad95211924a2b4be7c4c3",
+        "pyarrow": "23.0.1"
+      }
+    ]
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181"
+}

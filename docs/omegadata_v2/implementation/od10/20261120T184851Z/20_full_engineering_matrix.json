@@ -1,0 +1,1020 @@
+{
+  "collection": {
+    "command_id": "collection-9a7053bcb1-command",
+    "command": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od10-20261120T184851Z/logs/collection-9a7053bcb1-manifest.json",
+      "--manifest-sha256",
+      "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+      "--policy",
+      "/home/parilrupani/omega-od10-20261120T184851Z/logs/collection-9a7053bcb1-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od10-20261120T184851Z/collection-9a7053bcb1/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+    "worker_directory": "/work/repo",
+    "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+    "source_manifest_sha256": "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+    "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "start_utc": "2026-11-20T19:55:47.683133+00:00",
+    "end_utc": "2026-11-20T19:55:53.496209+00:00",
+    "exit_code": 0,
+    "counts": {},
+    "deselected": 0,
+    "evidence_path": "support/commands/collection-9a7053bcb1-command.json",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532224]",
+        "net": "net:[4026532229]",
+        "pid": "pid:[4026532227]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "test_classes": {
+    "C": 4,
+    "A": 1511,
+    "B": 4
+  },
+  "commands": {
+    "od10": {
+      "command_id": "od10-ec1d3542ee-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-ec1d3542ee-manifest.json",
+        "--manifest-sha256",
+        "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-ec1d3542ee-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od10-ec1d3542ee/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:55:35.383469+00:00",
+      "end_utc": "2026-11-20T19:55:47.526488+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 106
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/od10-ec1d3542ee-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532224]",
+          "net": "net:[4026532229]",
+          "pid": "pid:[4026532227]",
+          "user": "user:[4026532292]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "collection": {
+      "command_id": "collection-9a7053bcb1-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/collection-9a7053bcb1-manifest.json",
+        "--manifest-sha256",
+        "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/collection-9a7053bcb1-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/collection-9a7053bcb1/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:55:47.683133+00:00",
+      "end_utc": "2026-11-20T19:55:53.496209+00:00",
+      "exit_code": 0,
+      "counts": {},
+      "deselected": 0,
+      "evidence_path": "support/commands/collection-9a7053bcb1-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532224]",
+          "net": "net:[4026532229]",
+          "pid": "pid:[4026532227]",
+          "user": "user:[4026532293]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "A": {
+      "command_id": "A-302d555065-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/A-302d555065-manifest.json",
+        "--manifest-sha256",
+        "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/A-302d555065-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/A-302d555065/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:57:57.675283+00:00",
+      "end_utc": "2026-11-20T19:59:03.277799+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 1499,
+        "skipped": 12
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/A-302d555065-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532223]",
+          "net": "net:[4026532228]",
+          "pid": "pid:[4026532226]",
+          "user": "user:[4026532292]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "diagnostic": {
+      "command_id": "diagnostic-4e1e50f576-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/diagnostic-4e1e50f576-manifest.json",
+        "--manifest-sha256",
+        "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/diagnostic-4e1e50f576-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/diagnostic-4e1e50f576/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:59:03.419446+00:00",
+      "end_utc": "2026-11-20T20:00:10.037795+00:00",
+      "exit_code": 1,
+      "counts": {
+        "passed": 1499,
+        "failed": 4,
+        "skipped": 12
+      },
+      "deselected": 4,
+      "evidence_path": "support/commands/diagnostic-4e1e50f576-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532220]",
+          "net": "net:[4026532226]",
+          "pid": "pid:[4026532224]",
+          "user": "user:[4026532290]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "parser": {
+      "command_id": "parser-71ec864f6e-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/parser-71ec864f6e-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/parser-71ec864f6e-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/parser-71ec864f6e/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:49:21.344375+00:00",
+      "end_utc": "2026-11-20T19:49:26.276376+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 170,
+        "skipped": 1
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/parser-71ec864f6e-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532291]",
+          "net": "net:[4026532296]",
+          "pid": "pid:[4026532294]",
+          "user": "user:[4026532355]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od06": {
+      "command_id": "od06-8807e0594d-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od06-8807e0594d-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od06-8807e0594d-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od06-8807e0594d/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:49:26.486158+00:00",
+      "end_utc": "2026-11-20T19:49:31.417390+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 66
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/od06-8807e0594d-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532292]",
+          "net": "net:[4026532297]",
+          "pid": "pid:[4026532295]",
+          "user": "user:[4026532357]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "foundation": {
+      "command_id": "foundation-80fb5a76c7-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/foundation-80fb5a76c7-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/foundation-80fb5a76c7-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/foundation-80fb5a76c7/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:49:31.581147+00:00",
+      "end_utc": "2026-11-20T19:49:39.348145+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 87
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/foundation-80fb5a76c7-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532292]",
+          "net": "net:[4026532297]",
+          "pid": "pid:[4026532295]",
+          "user": "user:[4026532356]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od07": {
+      "command_id": "od07-178c6525e4-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od07-178c6525e4-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od07-178c6525e4-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od07-178c6525e4/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:49:39.554532+00:00",
+      "end_utc": "2026-11-20T19:49:46.698964+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 100
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/od07-178c6525e4-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532293]",
+          "net": "net:[4026532298]",
+          "pid": "pid:[4026532296]",
+          "user": "user:[4026532425]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od07final": {
+      "command_id": "od07final-e3d289517c-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od07final-e3d289517c-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od07final-e3d289517c-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od07final-e3d289517c/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:49:46.932426+00:00",
+      "end_utc": "2026-11-20T19:49:55.343531+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 84
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/od07final-e3d289517c-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532292]",
+          "net": "net:[4026532297]",
+          "pid": "pid:[4026532295]",
+          "user": "user:[4026532357]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od08": {
+      "command_id": "od08-a7ad8767e2-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od08-a7ad8767e2-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od08-a7ad8767e2-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od08-a7ad8767e2/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:49:55.523611+00:00",
+      "end_utc": "2026-11-20T19:50:06.123244+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 92
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/od08-a7ad8767e2-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532293]",
+          "net": "net:[4026532298]",
+          "pid": "pid:[4026532296]",
+          "user": "user:[4026532423]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "stagea": {
+      "command_id": "stagea-f90ca6a96e-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/stagea-f90ca6a96e-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/stagea-f90ca6a96e-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/stagea-f90ca6a96e/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:50:06.323243+00:00",
+      "end_utc": "2026-11-20T19:50:15.371578+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 37
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/stagea-f90ca6a96e-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532292]",
+          "net": "net:[4026532297]",
+          "pid": "pid:[4026532295]",
+          "user": "user:[4026532357]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od09": {
+      "command_id": "od09-f1064f69fd-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od09-f1064f69fd-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od09-f1064f69fd-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od09-f1064f69fd/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:50:15.693377+00:00",
+      "end_utc": "2026-11-20T19:50:28.793226+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 83
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/od09-f1064f69fd-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532293]",
+          "net": "net:[4026532298]",
+          "pid": "pid:[4026532296]",
+          "user": "user:[4026532489]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "focused": {
+      "command_id": "focused-7b257795be-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/focused-7b257795be-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/focused-7b257795be-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/focused-7b257795be/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:50:29.001174+00:00",
+      "end_utc": "2026-11-20T19:50:34.110931+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 33
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/focused-7b257795be-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532293]",
+          "net": "net:[4026532298]",
+          "pid": "pid:[4026532296]",
+          "user": "user:[4026532424]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "presence": {
+      "command_id": "presence-5537cf6143-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/presence-5537cf6143-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/presence-5537cf6143-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/presence-5537cf6143/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:50:34.407973+00:00",
+      "end_utc": "2026-11-20T19:50:45.923832+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 40,
+        "skipped": 1
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/presence-5537cf6143-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532294]",
+          "net": "net:[4026532299]",
+          "pid": "pid:[4026532297]",
+          "user": "user:[4026532430]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "W": {
+      "command_id": "W-fe8fb3d128-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/W-fe8fb3d128-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/W-fe8fb3d128-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/W-fe8fb3d128/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:50:46.134227+00:00",
+      "end_utc": "2026-11-20T19:50:51.485455+00:00",
+      "exit_code": 0,
+      "counts": {
+        "passed": 39
+      },
+      "deselected": 0,
+      "evidence_path": "support/commands/W-fe8fb3d128-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532293]",
+          "net": "net:[4026532298]",
+          "pid": "pid:[4026532296]",
+          "user": "user:[4026532425]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "mypy": {
+      "command_id": "mypy-b00a521652-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/mypy-b00a521652-manifest.json",
+        "--manifest-sha256",
+        "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/mypy-b00a521652-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/mypy-b00a521652/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "db61657e2616603cf32a28d81979b30ab7e70dc5ab371854511a05984774d699",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:55:53.647719+00:00",
+      "end_utc": "2026-11-20T19:56:12.429150+00:00",
+      "exit_code": 0,
+      "counts": {},
+      "deselected": 0,
+      "evidence_path": "support/commands/mypy-b00a521652-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532224]",
+          "net": "net:[4026532229]",
+          "pid": "pid:[4026532227]",
+          "user": "user:[4026532292]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "pip": {
+      "command_id": "pip-ede9c5cd33-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/pip-ede9c5cd33-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/pip-ede9c5cd33-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/pip-ede9c5cd33/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:51:24.904222+00:00",
+      "end_utc": "2026-11-20T19:51:31.568459+00:00",
+      "exit_code": 0,
+      "counts": {},
+      "deselected": 0,
+      "evidence_path": "support/commands/pip-ede9c5cd33-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532294]",
+          "net": "net:[4026532299]",
+          "pid": "pid:[4026532297]",
+          "user": "user:[4026532553]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "compile": {
+      "command_id": "compile-fb2a9ad378-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/compile-fb2a9ad378-manifest.json",
+        "--manifest-sha256",
+        "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/compile-fb2a9ad378-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/compile-fb2a9ad378/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "481a9e76cc40e8151cb4b87e9b0e4710ef4e85face50b535dea11e3a5e73d8a9",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T20:00:10.191368+00:00",
+      "end_utc": "2026-11-20T20:00:12.534182+00:00",
+      "exit_code": 0,
+      "counts": {},
+      "deselected": 0,
+      "evidence_path": "support/commands/compile-fb2a9ad378-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532221]",
+          "net": "net:[4026532226]",
+          "pid": "pid:[4026532224]",
+          "user": "user:[4026532291]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od10perf": {
+      "command_id": "od10perf-08289d8cf6-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10perf-08289d8cf6-manifest.json",
+        "--manifest-sha256",
+        "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10perf-08289d8cf6-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od10perf-08289d8cf6/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+      "runtime": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "start_utc": "2026-11-20T19:49:40.329901+00:00",
+      "end_utc": "2026-11-20T19:52:01.674634+00:00",
+      "exit_code": 0,
+      "counts": {},
+      "deselected": 0,
+      "evidence_path": "support/commands/od10perf-08289d8cf6-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532356]",
+          "net": "net:[4026532362]",
+          "pid": "pid:[4026532360]",
+          "user": "user:[4026532421]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    },
+    "od10detail": {
+      "command_id": "od10detail-b5a1d99f72-command",
+      "command": [
+        "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+        "-B",
+        "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+        "launch",
+        "--manifest",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10detail-b5a1d99f72-manifest.json",
+        "--manifest-sha256",
+        "da5d6fb8bc533becd7074b2963cd0266b15be2b264488c035caeb47a9e48329c",
+        "--policy",
+        "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10detail-b5a1d99f72-policy.json",
+        "--output",
+        "/home/parilrupani/omega-od10-20261120T184851Z/od10detail-b5a1d99f72/output"
+      ],
+      "working_directory": "/home/parilrupani/omega-od10-20261120T184851Z",
+      "worker_directory": "/work/repo",
+      "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+      "source_manifest_sha256": "da5d6fb8bc533becd7074b2963cd0266b15be2b264488c035caeb47a9e48329c",
+      "runtime": null,
+      "start_utc": "2026-11-20T19:53:45.765027+00:00",
+      "end_utc": "2026-11-20T19:53:51.359585+00:00",
+      "exit_code": 0,
+      "counts": {},
+      "deselected": 0,
+      "evidence_path": "support/commands/od10detail-b5a1d99f72-command.json",
+      "boundary": {
+        "backend": "bwrap+seccomp/v1",
+        "worker_namespaces": {
+          "mnt": "mnt:[4026532223]",
+          "net": "net:[4026532228]",
+          "pid": "pid:[4026532226]",
+          "user": "user:[4026532292]"
+        },
+        "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+        "verified": true,
+        "source_mounts": "EXACT_READ_ONLY",
+        "no_new_privs": true,
+        "seccomp_mode": 2
+      }
+    }
+  },
+  "ruff": {
+    "argv": [
+      "/usr/bin/bwrap",
+      "--unshare-all",
+      "--die-with-parent",
+      "--new-session",
+      "--cap-drop",
+      "ALL",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--symlink",
+      "usr/lib",
+      "/lib",
+      "--symlink",
+      "usr/lib64",
+      "/lib64",
+      "--ro-bind",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--tmpfs",
+      "/tmp",
+      "--ro-bind",
+      "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/src",
+      "/repo/src",
+      "--ro-bind",
+      "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts",
+      "/repo/scripts",
+      "--ro-bind",
+      "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/tests",
+      "/repo/tests",
+      "--ro-bind",
+      "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/pyproject.toml",
+      "/repo/pyproject.toml",
+      "--chdir",
+      "/repo",
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/ruff",
+      "check",
+      "--no-cache",
+      "src/omegadata",
+      "scripts",
+      "tests"
+    ],
+    "start_utc": "2026-11-20T19:59:45.610254+00:00",
+    "end_utc": "2026-11-20T19:59:45.660595+00:00",
+    "elapsed_seconds": 0.05033520500001032,
+    "exit_code": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": "",
+    "scope": "STATIC_ONLY read-only data-free source mounts, no original mount; does not certify child execution policy"
+  },
+  "B_actual_failures": [
+    "tests/unit/test_adjustment_reference_corpus.py::test_reference_corpus_official_nse_source_pack_cases",
+    "tests/unit/test_universe_manager.py::test_seed_pack_backfill_reproduces_reference_snapshots",
+    "tests/unit/test_universe_manager.py::test_seed_pack_preserves_knowledge_vs_effective_date_semantics",
+    "tests/unit/test_universe_manager.py::test_seed_pack_backfill_works_with_production_autoflush_setting"
+  ],
+  "C": {
+    "count": 4,
+    "executed": 0,
+    "status": "NOT_RUN_AUTHORIZATION_AND_AUTHENTIC_SOURCE_REQUIRED"
+  },
+  "diagnostic_independent": true,
+  "full_suite_coverage": {
+    "covered_lines": 10810,
+    "num_statements": 12439,
+    "percent_covered": 83.09615957130099,
+    "percent_covered_display": "83",
+    "missing_lines": 1629,
+    "excluded_lines": 19,
+    "percent_statements_covered": 86.90409196880778,
+    "percent_statements_covered_display": "87",
+    "num_branches": 4356,
+    "num_partial_branches": 878,
+    "covered_branches": 3146,
+    "missing_branches": 1210,
+    "percent_branches_covered": 72.22222222222223,
+    "percent_branches_covered_display": "72"
+  },
+  "source_hash_scope": "Exact per-command3861file manifests; final benchmark script-only formatting changes do not alter application/test behavior",
+  "original_expectations_preserved": true,
+  "historical_baseline": {
+    "status": "ARCHIVED_NOT_FRESH",
+    "collection": 1413,
+    "A": 1405,
+    "B": 4,
+    "C": 4,
+    "A_passed": 1393,
+    "A_skipped": 12,
+    "diagnostic_failed": 4
+  }
+}

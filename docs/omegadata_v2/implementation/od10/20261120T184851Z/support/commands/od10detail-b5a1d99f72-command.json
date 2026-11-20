@@ -1,0 +1,100 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10detail-b5a1d99f72-manifest.json",
+    "--manifest-sha256",
+    "da5d6fb8bc533becd7074b2963cd0266b15be2b264488c035caeb47a9e48329c",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10detail-b5a1d99f72-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10detail-b5a1d99f72/output"
+  ],
+  "start_utc": "2026-11-20T19:53:45.765027+00:00",
+  "end_utc": "2026-11-20T19:53:51.359585+00:00",
+  "seconds": 5.594542428000068,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10detail",
+    "exit_code": 0,
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532292]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    },
+    "financial_observations": 0,
+    "records": 1000,
+    "write_commit_seconds": 0.9306704310000669,
+    "full_read_query_seconds": 0.1495889640000314,
+    "read_rows_per_second": 6684.985130318772,
+    "write_rows_per_second": 1074.4942212523438,
+    "manifest_seconds": 0.0007036980000520998,
+    "file_read_seconds": 9.367500001644657e-05,
+    "checksum_seconds": 1.863599993612297e-05,
+    "schema_conversion_seconds": 0.9590911889999916,
+    "join_seconds": 0.17884184499996536,
+    "restart_seconds": 0.001299420000009377,
+    "historical_replay_seconds": 0.1598394319998988,
+    "compression_ratio_uncompressed_to_file": 1.7727772685609533,
+    "variants": [
+      {
+        "compression": "zstd",
+        "row_group_size": 256,
+        "bytes": 55819,
+        "write_seconds": 0.005723830999954771,
+        "logical_roundtrip": true
+      },
+      {
+        "compression": "zstd",
+        "row_group_size": 8192,
+        "bytes": 21764,
+        "write_seconds": 0.0031412230000569252,
+        "logical_roundtrip": true
+      },
+      {
+        "compression": "snappy",
+        "row_group_size": 256,
+        "bytes": 61166,
+        "write_seconds": 0.004668529000014132,
+        "logical_roundtrip": true
+      },
+      {
+        "compression": "snappy",
+        "row_group_size": 8192,
+        "bytes": 29924,
+        "write_seconds": 0.0023263940000788352,
+        "logical_roundtrip": true
+      }
+    ],
+    "dependency_query_plan": [
+      [
+        2,
+        0,
+        0,
+        "SEARCH dataset_dependency USING COVERING INDEX dependency_reverse (kind=? AND identity=?)"
+      ]
+    ],
+    "catalog_bytes": 139264,
+    "duckdb": "NOT_INSTALLED_NO_PROVISIONING",
+    "atomicity_scope": "SQLITE_READER_VISIBILITY",
+    "row_group_choice": "8192/zstd bounds small-file overhead; measured alternatives retained, no universal optimality claim"
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "da5d6fb8bc533becd7074b2963cd0266b15be2b264488c035caeb47a9e48329c"
+}

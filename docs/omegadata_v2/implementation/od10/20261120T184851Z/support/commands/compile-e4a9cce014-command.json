@@ -1,0 +1,55 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/compile-e4a9cce014-manifest.json",
+    "--manifest-sha256",
+    "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/compile-e4a9cce014-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/compile-e4a9cce014/output"
+  ],
+  "start_utc": "2026-11-20T19:51:31.792492+00:00",
+  "end_utc": "2026-11-20T19:51:37.023079+00:00",
+  "seconds": 5.230584285000077,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-20T19:51:36.530123+00:00",
+    "end_utc": "2026-11-20T19:51:36.982179+00:00",
+    "elapsed_seconds": 0.45205475399995976,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532294]",
+        "net": "net:[4026532299]",
+        "pid": "pid:[4026532297]",
+        "user": "user:[4026532427]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "5e5ee3a741ec94a8d827a45ddd3e89441978b76235baf8ec352033023ab9d181"
+}

@@ -1,0 +1,321 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-c6e7c2b189-manifest.json",
+    "--manifest-sha256",
+    "bc94270f56646d4e93bcbf98657c4e2aa5b8c3cef9b6e2b2ec34c9f4c7ea6c4a",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-c6e7c2b189-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10-c6e7c2b189/output"
+  ],
+  "start_utc": "2026-11-20T18:53:15.764749+00:00",
+  "end_utc": "2026-11-20T18:53:22.184421+00:00",
+  "seconds": 6.4196460779999995,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10",
+    "exit_code": 1,
+    "counts": {
+      "failed": 52,
+      "passed": 1
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S01]",
+        "outcome": "failed",
+        "reason": "group = 'S01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S02]",
+        "outcome": "failed",
+        "reason": "group = 'S02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S03]",
+        "outcome": "failed",
+        "reason": "group = 'S03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S04]",
+        "outcome": "failed",
+        "reason": "group = 'S04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S05]",
+        "outcome": "failed",
+        "reason": "group = 'S05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S06]",
+        "outcome": "failed",
+        "reason": "group = 'S06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L01]",
+        "outcome": "failed",
+        "reason": "group = 'L01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]",
+        "outcome": "failed",
+        "reason": "group = 'L02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L03]",
+        "outcome": "failed",
+        "reason": "group = 'L03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L04]",
+        "outcome": "failed",
+        "reason": "group = 'L04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L05]",
+        "outcome": "failed",
+        "reason": "group = 'L05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L06]",
+        "outcome": "failed",
+        "reason": "group = 'L06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L07]",
+        "outcome": "failed",
+        "reason": "group = 'L07', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L07_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V01]",
+        "outcome": "failed",
+        "reason": "group = 'V01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V02]",
+        "outcome": "failed",
+        "reason": "group = 'V02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V03]",
+        "outcome": "failed",
+        "reason": "group = 'V03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V04]",
+        "outcome": "failed",
+        "reason": "group = 'V04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V05]",
+        "outcome": "failed",
+        "reason": "group = 'V05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M01]",
+        "outcome": "failed",
+        "reason": "group = 'M01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M02]",
+        "outcome": "failed",
+        "reason": "group = 'M02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M03]",
+        "outcome": "failed",
+        "reason": "group = 'M03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M04]",
+        "outcome": "failed",
+        "reason": "group = 'M04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M05]",
+        "outcome": "failed",
+        "reason": "group = 'M05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M06]",
+        "outcome": "failed",
+        "reason": "group = 'M06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T01]",
+        "outcome": "failed",
+        "reason": "group = 'T01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T02]",
+        "outcome": "failed",
+        "reason": "group = 'T02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T03]",
+        "outcome": "failed",
+        "reason": "group = 'T03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T04]",
+        "outcome": "failed",
+        "reason": "group = 'T04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T05]",
+        "outcome": "failed",
+        "reason": "group = 'T05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T06]",
+        "outcome": "failed",
+        "reason": "group = 'T06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C01]",
+        "outcome": "failed",
+        "reason": "group = 'C01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C02]",
+        "outcome": "failed",
+        "reason": "group = 'C02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C03]",
+        "outcome": "failed",
+        "reason": "group = 'C03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C04]",
+        "outcome": "failed",
+        "reason": "group = 'C04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E01]",
+        "outcome": "failed",
+        "reason": "group = 'E01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E02]",
+        "outcome": "failed",
+        "reason": "group = 'E02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E03]",
+        "outcome": "failed",
+        "reason": "group = 'E03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E04]",
+        "outcome": "failed",
+        "reason": "group = 'E04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q01]",
+        "outcome": "failed",
+        "reason": "group = 'Q01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q02]",
+        "outcome": "failed",
+        "reason": "group = 'Q02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q03]",
+        "outcome": "failed",
+        "reason": "group = 'Q03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q04]",
+        "outcome": "failed",
+        "reason": "group = 'Q04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q05]",
+        "outcome": "failed",
+        "reason": "group = 'Q05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q06]",
+        "outcome": "failed",
+        "reason": "group = 'Q06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q07]",
+        "outcome": "failed",
+        "reason": "group = 'Q07', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q07_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R01]",
+        "outcome": "failed",
+        "reason": "group = 'R01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_R01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R02]",
+        "outcome": "failed",
+        "reason": "group = 'R02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_R02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R03]",
+        "outcome": "failed",
+        "reason": "group = 'R03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_R03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G01]",
+        "outcome": "failed",
+        "reason": "group = 'G01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G02]",
+        "outcome": "failed",
+        "reason": "group = 'G02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G03]",
+        "outcome": "failed",
+        "reason": "group = 'G03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G04]",
+        "outcome": "failed",
+        "reason": "group = 'G04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_legacy_partition_overwrite_reproduction",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-20T18:53:17.506437+00:00",
+    "end_utc": "2026-11-20T18:53:21.624244+00:00",
+    "elapsed_seconds": 4.117811622000001,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.                    [100%]\n=================================== FAILURES ===================================\n__________________________ test_od10_acceptance[S01] ___________________________\n\ngroup = 'S01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[S02] ___________________________\n\ngroup = 'S02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[S03] ___________________________\n\ngroup = 'S03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[S04] ___________________________\n\ngroup = 'S04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[S05] ___________________________\n\ngroup = 'S05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[S06] ___________________________\n\ngroup = 'S06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_S06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[L01] ___________________________\n\ngroup = 'L01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[L02] ___________________________\n\ngroup = 'L02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[L03] ___________________________\n\ngroup = 'L03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[L04] ___________________________\n\ngroup = 'L04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[L05] ___________________________\n\ngroup = 'L05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[L06] ___________________________\n\ngroup = 'L06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[L07] ___________________________\n\ngroup = 'L07', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_L07_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[V01] ___________________________\n\ngroup = 'V01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[V02] ___________________________\n\ngroup = 'V02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[V03] ___________________________\n\ngroup = 'V03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[V04] ___________________________\n\ngroup = 'V04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[V05] ___________________________\n\ngroup = 'V05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_V05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[M01] ___________________________\n\ngroup = 'M01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[M02] ___________________________\n\ngroup = 'M02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[M03] ___________________________\n\ngroup = 'M03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[M04] ___________________________\n\ngroup = 'M04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[M05] ___________________________\n\ngroup = 'M05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[M06] ___________________________\n\ngroup = 'M06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_M06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[T01] ___________________________\n\ngroup = 'T01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[T02] ___________________________\n\ngroup = 'T02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[T03] ___________________________\n\ngroup = 'T03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[T04] ___________________________\n\ngroup = 'T04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[T05] ___________________________\n\ngroup = 'T05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[T06] ___________________________\n\ngroup = 'T06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_T06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[C01] ___________________________\n\ngroup = 'C01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[C02] ___________________________\n\ngroup = 'C02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[C03] ___________________________\n\ngroup = 'C03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[C04] ___________________________\n\ngroup = 'C04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_C04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[E01] ___________________________\n\ngroup = 'E01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[E02] ___________________________\n\ngroup = 'E02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[E03] ___________________________\n\ngroup = 'E03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[E04] ___________________________\n\ngroup = 'E04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_E04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[Q01] ___________________________\n\ngroup = 'Q01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[Q02] ___________________________\n\ngroup = 'Q02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[Q03] ___________________________\n\ngroup = 'Q03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[Q04] ___________________________\n\ngroup = 'Q04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[Q05] ___________________________\n\ngroup = 'Q05', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q05_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[Q06] ___________________________\n\ngroup = 'Q06', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q06_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[Q07] ___________________________\n\ngroup = 'Q07', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_Q07_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[R01] ___________________________\n\ngroup = 'R01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_R01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[R02] ___________________________\n\ngroup = 'R02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_R02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[R03] ___________________________\n\ngroup = 'R03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_R03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[G01] ___________________________\n\ngroup = 'G01', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G01_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[G02] ___________________________\n\ngroup = 'G02', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G02_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[G03] ___________________________\n\ngroup = 'G03', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G03_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n__________________________ test_od10_acceptance[G04] ___________________________\n\ngroup = 'G04', tmp_path = PosixPath('/work/job/tmp/test_od10_acceptance_G04_0')\n\n    @pytest.mark.parametrize('group',GROUPS)\n    def test_od10_acceptance(group,tmp_path):\n>    from omegadata.canonical_storage import schema\nE    ModuleNotFoundError: No module named 'omegadata.canonical_storage'\n\ntests/unit/test_od10_canonical_storage.py:35: ModuleNotFoundError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S05]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S06]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L05]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L06]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L07]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V05]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M05]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M06]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T05]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T06]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q04]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q05]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q06]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q07]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G01]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G02]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G03]\nFAILED tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G04]\n52 failed, 1 passed in 2.39s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "bc94270f56646d4e93bcbf98657c4e2aa5b8c3cef9b6e2b2ec34c9f4c7ea6c4a"
+}

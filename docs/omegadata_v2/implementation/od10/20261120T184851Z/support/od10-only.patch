@@ -1,0 +1,3499 @@
+--- /dev/null
++++ b/scripts/od10_isolated_jobs.py
+@@ -0,0 +1,97 @@
++"""Trusted OD10 experiment adapter; unchanged worker seccomp and namespace contract.
++
++The template is a hash-pinned successful accepted-launcher command. Only fresh
++/work output, exact policy input and one explicitly owned generated-canary mount
++are substituted. No source discovery, original mount, subprocess from worker,
++network grant, cleanup or production invocation is provided.
++"""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import subprocess
++from pathlib import Path
++from typing import Any
++
++
++def start_worker(
++    template: Path,
++    template_sha256: str,
++    policy_template: Path,
++    output: Path,
++    shared: Path,
++    owned_root: Path,
++    role: dict[str, Any],
++) -> tuple[subprocess.Popen[str], dict[str, Any]]:
++    raw = template.read_bytes()
++    if hashlib.sha256(raw).hexdigest() != template_sha256:
++        raise ValueError("LAUNCH_TEMPLATE_PIN")
++    if (
++        output.exists()
++        or not output.is_relative_to(owned_root)
++        or not shared.is_relative_to(owned_root)
++        or output == shared
++    ):
++        raise ValueError("EXPERIMENT_SCOPE")
++    if not owned_root.is_absolute() or ".." in owned_root.parts:
++        raise ValueError("EXPERIMENT_SCOPE")
++    for p in (*shared.parents, shared, *output.parent.parents, output.parent):
++        if p.is_symlink():
++            raise ValueError("EXPERIMENT_LINK_ESCAPE")
++    if (shared / "NON_MARKET_SHARED.json").read_text() != '{"class":"OD10_NON_MARKET_SHARED/v1"}':
++        raise ValueError("EXPERIMENT_OWNERSHIP")
++    if shared.stat().st_dev != owned_root.stat().st_dev:
++        raise ValueError("EXPERIMENT_DEVICE")
++    output.mkdir(mode=0o700)
++    base = json.loads(raw)
++    argv = base["argv"]
++    config = json.loads(policy_template.read_bytes())
++    if argv[0] != "/usr/bin/bwrap" or base["exit_code"] != 0:
++        raise ValueError("ACCEPTED_TEMPLATE_REQUIRED")
++    for flag in (
++        "--unshare-all",
++        "--die-with-parent",
++        "--new-session",
++        "--cap-drop",
++        "--clearenv",
++        "--remount-ro",
++    ):
++        if flag not in argv:
++            raise ValueError("BOUNDARY_FLAGS_REQUIRED")
++    if argv[-2:] != ["/input/scripts/od05x_isolated_runner.py", "worker"]:
++        raise ValueError("WORKER_ENTRYPOINT")
++    if role.get("mode") not in {"initial", "attempt", "recover", "race", "reader"}:
++        raise ValueError("EXPERIMENT_ROLE")
++    config = {**config, "job": "od10proc", "od10_role": role}
++    policy = output.parent / (output.name + "-policy.json")
++    with policy.open("x") as f:
++        json.dump(config, f, indent=2)
++    args = list(argv)
++    bind = args.index("--bind")
++    if args[bind + 2] != "/work":
++        raise ValueError("WORKSPACE_BIND_REQUIRED")
++    args[bind + 1] = str(output)
++    pos = args.index("/policy/config.json")
++    if args[pos - 2] != "--ro-bind":
++        raise ValueError("POLICY_BIND_REQUIRED")
++    args[pos - 1] = str(policy)
++    pos = args.index("--remount-ro")
++    args[pos:pos] = ["--bind", str(shared), "/work/shared"]
++    # Existing seccomp denies fork/exec/network inside worker. Only trusted host launcher starts it.
++    process = subprocess.Popen(
++        args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, start_new_session=True
++    )
++    record = {
++        "argv": args,
++        "policy_sha256": hashlib.sha256(policy.read_bytes()).hexdigest(),
++        "template_sha256": template_sha256,
++        "global_launcher_pid": process.pid,
++        "role": role,
++        "shared_class": "OD10_NON_MARKET_SHARED/v1",
++        "isolation_weakened": False,
++        "original_mounts_added": False,
++    }
++    with (output.parent / (output.name + "-launch.json")).open("x") as f:
++        json.dump(record, f, indent=2)
++    return process, record
+--- /dev/null
++++ b/scripts/od10_structural_experiments.py
+@@ -0,0 +1,325 @@
++"""Only non-market storage experiments; invoked after native boundary proof."""
++
++from __future__ import annotations
++
++import importlib.util
++import json
++import os
++import sys
++import time
++from datetime import UTC, datetime
++from pathlib import Path
++from typing import Any
++
++
++def run_process(config: dict[str, Any]) -> int:
++    import od05x_isolated_runner as boundary
++
++    boundary.assert_boundary()
++    from decimal import Decimal
++
++    from test_od10_canonical_storage import commit, database, query, record
++
++    from omegadata.canonical_storage.contracts import StorageError
++
++    output = Path("/work/job")
++    output.mkdir()
++    shared = Path("/work/shared")
++    role = config["od10_role"]
++    tick = time.monotonic()
++    start = datetime.now(UTC).isoformat()
++    if role["mode"] == "reader":
++        from omegadata.canonical_storage.store import CanonicalStore
++
++        db = CanonicalStore(shared / "store", disposable_root=shared, read_only=True)
++    else:
++        db = database(shared)
++    result: dict[str, Any] = {
++        "mode": role["mode"],
++        "start_utc": start,
++        "python": sys.version,
++        "pid_in_namespace": os.getpid(),
++        "boundary": boundary.assert_boundary(),
++        "financial_observations": 0,
++    }
++    if role["mode"] == "initial":
++        v = commit(db)
++        (shared / "initial.json").write_text(json.dumps({"version": v, "manifest": db.manifest(v)}))
++        result["version"] = v
++    else:
++        initial = json.loads((shared / "initial.json").read_bytes())
++        v = initial["version"]
++        if role["mode"] in {"attempt", "recover"}:
++
++            def fault(at: str) -> None:
++                if role["mode"] == "attempt" and at == role["phase"]:
++                    (shared / "reached.json").write_text(
++                        json.dumps(
++                            {
++                                "phase": at,
++                                "original_verified": db.verify(v)["verified"],
++                                "operation_visible": db.operation_version("process-interrupted"),
++                            }
++                        )
++                    )
++                    while True:
++                        time.sleep(0.01)
++
++            old = db.operation_version("process-interrupted")
++            new = commit(db, op="process-interrupted", parent=v, hook=fault)
++            result.update(
++                old_version=v,
++                new_version=new,
++                retry_recognized=old == new,
++                old_bytes_preserved=db.manifest(v) == initial["manifest"],
++                old_query_rows=len(query(db, v).rows),
++                new_query_rows=len(query(db, new).rows),
++                orphans=db.orphans(),
++            )
++            if (
++                result["old_query_rows"] != 1
++                or result["new_query_rows"] != 1
++                or not result["old_bytes_preserved"]
++            ):
++                raise ValueError("RECOVERY_NOT_REPRODUCIBLE")
++        elif role["mode"] == "reader":
++            result.update(
++                old_rows=len(query(db, v).rows),
++                operation_visible=db.operation_version("process-interrupted"),
++                old_bytes_preserved=db.manifest(v) == initial["manifest"],
++            )
++            if result["old_rows"] != 1 or not result["old_bytes_preserved"]:
++                raise ValueError("PARTIAL_READER_VISIBILITY")
++        elif role["mode"] == "race":
++            name = role["name"]
++            (shared / ("ready-" + name + ".json")).write_text("{}")
++            deadline = time.monotonic() + 30
++            while not (shared / "go.json").exists():
++                if time.monotonic() > deadline:
++                    raise TimeoutError("CONTROL_BARRIER_TIMEOUT")
++                time.sleep(0.01)
++            try:
++                r = (record(value=Decimal(role["value"])),)
++                result["version"] = commit(db, r, role["operation"], v)
++                result["outcome"] = "COMMITTED"
++            except StorageError as error:
++                result.update(outcome="REFUSED", reason=error.reason_code)
++            result.update(old_bytes_preserved=db.manifest(v) == initial["manifest"])
++    result.update(
++        exit_code=0, end_utc=datetime.now(UTC).isoformat(), elapsed_seconds=time.monotonic() - tick
++    )
++    (output / "result.json").write_text(json.dumps(result, indent=2))
++    db.close()
++    return 0
++
++
++def run(config: dict[str, Any]) -> int:
++    import od05x_isolated_runner as boundary
++
++    boundary.assert_boundary()
++    output = Path("/work/job")
++    output.mkdir()
++    result = {
++        "job": "od10perf",
++        "exit_code": 0,
++        "python": sys.version,
++        "boundary": boundary.assert_boundary(),
++        "duckdb_available": importlib.util.find_spec("duckdb") is not None,
++        "scale_class": "NON_MARKET_BOOKKEEPING_ONLY",
++        "financial_observations": 0,
++        "measurements": [],
++    }
++    # A bounded scale ladder; actual results determine whether a larger tier is safe.
++    import resource
++
++    import pyarrow as pa
++    from test_od10_canonical_storage import commit, database, query, record
++
++    from omegadata.canonical_storage.query import aggregate_scalar
++
++    for size in (1000, 10000, 100000):
++        root = output / ("scale-" + str(size))
++        root.mkdir()
++        db = database(root)
++        tick = time.perf_counter()
++        rows = tuple(
++            record(
++                observation_id="control-" + str(i),
++                observation_revision_id="revision-" + str(i),
++                listing_id="CONTROL-" + str(i % 100),
++            )
++            for i in range(size)
++        )
++        build = time.perf_counter() - tick
++        tick = time.perf_counter()
++        version = commit(db, rows, "benchmark-" + str(size))
++        write = time.perf_counter() - tick
++        tick = time.perf_counter()
++        check = db.verify(version)
++        validation = time.perf_counter() - tick
++        tick = time.perf_counter()
++        out = query(db, version, listing_ids=("CONTROL-0",))
++        latency = time.perf_counter() - tick
++        expected = size // 100
++        if len(out.rows) != expected or aggregate_scalar(out.rows)["sum_exact"] != (
++            __import__("fractions").Fraction(5 * expected, 4).numerator,
++            __import__("fractions").Fraction(5 * expected, 4).denominator,
++        ):
++            raise ValueError("INDEPENDENT_QUERY_ROWS_OR_VALUES")
++        files = list((root / "store/objects").iterdir())
++        bytes_on_disk = sum(p.stat().st_size for p in files)
++        result["measurements"].append(
++            {
++                "records": size,
++                "build_seconds": build,
++                "write_and_commit_seconds": write,
++                "verify_seconds": validation,
++                "filtered_query_seconds": latency,
++                "expected_filtered_rows": expected,
++                "actual_filtered_rows": len(out.rows),
++                "objects": len(files),
++                "parquet_bytes": bytes_on_disk,
++                "catalog_bytes": (root / "store/catalog/catalog.sqlite").stat().st_size,
++                "maximum_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
++                "files_scanned": out.files_scanned,
++                "files_verified": out.files_verified,
++                "manifest_digest": check["manifest_digest"],
++                "pyarrow": pa.__version__,
++            }
++        )
++        db.close()
++    (output / "result.json").write_text(json.dumps(result, indent=2))
++    return 0
++
++
++def detail(config: dict[str, Any]) -> int:
++    """Bounded 1,000-row technology/metadata measurements, never financial replay."""
++    import hashlib
++
++    import od05x_isolated_runner as boundary
++    import pyarrow as pa
++    import pyarrow.parquet as pq
++    from sqlalchemy import text
++    from test_od10_canonical_storage import D, K, commit, database, query, record
++
++    from omegadata.canonical_storage import schema
++    from omegadata.canonical_storage.contracts import Query
++    from omegadata.canonical_storage.store import CanonicalStore
++    from omegadata.identity import Listing
++
++    boundary.assert_boundary()
++    output = Path("/work/job")
++    output.mkdir()
++    root = output / "detail"
++    root.mkdir()
++    db = database(root)
++    rows = tuple(
++        record(observation_id="control-" + str(i), observation_revision_id="revision-" + str(i))
++        for i in range(1000)
++    )
++
++    def timed(call):
++        tick = time.perf_counter()
++        value = call()
++        return value, time.perf_counter() - tick
++
++    v, write = timed(lambda: commit(db, rows))
++    manifest, manifest_seconds = timed(lambda: db.manifest(v))
++    e = manifest["file_entries"][0]
++    raw, read_seconds = timed(lambda: db._read(e["relative_path"]))
++    _, checksum_seconds = timed(lambda: hashlib.sha256(raw).hexdigest())
++    full, read_query = timed(lambda: query(db, v))
++    assert len(full.rows) == 1000
++    ref = db.pin_domain(
++        "instrument_identity_revisions",
++        "control-listing",
++        Listing("00001", "control-security", "CANARY-X"),
++        K,
++    )
++    joined, join_seconds = timed(
++        lambda: db.query_join(
++            query=Query(
++                v, "control-dataset", D, D.replace(day=D.day + 1), K, "RAW_UNADJUSTED", "AUDIT"
++            ),
++            references=(ref,),
++            join_key="listing_id",
++        )
++    )
++    assert len(joined["joined"]) == 1000 and all(
++        r["status"] == "MATCHED_UNVERIFIED" for r in joined["joined"]
++    )
++    converted, conversion = timed(
++        lambda: db.convert_version(v, "canonical/v2", "schema-conversion")
++    )
++    db.close()
++    db, restart = timed(
++        lambda: CanonicalStore(root / "store", disposable_root=root, read_only=True)
++    )
++    restored, replay = timed(lambda: query(db, v))
++    assert restored.rows == full.rows
++    assert db.manifest(converted)["parent_dataset_version_id"] == v
++    with db.engine.connect() as con:
++        plans = [
++            tuple(row)
++            for row in con.execute(
++                text(
++                    "EXPLAIN QUERY PLAN SELECT version FROM dataset_dependency WHERE kind=:kind AND identity=:identity"
++                ),
++                {"kind": "source", "identity": "control"},
++            ).fetchall()
++        ]
++    table = schema.to_table(rows, "canonical/v1")
++    variants = []
++    for compression in ("zstd", "snappy"):
++        for group in (256, 8192):
++            buf = pa.BufferOutputStream()
++            _, elapsed = timed(
++                lambda buf=buf, compression=compression, group=group: pq.write_table(
++                    table, buf, compression=compression, row_group_size=group
++                )
++            )
++            data = buf.getvalue()
++            decoded = pq.read_table(pa.BufferReader(data))
++            assert schema.from_table(decoded) == rows
++            variants.append(
++                {
++                    "compression": compression,
++                    "row_group_size": group,
++                    "bytes": len(data),
++                    "write_seconds": elapsed,
++                    "logical_roundtrip": True,
++                }
++            )
++    parquet = pq.ParquetFile(pa.BufferReader(raw))
++    uncompressed = sum(
++        parquet.metadata.row_group(g).total_byte_size
++        for g in range(parquet.metadata.num_row_groups)
++    )
++    result = {
++        "job": "od10detail",
++        "exit_code": 0,
++        "boundary": boundary.assert_boundary(),
++        "financial_observations": 0,
++        "records": 1000,
++        "write_commit_seconds": write,
++        "full_read_query_seconds": read_query,
++        "read_rows_per_second": 1000 / read_query,
++        "write_rows_per_second": 1000 / write,
++        "manifest_seconds": manifest_seconds,
++        "file_read_seconds": read_seconds,
++        "checksum_seconds": checksum_seconds,
++        "schema_conversion_seconds": conversion,
++        "join_seconds": join_seconds,
++        "restart_seconds": restart,
++        "historical_replay_seconds": replay,
++        "compression_ratio_uncompressed_to_file": uncompressed / len(raw),
++        "variants": variants,
++        "dependency_query_plan": plans,
++        "catalog_bytes": (root / "store/catalog/catalog.sqlite").stat().st_size,
++        "duckdb": "NOT_INSTALLED_NO_PROVISIONING",
++        "atomicity_scope": "SQLITE_READER_VISIBILITY",
++        "row_group_choice": "8192/zstd bounds small-file overhead; measured alternatives retained, no universal optimality claim",
++    }
++    (output / "result.json").write_text(json.dumps(result, indent=2))
++    db.close()
++    return 0
+--- /dev/null
++++ b/src/omegadata/canonical_storage/__init__.py
+@@ -0,0 +1 @@
++"""Opt-in versioned development storage; storage commitment is not publication."""
+--- /dev/null
++++ b/src/omegadata/canonical_storage/admission.py
+@@ -0,0 +1,370 @@
++"""Typed upstream pins and independent source scope. Labels confer no authority."""
++
++from __future__ import annotations
++
++from dataclasses import dataclass, fields, is_dataclass
++from datetime import datetime
++from typing import Any
++
++from omegadata.adjustments.bound_contracts import BoundResult, PinnedCalculation
++from omegadata.canonical_storage.contracts import StorageError, fingerprint, timestamp
++from omegadata.reconciliation.contracts import ComparisonContext, Observation, ReconciliationResult
++from omegadata.reconciliation.dependencies import UpstreamProof, verify_upstream
++from omegadata.reconciliation.engine import reconcile_context
++from omegadata.universe.contracts import UniverseSnapshot
++from omegadata.universe.snapshots import get_universe_as_of
++
++
++@dataclass(frozen=True)
++class SourceBinding:
++    source_id: str
++    artifact: str
++    record: str | None
++    publisher: str | None
++    symbol: str
++    series: str
++    lineage_root: str | None
++    field_semantics: str
++    record_digest: str
++
++    @classmethod
++    def from_observation(cls, o: Observation) -> SourceBinding:
++        return cls(
++            o.source_id,
++            o.source_artifact_identity,
++            o.source_record_identity,
++            o.publisher_identity,
++            o.symbol_as_reported,
++            o.series_as_reported,
++            o.source_lineage_root,
++            o.field_name,
++            fingerprint(o),
++        )
++
++
++@dataclass(frozen=True)
++class AdmissionResult:
++    input_digest: str
++    result_digests: tuple[str, ...]
++    coverage_state: str
++    financial_eligible: bool = False
++    authority_status: str = "UNVERIFIED"
++
++
++class ProvenanceLedger:
++    """Explicit immutable code-only pins, never a financial authority registry."""
++
++    def __init__(self) -> None:
++        self.records: dict[tuple[str, str, str], Any] = {}
++        self.observations: dict[str, Observation] = {}
++
++    def pin(
++        self,
++        domain: str,
++        identity: str,
++        payload: Any,
++        known_from: datetime | None,
++        *,
++        context: Any = None,
++    ) -> tuple[str, str, str]:
++        from omegadata.canonical_storage.schema import DOMAINS
++
++        timestamp(known_from)
++        if domain not in DOMAINS or not is_dataclass(payload) or isinstance(payload, type):
++            raise StorageError("UPSTREAM_TYPED_RECORD_REQUIRED")
++        from omegadata import identity as i
++        from omegadata import session_calendar as c
++        from omegadata.adjustments.contracts import Action
++        from omegadata.identity_adapters import MembershipClaim
++        from omegadata.parsers.contracts import ParsedBar, ParseRequest, ParseResult
++        from omegadata.reconciliation.anomalies import AnomalyRecord
++        from omegadata.reconciliation.reviews import (
++            CorrectionRevision,
++            ReprocessCompletion,
++            ReprocessRequest,
++            ReviewRevision,
++        )
++        from omegadata.universe.contracts import MemberDecision, MembershipRevision
++
++        allowed = {
++            "source_observations": (ParseRequest, ParseResult, ParsedBar, Observation),
++            "instrument_identity_revisions": (
++                i.Issuer,
++                i.Security,
++                i.Listing,
++                i.IdentifierClaim,
++                i.MemoryIdentityRepository,
++            ),
++            "listing_lifecycle": (i.LifecycleEvent,),
++            "session_calendar": (c.SessionClaim, c.CoverageClaim, c.VerifiedCalendar),
++            "corporate_action_revisions": (Action,),
++            "adjustment_results": (BoundResult,),
++            "universe_membership_revisions": (MembershipClaim, MembershipRevision),
++            "universe_snapshots": (UniverseSnapshot,),
++            "universe_member_decisions": (MemberDecision,),
++            "reconciliation_results": (ReconciliationResult,),
++            "anomaly_records": (AnomalyRecord,),
++            "review_revisions": (ReviewRevision,),
++            "correction_revisions": (CorrectionRevision,),
++            "reprocess_requests": (ReprocessRequest,),
++            "reprocess_completions": (ReprocessCompletion,),
++        }
++        if type(payload) not in allowed.get(domain, ()):
++            raise StorageError("UPSTREAM_TYPE_DOMAIN_MISMATCH")
++        if domain == "universe_snapshots":
++            if context is None or type(payload) is not UniverseSnapshot:
++                raise StorageError("UNIVERSE_CONTEXT_REQUIRED")
++            x, p = context
++            if (
++                get_universe_as_of(
++                    x, payload.valid_at, payload.known_at, p, x.source_snapshot_id
++                ).canonical_json
++                != payload.canonical_json
++            ):
++                raise StorageError("UNIVERSE_REPLAY_MISMATCH")
++        if domain == "adjustment_results":
++            if known_from is None or type(payload) is not BoundResult:
++                raise StorageError("ADJUSTMENT_CONTEXT_REQUIRED")
++            verify_proof(context, known_from)
++            if context.payload != payload:
++                raise StorageError("ADJUSTMENT_CONTEXT_MISMATCH")
++        ref = (domain, identity, fingerprint((payload, known_from)))
++        for old in self.records:
++            if old[:2] == ref[:2] and old != ref:
++                raise StorageError("IMMUTABLE_UPSTREAM_ID")
++        self.records[ref] = payload
++        return ref
++
++    def get(self, ref: tuple[str, str, str]) -> Any:
++        try:
++            return self.records[ref]
++        except KeyError as error:
++            raise StorageError("UPSTREAM_PIN_MISSING") from error
++
++    def financial_eligible(self, ref: tuple[str, str, str]) -> bool:
++        self.get(ref)
++        return False
++
++    def pin_observations(self, rows: tuple[Observation, ...]) -> None:
++        for o in rows:
++            if type(o) is not Observation:
++                raise StorageError("OBSERVATION_CONTRACT")
++            old = self.observations.get(o.observation_id)
++            if old is not None and old != o:
++                raise StorageError("IMMUTABLE_SOURCE_REVISION")
++            self.observations[o.observation_id] = o
++
++    def verify_source(self, o: Observation, binding: SourceBinding) -> None:
++        if (
++            SourceBinding.from_observation(o) != binding
++            or self.observations.get(o.observation_id) != o
++        ):
++            raise StorageError("SOURCE_METADATA_OR_FIELD_SEMANTIC_MISMATCH")
++
++
++def verify_proof(proof: UpstreamProof | None, cutoff: datetime) -> None:
++    if type(proof) is not UpstreamProof or not verify_upstream(proof, cutoff):
++        raise StorageError("BOUND_UPSTREAM_PROOF_REQUIRED")
++
++
++def admit_comparison(
++    context: ComparisonContext,
++    results: tuple[ReconciliationResult, ...],
++    ledger: ProvenanceLedger,
++    required_ids: tuple[str, ...],
++    complete: bool,
++) -> AdmissionResult:
++    if type(context) is not ComparisonContext or len(set(required_ids)) != len(required_ids):
++        raise StorageError("COMPARISON_SCOPE_INVALID")
++    supplied = context.left + context.right
++    # Scope is independently declared against the persisted ledger, not result.inputs.
++    eligible = set()
++    for identity in required_ids:
++        observation = ledger.observations.get(identity)
++        known = observation.availability.known_from if observation is not None else None
++        if known is not None and known <= context.known_at:
++            eligible.add(identity)
++    if any(identity not in ledger.observations for identity in required_ids):
++        raise StorageError("REQUIRED_SOURCE_SCOPE_MISSING")
++    ids = {o.observation_id for o in supplied}
++    if complete and ids != eligible or not ids <= eligible:
++        raise StorageError("INCOMPLETE_REQUIRED_COMPARISON_SCOPE")
++    for o in supplied:
++        ledger.verify_source(
++            o, SourceBinding.from_observation(ledger.observations[o.observation_id])
++        )
++    expected = reconcile_context(context)
++    if expected != results:
++        raise StorageError("RECONCILIATION_REPLAY_MISMATCH")
++    return AdmissionResult(
++        fingerprint(context),
++        tuple(v.result_digest for v in results),
++        "COMPLETE_DECLARED_SCOPE" if complete else "PARTIAL",
++    )
++
++
++def admit_derived(row: Any, proof: UpstreamProof) -> None:
++    if type(proof.context) is not PinnedCalculation or type(proof.payload) is not BoundResult:
++        raise StorageError("DERIVED_ADJUSTMENT_PROOF_REQUIRED")
++    cutoff = proof.context.context.known_at if proof.kind == "ADJUSTMENT" else None
++    if cutoff is None:
++        raise StorageError("DERIVED_ADJUSTMENT_PROOF_REQUIRED")
++    verify_proof(proof, cutoff)
++    a = proof.source_observation
++    p = proof.context
++    bound = proof.payload
++    expected = (
++        bound.calculation.adjusted_volume
++        if row.field_semantics == "VOLUME"
++        else bound.adjusted_price
++    )
++    raw = p.raw.raw
++    if (
++        row.observation_id,
++        row.source_artifact_identity,
++        row.source_record_identity,
++        row.security_id,
++        row.listing_id,
++        row.exchange,
++        row.session_date,
++        row.currency,
++        row.value,
++    ) != (
++        a.observation_id,
++        a.artifact_identity,
++        a.record_identity,
++        raw.security_id,
++        raw.listing_id,
++        raw.exchange,
++        a.session_date,
++        a.currency,
++        expected,
++    ):
++        raise StorageError("DERIVED_OBSERVATION_BINDING")
++    if (
++        (row.volume_basis if row.field_semantics == "VOLUME" else row.price_basis)
++        != p.policy.adjustment_basis
++        or row.known_from is None
++        or row.known_from < cutoff
++    ):
++        raise StorageError("DERIVED_BASIS_OR_KNOWLEDGE")
++    if not set(derived_lineage(proof)) <= set(row.lineage):
++        raise StorageError("DERIVED_LINEAGE_REQUIRED")
++
++
++def derived_lineage(proof: UpstreamProof) -> tuple[tuple[str, str, str], ...]:
++    from omegadata.adjustments.contracts import digest
++
++    if (
++        type(proof) is not UpstreamProof
++        or proof.kind != "ADJUSTMENT"
++        or type(proof.context) is not PinnedCalculation
++        or type(proof.payload) is not BoundResult
++    ):
++        raise StorageError("DERIVED_ADJUSTMENT_PROOF_REQUIRED")
++    p = proof.context
++    return (
++        ("raw_observation", p.raw.observation_id, digest(p.raw)),
++        ("adjustment_context", p.snapshot_id, digest(p)),
++        ("adjustment_result", proof.payload.output_digest, proof.payload.output_digest),
++        ("action_history", digest(p.history), digest(p.history)),
++        ("parameter_availability", digest(p.parameters), digest(p.parameters)),
++    )
++
++
++@dataclass(frozen=True)
++class ComparisonScope:
++    scope_id: str
++    source_ids: tuple[str, ...]
++    listing_ids: tuple[str, ...]
++    field_names: tuple[str, ...]
++    session_from: Any
++    session_to: Any
++    known_from: datetime
++    version: str = "od10.comparison-scope/v1"
++
++    def __post_init__(self) -> None:
++        from omegadata.canonical_storage.contracts import token
++
++        token(self.scope_id)
++        timestamp(self.known_from)
++        if (
++            self.known_from is None
++            or self.session_to <= self.session_from
++            or self.version != "od10.comparison-scope/v1"
++        ):
++            raise StorageError("COMPARISON_SCOPE_INVALID")
++        for values in (self.source_ids, self.listing_ids, self.field_names):
++            if (
++                type(values) is not tuple
++                or not 1 <= len(values) <= 1000
++                or len(values) != len(set(values))
++            ):
++                raise StorageError("COMPARISON_SCOPE_RESOURCE_LIMIT")
++
++
++def strict_comparison_admission(
++    scope: ComparisonScope,
++    context: ComparisonContext,
++    results: tuple[ReconciliationResult, ...],
++    ledger: ProvenanceLedger,
++    *,
++    complete: bool,
++) -> AdmissionResult:
++    if scope.known_from > context.known_at:
++        raise StorageError("COMPARISON_SCOPE_FUTURE")
++    selected = []
++    for o in ledger.observations.values():
++        a = o.availability
++        if (
++            o.source_id not in scope.source_ids
++            or o.listing_id not in scope.listing_ids
++            or o.field_name not in scope.field_names
++            or not scope.session_from <= o.session_date < scope.session_to
++        ):
++            continue
++        if a.known_from is None:
++            raise StorageError("COMPARISON_AVAILABILITY_UNKNOWN")
++        if a.known_from <= context.known_at and (
++            a.known_to is None or context.known_at < a.known_to
++        ):
++            selected.append(o.observation_id)
++    admitted = admit_comparison(context, results, ledger, tuple(sorted(selected)), complete)
++    return AdmissionResult(
++        admitted.input_digest,
++        admitted.result_digests,
++        "COMPLETE_REQUIRED_LEDGER_SET" if complete else "PARTIAL_REQUIRED_SET",
++    )
++
++
++def code_only_payload_admission(payload: Any, context: Any) -> None:
++    """No source payload is copied on the strength of caller supplied rights labels.
++
++    Only explicit non-market structural inputs or metadata-only parser receipts
++    belong to this execution. Authentic payload admission requires a separately
++    authorized source-purpose capability and is deliberately unavailable here.
++    """
++    from omegadata.identity import Evidence
++    from omegadata.parsers.contracts import ParsedBar, ParseResult
++
++    pending = [(payload, 0), (context, 0)]
++    seen: set[int] = set()
++    while pending:
++        value, depth = pending.pop()
++        if id(value) in seen:
++            continue
++        seen.add(id(value))
++        if len(seen) > 25000 or depth > 32:
++            raise StorageError("UPSTREAM_PAYLOAD_RESOURCE_LIMIT")
++        if type(value) is Evidence and (
++            value.permission == "DENIED" or value.classification != "NON_MARKET_CANARY"
++        ):
++            raise StorageError("SOURCE_PAYLOAD_AUTHORITY_REQUIRED")
++        if type(value) is ParsedBar or (type(value) is ParseResult and value.rows):
++            raise StorageError("SOURCE_PAYLOAD_AUTHORITY_REQUIRED")
++        if is_dataclass(value) and not isinstance(value, type):
++            pending.extend((getattr(value, f.name), depth + 1) for f in fields(value))
++        elif isinstance(value, (tuple, list)):
++            pending.extend((item, depth + 1) for item in value)
++        elif isinstance(value, dict):
++            pending.extend((item, depth + 1) for item in value.values())
+--- /dev/null
++++ b/src/omegadata/canonical_storage/contracts.py
+@@ -0,0 +1,258 @@
++"""Explicit storage identities, semantics and resource limits. No financial promotion."""
++
++from __future__ import annotations
++
++import hashlib
++import re
++from dataclasses import dataclass, field
++from datetime import UTC, date, datetime
++from decimal import Decimal
++from typing import Any
++
++from omegadata.universe.repository import pack
++
++
++class StorageError(ValueError):
++    def __init__(self, reason_code: str):
++        self.reason_code = reason_code
++        super().__init__(reason_code)
++
++
++def fingerprint(value: Any) -> str:
++    return hashlib.sha256(pack(value).encode()).hexdigest()
++
++
++def token(value: str) -> None:
++    if not isinstance(value, str) or not re.fullmatch(r"[A-Za-z0-9_.:-]{1,160}", value):
++        raise StorageError("IDENTIFIER_UNSAFE")
++
++
++def timestamp(value: datetime | None) -> None:
++    if value is not None and (
++        not isinstance(value, datetime) or value.tzinfo is None or value.utcoffset() is None
++    ):
++        raise StorageError("TIMESTAMP_TIMEZONE_REQUIRED")
++
++
++@dataclass(frozen=True)
++class Observation:
++    observation_id: str
++    observation_revision_id: str
++    source_id: str
++    source_artifact_identity: str
++    source_record_identity: str
++    trade_date: date
++    session_date: date
++    known_from: datetime | None
++    field_semantics: str
++    value: Decimal | None
++    supersedes_revision_id: str | None = None
++    publisher_identity: str | None = None
++    source_row_ordinal: int | None = None
++    parser_version: str | None = None
++    schema_version: str | None = None
++    canonical_schema_version: str = "canonical/v1"
++    security_id: str | None = None
++    listing_id: str | None = None
++    exchange: str | None = None
++    symbol_as_reported: str | None = None
++    series_as_reported: str | None = None
++    isin_as_reported_if_available: str | None = None
++    observation_type: str = "NON_MARKET_CONTROL"
++    observation_interval: str = "CONTROL"
++    economic_valid_from: date | None = None
++    economic_valid_to: date | None = None
++    observed_at: datetime | None = None
++    published_at: datetime | None = None
++    known_to: datetime | None = None
++    ingested_at: datetime | None = None
++    currency: str | None = None
++    price_unit: str | None = None
++    volume_unit: str | None = None
++    price_basis: str = "RAW_UNADJUSTED"
++    volume_basis: str | None = None
++    source_evidence_id: str | None = None
++    source_rights_state: str = "UNKNOWN"
++    source_authority_digest: str | None = None
++    observation_classification: str = "UNVERIFIED_SOURCE"
++    quality_state: str = "UNVERIFIED"
++    hard_block_reasons: tuple[str, ...] = ("SOURCE_AUTHORITY_UNVERIFIED",)
++    lineage: tuple[tuple[str, str, str], ...] = ()
++    numeric_kind: str = "RAW"
++    value_state: str = "PRESENT"
++    rational_numerator: str | None = None
++    rational_denominator: str | None = None
++    consumer_profile: str = "AUDIT"
++    source_note: str | None = None
++    financial_eligibility: bool = field(default=False, init=False)
++    publication_eligibility: bool = field(default=False, init=False)
++    execution_eligibility: bool = field(default=False, init=False)
++
++    def __post_init__(self) -> None:
++        for v in (
++            self.observation_id,
++            self.observation_revision_id,
++            self.source_id,
++            self.source_artifact_identity,
++            self.source_record_identity,
++        ):
++            token(v)
++        for name in ("known_from", "known_to", "observed_at", "published_at", "ingested_at"):
++            value = getattr(self, name)
++            timestamp(value)
++            if value is not None:
++                object.__setattr__(self, name, value.astimezone(UTC))
++        if type(self.hard_block_reasons) is not tuple or len(self.hard_block_reasons) > 64:
++            raise StorageError("HARD_BLOCK_RESOURCE_LIMIT")
++        reasons = set(self.hard_block_reasons)
++        if self.security_id is None or self.listing_id is None:
++            reasons.add("IDENTITY_UNRESOLVED")
++        if self.known_from is None:
++            reasons.add("AVAILABILITY_UNKNOWN")
++        if self.observation_classification == "NON_MARKET_STRUCTURAL_CONTROL":
++            reasons.add("NON_MARKET_CONTROL")
++        if self.source_rights_state == "DENIED":
++            reasons.add("SOURCE_RIGHTS_DENIED")
++        object.__setattr__(self, "hard_block_reasons", tuple(sorted(reasons)))
++        if type(self.trade_date) is not date or type(self.session_date) is not date:
++            raise StorageError("DATE_SEMANTICS")
++        if self.economic_valid_to and (
++            self.economic_valid_from is None or self.economic_valid_to <= self.economic_valid_from
++        ):
++            raise StorageError("VALID_INTERVAL")
++        if self.known_to and (self.known_from is None or self.known_to <= self.known_from):
++            raise StorageError("KNOWLEDGE_INTERVAL")
++        if self.field_semantics not in {
++            "OPEN",
++            "HIGH",
++            "LOW",
++            "CLOSE",
++            "VOLUME",
++            "TURNOVER",
++            "REFERENCE_CLOSE",
++            "SETTLEMENT_PRICE",
++            "FACTOR",
++            "CONTROL_SCALAR",
++        }:
++            raise StorageError("FIELD_SEMANTICS_UNKNOWN")
++        semantic = {
++            "RAW_CLOSE": "CLOSE",
++            "RAW_OPEN": "OPEN",
++            "SETTLEMENT_PRICE": "SETTLEMENT_PRICE",
++        }
++        if (
++            self.observation_type in semantic
++            and self.field_semantics != semantic[self.observation_type]
++        ):
++            raise StorageError("FIELD_SEMANTICS_MISMATCH")
++        if self.numeric_kind not in {"RAW", "CALCULATION"} or self.value_state not in {
++            "PRESENT",
++            "MISSING",
++            "UNAVAILABLE",
++            "INVALID",
++        }:
++            raise StorageError("VALUE_STATE")
++        if (self.value is None) != (self.value_state != "PRESENT"):
++            raise StorageError("MISSING_VERSUS_ZERO")
++        if self.field_semantics == "VOLUME" and self.value is not None and self.value < 0:
++            raise StorageError("NEGATIVE_VOLUME")
++        if self.value is not None and (
++            type(self.value) is not Decimal or not self.value.is_finite()
++        ):
++            raise StorageError("NUMERIC_INVALID")
++        if self.source_row_ordinal is not None and (
++            type(self.source_row_ordinal) is not int or not 1 <= self.source_row_ordinal < 2**63
++        ):
++            raise StorageError("ROW_ORDINAL")
++        if (
++            type(self.lineage) is not tuple
++            or len(self.lineage) > 128
++            or len(set(self.lineage)) != len(self.lineage)
++        ):
++            raise StorageError("LINEAGE_INVALID")
++        for kind, identity, digest in self.lineage:
++            token(kind)
++            token(identity)
++            if not re.fullmatch("[a-f0-9]{64}", digest):
++                raise StorageError("LINEAGE_DIGEST")
++        if (self.rational_numerator is None) != (self.rational_denominator is None):
++            raise StorageError("RATIONAL_PAIR")
++        if self.rational_numerator is not None:
++            for rational_term in (self.rational_numerator, self.rational_denominator):
++                if rational_term is None or not re.fullmatch(
++                    r"-?(0|[1-9][0-9]{0,999})", rational_term
++                ):
++                    raise StorageError("RATIONAL_RESOURCE_LIMIT")
++            if int(self.rational_denominator or "0") <= 0:
++                raise StorageError("RATIONAL_DENOMINATOR")
++
++
++@dataclass(frozen=True)
++class DatasetDefinition:
++    dataset_id: str
++    domain: str
++    layer: str
++    schema_version: str
++    price_basis: str
++    consumer_profile: str
++    source_scope: tuple[str, ...]
++    coverage_state: str = "UNKNOWN"
++    partitioning_version: str = "exchange-month/v1"
++    volume_basis: str | None = None
++
++    def __post_init__(self) -> None:
++        token(self.dataset_id)
++        if self.layer not in {"RAW", "DERIVED"} or self.partitioning_version != "exchange-month/v1":
++            raise StorageError("DATASET_CONTRACT")
++        if self.coverage_state not in {
++            "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE",
++            "PARTIAL",
++            "UNKNOWN",
++            "SOURCE_BLOCKED",
++        }:
++            raise StorageError("COVERAGE_AUTHORITY_REQUIRED")
++
++
++@dataclass(frozen=True)
++class Query:
++    dataset_version_id: str
++    dataset_id: str
++    valid_from: date
++    valid_to: date
++    known_at: datetime
++    price_basis: str
++    consumer_profile: str
++    security_ids: tuple[str, ...] | None = None
++    listing_ids: tuple[str, ...] | None = None
++    exchange: str | None = None
++    columns: tuple[str, ...] | None = None
++    maximum_rows: int = 100000
++    maximum_files: int = 64
++
++    def __post_init__(self) -> None:
++        timestamp(self.known_at)
++        if self.known_at is None:
++            raise StorageError("KNOWLEDGE_CUTOFF_REQUIRED")
++        if (
++            type(self.maximum_rows) is not int
++            or not 1 <= self.maximum_rows <= 100000
++            or type(self.maximum_files) is not int
++            or not 1 <= self.maximum_files <= 64
++        ):
++            raise StorageError("QUERY_RESOURCE_LIMIT")
++        if self.valid_to <= self.valid_from or (self.valid_to - self.valid_from).days > 3660:
++            raise StorageError("QUERY_RESOURCE_LIMIT")
++        for values in (self.security_ids, self.listing_ids, self.columns):
++            if values is not None and (type(values) is not tuple or len(values) > 1000):
++                raise StorageError("QUERY_RESOURCE_LIMIT")
++
++
++@dataclass(frozen=True)
++class QueryResult:
++    rows: tuple[dict[str, Any], ...]
++    excluded: tuple[dict[str, Any], ...]
++    files_scanned: int
++    files_verified: int
++    version_id: str
++    financial_eligible: bool = field(default=False, init=False)
++    publication_eligible: bool = field(default=False, init=False)
+--- /dev/null
++++ b/src/omegadata/canonical_storage/query.py
+@@ -0,0 +1,101 @@
++"""Bounded Arrow scanning over catalog manifests only; no arbitrary SQL or paths."""
++
++from __future__ import annotations
++
++from dataclasses import asdict
++from datetime import date
++from fractions import Fraction
++from typing import Any
++
++import pyarrow as pa  # type: ignore[import-untyped]
++import pyarrow.dataset as ds  # type: ignore[import-untyped]
++
++from omegadata.canonical_storage import schema
++from omegadata.canonical_storage.contracts import Query, QueryResult, StorageError
++
++
++def query_dataset(store: Any, q: Query) -> QueryResult:
++    if type(q) is not Query:
++        raise StorageError("QUERY_CONTRACT")
++    m = store.manifest(q.dataset_version_id)
++    if m["dataset_id"] != q.dataset_id:
++        raise StorageError("DATASET_SCOPE_MISMATCH")
++    if m["price_basis"] != q.price_basis:
++        raise StorageError("PRICE_BASIS_MISMATCH")
++    if m["consumer_profile"] != q.consumer_profile or q.consumer_profile != "AUDIT":
++        raise StorageError("SOURCE_SCOPE_BLOCKED")
++    if len(m["file_entries"]) > q.maximum_files:
++        raise StorageError("QUERY_RESOURCE_LIMIT")
++    captured: dict[str, bytes] = {}
++    store.verify(q.dataset_version_id, _captured=captured)
++    rows = []
++    excluded = []
++    scanned = 0
++    for e in m["file_entries"]:
++        if (
++            date.fromisoformat(e["maximum_trade_date"]) < q.valid_from
++            or date.fromisoformat(e["minimum_trade_date"]) >= q.valid_to
++        ):
++            continue
++        if q.exchange and not e["partition_identity"].startswith(q.exchange + "/"):
++            continue
++        raw = captured[e["relative_path"]]
++        scanned += 1
++        predicate = (ds.field("trade_date") >= pa.scalar(q.valid_from)) & (
++            ds.field("trade_date") < pa.scalar(q.valid_to)
++        )
++        if q.exchange:
++            predicate = predicate & (ds.field("exchange") == q.exchange)
++        if q.security_ids is not None:
++            predicate = predicate & ds.field("security_id").isin(q.security_ids)
++        if q.listing_ids is not None:
++            predicate = predicate & ds.field("listing_id").isin(q.listing_ids)
++        # Row-group predicates operate on the exact bytes already fully integrity checked.
++        # No path is reopened after verification; filesystem races cannot swap the fragment.
++        fmt = ds.ParquetFileFormat()
++        fragment = fmt.make_fragment(pa.BufferReader(raw))
++        dataset = ds.FileSystemDataset([fragment], schema.get_schema(m["schema_version"]), fmt)
++        selected = dataset.scanner(filter=predicate, use_threads=False).to_table()
++        for r in schema.from_table(selected):
++            reason = None
++            if r.known_from is None:
++                reason = "AVAILABILITY_UNKNOWN"
++            elif (
++                r.known_from > q.known_at
++                or r.published_at is not None
++                and r.published_at > q.known_at
++                or r.observed_at is not None
++                and r.observed_at > q.known_at
++            ):
++                reason = "FUTURE_INFORMATION"
++            elif r.known_to is not None and q.known_at >= r.known_to:
++                reason = "SUPERSEDED_KNOWLEDGE"
++            if reason:
++                excluded.append({"revision": r.observation_revision_id, "reason": reason})
++                continue
++            item = asdict(r)
++            if q.columns is not None:
++                if any(n not in item for n in q.columns):
++                    raise StorageError("QUERY_PROJECTION_UNSUPPORTED")
++                item = {n: item[n] for n in q.columns}
++            rows.append(item)
++            if len(rows) > q.maximum_rows:
++                raise StorageError("QUERY_RESOURCE_LIMIT")
++    return QueryResult(
++        tuple(rows), tuple(excluded), scanned, len(m["file_entries"]), q.dataset_version_id
++    )
++
++
++def aggregate_scalar(rows: tuple[dict[str, Any], ...]) -> dict[str, Any]:
++    if len(rows) > 100000:
++        raise StorageError("QUERY_RESOURCE_LIMIT")
++    values = [Fraction(r["value"]) for r in rows if r.get("value") is not None]
++    total = sum(values, Fraction(0))
++    return {
++        "count": len(values),
++        "missing": len(rows) - len(values),
++        "sum_exact": (total.numerator, total.denominator),
++        "mean_exact": ((total / len(values)).numerator, (total / len(values)).denominator)
++        if values
++        else None,
++    }
+--- /dev/null
++++ b/src/omegadata/canonical_storage/schema.py
+@@ -0,0 +1,223 @@
++"""Pinned Arrow types; exact coefficient/exponent fallback, never silent rounding."""
++
++from __future__ import annotations
++
++import hashlib
++from dataclasses import fields
++from datetime import UTC
++from decimal import Decimal
++from typing import Any
++
++import pyarrow as pa  # type: ignore[import-untyped]
++
++from omegadata.canonical_storage.contracts import Observation, StorageError
++
++DOMAINS = {
++    n: (
++        "PARQUET_DATASET"
++        if n in {"source_observations", "adjustment_results"}
++        else "TRANSACTIONAL_METADATA"
++    )
++    for n in (
++        "source_observations",
++        "instrument_identity_revisions",
++        "listing_lifecycle",
++        "session_calendar",
++        "corporate_action_revisions",
++        "adjustment_results",
++        "universe_membership_revisions",
++        "universe_snapshots",
++        "universe_member_decisions",
++        "reconciliation_results",
++        "anomaly_records",
++        "review_revisions",
++        "correction_revisions",
++        "reprocess_requests",
++        "reprocess_completions",
++    )
++}
++TIME = {"known_from", "known_to", "observed_at", "published_at", "ingested_at"}
++DATES = {"trade_date", "session_date", "economic_valid_from", "economic_valid_to"}
++BOOL = {"financial_eligibility", "publication_eligibility", "execution_eligibility"}
++
++
++def encode_decimal(value: Decimal | None, kind: str = "RAW") -> dict[str, Any]:
++    if value is None:
++        return {"coefficient": None, "exponent": None, "fixed": None, "encoding": "NULL"}
++    if type(value) is not Decimal or not value.is_finite():
++        raise StorageError("NUMERIC_INVALID")
++    sign, digits, exponent = value.as_tuple()
++    exp = int(exponent)
++    if len(digits) > 1000 or not -9999 <= exp <= 9999:
++        raise StorageError("PRECISION_RESOURCE_LIMIT")
++    coefficient = ("-" if sign else "") + "".join(str(v) for v in digits)
++    p, s = (38, 12) if kind == "RAW" else (76, 36)
++    # Validate exact rescaling by digit arithmetic, independently of ambient Decimal context.
++    scaled = len(digits) + exp + s
++    fractional_ok = exp >= -s or all(v == 0 for v in digits[len(digits) + exp + s :])
++    fits = (
++        not any(digits)
++        or fractional_ok
++        and scaled <= p
++        and (exp + s >= 0 or len(digits) + exp + s >= 0)
++    )
++    if kind not in {"RAW", "CALCULATION"}:
++        raise StorageError("NUMERIC_KIND")
++    if kind == "RAW" and not fits:
++        raise StorageError("STORAGE_PRECISION_UNSUPPORTED")
++    return {
++        "coefficient": coefficient,
++        "exponent": exp,
++        "fixed": value if fits else None,
++        "encoding": "COEFFICIENT_EXPONENT/v1",
++    }
++
++
++def decode_decimal(value: dict[str, Any]) -> Decimal | None:
++    c = value["coefficient"]
++    if c is None:
++        return None
++    sign = int(c.startswith("-"))
++    digits = c[1:] if sign else c
++    return Decimal((sign, tuple(int(v) for v in digits), value["exponent"]))
++
++
++def get_schema(version: str) -> Any:
++    if version not in {"canonical/v1", "canonical/v2"}:
++        raise StorageError("SCHEMA_VERSION_UNSUPPORTED")
++    result = []
++    for f in fields(Observation):
++        n = f.name
++        if n == "value" or n == "source_note" and version == "canonical/v1":
++            continue
++        t = (
++            pa.timestamp("us", tz="UTC")
++            if n in TIME
++            else pa.date32()
++            if n in DATES
++            else pa.bool_()
++            if n in BOOL
++            else pa.int64()
++            if n == "source_row_ordinal"
++            else pa.list_(pa.field("element", pa.string()))
++            if n == "hard_block_reasons"
++            else pa.list_(
++                pa.field(
++                    "element",
++                    pa.struct(
++                        [("kind", pa.string()), ("identity", pa.string()), ("digest", pa.string())]
++                    ),
++                )
++            )
++            if n == "lineage"
++            else pa.string()
++        )
++        result.append(
++            pa.field(
++                n,
++                t,
++                nullable=n
++                not in {
++                    "observation_id",
++                    "observation_revision_id",
++                    "source_id",
++                    "source_artifact_identity",
++                    "source_record_identity",
++                    "trade_date",
++                    "session_date",
++                    "field_semantics",
++                    "value_state",
++                    "numeric_kind",
++                },
++            )
++        )
++    result.extend(
++        [
++            pa.field("value_coefficient", pa.string()),
++            pa.field("value_exponent", pa.int16()),
++            pa.field("value_fixed", pa.decimal128(38, 12)),
++            pa.field("factor_fixed", pa.decimal256(76, 36)),
++            pa.field("value_encoding", pa.string(), nullable=False),
++        ]
++    )
++    return pa.schema(
++        result,
++        metadata={
++            b"canonical_schema": version.encode(),
++            b"financial_acceptance": b"NOT_AUTHORIZED",
++        },
++    )
++
++
++def schema_fingerprint(version: str) -> str:
++    return hashlib.sha256(get_schema(version).serialize().to_pybytes()).hexdigest()
++
++
++def to_table(rows: tuple[Observation, ...], version: str) -> Any:
++    schema = get_schema(version)
++    out = []
++    for r in rows:
++        if type(r) is not Observation or r.canonical_schema_version != version:
++            raise StorageError("SCHEMA_RECORD_MISMATCH")
++        d = {f.name: getattr(r, f.name) for f in fields(r) if f.name in schema.names}
++        d["lineage"] = [
++            dict(zip(("kind", "identity", "digest"), v, strict=True)) for v in r.lineage
++        ]
++        for n in TIME:
++            if d[n] is not None:
++                d[n] = d[n].astimezone(UTC)
++        scalar = encode_decimal(r.value, r.numeric_kind)
++        d.update(
++            value_coefficient=scalar["coefficient"],
++            value_exponent=scalar["exponent"],
++            value_encoding=scalar["encoding"],
++            value_fixed=scalar["fixed"] if r.numeric_kind == "RAW" else None,
++            factor_fixed=scalar["fixed"] if r.numeric_kind == "CALCULATION" else None,
++        )
++        out.append(d)
++    try:
++        return pa.Table.from_pylist(out, schema=schema)
++    except (pa.ArrowException, ValueError, OverflowError) as error:
++        raise StorageError("STORAGE_PRECISION_OR_TYPE") from error
++
++
++def from_table(table: Any) -> tuple[Observation, ...]:
++    version = (table.schema.metadata or {}).get(b"canonical_schema", b"").decode()
++    if not table.schema.equals(get_schema(version), check_metadata=True):
++        raise StorageError("SCHEMA_FINGERPRINT_MISMATCH")
++    result = []
++    for raw in table.to_pylist():
++        r = dict(raw)
++        value = decode_decimal(
++            {"coefficient": r.pop("value_coefficient"), "exponent": r.pop("value_exponent")}
++        )
++        encoding = r.pop("value_encoding")
++        raw_fixed = r.pop("value_fixed")
++        factor_fixed = r.pop("factor_fixed")
++        check = encode_decimal(value, r["numeric_kind"])
++        if (
++            encoding != check["encoding"]
++            or raw_fixed != (check["fixed"] if r["numeric_kind"] == "RAW" else None)
++            or factor_fixed != (check["fixed"] if r["numeric_kind"] == "CALCULATION" else None)
++        ):
++            raise StorageError("SCALAR_PHYSICAL_RECONCILIATION")
++        for n in BOOL:
++            if r.pop(n) is not False:
++                raise StorageError("FINANCIAL_PROMOTION_REFUSED")
++        r["lineage"] = tuple((v["kind"], v["identity"], v["digest"]) for v in r["lineage"])
++        r["hard_block_reasons"] = tuple(r["hard_block_reasons"])
++        r["value"] = value
++        observation = Observation(**r)
++        # Re-encode the authoritative scalar representation; fixed fields cannot disagree.
++        result.append(observation)
++    return tuple(result)
++
++
++def classify_change(before: str, after: str) -> str:
++    get_schema(before)
++    get_schema(after)
++    if before == after:
++        return "IDENTICAL"
++    if (before, after) == ("canonical/v1", "canonical/v2"):
++        return "BACKWARD_COMPATIBLE_ADDITION"
++    raise StorageError("LOSSY_CONVERSION_REFUSED")
+--- /dev/null
++++ b/src/omegadata/canonical_storage/store.py
+@@ -0,0 +1,1005 @@
++"""Version-pinned local storage. SQLite visibility, immutable files, recoverable orphans."""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import os
++import re
++import stat
++import uuid
++from collections.abc import Callable, Iterator
++from contextlib import contextmanager
++from dataclasses import asdict, replace
++from datetime import UTC, datetime
++from pathlib import Path
++from typing import Any
++
++import pyarrow as pa  # type: ignore[import-untyped]
++import pyarrow.parquet as pq  # type: ignore[import-untyped]
++from sqlalchemy import create_engine, event, text
++from sqlalchemy.engine import Connection
++
++from omegadata.canonical_storage import schema
++from omegadata.canonical_storage.contracts import (
++    DatasetDefinition,
++    Observation,
++    Query,
++    QueryResult,
++    StorageError,
++    fingerprint,
++    timestamp,
++    token,
++)
++
++DDL = (
++    "CREATE TABLE IF NOT EXISTS comparison_scope(id TEXT PRIMARY KEY,payload TEXT NOT NULL,digest TEXT NOT NULL)",
++    "CREATE TABLE IF NOT EXISTS source_observation_index(id TEXT PRIMARY KEY,source TEXT NOT NULL,listing TEXT NOT NULL,field TEXT NOT NULL,session TEXT NOT NULL,known_from TEXT)",
++    "CREATE INDEX IF NOT EXISTS source_scope_lookup ON source_observation_index(source,listing,field,session,known_from)",
++    "CREATE TABLE IF NOT EXISTS reference_dependency(child_kind TEXT NOT NULL,child_identity TEXT NOT NULL,child_digest TEXT NOT NULL,parent_kind TEXT NOT NULL,parent_identity TEXT NOT NULL,parent_digest TEXT NOT NULL,FOREIGN KEY(child_kind,child_identity) REFERENCES typed_reference(kind,identity),PRIMARY KEY(child_kind,child_identity,parent_kind,parent_identity,parent_digest))",
++    "CREATE INDEX IF NOT EXISTS metadata_dependency_reverse ON reference_dependency(parent_kind,parent_identity)",
++    "CREATE TABLE IF NOT EXISTS schema_version(id TEXT PRIMARY KEY,fingerprint TEXT NOT NULL)",
++    "CREATE TABLE IF NOT EXISTS dataset_definition(id TEXT PRIMARY KEY,dataset TEXT NOT NULL,payload TEXT NOT NULL)",
++    "CREATE TABLE IF NOT EXISTS dataset_version(id TEXT PRIMARY KEY,dataset TEXT NOT NULL,parent TEXT REFERENCES dataset_version(id),generation INTEGER NOT NULL,definition TEXT NOT NULL REFERENCES dataset_definition(id),payload TEXT NOT NULL,digest TEXT NOT NULL,UNIQUE(dataset,generation))",
++    "CREATE TABLE IF NOT EXISTS physical_file(id TEXT PRIMARY KEY,payload TEXT NOT NULL,digest TEXT NOT NULL)",
++    "CREATE TABLE IF NOT EXISTS partition_reference(version TEXT REFERENCES dataset_version(id) NOT NULL,partition TEXT NOT NULL,file TEXT REFERENCES physical_file(id) NOT NULL,PRIMARY KEY(version,partition))",
++    "CREATE TABLE IF NOT EXISTS commit_operation(id TEXT PRIMARY KEY,input_digest TEXT NOT NULL,version TEXT NOT NULL REFERENCES dataset_version(id))",
++    "CREATE TABLE IF NOT EXISTS dataset_dependency(version TEXT NOT NULL REFERENCES dataset_version(id),kind TEXT NOT NULL,identity TEXT NOT NULL,digest TEXT NOT NULL,PRIMARY KEY(version,kind,identity,digest))",
++    "CREATE INDEX IF NOT EXISTS dependency_reverse ON dataset_dependency(kind,identity,version)",
++    "CREATE TABLE IF NOT EXISTS version_selection_event(sequence INTEGER PRIMARY KEY AUTOINCREMENT,dataset TEXT NOT NULL,version TEXT NOT NULL REFERENCES dataset_version(id),reason TEXT NOT NULL,at TEXT NOT NULL)",
++    "CREATE TABLE IF NOT EXISTS typed_reference(kind TEXT NOT NULL,identity TEXT NOT NULL,payload TEXT NOT NULL,digest TEXT NOT NULL,known_from TEXT,PRIMARY KEY(kind,identity))",
++    "CREATE TABLE IF NOT EXISTS catalog_schema(version TEXT PRIMARY KEY)",
++)
++TABLES = (
++    "comparison_scope",
++    "source_observation_index",
++    "reference_dependency",
++    "schema_version",
++    "dataset_definition",
++    "dataset_version",
++    "physical_file",
++    "partition_reference",
++    "commit_operation",
++    "dataset_dependency",
++    "version_selection_event",
++    "typed_reference",
++    "catalog_schema",
++)
++
++
++def canonical(value: Any) -> str:
++    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
++
++
++def digest(raw: bytes) -> str:
++    return hashlib.sha256(raw).hexdigest()
++
++
++def fsync_dir(path: Path) -> None:
++    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
++    try:
++        os.fsync(fd)
++    finally:
++        os.close(fd)
++
++
++def safe_ancestors(path: Path) -> None:
++    if not path.is_absolute() or ".." in path.parts:
++        raise StorageError("STORAGE_PATH_UNSAFE")
++    for p in (*reversed(path.parents), path):
++        if p.is_symlink():
++            raise StorageError("STORAGE_LINK_ESCAPE")
++
++
++def safe_fd(root: Path, name: str, flags: int) -> int:
++    if not re.fullmatch(r"(objects|manifests)/[a-f0-9-]+\.(parquet|json)", name):
++        raise StorageError("MANIFEST_PATH_UNSAFE")
++    safe_ancestors(root)
++    directory, leaf = name.split("/")
++    parent = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
++    try:
++        child = os.open(directory, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
++        try:
++            return os.open(f"/proc/self/fd/{child}/{leaf}", flags | os.O_NOFOLLOW, 0o600)
++        finally:
++            os.close(child)
++    finally:
++        os.close(parent)
++
++
++class CanonicalStore:
++    def __init__(self, root: Path, *, disposable_root: Path, read_only: bool = False) -> None:
++        safe_ancestors(disposable_root)
++        if (
++            not root.is_absolute()
++            or not root.is_relative_to(disposable_root)
++            or not disposable_root.is_relative_to(Path("/work"))
++        ):
++            raise StorageError("OWNED_DISPOSABLE_STORAGE_REQUIRED")
++        safe_ancestors(root)
++        self.read_only = read_only
++        if read_only and not root.is_dir():
++            raise StorageError("UNKNOWN_STORAGE_ROOT")
++        if not read_only:
++            root.mkdir(mode=0o700, parents=True, exist_ok=True)
++        self.root = root
++        owner = root / "owner.json"
++        if not owner.exists() and any(root.iterdir()):
++            raise StorageError("STORAGE_OWNERSHIP_UNKNOWN")
++        try:
++            if read_only:
++                raise FileExistsError
++            with owner.open("x") as f:
++                f.write('{"schema":"od10.disposable/v1"}')
++        except FileExistsError:
++            if owner.is_symlink() or owner.read_text() != '{"schema":"od10.disposable/v1"}':
++                raise StorageError("STORAGE_OWNERSHIP_MISMATCH") from None
++        for name in ("objects", "manifests", "staging", "catalog"):
++            safe_ancestors(root / name)
++            if not read_only:
++                (root / name).mkdir(mode=0o700, exist_ok=True)
++        path = root / "catalog/catalog.sqlite"
++        safe_ancestors(path)
++        self.engine = create_engine(
++            ("sqlite:///" + str(path)) if read_only else "sqlite:///" + str(path),
++            connect_args={"check_same_thread": False, "timeout": 15},
++        )
++
++        @event.listens_for(self.engine, "connect")
++        def setup(con: Any, record: Any) -> None:
++            con.execute("PRAGMA foreign_keys=ON")
++            con.execute("PRAGMA busy_timeout=15000")
++            con.execute("PRAGMA synchronous=FULL")
++            if read_only:
++                con.execute("PRAGMA query_only=ON")
++
++        if read_only:
++            with self.engine.connect() as con:
++                if list(con.exec_driver_sql("SELECT version FROM catalog_schema").scalars()) != [
++                    "od10.catalog/v1"
++                ]:
++                    raise StorageError("CATALOG_SCHEMA_UNSUPPORTED")
++            return
++        with self.transaction() as con:
++            for ddl in DDL:
++                con.exec_driver_sql(ddl)
++            con.exec_driver_sql(
++                "INSERT OR IGNORE INTO catalog_schema(version) VALUES ('od10.catalog/v1')"
++            )
++            if list(con.exec_driver_sql("SELECT version FROM catalog_schema").scalars()) != [
++                "od10.catalog/v1"
++            ]:
++                raise StorageError("CATALOG_SCHEMA_UNSUPPORTED")
++            for table in TABLES:
++                for operation in ("UPDATE", "DELETE"):
++                    con.exec_driver_sql(
++                        f"CREATE TRIGGER IF NOT EXISTS immutable_{table}_{operation} BEFORE {operation} ON {table} BEGIN SELECT RAISE(ABORT,'IMMUTABLE_HISTORY'); END"
++                    )
++
++    @contextmanager
++    def transaction(self) -> Iterator[Connection]:
++        if self.read_only:
++            raise StorageError("READ_ONLY_CATALOG")
++        with self.engine.connect() as con:
++            con.exec_driver_sql("BEGIN IMMEDIATE")
++            try:
++                yield con
++                con.commit()
++            except BaseException:
++                con.rollback()
++                raise
++
++    def close(self) -> None:
++        self.engine.dispose()
++
++    def domain_registry(self) -> dict[str, str]:
++        return dict(schema.DOMAINS)
++
++    def operation_version(self, operation_id: str) -> str | None:
++        with self.engine.connect() as con:
++            return con.execute(
++                text("SELECT version FROM commit_operation WHERE id=:id"), {"id": operation_id}
++            ).scalar()
++
++    def _read(self, name: str, limit: int = 256_000_000) -> bytes:
++        try:
++            fd = safe_fd(self.root, name, os.O_RDONLY)
++            with os.fdopen(fd, "rb") as f:
++                before = os.fstat(f.fileno())
++                if (
++                    not stat.S_ISREG(before.st_mode)
++                    or before.st_nlink != 1
++                    or before.st_size > limit
++                ):
++                    raise StorageError("MANIFEST_FILE_UNSAFE")
++                raw = f.read(limit + 1)
++                after = os.fstat(f.fileno())
++            if (before.st_ino, before.st_size, before.st_mtime_ns, before.st_nlink) != (
++                after.st_ino,
++                after.st_size,
++                after.st_mtime_ns,
++                after.st_nlink,
++            ) or len(raw) != before.st_size:
++                raise StorageError("MANIFEST_INPUT_CHANGED")
++            return raw
++        except OSError as error:
++            raise StorageError("MANIFEST_INTEGRITY_FAILURE") from error
++
++    def _install(self, name: str, raw: bytes) -> None:
++        fd = safe_fd(self.root, name, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
++        with os.fdopen(fd, "wb") as f:
++            f.write(raw)
++            f.flush()
++            os.fsync(f.fileno())
++        fsync_dir((self.root / name).parent)
++
++    def verify_file(self, entry: dict[str, Any]) -> Any:
++        return self._verified_file(entry)[0]
++
++    def _verified_file(self, entry: dict[str, Any]) -> tuple[Any, bytes]:
++        try:
++            if (
++                type(entry["row_count"]) is not int
++                or not 1 <= entry["row_count"] <= 100000
++                or type(entry["byte_length"]) is not int
++                or not 1 <= entry["byte_length"] <= 256000000
++                or not re.fullmatch(r"objects/[a-f0-9]{32}\.parquet", entry["relative_path"])
++                or entry["file_id"] != entry["relative_path"].split("/")[1].split(".")[0]
++                or not re.fullmatch(r"[a-f0-9]{64}", entry["sha256"])
++            ):
++                raise StorageError("MANIFEST_FILE_CONTRACT")
++            raw = self._read(entry["relative_path"])
++            if len(raw) != entry["byte_length"] or digest(raw) != entry["sha256"]:
++                raise StorageError("MANIFEST_INTEGRITY_FAILURE")
++            table = pq.read_table(pa.BufferReader(raw))
++            version = (table.schema.metadata or {}).get(b"canonical_schema", b"").decode()
++            if (
++                table.num_rows != entry["row_count"]
++                or schema.schema_fingerprint(version) != entry["schema_fingerprint"]
++                or not table.schema.equals(schema.get_schema(version), check_metadata=True)
++            ):
++                raise StorageError("MANIFEST_SCHEMA_OR_ROW_COUNT")
++            rows = schema.from_table(table)
++            partitions = {
++                r.exchange + "/" + r.trade_date.strftime("%Y-%m") for r in rows if r.exchange
++            }
++            known = [
++                r.known_from.astimezone(UTC).isoformat() for r in rows if r.known_from is not None
++            ]
++            expected = {
++                "minimum_trade_date": min(r.trade_date for r in rows).isoformat(),
++                "maximum_trade_date": max(r.trade_date for r in rows).isoformat(),
++                "minimum_known_from": min(known) if known else None,
++                "maximum_known_from": max(known) if known else None,
++                "content_classification": "NON_MARKET_STRUCTURAL_CONTROL",
++                "compression": "zstd",
++            }
++            parquet = pq.ParquetFile(pa.BufferReader(raw))
++            compressions = {
++                parquet.metadata.row_group(g).column(c).compression.lower()
++                for g in range(parquet.metadata.num_row_groups)
++                for c in range(parquet.metadata.num_columns)
++            }
++            if (
++                partitions != {entry["partition_identity"]}
++                or compressions != {"zstd"}
++                or any(entry[k] != v for k, v in expected.items())
++                or any(
++                    r.observation_classification != expected["content_classification"] for r in rows
++                )
++            ):
++                raise StorageError("MANIFEST_SEMANTIC_MISMATCH")
++            return table, raw
++        except (pa.ArrowException, KeyError, ValueError, TypeError) as error:
++            if isinstance(error, StorageError):
++                raise
++            raise StorageError("MANIFEST_INTEGRITY_FAILURE") from error
++
++    def manifest(self, version: str) -> dict[str, Any]:
++        with self.engine.connect() as con:
++            row = con.execute(
++                text("SELECT payload,digest FROM dataset_version WHERE id=:id"), {"id": version}
++            ).first()
++        if row is None:
++            raise StorageError("UNKNOWN_DATASET_VERSION")
++        if digest(row[0].encode()) != row[1]:
++            raise StorageError("MANIFEST_INTEGRITY_FAILURE")
++        m = json.loads(row[0])
++        if not isinstance(m, dict):
++            raise StorageError("MANIFEST_CONTRACT")
++        raw = self._read(m["manifest_relative_path"], 8_000_000)
++        if raw != row[0].encode():
++            raise StorageError("MANIFEST_INTEGRITY_FAILURE")
++        return m
++
++    def verify(self, version: str, *, _captured: dict[str, bytes] | None = None) -> dict[str, Any]:
++        m = self.manifest(version)
++        seen = set()
++        rows = 0
++        if m["dataset_version_id"] != version or m["storage_commit_state"] != "STORAGE_COMMITTED":
++            raise StorageError("MANIFEST_VERSION_MISMATCH")
++        for e in m["file_entries"]:
++            if e["partition_identity"] in seen or e["dataset_version_id"] != version:
++                raise StorageError("DUPLICATE_PARTITION")
++            seen.add(e["partition_identity"])
++            table, raw = self._verified_file(e)
++            rows += table.num_rows
++            if _captured is not None:
++                _captured[e["relative_path"]] = raw
++        if rows != m["total_rows"] or len(seen) != m["total_partitions"]:
++            raise StorageError("MANIFEST_ACCOUNTING")
++        return {
++            "verified": True,
++            "rows": rows,
++            "partitions": len(seen),
++            "manifest_digest": fingerprint(m),
++        }
++
++    def commit(
++        self,
++        definition: DatasetDefinition,
++        rows: tuple[Observation, ...],
++        *,
++        operation_id: str,
++        parent_version: str | None = None,
++        expected_partitions: tuple[str, ...],
++        hook: Callable[[str], None] | None = None,
++        proofs: tuple[Any, ...] = (),
++    ) -> str:
++        if self.read_only:
++            raise StorageError("READ_ONLY_CATALOG")
++        token(operation_id)
++        schema.get_schema(definition.schema_version)
++        if (
++            definition.domain not in schema.DOMAINS
++            or schema.DOMAINS[definition.domain] != "PARQUET_DATASET"
++        ):
++            raise StorageError("DOMAIN_STORAGE_MISMATCH")
++        if (definition.domain == "adjustment_results") != (definition.layer == "DERIVED"):
++            raise StorageError("DOMAIN_LAYER_MISMATCH")
++        if type(rows) is not tuple or not 1 <= len(rows) <= 100000:
++            raise StorageError("WRITE_RESOURCE_LIMIT")
++        if len({r.observation_revision_id for r in rows}) != len(rows):
++            raise StorageError("DUPLICATE_OBSERVATION_REVISION")
++        rows = tuple(sorted(rows, key=lambda r: r.observation_revision_id))
++        for r in rows:
++            if (
++                r.source_rights_state != "NON_MARKET_CONTROL"
++                or r.observation_classification != "NON_MARKET_STRUCTURAL_CONTROL"
++            ):
++                raise StorageError("SOURCE_SCOPE_BLOCKED")
++            if (
++                r.source_id not in definition.source_scope
++                or r.price_basis != definition.price_basis
++                or r.consumer_profile != definition.consumer_profile
++            ):
++                raise StorageError("SOURCE_OR_BASIS_SCOPE")
++            adjusted = (
++                (r.volume_basis not in {None, "RAW"})
++                if r.field_semantics == "VOLUME"
++                else r.price_basis != "RAW_UNADJUSTED"
++            )
++            if (definition.layer == "DERIVED") != adjusted:
++                raise StorageError("RAW_DERIVED_SEPARATION")
++            if r.field_semantics == "VOLUME" and definition.volume_basis != r.volume_basis:
++                raise StorageError("VOLUME_BASIS_MISMATCH")
++            if definition.layer == "DERIVED":
++                from omegadata.canonical_storage.admission import admit_derived
++
++                matching = [
++                    p for p in proofs if p.source_observation.observation_id == r.observation_id
++                ]
++                if len(matching) != 1:
++                    raise StorageError("DERIVED_BOUND_PROOF_REQUIRED")
++                admit_derived(r, matching[0])
++                proof = matching[0]
++                self.pin_domain(
++                    "adjustment_results",
++                    proof.payload.output_digest,
++                    proof.payload,
++                    r.known_from,
++                    context=proof,
++                )
++        request = fingerprint((definition, rows, operation_id, parent_version, expected_partitions))
++        version = uuid.uuid4().hex
++
++        def fault(at: str) -> None:
++            if hook:
++                hook(at)
++
++        with self.engine.connect() as con:
++            old = con.execute(
++                text("SELECT input_digest,version FROM commit_operation WHERE id=:id"),
++                {"id": operation_id},
++            ).first()
++        if old:
++            if old[0] != request:
++                raise StorageError("OPERATION_ID_CONTENT_CHANGED")
++            self.verify(old[1])
++            return str(old[1])
++        parts: dict[str, list[Observation]] = {}
++        for r in rows:
++            if r.exchange is None:
++                raise StorageError("PARTITION_IDENTITY_UNKNOWN")
++            key = r.exchange + "/" + r.trade_date.strftime("%Y-%m")
++            parts.setdefault(key, []).append(r)
++        if (
++            type(expected_partitions) is not tuple
++            or len(set(expected_partitions)) != len(expected_partitions)
++            or set(parts) != set(expected_partitions)
++            or len(parts) > 64
++        ):
++            raise StorageError("PARTITION_ACCOUNTING")
++        attempt = self.root / "staging" / uuid.uuid4().hex
++        attempt.mkdir(mode=0o700)
++        staged = []
++        fault("before_write")
++        for i, (partition, subset) in enumerate(sorted(parts.items())):
++            table = schema.to_table(tuple(subset), definition.schema_version)
++            p = attempt / (str(i) + ".parquet")
++            with p.open("xb") as f:
++                f.write(b"PAR1")
++                f.flush()
++                fault("during_file_write")
++            pq.write_table(
++                table, p, compression="zstd", row_group_size=8192, version="2.6", store_schema=True
++            )
++            with p.open("rb") as verify_stream:
++                os.fsync(verify_stream.fileno())
++            fault("after_file_write_before_validation")
++            raw = p.read_bytes()
++            decoded = schema.from_table(pq.read_table(pa.BufferReader(raw)))
++            if decoded != tuple(subset):
++                raise StorageError("STAGED_ROUNDTRIP_MISMATCH")
++            path = "objects/" + uuid.uuid4().hex + ".parquet"
++            known = [
++                r.known_from.astimezone(UTC).isoformat() for r in subset if r.known_from is not None
++            ]
++            entry = {
++                "file_id": path.split("/")[1].split(".")[0],
++                "relative_path": path,
++                "sha256": digest(raw),
++                "byte_length": len(raw),
++                "row_count": len(subset),
++                "schema_fingerprint": schema.schema_fingerprint(definition.schema_version),
++                "partition_identity": partition,
++                "dataset_version_id": version,
++                "minimum_trade_date": min(r.trade_date for r in subset).isoformat(),
++                "maximum_trade_date": max(r.trade_date for r in subset).isoformat(),
++                "minimum_known_from": min(known) if known else None,
++                "maximum_known_from": max(known) if known else None,
++                "compression": "zstd",
++                "writer_version": "pyarrow/" + pa.__version__ + "/od10/v1",
++                "content_classification": "NON_MARKET_STRUCTURAL_CONTROL",
++            }
++            staged.append((entry, raw))
++        fault("after_validation_before_install")
++        with self.transaction() as con:
++            old = con.execute(
++                text("SELECT input_digest,version FROM commit_operation WHERE id=:id"),
++                {"id": operation_id},
++            ).first()
++            if old:
++                if old[0] != request:
++                    raise StorageError("OPERATION_ID_CONTENT_CHANGED")
++                return str(old[1])
++            parent = con.execute(
++                text(
++                    "SELECT id,generation FROM dataset_version WHERE dataset=:d ORDER BY generation DESC LIMIT 1"
++                ),
++                {"d": definition.dataset_id},
++            ).first()
++            if (str(parent[0]) if parent else None) != parent_version:
++                raise StorageError("COMPETING_PARENT_VERSION")
++            if parent_version:
++                self.verify(parent_version)
++                prior = self.manifest(parent_version)
++                original = {
++                    r.observation_revision_id: r
++                    for e in prior["file_entries"]
++                    for r in schema.from_table(self.verify_file(e))
++                }
++                for r in rows:
++                    if r.supersedes_revision_id:
++                        previous = original.get(r.supersedes_revision_id)
++                        if (
++                            previous is None
++                            or previous.observation_id != r.observation_id
++                            or previous.known_from is None
++                            or r.known_from is None
++                            or r.known_from <= previous.known_from
++                        ):
++                            raise StorageError("REVISION_LINEAGE_INVALID")
++            for entry, raw in staged:
++                self._install(entry["relative_path"], raw)
++                self.verify_file(entry)
++            fault("after_install_before_catalog_commit")
++            deps = sorted({v for r in rows for v in r.lineage})
++            m = {
++                "dataset_version_id": version,
++                "parent_dataset_version_id": parent_version,
++                "dataset_id": definition.dataset_id,
++                "domain": definition.domain,
++                "layer": definition.layer,
++                "schema_version": definition.schema_version,
++                "schema_fingerprint": schema.schema_fingerprint(definition.schema_version),
++                "partitioning_version": definition.partitioning_version,
++                "writer_version": "pyarrow/" + pa.__version__ + "/od10/v1",
++                "manifest_relative_path": "manifests/" + uuid.uuid4().hex + ".json",
++                "manifest_version": "od10.manifest/v1",
++                "source_scope": list(definition.source_scope),
++                "price_basis": definition.price_basis,
++                "consumer_profile": definition.consumer_profile,
++                "volume_basis": definition.volume_basis,
++                "valid_time_scope": [
++                    min(r.trade_date for r in rows).isoformat(),
++                    max(r.trade_date for r in rows).isoformat(),
++                ],
++                "file_entries": [e for e, raw in staged],
++                "total_rows": len(rows),
++                "total_partitions": len(staged),
++                "upstream_references": [list(v) for v in deps],
++                "source_rights_state": "NON_MARKET_CONTROL",
++                "coverage_state": definition.coverage_state,
++                "dependency_coverage_state": "UNKNOWN"
++                if deps
++                else "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE",
++                "anomaly_state": "UNVERIFIED",
++                "financial_acceptance_state": "BLOCKED_REAL_DATA",
++                "publication_state": "NOT_AUTHORIZED",
++                "storage_commit_state": "STORAGE_COMMITTED",
++                "commit_operation_id": operation_id,
++            }
++            payload = canonical(m)
++            self._install(m["manifest_relative_path"], payload.encode())
++            sd = schema.schema_fingerprint(definition.schema_version)
++            con.execute(
++                text("INSERT OR IGNORE INTO schema_version VALUES (:id,:f)"),
++                {"id": definition.schema_version, "f": sd},
++            )
++            actual = con.execute(
++                text("SELECT fingerprint FROM schema_version WHERE id=:id"),
++                {"id": definition.schema_version},
++            ).scalar()
++            if actual != sd:
++                raise StorageError("SCHEMA_FINGERPRINT_MISMATCH")
++            dd = fingerprint(definition)
++            con.execute(
++                text("INSERT OR IGNORE INTO dataset_definition VALUES (:id,:d,:p)"),
++                {"id": dd, "d": definition.dataset_id, "p": canonical(asdict(definition))},
++            )
++            con.execute(
++                text("INSERT INTO dataset_version VALUES (:id,:d,:parent,:g,:definition,:p,:h)"),
++                {
++                    "id": version,
++                    "d": definition.dataset_id,
++                    "parent": parent_version,
++                    "g": parent[1] + 1 if parent else 1,
++                    "definition": dd,
++                    "p": payload,
++                    "h": digest(payload.encode()),
++                },
++            )
++            for e, _raw in staged:
++                con.execute(
++                    text("INSERT INTO physical_file VALUES (:id,:p,:h)"),
++                    {"id": e["file_id"], "p": canonical(e), "h": e["sha256"]},
++                )
++                con.execute(
++                    text("INSERT INTO partition_reference VALUES (:v,:p,:f)"),
++                    {"v": version, "p": e["partition_identity"], "f": e["file_id"]},
++                )
++            for kind, identity, h in deps:
++                con.execute(
++                    text("INSERT INTO dataset_dependency VALUES (:v,:k,:i,:h)"),
++                    {"v": version, "k": kind, "i": identity, "h": h},
++                )
++            con.execute(
++                text("INSERT INTO commit_operation VALUES (:id,:h,:v)"),
++                {"id": operation_id, "h": request, "v": version},
++            )
++            fault("during_catalog_transaction")
++        fault("after_catalog_commit_before_acknowledgement")
++        self.verify(version)
++        return version
++
++    def query(self, query: Query) -> QueryResult:
++        from omegadata.canonical_storage.query import query_dataset
++
++        return query_dataset(self, query)
++
++    def select_version(self, dataset: str, version: str, reason: str, at: datetime) -> None:
++        timestamp(at)
++        token(reason)
++        self.verify(version)
++        if self.manifest(version)["dataset_id"] != dataset:
++            raise StorageError("VERSION_SELECTION_SCOPE")
++        with self.transaction() as con:
++            con.execute(
++                text(
++                    "INSERT INTO version_selection_event(dataset,version,reason,at) VALUES (:d,:v,:r,:t)"
++                ),
++                {"d": dataset, "v": version, "r": reason, "t": at.isoformat()},
++            )
++
++    def selected_version(self, dataset: str) -> str | None:
++        with self.engine.connect() as con:
++            return con.execute(
++                text(
++                    "SELECT version FROM version_selection_event WHERE dataset=:d ORDER BY sequence DESC LIMIT 1"
++                ),
++                {"d": dataset},
++            ).scalar()
++
++    def convert_version(self, old: str, new_schema: str, operation_id: str) -> str:
++        m = self.manifest(old)
++        schema.classify_change(m["schema_version"], new_schema)
++        rows = tuple(
++            replace(r, canonical_schema_version=new_schema)
++            for e in m["file_entries"]
++            for r in schema.from_table(self.verify_file(e))
++        )
++        definition = DatasetDefinition(
++            m["dataset_id"],
++            m["domain"],
++            m["layer"],
++            new_schema,
++            m["price_basis"],
++            m["consumer_profile"],
++            tuple(m["source_scope"]),
++            m["coverage_state"],
++        )
++        return self.commit(
++            definition,
++            rows,
++            operation_id=operation_id,
++            parent_version=old,
++            expected_partitions=tuple(e["partition_identity"] for e in m["file_entries"]),
++        )
++
++    def impact(
++        self, kind: str, identity: str, known_at: datetime, *, maximum_nodes: int = 10000
++    ) -> dict[str, Any]:
++        timestamp(known_at)
++        if known_at is None or type(maximum_nodes) is not int or not 1 <= maximum_nodes <= 10000:
++            raise StorageError("DEPENDENCY_RESOURCE_LIMIT")
++        pending = [(kind, identity)]
++        seen = set()
++        versions = set()
++        with self.engine.connect() as con:
++            while pending:
++                node = pending.pop()
++                if node in seen:
++                    continue
++                seen.add(node)
++                if len(seen) > maximum_nodes:
++                    raise StorageError("DEPENDENCY_RESOURCE_LIMIT")
++                found = (
++                    con.execute(
++                        text(
++                            "SELECT DISTINCT version FROM dataset_dependency WHERE kind=:k AND identity=:i LIMIT :n"
++                        ),
++                        {"k": node[0], "i": node[1], "n": maximum_nodes + 1},
++                    )
++                    .scalars()
++                    .all()
++                )
++                if len(found) > maximum_nodes:
++                    raise StorageError("DEPENDENCY_RESOURCE_LIMIT")
++                for v in found:
++                    m = self.manifest(v)
++                    known = [
++                        e["minimum_known_from"]
++                        for e in m["file_entries"]
++                        if e["minimum_known_from"]
++                    ]
++                    if known and min(datetime.fromisoformat(t) for t in known) <= known_at:
++                        versions.add(v)
++                children = con.execute(
++                    text(
++                        "SELECT d.child_kind,d.child_identity,r.known_from FROM reference_dependency d JOIN typed_reference r ON r.kind=d.child_kind AND r.identity=d.child_identity WHERE d.parent_kind=:k AND d.parent_identity=:i LIMIT :n"
++                    ),
++                    {"k": node[0], "i": node[1], "n": maximum_nodes + 1},
++                ).fetchall()
++                if len(children) > maximum_nodes:
++                    raise StorageError("DEPENDENCY_RESOURCE_LIMIT")
++                pending.extend(
++                    (r[0], r[1])
++                    for r in children
++                    if r[2] is not None and datetime.fromisoformat(r[2]) <= known_at
++                )
++        return {
++            "dataset_versions": sorted(versions),
++            "visited_reference_nodes": len(seen),
++            "coverage_state": "DEPENDENCY_UNKNOWN",
++            "classification": "ALL_REGISTERED_HISTORY_RETAINED",
++            "automatic_reprocess": False,
++        }
++
++    def orphans(self) -> dict[str, Any]:
++        with self.engine.connect() as con:
++            committed = {
++                json.loads(v)["relative_path"]
++                for v in con.execute(text("SELECT payload FROM physical_file")).scalars()
++            }
++            manifests = {
++                json.loads(v)["manifest_relative_path"]
++                for v in con.execute(text("SELECT payload FROM dataset_version")).scalars()
++            }
++        objects = {p.relative_to(self.root).as_posix() for p in (self.root / "objects").iterdir()}
++        ms = {p.relative_to(self.root).as_posix() for p in (self.root / "manifests").iterdir()}
++        return {
++            "uncommitted_objects": sorted(objects - committed),
++            "uncommitted_manifests": sorted(ms - manifests),
++            "attempts": sorted(p.name for p in (self.root / "staging").iterdir()),
++            "promotion": "NEVER_AUTOMATIC",
++            "cleanup_performed": False,
++        }
++
++    def pin_domain(
++        self,
++        domain: str,
++        identity: str,
++        payload: Any,
++        known_from: datetime | None,
++        *,
++        context: Any = None,
++        dependencies: tuple[tuple[str, str, str], ...] = (),
++    ) -> tuple[str, str, str]:
++        from omegadata.canonical_storage.admission import (
++            ProvenanceLedger,
++            code_only_payload_admission,
++        )
++        from omegadata.universe.repository import encode
++
++        code_only_payload_admission(payload, context)
++
++        if len(dependencies) > 128 or len(set(dependencies)) != len(dependencies):
++            raise StorageError("DEPENDENCY_RESOURCE_LIMIT")
++        if domain == "reconciliation_results":
++            from omegadata.reconciliation.engine import reconcile_context
++
++            if not isinstance(context, tuple) or len(context) != 2:
++                raise StorageError("COMPARISON_CONTEXT_REQUIRED")
++            scope_id, comparison = context
++            replay = reconcile_context(comparison)
++            self.admit_comparison_scope(scope_id, comparison, replay, complete=True)
++            if payload not in replay:
++                raise StorageError("RECONCILIATION_REPLAY_MISMATCH")
++        ref = ProvenanceLedger().pin(domain, identity, payload, known_from, context=context)
++        body = canonical(
++            {
++                "payload": encode(payload),
++                "context": encode(context),
++                "known_from": known_from.isoformat() if known_from is not None else None,
++                "dependencies": encode(tuple(sorted(dependencies))),
++                "financial_acceptance": "NOT_AUTHORIZED",
++                "version": "od10.reference/v1",
++            }
++        )
++        ref = (domain, identity, digest(body.encode()))
++        with self.transaction() as con:
++            old = con.execute(
++                text("SELECT payload,digest FROM typed_reference WHERE kind=:k AND identity=:i"),
++                {"k": domain, "i": identity},
++            ).first()
++            if old:
++                if old[0] != body or old[1] != ref[2]:
++                    raise StorageError("IMMUTABLE_UPSTREAM_ID")
++            else:
++                con.execute(
++                    text("INSERT INTO typed_reference VALUES (:k,:i,:p,:h,:t)"),
++                    {
++                        "k": domain,
++                        "i": identity,
++                        "p": body,
++                        "h": ref[2],
++                        "t": known_from.astimezone(UTC).isoformat()
++                        if known_from is not None
++                        else None,
++                    },
++                )
++            from omegadata.reconciliation.contracts import Observation as SourceObservation
++
++            if type(payload) is SourceObservation and domain == "source_observations":
++                o = payload
++                if o.observation_id != identity:
++                    raise StorageError("SOURCE_OBSERVATION_IDENTITY")
++                con.execute(
++                    text(
++                        "INSERT OR IGNORE INTO source_observation_index VALUES (:id,:s,:l,:f,:d,:k)"
++                    ),
++                    {
++                        "id": o.observation_id,
++                        "s": o.source_id,
++                        "l": o.listing_id,
++                        "f": o.field_name,
++                        "d": o.session_date.isoformat(),
++                        "k": o.availability.known_from.astimezone(UTC).isoformat()
++                        if o.availability.known_from
++                        else None,
++                    },
++                )
++            for kind, parent, h in dependencies:
++                if (kind, parent) == (domain, identity):
++                    raise StorageError("DEPENDENCY_SELF_CYCLE")
++                con.execute(
++                    text("INSERT OR IGNORE INTO reference_dependency VALUES (:k,:i,:d,:p,:j,:h)"),
++                    {"k": domain, "i": identity, "d": ref[2], "p": kind, "j": parent, "h": h},
++                )
++        return ref
++
++    def read_domain(self, ref: tuple[str, str, str], known_at: datetime) -> Any:
++        from omegadata.parsers.contracts import ParsedBar, ParseRequest, ParseResult
++        from omegadata.reconciliation.repository import TYPES as reconciliation_types
++        from omegadata.universe.repository import TYPES, decode
++
++        timestamp(known_at)
++        TYPES.update(reconciliation_types)
++        for cls in (ParseResult, ParsedBar, ParseRequest):
++            TYPES[cls.__name__] = cls
++        with self.engine.connect() as con:
++            row = con.execute(
++                text(
++                    "SELECT payload,digest,known_from FROM typed_reference WHERE kind=:k AND identity=:i"
++                ),
++                {"k": ref[0], "i": ref[1]},
++            ).first()
++        if row is None or row[1] != ref[2]:
++            raise StorageError("UPSTREAM_PIN_MISSING_OR_CHANGED")
++        if row[2] is None:
++            raise StorageError("AVAILABILITY_UNKNOWN")
++        if datetime.fromisoformat(row[2]) > known_at:
++            raise StorageError("FUTURE_INFORMATION")
++        body = json.loads(row[0])
++        payload = decode(body["payload"])
++        if digest(row[0].encode()) != ref[2]:
++            raise StorageError("UPSTREAM_REFERENCE_INTEGRITY")
++        return payload
++
++    def query_join(
++        self,
++        *,
++        query: Query,
++        references: tuple[tuple[str, str, str], ...],
++        join_key: str | None = None,
++    ) -> dict[str, Any]:
++        if len(references) > 1000 or len(set(references)) != len(references):
++            raise StorageError("QUERY_RESOURCE_LIMIT")
++        if join_key not in {None, "listing_id", "security_id"}:
++            raise StorageError("QUERY_JOIN_KEY_UNSUPPORTED")
++        rows = self.query(query)
++        metadata = tuple(self.read_domain(ref, query.known_at) for ref in references)
++        joined = []
++        if join_key is not None:
++            for row in rows.rows:
++                key = row.get(join_key)
++                matches = [
++                    m for m in metadata if key is not None and getattr(m, join_key, None) == key
++                ]
++                joined.append(
++                    {
++                        "observation": row,
++                        "metadata": matches[0] if len(matches) == 1 else tuple(matches),
++                        "status": "MATCHED_UNVERIFIED"
++                        if len(matches) == 1
++                        else "AMBIGUOUS"
++                        if matches
++                        else "UNRESOLVED",
++                    }
++                )
++        return {
++            "rows": rows.rows,
++            "joined": tuple(joined),
++            "excluded": rows.excluded,
++            "metadata": metadata,
++            "join_mode": "EXPLICIT_IMMUTABLE_REFERENCE_CONTEXT",
++            "financial_eligible": False,
++        }
++
++    def rollback_empty(self) -> None:
++        with self.transaction() as con:
++            if (
++                any(
++                    con.exec_driver_sql("SELECT count(*) FROM " + t).scalar()
++                    for t in TABLES
++                    if t != "catalog_schema"
++                )
++                or any((self.root / "objects").iterdir())
++                or any((self.root / "manifests").iterdir())
++            ):
++                raise StorageError("NONEMPTY_ROLLBACK_REFUSED")
++            for t in (
++                "reference_dependency",
++                "source_observation_index",
++                "comparison_scope",
++                "version_selection_event",
++                "dataset_dependency",
++                "commit_operation",
++                "partition_reference",
++                "typed_reference",
++                "dataset_version",
++                "physical_file",
++                "dataset_definition",
++                "schema_version",
++                "catalog_schema",
++            ):
++                con.exec_driver_sql("DROP TABLE " + t)
++
++    def pin_source_observations(self, rows: tuple[Any, ...]) -> None:
++        from omegadata.reconciliation.contracts import Observation as SourceObservation
++
++        for o in rows:
++            if type(o) is not SourceObservation:
++                raise StorageError("OBSERVATION_CONTRACT")
++            self.pin_domain("source_observations", o.observation_id, o, o.availability.known_from)
++
++    def pin_comparison_scope(self, scope: Any) -> None:
++        from omegadata.canonical_storage.admission import ComparisonScope
++        from omegadata.universe.repository import pack
++
++        if type(scope) is not ComparisonScope:
++            raise StorageError("COMPARISON_SCOPE_REQUIRED")
++        body = pack(scope)
++        h = fingerprint(scope)
++        with self.transaction() as con:
++            old = con.execute(
++                text("SELECT payload FROM comparison_scope WHERE id=:id"), {"id": scope.scope_id}
++            ).scalar()
++            if old is not None and old != body:
++                raise StorageError("IMMUTABLE_SCOPE_ID")
++            con.execute(
++                text("INSERT OR IGNORE INTO comparison_scope VALUES (:id,:p,:h)"),
++                {"id": scope.scope_id, "p": body, "h": h},
++            )
++
++    def admit_comparison_scope(
++        self, scope_id: str, context: Any, results: tuple[Any, ...], *, complete: bool
++    ) -> Any:
++        from sqlalchemy import bindparam
++
++        from omegadata.canonical_storage.admission import (
++            ComparisonScope,
++            ProvenanceLedger,
++            strict_comparison_admission,
++        )
++        from omegadata.universe.repository import TYPES, unpack
++
++        TYPES["ComparisonScope"] = ComparisonScope
++        with self.engine.connect() as con:
++            stored = con.execute(
++                text("SELECT payload,digest FROM comparison_scope WHERE id=:id"), {"id": scope_id}
++            ).first()
++            if stored is None:
++                raise StorageError("COMPARISON_SCOPE_MISSING")
++            scope = unpack(stored[0])
++            if fingerprint(scope) != stored[1]:
++                raise StorageError("COMPARISON_SCOPE_INTEGRITY")
++            stmt = text(
++                "SELECT i.id,r.payload FROM source_observation_index i JOIN typed_reference r ON r.kind=:kind AND r.identity=i.id WHERE i.source IN :sources AND i.listing IN :listings AND i.field IN :fields AND i.session>=:start AND i.session<:end AND (i.known_from IS NULL OR i.known_from<=:cutoff) LIMIT 10001"
++            ).bindparams(
++                bindparam("sources", expanding=True),
++                bindparam("listings", expanding=True),
++                bindparam("fields", expanding=True),
++            )
++            found = con.execute(
++                stmt,
++                {
++                    "kind": "source_observations",
++                    "sources": scope.source_ids,
++                    "listings": scope.listing_ids,
++                    "fields": scope.field_names,
++                    "start": scope.session_from.isoformat(),
++                    "end": scope.session_to.isoformat(),
++                    "cutoff": context.known_at.astimezone(UTC).isoformat(),
++                },
++            ).fetchall()
++        if len(found) > 10000:
++            raise StorageError("COMPARISON_SCOPE_RESOURCE_LIMIT")
++        ledger = ProvenanceLedger()
++        from omegadata.reconciliation.repository import TYPES as registered
++        from omegadata.universe.repository import decode
++
++        TYPES.update(registered)
++        ledger.pin_observations(tuple(decode(json.loads(row[1])["payload"]) for row in found))
++        return strict_comparison_admission(scope, context, results, ledger, complete=complete)
+--- /dev/null
++++ b/tests/unit/test_od10_canonical_storage.py
+@@ -0,0 +1,1092 @@
++"""OD10 anonymous bookkeeping / literal scalar tests. No financial source observations."""
++
++import hashlib
++import threading
++from dataclasses import replace
++from datetime import UTC, date, datetime, timedelta, timezone
++from decimal import Decimal
++from pathlib import Path
++
++import pytest
++
++D = date(2020, 1, 2)
++K = datetime(2020, 1, 3, tzinfo=UTC)
++
++
++def record(**kw):
++    from omegadata.canonical_storage.contracts import Observation
++
++    return replace(
++        Observation(
++            observation_id="control-0001",
++            observation_revision_id="revision-1",
++            source_id="control-source",
++            source_artifact_identity="control-artifact",
++            source_record_identity="control-row",
++            trade_date=D,
++            session_date=D,
++            known_from=K,
++            field_semantics="CONTROL_SCALAR",
++            value=Decimal("1.2500"),
++            security_id="control-security",
++            listing_id="00001",
++            exchange="CANARY-X",
++            symbol_as_reported="CONTROL",
++            series_as_reported="CONTROL",
++            publisher_identity="control-publisher",
++            source_row_ordinal=1,
++            parser_version="control-parser/v1",
++            schema_version="control/v1",
++            source_evidence_id="NON_MARKET_CONTROL",
++            source_rights_state="NON_MARKET_CONTROL",
++            source_authority_digest="a" * 64,
++            observation_classification="NON_MARKET_STRUCTURAL_CONTROL",
++            quality_state="UNVERIFIED",
++            price_basis="RAW_UNADJUSTED",
++            volume_basis="RAW",
++            currency="CONTROL",
++            price_unit="CONTROL",
++            volume_unit="CONTROL",
++            consumer_profile="AUDIT",
++            economic_valid_from=D,
++        ),
++        **kw,
++    )
++
++
++def database(tmp_path):
++    from omegadata.canonical_storage.store import CanonicalStore
++
++    return CanonicalStore(tmp_path / "store", disposable_root=tmp_path)
++
++
++def commit(db, rows=None, op="operation-1", parent=None, **kw):
++    from omegadata.canonical_storage.contracts import DatasetDefinition
++
++    definition = DatasetDefinition(
++        "control-dataset",
++        "source_observations",
++        "RAW",
++        "canonical/v1",
++        "RAW_UNADJUSTED",
++        "AUDIT",
++        ("control-source",),
++        "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE",
++    )
++    definition = replace(definition, **kw.pop("definition", {}))
++    return db.commit(
++        definition,
++        (record(),) if rows is None else rows,
++        operation_id=op,
++        parent_version=parent,
++        expected_partitions=("CANARY-X/2020-01",),
++        **kw,
++    )
++
++
++def query(db, version, **kw):
++    from omegadata.canonical_storage.contracts import Query
++
++    return db.query(
++        replace(
++            Query(
++                version, "control-dataset", D, D + timedelta(days=1), K, "RAW_UNADJUSTED", "AUDIT"
++            ),
++            **kw,
++        )
++    )
++
++
++GROUPS = [
++    f"{p}{i:02}"
++    for p, n in [
++        ("S", 6),
++        ("L", 7),
++        ("V", 5),
++        ("M", 6),
++        ("T", 6),
++        ("C", 4),
++        ("E", 4),
++        ("Q", 7),
++        ("R", 3),
++        ("G", 4),
++    ]
++    for i in range(1, n + 1)
++]
++
++
++@pytest.mark.parametrize("group", GROUPS)
++def test_od10_acceptance(group, tmp_path):
++    from omegadata.canonical_storage import schema
++    from omegadata.canonical_storage.contracts import StorageError
++
++    if group.startswith("S"):
++        row = record()
++        if group == "S01":
++            assert schema.from_table(schema.to_table((row,), "canonical/v1")) == (row,)
++        elif group == "S02":
++            value = Decimal("0." + "1" * 90)
++            coded = schema.encode_decimal(value, "CALCULATION")
++            assert (
++                schema.decode_decimal(coded).as_tuple() == value.as_tuple()
++                and coded["fixed"] is None
++            )
++        elif group == "S03":
++            with pytest.raises(StorageError, match="PRECISION"):
++                schema.encode_decimal(Decimal("1e-90"), "RAW")
++        elif group == "S04":
++            rows = (
++                replace(row, value=None, value_state="MISSING"),
++                replace(row, observation_revision_id="zero", value=Decimal(0)),
++            )
++            assert [r.value for r in schema.from_table(schema.to_table(rows, "canonical/v1"))] == [
++                None,
++                Decimal(0),
++            ]
++        elif group == "S05":
++            r = replace(row, known_from=K.astimezone(timezone(timedelta(hours=5, minutes=30))))
++            assert schema.from_table(schema.to_table((r,), "canonical/v1"))[0].known_from == K
++            with pytest.raises(StorageError):
++                replace(row, known_from=K.replace(tzinfo=None))
++        elif group == "S06":
++            assert (
++                schema.from_table(schema.to_table((row,), "canonical/v1"))[0].listing_id == "00001"
++            )
++        return
++    db = database(tmp_path)
++    if group.startswith("L"):
++        from test_od09_reconciliation import controls
++
++        from omegadata.canonical_storage.admission import (
++            ProvenanceLedger,
++            SourceBinding,
++            admit_comparison,
++        )
++        from omegadata.reconciliation.engine import reconcile_context
++
++        _, x, left, right = controls()
++        ledger = ProvenanceLedger()
++        if group == "L01":
++            from omegadata.parsers.contracts import ParseResult
++
++            v = ParseResult("PARSED_UNVERIFIED", "a" * 64)
++            ref = ledger.pin("source_observations", "parser-control", v, K)
++            assert ledger.get(ref) == v and not ledger.financial_eligible(ref)
++        elif group == "L02":
++            a = ledger.pin("instrument_identity_revisions", "identity", x.universe.identity, K)
++            b = ledger.pin("session_calendar", "calendar", x.universe.calendar, K)
++            assert ledger.get(a) == x.universe.identity and ledger.get(b) == x.universe.calendar
++        elif group == "L03":
++            from omegadata.canonical_storage.admission import verify_proof
++            from omegadata.reconciliation.dependencies import UpstreamProof
++
++            with pytest.raises(StorageError):
++                verify_proof(None, K)
++            assert UpstreamProof is not None
++        elif group == "L04":
++            from omegadata.universe.contracts import EligibilityPolicy
++            from omegadata.universe.snapshots import get_universe_as_of
++
++            p = EligibilityPolicy("control-membership", view="MEMBERSHIP")
++            s = get_universe_as_of(x.universe, D, K, p, x.universe.source_snapshot_id)
++            ref = ledger.pin("universe_snapshots", "snapshot", s, K, context=(x.universe, p))
++            assert len(ledger.get(ref).decisions) == len(s.decisions)
++        else:
++            ledger.pin_observations((left, right))
++            binding = SourceBinding.from_observation(left)
++            if group == "L05":
++                assert (
++                    admit_comparison(
++                        x,
++                        reconcile_context(x),
++                        ledger,
++                        (left.observation_id, right.observation_id),
++                        False,
++                    ).financial_eligible
++                    is False
++                )
++            elif group == "L06":
++                with pytest.raises(StorageError, match="SCOPE"):
++                    admit_comparison(
++                        replace(x, right=()),
++                        reconcile_context(replace(x, right=())),
++                        ledger,
++                        (left.observation_id, right.observation_id),
++                        True,
++                    )
++            elif group == "L07":
++                with pytest.raises(StorageError, match="SEMANTIC"):
++                    ledger.verify_source(replace(left, field_name="open"), binding)
++        return
++    if group.startswith("V"):
++        v1 = commit(db)
++        before = db.manifest(v1)
++        row2 = record(
++            observation_revision_id="revision-2",
++            supersedes_revision_id="revision-1",
++            value=Decimal("2.5"),
++            known_from=K + timedelta(days=1),
++        )
++        if group == "V03":
++            assert commit(db) == v1
++            return
++        if group == "V04":
++            with pytest.raises(StorageError):
++                commit(db, (row2,))
++            return
++        v2 = commit(db, (row2,), "operation-2", v1)
++        if group == "V01":
++            assert query(db, v1).rows[0]["value"] == Decimal("1.2500") and query(
++                db, v2, known_at=K + timedelta(days=1)
++            ).rows[0]["value"] == Decimal("2.5")
++        elif group == "V02":
++            assert db.manifest(v1) == before and db.verify(v1)["verified"]
++        elif group == "V05":
++            db.select_version("control-dataset", v2, "control-new", K + timedelta(days=1))
++            db.select_version("control-dataset", v1, "control-rollback", K + timedelta(days=2))
++            assert db.selected_version("control-dataset") == v1 and query(db, v1).rows[0][
++                "value"
++            ] == Decimal("1.2500")
++        return
++    if group.startswith("M"):
++        v = commit(db)
++        m = db.manifest(v)
++        file = tmp_path / "store" / m["file_entries"][0]["relative_path"]
++        if group == "M01":
++            file.rename(file.with_suffix(".missing"))
++        elif group == "M02":
++            file.write_bytes(b"NON_MARKET_CORRUPT")
++        elif group in {"M03", "M04", "M05"}:
++            entry = dict(m["file_entries"][0])
++            entry[
++                {"M03": "row_count", "M04": "schema_fingerprint", "M05": "relative_path"}[group]
++            ] = {"M03": 999, "M04": "0" * 64, "M05": "../outside.parquet"}[group]
++            with pytest.raises(StorageError):
++                db.verify_file(entry)
++            return
++        elif group == "M06":
++            (tmp_path / "store/objects/unreferenced.parquet").write_bytes(b"NOT_A_MEMBER")
++            assert len(query(db, v).rows) == 1
++            return
++        with pytest.raises(StorageError):
++            query(db, v)
++        return
++    if group.startswith("T"):
++        v1 = commit(db)
++        phases = {
++            "T01": "during_file_write",
++            "T02": "after_install_before_catalog_commit",
++            "T03": "after_catalog_commit_before_acknowledgement",
++            "T04": "after_file_write_before_validation",
++            "T05": "during_catalog_transaction",
++            "T06": "after_validation_before_install",
++        }
++        phase = phases[group]
++
++        def fault(at):
++            if at == phase:
++                if group == "T04":
++                    assert len(query(db, v1).rows) == 1
++                raise RuntimeError("CONTROLLED_FAULT")
++
++        with pytest.raises(RuntimeError):
++            commit(db, op="interrupted", parent=v1, hook=fault)
++        db.close()
++        db = database(tmp_path)
++        assert len(query(db, v1).rows) == 1
++        if group == "T03":
++            assert commit(db, op="interrupted", parent=v1) == db.operation_version("interrupted")
++        else:
++            assert db.operation_version("interrupted") is None
++        assert isinstance(db.orphans(), dict)
++        return
++    if group.startswith("C"):
++        v = commit(db)
++        results = []
++        barrier = threading.Barrier(2)
++
++        def writer(i):
++            local = database(tmp_path)
++            try:
++                barrier.wait(timeout=10)
++                results.append(
++                    commit(
++                        local,
++                        op="shared" if group == "C01" else "race-" + str(i),
++                        parent=v,
++                        rows=(record(value=Decimal(i + 1)),) if group == "C02" else None,
++                    )
++                )
++            except StorageError:
++                results.append("REFUSED")
++            finally:
++                local.close()
++
++        threads = [threading.Thread(target=writer, args=(i,)) for i in range(2)]
++        for t in threads:
++            t.start()
++        if group == "C04":
++            assert query(db, v).rows[0]["value"] == Decimal("1.2500")
++        for t in threads:
++            t.join(15)
++            assert not t.is_alive()
++        assert len(results) == 2
++        if group == "C01":
++            assert results[0] == results[1] and results[0] != "REFUSED"
++        else:
++            assert results.count("REFUSED") == 1
++        assert db.verify(v)["verified"]
++        return
++    if group.startswith("E"):
++        v = commit(db)
++        if group == "E01":
++            assert (
++                schema.classify_change("canonical/v1", "canonical/v2")
++                == "BACKWARD_COMPATIBLE_ADDITION"
++            )
++        elif group == "E02":
++            with pytest.raises(StorageError):
++                schema.get_schema("unknown")
++        elif group == "E03":
++            with pytest.raises(StorageError):
++                schema.encode_decimal(Decimal("1e40"), "RAW")
++        elif group == "E04":
++            new = db.convert_version(v, "canonical/v2", "convert-control")
++            assert (
++                db.manifest(new)["parent_dataset_version_id"] == v
++                and query(db, new).rows[0]["value"] == Decimal("1.2500")
++                and db.verify(v)["verified"]
++            )
++        return
++    if group.startswith("Q"):
++        v = commit(db)
++        if group == "Q01":
++            with pytest.raises(StorageError, match="UNKNOWN_DATASET_VERSION"):
++                query(db, "unknown")
++        elif group == "Q02":
++            q = query(db, v, known_at=K - timedelta(seconds=1))
++            assert q.rows == () and q.excluded[0]["reason"] == "FUTURE_INFORMATION"
++        elif group == "Q03":
++            with pytest.raises(StorageError, match="PRICE_BASIS"):
++                query(db, v, price_basis="BACKWARD_ADJUSTED")
++        elif group == "Q04":
++            assert query(db, v, listing_ids=("other",)).rows == ()
++        elif group == "Q05":
++            assert query(db, v).files_scanned == 1 and query(db, v).files_verified == 1
++        elif group == "Q06":
++            with pytest.raises(StorageError):
++                query(db, v, maximum_rows=0)
++        elif group == "Q07":
++            assert [
++                (r["observation_revision_id"], r["listing_id"], r["value"])
++                for r in query(db, v).rows
++            ] == [("revision-1", "00001", Decimal("1.2500"))]
++        return
++    if group.startswith("R"):
++        refs = (("source_observation_revision", "external-control", "a" * 64),)
++        v1 = commit(db, rows=(record(lineage=refs),))
++        v2 = commit(
++            db,
++            op="next",
++            parent=v1,
++            rows=(
++                record(
++                    observation_revision_id="second",
++                    supersedes_revision_id="revision-1",
++                    lineage=refs,
++                    known_from=K + timedelta(days=1),
++                ),
++            ),
++        )
++        out = db.impact("source_observation_revision", "external-control", K + timedelta(days=2))
++        assert set(out["dataset_versions"]) == {v1, v2}
++        if group == "R02":
++            assert out["coverage_state"] != "AUTHENTIC_COMPLETE"
++        elif group == "R03":
++            assert query(db, v1).rows[0]["observation_revision_id"] == "revision-1"
++        return
++    if group.startswith("G"):
++        row = record()
++        if group == "G01":
++            with pytest.raises(ValueError, match="init=False"):
++                replace(row, financial_eligibility=True)
++        elif group == "G02":
++            assert query(db, commit(db)).financial_eligible is False
++        elif group == "G03":
++            with pytest.raises(OSError):
++                Path("/unmounted-original/CONTROL_ONLY").read_bytes()
++        elif group == "G04":
++            assert db.domain_registry()["review_revisions"] == "TRANSACTIONAL_METADATA"
++
++
++def test_legacy_partition_overwrite_reproduction(tmp_path, monkeypatch):
++    import pandas as pd
++
++    from omegadata.config import settings
++    from omegadata.track_a.storage import ParquetStorage
++
++    monkeypatch.setattr(settings, "parquet_root", str(tmp_path / "legacy"))
++    store = ParquetStorage()
++    a = store.store_daily("NON_MARKET_BOOKKEEPING", D, pd.DataFrame({"anonymous_sequence": [1]}))
++    before = hashlib.sha256(a.path.read_bytes()).hexdigest()
++    b = store.store_daily("NON_MARKET_BOOKKEEPING", D, pd.DataFrame({"anonymous_sequence": [2]}))
++    assert a.path == b.path and before != hashlib.sha256(b.path.read_bytes()).hexdigest()
++
++
++@pytest.mark.parametrize(
++    "phase",
++    [
++        "before_write",
++        "during_file_write",
++        "after_file_write_before_validation",
++        "after_validation_before_install",
++        "after_install_before_catalog_commit",
++        "during_catalog_transaction",
++        "after_catalog_commit_before_acknowledgement",
++    ],
++)
++def test_fault_retry_is_recoverable_without_orphan_promotion(phase, tmp_path):
++    db = database(tmp_path)
++    v = commit(db)
++
++    def fault(at):
++        if at == phase:
++            raise RuntimeError("CONTROLLED_FAULT")
++
++    with pytest.raises(RuntimeError):
++        commit(db, op="retry-control", parent=v, hook=fault)
++    orphans = db.orphans()
++    new = commit(db, op="retry-control", parent=v)
++    assert (
++        db.operation_version("retry-control") == new
++        and db.verify(v)["verified"]
++        and db.verify(new)["verified"]
++    )
++    assert orphans["cleanup_performed"] is False
++
++
++@pytest.mark.parametrize(
++    "case", ["fixed-mismatch", "overflow", "zero-scale", "fraction", "negative", "maximum"]
++)
++def test_scalar_physical_and_logical_reconciliation(case):
++    import pyarrow as pa
++
++    from omegadata.canonical_storage import schema
++    from omegadata.canonical_storage.contracts import StorageError
++
++    if case == "fixed-mismatch":
++        t = schema.to_table((record(),), "canonical/v1")
++        i = t.schema.get_field_index("value_fixed")
++        t = t.set_column(
++            i, t.schema.field(i), pa.array([Decimal("2.5")], type=pa.decimal128(38, 12))
++        )
++        with pytest.raises(StorageError, match="SCALAR"):
++            schema.from_table(t)
++    elif case == "overflow":
++        with pytest.raises(StorageError):
++            schema.encode_decimal(Decimal("9e10000"), "CALCULATION")
++    elif case == "zero-scale":
++        assert (
++            schema.decode_decimal(schema.encode_decimal(Decimal("0E-90"), "RAW")).as_tuple()
++            == Decimal("0E-90").as_tuple()
++        )
++    elif case == "fraction":
++        r = record(
++            value=Decimal("0.125"),
++            rational_numerator="1",
++            rational_denominator="8",
++            lineage=(("control", "00001", "a" * 64),),
++        )
++        assert schema.from_table(schema.to_table((r,), "canonical/v1")) == (r,)
++    elif case == "negative":
++        assert schema.decode_decimal(schema.encode_decimal(Decimal("-1.25"))) == Decimal("-1.25")
++    else:
++        assert schema.decode_decimal(
++            schema.encode_decimal(Decimal("9" * 26 + "." + "9" * 12))
++        ) == Decimal("9" * 26 + "." + "9" * 12)
++
++
++@pytest.mark.parametrize(
++    "case",
++    [
++        "durable",
++        "changed-id",
++        "future",
++        "join",
++        "rollback",
++        "foreign-key",
++        "immutable",
++        "unknown-root",
++    ],
++)
++def test_durable_typed_metadata_admission(case, tmp_path):
++    from sqlalchemy import text
++
++    from omegadata.canonical_storage.contracts import StorageError
++    from omegadata.parsers.contracts import ParseResult
++
++    db = database(tmp_path)
++    payload = ParseResult("PARSED_UNVERIFIED", "a" * 64)
++    if case == "unknown-root":
++        from omegadata.canonical_storage.store import CanonicalStore
++
++        unknown = tmp_path / "unknown"
++        unknown.mkdir()
++        (unknown / "retained").write_text("NON_MARKET_METADATA")
++        with pytest.raises(StorageError):
++            CanonicalStore(unknown, disposable_root=tmp_path)
++        return
++    if case == "rollback":
++        db.rollback_empty()
++        db.close()
++        db = database(tmp_path)
++        assert db.operation_version("none") is None
++        commit(db)
++        with pytest.raises(StorageError):
++            db.rollback_empty()
++        return
++    if case == "foreign-key":
++        with pytest.raises(Exception, match="FOREIGN KEY"), db.transaction() as con:
++            con.execute(text("INSERT INTO commit_operation VALUES ('orphan','x','absent')"))
++        return
++    ref = db.pin_domain("source_observations", "parser-identity", payload, K)
++    if case == "changed-id":
++        with pytest.raises(StorageError):
++            db.pin_domain(
++                "source_observations", "parser-identity", replace(payload, raw_sha256="b" * 64), K
++            )
++    elif case == "future":
++        with pytest.raises(StorageError, match="FUTURE"):
++            db.read_domain(ref, K - timedelta(seconds=1))
++    elif case == "join":
++        v = commit(db)
++        joined = db.query_join(
++            query=__import__("omegadata.canonical_storage.contracts", fromlist=["Query"]).Query(
++                v, "control-dataset", D, D + timedelta(days=1), K, "RAW_UNADJUSTED", "AUDIT"
++            ),
++            references=(ref,),
++        )
++        assert joined["metadata"][0] == payload and len(joined["rows"]) == 1
++    elif case == "immutable":
++        with pytest.raises(Exception, match="IMMUTABLE"), db.transaction() as con:
++            con.execute(text("UPDATE typed_reference SET payload='changed'"))
++    else:
++        db.close()
++        db = database(tmp_path)
++        assert db.read_domain(ref, K) == payload
++
++
++@pytest.mark.parametrize(
++    "case",
++    [
++        "denied",
++        "metadata-only",
++        "forged-authority",
++        "derived-unbound",
++        "wrong-domain",
++        "raw-price-field-mismatch",
++    ],
++)
++def test_admission_refuses_unbound_or_unauthorized_payload(case, tmp_path):
++    from omegadata.canonical_storage.contracts import StorageError
++
++    db = database(tmp_path)
++    kw = {
++        "denied": {"source_rights_state": "DENIED"},
++        "metadata-only": {"source_rights_state": "METADATA_ONLY"},
++        "forged-authority": {
++            "observation_classification": "APPROVED_AUTHENTIC_SOURCE",
++            "source_rights_state": "PERMITTED",
++        },
++        "derived-unbound": {"price_basis": "BACKWARD_ADJUSTED", "numeric_kind": "CALCULATION"},
++        "wrong-domain": {},
++        "raw-price-field-mismatch": {"field_semantics": "OPEN", "observation_type": "RAW_CLOSE"},
++    }[case]
++    definition = (
++        {"layer": "DERIVED", "domain": "adjustment_results", "price_basis": "BACKWARD_ADJUSTED"}
++        if case == "derived-unbound"
++        else {"domain": "adjustment_results"}
++        if case == "wrong-domain"
++        else {}
++    )
++    with pytest.raises(StorageError):
++        commit(db, rows=(record(**kw),), definition=definition)
++
++
++def test_query_projection_aggregate_and_partition_pruning(tmp_path):
++    from omegadata.canonical_storage.contracts import DatasetDefinition, StorageError
++    from omegadata.canonical_storage.query import aggregate_scalar
++
++    db = database(tmp_path)
++    rows = (
++        record(),
++        record(
++            observation_id="other",
++            observation_revision_id="other",
++            listing_id="00002",
++            trade_date=date(2020, 2, 3),
++            session_date=date(2020, 2, 3),
++            value=Decimal("0.75"),
++        ),
++    )
++    definition = DatasetDefinition(
++        "control-dataset",
++        "source_observations",
++        "RAW",
++        "canonical/v1",
++        "RAW_UNADJUSTED",
++        "AUDIT",
++        ("control-source",),
++    )
++    v = db.commit(
++        definition,
++        rows,
++        operation_id="two-months",
++        expected_partitions=("CANARY-X/2020-01", "CANARY-X/2020-02"),
++    )
++    q = query(db, v, columns=("listing_id", "value"))
++    assert (
++        q.rows == ({"listing_id": "00001", "value": Decimal("1.2500")},)
++        and q.files_scanned == 1
++        and q.files_verified == 2
++    )
++    assert aggregate_scalar(q.rows)["sum_exact"] == (5, 4)
++    with pytest.raises(StorageError):
++        query(db, v, columns=("arbitrary_sql()",))
++
++
++def test_independently_declared_comparison_scope_rejects_metadata_relabel():
++    from test_od09_reconciliation import controls
++
++    from omegadata.canonical_storage.admission import (
++        ProvenanceLedger,
++        SourceBinding,
++        admit_comparison,
++    )
++    from omegadata.canonical_storage.contracts import StorageError
++    from omegadata.reconciliation.engine import reconcile_context
++
++    _, x, a, b = controls()
++    ledger = ProvenanceLedger()
++    ledger.pin_observations((a, b))
++    for changed in (
++        replace(a, publisher_identity="forged"),
++        replace(a, symbol_as_reported="NEW"),
++        replace(a, source_lineage_root="fake"),
++    ):
++        with pytest.raises(StorageError):
++            ledger.verify_source(changed, SourceBinding.from_observation(a))
++    future = replace(b, availability=replace(b.availability, known_from=K + timedelta(days=1)))
++    ledger = ProvenanceLedger()
++    ledger.pin_observations((a, future))
++    assert (
++        admit_comparison(
++            replace(x, right=()),
++            reconcile_context(replace(x, right=())),
++            ledger,
++            (a.observation_id, b.observation_id),
++            True,
++        ).coverage_state
++        == "COMPLETE_DECLARED_SCOPE"
++    )
++
++
++def test_bound_derived_volume_admission_replays_exact_upstream(tmp_path):
++    from test_od07_final import D as BD
++    from test_od07_final import setup_bound
++
++    from omegadata.adjustments import bound_contracts as bc
++    from omegadata.adjustments.bound_chain import calculate_bound_chain
++    from omegadata.adjustments.contracts import digest
++    from omegadata.canonical_storage.admission import derived_lineage
++    from omegadata.canonical_storage.contracts import DatasetDefinition, StorageError
++    from omegadata.reconciliation.dependencies import UpstreamProof
++    from omegadata.universe.contracts import AvailabilityObservation
++    from omegadata.universe.observation_binding import AdjustmentBinding
++
++    parts = setup_bound(basis=bc.BasisPolicy("VOLUME", "BACKWARD_ADJUSTED", BD + timedelta(days=5)))
++    pin = parts[8]
++    bound = calculate_bound_chain(pin)
++    raw = pin.raw.raw
++    o = AvailabilityObservation(
++        "bound-volume",
++        "CONTROL_ONLY",
++        raw.listing_id,
++        raw.trade_date,
++        None,
++        raw.known_from,
++        None,
++        raw.known_from,
++        None,
++        None,
++        pin.raw.source_id,
++        raw.artifact_id,
++        raw.evidence,
++        interval_completed_at=raw.known_from,
++        record_identity=pin.raw.source_record_identity,
++        volume=bound.calculation.adjusted_volume,
++        currency=raw.currency,
++        price_unit=pin.raw.price_unit,
++        price_basis="RAW_UNADJUSTED",
++        volume_basis="BACKWARD_ADJUSTED",
++        adjustment=bound,
++        adjustment_pin=pin,
++    )
++    binding = AdjustmentBinding(
++        o.observation_id,
++        pin.raw.source_record_identity,
++        raw.artifact_id,
++        raw.security_id,
++        raw.listing_id,
++        raw.exchange,
++        raw.trade_date,
++        pin.raw.observation_id,
++        digest(pin.raw),
++        pin.snapshot_id,
++        bound.output_digest,
++        pin.policy.profile,
++        bound.adjustment_basis,
++        bound.basis_date,
++        raw.currency,
++        pin.raw.price_unit,
++        "SHARES",
++        "volume",
++        o.volume,
++        pin.context.known_at,
++    )
++    o = replace(o, adjustment_binding=binding)
++    proof = UpstreamProof("ADJUSTMENT", "prior-output", "a" * 64, o, bound, pin)
++    row = record(
++        observation_id=o.observation_id,
++        source_id=o.source_id,
++        source_artifact_identity=o.artifact_identity,
++        source_record_identity=o.record_identity,
++        security_id=raw.security_id,
++        listing_id=raw.listing_id,
++        exchange=raw.exchange,
++        trade_date=raw.trade_date,
++        session_date=raw.trade_date,
++        currency=raw.currency,
++        price_unit=pin.raw.price_unit,
++        volume_unit="SHARES",
++        price_basis="RAW_UNADJUSTED",
++        volume_basis="BACKWARD_ADJUSTED",
++        field_semantics="VOLUME",
++        numeric_kind="CALCULATION",
++        value=o.volume,
++        known_from=pin.context.known_at,
++        lineage=derived_lineage(proof),
++    )
++    definition = DatasetDefinition(
++        "derived-volume",
++        "adjustment_results",
++        "DERIVED",
++        "canonical/v1",
++        "RAW_UNADJUSTED",
++        "AUDIT",
++        (o.source_id,),
++        volume_basis="BACKWARD_ADJUSTED",
++    )
++    db = database(tmp_path)
++    v = db.commit(
++        definition,
++        (row,),
++        operation_id="bound-control",
++        expected_partitions=(raw.exchange + "/" + raw.trade_date.strftime("%Y-%m"),),
++        proofs=(proof,),
++    )
++    assert db.verify(v)["verified"] and db.manifest(v)["layer"] == "DERIVED"
++    with pytest.raises(StorageError):
++        db.commit(
++            definition,
++            (replace(row, value=row.value + Decimal(1)),),
++            operation_id="wrong-consumed-field",
++            parent_version=v,
++            expected_partitions=(raw.exchange + "/" + raw.trade_date.strftime("%Y-%m"),),
++            proofs=(proof,),
++        )
++
++
++@pytest.mark.parametrize(
++    "case", ["omitted", "future", "unrelated", "conflict", "unknown-time", "restart"]
++)
++def test_persisted_comparison_scope_independent_selection(case, tmp_path):
++    from test_od09_reconciliation import controls
++
++    from omegadata.canonical_storage.admission import ComparisonScope
++    from omegadata.canonical_storage.contracts import StorageError
++    from omegadata.reconciliation.engine import reconcile_context
++
++    _, x, a, b = controls()
++    db = database(tmp_path)
++    scope = ComparisonScope(
++        "scope",
++        ("control-source",),
++        (a.listing_id,),
++        ("close",),
++        a.session_date,
++        a.session_date + timedelta(days=1),
++        x.known_at,
++    )
++    if case == "future":
++        b = replace(b, availability=replace(b.availability, known_from=K + timedelta(days=1)))
++    if case == "unknown-time":
++        b = replace(b, availability=replace(b.availability, known_from=None))
++    db.pin_source_observations((a, b))
++    db.pin_comparison_scope(scope)
++    selected = replace(x, right=()) if case in {"omitted", "future", "unknown-time"} else x
++    if case == "unrelated":
++        db.pin_source_observations(
++            (
++                replace(
++                    b,
++                    field_name="open",
++                    availability=replace(b.availability, observation_id="unrelated"),
++                ),
++            )
++        )
++    if case == "conflict":
++        db.pin_source_observations(
++            (replace(b, availability=replace(b.availability, observation_id="conflict")),)
++        )
++    if case == "restart":
++        db.close()
++        db = database(tmp_path)
++    if case in {"omitted", "conflict", "unknown-time"}:
++        with pytest.raises(StorageError):
++            db.admit_comparison_scope("scope", selected, reconcile_context(selected), complete=True)
++    else:
++        result = db.admit_comparison_scope(
++            "scope", selected, reconcile_context(selected), complete=True
++        )
++        assert (
++            result.coverage_state == "COMPLETE_REQUIRED_LEDGER_SET"
++            and not result.financial_eligible
++        )
++
++
++def test_transitive_dependency_index_uses_pinned_metadata(tmp_path):
++    from omegadata.parsers.contracts import ParseResult
++
++    db = database(tmp_path)
++    a = db.pin_domain("source_observations", "a", ParseResult("PARSED_UNVERIFIED", "a" * 64), K)
++    b = db.pin_domain(
++        "source_observations", "b", ParseResult("PARSED_UNVERIFIED", "b" * 64), K, dependencies=(a,)
++    )
++    v = commit(db, rows=(record(lineage=(b,)),))
++    out = db.impact(a[0], a[1], K)
++    assert out["dataset_versions"] == [v] and out["coverage_state"] == "DEPENDENCY_UNKNOWN"
++    assert db.impact(a[0], a[1], K - timedelta(seconds=1))["dataset_versions"] == []
++
++
++@pytest.mark.parametrize("kind", ["symlink", "hardlink"])
++def test_file_link_escape_refused(kind, tmp_path):
++    import os
++
++    from omegadata.canonical_storage.contracts import StorageError
++
++    db = database(tmp_path)
++    v = commit(db)
++    p = tmp_path / "store" / db.manifest(v)["file_entries"][0]["relative_path"]
++    target = tmp_path / "CONTROL_ONLY.parquet"
++    target.write_bytes(p.read_bytes())
++    if kind == "symlink":
++        p.rename(p.with_suffix(".retained"))
++        p.symlink_to(target)
++    else:
++        os.link(p, tmp_path / "CONTROL_ONLY.hardlink")
++    with pytest.raises(StorageError):
++        db.verify(v)
++
++
++def test_canonical_UTC_retry_and_derived_hard_blocks(tmp_path):
++    db = database(tmp_path)
++    v = commit(db)
++    shifted = record(known_from=K.astimezone(timezone(timedelta(hours=5, minutes=30))))
++    assert commit(db, rows=(shifted,)) == v
++    empty = record(security_id=None, listing_id=None, known_from=None, hard_block_reasons=())
++    assert {"IDENTITY_UNRESOLVED", "AVAILABILITY_UNKNOWN", "NON_MARKET_CONTROL"} <= set(
++        empty.hard_block_reasons
++    )
++
++
++def test_generic_pin_cannot_bypass_required_observation_index(tmp_path):
++    from test_od09_reconciliation import controls
++
++    from omegadata.canonical_storage.admission import ComparisonScope
++    from omegadata.canonical_storage.contracts import StorageError
++    from omegadata.reconciliation.engine import reconcile_context
++
++    _, x, a, b = controls()
++    db = database(tmp_path)
++    db.pin_source_observations((a,))
++    db.pin_domain("source_observations", b.observation_id, b, b.availability.known_from)
++    db.pin_comparison_scope(
++        ComparisonScope(
++            "scope",
++            ("control-source",),
++            (a.listing_id,),
++            ("close",),
++            a.session_date,
++            a.session_date + timedelta(days=1),
++            x.known_at,
++        )
++    )
++    omitted = replace(x, right=())
++    with pytest.raises(StorageError):
++        db.admit_comparison_scope("scope", omitted, reconcile_context(omitted), complete=True)
++
++
++def test_dependency_set_cannot_mutate_existing_pin(tmp_path):
++    from omegadata.canonical_storage.contracts import StorageError
++    from omegadata.parsers.contracts import ParseResult
++
++    db = database(tmp_path)
++    p = ParseResult("PARSED_UNVERIFIED", "a" * 64)
++    db.pin_domain("source_observations", "immutable-pin", p, K)
++    with pytest.raises(StorageError):
++        db.pin_domain(
++            "source_observations",
++            "immutable-pin",
++            p,
++            K,
++            dependencies=(("external", "new", "a" * 64),),
++        )
++
++
++@pytest.mark.parametrize(
++    "field",
++    [
++        "partition_identity",
++        "minimum_trade_date",
++        "maximum_known_from",
++        "compression",
++        "row_count",
++        "relative_path",
++    ],
++)
++def test_file_manifest_semantics_independently_reconciled(field, tmp_path):
++    from omegadata.canonical_storage.contracts import StorageError
++
++    db = database(tmp_path)
++    v = commit(db)
++    entry = dict(db.manifest(v)["file_entries"][0])
++    entry[field] = {
++        "partition_identity": "CANARY-X/1999-01",
++        "minimum_trade_date": "1999-01-01",
++        "maximum_known_from": (K + timedelta(days=1)).isoformat(),
++        "compression": "snappy",
++        "row_count": True,
++        "relative_path": "objects/not-an-identity.parquet",
++    }[field]
++    with pytest.raises(StorageError):
++        db.verify_file(entry)
++
++
++def test_version_identity_cannot_alias_different_manifests_across_catalogs(tmp_path):
++    first = tmp_path / "first"
++    second = tmp_path / "second"
++    first.mkdir()
++    second.mkdir()
++    a = database(first)
++    b = database(second)
++    av = commit(a)
++    bv = commit(b)
++    assert av != bv or a.manifest(av) == b.manifest(bv)
++
++
++def test_strict_metadata_domain_and_reconciliation_admission(tmp_path):
++    from test_od09_reconciliation import controls
++
++    from omegadata.canonical_storage.admission import ComparisonScope
++    from omegadata.canonical_storage.contracts import StorageError
++    from omegadata.parsers.contracts import ParseResult
++    from omegadata.reconciliation.engine import reconcile_context
++
++    db = database(tmp_path)
++    with pytest.raises(StorageError):
++        db.pin_domain(
++            "review_revisions", "wrong-kind", ParseResult("PARSED_UNVERIFIED", "a" * 64), K
++        )
++    _, x, a, b = controls()
++    db.pin_source_observations((a, b))
++    db.pin_comparison_scope(
++        ComparisonScope(
++            "scope",
++            ("control-source",),
++            (a.listing_id,),
++            ("close",),
++            a.session_date,
++            a.session_date + timedelta(days=1),
++            x.known_at,
++        )
++    )
++    result = reconcile_context(x)[0]
++    ref = db.pin_domain(
++        "reconciliation_results", "result", result, x.known_at, context=("scope", x)
++    )
++    assert db.read_domain(ref, x.known_at) == result
++    with pytest.raises(StorageError):
++        db.pin_domain(
++            "reconciliation_results",
++            "wrong-result",
++            replace(result, outcome="FAIL"),
++            x.known_at,
++            context=("scope", x),
++        )
++
++
++def test_actual_stable_identity_metadata_join(tmp_path):
++    from omegadata.canonical_storage.contracts import Query
++    from omegadata.identity import Listing
++
++    db = database(tmp_path)
++    v = commit(db)
++    listing = Listing("00001", "control-security", "CANARY-X")
++    ref = db.pin_domain("instrument_identity_revisions", "listing-reference", listing, K)
++    out = db.query_join(
++        query=Query(v, "control-dataset", D, D + timedelta(days=1), K, "RAW_UNADJUSTED", "AUDIT"),
++        references=(ref,),
++        join_key="listing_id",
++    )
++    assert (
++        out["joined"][0]["status"] == "MATCHED_UNVERIFIED"
++        and out["joined"][0]["metadata"] == listing
++        and not out["financial_eligible"]
++    )
++
++
++def test_readonly_catalog_reader_during_uncommitted_write(tmp_path):
++    from omegadata.canonical_storage.contracts import StorageError
++    from omegadata.canonical_storage.store import CanonicalStore
++
++    db = database(tmp_path)
++    v = commit(db)
++    with db.transaction():
++        reader = CanonicalStore(db.root, disposable_root=tmp_path, read_only=True)
++        assert len(query(reader, v).rows) == 1
++        with pytest.raises(StorageError):
++            commit(reader, op="forbidden-reader-write", parent=v)
++        reader.close()
++
++
++def test_denied_or_unverified_source_payload_cannot_enter_metadata_store(tmp_path):
++    from test_od09_reconciliation import controls
++
++    from omegadata.canonical_storage.contracts import StorageError
++
++    db = database(tmp_path)
++    _, _, a, _ = controls()
++    for evidence in (
++        replace(a.availability.evidence, permission="DENIED"),
++        replace(
++            a.availability.evidence, classification="SOURCE_DOCUMENT", authentication="VERIFIED"
++        ),
++    ):
++        denied = replace(a, availability=replace(a.availability, evidence=evidence))
++        with pytest.raises(StorageError):
++            db.pin_domain("source_observations", denied.observation_id, denied, K)
++    with db.engine.connect() as con:
++        from sqlalchemy import text
++
++        assert con.execute(text("SELECT count(*) FROM typed_reference")).scalar() == 0

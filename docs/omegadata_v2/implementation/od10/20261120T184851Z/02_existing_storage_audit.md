@@ -1,0 +1,5 @@
+# Existing storage audit
+
+[ParquetStorage.store_daily](support/audited-source/src/omegadata/track_a/storage.py) writes a deterministic day path ending `part-00000.parquet`. The anonymous disposable regression reproduced replacement on repeated day writes: LEGACY_RISK_RETAINED; new store is OPT_IN_REPLACEMENT. The legacy API and expectations remain unchanged.
+
+[ReleaseManager](support/audited-source/src/omegadata/track_b/release_manager.py) has release-directory writers, manifest/release profiles and signing integration: WRAP/FUTURE_OD11. No operational writer or signing path was invoked. API/release-readiness readers consume legacy release paths; integration remains separate. [ClickHouseWarehouseSync](support/audited-source/src/omegadata/track_a/warehouse.py) opens a configured client and writes warehouse data: BLOCKED_EXTERNAL, inspected as code only. Existing Arrow/Pandas/SQLAlchemy schemas and domain conventions were reused. Approved source search covered `src`, scripts and tests only; no payload-root search. Exact audit source hashes and function lines are in support/storage-audit.json.

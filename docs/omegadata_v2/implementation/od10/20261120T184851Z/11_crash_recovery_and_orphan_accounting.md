@@ -1,0 +1,5 @@
+# Crash recovery and orphans
+
+Seven actual independent-worker terminations were exercised at before_write, during_file_write, after_file_write_before_validation, after_validation_before_install, after_install_before_catalog_commit, during_catalog_transaction and after_catalog_commit_before_acknowledgement. The trusted coordinator killed only its exact spawned process group. Independent readers verified V1 during each paused writer; only the postcatalog checkpoint exposed the new operation. Restart/retry preserved original manifest/rows and never promoted an orphan.
+
+Three independent-process races covered identical same-operation retry, changed content under the same operation, and competing successor operations sharing a parent. Identical retries converged; incompatible writes refused. Each worker retained the namespace/seccomp boundary and only one explicitly owned non-market shared directory was added. Full launches, exits, probes and outcomes are in support/process. Orphan inventory is read-only; no automatic cleanup, deletion, guessing or recovery promotion exists. These are process-kill tests, not disk/power-loss or Windows certification.

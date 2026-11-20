@@ -1,0 +1,5 @@
+# Version-pinned analytical queries
+
+Query requires immutable version, dataset, half-open date range, aware known_at, compatible basis/profile and bounded rows/files/date span. Stable listing/security and exchange filters are explicit. Every manifest member is integrity verified before file/partition pruning; selected Parquet fragments read only the verified captured bytes. Predicate filtering cannot reopen a changed path. Projection preserves requested logical fields; exact Fraction aggregation avoids float/ambient Decimal rounding. Stable-ID metadata joins account for unmatched/ambiguous rows and remain unverified.
+
+Unknown version/schema, manifest corruption, incompatible basis/purpose, unsupported projection, missing availability and resource excess produce typed refusal or explicit audit exclusion. AUDIT is the only enabled consumer; neither newest-version nor wall-clock defaults exist. No arbitrary SQL, remote URL, extension, shell or user-supplied filesystem path is exposed. Integrity verification necessarily reads all manifest files; selective scan counts are distinct from files verified.

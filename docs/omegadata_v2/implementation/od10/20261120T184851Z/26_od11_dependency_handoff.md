@@ -1,0 +1,9 @@
+# OD11 dependency contract — execution not authorized
+
+OD11 may consume the integrated code-only canonical_storage API after separate phase authorization. Consume immutable dataset version and exact verified manifest, byte-integrity report, schema fingerprint/version, full partition/row accounting, exact source-rights/financial/reconciliation/anomaly/review/reprocess states, dependency references, storage operation identity and exact prior manifest/file/query rollback identities.
+
+CanonicalStore.commit is technical storage admission only. STORAGE_COMMITTED is not publication. No production release pointer or signing path was created. Query requires explicit version/cutoff/AUDIT purpose; auth payloads and production consumers stay disabled. Reverse impact completeness remains DEPENDENCY_UNKNOWN until upstream registration is independently reconciled. Strict OD09 comparison scopes and replayed OD07/OD08 proofs must be retained.
+
+OD11 should implement release profiles, freshness and hard-block enforcement, independently reviewed evidence, verified reprocess completion, exact candidate verification, atomic publication promotion and production rollback. Reuse OD09 review/reprocess and existing legacy release concepts without invoking production writes. Do not accept numerical confidence, scalar arithmetic, matching source labels or a storage commit as source permission.
+
+Required external artifacts are consolidated in22_external_dependencies.json. Original checkout integration still needs incident-owner disposition and applicable platform/source approvals. Authentic positive-path capability, authenticated corpus/references and reviewer attestations must precede actual financial release testing. Owner authorization for OD11 is NOT_GRANTED by this execution. No OD11 code was executed.

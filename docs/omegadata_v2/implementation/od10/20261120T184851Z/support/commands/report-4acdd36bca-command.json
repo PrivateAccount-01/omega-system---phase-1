@@ -1,0 +1,47 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/report-4acdd36bca-manifest.json",
+    "--manifest-sha256",
+    "502fce767f4e87f6c942af27e28eaba4bc4d5b08bde75aedbfc4c4017151c151",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/report-4acdd36bca-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/report-4acdd36bca/output"
+  ],
+  "start_utc": "2026-11-20T20:01:02.361248+00:00",
+  "end_utc": "2026-11-20T20:01:03.566614+00:00",
+  "seconds": 1.2053552910000178,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "report",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "{\"schema_version\": \"od05.final-report.receipt/v1\", \"files\": [\"00_scope_and_identity.md\", \"01_upstream_adoption_manifest.json\", \"02_existing_storage_audit.md\", \"03_storage_architecture_decision.md\", \"04_canonical_schema_registry.md\", \"05_precision_and_type_contract.md\", \"06_upstream_admission_contract.md\", \"07_partition_and_file_manifest_contract.md\", \"08_dataset_version_contract.md\", \"09_atomic_commit_protocol.md\", \"10_concurrency_verification.json\", \"11_crash_recovery_and_orphan_accounting.md\", \"12_schema_evolution_contract.md\", \"13_metadata_catalog_and_rollback.md\", \"14_dependency_index_contract.md\", \"15_PIT_query_contract.md\", \"16_arrow_duckdb_evaluation.md\", \"17_hard_blocks_and_quarantine.md\", \"18_negative_first_tests.md\", \"19_focused_test_results.json\", \"20_full_engineering_matrix.json\", \"21_performance_results.json\", \"22_external_dependencies.json\", \"23_preservation_manifest.json\", \"24_acceptance_matrix.json\", \"25_final_gatekeeper.json\", \"26_od11_dependency_handoff.md\", \"27_final_report.md\"], \"manifest_sha256\": \"88a24c6da906855f0fb93841261b4f0930794dcb6d055779344fa95d5bf4dc48\", \"sha256\": {\"01_upstream_adoption_manifest.json\": \"8b14863c0fdcea828e0b0e9f905afbbfce9d08286d851a8536255737b9e6b2db\", \"00_scope_and_identity.md\": \"6baa999b29752f792862451b530e938e14330877b0da51e12f871acd32a94690\", \"02_existing_storage_audit.md\": \"3dfba9619be9162c0f05c46615fd5729971d9538c1164701954cfdf5c9d39293\", \"03_storage_architecture_decision.md\": \"ffc9ccf43d876bcdf144975d9852b58afb61357126ace693e1d4f86785a2264d\", \"04_canonical_schema_registry.md\": \"be976765a02b7b89cbd66fd771e93dae550cac0d946f9b68515bd6bc3fe7d34b\", \"05_precision_and_type_contract.md\": \"f14827ee7ef7a7090ef023249f8780c3e7aa9312dd112301345355bf3506c66c\", \"06_upstream_admission_contract.md\": \"397630a4d35fd4cfd566ef3eed7a471f9b69cb89fadd71bef769b691c28bc110\", \"07_partition_and_file_manifest_contract.md\": \"b5b5a60ae4f4b21e260eb917baeb521d97c36cb153da5edd5507da58c1c14458\", \"08_dataset_version_contract.md\": \"73e5b11a583e205ee555e5928839a97600eeefd839fe2b16a4b6a8869f43c5dd\", \"09_atomic_commit_protocol.md\": \"94d285c0bcb8e1727b32e19cede2516fe9ee66661acb7e4182630d73dc14862e\", \"10_concurrency_verification.json\": \"984e26daebba4940b49e70a009967ef385696bf0e31064239aeb8b4f23529043\", \"11_crash_recovery_and_orphan_accounting.md\": \"a547f5a22266fbe1651e1c6e7a43dff8856a36bd3a8ba7bd66f11e56ebbcd203\", \"12_schema_evolution_contract.md\": \"6580085792ed08c5055e1a4b432f08e4704a005c27c81ffd42fe374bdab15b2f\", \"13_metadata_catalog_and_rollback.md\": \"43c8e2b08f810a4d323ebdd84986d3f7ff9a96f7b63249afd7980fe3070f22e8\", \"14_dependency_index_contract.md\": \"500427c7df1a02be4c4a0e700dc0d82137d2443cb6ef24601cb2756de1c25026\", \"15_PIT_query_contract.md\": \"09186f74e86b0ca0553ce12cc74b87aa0238983f3296a4c96ef57eba65449f2f\", \"16_arrow_duckdb_evaluation.md\": \"a2a7c1b37bcfca11a477e0adced710f5264d3fb81a8700ce230e05b1e88c4223\", \"17_hard_blocks_and_quarantine.md\": \"5098abb1d9630fddbbb26ae391422dd01d513355ac8d3e3a2b8a87a89b0b36d8\", \"18_negative_first_tests.md\": \"cce09e06555a4d6d83998f32be24413aa31b71ea8652049b544e0c579671c67d\", \"19_focused_test_results.json\": \"4c25e2563fc59d334cad53e06ae8c8ab9975ff5d1617ca1a58f8c19f1efab517\", \"20_full_engineering_matrix.json\": \"324f3b54ae7bffd9f8e4534e9ee57ae09a5898c40fcd361a3642a954a402cede\", \"21_performance_results.json\": \"1cf0878ba836b1141b459d1ca4cc162834eedf0621dedd53855f34d83c89fb34\", \"22_external_dependencies.json\": \"0e364a3d3a62a1a763bc245089fb437dc91cc10846e162e10645e55fd3f923c2\", \"23_preservation_manifest.json\": \"32a3f5cc0b1559da83dcee04e691c7640ebdefda39a71e81f7c387dd3975aa51\", \"24_acceptance_matrix.json\": \"eb937ff0a6cab5b2a964717d920ebb8fc723cde7e59cc931aec5ad16d3048c10\", \"25_final_gatekeeper.json\": \"154af4755239829dc94ad12c7cd9472736e9348e153e890b5db6a4c04397cbb5\", \"26_od11_dependency_handoff.md\": \"ead1c48cf0fcdb72b2654d7635a98ba2acff2cda3c2d5aad50f0943a7201358e\", \"27_final_report.md\": \"c576f3f0717b3eb59280aa6e3cbf8073216f3bc7b9b1c141a772399a7970702e\"}, \"boundary\": {\"backend\": \"bwrap+seccomp/v1\", \"worker_namespaces\": {\"mnt\": \"mnt:[4026532222]\", \"net\": \"net:[4026532227]\", \"pid\": \"pid:[4026532225]\", \"user\": \"user:[4026532291]\"}, \"outside_canary\": \"/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY\", \"verified\": true, \"source_mounts\": \"EXACT_READ_ONLY\", \"no_new_privs\": true, \"seccomp_mode\": 2}, \"git_calls\": 0, \"original_repository_mounted\": false}",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "502fce767f4e87f6c942af27e28eaba4bc4d5b08bde75aedbfc4c4017151c151"
+}

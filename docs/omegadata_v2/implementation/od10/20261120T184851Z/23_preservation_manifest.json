@@ -1,0 +1,517 @@
+{
+  "reviewed_head": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "safe_workspace": "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo",
+  "upstream_unchanged": 3852,
+  "changes": [
+    {
+      "path": "src/omegadata/canonical_storage/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "d85adf66808b09632a15c35a741c5bf17c30c4f3a3ab823def9cbe6d15ee9627",
+      "bytes": 83,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/contracts.py",
+      "before_sha256": null,
+      "after_sha256": "f94cbe5a2ea45f4e50a33dffc8d55b7db8d061ff28a777cd23c214ab12f3c23f",
+      "bytes": 9772,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/schema.py",
+      "before_sha256": null,
+      "after_sha256": "dd4d663f48681a6fa90106d2a01a09233ad8eadb7fa29644b9ad27ac2f1b045d",
+      "bytes": 8110,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/admission.py",
+      "before_sha256": null,
+      "after_sha256": "75608668aad5f1891e53b0654cf08666200b86d2d01d9708af90e7debf687842",
+      "bytes": 14271,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/store.py",
+      "before_sha256": null,
+      "after_sha256": "1164dc212e8761bc531f969a5411a80a574e57102036797bcd799293bc820070",
+      "bytes": 45150,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/query.py",
+      "before_sha256": null,
+      "after_sha256": "bdc90ef7c6d8df8b951561070c55506a0ee455843df4c76722596b239e3fe28c",
+      "bytes": 4326,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "scripts/od10_structural_experiments.py",
+      "before_sha256": null,
+      "after_sha256": "9be9515ec62ea2e3cc18ee2813a0c4a61a162c3c2e29c559f30c3eeb7772160f",
+      "bytes": 12518,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "scripts/od10_isolated_jobs.py",
+      "before_sha256": null,
+      "after_sha256": "da80eb145db64063545018acd653ddfcd169a39ad804ed78404218ad8ef9f8b2",
+      "bytes": 3733,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "tests/unit/test_od10_canonical_storage.py",
+      "before_sha256": null,
+      "after_sha256": "08617d45bceec04ee4e76ea7aad463950c237ca4b28cf2f8f2b1e05bbe369ba4",
+      "bytes": 39246,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    }
+  ],
+  "combined_delivery": [
+    {
+      "path": "config/identity_authority_roots.v1.json",
+      "before_sha256": null,
+      "after_sha256": "85b0b763221cf91f3a83afbd5f22f17740f85f61be57f1156e0e7b7eb96662dd",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 71
+    },
+    {
+      "path": "scripts/od05_final_report.py",
+      "before_sha256": null,
+      "after_sha256": "6c6d5d1e057ec7c4e6467e734d1a26c5a6d64557e6950dd2c0cab8bc8aa104fc",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 5329
+    },
+    {
+      "path": "scripts/od06_database_experiments.py",
+      "before_sha256": null,
+      "after_sha256": "e589673f17cc6bd03d535c14077f48d50ef485f16a9db00cf08dc9c963b5c783",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 8439
+    },
+    {
+      "path": "scripts/od06_experiment_contract.py",
+      "before_sha256": null,
+      "after_sha256": "0f4207f01b97b6b78c2d99a31b097a6922c27d9001f1c7bc410200995044b975",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 1076
+    },
+    {
+      "path": "scripts/od08_structural_experiments.py",
+      "before_sha256": null,
+      "after_sha256": "d5c16e79dc96496d1917ea5ed95e7dfac21f3405d6fdbe24bfc133407703c562",
+      "bytes": 5623,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "scripts/od09_structural_experiments.py",
+      "before_sha256": null,
+      "after_sha256": "ea038facd1bbad5c72579dcc2062c08d20636d3c098cea4fcba7620d3236f7a3",
+      "bytes": 3832
+    },
+    {
+      "path": "src/omegadata/adjustments/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "64407efeb26792e78eed181bae7bcd0c1cac9ea6a5addf30bd908f2f0438b504",
+      "bytes": 90,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/admission.py",
+      "before_sha256": null,
+      "after_sha256": "f7a2c6e4c2ee51676b0c88ce15d6063eb71777792c95f6ed42d375797c323dd9",
+      "bytes": 14529,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/bound_chain.py",
+      "before_sha256": null,
+      "after_sha256": "1ddb4707152230ac04e98cbac59ad94b28884b2d465e7fb1b792efa6939860e9",
+      "bytes": 23068,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/bound_contracts.py",
+      "before_sha256": null,
+      "after_sha256": "63949f70bf498389a62ebdfdee87efca02129bc70aedd6bfb17ea42468de821f",
+      "bytes": 7694,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/chains.py",
+      "before_sha256": null,
+      "after_sha256": "738a7f4847ac556ec4471e3ce5e5558e73e6f943683780b2b34cd53540e4bc2b",
+      "bytes": 6998,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/compatibility.py",
+      "before_sha256": null,
+      "after_sha256": "cff0402b0471cde81ef3e2a20c3d22b8c8c4b1cd0049f349048437150a8689c5",
+      "bytes": 620,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/contracts.py",
+      "before_sha256": null,
+      "after_sha256": "a5ba96ad5e75ddd689c0d0587a2a12e208ee320c4ad30e93453f4c8f5c2711ab",
+      "bytes": 11893,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/factors.py",
+      "before_sha256": null,
+      "after_sha256": "88b46b55353f953b4ad35cd7780daf7809e665a9c1fc9fbb8d66c47038cd3260",
+      "bytes": 4333,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/repository.py",
+      "before_sha256": null,
+      "after_sha256": "4eb0209e555b3e5317d22813d117a69294482a72bc431eeb2e8b217b0639ce57",
+      "bytes": 15581,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/adjustments/temporal.py",
+      "before_sha256": null,
+      "after_sha256": "9533eb05344feb4e0eb3262f38ebc7974b9885116bc28350c390364345a7e8bf",
+      "bytes": 8652,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/identity.py",
+      "before_sha256": null,
+      "after_sha256": "eed6fed316b674985f08007208305f769065261f4756b896d63752f26e41a49c",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 17464
+    },
+    {
+      "path": "src/omegadata/identity_adapters.py",
+      "before_sha256": null,
+      "after_sha256": "2df613b251e51ba88e208392c0ee930d72201e10e9ac86d89970ed039aed9be7",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 13104
+    },
+    {
+      "path": "src/omegadata/identity_authority.py",
+      "before_sha256": null,
+      "after_sha256": "9e469ddd5bb3e498bc1d8207f06274db250411bfa72922cbe63288d75ad6779d",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 11523
+    },
+    {
+      "path": "src/omegadata/identity_repository.py",
+      "before_sha256": null,
+      "after_sha256": "ae5e1e6c8ac1bf4513ea1c3654659cd3e0291b9d6614b2f7c65515cbde7dc192",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 25697
+    },
+    {
+      "path": "src/omegadata/parsers/contracts.py",
+      "before_sha256": "2dc704bbc443b8fa11f3bbbae7686a58c49c15ec8cce172a62ecdeba8e9b4c32",
+      "after_sha256": "81c8acbcb0348196430024361fc181e14fc64d96181c5758f3525f7875f82d1a",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 3639
+    },
+    {
+      "path": "src/omegadata/parsers/dispatch.py",
+      "before_sha256": "02a60e6a98d55f3d064114bf7e9e429e5e8300b54b51c0ddb7affb42b73d2121",
+      "after_sha256": "7436b5f1c2f833a3b3945b4d90ce6e5badb3af360e76b66823a9087cf1f495ae",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 2697
+    },
+    {
+      "path": "src/omegadata/parsers/nse_cm.py",
+      "before_sha256": "f5f634ca7293c16b131b60fadc768574a4ed69c30a651b4845e1db122f7061a0",
+      "after_sha256": "d6c0af6a4225bf1d6c814f116065e8d8c031ab9aeee9fee385ab54c55e580392",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 9097
+    },
+    {
+      "path": "src/omegadata/parsers/schema_catalog.py",
+      "before_sha256": null,
+      "after_sha256": "f46a4fbae673a3dcfa5ddaf85e46dc736971dbf25d7fe852b180d60ba6ad9bf3",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 1728
+    },
+    {
+      "path": "src/omegadata/reconciliation/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "8e4d99f725e8ebe0ff45d81d209722741a640d17ba2f156d497a5dbfe36757ef",
+      "bytes": 86
+    },
+    {
+      "path": "src/omegadata/reconciliation/anomalies.py",
+      "before_sha256": null,
+      "after_sha256": "0d0bc33e042e738ce5798b06f9343ce4e665a801dd4a0b0406d0bf7f584d48e7",
+      "bytes": 6140
+    },
+    {
+      "path": "src/omegadata/reconciliation/compatibility.py",
+      "before_sha256": null,
+      "after_sha256": "656d99746022b7fec7ceb8d166d1e6bff4df937977ff0308af6dcfa1227b53f4",
+      "bytes": 825
+    },
+    {
+      "path": "src/omegadata/reconciliation/contracts.py",
+      "before_sha256": null,
+      "after_sha256": "5a232b054163fcb82d95e7e5dbe5b97b556992a9cda4ca37fb46c96ec04d77c2",
+      "bytes": 7374
+    },
+    {
+      "path": "src/omegadata/reconciliation/dependencies.py",
+      "before_sha256": null,
+      "after_sha256": "f7c3d1d5ff1a2a034dfe71434ddff985275f4c9b88b983a0214f710253c5453f",
+      "bytes": 2574
+    },
+    {
+      "path": "src/omegadata/reconciliation/engine.py",
+      "before_sha256": null,
+      "after_sha256": "32b4dbf32454a46fec60ce50c165f3ef29018aff3cf0602936ba5cfd20de7511",
+      "bytes": 11629
+    },
+    {
+      "path": "src/omegadata/reconciliation/metrics.py",
+      "before_sha256": null,
+      "after_sha256": "1964c77ad5614f5674734756fe62afe089391ae81485406e6734a8789be7e45b",
+      "bytes": 1820
+    },
+    {
+      "path": "src/omegadata/reconciliation/repository.py",
+      "before_sha256": null,
+      "after_sha256": "ac47fa7d7ddc2e7d733d5f783309fc9a84a9628a3301627c5cd5550d7fd3d37b",
+      "bytes": 24547
+    },
+    {
+      "path": "src/omegadata/reconciliation/reviews.py",
+      "before_sha256": null,
+      "after_sha256": "35d8f6703a8b1548aaedc03012aa1c3b7879b028537c466607cb8ffd290bd8f0",
+      "bytes": 10483
+    },
+    {
+      "path": "src/omegadata/reconciliation/tolerances.py",
+      "before_sha256": null,
+      "after_sha256": "c3e90c53ae03f3326aa64b2d23d4a06a62dc502c2a4ddb075ceef17bdf8400ef",
+      "bytes": 4516
+    },
+    {
+      "path": "src/omegadata/session_calendar.py",
+      "before_sha256": null,
+      "after_sha256": "779141af68899f346e159c4e65a6463de4cdc6f478b72eaf226055ec7ab5436d",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 11171
+    },
+    {
+      "path": "src/omegadata/universe/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "00331e4bce4c4f72a61793b9a1a76f016c3384746894a9813eae860ee2e93195",
+      "bytes": 81,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/universe/compatibility.py",
+      "before_sha256": null,
+      "after_sha256": "3034a941657de392d2d4655ccab83927658efbc92f55779b19b4136883d6ed19",
+      "bytes": 891,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/universe/contracts.py",
+      "before_sha256": null,
+      "after_sha256": "3cded9e0059e51eeea3bc3810c26e3cd0e3a67d26f0b2dd1ecb020592f345454",
+      "bytes": 14180,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/universe/eligibility.py",
+      "before_sha256": null,
+      "after_sha256": "1fba01696efce84d0790f93c53a0ffd81da08643a6e79085960afe5cb3a089b5",
+      "bytes": 8018,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/universe/observation_binding.py",
+      "before_sha256": null,
+      "after_sha256": "28cb36fafdd688eec450f26a2a318fcd0f4fbfb97a91e15d1f8f83263e627668",
+      "bytes": 4092
+    },
+    {
+      "path": "src/omegadata/universe/repository.py",
+      "before_sha256": null,
+      "after_sha256": "22b74592c7762dbdb7e571d3f8fc13bbcdf602f822669930d36372d08f531a93",
+      "bytes": 27069,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/universe/snapshots.py",
+      "before_sha256": null,
+      "after_sha256": "e0edf81583ee76ab3f45008dcfdeacb1fe306bee5533654a8fc1dfa14c9e3220",
+      "bytes": 17666,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "src/omegadata/universe/temporal.py",
+      "before_sha256": null,
+      "after_sha256": "e2d4d89f9b66df7f928f257ad4651ea95b255b1fce1fe7c0ce8fa3e273a1fbe9",
+      "bytes": 14257,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od05_final_contracts.py",
+      "before_sha256": null,
+      "after_sha256": "41c59fc7eaf2c3cab0be36b5f39b94da0fa57245fc104f45358e85c824c42117",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 5725
+    },
+    {
+      "path": "tests/unit/test_od06_contracts.py",
+      "before_sha256": null,
+      "after_sha256": "de2c432631ddfcc129114dbf183872a2ae41c7e2b9b3aa4d1d13e75e1a0e8933",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 22496
+    },
+    {
+      "path": "tests/unit/test_od06_foundation.py",
+      "before_sha256": null,
+      "after_sha256": "4596964ceeba8209df47d879542e8ebc91dd4ec6c20272e039d32e23549718af",
+      "applied_in_development": true,
+      "applied_to_original_checkout": false,
+      "bytes": 26780
+    },
+    {
+      "path": "tests/unit/test_od07_adjustments.py",
+      "before_sha256": null,
+      "after_sha256": "0b8d73993d546cfbda5074f354271bae8e7e51679dd301f463126ff95291e3ef",
+      "bytes": 33046,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od07_final.py",
+      "before_sha256": null,
+      "after_sha256": "5d7f730659e7b5e63102727c1a0215c620b0dc48ae4041ee7f90b6856859ceb0",
+      "bytes": 30146,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od08_dependencies.py",
+      "before_sha256": null,
+      "after_sha256": "d14c5138a7eb40326a2016d3b3fa39933756b06235d12c0b31a41ef2a3bfe868",
+      "bytes": 12834
+    },
+    {
+      "path": "tests/unit/test_od08_universe.py",
+      "before_sha256": null,
+      "after_sha256": "8479681e4a03ebab333f95cc907fdd0531be59c9895a7c64de8d3057aee289ae",
+      "bytes": 35769,
+      "applied_in_safe_snapshot": true,
+      "applied_to_original_checkout": false
+    },
+    {
+      "path": "tests/unit/test_od09_reconciliation.py",
+      "before_sha256": null,
+      "after_sha256": "4be6b193d0db3c7c8110c89e1c850d1561cba82d344abd806e99ff8fc9f4863d",
+      "bytes": 37912
+    },
+    {
+      "path": "src/omegadata/canonical_storage/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "d85adf66808b09632a15c35a741c5bf17c30c4f3a3ab823def9cbe6d15ee9627",
+      "bytes": 83,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/contracts.py",
+      "before_sha256": null,
+      "after_sha256": "f94cbe5a2ea45f4e50a33dffc8d55b7db8d061ff28a777cd23c214ab12f3c23f",
+      "bytes": 9772,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/schema.py",
+      "before_sha256": null,
+      "after_sha256": "dd4d663f48681a6fa90106d2a01a09233ad8eadb7fa29644b9ad27ac2f1b045d",
+      "bytes": 8110,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/admission.py",
+      "before_sha256": null,
+      "after_sha256": "75608668aad5f1891e53b0654cf08666200b86d2d01d9708af90e7debf687842",
+      "bytes": 14271,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/store.py",
+      "before_sha256": null,
+      "after_sha256": "1164dc212e8761bc531f969a5411a80a574e57102036797bcd799293bc820070",
+      "bytes": 45150,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "src/omegadata/canonical_storage/query.py",
+      "before_sha256": null,
+      "after_sha256": "bdc90ef7c6d8df8b951561070c55506a0ee455843df4c76722596b239e3fe28c",
+      "bytes": 4326,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "scripts/od10_structural_experiments.py",
+      "before_sha256": null,
+      "after_sha256": "9be9515ec62ea2e3cc18ee2813a0c4a61a162c3c2e29c559f30c3eeb7772160f",
+      "bytes": 12518,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "scripts/od10_isolated_jobs.py",
+      "before_sha256": null,
+      "after_sha256": "da80eb145db64063545018acd653ddfcd169a39ad804ed78404218ad8ef9f8b2",
+      "bytes": 3733,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    },
+    {
+      "path": "tests/unit/test_od10_canonical_storage.py",
+      "before_sha256": null,
+      "after_sha256": "08617d45bceec04ee4e76ea7aad463950c237ca4b28cf2f8f2b1e05bbe369ba4",
+      "bytes": 39246,
+      "state": "APPLIED_AND_TESTED_DATA_FREE_SNAPSHOT"
+    }
+  ],
+  "original_checkout_integrated": false,
+  "original_payload_access": false
+}

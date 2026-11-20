@@ -1,0 +1,466 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-1732bfc694-manifest.json",
+    "--manifest-sha256",
+    "85e9a971e26084531d2d89b521f07baedfabfd361ecbbd81ce453ef7d46114ef",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-1732bfc694-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10-1732bfc694/output"
+  ],
+  "start_utc": "2026-11-20T19:16:35.061614+00:00",
+  "end_utc": "2026-11-20T19:16:54.922889+00:00",
+  "seconds": 19.861228674000003,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10",
+    "exit_code": 1,
+    "counts": {
+      "passed": 69,
+      "failed": 13
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_legacy_partition_overwrite_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[before_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_file_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_file_write_before_validation]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_validation_before_install]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_install_before_catalog_commit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_catalog_transaction]",
+        "outcome": "failed",
+        "reason": "phase = 'during_catalog_transaction'\ntmp_path = PosixPath('/work/job/tmp/test_fault_retry_is_recoverabl5')\n\n    @pytest.mark.parametrize('phase',['before_write','during_file_write','after_file_write_before_validation','after_validation_before_install','after_install_before_catalog_commit','during_catalog_transaction','after_catalog_commit_before_acknowledgement'])\n    def test_fault_retry_is_recoverable_without_orphan_promotion(phase,tmp_path):\n     db=database(tmp_path);v=commit(db)\n     def fault(at):\n      if at==phase:raise RuntimeError('CONTROLLED_FAULT')\n     with pytest.raises(RuntimeError):commit(db,op='retry-control',parent=v,hook=fault)\n     orphans=db.orphans()\n>    new=commit(db,op='retry-control',parent=v)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:209: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_od10_canonical_storage.py:26: in commit\n    return db.commit(definition,(record(),) if rows is None else rows,operation_id=op,parent_version=parent,expected_partitions=('CANARY-X/2020-01',),**kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/omegadata/canonical_storage/store.py:194: in commit\n    payload=canonical(m);self._install('manifests/'+version+'.json',payload.encode())\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/omegadata/canonical_storage/store.py:106: in _install\n    fd=safe_fd(self.root,name,os.O_CREAT|os.O_EXCL|os.O_WRONLY)\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nroot = PosixPath('/work/job/tmp/test_fault_retry_is_recoverabl5/store')\nname = 'manifests/cd30859095bb4c0d015161550da73fa6f217b4c8b70159b9f5ea66ea434e591c.json'\nflags = 193\n\n    def safe_fd(root:Path,name:str,flags:int)->int:\n     if not re.fullmatch(r'(objects|manifests)/[a-f0-9-]+\\.(parquet|json)',name):raise StorageError('MANIFEST_PATH_UNSAFE')\n     safe_ancestors(root)\n     directory,leaf=name.split('/')\n     parent=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)\n     try:\n      child=os.open(directory,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=parent)\n>     try:return os.open(leaf,flags|os.O_NOFOLLOW,0o600,dir_fd=child)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE     FileExistsError: [Errno 17] File exists: 'cd30859095bb4c0d015161550da73fa6f217b4c8b70159b9f5ea66ea434e591c.json'\n\nsrc/omegadata/canonical_storage/store.py:55: FileExistsError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_catalog_commit_before_acknowledgement]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fixed-mismatch]",
+        "outcome": "failed",
+        "reason": "case = 'fixed-mismatch'\n\n    @pytest.mark.parametrize('case',['fixed-mismatch','overflow','zero-scale','fraction','negative','maximum'])\n    def test_scalar_physical_and_logical_reconciliation(case):\n     import pyarrow as pa\n     from omegadata.canonical_storage import schema\n     from omegadata.canonical_storage.contracts import StorageError\n     if case=='fixed-mismatch':\n      t=schema.to_table((record(),),'canonical/v1');i=t.schema.get_field_index('value_fixed')\n      t=t.set_column(i,t.schema.field(i),pa.array([Decimal('2.5')],type=pa.decimal128(38,12)))\n>     with pytest.raises(StorageError,match='SCALAR'):schema.from_table(t)\nE     Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:221: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[overflow]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[zero-scale]",
+        "outcome": "failed",
+        "reason": "case = 'zero-scale'\n\n    @pytest.mark.parametrize('case',['fixed-mismatch','overflow','zero-scale','fraction','negative','maximum'])\n    def test_scalar_physical_and_logical_reconciliation(case):\n     import pyarrow as pa\n     from omegadata.canonical_storage import schema\n     from omegadata.canonical_storage.contracts import StorageError\n     if case=='fixed-mismatch':\n      t=schema.to_table((record(),),'canonical/v1');i=t.schema.get_field_index('value_fixed')\n      t=t.set_column(i,t.schema.field(i),pa.array([Decimal('2.5')],type=pa.decimal128(38,12)))\n      with pytest.raises(StorageError,match='SCALAR'):schema.from_table(t)\n     elif case=='overflow':\n      with pytest.raises(StorageError):schema.encode_decimal(Decimal('9e10000'),'CALCULATION')\n>    elif case=='zero-scale':assert schema.decode_decimal(schema.encode_decimal(Decimal('0E-90'),'RAW')).as_tuple()==Decimal('0E-90').as_tuple()\n                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:224: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalue = Decimal('0E-90'), kind = 'RAW'\n\n    def encode_decimal(value:Decimal|None,kind:str='RAW')->dict[str,Any]:\n     if value is None:return {'coefficient':None,'exponent':None,'fixed':None,'encoding':'NULL'}\n     if type(value) is not Decimal or not value.is_finite():raise StorageError('NUMERIC_INVALID')\n     sign,digits,exponent=value.as_tuple();exp=int(exponent)\n     if len(digits)>1000 or not -9999<=exp<=9999:raise StorageError('PRECISION_RESOURCE_LIMIT')\n     coefficient=('-' if sign else '')+''.join(str(v) for v in digits)\n     p,s=(38,12) if kind=='RAW' else (76,36)\n     # Validate exact rescaling by digit arithmetic, independently of ambient Decimal context.\n     scaled=len(digits)+exp+s\n     fractional_ok=exp>=-s or all(v==0 for v in digits[len(digits)+exp+s:])\n     fits=fractional_ok and scaled<=p and (exp+s>=0 or len(digits)+exp+s>=0)\n     if kind not in {'RAW','CALCULATION'}:raise StorageError('NUMERIC_KIND')\n>    if kind=='RAW' and not fits:raise StorageError('STORAGE_PRECISION_UNSUPPORTED')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: STORAGE_PRECISION_UNSUPPORTED\n\nsrc/omegadata/canonical_storage/schema.py:28: StorageError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fraction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[negative]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[maximum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[durable]",
+        "outcome": "failed",
+        "reason": "case = 'durable'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad0')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[changed-id]",
+        "outcome": "failed",
+        "reason": "case = 'changed-id'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad1')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[future]",
+        "outcome": "failed",
+        "reason": "case = 'future'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad2')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[join]",
+        "outcome": "failed",
+        "reason": "case = 'join'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad3')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[rollback]",
+        "outcome": "failed",
+        "reason": "case = 'rollback'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad4')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n>     db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      ^^^^^^^^^^^^^^^^^\nE     AttributeError: 'CanonicalStore' object has no attribute 'rollback_empty'\n\ntests/unit/test_od10_canonical_storage.py:243: AttributeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[immutable]",
+        "outcome": "failed",
+        "reason": "case = 'immutable'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad6')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[unknown-root]",
+        "outcome": "failed",
+        "reason": "case = 'unknown-root'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad7')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n>     with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\nE     Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:240: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[denied]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[metadata-only]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[forged-authority]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[derived-unbound]",
+        "outcome": "failed",
+        "reason": "case = 'derived-unbound'\ntmp_path = PosixPath('/work/job/tmp/test_admission_refuses_unbound3')\n\n    @pytest.mark.parametrize('case',['denied','metadata-only','forged-authority','derived-unbound','wrong-domain','raw-price-field-mismatch'])\n    def test_admission_refuses_unbound_or_unauthorized_payload(case,tmp_path):\n     from omegadata.canonical_storage.contracts import StorageError\n     db=database(tmp_path)\n     kw={'denied':{'source_rights_state':'DENIED'},'metadata-only':{'source_rights_state':'METADATA_ONLY'},'forged-authority':{'observation_classification':'APPROVED_AUTHENTIC_SOURCE','source_rights_state':'PERMITTED'},'derived-unbound':{'price_basis':'BACKWARD_ADJUSTED','numeric_kind':'CALCULATION'},'wrong-domain':{},'raw-price-field-mismatch':{'field_semantics':'OPEN','observation_type':'RAW_CLOSE'}}[case]\n     definition={'layer':'DERIVED','domain':'adjustment_results','price_basis':'BACKWARD_ADJUSTED'} if case=='derived-unbound' else {'domain':'adjustment_results'} if case=='wrong-domain' else {}\n>    with pytest.raises(StorageError):commit(db,rows=(record(**kw),),definition=definition)\nE    Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:273: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[wrong-domain]",
+        "outcome": "failed",
+        "reason": "case = 'wrong-domain'\ntmp_path = PosixPath('/work/job/tmp/test_admission_refuses_unbound4')\n\n    @pytest.mark.parametrize('case',['denied','metadata-only','forged-authority','derived-unbound','wrong-domain','raw-price-field-mismatch'])\n    def test_admission_refuses_unbound_or_unauthorized_payload(case,tmp_path):\n     from omegadata.canonical_storage.contracts import StorageError\n     db=database(tmp_path)\n     kw={'denied':{'source_rights_state':'DENIED'},'metadata-only':{'source_rights_state':'METADATA_ONLY'},'forged-authority':{'observation_classification':'APPROVED_AUTHENTIC_SOURCE','source_rights_state':'PERMITTED'},'derived-unbound':{'price_basis':'BACKWARD_ADJUSTED','numeric_kind':'CALCULATION'},'wrong-domain':{},'raw-price-field-mismatch':{'field_semantics':'OPEN','observation_type':'RAW_CLOSE'}}[case]\n     definition={'layer':'DERIVED','domain':'adjustment_results','price_basis':'BACKWARD_ADJUSTED'} if case=='derived-unbound' else {'domain':'adjustment_results'} if case=='wrong-domain' else {}\n>    with pytest.raises(StorageError):commit(db,rows=(record(**kw),),definition=definition)\nE    Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:273: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[raw-price-field-mismatch]",
+        "outcome": "failed",
+        "reason": "case = 'raw-price-field-mismatch'\ntmp_path = PosixPath('/work/job/tmp/test_admission_refuses_unbound5')\n\n    @pytest.mark.parametrize('case',['denied','metadata-only','forged-authority','derived-unbound','wrong-domain','raw-price-field-mismatch'])\n    def test_admission_refuses_unbound_or_unauthorized_payload(case,tmp_path):\n     from omegadata.canonical_storage.contracts import StorageError\n     db=database(tmp_path)\n     kw={'denied':{'source_rights_state':'DENIED'},'metadata-only':{'source_rights_state':'METADATA_ONLY'},'forged-authority':{'observation_classification':'APPROVED_AUTHENTIC_SOURCE','source_rights_state':'PERMITTED'},'derived-unbound':{'price_basis':'BACKWARD_ADJUSTED','numeric_kind':'CALCULATION'},'wrong-domain':{},'raw-price-field-mismatch':{'field_semantics':'OPEN','observation_type':'RAW_CLOSE'}}[case]\n     definition={'layer':'DERIVED','domain':'adjustment_results','price_basis':'BACKWARD_ADJUSTED'} if case=='derived-unbound' else {'domain':'adjustment_results'} if case=='wrong-domain' else {}\n>    with pytest.raises(StorageError):commit(db,rows=(record(**kw),),definition=definition)\nE    Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:273: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_query_projection_aggregate_and_partition_pruning",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_independently_declared_comparison_scope_rejects_metadata_relabel",
+        "outcome": "passed",
+        "reason": null
+      }
+    ],
+    "start_utc": "2026-11-20T19:16:38.124053+00:00",
+    "end_utc": "2026-11-20T19:16:53.786089+00:00",
+    "elapsed_seconds": 15.662074470999997,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "..........................................................F.F.F...FFFFF. [ 87%]\nFF...FFF..                                                               [100%]\n=================================== FAILURES ===================================\n_ test_fault_retry_is_recoverable_without_orphan_promotion[during_catalog_transaction] _\n\nphase = 'during_catalog_transaction'\ntmp_path = PosixPath('/work/job/tmp/test_fault_retry_is_recoverabl5')\n\n    @pytest.mark.parametrize('phase',['before_write','during_file_write','after_file_write_before_validation','after_validation_before_install','after_install_before_catalog_commit','during_catalog_transaction','after_catalog_commit_before_acknowledgement'])\n    def test_fault_retry_is_recoverable_without_orphan_promotion(phase,tmp_path):\n     db=database(tmp_path);v=commit(db)\n     def fault(at):\n      if at==phase:raise RuntimeError('CONTROLLED_FAULT')\n     with pytest.raises(RuntimeError):commit(db,op='retry-control',parent=v,hook=fault)\n     orphans=db.orphans()\n>    new=commit(db,op='retry-control',parent=v)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:209: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_od10_canonical_storage.py:26: in commit\n    return db.commit(definition,(record(),) if rows is None else rows,operation_id=op,parent_version=parent,expected_partitions=('CANARY-X/2020-01',),**kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/omegadata/canonical_storage/store.py:194: in commit\n    payload=canonical(m);self._install('manifests/'+version+'.json',payload.encode())\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/omegadata/canonical_storage/store.py:106: in _install\n    fd=safe_fd(self.root,name,os.O_CREAT|os.O_EXCL|os.O_WRONLY)\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nroot = PosixPath('/work/job/tmp/test_fault_retry_is_recoverabl5/store')\nname = 'manifests/cd30859095bb4c0d015161550da73fa6f217b4c8b70159b9f5ea66ea434e591c.json'\nflags = 193\n\n    def safe_fd(root:Path,name:str,flags:int)->int:\n     if not re.fullmatch(r'(objects|manifests)/[a-f0-9-]+\\.(parquet|json)',name):raise StorageError('MANIFEST_PATH_UNSAFE')\n     safe_ancestors(root)\n     directory,leaf=name.split('/')\n     parent=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)\n     try:\n      child=os.open(directory,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=parent)\n>     try:return os.open(leaf,flags|os.O_NOFOLLOW,0o600,dir_fd=child)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE     FileExistsError: [Errno 17] File exists: 'cd30859095bb4c0d015161550da73fa6f217b4c8b70159b9f5ea66ea434e591c.json'\n\nsrc/omegadata/canonical_storage/store.py:55: FileExistsError\n_______ test_scalar_physical_and_logical_reconciliation[fixed-mismatch] ________\n\ncase = 'fixed-mismatch'\n\n    @pytest.mark.parametrize('case',['fixed-mismatch','overflow','zero-scale','fraction','negative','maximum'])\n    def test_scalar_physical_and_logical_reconciliation(case):\n     import pyarrow as pa\n     from omegadata.canonical_storage import schema\n     from omegadata.canonical_storage.contracts import StorageError\n     if case=='fixed-mismatch':\n      t=schema.to_table((record(),),'canonical/v1');i=t.schema.get_field_index('value_fixed')\n      t=t.set_column(i,t.schema.field(i),pa.array([Decimal('2.5')],type=pa.decimal128(38,12)))\n>     with pytest.raises(StorageError,match='SCALAR'):schema.from_table(t)\nE     Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:221: Failed\n_________ test_scalar_physical_and_logical_reconciliation[zero-scale] __________\n\ncase = 'zero-scale'\n\n    @pytest.mark.parametrize('case',['fixed-mismatch','overflow','zero-scale','fraction','negative','maximum'])\n    def test_scalar_physical_and_logical_reconciliation(case):\n     import pyarrow as pa\n     from omegadata.canonical_storage import schema\n     from omegadata.canonical_storage.contracts import StorageError\n     if case=='fixed-mismatch':\n      t=schema.to_table((record(),),'canonical/v1');i=t.schema.get_field_index('value_fixed')\n      t=t.set_column(i,t.schema.field(i),pa.array([Decimal('2.5')],type=pa.decimal128(38,12)))\n      with pytest.raises(StorageError,match='SCALAR'):schema.from_table(t)\n     elif case=='overflow':\n      with pytest.raises(StorageError):schema.encode_decimal(Decimal('9e10000'),'CALCULATION')\n>    elif case=='zero-scale':assert schema.decode_decimal(schema.encode_decimal(Decimal('0E-90'),'RAW')).as_tuple()==Decimal('0E-90').as_tuple()\n                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:224: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalue = Decimal('0E-90'), kind = 'RAW'\n\n    def encode_decimal(value:Decimal|None,kind:str='RAW')->dict[str,Any]:\n     if value is None:return {'coefficient':None,'exponent':None,'fixed':None,'encoding':'NULL'}\n     if type(value) is not Decimal or not value.is_finite():raise StorageError('NUMERIC_INVALID')\n     sign,digits,exponent=value.as_tuple();exp=int(exponent)\n     if len(digits)>1000 or not -9999<=exp<=9999:raise StorageError('PRECISION_RESOURCE_LIMIT')\n     coefficient=('-' if sign else '')+''.join(str(v) for v in digits)\n     p,s=(38,12) if kind=='RAW' else (76,36)\n     # Validate exact rescaling by digit arithmetic, independently of ambient Decimal context.\n     scaled=len(digits)+exp+s\n     fractional_ok=exp>=-s or all(v==0 for v in digits[len(digits)+exp+s:])\n     fits=fractional_ok and scaled<=p and (exp+s>=0 or len(digits)+exp+s>=0)\n     if kind not in {'RAW','CALCULATION'}:raise StorageError('NUMERIC_KIND')\n>    if kind=='RAW' and not fits:raise StorageError('STORAGE_PRECISION_UNSUPPORTED')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    omegadata.canonical_storage.contracts.StorageError: STORAGE_PRECISION_UNSUPPORTED\n\nsrc/omegadata/canonical_storage/schema.py:28: StorageError\n________________ test_durable_typed_metadata_admission[durable] ________________\n\ncase = 'durable'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad0')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError\n______________ test_durable_typed_metadata_admission[changed-id] _______________\n\ncase = 'changed-id'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad1')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError\n________________ test_durable_typed_metadata_admission[future] _________________\n\ncase = 'future'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad2')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError\n_________________ test_durable_typed_metadata_admission[join] __________________\n\ncase = 'join'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad3')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError\n_______________ test_durable_typed_metadata_admission[rollback] ________________\n\ncase = 'rollback'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad4')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n>     db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      ^^^^^^^^^^^^^^^^^\nE     AttributeError: 'CanonicalStore' object has no attribute 'rollback_empty'\n\ntests/unit/test_od10_canonical_storage.py:243: AttributeError\n_______________ test_durable_typed_metadata_admission[immutable] _______________\n\ncase = 'immutable'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad6')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n      with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\n      return\n     if case=='rollback':\n      db.rollback_empty();db.close();db=database(tmp_path);assert db.operation_version('none') is None\n      commit(db)\n      with pytest.raises(StorageError):db.rollback_empty()\n      return\n     if case=='foreign-key':\n      with pytest.raises(Exception,match='FOREIGN KEY'):\n       with db.transaction() as con:con.execute(text(\"INSERT INTO commit_operation VALUES ('orphan','x','absent')\"))\n      return\n>    ref=db.pin_domain('source_observations','parser-identity',payload,K)\n         ^^^^^^^^^^^^^\nE    AttributeError: 'CanonicalStore' object has no attribute 'pin_domain'\n\ntests/unit/test_od10_canonical_storage.py:251: AttributeError\n_____________ test_durable_typed_metadata_admission[unknown-root] ______________\n\ncase = 'unknown-root'\ntmp_path = PosixPath('/work/job/tmp/test_durable_typed_metadata_ad7')\n\n    @pytest.mark.parametrize('case',['durable','changed-id','future','join','rollback','foreign-key','immutable','unknown-root'])\n    def test_durable_typed_metadata_admission(case,tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     from omegadata.canonical_storage.contracts import StorageError\n     from sqlalchemy import text\n     db=database(tmp_path);payload=ParseResult('PARSED_UNVERIFIED','a'*64)\n     if case=='unknown-root':\n      from omegadata.canonical_storage.store import CanonicalStore\n      unknown=tmp_path/'unknown';unknown.mkdir();(unknown/'retained').write_text('NON_MARKET_METADATA')\n>     with pytest.raises(StorageError):CanonicalStore(unknown,disposable_root=tmp_path)\nE     Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:240: Failed\n___ test_admission_refuses_unbound_or_unauthorized_payload[derived-unbound] ____\n\ncase = 'derived-unbound'\ntmp_path = PosixPath('/work/job/tmp/test_admission_refuses_unbound3')\n\n    @pytest.mark.parametrize('case',['denied','metadata-only','forged-authority','derived-unbound','wrong-domain','raw-price-field-mismatch'])\n    def test_admission_refuses_unbound_or_unauthorized_payload(case,tmp_path):\n     from omegadata.canonical_storage.contracts import StorageError\n     db=database(tmp_path)\n     kw={'denied':{'source_rights_state':'DENIED'},'metadata-only':{'source_rights_state':'METADATA_ONLY'},'forged-authority':{'observation_classification':'APPROVED_AUTHENTIC_SOURCE','source_rights_state':'PERMITTED'},'derived-unbound':{'price_basis':'BACKWARD_ADJUSTED','numeric_kind':'CALCULATION'},'wrong-domain':{},'raw-price-field-mismatch':{'field_semantics':'OPEN','observation_type':'RAW_CLOSE'}}[case]\n     definition={'layer':'DERIVED','domain':'adjustment_results','price_basis':'BACKWARD_ADJUSTED'} if case=='derived-unbound' else {'domain':'adjustment_results'} if case=='wrong-domain' else {}\n>    with pytest.raises(StorageError):commit(db,rows=(record(**kw),),definition=definition)\nE    Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:273: Failed\n_____ test_admission_refuses_unbound_or_unauthorized_payload[wrong-domain] _____\n\ncase = 'wrong-domain'\ntmp_path = PosixPath('/work/job/tmp/test_admission_refuses_unbound4')\n\n    @pytest.mark.parametrize('case',['denied','metadata-only','forged-authority','derived-unbound','wrong-domain','raw-price-field-mismatch'])\n    def test_admission_refuses_unbound_or_unauthorized_payload(case,tmp_path):\n     from omegadata.canonical_storage.contracts import StorageError\n     db=database(tmp_path)\n     kw={'denied':{'source_rights_state':'DENIED'},'metadata-only':{'source_rights_state':'METADATA_ONLY'},'forged-authority':{'observation_classification':'APPROVED_AUTHENTIC_SOURCE','source_rights_state':'PERMITTED'},'derived-unbound':{'price_basis':'BACKWARD_ADJUSTED','numeric_kind':'CALCULATION'},'wrong-domain':{},'raw-price-field-mismatch':{'field_semantics':'OPEN','observation_type':'RAW_CLOSE'}}[case]\n     definition={'layer':'DERIVED','domain':'adjustment_results','price_basis':'BACKWARD_ADJUSTED'} if case=='derived-unbound' else {'domain':'adjustment_results'} if case=='wrong-domain' else {}\n>    with pytest.raises(StorageError):commit(db,rows=(record(**kw),),definition=definition)\nE    Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:273: Failed\n_ test_admission_refuses_unbound_or_unauthorized_payload[raw-price-field-mismatch] _\n\ncase = 'raw-price-field-mismatch'\ntmp_path = PosixPath('/work/job/tmp/test_admission_refuses_unbound5')\n\n    @pytest.mark.parametrize('case',['denied','metadata-only','forged-authority','derived-unbound','wrong-domain','raw-price-field-mismatch'])\n    def test_admission_refuses_unbound_or_unauthorized_payload(case,tmp_path):\n     from omegadata.canonical_storage.contracts import StorageError\n     db=database(tmp_path)\n     kw={'denied':{'source_rights_state':'DENIED'},'metadata-only':{'source_rights_state':'METADATA_ONLY'},'forged-authority':{'observation_classification':'APPROVED_AUTHENTIC_SOURCE','source_rights_state':'PERMITTED'},'derived-unbound':{'price_basis':'BACKWARD_ADJUSTED','numeric_kind':'CALCULATION'},'wrong-domain':{},'raw-price-field-mismatch':{'field_semantics':'OPEN','observation_type':'RAW_CLOSE'}}[case]\n     definition={'layer':'DERIVED','domain':'adjustment_results','price_basis':'BACKWARD_ADJUSTED'} if case=='derived-unbound' else {'domain':'adjustment_results'} if case=='wrong-domain' else {}\n>    with pytest.raises(StorageError):commit(db,rows=(record(**kw),),definition=definition)\nE    Failed: DID NOT RAISE <class 'omegadata.canonical_storage.contracts.StorageError'>\n\ntests/unit/test_od10_canonical_storage.py:273: Failed\n=========================== short test summary info ============================\nFAILED tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_catalog_transaction]\nFAILED tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fixed-mismatch]\nFAILED tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[zero-scale]\nFAILED tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[durable]\nFAILED tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[changed-id]\nFAILED tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[future]\nFAILED tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[join]\nFAILED tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[rollback]\nFAILED tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[immutable]\nFAILED tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[unknown-root]\nFAILED tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[derived-unbound]\nFAILED tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[wrong-domain]\nFAILED tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[raw-price-field-mismatch]\n13 failed, 69 passed in 12.30s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "85e9a971e26084531d2d89b521f07baedfabfd361ecbbd81ce453ef7d46114ef"
+}

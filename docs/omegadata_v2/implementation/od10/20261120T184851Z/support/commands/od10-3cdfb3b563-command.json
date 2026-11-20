@@ -1,0 +1,521 @@
+{
+  "cwd": "/home/parilrupani/omega-od10-20261120T184851Z",
+  "worker_cwd": "/work/repo",
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od10-20261120T184851Z/staged/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-3cdfb3b563-manifest.json",
+    "--manifest-sha256",
+    "a77e180ce26e692c15439d08099f4edec50f761e4a8a8725672c8302a8bdf8cc",
+    "--policy",
+    "/home/parilrupani/omega-od10-20261120T184851Z/logs/od10-3cdfb3b563-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od10-20261120T184851Z/od10-3cdfb3b563/output"
+  ],
+  "start_utc": "2026-11-20T19:25:43.049799+00:00",
+  "end_utc": "2026-11-20T19:25:55.205599+00:00",
+  "seconds": 12.155778949,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od10",
+    "exit_code": 1,
+    "counts": {
+      "passed": 85,
+      "failed": 8
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[S06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[L07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[V05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[M06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[T06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[Q07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[R03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_od10_acceptance[G04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_legacy_partition_overwrite_reproduction",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[before_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_file_write]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_file_write_before_validation]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_validation_before_install]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_install_before_catalog_commit]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[during_catalog_transaction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_fault_retry_is_recoverable_without_orphan_promotion[after_catalog_commit_before_acknowledgement]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fixed-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[overflow]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[zero-scale]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[fraction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[negative]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_scalar_physical_and_logical_reconciliation[maximum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[durable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[changed-id]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[future]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[join]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[immutable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_durable_typed_metadata_admission[unknown-root]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[denied]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[metadata-only]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[forged-authority]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[derived-unbound]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[wrong-domain]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_admission_refuses_unbound_or_unauthorized_payload[raw-price-field-mismatch]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_query_projection_aggregate_and_partition_pruning",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_independently_declared_comparison_scope_rejects_metadata_relabel",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_bound_derived_volume_admission_replays_exact_upstream",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[omitted]",
+        "outcome": "failed",
+        "reason": "case = 'omitted'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop0')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[future]",
+        "outcome": "failed",
+        "reason": "case = 'future'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop1')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unrelated]",
+        "outcome": "failed",
+        "reason": "case = 'unrelated'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop2')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[conflict]",
+        "outcome": "failed",
+        "reason": "case = 'conflict'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop3')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unknown-time]",
+        "outcome": "failed",
+        "reason": "case = 'unknown-time'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop4')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[restart]",
+        "outcome": "failed",
+        "reason": "case = 'restart'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop5')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_transitive_dependency_index_uses_pinned_metadata",
+        "outcome": "failed",
+        "reason": "tmp_path = PosixPath('/work/job/tmp/test_transitive_dependency_ind0')\n\n    def test_transitive_dependency_index_uses_pinned_metadata(tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     db=database(tmp_path)\n     a=db.pin_domain('source_observations','a',ParseResult('PARSED_UNVERIFIED','a'*64),K)\n>    b=db.pin_domain('source_observations','b',ParseResult('PARSED_UNVERIFIED','b'*64),K,dependencies=(a,))\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    TypeError: CanonicalStore.pin_domain() got an unexpected keyword argument 'dependencies'\n\ntests/unit/test_od10_canonical_storage.py:347: TypeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[symlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_file_link_escape_refused[hardlink]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od10_canonical_storage.py::test_canonical_UTC_retry_and_derived_hard_blocks",
+        "outcome": "failed",
+        "reason": "tmp_path = PosixPath('/work/job/tmp/test_canonical_UTC_retry_and_d0')\n\n    def test_canonical_UTC_retry_and_derived_hard_blocks(tmp_path):\n     db=database(tmp_path);v=commit(db)\n     shifted=record(known_from=K.astimezone(timezone(timedelta(hours=5,minutes=30))))\n>    assert commit(db,rows=(shifted,))==v\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:366: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_od10_canonical_storage.py:26: in commit\n    return db.commit(definition,(record(),) if rows is None else rows,operation_id=op,parent_version=parent,expected_partitions=('CANARY-X/2020-01',),**kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.canonical_storage.store.CanonicalStore object at 0x735c04ac1790>\ndefinition = DatasetDefinition(dataset_id='control-dataset', domain='source_observations', layer='RAW', schema_version='canonical/v..., coverage_state='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE', partitioning_version='exchange-month/v1', volume_basis=None)\nrows = (Observation(observation_id='control-0001', observation_revision_id='revision-1', source_id='control-source', source_a...e='AUDIT', source_note=None, financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\n\n    def commit(self,definition:DatasetDefinition,rows:tuple[Observation,...],*,operation_id:str,parent_version:str|None=None,expected_partitions:tuple[str,...],hook:Callable[[str],None]|None=None,proofs:tuple[Any,...]=())->str:\n     token(operation_id);schema.get_schema(definition.schema_version)\n     if definition.domain not in schema.DOMAINS or schema.DOMAINS[definition.domain]!='PARQUET_DATASET':raise StorageError('DOMAIN_STORAGE_MISMATCH')\n     if (definition.domain=='adjustment_results')!=(definition.layer=='DERIVED'):raise StorageError('DOMAIN_LAYER_MISMATCH')\n     if type(rows) is not tuple or not 1<=len(rows)<=100000:raise StorageError('WRITE_RESOURCE_LIMIT')\n     if len({r.observation_revision_id for r in rows})!=len(rows):raise StorageError('DUPLICATE_OBSERVATION_REVISION')\n     rows=tuple(sorted(rows,key=lambda r:r.observation_revision_id))\n     for r in rows:\n      if r.source_rights_state!='NON_MARKET_CONTROL' or r.observation_classification!='NON_MARKET_STRUCTURAL_CONTROL':raise StorageError('SOURCE_SCOPE_BLOCKED')\n      if r.source_id not in definition.source_scope or r.price_basis!=definition.price_basis or r.consumer_profile!=definition.consumer_profile:raise StorageError('SOURCE_OR_BASIS_SCOPE')\n      adjusted=(r.volume_basis not in {None,'RAW'}) if r.field_semantics=='VOLUME' else r.price_basis!='RAW_UNADJUSTED'\n      if (definition.layer=='DERIVED')!=adjusted:raise StorageError('RAW_DERIVED_SEPARATION')\n      if r.field_semantics=='VOLUME' and definition.volume_basis!=r.volume_basis:raise StorageError('VOLUME_BASIS_MISMATCH')\n      if definition.layer=='DERIVED':\n       from omegadata.canonical_storage.admission import admit_derived\n       matching=[p for p in proofs if p.source_observation.observation_id==r.observation_id]\n       if len(matching)!=1:raise StorageError('DERIVED_BOUND_PROOF_REQUIRED')\n       admit_derived(r,matching[0])\n       proof=matching[0]\n       self.pin_domain('adjustment_results',proof.payload.output_digest,proof.payload,r.known_from,context=proof)\n     request=fingerprint((definition,rows,operation_id,parent_version,expected_partitions));version=request\n     def fault(at:str)->None:\n      if hook:hook(at)\n     with self.engine.connect() as con:\n      old=con.execute(text('SELECT input_digest,version FROM commit_operation WHERE id=:id'),{'id':operation_id}).first()\n     if old:\n>     if old[0]!=request:raise StorageError('OPERATION_ID_CONTENT_CHANGED')\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE     omegadata.canonical_storage.contracts.StorageError: OPERATION_ID_CONTENT_CHANGED\n\nsrc/omegadata/canonical_storage/store.py:163: StorageError"
+      }
+    ],
+    "start_utc": "2026-11-20T19:25:44.383422+00:00",
+    "end_utc": "2026-11-20T19:25:54.425396+00:00",
+    "elapsed_seconds": 10.041979252,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 77%]\n...........FFFFFFF..F                                                    [100%]\n=================================== FAILURES ===================================\n________ test_persisted_comparison_scope_independent_selection[omitted] ________\n\ncase = 'omitted'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop0')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError\n________ test_persisted_comparison_scope_independent_selection[future] _________\n\ncase = 'future'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop1')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError\n_______ test_persisted_comparison_scope_independent_selection[unrelated] _______\n\ncase = 'unrelated'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop2')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError\n_______ test_persisted_comparison_scope_independent_selection[conflict] ________\n\ncase = 'conflict'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop3')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError\n_____ test_persisted_comparison_scope_independent_selection[unknown-time] ______\n\ncase = 'unknown-time'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop4')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError\n________ test_persisted_comparison_scope_independent_selection[restart] ________\n\ncase = 'restart'\ntmp_path = PosixPath('/work/job/tmp/test_persisted_comparison_scop5')\n\n    @pytest.mark.parametrize('case',['omitted','future','unrelated','conflict','unknown-time','restart'])\n    def test_persisted_comparison_scope_independent_selection(case,tmp_path):\n>    from omegadata.canonical_storage.admission import ComparisonScope\nE    ImportError: cannot import name 'ComparisonScope' from 'omegadata.canonical_storage.admission' (/work/repo/src/omegadata/canonical_storage/admission.py)\n\ntests/unit/test_od10_canonical_storage.py:324: ImportError\n____________ test_transitive_dependency_index_uses_pinned_metadata _____________\n\ntmp_path = PosixPath('/work/job/tmp/test_transitive_dependency_ind0')\n\n    def test_transitive_dependency_index_uses_pinned_metadata(tmp_path):\n     from omegadata.parsers.contracts import ParseResult\n     db=database(tmp_path)\n     a=db.pin_domain('source_observations','a',ParseResult('PARSED_UNVERIFIED','a'*64),K)\n>    b=db.pin_domain('source_observations','b',ParseResult('PARSED_UNVERIFIED','b'*64),K,dependencies=(a,))\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE    TypeError: CanonicalStore.pin_domain() got an unexpected keyword argument 'dependencies'\n\ntests/unit/test_od10_canonical_storage.py:347: TypeError\n_______________ test_canonical_UTC_retry_and_derived_hard_blocks _______________\n\ntmp_path = PosixPath('/work/job/tmp/test_canonical_UTC_retry_and_d0')\n\n    def test_canonical_UTC_retry_and_derived_hard_blocks(tmp_path):\n     db=database(tmp_path);v=commit(db)\n     shifted=record(known_from=K.astimezone(timezone(timedelta(hours=5,minutes=30))))\n>    assert commit(db,rows=(shifted,))==v\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od10_canonical_storage.py:366: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_od10_canonical_storage.py:26: in commit\n    return db.commit(definition,(record(),) if rows is None else rows,operation_id=op,parent_version=parent,expected_partitions=('CANARY-X/2020-01',),**kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <omegadata.canonical_storage.store.CanonicalStore object at 0x735c04ac1790>\ndefinition = DatasetDefinition(dataset_id='control-dataset', domain='source_observations', layer='RAW', schema_version='canonical/v..., coverage_state='COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE', partitioning_version='exchange-month/v1', volume_basis=None)\nrows = (Observation(observation_id='control-0001', observation_revision_id='revision-1', source_id='control-source', source_a...e='AUDIT', source_note=None, financial_eligibility=False, publication_eligibility=False, execution_eligibility=False),)\n\n    def commit(self,definition:DatasetDefinition,rows:tuple[Observation,...],*,operation_id:str,parent_version:str|None=None,expected_partitions:tuple[str,...],hook:Callable[[str],None]|None=None,proofs:tuple[Any,...]=())->str:\n     token(operation_id);schema.get_schema(definition.schema_version)\n     if definition.domain not in schema.DOMAINS or schema.DOMAINS[definition.domain]!='PARQUET_DATASET':raise StorageError('DOMAIN_STORAGE_MISMATCH')\n     if (definition.domain=='adjustment_results')!=(definition.layer=='DERIVED'):raise StorageError('DOMAIN_LAYER_MISMATCH')\n     if type(rows) is not tuple or not 1<=len(rows)<=100000:raise StorageError('WRITE_RESOURCE_LIMIT')\n     if len({r.observation_revision_id for r in rows})!=len(rows):raise StorageError('DUPLICATE_OBSERVATION_REVISION')\n     rows=tuple(sorted(rows,key=lambda r:r.observation_revision_id))\n     for r in rows:\n      if r.source_rights_state!='NON_MARKET_CONTROL' or r.observation_classification!='NON_MARKET_STRUCTURAL_CONTROL':raise StorageError('SOURCE_SCOPE_BLOCKED')\n      if r.source_id not in definition.source_scope or r.price_basis!=definition.price_basis or r.consumer_profile!=definition.consumer_profile:raise StorageError('SOURCE_OR_BASIS_SCOPE')\n      adjusted=(r.volume_basis not in {None,'RAW'}) if r.field_semantics=='VOLUME' else r.price_basis!='RAW_UNADJUSTED'\n      if (definition.layer=='DERIVED')!=adjusted:raise StorageError('RAW_DERIVED_SEPARATION')\n      if r.field_semantics=='VOLUME' and definition.volume_basis!=r.volume_basis:raise StorageError('VOLUME_BASIS_MISMATCH')\n      if definition.layer=='DERIVED':\n       from omegadata.canonical_storage.admission import admit_derived\n       matching=[p for p in proofs if p.source_observation.observation_id==r.observation_id]\n       if len(matching)!=1:raise StorageError('DERIVED_BOUND_PROOF_REQUIRED')\n       admit_derived(r,matching[0])\n       proof=matching[0]\n       self.pin_domain('adjustment_results',proof.payload.output_digest,proof.payload,r.known_from,context=proof)\n     request=fingerprint((definition,rows,operation_id,parent_version,expected_partitions));version=request\n     def fault(at:str)->None:\n      if hook:hook(at)\n     with self.engine.connect() as con:\n      old=con.execute(text('SELECT input_digest,version FROM commit_operation WHERE id=:id'),{'id':operation_id}).first()\n     if old:\n>     if old[0]!=request:raise StorageError('OPERATION_ID_CONTENT_CHANGED')\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE     omegadata.canonical_storage.contracts.StorageError: OPERATION_ID_CONTENT_CHANGED\n\nsrc/omegadata/canonical_storage/store.py:163: StorageError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[omitted]\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[future]\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unrelated]\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[conflict]\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[unknown-time]\nFAILED tests/unit/test_od10_canonical_storage.py::test_persisted_comparison_scope_independent_selection[restart]\nFAILED tests/unit/test_od10_canonical_storage.py::test_transitive_dependency_index_uses_pinned_metadata\nFAILED tests/unit/test_od10_canonical_storage.py::test_canonical_UTC_retry_and_derived_hard_blocks\n8 failed, 85 passed in 8.40s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od10-20261120T184851Z/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "source_commit": "641f1ebc54d4619e77f36afb4821b5986ef3a756",
+  "source_manifest_sha256": "a77e180ce26e692c15439d08099f4edec50f761e4a8a8725672c8302a8bdf8cc"
+}
