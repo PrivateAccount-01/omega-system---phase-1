@@ -1,0 +1,3 @@
+from pathlib import Path
+B=Path('/home/parilrupani/omega-od08-20261119T184624Z');P=Path('/home/parilrupani/omega-od07-final-20261119T175351Z')
+s=(P/'format_code.py').read_text().replace(str(P),str(B));a=s.index('paths=');z=s.index('\nargv=',a);paths=['src/omegadata/universe/'+n+'.py' for n in ['__init__','contracts','temporal','eligibility','snapshots','repository','compatibility']]+['tests/unit/test_od08_universe.py','scripts/od08_structural_experiments.py'];s=s[:a]+'paths='+repr(paths)+s[z:];s=s.replace("['src/omegadata','tests/unit']","['src/omegadata','tests/unit','scripts']");(B/'format_code.py').write_text(s)

@@ -1,0 +1,69 @@
+{
+  "owner_action_register": [
+    {
+      "required_source_or_reference": "Authenticated historical constituent snapshots",
+      "why_needed": "Establish exact real identities, not counts",
+      "applicable_permission": "Existing source-rights register must independently permit the exact purpose; no new approval written",
+      "reviewer_requirement": "Accountable owner and independent authenticated-source reviewer",
+      "expected_artifact": "Pinned original bytes, provenance, rights decision and reviewed exact expected identities/timestamps",
+      "affected_acceptance_gate": "CONSTITUENT_VALIDATION",
+      "current_blocker": "Not supplied/authenticated/authorized in current code-only boundary"
+    },
+    {
+      "required_source_or_reference": "Complete change-event history and methodology",
+      "why_needed": "Establish interval coverage and effective conventions",
+      "applicable_permission": "Existing source-rights register must independently permit the exact purpose; no new approval written",
+      "reviewer_requirement": "Accountable owner and independent authenticated-source reviewer",
+      "expected_artifact": "Pinned original bytes, provenance, rights decision and reviewed exact expected identities/timestamps",
+      "affected_acceptance_gate": "COVERAGE_INTEGRITY",
+      "current_blocker": "Not supplied/authenticated/authorized in current code-only boundary"
+    },
+    {
+      "required_source_or_reference": "Publication and availability references",
+      "why_needed": "Establish as-known facts and intraday timing",
+      "applicable_permission": "Existing source-rights register must independently permit the exact purpose; no new approval written",
+      "reviewer_requirement": "Accountable owner and independent authenticated-source reviewer",
+      "expected_artifact": "Pinned original bytes, provenance, rights decision and reviewed exact expected identities/timestamps",
+      "affected_acceptance_gate": "AVAILABILITY_VALIDATION",
+      "current_blocker": "Not supplied/authenticated/authorized in current code-only boundary"
+    },
+    {
+      "required_source_or_reference": "Identity/lifecycle and calendar references",
+      "why_needed": "Resolve real listings, delistings and sessions",
+      "applicable_permission": "Existing source-rights register must independently permit the exact purpose; no new approval written",
+      "reviewer_requirement": "Accountable owner and independent authenticated-source reviewer",
+      "expected_artifact": "Pinned original bytes, provenance, rights decision and reviewed exact expected identities/timestamps",
+      "affected_acceptance_gate": "SURVIVORSHIP/TRADABILITY",
+      "current_blocker": "Not supplied/authenticated/authorized in current code-only boundary"
+    },
+    {
+      "required_source_or_reference": "Liquidity observations and adjustment lineage",
+      "why_needed": "Verify windows/units and price bases",
+      "applicable_permission": "Existing source-rights register must independently permit the exact purpose; no new approval written",
+      "reviewer_requirement": "Accountable owner and independent authenticated-source reviewer",
+      "expected_artifact": "Pinned original bytes, provenance, rights decision and reviewed exact expected identities/timestamps",
+      "affected_acceptance_gate": "LIQUIDITY/OD07_INTEGRATION",
+      "current_blocker": "Not supplied/authenticated/authorized in current code-only boundary"
+    }
+  ],
+  "authentic_constituent_records_verified": 0,
+  "authentic_availability_records_verified": 0,
+  "market_observations_inspected": 0,
+  "financial_backtests": 0,
+  "historical_archive_metadata_ARCH_only": {
+    "candidates": 3626,
+    "seed": 3596,
+    "cache": 30,
+    "physically_present_size_matched": 3626,
+    "hardlinked": 2760,
+    "single_link": 866,
+    "new_scan": "NOT_RUN"
+  },
+  "incidents": {
+    "OD05V": "PENDING_HUMAN_OWNER_REVIEW;39files/6135515recordedbytes",
+    "OD05XR1": "PENDING_HUMAN_OWNER_REVIEW;payload_access_UNKNOWN_NOT_INDEPENDENTLY_EXCLUDED"
+  },
+  "Windows": "OS_CAPABILITY_BLOCKED;no certification/waiver",
+  "source_rights_changes": 0,
+  "new_original_payload_reads_hashes_copies": 0
+}

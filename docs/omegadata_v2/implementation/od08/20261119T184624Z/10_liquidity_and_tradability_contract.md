@@ -1,0 +1,4 @@
+# Completed-session liquidity and tradability
+LiquidityPolicy pins lookback sessions, minimum completed count, average-volume/median-turnover thresholds, observation coverage, currency, unit and bases. Only verified completed sessions enter the window. Unknown coverage or closing time blocks; no weekday approximation. Duplicate listing-session observations block. Missing volume differs from zero; real zero remains valid under the policy. Missing sessions are reported, not silently skipped. Currency/units/bases must match; adjusted volume requires OD07 context.
+
+Decimal calculations use the existing pinned arithmetic context. Average volume and median turnover use time-eligible observations. Strict execution also needs lifecycle/session/lot/settlement/restriction and availability inputs supplied through OD07. CALCULATED or raw price alone is not tradability. No orders or simulated trading.

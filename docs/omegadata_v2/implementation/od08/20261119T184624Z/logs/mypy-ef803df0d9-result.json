@@ -1,0 +1,29 @@
+{
+  "job": "mypy",
+  "start_utc": "2026-11-19T19:08:13.757902+00:00",
+  "end_utc": "2026-11-19T19:08:28.669207+00:00",
+  "elapsed_seconds": 14.361641992999978,
+  "exit_code": 1,
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "stdout_stderr": "src/omegadata/universe/repository.py:483: error: \"object\" has no attribute \"known_from\"  [attr-defined]\nFound 1 error in 1 file (checked 81 source files)\n \n",
+  "collected": [],
+  "reports": [],
+  "deselected": [],
+  "counts": {},
+  "guard_denials": {},
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532224]",
+      "net": "net:[4026532229]",
+      "pid": "pid:[4026532227]",
+      "user": "user:[4026532292]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/mypy-ef803df0d9/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  }
+}

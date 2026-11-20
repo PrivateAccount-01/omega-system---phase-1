@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/mypy-ffc7f35057-manifest.json",
+    "--manifest-sha256",
+    "ad106a795075b92d6cec8b361f908aac9c7da8124f1fdaf59c085667a471cbdd",
+    "--policy",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/mypy-ffc7f35057-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od08-20261119T184624Z/mypy-ffc7f35057/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od08-20261119T184624Z",
+  "start_utc": "2026-11-19T18:59:34.352026+00:00",
+  "end_utc": "2026-11-19T18:59:53.369407+00:00",
+  "elapsed_seconds": 19.017375223000002,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-19T18:59:36.396150+00:00",
+    "end_utc": "2026-11-19T18:59:48.025618+00:00",
+    "elapsed_seconds": 11.629479270999994,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/universe/contracts.py:57: error: Incompatible types in assignment (expression has type \"datetime | None\", variable has type \"str\")  [assignment]\nsrc/omegadata/universe/contracts.py:58: error: Argument 1 to \"query_time\" has incompatible type \"str\"; expected \"datetime\"  [arg-type]\nsrc/omegadata/universe/contracts.py:132: error: Incompatible types in assignment (expression has type \"datetime | None\", variable has type \"str\")  [assignment]\nsrc/omegadata/universe/contracts.py:133: error: Argument 1 to \"query_time\" has incompatible type \"str\"; expected \"datetime\"  [arg-type]\nsrc/omegadata/universe/contracts.py:134: error: Incompatible types in assignment (expression has type \"Decimal | None\", variable has type \"str\")  [assignment]\nsrc/omegadata/universe/contracts.py:135: error: Non-overlapping identity check (left operand type: \"type[str]\", right operand type: \"type[Decimal]\")  [comparison-overlap]\nsrc/omegadata/universe/eligibility.py:21: error: Argument 4 to \"coverage_status\" of \"VerifiedCalendar\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/universe/eligibility.py:22: error: Argument 4 to \"query\" of \"VerifiedCalendar\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/universe/eligibility.py:56: error: Argument 4 to \"resolve_listing_id\" of \"MemoryIdentityRepository\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/universe/snapshots.py:32: error: Need type annotation for \"resolutions\" (hint: \"resolutions: dict[<type>, <type>] = ...\")  [var-annotated]\nsrc/omegadata/universe/snapshots.py:36: error: Argument 6 to \"resolve_listing\" of \"MemoryIdentityRepository\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/universe/snapshots.py:37: error: Argument 4 to \"resolve_listing_id\" of \"MemoryIdentityRepository\" has incompatible type \"str\"; expected \"Literal['STRICT', 'CANARY_ONLY']\"  [arg-type]\nsrc/omegadata/universe/snapshots.py:39: error: Incompatible types in assignment (expression has type \"None\", target has type \"Resolution\")  [assignment]\nsrc/omegadata/universe/snapshots.py:77: error: Value of type variable \"SupportsRichComparisonT\" of \"sorted\" cannot be \"str | None\"  [type-var]\nsrc/omegadata/universe/snapshots.py:78: error: Argument 9 to \"UniverseSnapshot\" has incompatible type \"tuple[str | None, ...]\"; expected \"tuple[str, ...]\"  [arg-type]\nFound 15 errors in 3 files (checked 81 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/mypy-ffc7f35057/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "mypy",
+  "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+  "source_manifest_sha256": "ad106a795075b92d6cec8b361f908aac9c7da8124f1fdaf59c085667a471cbdd"
+}

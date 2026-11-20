@@ -1,0 +1,4 @@
+from pathlib import Path
+from datetime import UTC,datetime
+import hashlib,json
+B=Path('/home/parilrupani/omega-od08-20261119T184624Z');p=B/'staged2/repo/tests/unit/test_od08_universe.py';s=p.read_text();block='    if case == "persist-authority-object":\n        from omegadata.identity_authority import EvidenceAuthority\n        pin=replace(pin,context=replace(pin.context,authority=EvidenceAuthority.unconfigured()))\n';s=s.replace(block,'');a=s.index('def test_od07_bound_integration');before=s[:a];tail=s[a:];tail=tail.replace('    pin = setup_bound()[8]\n','    pin = setup_bound()[8]\n'+block,1);s=before+tail;p.write_text(s);(B/'authority-corrected-negative-source.py').write_text(s);(B/'authority-corrected-freeze.json').write_text(json.dumps({'utc':datetime.now(UTC).isoformat(),'sha256':hashlib.sha256(s.encode()).hexdigest(),'reason':'Repair new test insertion indentation; actual executable red must follow before serializer change'},indent=2))

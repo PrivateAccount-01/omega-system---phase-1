@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/mypy-fa45416f8d-manifest.json",
+    "--manifest-sha256",
+    "dad0deef46d0b4bcfa05b644848116ee53a9ee08966600356a3d3eeb831f4e44",
+    "--policy",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/mypy-fa45416f8d-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od08-20261119T184624Z/mypy-fa45416f8d/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od08-20261119T184624Z",
+  "start_utc": "2026-11-19T19:10:02.883032+00:00",
+  "end_utc": "2026-11-19T19:10:21.302845+00:00",
+  "elapsed_seconds": 18.419816845,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "mypy",
+    "start_utc": "2026-11-19T19:10:04.764615+00:00",
+    "end_utc": "2026-11-19T19:10:16.334991+00:00",
+    "elapsed_seconds": 11.570375658000003,
+    "exit_code": 1,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "src/omegadata/universe/snapshots.py:147: error: Value of type variable \"SupportsRichComparisonT\" of \"sorted\" cannot be \"str | None\"  [type-var]\nsrc/omegadata/universe/snapshots.py:148: error: Invalid index type \"str | None\" for \"dict[str, Security]\"; expected type \"str\"  [index]\nFound 2 errors in 1 file (checked 81 source files)\n \n",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/mypy-fa45416f8d/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "mypy",
+  "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+  "source_manifest_sha256": "dad0deef46d0b4bcfa05b644848116ee53a9ee08966600356a3d3eeb831f4e44"
+}

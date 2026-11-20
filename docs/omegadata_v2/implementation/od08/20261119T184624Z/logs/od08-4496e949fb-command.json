@@ -1,0 +1,486 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-4496e949fb-manifest.json",
+    "--manifest-sha256",
+    "eaac49a69408c26c69276a9a1f34a81ecdb6729904def7f8b468a7a5ad0c01de",
+    "--policy",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-4496e949fb-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od08-20261119T184624Z/od08-4496e949fb/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od08-20261119T184624Z",
+  "start_utc": "2026-11-19T19:05:45.704699+00:00",
+  "end_utc": "2026-11-19T19:05:51.770982+00:00",
+  "elapsed_seconds": 6.066265549999969,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od08",
+    "exit_code": 1,
+    "counts": {
+      "passed": 82,
+      "failed": 4
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U08]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U09]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U10]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[order]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[future-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[naive]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[wrong-pin]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[replay]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[explain]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[changed-policy]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[unknown-schema]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[nonempty-rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[immutable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[bounds]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[cancel-lineage]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[provisional]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[observation-future-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[definition-expired]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[context-checksum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[replay-restart]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[omitted-ledger]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[omitted-coverage]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[order-observations]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[complete-transition]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[listing-granularity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[actual-rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[migration-empty]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[read-only-backfill]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[closed-session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[same-instant-correction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[replay-bool]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[future-definition]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[ranking-tie]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[valid-adjustment]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[wrong-profile]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[future-context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[persist-adjustment]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-announcement]",
+        "outcome": "failed",
+        "reason": "case = 'future-announcement'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n>           assert out[0][1]=='BLOCKED_AVAILABILITY'\nE           AssertionError: assert 'KNOWN_AND_NOT_YET_EFFECTIVE' == 'BLOCKED_AVAILABILITY'\nE             \nE             - BLOCKED_AVAILABILITY\nE             + KNOWN_AND_NOT_YET_EFFECTIVE\n\ntests/unit/test_od08_universe.py:266: AssertionError"
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-publication]",
+        "outcome": "failed",
+        "reason": "case = 'future-publication'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n>           assert out[0][1]=='BLOCKED_AVAILABILITY'\nE           AssertionError: assert 'KNOWN_AND_NOT_YET_EFFECTIVE' == 'BLOCKED_AVAILABILITY'\nE             \nE             - BLOCKED_AVAILABILITY\nE             + KNOWN_AND_NOT_YET_EFFECTIVE\n\ntests/unit/test_od08_universe.py:266: AssertionError"
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-before]",
+        "outcome": "failed",
+        "reason": "case = 'intraday-before'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n            assert out[0][1]=='BLOCKED_AVAILABILITY'\n        else:\n            effective=K+timedelta(hours=1)\n>           changed=replace(m,effective_at=effective,effective_convention='EXPLICIT_TIMESTAMP')\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od08_universe.py:269: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nobj = MembershipRevision(claim=MembershipClaim(membership_id='m-a', index_name='CONTROL_SCOPE', symbol='TOKEN', series='SERI...blished_at=None, ingested_at=None, revision_number=1, effective_convention='SOURCE_DATE', version='od08.membership/v1')\nchanges = {'announcement_at': None, 'artifact_identity': 'artifact-a', 'claim': MembershipClaim(membership_id='m-a', index_name=...supersedes_membership_id=None), 'effective_at': datetime.datetime(2001, 1, 1, 1, 0, tzinfo=datetime.timezone.utc), ...}\nf = Field(name='version',type='str',default='od08.membership/v1',default_factory=<dataclasses._MISSING_TYPE object at 0x724dbfe2d2e0>,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)\n\n    def replace(obj, /, **changes):\n        \"\"\"Return a new object replacing specified fields with new values.\n    \n        This is especially useful for frozen classes.  Example usage::\n    \n          @dataclass(frozen=True)\n          class C:\n              x: int\n              y: int\n    \n          c = C(1, 2)\n          c1 = replace(c, x=3)\n          assert c1.x == 3 and c1.y == 2\n        \"\"\"\n    \n        # We're going to mutate 'changes', but that's okay because it's a\n        # new dict, even if called with 'replace(obj, **my_changes)'.\n    \n        if not _is_dataclass_instance(obj):\n            raise TypeError(\"replace() should be called on dataclass instances\")\n    \n        # It's an error to have init=False fields in 'changes'.\n        # If a field is not in 'changes', read its value from the provided obj.\n    \n        for f in getattr(obj, _FIELDS).values():\n            # Only consider normal fields or InitVars.\n            if f._field_type is _FIELD_CLASSVAR:\n                continue\n    \n            if not f.init:\n                # Error if this field is specified in changes.\n                if f.name in changes:\n                    raise ValueError(f'field {f.name} is declared with '\n                                     'init=False, it cannot be specified with '\n                                     'replace()')\n                continue\n    \n            if f.name not in changes:\n                if f._field_type is _FIELD_INITVAR and f.default is MISSING:\n                    raise ValueError(f\"InitVar {f.name!r} \"\n                                     'must be specified with replace()')\n                changes[f.name] = getattr(obj, f.name)\n    \n        # Create the new object, which calls __init__() and\n        # __post_init__() (if defined), using all of the init fields we've\n        # added and/or left in 'changes'.  If there are values supplied in\n        # changes that aren't fields, this will correctly raise a\n        # TypeError.\n>       return obj.__class__(**changes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: MembershipRevision.__init__() got an unexpected keyword argument 'effective_at'\n\n/usr/lib/python3.12/dataclasses.py:1581: TypeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-at]",
+        "outcome": "failed",
+        "reason": "case = 'intraday-at'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n            assert out[0][1]=='BLOCKED_AVAILABILITY'\n        else:\n            effective=K+timedelta(hours=1)\n>           changed=replace(m,effective_at=effective,effective_convention='EXPLICIT_TIMESTAMP')\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od08_universe.py:269: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nobj = MembershipRevision(claim=MembershipClaim(membership_id='m-a', index_name='CONTROL_SCOPE', symbol='TOKEN', series='SERI...blished_at=None, ingested_at=None, revision_number=1, effective_convention='SOURCE_DATE', version='od08.membership/v1')\nchanges = {'announcement_at': None, 'artifact_identity': 'artifact-a', 'claim': MembershipClaim(membership_id='m-a', index_name=...supersedes_membership_id=None), 'effective_at': datetime.datetime(2001, 1, 1, 1, 0, tzinfo=datetime.timezone.utc), ...}\nf = Field(name='version',type='str',default='od08.membership/v1',default_factory=<dataclasses._MISSING_TYPE object at 0x724dbfe2d2e0>,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)\n\n    def replace(obj, /, **changes):\n        \"\"\"Return a new object replacing specified fields with new values.\n    \n        This is especially useful for frozen classes.  Example usage::\n    \n          @dataclass(frozen=True)\n          class C:\n              x: int\n              y: int\n    \n          c = C(1, 2)\n          c1 = replace(c, x=3)\n          assert c1.x == 3 and c1.y == 2\n        \"\"\"\n    \n        # We're going to mutate 'changes', but that's okay because it's a\n        # new dict, even if called with 'replace(obj, **my_changes)'.\n    \n        if not _is_dataclass_instance(obj):\n            raise TypeError(\"replace() should be called on dataclass instances\")\n    \n        # It's an error to have init=False fields in 'changes'.\n        # If a field is not in 'changes', read its value from the provided obj.\n    \n        for f in getattr(obj, _FIELDS).values():\n            # Only consider normal fields or InitVars.\n            if f._field_type is _FIELD_CLASSVAR:\n                continue\n    \n            if not f.init:\n                # Error if this field is specified in changes.\n                if f.name in changes:\n                    raise ValueError(f'field {f.name} is declared with '\n                                     'init=False, it cannot be specified with '\n                                     'replace()')\n                continue\n    \n            if f.name not in changes:\n                if f._field_type is _FIELD_INITVAR and f.default is MISSING:\n                    raise ValueError(f\"InitVar {f.name!r} \"\n                                     'must be specified with replace()')\n                changes[f.name] = getattr(obj, f.name)\n    \n        # Create the new object, which calls __init__() and\n        # __post_init__() (if defined), using all of the init fields we've\n        # added and/or left in 'changes'.  If there are values supplied in\n        # changes that aren't fields, this will correctly raise a\n        # TypeError.\n>       return obj.__class__(**changes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: MembershipRevision.__init__() got an unexpected keyword argument 'effective_at'\n\n/usr/lib/python3.12/dataclasses.py:1581: TypeError"
+      }
+    ],
+    "start_utc": "2026-11-19T19:05:47.265660+00:00",
+    "end_utc": "2026-11-19T19:05:51.158692+00:00",
+    "elapsed_seconds": 3.8930386000000112,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 83%]\n..........FFFF                                                           [100%]\n=================================== FAILURES ===================================\n_______________ test_source_time_boundaries[future-announcement] _______________\n\ncase = 'future-announcement'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n>           assert out[0][1]=='BLOCKED_AVAILABILITY'\nE           AssertionError: assert 'KNOWN_AND_NOT_YET_EFFECTIVE' == 'BLOCKED_AVAILABILITY'\nE             \nE             - BLOCKED_AVAILABILITY\nE             + KNOWN_AND_NOT_YET_EFFECTIVE\n\ntests/unit/test_od08_universe.py:266: AssertionError\n_______________ test_source_time_boundaries[future-publication] ________________\n\ncase = 'future-publication'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n>           assert out[0][1]=='BLOCKED_AVAILABILITY'\nE           AssertionError: assert 'KNOWN_AND_NOT_YET_EFFECTIVE' == 'BLOCKED_AVAILABILITY'\nE             \nE             - BLOCKED_AVAILABILITY\nE             + KNOWN_AND_NOT_YET_EFFECTIVE\n\ntests/unit/test_od08_universe.py:266: AssertionError\n_________________ test_source_time_boundaries[intraday-before] _________________\n\ncase = 'intraday-before'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n            assert out[0][1]=='BLOCKED_AVAILABILITY'\n        else:\n            effective=K+timedelta(hours=1)\n>           changed=replace(m,effective_at=effective,effective_convention='EXPLICIT_TIMESTAMP')\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od08_universe.py:269: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nobj = MembershipRevision(claim=MembershipClaim(membership_id='m-a', index_name='CONTROL_SCOPE', symbol='TOKEN', series='SERI...blished_at=None, ingested_at=None, revision_number=1, effective_convention='SOURCE_DATE', version='od08.membership/v1')\nchanges = {'announcement_at': None, 'artifact_identity': 'artifact-a', 'claim': MembershipClaim(membership_id='m-a', index_name=...supersedes_membership_id=None), 'effective_at': datetime.datetime(2001, 1, 1, 1, 0, tzinfo=datetime.timezone.utc), ...}\nf = Field(name='version',type='str',default='od08.membership/v1',default_factory=<dataclasses._MISSING_TYPE object at 0x724dbfe2d2e0>,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)\n\n    def replace(obj, /, **changes):\n        \"\"\"Return a new object replacing specified fields with new values.\n    \n        This is especially useful for frozen classes.  Example usage::\n    \n          @dataclass(frozen=True)\n          class C:\n              x: int\n              y: int\n    \n          c = C(1, 2)\n          c1 = replace(c, x=3)\n          assert c1.x == 3 and c1.y == 2\n        \"\"\"\n    \n        # We're going to mutate 'changes', but that's okay because it's a\n        # new dict, even if called with 'replace(obj, **my_changes)'.\n    \n        if not _is_dataclass_instance(obj):\n            raise TypeError(\"replace() should be called on dataclass instances\")\n    \n        # It's an error to have init=False fields in 'changes'.\n        # If a field is not in 'changes', read its value from the provided obj.\n    \n        for f in getattr(obj, _FIELDS).values():\n            # Only consider normal fields or InitVars.\n            if f._field_type is _FIELD_CLASSVAR:\n                continue\n    \n            if not f.init:\n                # Error if this field is specified in changes.\n                if f.name in changes:\n                    raise ValueError(f'field {f.name} is declared with '\n                                     'init=False, it cannot be specified with '\n                                     'replace()')\n                continue\n    \n            if f.name not in changes:\n                if f._field_type is _FIELD_INITVAR and f.default is MISSING:\n                    raise ValueError(f\"InitVar {f.name!r} \"\n                                     'must be specified with replace()')\n                changes[f.name] = getattr(obj, f.name)\n    \n        # Create the new object, which calls __init__() and\n        # __post_init__() (if defined), using all of the init fields we've\n        # added and/or left in 'changes'.  If there are values supplied in\n        # changes that aren't fields, this will correctly raise a\n        # TypeError.\n>       return obj.__class__(**changes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: MembershipRevision.__init__() got an unexpected keyword argument 'effective_at'\n\n/usr/lib/python3.12/dataclasses.py:1581: TypeError\n___________________ test_source_time_boundaries[intraday-at] ___________________\n\ncase = 'intraday-at'\n\n    @pytest.mark.parametrize('case',['future-announcement','future-publication','intraday-before','intraday-at'])\n    def test_source_time_boundaries(case):\n        from omegadata.universe.temporal import get_known_upcoming_changes\n        c,x,m,cov,p,run=setup_case()\n        if case.startswith('future'):\n            values={'announcement_at':K+timedelta(seconds=1)} if case=='future-announcement' else {'published_at':K+timedelta(seconds=1)}\n            changed=replace(m,claim=replace(m.claim,valid_from=D+timedelta(days=1)),**values)\n            out=get_known_upcoming_changes(replace(x,memberships=(changed,)),D,K)\n            assert out[0][1]=='BLOCKED_AVAILABILITY'\n        else:\n            effective=K+timedelta(hours=1)\n>           changed=replace(m,effective_at=effective,effective_convention='EXPLICIT_TIMESTAMP')\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/unit/test_od08_universe.py:269: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nobj = MembershipRevision(claim=MembershipClaim(membership_id='m-a', index_name='CONTROL_SCOPE', symbol='TOKEN', series='SERI...blished_at=None, ingested_at=None, revision_number=1, effective_convention='SOURCE_DATE', version='od08.membership/v1')\nchanges = {'announcement_at': None, 'artifact_identity': 'artifact-a', 'claim': MembershipClaim(membership_id='m-a', index_name=...supersedes_membership_id=None), 'effective_at': datetime.datetime(2001, 1, 1, 1, 0, tzinfo=datetime.timezone.utc), ...}\nf = Field(name='version',type='str',default='od08.membership/v1',default_factory=<dataclasses._MISSING_TYPE object at 0x724dbfe2d2e0>,init=True,repr=True,hash=None,compare=True,metadata=mappingproxy({}),kw_only=False,_field_type=_FIELD)\n\n    def replace(obj, /, **changes):\n        \"\"\"Return a new object replacing specified fields with new values.\n    \n        This is especially useful for frozen classes.  Example usage::\n    \n          @dataclass(frozen=True)\n          class C:\n              x: int\n              y: int\n    \n          c = C(1, 2)\n          c1 = replace(c, x=3)\n          assert c1.x == 3 and c1.y == 2\n        \"\"\"\n    \n        # We're going to mutate 'changes', but that's okay because it's a\n        # new dict, even if called with 'replace(obj, **my_changes)'.\n    \n        if not _is_dataclass_instance(obj):\n            raise TypeError(\"replace() should be called on dataclass instances\")\n    \n        # It's an error to have init=False fields in 'changes'.\n        # If a field is not in 'changes', read its value from the provided obj.\n    \n        for f in getattr(obj, _FIELDS).values():\n            # Only consider normal fields or InitVars.\n            if f._field_type is _FIELD_CLASSVAR:\n                continue\n    \n            if not f.init:\n                # Error if this field is specified in changes.\n                if f.name in changes:\n                    raise ValueError(f'field {f.name} is declared with '\n                                     'init=False, it cannot be specified with '\n                                     'replace()')\n                continue\n    \n            if f.name not in changes:\n                if f._field_type is _FIELD_INITVAR and f.default is MISSING:\n                    raise ValueError(f\"InitVar {f.name!r} \"\n                                     'must be specified with replace()')\n                changes[f.name] = getattr(obj, f.name)\n    \n        # Create the new object, which calls __init__() and\n        # __post_init__() (if defined), using all of the init fields we've\n        # added and/or left in 'changes'.  If there are values supplied in\n        # changes that aren't fields, this will correctly raise a\n        # TypeError.\n>       return obj.__class__(**changes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: MembershipRevision.__init__() got an unexpected keyword argument 'effective_at'\n\n/usr/lib/python3.12/dataclasses.py:1581: TypeError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od08_universe.py::test_source_time_boundaries[future-announcement]\nFAILED tests/unit/test_od08_universe.py::test_source_time_boundaries[future-publication]\nFAILED tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-before]\nFAILED tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-at]\n4 failed, 82 passed in 2.70s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/od08-4496e949fb/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "od08",
+  "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+  "source_manifest_sha256": "eaac49a69408c26c69276a9a1f34a81ecdb6729904def7f8b468a7a5ad0c01de"
+}

@@ -1,0 +1,3098 @@
+--- /dev/null
++++ b/src/omegadata/universe/__init__.py
+@@ -0,0 +1 @@
++"""OD08 opt-in historical universe; no raw-source acquisition or publication."""
+--- /dev/null
++++ b/src/omegadata/universe/contracts.py
+@@ -0,0 +1,370 @@
++"""Immutable OD08 contracts. Anonymous controls never confer financial authority."""
++
++from __future__ import annotations
++
++from dataclasses import dataclass, field
++from datetime import date, datetime
++from decimal import Decimal
++
++from omegadata.adjustments.bound_contracts import BoundResult, PinnedCalculation
++from omegadata.adjustments.contracts import canonical, digest
++from omegadata.identity import (
++    Evidence,
++    MemoryIdentityRepository,
++    Policy,
++    intervals,
++    query_time,
++    text,
++)
++from omegadata.identity_adapters import MembershipClaim
++from omegadata.identity_authority import EvidenceAuthority
++from omegadata.session_calendar import VerifiedCalendar
++
++
++@dataclass(frozen=True)
++class UniverseDefinition:
++    universe_id: str
++    universe_name: str
++    universe_type: str
++    identity_granularity: str
++    methodology_version: str
++    source_scope: tuple[str, ...]
++    exchange_scope: tuple[str, ...]
++    valid_from: date
++    valid_to: date | None
++    known_from: datetime | None
++    known_to: datetime | None
++    evidence: Evidence
++    version: str = "od08.definition/v1"
++
++    def __post_init__(self) -> None:
++        if type(self.source_scope) is not tuple or type(self.exchange_scope) is not tuple:
++            raise ValueError("IMMUTABLE_DEFINITION_SCOPE_REQUIRED")
++        for v in (self.universe_id, self.universe_name, self.methodology_version):
++            text(v)
++        intervals(self.valid_from, self.valid_to, self.known_from, self.known_to)
++        if (
++            self.universe_type
++            not in {
++                "OFFICIAL_INDEX",
++                "EXCHANGE_LISTED_UNIVERSE",
++                "RESEARCH_ELIGIBLE_UNIVERSE",
++                "PROVISIONAL_RECONSTRUCTION",
++                "CUSTOM_POLICY_UNIVERSE",
++            }
++            or self.identity_granularity not in {"SECURITY", "LISTING"}
++            or not self.source_scope
++            or not self.exchange_scope
++            or self.version != "od08.definition/v1"
++        ):
++            raise ValueError("UNIVERSE_DEFINITION")
++
++
++@dataclass(frozen=True)
++class MembershipRevision:
++    claim: MembershipClaim
++    event_id: str
++    source_id: str
++    artifact_identity: str
++    record_identity: str
++    security_id: str | None = None
++    listing_id: str | None = None
++    event_type: str = "ADD"
++    announcement_at: datetime | None = None
++    published_at: datetime | None = None
++    ingested_at: datetime | None = None
++    revision_number: int = 1
++    effective_convention: str = "SOURCE_DATE"
++    version: str = "od08.membership/v1"
++    effective_at: datetime | None = None
++    removal_effective_at: datetime | None = None
++
++    @property
++    def revision_id(self) -> str:
++        return self.claim.membership_id
++
++    @property
++    def evidence(self) -> Evidence:
++        return self.claim.evidence
++
++    @property
++    def universe_id(self) -> str:
++        return self.claim.index_name
++
++    def __post_init__(self) -> None:
++        for v in (self.event_id, self.source_id, self.artifact_identity, self.record_identity):
++            text(v)
++        for stamp in (
++            self.announcement_at,
++            self.published_at,
++            self.ingested_at,
++            self.effective_at,
++            self.removal_effective_at,
++        ):
++            if stamp is not None:
++                query_time(stamp)
++        if (
++            self.event_type not in {"ADD", "CORRECTION", "CANCEL", "REMOVE"}
++            or self.revision_number < 1
++            or self.version != "od08.membership/v1"
++            or self.effective_convention not in {"SOURCE_DATE", "EXPLICIT_TIMESTAMP", "UNKNOWN"}
++        ):
++            raise ValueError("MEMBERSHIP_VERSION")
++        if self.effective_convention == "EXPLICIT_TIMESTAMP" and self.effective_at is None:
++            raise ValueError("EXPLICIT_EFFECTIVE_TIME_REQUIRED")
++        if (
++            self.effective_at is not None
++            and self.removal_effective_at is not None
++            and self.effective_at >= self.removal_effective_at
++        ):
++            raise ValueError("EFFECTIVE_TIME_INTERVAL")
++
++
++@dataclass(frozen=True)
++class CoverageTransition:
++    revision_id: str
++    member_identity: str
++    event_type: str
++    effective_date: date
++
++
++@dataclass(frozen=True)
++class UniverseCoverage:
++    coverage_id: str
++    universe_id: str
++    source_id: str
++    artifact_identity: str
++    methodology_version: str
++    valid_from: date
++    valid_to: date
++    known_from: datetime | None
++    known_to: datetime | None
++    state: str
++    expected_member_identities: tuple[str, ...]
++    evidence: Evidence
++    independent_reference_identity: str
++    granularity: str = "SNAPSHOT"
++    expected_count: int | None = None
++    transitions: tuple[CoverageTransition, ...] = ()
++    ending_member_identities: tuple[str, ...] = ()
++    ending_reference: str | None = None
++    snapshot_identity: str = "declared-reference"
++    version: str = "od08.coverage/v1"
++
++    def __post_init__(self) -> None:
++        if any(
++            type(v) is not tuple
++            for v in (
++                self.expected_member_identities,
++                self.transitions,
++                self.ending_member_identities,
++            )
++        ):
++            raise ValueError("IMMUTABLE_COVERAGE_REQUIRED")
++        intervals(self.valid_from, self.valid_to, self.known_from, self.known_to)
++        if (
++            self.state
++            not in {
++                "COMPLETE_VERIFIED",
++                "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE",
++                "PARTIAL",
++                "PROVISIONAL",
++                "UNKNOWN",
++                "CONFLICTING",
++                "SOURCE_BLOCKED",
++            }
++            or self.granularity not in {"SNAPSHOT", "COMPLETE_CHANGE_HISTORY"}
++            or self.version != "od08.coverage/v1"
++        ):
++            raise ValueError("COVERAGE_CONTRACT")
++        if len(set(self.expected_member_identities)) != len(self.expected_member_identities):
++            raise ValueError("DUPLICATE_REFERENCE_IDENTITY")
++
++
++@dataclass(frozen=True)
++class AvailabilityPolicy:
++    policy_version: str = "availability-v1"
++    mode: str = "STRICT"
++    bound: datetime | None = None
++    evidence: Evidence | None = None
++    semantics_reference: str | None = None
++
++
++@dataclass(frozen=True)
++class AvailabilityObservation:
++    observation_id: str
++    observation_type: str
++    listing_id: str
++    session_date: date
++    economic_effective_time: datetime | None
++    observed_at: datetime | None
++    published_at: datetime | None
++    known_from: datetime | None
++    known_to: datetime | None
++    ingested_at: datetime | None
++    source_id: str
++    artifact_identity: str
++    evidence: Evidence
++    interval_completed_at: datetime | None = None
++    volume: Decimal | None = None
++    turnover: Decimal | None = None
++    currency: str | None = None
++    price_unit: str | None = None
++    price_basis: str | None = None
++    volume_basis: str | None = None
++    record_identity: str | None = None
++    adjustment: BoundResult | None = None
++    adjustment_pin: PinnedCalculation | None = None
++    version: str = "od08.availability/v1"
++
++    def __post_init__(self) -> None:
++        for v in (self.observation_id, self.listing_id, self.source_id, self.artifact_identity):
++            text(v)
++        intervals(self.session_date, None, self.known_from, self.known_to)
++        for stamp in (
++            self.economic_effective_time,
++            self.observed_at,
++            self.published_at,
++            self.ingested_at,
++            self.interval_completed_at,
++        ):
++            if stamp is not None:
++                query_time(stamp)
++        for number in (self.volume, self.turnover):
++            if number is not None and (
++                type(number) is not Decimal or not number.is_finite() or number < 0
++            ):
++                raise ValueError("OBSERVATION_NUMBER")
++
++
++@dataclass(frozen=True)
++class LiquidityPolicy:
++    policy_version: str
++    lookback_sessions: int
++    minimum_completed_sessions: int
++    minimum_average_volume: Decimal
++    minimum_median_turnover: Decimal
++    minimum_observation_coverage: Decimal
++    currency: str
++    price_unit: str
++    price_basis: str
++    volume_basis: str
++
++    def __post_init__(self) -> None:
++        if not 1 <= self.minimum_completed_sessions <= self.lookback_sessions <= 366 or not Decimal(
++            0
++        ) <= self.minimum_observation_coverage <= Decimal(1):
++            raise ValueError("LIQUIDITY_BUDGET")
++        for v in (
++            self.minimum_average_volume,
++            self.minimum_median_turnover,
++            self.minimum_observation_coverage,
++        ):
++            if type(v) is not Decimal or not v.is_finite() or v < 0:
++                raise ValueError("LIQUIDITY_NUMBER")
++
++
++@dataclass(frozen=True)
++class EligibilityPolicy:
++    policy_version: str
++    view: str = "MEMBERSHIP"
++    require_observations: bool = False
++    liquidity_policy: LiquidityPolicy | None = None
++    required_profile: str = "PRICE_RETURN"
++    required_basis: str = "BACKWARD_ADJUSTED"
++    require_adjustment: bool = False
++    availability_policy: AvailabilityPolicy = AvailabilityPolicy()
++
++    def __post_init__(self) -> None:
++        text(self.policy_version)
++        if self.view not in {"MEMBERSHIP", "RESEARCH", "LIQUIDITY", "EXECUTION"}:
++            raise ValueError("CONSUMER_VIEW")
++
++
++@dataclass(frozen=True)
++class UniverseContext:
++    source_snapshot_id: str
++    definition: UniverseDefinition
++    memberships: tuple[MembershipRevision, ...]
++    coverage: tuple[UniverseCoverage, ...]
++    identity: MemoryIdentityRepository
++    calendar: VerifiedCalendar
++    observations: tuple[AvailabilityObservation, ...] = ()
++    authority: EvidenceAuthority | None = field(default=None, repr=False, compare=False)
++    mode: Policy = "STRICT"
++    calendar_version: str | None = None
++    version: str = "od08.context/v1"
++
++    def __post_init__(self) -> None:
++        if (
++            self.mode not in {"STRICT", "CANARY_ONLY"}
++            or self.version != "od08.context/v1"
++            or type(self.identity) is not MemoryIdentityRepository
++            or type(self.calendar) is not VerifiedCalendar
++        ):
++            raise ValueError("CONTEXT_VERSION")
++        for v in (self.memberships, self.coverage, self.observations):
++            if type(v) is not tuple or len(v) > 10000:
++                raise ValueError("IMMUTABLE_RESOURCE_BUDGET")
++
++
++@dataclass(frozen=True)
++class MemberDecision:
++    revision_id: str
++    security_id: str | None
++    listing_id: str | None
++    status: str
++    reasons: tuple[str, ...]
++    evidence_id: str
++    identity_resolution_digest: str
++    membership_state: str
++    research_eligibility: str = "NOT_REQUESTED"
++    liquidity_eligibility: str = "NOT_REQUESTED"
++    tradability_state: str = "UNKNOWN"
++    execution_eligibility: bool = False
++
++
++@dataclass(frozen=True)
++class UniverseSnapshot:
++    universe_id: str
++    definition_version: str
++    valid_at: date | datetime
++    known_at: datetime
++    source_snapshot_id: str
++    selected_revision_ids: tuple[str, ...]
++    decisions: tuple[MemberDecision, ...]
++    member_identities: tuple[str, ...]
++    included_member_ids: tuple[str, ...]
++    coverage_state: str
++    reconciliation_json: str
++    upstream_bindings: str
++    decision_digest: str
++    policy_version: str
++    availability_policy_version: str
++    liquidity_policy_version: str | None
++    financial_accepted: bool = field(default=False, init=False)
++    execution_accepted: bool = field(default=False, init=False)
++    version: str = "od08.snapshot/v1"
++
++    @property
++    def accounted_count(self) -> int:
++        return len(self.decisions)
++
++    @property
++    def canonical_json(self) -> str:
++        return canonical(self)
++
++    @property
++    def snapshot_digest(self) -> str:
++        return digest(self)
++
++    @property
++    def universe_snapshot_id(self) -> str:
++        return self.snapshot_digest
++
++
++@dataclass(frozen=True)
++class RankingCandidate:
++    member_identity: str
++    metric: Decimal
++    observation: AvailabilityObservation
+--- /dev/null
++++ b/src/omegadata/universe/temporal.py
+@@ -0,0 +1,293 @@
++"""Bitemporal selection and independently declared coverage; no raw file access."""
++
++from __future__ import annotations
++
++from datetime import date, datetime, timedelta
++from typing import Any
++from zoneinfo import ZoneInfo
++
++from omegadata.identity import query_time
++from omegadata.identity_authority import EvidenceAuthority
++from omegadata.universe import contracts as c
++
++
++def known(start: datetime | None, end: datetime | None, cutoff: datetime) -> bool:
++    return (start is None or start <= cutoff) and (end is None or cutoff < end)
++
++
++def authorized(
++    value: Any, x: c.UniverseContext, cutoff: datetime, purpose: str = "RESEARCH"
++) -> bool:
++    e = value.evidence
++    if e is None or e.permission != "PERMITTED":
++        return False
++    if x.mode == "CANARY_ONLY":
++        return bool(e.eligible("CANARY_ONLY"))
++    return (
++        (x.authority or EvidenceAuthority.unconfigured())
++        .check_claim(value, cutoff, purpose)
++        .allowed
++    )
++
++
++def validate_revisions(rows: tuple[c.MembershipRevision, ...]) -> dict[str, datetime]:
++    by_id = {r.revision_id: r for r in rows}
++    if len(by_id) != len(rows):
++        raise ValueError("DUPLICATE_MEMBERSHIP_REVISION")
++    ends: dict[str, datetime] = {}
++    for r in rows:
++        parent = r.claim.supersedes_membership_id
++        if parent is None:
++            if r.revision_number != 1:
++                raise ValueError("REVISION_PARENT_REQUIRED")
++            continue
++        old = by_id.get(parent)
++        if (
++            old is None
++            or parent in ends
++            or old.event_id != r.event_id
++            or old.universe_id != r.universe_id
++            or r.revision_number != old.revision_number + 1
++            or old.claim.known_from is None
++            or r.claim.known_from is None
++            or r.claim.known_from <= old.claim.known_from
++        ):
++            raise ValueError("MEMBERSHIP_SUPERSESSION")
++        if old.claim.known_to is not None and old.claim.known_to < r.claim.known_from:
++            raise ValueError("MEMBERSHIP_KNOWLEDGE_GAP")
++        ends[parent] = r.claim.known_from
++    return ends
++
++
++def visible_revisions(x: c.UniverseContext, cutoff: datetime) -> tuple[c.MembershipRevision, ...]:
++    query_time(cutoff)
++    ends = validate_revisions(x.memberships)
++    return tuple(
++        sorted(
++            (
++                r
++                for r in x.memberships
++                if r.universe_id == x.definition.universe_id
++                and known(r.claim.known_from, r.claim.known_to, cutoff)
++                and (r.revision_id not in ends or cutoff < ends[r.revision_id])
++            ),
++            key=lambda r: r.revision_id,
++        )
++    )
++
++
++def business_day(point: date | datetime) -> date:
++    if isinstance(point, datetime):
++        query_time(point)
++        return point.astimezone(ZoneInfo("Asia/Kolkata")).date()
++    if type(point) is not date:
++        raise ValueError("DATE_OR_AWARE_TIMESTAMP_REQUIRED")
++    return point
++
++
++def valid_member(r: c.MembershipRevision, point: date | datetime) -> bool:
++    day = business_day(point)
++    claim = r.claim
++    upper = claim.valid_to
++    if claim.valid_from > day:
++        return False
++    if upper is not None and (day > upper or day == upper and r.removal_effective_at is None):
++        return False
++    if isinstance(point, datetime):
++        if r.effective_at is not None and point < r.effective_at:
++            return False
++        if r.removal_effective_at is not None and point >= r.removal_effective_at:
++            return False
++    return True
++
++
++def select_memberships(
++    x: c.UniverseContext, day: date | datetime, cutoff: datetime
++) -> tuple[c.MembershipRevision, ...]:
++    business_day(day)
++    return tuple(r for r in visible_revisions(x, cutoff) if valid_member(r, day))
++
++
++def get_membership_history(x: c.UniverseContext, event_id: str) -> tuple[c.MembershipRevision, ...]:
++    validate_revisions(x.memberships)
++    return tuple(
++        sorted(
++            (r for r in x.memberships if r.event_id == event_id),
++            key=lambda r: (r.revision_number, r.revision_id),
++        )
++    )
++
++
++def get_known_upcoming_changes(
++    x: c.UniverseContext, day: date, cutoff: datetime, *, horizon_days: int = 30
++) -> tuple[tuple[c.MembershipRevision, str], ...]:
++    if not 1 <= horizon_days <= 366:
++        raise ValueError("UPCOMING_BUDGET")
++    out = []
++    for r in visible_revisions(x, cutoff):
++        boundary = r.claim.valid_from
++        if not day < boundary <= day + timedelta(days=horizon_days):
++            continue
++        status = (
++            "EFFECTIVE_BUT_AVAILABILITY_UNKNOWN"
++            if r.claim.known_from is None
++            else "CONFLICTING"
++            if r.claim.status == "CONFLICTING"
++            else "SUPERSEDED"
++            if r.event_type == "CANCEL"
++            else "KNOWN_AND_NOT_YET_EFFECTIVE"
++        )
++        if any(v is not None and v > cutoff for v in (r.announcement_at, r.published_at)):
++            status = "BLOCKED_AVAILABILITY"
++        if not authorized(r, x, cutoff):
++            status = "SOURCE_BLOCKED"
++        out.append((r, status))
++    return tuple(out)
++
++
++def availability(
++    o: c.AvailabilityObservation,
++    cutoff: datetime,
++    policy: c.AvailabilityPolicy,
++    x: c.UniverseContext,
++) -> str:
++    query_time(cutoff)
++    if (
++        o.version != "od08.availability/v1"
++        or not o.record_identity
++        or o.source_id not in x.definition.source_scope
++    ):
++        return "BLOCKED_AVAILABILITY"
++    if policy.mode not in {"STRICT", "CONSERVATIVE"}:
++        return "BLOCKED_AVAILABILITY"
++    lower = o.known_from
++    if lower is None:
++        if (
++            policy.mode != "CONSERVATIVE"
++            or policy.bound is None
++            or not policy.semantics_reference
++            or policy.evidence is None
++            or x.mode != "STRICT"
++            or not authorized(policy, x, cutoff)
++        ):
++            return "BLOCKED_AVAILABILITY"
++        lower = policy.bound
++    if lower > cutoff or o.known_to is not None and cutoff >= o.known_to:
++        return "BLOCKED_AVAILABILITY"
++    for stamp in (o.observed_at, o.published_at, o.interval_completed_at):
++        if stamp is not None and stamp > cutoff:
++            return "BLOCKED_AVAILABILITY"
++    if o.interval_completed_at is None:
++        return "BLOCKED_AVAILABILITY"
++    return "AVAILABLE" if authorized(o, x, cutoff) else "BLOCKED_SOURCE_RIGHTS"
++
++
++def coverage_reconcile(
++    x: c.UniverseContext,
++    day: date,
++    cutoff: datetime,
++    actual: tuple[str, ...],
++    unresolved: tuple[str, ...],
++) -> tuple[str, dict[str, Any]]:
++    candidates = tuple(
++        v
++        for v in x.coverage
++        if v.universe_id == x.definition.universe_id
++        and v.valid_from <= day < v.valid_to
++        and v.known_from is not None
++        and known(v.known_from, v.known_to, cutoff)
++    )
++    diagnostics: dict[str, Any] = {
++        "missing": [],
++        "unexpected": [],
++        "matching": [],
++        "duplicates": sorted({v for v in actual if actual.count(v) > 1}),
++        "unresolved": list(unresolved),
++    }
++    if not candidates:
++        return "UNKNOWN", diagnostics
++    if len(candidates) != 1:
++        return "CONFLICTING", diagnostics
++    cov = candidates[0]
++    if (
++        cov.source_id not in x.definition.source_scope
++        or cov.methodology_version != x.definition.methodology_version
++        or not cov.independent_reference_identity
++        or not cov.artifact_identity
++        or not authorized(cov, x, cutoff)
++    ):
++        return "SOURCE_BLOCKED", diagnostics
++    if cov.state not in {"COMPLETE_VERIFIED", "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"}:
++        return cov.state, diagnostics
++    if cov.state == "COMPLETE_VERIFIED" and x.mode != "STRICT":
++        return "SOURCE_BLOCKED", diagnostics
++    if cov.state == "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE" and x.mode != "CANARY_ONLY":
++        return "SOURCE_BLOCKED", diagnostics
++    expected = set(cov.expected_member_identities)
++    if cov.expected_count is not None and cov.expected_count != len(expected):
++        return "CONFLICTING", diagnostics
++    if cov.granularity == "SNAPSHOT":
++        if day != cov.valid_from or cov.valid_to != cov.valid_from + timedelta(days=1):
++            return "PARTIAL", diagnostics
++    else:
++        if not cov.ending_reference:
++            return "PARTIAL", diagnostics
++        relevant = visible_revisions(x, cutoff)
++        required = []
++        for r in relevant:
++            if r.event_type == "CANCEL":
++                continue
++            ident = (
++                r.security_id if x.definition.identity_granularity == "SECURITY" else r.listing_id
++            )
++            if ident is None:
++                continue
++            if cov.valid_from < r.claim.valid_from < cov.valid_to:
++                required.append((r.revision_id, ident, "ADD", r.claim.valid_from))
++            if r.claim.valid_to is not None and cov.valid_from < r.claim.valid_to < cov.valid_to:
++                required.append((r.revision_id, ident, "REMOVE", r.claim.valid_to))
++        supplied = [
++            (v.revision_id, v.member_identity, v.event_type, v.effective_date)
++            for v in cov.transitions
++        ]
++        if len(set(supplied)) != len(supplied) or set(supplied) != set(required):
++            return "PARTIAL", diagnostics
++        final = set(expected)
++        for transition in sorted(
++            cov.transitions, key=lambda v: (v.effective_date, v.event_type, v.revision_id)
++        ):
++            if transition.event_type == "ADD":
++                if transition.member_identity in final:
++                    return "CONFLICTING", diagnostics
++                final.add(transition.member_identity)
++            elif transition.event_type == "REMOVE":
++                if transition.member_identity not in final:
++                    return "CONFLICTING", diagnostics
++                final.remove(transition.member_identity)
++            else:
++                return "CONFLICTING", diagnostics
++        if final != set(cov.ending_member_identities):
++            return "CONFLICTING", diagnostics
++        for transition in sorted(
++            cov.transitions, key=lambda v: (v.effective_date, v.event_type, v.revision_id)
++        ):
++            if transition.effective_date > day:
++                continue
++            if transition.event_type == "ADD":
++                expected.add(transition.member_identity)
++            else:
++                expected.discard(transition.member_identity)
++    observed = set(actual)
++    diagnostics.update(
++        missing=sorted(expected - observed),
++        unexpected=sorted(observed - expected),
++        matching=sorted(expected & observed),
++    )
++    if (
++        diagnostics["missing"]
++        or diagnostics["unexpected"]
++        or diagnostics["duplicates"]
++        or unresolved
++    ):
++        return "CONFLICTING", diagnostics
++    return cov.state, diagnostics
+--- /dev/null
++++ b/src/omegadata/universe/eligibility.py
+@@ -0,0 +1,167 @@
++"""Versioned consumer policies; membership is never silently filtered."""
++
++from __future__ import annotations
++
++from datetime import date, datetime, timedelta
++from decimal import Decimal, localcontext
++from typing import Any
++
++from omegadata.adjustments.bound_chain import calculate_bound_chain
++from omegadata.adjustments.bound_contracts import BOUND_VERSION, BoundResult, PinnedCalculation
++from omegadata.adjustments.contracts import arithmetic_context
++from omegadata.universe import contracts as c
++from omegadata.universe.temporal import availability
++
++
++def adjustment_eligible(
++    result: BoundResult, pin: PinnedCalculation | None, cutoff: datetime, profile: str, basis: str
++) -> str:
++    if (
++        pin is None
++        or result.version != BOUND_VERSION
++        or result.status != "CALCULATED"
++        or result.calculation.consumer_profile != profile
++        or result.adjustment_basis != basis
++        or pin.context.known_at > cutoff
++    ):
++        return "BLOCKED_ADJUSTMENT_CONTEXT"
++    rebuilt = calculate_bound_chain(pin)
++    if (
++        rebuilt.canonical_json != result.canonical_json
++        or pin.raw.observation_id != result.calculation.original_raw_reference
++    ):
++        return "BLOCKED_ADJUSTMENT_CONTEXT"
++    return (
++        "ELIGIBLE_NON_MARKET" if pin.context.mode == "NON_MARKET_MATH" else "ELIGIBLE_SOURCE_BACKED"
++    )
++
++
++def liquidity(
++    member: c.MembershipRevision,
++    x: c.UniverseContext,
++    observations: tuple[c.AvailabilityObservation, ...],
++    day: date,
++    cutoff: datetime,
++    p: c.LiquidityPolicy,
++) -> tuple[str, dict[str, Any]]:
++    needed = []
++    current = day
++    calendar = x.calendar
++    diagnostics: dict[str, Any] = {}
++    for _ in range(3660):
++        if calendar.coverage_status(member.claim.exchange, current, cutoff, x.mode) != "COMPLETE":
++            return "BLOCKED_LIQUIDITY_COVERAGE", {
++                "reason": "CALENDAR_COVERAGE_UNKNOWN",
++                "date": current.isoformat(),
++            }
++        session = calendar.query(
++            member.claim.exchange, current, cutoff, x.mode, calendar_version=x.calendar_version
++        )
++        if session.status in {"AUTHORITATIVE_SESSION", "VERIFIED_SPECIAL_SESSION"}:
++            close = session.claims[0].closes_at
++            if close is None:
++                return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "SESSION_COMPLETION_UNKNOWN"}
++            if close <= cutoff:
++                needed.append(current)
++        elif session.status != "KNOWN_CLOSURE":
++            return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "SESSION_UNKNOWN"}
++        if len(needed) == p.lookback_sessions:
++            break
++        current -= timedelta(days=1)
++    if len(needed) != p.lookback_sessions:
++        return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "WINDOW_BUDGET"}
++    usable = []
++    missing = []
++    for d in needed:
++        rows = [o for o in observations if o.session_date == d]
++        if len(rows) > 1:
++            return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "DUPLICATE_SESSION"}
++        if not rows:
++            missing.append(d)
++            continue
++        o = rows[0]
++        if (
++            o.listing_id != member.listing_id
++            or (o.currency, o.price_unit, o.price_basis, o.volume_basis)
++            != (p.currency, p.price_unit, p.price_basis, p.volume_basis)
++            or o.volume is None
++            or o.turnover is None
++            or availability(o, cutoff, c.AvailabilityPolicy(), x) != "AVAILABLE"
++        ):
++            return "BLOCKED_LIQUIDITY_COVERAGE", {
++                "reason": "OBSERVATION_IDENTITY_UNITS_AVAILABILITY_OR_MISSING_VALUE"
++            }
++        if p.volume_basis != "RAW" and (
++            o.adjustment is None
++            or adjustment_eligible(
++                o.adjustment, o.adjustment_pin, cutoff, "VOLUME", o.adjustment.adjustment_basis
++            ).startswith("BLOCKED")
++        ):
++            return "BLOCKED_LIQUIDITY_COVERAGE", {"reason": "VOLUME_ADJUSTMENT_CONTEXT_REQUIRED"}
++        usable.append(o)
++    with localcontext(arithmetic_context()) as math:
++        math.prec = 80
++        ratio = Decimal(len(usable)) / Decimal(len(needed))
++        if len(usable) < p.minimum_completed_sessions or ratio < p.minimum_observation_coverage:
++            return "BLOCKED_LIQUIDITY_COVERAGE", {
++                "reason": "INSUFFICIENT_OBSERVATIONS",
++                "expected": len(needed),
++                "actual": len(usable),
++                "missing": missing,
++            }
++        volumes = [o.volume for o in usable if o.volume is not None]
++        turnovers = sorted(o.turnover for o in usable if o.turnover is not None)
++        average = sum(volumes, Decimal(0)) / Decimal(len(volumes))
++        n = len(turnovers)
++        median = (
++            turnovers[n // 2] if n % 2 else (turnovers[n // 2 - 1] + turnovers[n // 2]) / Decimal(2)
++        )
++    diagnostics.update(
++        window=needed,
++        missing=missing,
++        coverage=ratio,
++        average_volume=average,
++        median_turnover=median,
++    )
++    return (
++        "ELIGIBLE"
++        if average >= p.minimum_average_volume and median >= p.minimum_median_turnover
++        else "EXCLUDED_BY_POLICY"
++    ), diagnostics
++
++
++def reconstruct(
++    rows: tuple[c.RankingCandidate, ...], top_n: int, cutoff: datetime, x: c.UniverseContext
++) -> tuple[str, tuple[str, ...], tuple[tuple[str, str], ...]]:
++    if not 1 <= top_n <= 10000 or len(rows) > 10000:
++        raise ValueError("RANKING_BUDGET")
++    if len({r.member_identity for r in rows}) != len(rows):
++        raise ValueError("DUPLICATE_RANKING_MEMBER")
++    accepted = []
++    excluded = []
++    for r in rows:
++        if type(r.metric) is not Decimal or not r.metric.is_finite() or r.metric < 0:
++            raise ValueError("RANKING_NUMBER")
++        if availability(r.observation, cutoff, c.AvailabilityPolicy(), x) != "AVAILABLE":
++            excluded.append((r.member_identity, "BLOCKED_AVAILABILITY"))
++            continue
++        resolution = x.identity.resolve_listing_id(
++            r.observation.listing_id, r.observation.session_date, cutoff, x.mode
++        )
++        expected = (
++            resolution.security_id
++            if x.definition.identity_granularity == "SECURITY"
++            else resolution.listing_id
++        )
++        if resolution.state != "RESOLVED" or expected != r.member_identity:
++            excluded.append((r.member_identity, "UNRESOLVED_IDENTITY"))
++            continue
++        accepted.append(r)
++    ordered = sorted(accepted, key=lambda r: (-r.metric, r.member_identity))
++    return (
++        "RECONSTRUCTED_PROVISIONAL",
++        tuple(r.member_identity for r in ordered[:top_n]),
++        tuple(
++            sorted(excluded + [(r.member_identity, "BELOW_RANK_CUTOFF") for r in ordered[top_n:]])
++        ),
++    )
+--- /dev/null
++++ b/src/omegadata/universe/snapshots.py
+@@ -0,0 +1,435 @@
++"""Deterministic OD08 query and bounded replay using pinned domain inputs."""
++
++from __future__ import annotations
++
++from collections import Counter
++from dataclasses import replace
++from datetime import date, datetime
++from typing import Any
++
++from omegadata.adjustments.contracts import canonical, digest
++from omegadata.identity import IdentifierClaim, MemoryIdentityRepository, Resolution, query_time
++from omegadata.identity_authority import EvidenceAuthority
++from omegadata.universe import contracts as c
++from omegadata.universe.eligibility import adjustment_eligible, liquidity
++from omegadata.universe.temporal import (
++    authorized,
++    availability,
++    business_day,
++    coverage_reconcile,
++    known,
++    select_memberships,
++)
++
++
++def bindings(
++    x: c.UniverseContext,
++    day: date | datetime,
++    cutoff: datetime,
++    p: c.EligibilityPolicy,
++    selected: tuple[c.MembershipRevision, ...],
++) -> dict[str, Any]:
++    visible = tuple(
++        r
++        for r in x.memberships
++        if r.universe_id == x.definition.universe_id
++        and (r.claim.known_from is None or r.claim.known_from <= cutoff)
++    )
++    reported_keys = {(r.claim.exchange, r.claim.symbol, r.claim.series) for r in selected}
++    listing_ids = {r.listing_id for r in selected if r.listing_id is not None}
++    claims = tuple(
++        v
++        for v in x.identity.claims
++        if (v.known_from is None or v.known_from <= cutoff)
++        and (v.listing_id in listing_ids or (v.exchange, v.symbol, v.series) in reported_keys)
++    )
++    listing_ids.update(v.listing_id for v in claims)
++    listings = tuple(v for v in x.identity.listings if v.listing_id in listing_ids)
++    security_ids = {v.security_id for v in listings}
++    securities = tuple(v for v in x.identity.securities if v.security_id in security_ids)
++    issuer_ids = {v.issuer_id for v in securities}
++    identity = {
++        "claims": claims,
++        "listings": listings,
++        "securities": securities,
++        "issuers": tuple(v for v in x.identity.issuers if v.issuer_id in issuer_ids),
++    }
++    calendar = {
++        "claims": tuple(
++            v
++            for v in x.calendar.claims
++            if v.exchange in x.definition.exchange_scope
++            and (v.known_from is None or v.known_from <= cutoff)
++            and (x.calendar_version is None or v.calendar_version == x.calendar_version)
++        ),
++        "coverage": tuple(
++            v
++            for v in x.calendar.coverage
++            if v.exchange in x.definition.exchange_scope
++            and (v.known_from is None or v.known_from <= cutoff)
++            and (x.calendar_version is None or v.calendar_version == x.calendar_version)
++        ),
++    }
++    observations = tuple(
++        sorted(
++            (
++                o
++                for o in x.observations
++                if o.listing_id in listing_ids
++                and (o.known_from is None or o.known_from <= cutoff)
++                and p.view != "MEMBERSHIP"
++            ),
++            key=lambda o: o.observation_id,
++        )
++    )
++    refs = tuple(
++        {
++            "observation_id": o.observation_id,
++            "raw_observation_digest": digest(o.adjustment_pin.raw) if o.adjustment_pin else None,
++            "adjustment_context_id": o.adjustment_pin.snapshot_id if o.adjustment_pin else None,
++            "adjustment_result_digest": o.adjustment.output_digest,
++            "bindings": o.adjustment.context_bindings,
++        }
++        for o in observations
++        if o.adjustment is not None
++    )
++    return {
++        "universe_definition": digest(x.definition),
++        "membership_ledger_digest": digest(tuple(sorted(visible, key=lambda r: r.revision_id))),
++        "coverage_evidence_digest": digest(
++            tuple(
++                sorted(
++                    (v for v in x.coverage if v.known_from is None or v.known_from <= cutoff),
++                    key=lambda v: v.coverage_id,
++                )
++            )
++        ),
++        "identity_snapshot_digest": digest(identity),
++        "calendar_snapshot_digest": digest(calendar),
++        "source_authority_digest": (
++            x.authority or EvidenceAuthority.unconfigured()
++        ).snapshot_digest(),
++        "observation_digest": digest(tuple(replace(o, adjustment_pin=None) for o in observations)),
++        "adjustment_context_references": refs,
++        "policy": p,
++        "known_at": cutoff,
++        "valid_at": day,
++        "source_snapshot_id": x.source_snapshot_id,
++        "version": x.version,
++    }
++
++
++def identity_views(
++    x: c.UniverseContext, selected: tuple[c.MembershipRevision, ...]
++) -> dict[str, MemoryIdentityRepository]:
++    """Index once, then reuse the existing resolver on complete listing lineages."""
++    claims_by_listing: dict[str, list[IdentifierClaim]] = {}
++    reported: dict[tuple[str, str, str], set[str]] = {}
++    for claim in x.identity.claims:
++        claims_by_listing.setdefault(claim.listing_id, []).append(claim)
++        reported.setdefault((claim.exchange, claim.symbol, claim.series), set()).add(
++            claim.listing_id
++        )
++    listings = {v.listing_id: v for v in x.identity.listings}
++    securities = {v.security_id: v for v in x.identity.securities}
++    issuers = {v.issuer_id: v for v in x.identity.issuers}
++    cache: dict[tuple[str, ...], MemoryIdentityRepository] = {}
++    views = {}
++    for member in selected:
++        ids = set(
++            reported.get((member.claim.exchange, member.claim.symbol, member.claim.series), set())
++        )
++        if member.listing_id in listings:
++            ids.add(str(member.listing_id))
++        key = tuple(sorted(ids))
++        if key not in cache:
++            selected_listings = tuple(listings[n] for n in key)
++            security_ids = sorted(
++                {v.security_id for v in selected_listings if v.security_id is not None}
++            )
++            selected_securities = tuple(securities[n] for n in security_ids)
++            issuer_ids = sorted(
++                {v.issuer_id for v in selected_securities if v.issuer_id is not None}
++            )
++            cache[key] = MemoryIdentityRepository(
++                tuple(issuers[n] for n in issuer_ids),
++                selected_securities,
++                selected_listings,
++                tuple(
++                    sorted(
++                        (v for n in key for v in claims_by_listing.get(n, [])),
++                        key=lambda v: v.claim_id,
++                    )
++                ),
++                authority=x.identity.authority,
++            )
++        views[member.revision_id] = cache[key]
++    return views
++
++
++def get_universe_as_of(
++    x: c.UniverseContext,
++    valid_at: date | datetime,
++    known_at: datetime,
++    eligibility_policy: c.EligibilityPolicy,
++    source_snapshot_id: str,
++) -> c.UniverseSnapshot:
++    query_time(known_at)
++    d = x.definition
++    p = eligibility_policy
++    valid_point = valid_at
++    valid_at = business_day(valid_point)
++    if source_snapshot_id != x.source_snapshot_id:
++        raise ValueError("EXACT_SOURCE_PIN_REQUIRED")
++    if (
++        not d.valid_from <= valid_at
++        or d.valid_to is not None
++        and valid_at >= d.valid_to
++        or d.known_from is None
++        or not known(d.known_from, d.known_to, known_at)
++    ):
++        raise ValueError("DEFINITION_NOT_AVAILABLE")
++    selected = select_memberships(x, valid_point, known_at)
++    views = identity_views(x, selected)
++    resolutions: dict[str, Resolution | None] = {}
++    identities = []
++    unresolved = []
++    for r in selected:
++        # Resolve as reported when the source claim became applicable, then follow stable IDs.
++        origin = views[r.revision_id].resolve_listing(
++            r.claim.exchange, r.claim.symbol, r.claim.series, r.claim.valid_from, known_at, x.mode
++        )
++        current = (
++            views[r.revision_id].resolve_listing_id(origin.listing_id, valid_at, known_at, x.mode)
++            if origin.listing_id is not None
++            else origin
++        )
++        if (
++            origin.state != "RESOLVED"
++            or current.state != "RESOLVED"
++            or origin.security_id != current.security_id
++            or (r.security_id is not None and r.security_id != origin.security_id)
++            or (r.listing_id is not None and r.listing_id != origin.listing_id)
++        ):
++            unresolved.append(r.revision_id)
++            resolutions[r.revision_id] = None
++            continue
++        resolutions[r.revision_id] = current
++        if r.event_type != "CANCEL":
++            identities.append(
++                current.security_id if d.identity_granularity == "SECURITY" else current.listing_id
++            )
++    actual = tuple(v for v in identities if v is not None)
++    counts = Counter(actual)
++    state, reconciliation = coverage_reconcile(x, valid_at, known_at, actual, tuple(unresolved))
++    decisions = []
++    complete = state in {"COMPLETE_VERIFIED", "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"}
++    for r in selected:
++        resolution = resolutions[r.revision_id]
++        security = resolution.security_id if resolution else None
++        listing = resolution.listing_id if resolution else None
++        ident = security if d.identity_granularity == "SECURITY" else listing
++        status = "INCLUDED"
++        reasons = []
++        research = "NOT_REQUESTED"
++        liq = "NOT_REQUESTED"
++        tradability = resolution.lifecycle if resolution else "UNKNOWN"
++        execution = False
++        if r.event_type == "CANCEL":
++            status = "EXCLUDED_BY_POLICY"
++            reasons.append("CANCELLED")
++        elif (
++            r.claim.exchange not in d.exchange_scope
++            or r.source_id not in d.source_scope
++            or not authorized(d, x, known_at)
++            or not authorized(r, x, known_at)
++        ):
++            status = "BLOCKED_SOURCE_RIGHTS"
++        elif (
++            r.claim.known_from is None
++            or (
++                r.effective_convention == "UNKNOWN"
++                or r.effective_convention == "EXPLICIT_TIMESTAMP"
++                and not isinstance(valid_point, datetime)
++            )
++            or any(v is not None and v > known_at for v in (r.published_at, r.announcement_at))
++        ):
++            status = "BLOCKED_AVAILABILITY"
++        elif r.claim.status == "CONFLICTING" or ident is not None and counts[ident] > 1:
++            status = "CONFLICTING_MEMBERSHIP"
++        elif resolution is None:
++            status = "UNRESOLVED_IDENTITY"
++        elif (
++            r.claim.status in {"RECONSTRUCTED_PROVISIONAL", "UNKNOWN"}
++            or d.universe_type == "PROVISIONAL_RECONSTRUCTION"
++        ):
++            status = "PROVISIONAL_ONLY"
++        elif not complete:
++            status = "BLOCKED_REFERENCE_COVERAGE"
++        elif p.view != "MEMBERSHIP":
++            obs = tuple(
++                o
++                for o in x.observations
++                if o.listing_id == listing
++                and o.session_date <= valid_at
++                and (o.known_from is None or o.known_from <= known_at)
++            )
++            if p.require_observations and (
++                not obs
++                or any(
++                    availability(o, known_at, p.availability_policy, x) != "AVAILABLE" for o in obs
++                )
++            ):
++                status = "BLOCKED_AVAILABILITY"
++                research = status
++            else:
++                research = (
++                    "ELIGIBLE_NON_MARKET" if x.mode == "CANARY_ONLY" else "ELIGIBLE_SOURCE_BACKED"
++                )
++            if (
++                status == "INCLUDED"
++                and p.require_adjustment
++                and (
++                    not obs
++                    or any(
++                        o.adjustment is None
++                        or adjustment_eligible(
++                            o.adjustment,
++                            o.adjustment_pin,
++                            known_at,
++                            p.required_profile,
++                            p.required_basis,
++                        ).startswith("BLOCKED")
++                        or o.adjustment_pin is not None
++                        and o.adjustment_pin.raw.raw.listing_id != listing
++                        for o in obs
++                    )
++                )
++            ):
++                status = "BLOCKED_AVAILABILITY"
++                reasons.append("BLOCKED_ADJUSTMENT_CONTEXT")
++            if status == "INCLUDED" and p.view == "LIQUIDITY":
++                if p.liquidity_policy is None:
++                    status = liq = "BLOCKED_LIQUIDITY_COVERAGE"
++                else:
++                    liq, detail = liquidity(
++                        replace(r, listing_id=listing),
++                        x,
++                        obs,
++                        valid_at,
++                        known_at,
++                        p.liquidity_policy,
++                    )
++                    reasons.append(canonical(detail))
++                    if liq != "ELIGIBLE":
++                        status = liq
++            if status == "INCLUDED" and p.view == "EXECUTION":
++                eligible = [
++                    o
++                    for o in obs
++                    if o.adjustment is not None
++                    and o.adjustment_pin is not None
++                    and o.session_date == valid_at
++                    and availability(o, known_at, p.availability_policy, x) == "AVAILABLE"
++                    and adjustment_eligible(
++                        o.adjustment, o.adjustment_pin, known_at, "EXECUTION", "RAW_UNADJUSTED"
++                    )
++                    == "ELIGIBLE_SOURCE_BACKED"
++                    and o.adjustment.execution_eligibility
++                    and o.adjustment_pin.raw.raw.listing_id == listing
++                ]
++                execution = bool(eligible) and x.mode == "STRICT"
++                if not execution:
++                    status = "BLOCKED_TRADABILITY"
++        reasons.append(status)
++        decisions.append(
++            c.MemberDecision(
++                r.revision_id,
++                security,
++                listing,
++                status,
++                tuple(reasons),
++                r.evidence.evidence_id,
++                digest(resolution),
++                r.claim.status,
++                research,
++                liq,
++                tradability or "UNKNOWN",
++                execution,
++            )
++        )
++    rows = tuple(decisions)
++    if len(rows) != len(selected) or len({r.revision_id for r in rows}) != len(rows):
++        raise ValueError("ACCOUNTING_INVARIANT")
++    included = tuple(
++        sorted(
++            {
++                str(v.security_id if d.identity_granularity == "SECURITY" else v.listing_id)
++                for v in rows
++                if v.status == "INCLUDED"
++                and (v.security_id if d.identity_granularity == "SECURITY" else v.listing_id)
++                is not None
++            }
++        )
++    )
++    snapshot = c.UniverseSnapshot(
++        d.universe_id,
++        d.version,
++        valid_point,
++        known_at,
++        x.source_snapshot_id,
++        tuple(v.revision_id for v in selected),
++        rows,
++        tuple(sorted(set(actual))),
++        included,
++        state,
++        canonical(reconciliation),
++        canonical(bindings(x, valid_point, known_at, p, selected)),
++        digest(rows),
++        p.policy_version,
++        p.availability_policy.policy_version,
++        p.liquidity_policy.policy_version if p.liquidity_policy else None,
++    )
++    # Publication remains blocked until separate authentic corpus and release gates pass.
++    return snapshot
++
++
++def get_eligible_members(snapshot: c.UniverseSnapshot) -> tuple[c.MemberDecision, ...]:
++    return tuple(v for v in snapshot.decisions if v.status == "INCLUDED")
++
++
++def explain_member_decision(snapshot: c.UniverseSnapshot, revision_id: str) -> c.MemberDecision:
++    return next(v for v in snapshot.decisions if v.revision_id == revision_id)
++
++
++def compare_universe_snapshots(old: c.UniverseSnapshot, new: c.UniverseSnapshot) -> dict[str, Any]:
++    if old.universe_id != new.universe_id:
++        raise ValueError("SNAPSHOT_SCOPE_MISMATCH")
++    a = {v.revision_id: v for v in old.decisions}
++    b = {v.revision_id: v for v in new.decisions}
++    return {
++        "added": sorted(set(b) - set(a)),
++        "removed": sorted(set(a) - set(b)),
++        "changed": sorted(n for n in set(a) & set(b) if a[n] != b[n]),
++        "old": old.snapshot_digest,
++        "new": new.snapshot_digest,
++    }
++
++
++def replay_universe_decisions(
++    x: c.UniverseContext,
++    steps: tuple[tuple[date, datetime], ...],
++    policy: c.EligibilityPolicy,
++    *,
++    max_steps: int = 366,
++) -> tuple[c.UniverseSnapshot, ...]:
++    if (
++        type(steps) is not tuple
++        or type(max_steps) is not int
++        or not 0 < max_steps <= 3660
++        or len(steps) > max_steps
++    ):
++        raise ValueError("REPLAY_BUDGET")
++    if steps and (max(v[0] for v in steps) - min(v[0] for v in steps)).days > 3660:
++        raise ValueError("REPLAY_DATE_BUDGET")
++    return tuple(get_universe_as_of(x, d, k, policy, x.source_snapshot_id) for d, k in steps)
+--- /dev/null
++++ b/src/omegadata/universe/repository.py
+@@ -0,0 +1,604 @@
++"""Additive, append-only SQLAlchemy store in explicitly owned disposable SQLite.
++Reuse OD06 transaction/path conventions and OD07 typed payload encoding.
++No operational DB migration, raw-source reads, cleanup, or same-process tamper claim.
++"""
++
++from __future__ import annotations
++
++import hashlib
++import json
++from collections.abc import Iterator
++from contextlib import contextmanager
++from dataclasses import fields, is_dataclass, replace
++from datetime import date, datetime
++from decimal import Decimal
++from pathlib import Path
++from typing import Any, cast
++
++from sqlalchemy import (
++    Column,
++    ForeignKey,
++    Index,
++    MetaData,
++    String,
++    Table,
++    create_engine,
++    event,
++    exists,
++    func,
++    inspect,
++    or_,
++    select,
++)
++from sqlalchemy.engine import Connection, make_url
++from sqlalchemy.pool import StaticPool
++
++from omegadata import identity as identity
++from omegadata import session_calendar as cal
++from omegadata.adjustments import bound_contracts as bc
++from omegadata.adjustments import contracts as ac
++from omegadata.adjustments.repository import TYPES as OLD_TYPES
++from omegadata.adjustments.repository import encode as encode_scalar
++from omegadata.identity_adapters import MembershipClaim
++from omegadata.identity_authority import EvidenceAuthority
++from omegadata.universe import contracts as c
++from omegadata.universe.snapshots import get_universe_as_of
++from omegadata.universe.temporal import business_day, validate_revisions
++
++M = MetaData()
++schema = Table("od08_schema", M, Column("version", String, primary_key=True))
++
++
++def payload() -> list[Column[Any]]:
++    return [Column("payload", String, nullable=False), Column("digest", String, nullable=False)]
++
++
++definitions = Table(
++    "od08_definition",
++    M,
++    Column("id", String, primary_key=True),
++    Column("universe", String, nullable=False),
++    *payload(),
++)
++members = Table(
++    "od08_membership",
++    M,
++    Column("id", String, primary_key=True),
++    Column("definition", ForeignKey(definitions.c.id), nullable=False),
++    Column("universe", String, nullable=False),
++    Column("event", String, nullable=False),
++    Column("parent", ForeignKey("od08_membership.id"), unique=True),
++    Column("valid_from", String, nullable=False),
++    Column("valid_to", String),
++    Column("known_from", String),
++    Column("known_to", String),
++    Column("effective_at", String),
++    Column("removal_at", String),
++    *payload(),
++)
++coverages = Table(
++    "od08_coverage",
++    M,
++    Column("id", String, primary_key=True),
++    Column("definition", ForeignKey(definitions.c.id), nullable=False),
++    *payload(),
++)
++observations = Table(
++    "od08_availability",
++    M,
++    Column("id", String, primary_key=True),
++    Column("definition", ForeignKey(definitions.c.id), nullable=False),
++    *payload(),
++)
++policies = Table("od08_policy", M, Column("id", String, primary_key=True), *payload())
++contexts = Table(
++    "od08_context",
++    M,
++    Column("id", String, primary_key=True),
++    Column("definition", ForeignKey(definitions.c.id), nullable=False),
++    Column("policy", ForeignKey(policies.c.id), nullable=False),
++    *payload(),
++)
++snapshots = Table(
++    "od08_snapshot",
++    M,
++    Column("id", String, primary_key=True),
++    Column("context", ForeignKey(contexts.c.id), nullable=False),
++    *payload(),
++)
++decisions = Table(
++    "od08_decision",
++    M,
++    Column("snapshot", ForeignKey(snapshots.c.id), primary_key=True),
++    Column("revision", ForeignKey(members.c.id), primary_key=True),
++    *payload(),
++)
++Index("od08_membership_query", members.c.universe, members.c.valid_from, members.c.known_from)
++Index("od08_membership_history", members.c.event, members.c.known_from)
++TYPES: dict[str, Any] = {
++    **OLD_TYPES,
++    **{
++        v.__name__: v
++        for v in [
++            c.UniverseDefinition,
++            c.MembershipRevision,
++            c.CoverageTransition,
++            c.UniverseCoverage,
++            c.AvailabilityPolicy,
++            c.AvailabilityObservation,
++            c.LiquidityPolicy,
++            c.EligibilityPolicy,
++            c.UniverseContext,
++            c.MemberDecision,
++            c.UniverseSnapshot,
++            c.RankingCandidate,
++            identity.Issuer,
++            identity.Security,
++            identity.Listing,
++            identity.IdentifierClaim,
++            identity.MemoryIdentityRepository,
++            cal.SessionClaim,
++            cal.CoverageClaim,
++            cal.VerifiedCalendar,
++            MembershipClaim,
++            ac.Raw,
++            ac.Context,
++            ac.Policy,
++            ac.Result,
++            ac.Link,
++            ac.Factor,
++            bc.RawObservation,
++            bc.ParameterSet,
++            bc.HistorySnapshot,
++            bc.BasisPolicy,
++            bc.ExecutionConstraints,
++            bc.PinnedCalculation,
++            bc.BoundResult,
++        ]
++    },
++}
++
++
++def encode(v: Any) -> Any:
++    if type(v) is EvidenceAuthority:
++        return {"authority_snapshot_digest": v.snapshot_digest()}
++    if is_dataclass(v) and not isinstance(v, type):
++        return {
++            "type": type(v).__name__,
++            "values": {f.name: encode(getattr(v, f.name)) for f in fields(v)},
++        }
++    if isinstance(v, (tuple, list)):
++        return [encode(a) for a in v]
++    if isinstance(v, dict):
++        return {n: encode(a) for n, a in v.items()}
++    return encode_scalar(v)
++
++
++def decode(v: Any, authority: EvidenceAuthority | None = None) -> Any:
++    if isinstance(v, list):
++        return tuple(decode(a, authority) for a in v)
++    if not isinstance(v, dict):
++        return v
++    if set(v) == {"authority_snapshot_digest"}:
++        candidate = authority or EvidenceAuthority.unconfigured()
++        if candidate.snapshot_digest() != v["authority_snapshot_digest"]:
++            raise ValueError("EXACT_AUTHORITY_OBJECT_REQUIRED")
++        return candidate
++    if set(v) == {"date"}:
++        return date.fromisoformat(v["date"])
++    if set(v) == {"datetime"}:
++        return datetime.fromisoformat(v["datetime"])
++    if set(v) == {"decimal"}:
++        return Decimal(v["decimal"])
++    if set(v) == {"type", "values"}:
++        kind = TYPES[v["type"]]
++        allowed = {f.name for f in fields(kind) if f.init}
++        return kind(**{n: decode(a, authority) for n, a in v["values"].items() if n in allowed})
++    return {n: decode(a, authority) for n, a in v.items()}
++
++
++def pack(v: Any) -> str:
++    return ac.canonical(encode(v))
++
++
++def unpack(v: str, authority: EvidenceAuthority | None = None) -> Any:
++    return decode(json.loads(v), authority)
++
++
++def sqltime(v: date | datetime | None) -> str | None:
++    return str(ac.normalized(v)) if v is not None else None
++
++
++class UniverseRepository:
++    def __init__(
++        self, url: str, *, disposable_root: Path, authority: EvidenceAuthority | None = None
++    ) -> None:
++        parsed = make_url(url)
++        if parsed.drivername not in {"sqlite", "sqlite+pysqlite"}:
++            raise ValueError("DEVELOPMENT_SQLITE_ONLY")
++        if parsed.database not in {None, "", ":memory:"}:
++            path = Path(str(parsed.database))
++            root = disposable_root.resolve(strict=True)
++            if (
++                not path.is_absolute()
++                or ".." in path.parts
++                or path.is_symlink()
++                or not path.resolve().is_relative_to(root)
++                or any(p.is_symlink() for p in path.parents)
++            ):
++                raise ValueError("DISPOSABLE_DATABASE_REQUIRED")
++        self.authority = authority
++        self.engine = create_engine(
++            url,
++            poolclass=StaticPool if parsed.database in {None, "", ":memory:"} else None,
++            connect_args={"check_same_thread": False, "timeout": 5},
++        )
++
++        @event.listens_for(self.engine, "connect")
++        def setup(dbapi: Any, record: Any) -> None:
++            dbapi.execute("PRAGMA foreign_keys=ON")
++
++        existing = set(inspect(self.engine).get_table_names())
++        if existing and existing != set(M.tables):
++            raise ValueError("OWNED_SCHEMA_REQUIRED")
++        with self.engine.begin() as con:
++            M.create_all(con)
++            versions = con.execute(select(schema.c.version)).scalars().all()
++            if versions and versions != ["od08.store/v1"]:
++                raise ValueError("SCHEMA_VERSION_UNSUPPORTED")
++            if not versions:
++                con.execute(schema.insert().values(version="od08.store/v1"))
++            for table in M.tables.values():
++                for op in ("UPDATE", "DELETE"):
++                    con.exec_driver_sql(
++                        f"CREATE TRIGGER IF NOT EXISTS {table.name}_{op.lower()} BEFORE {op} ON {table.name} BEGIN SELECT RAISE(ABORT,'APPEND_ONLY'); END"
++                    )
++
++    @contextmanager
++    def transaction(self) -> Iterator[Connection]:
++        with self.engine.connect() as con:
++            con.exec_driver_sql("BEGIN IMMEDIATE")
++            try:
++                yield con
++                con.commit()
++            except BaseException:
++                con.rollback()
++                raise
++
++    def close(self) -> None:
++        self.engine.dispose()
++
++    def _put(self, con: Connection, table: Table, key: str, value: Any, **extra: Any) -> None:
++        body = pack(value)
++        old = con.scalar(select(table.c.payload).where(table.c.id == key))
++        if old is not None:
++            if old != body:
++                raise ValueError("IMMUTABLE_RECORD_ID_REUSED")
++            return
++        con.execute(
++            table.insert().values(
++                id=key, payload=body, digest=hashlib.sha256(body.encode()).hexdigest(), **extra
++            )
++        )
++
++    def _rows(self, con: Connection, table: Table, event_id: str | None = None) -> tuple[Any, ...]:
++        stmt = select(table.c.payload, table.c.digest).order_by(table.c.id)
++        if event_id is not None:
++            stmt = stmt.where(table.c.event == event_id)
++        rows = con.execute(stmt).all()
++        for body, pin in rows:
++            if hashlib.sha256(body.encode()).hexdigest() != pin:
++                raise ValueError("PERSISTED_PAYLOAD_CHANGED")
++        return tuple(unpack(body, self.authority) for body, pin in rows)
++
++    def append_definition(self, value: c.UniverseDefinition) -> str:
++        key = ac.digest(value)
++        with self.transaction() as con:
++            self._put(con, definitions, key, value, universe=value.universe_id)
++        return key
++
++    def _definition_key(self, con: Connection, universe_id: str, key: str | None) -> str:
++        keys = (
++            con.execute(select(definitions.c.id).where(definitions.c.universe == universe_id))
++            .scalars()
++            .all()
++        )
++        if key is not None and key in keys:
++            return key
++        if key is None and len(keys) == 1:
++            return str(keys[0])
++        raise ValueError("EXACT_DEFINITION_REQUIRED")
++
++    def append_membership(
++        self, value: c.MembershipRevision, definition_key: str | None = None
++    ) -> None:
++        with self.transaction() as con:
++            key = self._definition_key(con, value.universe_id, definition_key)
++            old = tuple(
++                r
++                for r in self._rows(con, members, value.event_id)
++                if r.universe_id == value.universe_id
++            )
++            existing = next((r for r in old if r.revision_id == value.revision_id), None)
++            if existing is None:
++                validate_revisions((*old, value))
++            self._put(
++                con,
++                members,
++                value.revision_id,
++                value,
++                definition=key,
++                universe=value.universe_id,
++                event=value.event_id,
++                parent=value.claim.supersedes_membership_id,
++                valid_from=sqltime(value.claim.valid_from),
++                valid_to=sqltime(value.claim.valid_to),
++                known_from=sqltime(value.claim.known_from),
++                known_to=sqltime(value.claim.known_to),
++                effective_at=sqltime(value.effective_at),
++                removal_at=sqltime(value.removal_effective_at),
++            )
++
++    def seed_context(self, x: c.UniverseContext, policy: c.EligibilityPolicy) -> None:
++        key = self.append_definition(x.definition)
++        for r in sorted(x.memberships, key=lambda r: (r.revision_number, r.revision_id)):
++            self.append_membership(r, key)
++        with self.transaction() as con:
++            self._put(con, policies, policy.policy_version, policy)
++            for v in x.coverage:
++                self._put(con, coverages, v.coverage_id, v, definition=key)
++            for o in x.observations:
++                self._put(con, observations, o.observation_id, o, definition=key)
++
++    def _selected_sql(
++        self, con: Connection, universe_id: str, day: date | datetime, cutoff: datetime
++    ) -> tuple[str, ...]:
++        child = members.alias("successor")
++        k = sqltime(cutoff)
++        point = day
++        day = business_day(point)
++        successor = exists(
++            select(child.c.id).where(child.c.parent == members.c.id, child.c.known_from <= k)
++        )
++        stmt = (
++            select(members.c.id)
++            .where(
++                members.c.universe == universe_id,
++                members.c.valid_from <= sqltime(day),
++                or_(
++                    members.c.valid_to.is_(None),
++                    members.c.valid_to > sqltime(day),
++                    (members.c.valid_to == sqltime(day)) & members.c.removal_at.is_not(None),
++                ),
++                or_(members.c.known_from.is_(None), members.c.known_from <= k),
++                or_(members.c.known_to.is_(None), members.c.known_to > k),
++                ~successor,
++            )
++            .order_by(members.c.id)
++        )
++        if isinstance(point, datetime):
++            stmt = stmt.where(
++                or_(members.c.effective_at.is_(None), members.c.effective_at <= sqltime(point)),
++                or_(members.c.removal_at.is_(None), members.c.removal_at > sqltime(point)),
++            )
++        return tuple(con.execute(stmt).scalars())
++
++    def pin_context(
++        self,
++        context_id: str,
++        x: c.UniverseContext,
++        day: date | datetime,
++        cutoff: datetime,
++        policy: c.EligibilityPolicy,
++    ) -> None:
++        # Future-known inputs are not allowed to change an earlier pinned decision.
++        kept = tuple(
++            r for r in x.memberships if r.claim.known_from is None or r.claim.known_from <= cutoff
++        )
++        clean = replace(
++            x,
++            memberships=kept,
++            coverage=tuple(v for v in x.coverage if v.known_from is None or v.known_from <= cutoff),
++            observations=tuple(
++                v for v in x.observations if v.known_from is None or v.known_from <= cutoff
++            ),
++            authority=None,
++            identity=replace(x.identity, authority=None),
++            calendar=replace(x.calendar, authority=None),
++        )
++        expected = get_universe_as_of(x, day, cutoff, policy, x.source_snapshot_id)
++        envelope = {
++            "context": clean,
++            "day": day,
++            "cutoff": cutoff,
++            "policy": policy,
++            "expected": expected.canonical_json,
++            "authority_digest": (x.authority or EvidenceAuthority.unconfigured()).snapshot_digest(),
++        }
++        with self.transaction() as con:
++            self._reconcile(con, x, day, cutoff, policy, expected)
++            self._put(
++                con,
++                contexts,
++                context_id,
++                envelope,
++                definition=ac.digest(x.definition),
++                policy=policy.policy_version,
++            )
++
++    def _reconcile(
++        self,
++        con: Connection,
++        x: c.UniverseContext,
++        day: date | datetime,
++        cutoff: datetime,
++        p: c.EligibilityPolicy,
++        out: c.UniverseSnapshot,
++    ) -> None:
++        if (
++            self._selected_sql(con, x.definition.universe_id, day, cutoff)
++            != out.selected_revision_ids
++        ):
++            raise ValueError("INDEPENDENT_SQL_SELECTED_MEMBERS_MISMATCH")
++        selected = set(out.selected_revision_ids)
++        if (
++            len(out.decisions) != len(selected)
++            or {v.revision_id for v in out.decisions} != selected
++            or out.decision_digest != ac.digest(out.decisions)
++        ):
++            raise ValueError("INDEPENDENT_DECISION_ACCOUNTING")
++        allrows = self._rows(con, members)
++        stored = {
++            r.revision_id: r
++            for r in allrows
++            if r.universe_id == x.definition.universe_id
++            and (r.claim.known_from is None or r.claim.known_from <= cutoff)
++        }
++        supplied = {
++            r.revision_id: r
++            for r in x.memberships
++            if r.universe_id == x.definition.universe_id
++            and (r.claim.known_from is None or r.claim.known_from <= cutoff)
++        }
++        if pack(stored) != pack(supplied):
++            raise ValueError("MEMBERSHIP_LEDGER_OMITTED_OR_CHANGED")
++        if con.scalar(
++            select(definitions.c.payload).where(definitions.c.id == ac.digest(x.definition))
++        ) != pack(x.definition) or con.scalar(
++            select(policies.c.payload).where(policies.c.id == p.policy_version)
++        ) != pack(p):
++            raise ValueError("DEFINITION_OR_POLICY_NOT_PINNED")
++        persisted_coverage = {
++            v.coverage_id: v
++            for v in self._rows(con, coverages)
++            if v.universe_id == x.definition.universe_id
++            and (v.known_from is None or v.known_from <= cutoff)
++        }
++        supplied_coverage = {
++            v.coverage_id: v
++            for v in x.coverage
++            if v.universe_id == x.definition.universe_id
++            and (v.known_from is None or v.known_from <= cutoff)
++        }
++        if pack(persisted_coverage) != pack(supplied_coverage):
++            raise ValueError("COVERAGE_LEDGER_OMITTED_OR_CHANGED")
++        inputs_to_check: list[tuple[Table, tuple[Any, ...], str]] = [
++            (coverages, x.coverage, "coverage_id"),
++            (observations, x.observations, "observation_id"),
++        ]
++        for table, items, idname in inputs_to_check:
++            for value in items:
++                lower = value.known_from
++                if lower is not None and lower > cutoff:
++                    continue
++                if con.scalar(
++                    select(table.c.payload).where(table.c.id == getattr(value, idname))
++                ) != pack(value):
++                    raise ValueError("UPSTREAM_EVIDENCE_NOT_PINNED")
++        if out.financial_accepted or out.execution_accepted:
++            raise ValueError("FINANCIAL_PROMOTION_NOT_AUTHORIZED")
++        for d in out.decisions:
++            row = stored[d.revision_id]
++            if (
++                row.security_id is not None
++                and d.security_id is not None
++                and d.security_id != row.security_id
++            ):
++                raise ValueError("MEMBER_IDENTITY_CHANGED")
++
++    def _context_payload(self, con: Connection, context_id: str) -> str:
++        row = con.execute(
++            select(contexts.c.payload, contexts.c.digest).where(contexts.c.id == context_id)
++        ).first()
++        if row is None:
++            raise ValueError("PINNED_CONTEXT_REQUIRED")
++        if hashlib.sha256(row[0].encode()).hexdigest() != row[1]:
++            raise ValueError("CONTEXT_STORAGE_CHANGED")
++        return str(row[0])
++
++    def admit_snapshot(self, context_id: str, out: c.UniverseSnapshot) -> None:
++        with self.transaction() as con:
++            envelope = self._context_payload(con, context_id)
++            data = unpack(envelope, self.authority)
++            x = data["context"]
++            cutoff = data["cutoff"]
++            day = data["day"]
++            policy = data["policy"]
++            if out.canonical_json != data["expected"]:
++                raise ValueError("SNAPSHOT_DOES_NOT_MATCH_PINNED_CONTEXT")
++            self._reconcile(con, x, day, cutoff, policy, out)
++            self._put(con, snapshots, out.universe_snapshot_id, out, context=context_id)
++            for decision in out.decisions:
++                body = pack(decision)
++                old = con.scalar(
++                    select(decisions.c.payload).where(
++                        decisions.c.snapshot == out.universe_snapshot_id,
++                        decisions.c.revision == decision.revision_id,
++                    )
++                )
++                if old is None:
++                    con.execute(
++                        decisions.insert().values(
++                            snapshot=out.universe_snapshot_id,
++                            revision=decision.revision_id,
++                            payload=body,
++                            digest=ac.digest(decision),
++                        )
++                    )
++                elif old != body:
++                    raise ValueError("IMMUTABLE_DECISION_CHANGED")
++
++    def get_snapshot(self, snapshot_id: str) -> str:
++        with self.engine.connect() as con:
++            row = con.execute(
++                select(snapshots.c.payload, snapshots.c.digest).where(snapshots.c.id == snapshot_id)
++            ).first()
++            if row is None:
++                raise LookupError(snapshot_id)
++            if hashlib.sha256(row[0].encode()).hexdigest() != row[1]:
++                raise ValueError("SNAPSHOT_STORAGE_CHANGED")
++            result = cast(c.UniverseSnapshot, unpack(row[0]))
++            if result.universe_snapshot_id != snapshot_id:
++                raise ValueError("SNAPSHOT_DIGEST_CHANGED")
++            return result.canonical_json
++
++    def replay_context(self, context_id: str) -> c.UniverseSnapshot:
++        with self.engine.connect() as con:
++            body = self._context_payload(con, context_id)
++        data = unpack(body, self.authority)
++        x = data["context"]
++        authority = self.authority or EvidenceAuthority.unconfigured()
++        if authority.snapshot_digest() != data["authority_digest"]:
++            raise ValueError("AUTHORITY_STATE_CHANGED")
++        x = replace(
++            x,
++            authority=self.authority,
++            identity=replace(x.identity, authority=self.authority),
++            calendar=replace(x.calendar, authority=self.authority),
++        )
++        result = get_universe_as_of(
++            x, data["day"], data["cutoff"], data["policy"], x.source_snapshot_id
++        )
++        if result.canonical_json != data["expected"]:
++            raise ValueError("REPLAY_NOT_REPRODUCIBLE")
++        return result
++
++    def query_plan(
++        self, universe_id: str, day: date | datetime, cutoff: datetime
++    ) -> tuple[str, ...]:
++        with self.engine.connect() as con:
++            rows = con.exec_driver_sql(
++                "EXPLAIN QUERY PLAN SELECT id FROM od08_membership WHERE universe=? AND valid_from<=? AND (known_from IS NULL OR known_from<=?)",
++                (universe_id, sqltime(day), sqltime(cutoff)),
++            ).all()
++        return tuple(str(r[-1]) for r in rows)
++
++    def rollback_empty(self) -> None:
++        with self.transaction() as con:
++            if any(
++                con.scalar(select(func.count()).select_from(t))
++                for t in M.tables.values()
++                if t is not schema
++            ):
++                raise ValueError("NONEMPTY_ROLLBACK_REFUSED")
++            M.drop_all(con)
+--- /dev/null
++++ b/src/omegadata/universe/compatibility.py
+@@ -0,0 +1,29 @@
++"""OD08 read-only integration with the existing strict/legacy inventory contracts."""
++
++from datetime import date
++
++from sqlalchemy.orm import Session
++
++from omegadata.identity_adapters import (
++    LegacyMembershipObservation,
++    legacy_universe_inventory,
++    source_backfill,
++)
++from omegadata.universe.contracts import UniverseContext
++from omegadata.universe.temporal import get_membership_history
++
++
++def legacy_inventory(
++    session: Session, universe_id: str, valid_at: date
++) -> tuple[LegacyMembershipObservation, ...]:
++    return legacy_universe_inventory(session, universe_id, valid_at)
++
++
++def source_dependent_backfill() -> None:
++    from pathlib import Path
++
++    source_backfill(Path("UNUSED_NO_SOURCE_TRAVERSAL"))
++
++
++def membership_history(context: UniverseContext, event_id: str) -> tuple[str, ...]:
++    return tuple(r.revision_id for r in get_membership_history(context, event_id))
+--- /dev/null
++++ b/scripts/od08_structural_experiments.py
+@@ -0,0 +1,158 @@
++"""Bounded NON_MARKET bookkeeping benchmark; no market observations or replay."""
++
++from __future__ import annotations
++
++import json
++import statistics
++import sys
++import time
++import tracemalloc
++from dataclasses import replace
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from typing import Any
++
++
++def run(config: dict[str, Any]) -> int:
++    import od05x_isolated_runner as boundary
++
++    boundary.assert_boundary()
++    from test_od08_universe import D, K, setup_case
++
++    from omegadata.identity import Issuer, Listing, MemoryIdentityRepository, Security
++    from omegadata.universe.repository import UniverseRepository
++    from omegadata.universe.snapshots import get_universe_as_of, replay_universe_decisions
++    from omegadata.universe.temporal import get_membership_history
++
++    c, x, member, cov, policy, query = setup_case()
++    count = 200
++    securities = tuple(Security("control-security-" + str(i), "issuer-a") for i in range(count))
++    listings = tuple(
++        Listing("control-listing-" + str(i), securities[i].security_id, "CANARY-X")
++        for i in range(count)
++    )
++    claims = tuple(
++        replace(
++            x.identity.claims[0],
++            claim_id="identity-" + str(i),
++            listing_id=listings[i].listing_id,
++            symbol="TOKEN-" + str(i),
++        )
++        for i in range(count)
++    )
++    identity = MemoryIdentityRepository((Issuer("issuer-a"),), securities, listings, claims)
++    members = tuple(
++        replace(
++            member,
++            claim=replace(
++                member.claim, membership_id="membership-" + str(i), symbol=claims[i].symbol
++            ),
++            event_id="event-" + str(i),
++            security_id=securities[i].security_id,
++            listing_id=listings[i].listing_id,
++        )
++        for i in range(count)
++    )
++    expected = tuple(sorted(s.security_id for s in securities))
++    x = replace(
++        x,
++        identity=identity,
++        memberships=members,
++        coverage=(
++            replace(cov, expected_member_identities=expected, ending_member_identities=expected),
++        ),
++    )
++    root = Path("/work/job")
++    root.mkdir()
++    start = datetime.now(UTC).isoformat()
++    tracemalloc.start()
++    samples = []
++    for _ in range(3):
++        tick = time.perf_counter()
++        out = get_universe_as_of(x, D, K, policy, x.source_snapshot_id)
++        samples.append(time.perf_counter() - tick)
++        assert out.included_member_ids == expected
++    dbpath = root / "bookkeeping.sqlite"
++    url = "sqlite:///" + str(dbpath)
++    db = UniverseRepository(url, disposable_root=root)
++    tick = time.perf_counter()
++    db.seed_context(x, policy)
++    insert = time.perf_counter() - tick
++    tick = time.perf_counter()
++    db.pin_context("pin", x, D, K, policy)
++    db.admit_snapshot("pin", out)
++    admission = time.perf_counter() - tick
++    tick = time.perf_counter()
++    history = get_membership_history(x, members[0].event_id)
++    history_time = time.perf_counter() - tick
++    assert len(history) == 1
++    correction = replace(
++        members[0],
++        claim=replace(
++            members[0].claim,
++            membership_id="correction",
++            known_from=K + timedelta(days=1),
++            supersedes_membership_id=members[0].revision_id,
++        ),
++        revision_number=2,
++    )
++    tick = time.perf_counter()
++    db.append_membership(correction)
++    append = time.perf_counter() - tick
++    changed = replace(x, memberships=(*members, correction))
++    assert (
++        get_universe_as_of(changed, D, K, policy, x.source_snapshot_id).snapshot_digest
++        == out.snapshot_digest
++    )
++    plan = db.query_plan(x.definition.universe_id, D, K)
++    db.close()
++    tick = time.perf_counter()
++    db = UniverseRepository(url, disposable_root=root)
++    assert db.replay_context("pin").snapshot_digest == out.snapshot_digest
++    restart = time.perf_counter() - tick
++    tick = time.perf_counter()
++    replay = replay_universe_decisions(
++        x, ((D, K), (D, K + timedelta(seconds=1))), policy, max_steps=2
++    )
++    replay_seconds = time.perf_counter() - tick
++    assert len(replay) == 2
++    rollback_start = time.perf_counter()
++    try:
++        with db.transaction():
++            raise RuntimeError("CONTROLLED_ROLLBACK")
++    except RuntimeError:
++        pass
++    rollback = time.perf_counter() - rollback_start
++    peak = tracemalloc.get_traced_memory()[1]
++    tracemalloc.stop()
++    db.close()
++    result = {
++        "job": config["job"],
++        "exit_code": 0,
++        "counts": {},
++        "python": sys.version,
++        "interpreter": sys.executable,
++        "start_utc": start,
++        "end_utc": datetime.now(UTC).isoformat(),
++        "stdout_stderr": "NON_MARKET_STRUCTURAL_CONTROL only; no exchange-scale throughput claim",
++        "boundary": boundary.assert_boundary(),
++        "members": count,
++        "revisions": count + 1,
++        "query_samples_seconds": samples,
++        "query_median_seconds": statistics.median(samples),
++        "seed_insert_seconds": insert,
++        "snapshot_admission_seconds": admission,
++        "membership_history_seconds": history_time,
++        "correction_append_seconds": append,
++        "restart_replay_seconds": restart,
++        "two_step_replay_seconds": replay_seconds,
++        "rollback_seconds": rollback,
++        "peak_tracemalloc_bytes": peak,
++        "snapshot_bytes": len(out.canonical_json.encode()),
++        "query_plan": plan,
++        "candidate_upper_bound": count,
++        "deterministic_digest": out.snapshot_digest,
++    }
++    (root / "result.json").write_text(json.dumps(result, indent=2))
++    print(json.dumps(result))
++    return 0
+--- /dev/null
++++ b/tests/unit/test_od08_universe.py
+@@ -0,0 +1,1014 @@
++"""NON_MARKET_STRUCTURAL_CONTROL only; no actual index, security or observations."""
++
++from dataclasses import replace
++from datetime import timedelta
++from decimal import Decimal
++
++import pytest
++from sqlalchemy.exc import IntegrityError
++from test_od06_contracts import D, K, system
++
++GROUPS = [
++    f"{p}{i:02}"
++    for p, n in [
++        ("U", 10),
++        ("I", 6),
++        ("C", 5),
++        ("A", 5),
++        ("L", 5),
++        ("E", 4),
++        ("R", 2),
++        ("P", 6),
++        ("S", 4),
++    ]
++    for i in range(1, n + 1)
++]
++
++
++def setup_case(**kw):
++    from omegadata.identity_adapters import MembershipClaim
++    from omegadata.session_calendar import VerifiedCalendar
++    from omegadata.universe import contracts as c
++    from omegadata.universe.snapshots import get_universe_as_of
++
++    m, e, identity, claim = system()
++    legacy = MembershipClaim(
++        "m-a", "CONTROL_SCOPE", "TOKEN", "SERIES", "CANARY-X", D, None, K, None, e
++    )
++    member = c.MembershipRevision(
++        legacy,
++        "event-a",
++        "control-source",
++        "artifact-a",
++        "record-a",
++        security_id="security-a",
++        listing_id="listing-a",
++    )
++    definition = c.UniverseDefinition(
++        "CONTROL_SCOPE",
++        "Anonymous bookkeeping scope",
++        "CUSTOM_POLICY_UNIVERSE",
++        "SECURITY",
++        "method-v1",
++        ("control-source",),
++        ("CANARY-X",),
++        D,
++        None,
++        K,
++        None,
++        e,
++    )
++    coverage = c.UniverseCoverage(
++        "coverage-a",
++        "CONTROL_SCOPE",
++        "control-source",
++        "coverage-artifact",
++        "method-v1",
++        D,
++        D + timedelta(days=20),
++        K,
++        None,
++        "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE",
++        ("security-a",),
++        e,
++        "reference-a",
++        granularity="COMPLETE_CHANGE_HISTORY",
++        ending_member_identities=("security-a",),
++        ending_reference="end-reference",
++    )
++    policy = c.EligibilityPolicy("membership-v1", "MEMBERSHIP")
++    context = c.UniverseContext(
++        "source-pin",
++        definition,
++        (member,),
++        (coverage,),
++        identity,
++        VerifiedCalendar(),
++        mode="CANARY_ONLY",
++    )
++    context = replace(context, **kw)
++    return c, context, member, coverage, policy, get_universe_as_of
++
++
++def query(ctx=None, day=D, known=K, policy=None):
++    c, x, m, coverage, p, run = setup_case()
++    return run(ctx or x, day, known, policy or p, "source-pin")
++
++
++def observation(x, **kw):
++    from omegadata.universe.contracts import AvailabilityObservation
++
++    e = x.definition.evidence
++    o = AvailabilityObservation(
++        "observation-a",
++        "CONTROL_ONLY",
++        "listing-a",
++        D,
++        K,
++        K,
++        K,
++        K,
++        None,
++        K,
++        "control-source",
++        "observation-artifact",
++        e,
++        interval_completed_at=K,
++        volume=Decimal(0),
++        turnover=Decimal(0),
++        currency="CONTROL_UNIT",
++        price_unit="CONTROL_ONLY",
++        price_basis="RAW_UNADJUSTED",
++        volume_basis="RAW",
++        record_identity="record",
++    )
++    return replace(o, **kw)
++
++
++@pytest.mark.parametrize("group", GROUPS)
++def test_acceptance(group, tmp_path):
++    c, x, m, coverage, p, run = setup_case()
++    from omegadata.universe import eligibility as e
++    from omegadata.universe import temporal as t
++    from omegadata.universe.repository import UniverseRepository
++
++    if group == "U01":
++        out = query(x)
++        assert (
++            out.selected_revision_ids == ("m-a",)
++            and out.included_member_ids == ("security-a",)
++            and out.accounted_count == 1
++        )
++    elif group == "U02":
++        bad = replace(coverage, expected_member_identities=("different-security",))
++        out = query(replace(x, coverage=(bad,)))
++        assert (
++            out.coverage_state == "CONFLICTING"
++            and out.decisions[0].status == "BLOCKED_REFERENCE_COVERAGE"
++        )
++    elif group == "U03":
++        changed = replace(m, claim=replace(m.claim, valid_from=D + timedelta(days=1)))
++        assert query(replace(x, memberships=(changed,))).selected_revision_ids == ()
++        assert query(
++            replace(x, memberships=(changed,)), day=D + timedelta(days=1)
++        ).selected_revision_ids == ("m-a",)
++    elif group == "U04":
++        changed = replace(m, claim=replace(m.claim, valid_to=D + timedelta(days=1)))
++        assert (
++            query(
++                replace(x, memberships=(changed,)), day=D + timedelta(days=1)
++            ).selected_revision_ids
++            == ()
++        )
++    elif group == "U05":
++        future = replace(m, claim=replace(m.claim, valid_from=D + timedelta(days=2)))
++        y = replace(x, memberships=(future,))
++        assert query(y).selected_revision_ids == ()
++        assert t.get_known_upcoming_changes(y, D, K)[0][1] == "KNOWN_AND_NOT_YET_EFFECTIVE"
++    elif group == "U06":
++        changed = replace(m, claim=replace(m.claim, known_from=None))
++        assert (
++            query(replace(x, memberships=(changed,))).decisions[0].status == "BLOCKED_AVAILABILITY"
++        )
++    elif group in {"U07", "U08", "U09", "U10"}:
++        correction = replace(
++            m,
++            claim=replace(
++                m.claim,
++                membership_id="m-b",
++                known_from=K + timedelta(days=1),
++                valid_from=D + timedelta(days=2),
++                supersedes_membership_id="m-a",
++            ),
++            revision_number=2,
++            event_type="CANCEL" if group == "U09" else "CORRECTION",
++        )
++        y = replace(x, memberships=(m, correction))
++        if group == "U07":
++            assert query(y).snapshot_digest == query(x).snapshot_digest
++        elif group == "U08":
++            assert query(y, known=K + timedelta(days=1)).selected_revision_ids == ()
++        elif group == "U09":
++            assert (
++                query(y, day=D + timedelta(days=3), known=K + timedelta(days=3)).included_member_ids
++                == ()
++            )
++        else:
++            with pytest.raises(ValueError):
++                query(
++                    replace(
++                        y,
++                        memberships=(
++                            m,
++                            correction,
++                            replace(
++                                correction, claim=replace(correction.claim, membership_id="m-c")
++                            ),
++                        ),
++                    )
++                )
++    elif group in {"I01", "I02", "I03", "I04", "I05", "I06"}:
++        old = x.identity.claims[0]
++        if group == "I01":
++            renamed = replace(
++                old, claim_id="rename", symbol="NEW", valid_from=D + timedelta(days=1)
++            )
++            identity = replace(
++                x.identity, claims=(replace(old, valid_to=renamed.valid_from), renamed)
++            )
++            assert query(
++                replace(x, identity=identity), day=D + timedelta(days=2)
++            ).included_member_ids == ("security-a",)
++        elif group == "I02":
++            changed = replace(m, security_id="wrong")
++            assert (
++                query(replace(x, memberships=(changed,))).decisions[0].status
++                == "UNRESOLVED_IDENTITY"
++            )
++        elif group == "I04":
++            changed = replace(
++                m, claim=replace(m.claim, symbol="MISSING"), security_id=None, listing_id=None
++            )
++            out = query(replace(x, memberships=(changed,)))
++            assert out.accounted_count == 1 and out.decisions[0].status == "UNRESOLVED_IDENTITY"
++        elif group == "I06":
++            other = replace(
++                m, claim=replace(m.claim, membership_id="duplicate"), event_id="event-b"
++            )
++            out = query(replace(x, memberships=(m, other)))
++            assert (
++                len(out.member_identities) == 1
++                and not out.included_member_ids
++                and all(d.status == "CONFLICTING_MEMBERSHIP" for d in out.decisions)
++            )
++        else:
++            identity = replace(
++                x.identity,
++                claims=(replace(old, lifecycle="DELISTED" if group == "I03" else "SUSPENDED"),),
++            )
++            out = query(replace(x, identity=identity))
++            assert out.included_member_ids == ("security-a",) and not out.execution_accepted
++    elif group in {"C01", "C02", "C03", "C04", "C05"}:
++        if group == "C01":
++            assert (
++                query(replace(x, coverage=(replace(coverage, state="PARTIAL"),))).coverage_state
++                == "PARTIAL"
++            )
++        elif group == "C02":
++            changed = replace(m, claim=replace(m.claim, valid_to=D + timedelta(days=2)))
++            cov = replace(
++                coverage,
++                granularity="COMPLETE_CHANGE_HISTORY",
++                ending_member_identities=(),
++                ending_reference="ending",
++            )
++            assert (
++                query(replace(x, memberships=(changed,), coverage=(cov,))).coverage_state
++                == "PARTIAL"
++            )
++        elif group == "C03":
++            assert (
++                query(
++                    replace(
++                        x,
++                        coverage=(
++                            coverage,
++                            replace(
++                                coverage, coverage_id="other", expected_member_identities=("other",)
++                            ),
++                        ),
++                    )
++                ).coverage_state
++                == "CONFLICTING"
++            )
++        elif group == "C04":
++            assert query(replace(x, memberships=(), coverage=())).coverage_state == "UNKNOWN"
++        else:
++            assert (
++                not query(x).financial_accepted
++                and query(x).coverage_state == "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"
++            )
++    elif group.startswith("A"):
++        o = observation(x)
++        changes = {
++            "A01": {"known_from": K + timedelta(seconds=1)},
++            "A02": {"published_at": K + timedelta(seconds=1)},
++            "A03": {},
++            "A04": {"interval_completed_at": K + timedelta(hours=1)},
++            "A05": {"known_from": None},
++        }[group]
++        o = replace(o, **changes)
++        policy = c.AvailabilityPolicy(
++            "availability-v1",
++            "CONSERVATIVE" if group == "A05" else "STRICT",
++            bound=K if group == "A05" else None,
++        )
++        assert t.availability(o, K, policy, x) == (
++            "AVAILABLE" if group == "A03" else "BLOCKED_AVAILABILITY"
++        )
++    elif group.startswith("L"):
++        from omegadata.session_calendar import CoverageClaim, SessionClaim, VerifiedCalendar
++
++        session = SessionClaim(
++            "session",
++            "CANARY-X",
++            D,
++            "REGULAR",
++            "Asia/Kolkata",
++            "calendar-v1",
++            x.definition.evidence,
++            K,
++            None,
++            closes_at=K + timedelta(hours=1),
++        )
++        cal = VerifiedCalendar(
++            (session,),
++            (
++                CoverageClaim(
++                    "range",
++                    "CANARY-X",
++                    D,
++                    D + timedelta(days=1),
++                    K,
++                    None,
++                    x.definition.evidence,
++                    "calendar-v1",
++                    "COMPLETE",
++                ),
++            ),
++        )
++        x = replace(x, calendar=cal)
++        o = observation(
++            x, interval_completed_at=K + timedelta(hours=1), known_from=K + timedelta(hours=1)
++        )
++        known = K + timedelta(hours=2)
++        lp = c.LiquidityPolicy(
++            "liquid-v1",
++            1,
++            1,
++            Decimal(0),
++            Decimal(0),
++            Decimal(1),
++            "CONTROL_UNIT",
++            "CONTROL_ONLY",
++            "RAW_UNADJUSTED",
++            "RAW",
++        )
++        obs = (o,)
++        if group == "L02":
++            assert (
++                e.liquidity(m, x, (replace(o, volume=None),), D, known, lp)[0]
++                == "BLOCKED_LIQUIDITY_COVERAGE"
++            )
++        elif group == "L03":
++            obs = (o, replace(o, observation_id="duplicate"))
++        elif group == "L04":
++            obs = (replace(o, currency="OTHER"),)
++        elif group == "L05":
++            obs = ()
++        elif group == "L01":
++            assert e.liquidity(m, x, obs, D, K, lp)[0] == "BLOCKED_LIQUIDITY_COVERAGE"
++        assert e.liquidity(m, x, obs, D, known, lp)[0] == (
++            "ELIGIBLE" if group in {"L01", "L02"} else "BLOCKED_LIQUIDITY_COVERAGE"
++        )
++    elif group.startswith("E"):
++        if group == "E01":
++            out = query(x, policy=replace(p, view="RESEARCH", require_observations=True))
++            assert (
++                out.member_identities == ("security-a",)
++                and out.decisions[0].status == "BLOCKED_AVAILABILITY"
++            )
++        elif group == "E02":
++            assert (
++                query(x, policy=replace(p, view="EXECUTION")).decisions[0].status
++                == "BLOCKED_TRADABILITY"
++            )
++        else:
++            from test_od07_final import setup_bound
++
++            from omegadata.adjustments.bound_chain import calculate_bound_chain
++
++            pin = setup_bound()[8]
++            bound = calculate_bound_chain(pin)
++            assert (
++                e.adjustment_eligible(bound, None, K, "PRICE_RETURN", "BACKWARD_ADJUSTED")
++                == "BLOCKED_ADJUSTMENT_CONTEXT"
++            )
++    elif group.startswith("R"):
++        candidate = c.RankingCandidate("security-a", Decimal(10), observation(x))
++        if group == "R01":
++            assert e.reconstruct((candidate,), 1, K, x)[0] == "RECONSTRUCTED_PROVISIONAL"
++        else:
++            with pytest.raises(ValueError):
++                e.reconstruct((candidate, candidate), 1, K, x)
++    elif group.startswith("P"):
++        url = (
++            "sqlite:///:memory:"
++            if group not in {"P04", "P06"}
++            else "sqlite:///" + str(tmp_path / "universe.sqlite")
++        )
++        db = UniverseRepository(url, disposable_root=tmp_path)
++        db.seed_context(x, p)
++        db.pin_context("pin", x, D, K, p)
++        out = query(x)
++        if group == "P01":
++            db.admit_snapshot("pin", out)
++            db.admit_snapshot("pin", out)
++        elif group == "P02":
++            with pytest.raises(ValueError):
++                db.admit_snapshot("pin", replace(out, decisions=(), selected_revision_ids=()))
++        elif group == "P03":
++            with pytest.raises(ValueError):
++                db.admit_snapshot("pin", replace(out, decision_digest="forged"))
++        elif group == "P04":
++            db.admit_snapshot("pin", out)
++            db.close()
++            db = UniverseRepository(url, disposable_root=tmp_path)
++            assert db.get_snapshot(out.universe_snapshot_id) == out.canonical_json
++        elif group == "P05":
++            with pytest.raises(ValueError):
++                db.pin_context("pin", replace(x, memberships=()), D, K, p)
++            db.admit_snapshot("pin", out)
++        else:
++            correction = replace(
++                m,
++                claim=replace(
++                    m.claim,
++                    membership_id="m-b",
++                    known_from=K + timedelta(days=1),
++                    supersedes_membership_id="m-a",
++                ),
++                revision_number=2,
++            )
++            db.append_membership(correction)
++            with pytest.raises(ValueError):
++                db.append_membership(
++                    replace(correction, claim=replace(correction.claim, membership_id="m-c"))
++                )
++        db.close()
++    elif group == "S01":
++        assert query(replace(x, mode="STRICT")).decisions[0].status == "BLOCKED_SOURCE_RIGHTS"
++    elif group == "S02":
++        assert not query(x).financial_accepted and not query(x).execution_accepted
++    elif group == "S03":
++        import od05x_isolated_runner as boundary
++
++        assert boundary.assert_boundary()["verified"]
++    elif group == "S04":
++        from omegadata.identity_adapters import strict_universe
++
++        old = strict_universe((m.claim,), x.identity, "CONTROL_SCOPE", D, K, "CANARY_ONLY")
++        assert old.accounted_count == 1
++
++
++@pytest.mark.parametrize(
++    "case",
++    [
++        "order",
++        "future-digest",
++        "naive",
++        "wrong-pin",
++        "replay",
++        "explain",
++        "changed-policy",
++        "unknown-schema",
++        "nonempty-rollback",
++        "foreign-key",
++        "immutable",
++        "bounds",
++        "cancel-lineage",
++        "provisional",
++        "observation-future-digest",
++        "definition-expired",
++    ],
++)
++def test_review_controls(case, tmp_path):
++    c, x, m, cov, p, run = setup_case()
++    from omegadata.universe import snapshots as s
++    from omegadata.universe.repository import UniverseRepository
++
++    if case == "order":
++        assert (
++            query(replace(x, memberships=tuple(reversed(x.memberships)))).snapshot_digest
++            == query(x).snapshot_digest
++        )
++    elif case == "future-digest":
++        future = replace(
++            m,
++            claim=replace(
++                m.claim,
++                membership_id="future",
++                known_from=K + timedelta(days=1),
++                supersedes_membership_id="m-a",
++            ),
++            revision_number=2,
++        )
++        assert (
++            query(replace(x, memberships=(m, future))).snapshot_digest == query(x).snapshot_digest
++        )
++    elif case == "naive":
++        with pytest.raises(ValueError):
++            query(x, known=K.replace(tzinfo=None))
++    elif case == "wrong-pin":
++        with pytest.raises(ValueError):
++            run(x, D, K, p, "wrong")
++    elif case == "replay":
++        out = s.replay_universe_decisions(
++            x, ((D, K), (D, K + timedelta(seconds=1))), p, max_steps=2
++        )
++        assert len(out) == 2
++    elif case == "explain":
++        assert s.explain_member_decision(query(x), "m-a").revision_id == "m-a"
++    elif case == "bounds":
++        with pytest.raises(ValueError):
++            s.replay_universe_decisions(x, ((D, K),), p, max_steps=0)
++    elif case == "cancel-lineage":
++        with pytest.raises(ValueError):
++            query(replace(x, memberships=(replace(m, revision_number=2),)))
++    elif case == "provisional":
++        assert (
++            query(
++                replace(
++                    x,
++                    memberships=(
++                        replace(m, claim=replace(m.claim, status="RECONSTRUCTED_PROVISIONAL")),
++                    ),
++                )
++            )
++            .decisions[0]
++            .status
++            == "PROVISIONAL_ONLY"
++        )
++    elif case == "observation-future-digest":
++        assert (
++            query(
++                replace(x, observations=(observation(x, known_from=K + timedelta(days=1)),))
++            ).snapshot_digest
++            == query(x).snapshot_digest
++        )
++    elif case == "definition-expired":
++        with pytest.raises(ValueError):
++            query(
++                replace(x, definition=replace(x.definition, known_to=K + timedelta(seconds=1))),
++                known=K + timedelta(seconds=1),
++            )
++    else:
++        from sqlalchemy import text
++
++        db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.seed_context(x, p)
++        db.pin_context("pin", x, D, K, p)
++        out = query(x)
++        db.admit_snapshot("pin", out)
++        if case == "changed-policy":
++            with pytest.raises(ValueError):
++                db.seed_context(x, replace(p, view="RESEARCH"))
++        elif case == "nonempty-rollback":
++            with pytest.raises(ValueError):
++                db.rollback_empty()
++        elif case == "foreign-key":
++            with pytest.raises(IntegrityError), db.transaction() as con:
++                con.execute(
++                    text(
++                        "INSERT INTO od08_decision(snapshot,revision,payload,digest) VALUES('missing','missing','x','x')"
++                    )
++                )
++        elif case == "immutable":
++            with pytest.raises(IntegrityError), db.transaction() as con:
++                con.execute(text("DELETE FROM od08_membership"))
++        elif case == "unknown-schema":
++            with pytest.raises(IntegrityError), db.transaction() as con:
++                con.execute(text("UPDATE od08_schema SET version='unknown'"))
++        db.close()
++
++
++@pytest.mark.parametrize(
++    "case",
++    [
++        "context-checksum",
++        "replay-restart",
++        "omitted-ledger",
++        "omitted-coverage",
++        "order-observations",
++        "complete-transition",
++        "listing-granularity",
++        "actual-rollback",
++        "migration-empty",
++        "read-only-backfill",
++        "closed-session",
++        "same-instant-correction",
++        "replay-bool",
++        "future-definition",
++        "ranking-tie",
++    ],
++)
++def test_independent_review(case, tmp_path):
++    from sqlalchemy import text
++
++    from omegadata.universe import eligibility as e
++    from omegadata.universe import snapshots as s
++    from omegadata.universe.repository import UniverseRepository
++
++    c, x, m, cov, p, run = setup_case()
++    if case == "context-checksum":
++        db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.seed_context(x, p)
++        db.pin_context("pin", x, D, K, p)
++        with db.transaction() as con:
++            con.exec_driver_sql("DROP TRIGGER od08_context_update")
++            con.exec_driver_sql("UPDATE od08_context SET payload=payload||' '")
++        with pytest.raises(ValueError):
++            db.admit_snapshot("pin", query(x))
++    elif case == "replay-restart":
++        url = "sqlite:///" + str(tmp_path / "replay.sqlite")
++        db = UniverseRepository(url, disposable_root=tmp_path)
++        db.seed_context(x, p)
++        db.pin_context("pin", x, D, K, p)
++        db.admit_snapshot("pin", query(x))
++        db.close()
++        db = UniverseRepository(url, disposable_root=tmp_path)
++        assert db.replay_context("pin").snapshot_digest == query(x).snapshot_digest
++    elif case in {"omitted-ledger", "omitted-coverage"}:
++        db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.seed_context(x, p)
++        with pytest.raises(ValueError):
++            db.pin_context(
++                "pin",
++                replace(
++                    x, **({"memberships": ()} if case == "omitted-ledger" else {"coverage": ()})
++                ),
++                D,
++                K,
++                p,
++            )
++    elif case == "order-observations":
++        a = observation(x)
++        b = replace(a, observation_id="other", session_date=D - timedelta(days=1))
++        policy = replace(p, view="RESEARCH")
++        assert (
++            query(replace(x, observations=(a, b)), policy=policy).snapshot_digest
++            == query(replace(x, observations=(b, a)), policy=policy).snapshot_digest
++        )
++    elif case == "complete-transition":
++        end = D + timedelta(days=2)
++        member = replace(m, claim=replace(m.claim, valid_to=end))
++        coverage = replace(
++            cov,
++            transitions=(c.CoverageTransition("m-a", "security-a", "REMOVE", end),),
++            ending_member_identities=(),
++        )
++        y = replace(x, memberships=(member,), coverage=(coverage,))
++        assert query(y).coverage_state == "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"
++        assert (
++            query(y, day=end).member_identities == ()
++            and query(y, day=end).coverage_state == "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE"
++        )
++    elif case == "listing-granularity":
++        from omegadata.identity import Listing
++
++        old = x.identity.claims[0]
++        otherlisting = Listing("listing-b", "security-a", "CANARY-X")
++        otherclaim = replace(old, claim_id="claim-b", listing_id="listing-b", series="OTHER")
++        identity = replace(
++            x.identity,
++            listings=(*x.identity.listings, otherlisting),
++            claims=(*x.identity.claims, otherclaim),
++        )
++        other = replace(
++            m,
++            claim=replace(m.claim, membership_id="m-b", series="OTHER"),
++            event_id="event-b",
++            listing_id="listing-b",
++        )
++        coverage = replace(
++            cov,
++            expected_member_identities=("listing-a", "listing-b"),
++            ending_member_identities=("listing-a", "listing-b"),
++        )
++        y = replace(
++            x,
++            definition=replace(x.definition, identity_granularity="LISTING"),
++            identity=identity,
++            memberships=(m, other),
++            coverage=(coverage,),
++        )
++        assert query(y).included_member_ids == ("listing-a", "listing-b")
++    elif case == "actual-rollback":
++        db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.seed_context(x, p)
++        with pytest.raises(RuntimeError), db.transaction() as con:
++            db._put(
++                con,
++                __import__("omegadata.universe.repository", fromlist=["policies"]).policies,
++                "new-policy",
++                replace(p, policy_version="new-policy"),
++            )
++            raise RuntimeError("CONTROLLED_INTERRUPT")
++        with db.engine.connect() as con:
++            assert con.scalar(text("SELECT count(*) FROM od08_policy WHERE id='new-policy'")) == 0
++    elif case == "migration-empty":
++        db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.rollback_empty()
++        db.close()
++    elif case == "read-only-backfill":
++        from omegadata.universe.compatibility import source_dependent_backfill
++
++        with pytest.raises(PermissionError):
++            source_dependent_backfill()
++    elif case == "closed-session":
++        from omegadata.session_calendar import SessionClaim
++
++        session = SessionClaim(
++            "closed",
++            "CANARY-X",
++            D,
++            "CLOSED",
++            "Asia/Kolkata",
++            "calendar",
++            x.definition.evidence,
++            K,
++            None,
++        )
++        y = replace(x, calendar=replace(x.calendar, claims=(session,)))
++        out = query(y, policy=replace(p, view="EXECUTION"))
++        assert (
++            out.member_identities == ("security-a",)
++            and out.decisions[0].status == "BLOCKED_TRADABILITY"
++        )
++    elif case == "same-instant-correction":
++        child = replace(
++            m,
++            claim=replace(m.claim, membership_id="bad", supersedes_membership_id="m-a"),
++            revision_number=2,
++        )
++        with pytest.raises(ValueError):
++            query(replace(x, memberships=(m, child)))
++    elif case == "replay-bool":
++        with pytest.raises(ValueError):
++            s.replay_universe_decisions(x, ((D, K),), p, max_steps=True)
++    elif case == "future-definition":
++        with pytest.raises(ValueError):
++            query(replace(x, definition=replace(x.definition, known_from=K + timedelta(seconds=1))))
++    elif case == "ranking-tie":
++        first = c.RankingCandidate("security-a", Decimal(10), observation(x))
++        out = e.reconstruct((first,), 1, K, x)
++        assert out[1] == ("security-a",) and out[0] == "RECONSTRUCTED_PROVISIONAL"
++
++
++@pytest.mark.parametrize(
++    "case",
++    [
++        "valid-adjustment",
++        "wrong-profile",
++        "future-context",
++        "persist-adjustment",
++        "persist-authority-object",
++    ],
++)
++def test_od07_bound_integration(case, tmp_path):
++    from test_od07_final import setup_bound
++
++    from omegadata.adjustments.bound_chain import calculate_bound_chain
++    from omegadata.identity_adapters import MembershipClaim
++    from omegadata.universe import contracts as c
++    from omegadata.universe.repository import UniverseRepository
++
++    pin = setup_bound()[8]
++    if case == "persist-authority-object":
++        from omegadata.identity_authority import EvidenceAuthority
++
++        pin = replace(pin, context=replace(pin.context, authority=EvidenceAuthority.unconfigured()))
++    raw = pin.raw.raw
++    result = calculate_bound_chain(pin)
++    e = raw.evidence
++    known = pin.context.known_at
++    day = pin.context.valid_at
++    claim = MembershipClaim(
++        "m-bound",
++        "BOUND_CONTROL",
++        raw.symbol,
++        raw.series,
++        raw.exchange,
++        raw.trade_date,
++        None,
++        raw.known_from,
++        None,
++        e,
++    )
++    member = c.MembershipRevision(
++        claim, "event", "math-source", "artifact", "record", raw.security_id, raw.listing_id
++    )
++    definition = c.UniverseDefinition(
++        "BOUND_CONTROL",
++        "Anonymous bound contract",
++        "CUSTOM_POLICY_UNIVERSE",
++        "SECURITY",
++        "method",
++        ("math-source",),
++        (raw.exchange,),
++        raw.trade_date,
++        None,
++        raw.known_from,
++        None,
++        e,
++    )
++    coverage = c.UniverseCoverage(
++        "cov",
++        "BOUND_CONTROL",
++        "math-source",
++        "ref",
++        "method",
++        raw.trade_date,
++        day + timedelta(days=1),
++        raw.known_from,
++        None,
++        "COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE",
++        (raw.security_id,),
++        e,
++        "independent-control",
++        granularity="COMPLETE_CHANGE_HISTORY",
++        ending_member_identities=(raw.security_id,),
++        ending_reference="end",
++    )
++    obs = c.AvailabilityObservation(
++        "bound-observation",
++        "CONTROL_ONLY",
++        raw.listing_id,
++        raw.trade_date,
++        None,
++        raw.known_from,
++        None,
++        raw.known_from,
++        None,
++        None,
++        "math-source",
++        "raw-artifact",
++        e,
++        interval_completed_at=raw.known_from,
++        record_identity="record",
++        adjustment=result,
++        adjustment_pin=pin,
++    )
++    x = c.UniverseContext(
++        "source-pin",
++        definition,
++        (member,),
++        (coverage,),
++        pin.context.identity_repository,
++        pin.context.calendar,
++        (obs,),
++        mode="CANARY_ONLY",
++    )
++    policy = c.EligibilityPolicy(
++        "bound-policy", "RESEARCH", require_observations=True, require_adjustment=True
++    )
++    if case == "wrong-profile":
++        policy = replace(policy, required_profile="TOTAL_RETURN")
++    if case == "future-context":
++        known -= timedelta(days=1)
++    from omegadata.universe.snapshots import get_universe_as_of
++
++    out = get_universe_as_of(x, day, known, policy, "source-pin")
++    assert out.decisions[0].status == (
++        "BLOCKED_AVAILABILITY" if case in {"wrong-profile", "future-context"} else "INCLUDED"
++    )
++    assert not out.financial_accepted
++    if case in {"persist-adjustment", "persist-authority-object"}:
++        db = UniverseRepository("sqlite:///:memory:", disposable_root=tmp_path)
++        db.seed_context(x, policy)
++        db.pin_context("bound-pin", x, day, known, policy)
++        db.admit_snapshot("bound-pin", out)
++        assert db.replay_context("bound-pin").snapshot_digest == out.snapshot_digest
++
++
++@pytest.mark.parametrize(
++    "case", ["future-announcement", "future-publication", "intraday-before", "intraday-at"]
++)
++def test_source_time_boundaries(case):
++    from omegadata.universe.temporal import get_known_upcoming_changes
++
++    c, x, m, cov, p, run = setup_case()
++    if case.startswith("future"):
++        values = (
++            {"announcement_at": K + timedelta(seconds=1)}
++            if case == "future-announcement"
++            else {"published_at": K + timedelta(seconds=1)}
++        )
++        changed = replace(m, claim=replace(m.claim, valid_from=D + timedelta(days=1)), **values)
++        out = get_known_upcoming_changes(replace(x, memberships=(changed,)), D, K)
++        assert out[0][1] == "BLOCKED_AVAILABILITY"
++    else:
++        effective = K + timedelta(hours=1)
++        changed = replace(m, effective_at=effective, effective_convention="EXPLICIT_TIMESTAMP")
++        instant = effective - timedelta(seconds=1) if case == "intraday-before" else effective
++        out = run(
++            replace(x, memberships=(changed,)), instant, K + timedelta(hours=2), p, "source-pin"
++        )
++        assert out.selected_revision_ids == (() if case == "intraday-before" else ("m-a",))
++
++
++def test_identity_selection_candidate_budget(monkeypatch):
++    from omegadata.identity import Listing, MemoryIdentityRepository, Security
++
++    c, x, m, cov, p, run = setup_case()
++    securities = (
++        Security("s0", "issuer-a"),
++        Security("s1", "issuer-a"),
++        Security("s2", "issuer-a"),
++    )
++    listings = tuple(
++        Listing("l" + str(i), s.security_id, "CANARY-X") for i, s in enumerate(securities)
++    )
++    claims = tuple(
++        replace(
++            x.identity.claims[0],
++            claim_id="i" + str(i),
++            listing_id=listing.listing_id,
++            symbol="T" + str(i),
++        )
++        for i, listing in enumerate(listings)
++    )
++    identity = replace(x.identity, securities=securities, listings=listings, claims=claims)
++    members = tuple(
++        replace(
++            m,
++            claim=replace(m.claim, membership_id="m" + str(i), symbol="T" + str(i)),
++            event_id="event" + str(i),
++            security_id=s.security_id,
++            listing_id=listings[i].listing_id,
++        )
++        for i, s in enumerate(securities)
++    )
++    y = replace(
++        x,
++        identity=identity,
++        memberships=members,
++        coverage=(
++            replace(
++                cov,
++                expected_member_identities=("s0", "s1", "s2"),
++                ending_member_identities=("s0", "s1", "s2"),
++            ),
++        ),
++    )
++    examined = []
++    original = MemoryIdentityRepository.resolve_listing
++
++    def trace(repository, *args, **kwargs):
++        examined.append(len(repository.claims))
++        return original(repository, *args, **kwargs)
++
++    monkeypatch.setattr(MemoryIdentityRepository, "resolve_listing", trace)
++    assert query(y).included_member_ids == ("s0", "s1", "s2")
++    assert sum(examined) <= 4 * len(members)
++
++
++def test_two_connection_competing_corrections(tmp_path):
++    from concurrent.futures import ThreadPoolExecutor
++    from threading import Barrier
++
++    from omegadata.universe.repository import UniverseRepository
++
++    c, x, m, cov, p, run = setup_case()
++    url = "sqlite:///" + str(tmp_path / "competing.sqlite")
++    first = UniverseRepository(url, disposable_root=tmp_path)
++    first.seed_context(x, p)
++    second = UniverseRepository(url, disposable_root=tmp_path)
++    barrier = Barrier(2)
++
++    def attempt(repository, name):
++        child = replace(
++            m,
++            claim=replace(
++                m.claim,
++                membership_id=name,
++                known_from=K + timedelta(days=1),
++                supersedes_membership_id="m-a",
++            ),
++            revision_number=2,
++        )
++        barrier.wait(timeout=5)
++        try:
++            repository.append_membership(child)
++            return "COMMITTED"
++        except (ValueError, IntegrityError):
++            return "REFUSED"
++
++    with ThreadPoolExecutor(max_workers=2) as pool:
++        a = pool.submit(attempt, first, "candidate-a")
++        b = pool.submit(attempt, second, "candidate-b")
++        assert sorted((a.result(), b.result())) == ["COMMITTED", "REFUSED"]
++    first.close()
++    second.close()
++
++
++@pytest.mark.parametrize("case", ["source-scope", "expected-identities", "transitions"])
++def test_immutable_source_contracts(case):
++    c, x, m, cov, p, run = setup_case()
++    with pytest.raises(ValueError):
++        if case == "source-scope":
++            replace(x.definition, source_scope=["control-source"])
++        elif case == "expected-identities":
++            replace(cov, expected_member_identities=["security-a"])
++        else:
++            replace(cov, transitions=[])

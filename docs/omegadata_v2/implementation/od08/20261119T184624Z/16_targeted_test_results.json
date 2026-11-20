@@ -1,0 +1,548 @@
+{
+  "families": {
+    "U01": "test_acceptance[U01]",
+    "U02": "test_acceptance[U02]",
+    "U03": "test_acceptance[U03]",
+    "U04": "test_acceptance[U04]",
+    "U05": "test_acceptance[U05]",
+    "U06": "test_acceptance[U06]",
+    "U07": "test_acceptance[U07]",
+    "U08": "test_acceptance[U08]",
+    "U09": "test_acceptance[U09]",
+    "U10": "test_acceptance[U10]",
+    "I01": "test_acceptance[I01]",
+    "I02": "test_acceptance[I02]",
+    "I03": "test_acceptance[I03]",
+    "I04": "test_acceptance[I04]",
+    "I05": "test_acceptance[I05]",
+    "I06": "test_acceptance[I06]",
+    "C01": "test_acceptance[C01]",
+    "C02": "test_acceptance[C02]",
+    "C03": "test_acceptance[C03]",
+    "C04": "test_acceptance[C04]",
+    "C05": "test_acceptance[C05]",
+    "A01": "test_acceptance[A01]",
+    "A02": "test_acceptance[A02]",
+    "A03": "test_acceptance[A03]",
+    "A04": "test_acceptance[A04]",
+    "A05": "test_acceptance[A05]",
+    "L01": "test_acceptance[L01]",
+    "L02": "test_acceptance[L02]",
+    "L03": "test_acceptance[L03]",
+    "L04": "test_acceptance[L04]",
+    "L05": "test_acceptance[L05]",
+    "E01": "test_acceptance[E01]",
+    "E02": "test_acceptance[E02]",
+    "E03": "test_acceptance[E03]",
+    "E04": "test_acceptance[E04]",
+    "R01": "test_acceptance[R01]",
+    "R02": "test_acceptance[R02]",
+    "P01": "test_acceptance[P01]",
+    "P02": "test_acceptance[P02]",
+    "P03": "test_acceptance[P03]",
+    "P04": "test_acceptance[P04]",
+    "P05": "test_acceptance[P05]",
+    "P06": "test_acceptance[P06]",
+    "S01": "test_acceptance[S01]",
+    "S02": "test_acceptance[S02]",
+    "S03": "test_acceptance[S03]",
+    "S04": "test_acceptance[S04]"
+  },
+  "focused_command": {
+    "job": "od08",
+    "command_id": "od08-f5a579dec7-command",
+    "launcher_argv": [
+      "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+      "-B",
+      "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+      "launch",
+      "--manifest",
+      "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-f5a579dec7-manifest.json",
+      "--manifest-sha256",
+      "2e7c0d9e192f8c449fd0d44249218317341079573bcaf56db3b327eea0a34b3a",
+      "--policy",
+      "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-f5a579dec7-policy.json",
+      "--output",
+      "/home/parilrupani/omega-od08-20261119T184624Z/od08-f5a579dec7/output"
+    ],
+    "working_directory": "/home/parilrupani/omega-od08-20261119T184624Z",
+    "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+    "platform": "Ubuntu/WSL Linux",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "start_utc": "2026-11-19T19:18:33.540589+00:00",
+    "end_utc": "2026-11-19T19:18:41.240735+00:00",
+    "elapsed_seconds": 7.700143560000015,
+    "exit_code": 0,
+    "counts": {
+      "passed": 92
+    },
+    "stdout_stderr": "logs/od08-f5a579dec7-command.json",
+    "source_manifest_sha256": "2e7c0d9e192f8c449fd0d44249218317341079573bcaf56db3b327eea0a34b3a",
+    "source_manifest": "logs/od08-f5a579dec7-manifest.json"
+  },
+  "focused_counts": {
+    "passed": 92
+  },
+  "coverage": {
+    "weighted": {
+      "covered_lines": 845,
+      "num_statements": 936,
+      "covered_branches": 289,
+      "num_branches": 370,
+      "statement_percent": 90.27777777777777,
+      "branch_percent": 78.10810810810811
+    },
+    "modules": {
+      "src/omegadata/universe/__init__.py": {
+        "covered_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100",
+        "num_branches": 0,
+        "num_partial_branches": 0,
+        "covered_branches": 0,
+        "missing_branches": 0,
+        "percent_branches_covered": 100.0,
+        "percent_branches_covered_display": "100"
+      },
+      "src/omegadata/universe/compatibility.py": {
+        "covered_lines": 10,
+        "num_statements": 12,
+        "percent_covered": 83.33333333333333,
+        "percent_covered_display": "83",
+        "missing_lines": 2,
+        "excluded_lines": 0,
+        "percent_statements_covered": 83.33333333333333,
+        "percent_statements_covered_display": "83",
+        "num_branches": 0,
+        "num_partial_branches": 0,
+        "covered_branches": 0,
+        "missing_branches": 0,
+        "percent_branches_covered": 100.0,
+        "percent_branches_covered_display": "100"
+      },
+      "src/omegadata/universe/contracts.py": {
+        "covered_lines": 242,
+        "num_statements": 254,
+        "percent_covered": 92.05298013245033,
+        "percent_covered_display": "92",
+        "missing_lines": 12,
+        "excluded_lines": 0,
+        "percent_statements_covered": 95.2755905511811,
+        "percent_statements_covered_display": "95",
+        "num_branches": 48,
+        "num_partial_branches": 12,
+        "covered_branches": 36,
+        "missing_branches": 12,
+        "percent_branches_covered": 75.0,
+        "percent_branches_covered_display": "75"
+      },
+      "src/omegadata/universe/eligibility.py": {
+        "covered_lines": 74,
+        "num_statements": 86,
+        "percent_covered": 81.53846153846153,
+        "percent_covered_display": "82",
+        "missing_lines": 12,
+        "excluded_lines": 0,
+        "percent_statements_covered": 86.04651162790698,
+        "percent_statements_covered_display": "86",
+        "num_branches": 44,
+        "num_partial_branches": 10,
+        "covered_branches": 32,
+        "missing_branches": 12,
+        "percent_branches_covered": 72.72727272727273,
+        "percent_branches_covered_display": "73"
+      },
+      "src/omegadata/universe/repository.py": {
+        "covered_lines": 246,
+        "num_statements": 271,
+        "percent_covered": 87.72845953002611,
+        "percent_covered_display": "88",
+        "missing_lines": 25,
+        "excluded_lines": 0,
+        "percent_statements_covered": 90.77490774907749,
+        "percent_statements_covered_display": "91",
+        "num_branches": 112,
+        "num_partial_branches": 22,
+        "covered_branches": 90,
+        "missing_branches": 22,
+        "percent_branches_covered": 80.35714285714286,
+        "percent_branches_covered_display": "80"
+      },
+      "src/omegadata/universe/snapshots.py": {
+        "covered_lines": 137,
+        "num_statements": 151,
+        "percent_covered": 88.51674641148325,
+        "percent_covered_display": "89",
+        "missing_lines": 14,
+        "excluded_lines": 0,
+        "percent_statements_covered": 90.72847682119205,
+        "percent_statements_covered_display": "91",
+        "num_branches": 58,
+        "num_partial_branches": 4,
+        "covered_branches": 48,
+        "missing_branches": 10,
+        "percent_branches_covered": 82.75862068965517,
+        "percent_branches_covered_display": "83"
+      },
+      "src/omegadata/universe/temporal.py": {
+        "covered_lines": 136,
+        "num_statements": 162,
+        "percent_covered": 81.11111111111111,
+        "percent_covered_display": "81",
+        "missing_lines": 26,
+        "excluded_lines": 0,
+        "percent_statements_covered": 83.95061728395062,
+        "percent_statements_covered_display": "84",
+        "num_branches": 108,
+        "num_partial_branches": 21,
+        "covered_branches": 83,
+        "missing_branches": 25,
+        "percent_branches_covered": 76.85185185185185,
+        "percent_branches_covered_display": "77"
+      }
+    },
+    "scope": "OD08 focused engineering coverage only, not financial coverage"
+  },
+  "negative_first_history": [
+    {
+      "command": "logs/od08-2d14d711d4-command.json",
+      "start_utc": "2026-11-19T18:51:18.873627+00:00",
+      "end_utc": "2026-11-19T18:51:23.402702+00:00",
+      "test_sha256": "daa04dc4d51be019003957e22525bc3c17871ce820d756b8b9edafc3b215154d",
+      "exit_code": 2,
+      "counts": {},
+      "failed_nodes": [],
+      "collection_failure": true
+    },
+    {
+      "command": "logs/od08-ca32cdba31-command.json",
+      "start_utc": "2026-11-19T18:51:48.901812+00:00",
+      "end_utc": "2026-11-19T18:51:55.039005+00:00",
+      "test_sha256": "35f7f347ee54c8425aebd77d0c53935799405731b972a059c855b55c797ea973",
+      "exit_code": 1,
+      "counts": {
+        "failed": 63
+      },
+      "failed_nodes": [
+        "tests/unit/test_od08_universe.py::test_acceptance[U01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U06]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U07]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U08]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U09]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U10]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I06]",
+        "tests/unit/test_od08_universe.py::test_acceptance[C01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[C02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[C03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[C04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[C05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[E01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[E02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[E03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[E04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[R01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[R02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P06]",
+        "tests/unit/test_od08_universe.py::test_acceptance[S01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[S02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[S03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[S04]",
+        "tests/unit/test_od08_universe.py::test_review_controls[order]",
+        "tests/unit/test_od08_universe.py::test_review_controls[future-digest]",
+        "tests/unit/test_od08_universe.py::test_review_controls[naive]",
+        "tests/unit/test_od08_universe.py::test_review_controls[wrong-pin]",
+        "tests/unit/test_od08_universe.py::test_review_controls[replay]",
+        "tests/unit/test_od08_universe.py::test_review_controls[explain]",
+        "tests/unit/test_od08_universe.py::test_review_controls[changed-policy]",
+        "tests/unit/test_od08_universe.py::test_review_controls[unknown-schema]",
+        "tests/unit/test_od08_universe.py::test_review_controls[nonempty-rollback]",
+        "tests/unit/test_od08_universe.py::test_review_controls[foreign-key]",
+        "tests/unit/test_od08_universe.py::test_review_controls[immutable]",
+        "tests/unit/test_od08_universe.py::test_review_controls[bounds]",
+        "tests/unit/test_od08_universe.py::test_review_controls[cancel-lineage]",
+        "tests/unit/test_od08_universe.py::test_review_controls[provisional]",
+        "tests/unit/test_od08_universe.py::test_review_controls[observation-future-digest]",
+        "tests/unit/test_od08_universe.py::test_review_controls[definition-expired]"
+      ],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-e538e9b01d-command.json",
+      "start_utc": "2026-11-19T18:58:25.158501+00:00",
+      "end_utc": "2026-11-19T18:58:31.998672+00:00",
+      "test_sha256": "35f7f347ee54c8425aebd77d0c53935799405731b972a059c855b55c797ea973",
+      "exit_code": 1,
+      "counts": {
+        "failed": 30,
+        "passed": 33
+      },
+      "failed_nodes": [
+        "tests/unit/test_od08_universe.py::test_acceptance[U01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[U02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[I06]",
+        "tests/unit/test_od08_universe.py::test_acceptance[C05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[A05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L03]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[L05]",
+        "tests/unit/test_od08_universe.py::test_acceptance[E01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[E02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[R01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[R02]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P01]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P04]",
+        "tests/unit/test_od08_universe.py::test_acceptance[P05]",
+        "tests/unit/test_od08_universe.py::test_review_controls[changed-policy]",
+        "tests/unit/test_od08_universe.py::test_review_controls[unknown-schema]",
+        "tests/unit/test_od08_universe.py::test_review_controls[nonempty-rollback]",
+        "tests/unit/test_od08_universe.py::test_review_controls[foreign-key]",
+        "tests/unit/test_od08_universe.py::test_review_controls[immutable]",
+        "tests/unit/test_od08_universe.py::test_review_controls[observation-future-digest]"
+      ],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-bd2097c2bb-command.json",
+      "start_utc": "2026-11-19T18:59:28.344473+00:00",
+      "end_utc": "2026-11-19T18:59:34.210432+00:00",
+      "test_sha256": "b970c641640c5229b5427225ef1eacdfa3aebb9740693896b310980e094f2d75",
+      "exit_code": 0,
+      "counts": {
+        "passed": 63
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-381896378d-command.json",
+      "start_utc": "2026-11-19T19:01:24.932066+00:00",
+      "end_utc": "2026-11-19T19:01:31.948039+00:00",
+      "test_sha256": "20a7e32ee78f13d7f3f8543162301e38a7ef6e44df527a0c1dbf1c3cf1fc1fd3",
+      "exit_code": 1,
+      "counts": {
+        "passed": 78,
+        "failed": 4
+      },
+      "failed_nodes": [
+        "tests/unit/test_od08_universe.py::test_independent_review[context-checksum]",
+        "tests/unit/test_od08_universe.py::test_independent_review[omitted-coverage]",
+        "tests/unit/test_od08_universe.py::test_independent_review[order-observations]",
+        "tests/unit/test_od08_universe.py::test_independent_review[replay-bool]"
+      ],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-9d6ec5d433-command.json",
+      "start_utc": "2026-11-19T19:02:52.140789+00:00",
+      "end_utc": "2026-11-19T19:02:59.593848+00:00",
+      "test_sha256": "20a7e32ee78f13d7f3f8543162301e38a7ef6e44df527a0c1dbf1c3cf1fc1fd3",
+      "exit_code": 0,
+      "counts": {
+        "passed": 82
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-4496e949fb-command.json",
+      "start_utc": "2026-11-19T19:05:45.704699+00:00",
+      "end_utc": "2026-11-19T19:05:51.770982+00:00",
+      "test_sha256": "3dd17ae677f8b4957697579edd9bcf7d7feecc7b68631123cb538acffe8424da",
+      "exit_code": 1,
+      "counts": {
+        "passed": 82,
+        "failed": 4
+      },
+      "failed_nodes": [
+        "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-announcement]",
+        "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-publication]",
+        "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-before]",
+        "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-at]"
+      ],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-4d056f7aaa-command.json",
+      "start_utc": "2026-11-19T19:06:51.672793+00:00",
+      "end_utc": "2026-11-19T19:06:58.643214+00:00",
+      "test_sha256": "3dd17ae677f8b4957697579edd9bcf7d7feecc7b68631123cb538acffe8424da",
+      "exit_code": 0,
+      "counts": {
+        "passed": 86
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-43ed59580a-command.json",
+      "start_utc": "2026-11-19T19:08:01.389508+00:00",
+      "end_utc": "2026-11-19T19:08:11.126408+00:00",
+      "test_sha256": "89daf32bb9bb2a716d1c41db9889de422bbdf16f774aa8773779e72523346552",
+      "exit_code": 0,
+      "counts": {
+        "passed": 86
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-7fb1a8cc95-command.json",
+      "start_utc": "2026-11-19T19:09:00.301230+00:00",
+      "end_utc": "2026-11-19T19:09:07.097477+00:00",
+      "test_sha256": "477a2516e5a3e442262c5236b3a6a425662eb73e124cc47e85d8ee10830add23",
+      "exit_code": 1,
+      "counts": {
+        "passed": 86,
+        "failed": 1
+      },
+      "failed_nodes": [
+        "tests/unit/test_od08_universe.py::test_identity_selection_candidate_budget"
+      ],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-056df0147b-command.json",
+      "start_utc": "2026-11-19T19:09:57.180632+00:00",
+      "end_utc": "2026-11-19T19:10:02.777864+00:00",
+      "test_sha256": "e71cc570f9d3d17aeea412b0b9fa2004f4b746ad7370f5c9f91b193d6bed88b2",
+      "exit_code": 0,
+      "counts": {
+        "passed": 87
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-61fe74e6a4-command.json",
+      "start_utc": "2026-11-19T19:10:33.894981+00:00",
+      "end_utc": "2026-11-19T19:10:40.281482+00:00",
+      "test_sha256": "20a467275a0e4180e18aa2b660284a01295804d4e8e39dd3f089020c17473548",
+      "exit_code": 0,
+      "counts": {
+        "passed": 88
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-32d46ba715-command.json",
+      "start_utc": "2026-11-19T19:12:23.736091+00:00",
+      "end_utc": "2026-11-19T19:12:29.607347+00:00",
+      "test_sha256": "20a467275a0e4180e18aa2b660284a01295804d4e8e39dd3f089020c17473548",
+      "exit_code": 0,
+      "counts": {
+        "passed": 88
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-75f03142a7-command.json",
+      "start_utc": "2026-11-19T19:15:49.675180+00:00",
+      "end_utc": "2026-11-19T19:15:57.692938+00:00",
+      "test_sha256": "baf89c17caf8f95e0809b4640801b3b073450dba23672fe52a60c13fb0f73480",
+      "exit_code": 1,
+      "counts": {
+        "passed": 88,
+        "failed": 3
+      },
+      "failed_nodes": [
+        "tests/unit/test_od08_universe.py::test_immutable_source_contracts[source-scope]",
+        "tests/unit/test_od08_universe.py::test_immutable_source_contracts[expected-identities]",
+        "tests/unit/test_od08_universe.py::test_immutable_source_contracts[transitions]"
+      ],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-79137e77bb-command.json",
+      "start_utc": "2026-11-19T19:16:20.826234+00:00",
+      "end_utc": "2026-11-19T19:16:22.685736+00:00",
+      "test_sha256": "14061149b55d931409a15ec99726661bd79c52b6c19acc416abf4100155884b9",
+      "exit_code": 2,
+      "counts": {},
+      "failed_nodes": [],
+      "collection_failure": true
+    },
+    {
+      "command": "logs/od08-8fb19b7c7e-command.json",
+      "start_utc": "2026-11-19T19:16:46.811287+00:00",
+      "end_utc": "2026-11-19T19:16:53.171137+00:00",
+      "test_sha256": "798f72d6fc5d7036970eb0f19d4dd46676867158c1d9be31595f33338014f0bd",
+      "exit_code": 1,
+      "counts": {
+        "passed": 88,
+        "failed": 4
+      },
+      "failed_nodes": [
+        "tests/unit/test_od08_universe.py::test_od07_bound_integration[persist-authority-object]",
+        "tests/unit/test_od08_universe.py::test_immutable_source_contracts[source-scope]",
+        "tests/unit/test_od08_universe.py::test_immutable_source_contracts[expected-identities]",
+        "tests/unit/test_od08_universe.py::test_immutable_source_contracts[transitions]"
+      ],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-edd8b177c2-command.json",
+      "start_utc": "2026-11-19T19:17:47.309449+00:00",
+      "end_utc": "2026-11-19T19:17:53.516039+00:00",
+      "test_sha256": "8479681e4a03ebab333f95cc907fdd0531be59c9895a7c64de8d3057aee289ae",
+      "exit_code": 0,
+      "counts": {
+        "passed": 92
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    },
+    {
+      "command": "logs/od08-f5a579dec7-command.json",
+      "start_utc": "2026-11-19T19:18:33.540589+00:00",
+      "end_utc": "2026-11-19T19:18:41.240735+00:00",
+      "test_sha256": "8479681e4a03ebab333f95cc907fdd0531be59c9895a7c64de8d3057aee289ae",
+      "exit_code": 0,
+      "counts": {
+        "passed": 92
+      },
+      "failed_nodes": [],
+      "collection_failure": false
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/compile-1f6b5d14d7-manifest.json",
+    "--manifest-sha256",
+    "69f8c3e46c24cf04c57e04e191b825c317a8f322c9553d491ae7f5b54f054d7f",
+    "--policy",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/compile-1f6b5d14d7-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od08-20261119T184624Z/compile-1f6b5d14d7/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od08-20261119T184624Z",
+  "start_utc": "2026-11-19T19:13:16.329107+00:00",
+  "end_utc": "2026-11-19T19:13:18.822220+00:00",
+  "elapsed_seconds": 2.4931106600000135,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "compile",
+    "start_utc": "2026-11-19T19:13:18.584344+00:00",
+    "end_utc": "2026-11-19T19:13:18.804121+00:00",
+    "elapsed_seconds": 0.2197695460000091,
+    "exit_code": 0,
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "",
+    "collected": [],
+    "reports": [],
+    "deselected": [],
+    "counts": {},
+    "guard_denials": {},
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532293]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/compile-1f6b5d14d7/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "compile",
+  "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+  "source_manifest_sha256": "69f8c3e46c24cf04c57e04e191b825c317a8f322c9553d491ae7f5b54f054d7f"
+}

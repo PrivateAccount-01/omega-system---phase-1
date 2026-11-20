@@ -1,0 +1,516 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-8fb19b7c7e-manifest.json",
+    "--manifest-sha256",
+    "654629a0c03cdbf3286c7e5d27bdf0389f8cc7336a11b3cbbf17ec67918f2349",
+    "--policy",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-8fb19b7c7e-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od08-20261119T184624Z/od08-8fb19b7c7e/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od08-20261119T184624Z",
+  "start_utc": "2026-11-19T19:16:46.811287+00:00",
+  "end_utc": "2026-11-19T19:16:53.171137+00:00",
+  "elapsed_seconds": 6.35983984500001,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od08",
+    "exit_code": 1,
+    "counts": {
+      "passed": 88,
+      "failed": 4
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U08]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U09]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U10]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[order]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[future-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[naive]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[wrong-pin]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[replay]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[explain]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[changed-policy]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[unknown-schema]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[nonempty-rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[immutable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[bounds]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[cancel-lineage]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[provisional]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[observation-future-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[definition-expired]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[context-checksum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[replay-restart]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[omitted-ledger]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[omitted-coverage]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[order-observations]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[complete-transition]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[listing-granularity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[actual-rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[migration-empty]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[read-only-backfill]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[closed-session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[same-instant-correction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[replay-bool]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[future-definition]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[ranking-tie]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[valid-adjustment]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[wrong-profile]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[future-context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[persist-adjustment]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[persist-authority-object]",
+        "outcome": "failed",
+        "reason": "case = 'persist-authority-object'\ntmp_path = PosixPath('/work/job/tmp/test_od07_bound_integration_pe1')\n\n    @pytest.mark.parametrize(\n        \"case\", [\"valid-adjustment\", \"wrong-profile\", \"future-context\", \"persist-adjustment\", \"persist-authority-object\"]\n    )\n    def test_od07_bound_integration(case, tmp_path):\n        from test_od07_final import setup_bound\n    \n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.identity_adapters import MembershipClaim\n        from omegadata.universe import contracts as c\n        from omegadata.universe.repository import UniverseRepository\n    \n        pin = setup_bound()[8]\n        if case == \"persist-authority-object\":\n            from omegadata.identity_authority import EvidenceAuthority\n            pin=replace(pin,context=replace(pin.context,authority=EvidenceAuthority.unconfigured()))\n        raw = pin.raw.raw\n        result = calculate_bound_chain(pin)\n        e = raw.evidence\n        known = pin.context.known_at\n        day = pin.context.valid_at\n        claim = MembershipClaim(\n            \"m-bound\",\n            \"BOUND_CONTROL\",\n            raw.symbol,\n            raw.series,\n            raw.exchange,\n            raw.trade_date,\n            None,\n            raw.known_from,\n            None,\n            e,\n        )\n        member = c.MembershipRevision(\n            claim, \"event\", \"math-source\", \"artifact\", \"record\", raw.security_id, raw.listing_id\n        )\n        definition = c.UniverseDefinition(\n            \"BOUND_CONTROL\",\n            \"Anonymous bound contract\",\n            \"CUSTOM_POLICY_UNIVERSE\",\n            \"SECURITY\",\n            \"method\",\n            (\"math-source\",),\n            (raw.exchange,),\n            raw.trade_date,\n            None,\n            raw.known_from,\n            None,\n            e,\n        )\n        coverage = c.UniverseCoverage(\n            \"cov\",\n            \"BOUND_CONTROL\",\n            \"math-source\",\n            \"ref\",\n            \"method\",\n            raw.trade_date,\n            day + timedelta(days=1),\n            raw.known_from,\n            None,\n            \"COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE\",\n            (raw.security_id,),\n            e,\n            \"independent-control\",\n            granularity=\"COMPLETE_CHANGE_HISTORY\",\n            ending_member_identities=(raw.security_id,),\n            ending_reference=\"end\",\n        )\n        obs = c.AvailabilityObservation(\n            \"bound-observation\",\n            \"CONTROL_ONLY\",\n            raw.listing_id,\n            raw.trade_date,\n            None,\n            raw.known_from,\n            None,\n            raw.known_from,\n            None,\n            None,\n            \"math-source\",\n            \"raw-artifact\",\n            e,\n            interval_completed_at=raw.known_from,\n            record_identity=\"record\",\n            adjustment=result,\n            adjustment_pin=pin,\n        )\n        x = c.UniverseContext(\n            \"source-pin\",\n            definition,\n            (member,),\n            (coverage,),\n            pin.context.identity_repository,\n            pin.context.calendar,\n            (obs,),\n            mode=\"CANARY_ONLY\",\n        )\n        policy = c.EligibilityPolicy(\n            \"bound-policy\", \"RESEARCH\", require_observations=True, require_adjustment=True\n        )\n        if case == \"wrong-profile\":\n            policy = replace(policy, required_profile=\"TOTAL_RETURN\")\n        if case == \"future-context\":\n            known -= timedelta(days=1)\n        from omegadata.universe.snapshots import get_universe_as_of\n    \n        out = get_universe_as_of(x, day, known, policy, \"source-pin\")\n        assert out.decisions[0].status == (\n            \"BLOCKED_AVAILABILITY\" if case in {\"wrong-profile\", \"future-context\"} else \"INCLUDED\"\n        )\n        assert not out.financial_accepted\n        if case in {\"persist-adjustment\", \"persist-authority-object\"}:\n            db = UniverseRepository(\"sqlite:///:memory:\", disposable_root=tmp_path)\n>           db.seed_context(x, policy)\n\ntests/unit/test_od08_universe.py:870: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/universe/repository.py:344: in seed_context\n    self._put(con, observations, o.observation_id, o, definition=key)\nsrc/omegadata/universe/repository.py:265: in _put\n    body = pack(value)\n           ^^^^^^^^^^^\nsrc/omegadata/universe/repository.py:194: in pack\n    return ac.canonical(encode(v))\n           ^^^^^^^^^^^^^^^^^^^^^^^\nsrc/omegadata/adjustments/contracts.py:53: in canonical\n    return json.dumps(normalized(value), sort_keys=True, separators=(\",\", \":\"), allow_nan=False)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/usr/lib/python3.12/json/__init__.py:238: in dumps\n    **kw).encode(obj)\n          ^^^^^^^^^^^\n/usr/lib/python3.12/json/encoder.py:200: in encode\n    chunks = self.iterencode(o, _one_shot=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/usr/lib/python3.12/json/encoder.py:258: in iterencode\n    return _iterencode(o, 0)\n           ^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <json.encoder.JSONEncoder object at 0x751268e645f0>\no = <omegadata.identity_authority.EvidenceAuthority object at 0x751268b5b170>\n\n    def default(self, o):\n        \"\"\"Implement this method in a subclass such that it returns\n        a serializable object for ``o``, or calls the base implementation\n        (to raise a ``TypeError``).\n    \n        For example, to support arbitrary iterators, you could\n        implement default like this::\n    \n            def default(self, o):\n                try:\n                    iterable = iter(o)\n                except TypeError:\n                    pass\n                else:\n                    return list(iterable)\n                # Let the base class default method raise the TypeError\n                return super().default(o)\n    \n        \"\"\"\n>       raise TypeError(f'Object of type {o.__class__.__name__} '\n                        f'is not JSON serializable')\nE       TypeError: Object of type EvidenceAuthority is not JSON serializable\n\n/usr/lib/python3.12/json/encoder.py:180: TypeError"
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-announcement]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-publication]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-before]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-at]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_identity_selection_candidate_budget",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_two_connection_competing_corrections",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_immutable_source_contracts[source-scope]",
+        "outcome": "failed",
+        "reason": "case = 'source-scope'\n\n    @pytest.mark.parametrize('case',['source-scope','expected-identities','transitions'])\n    def test_immutable_source_contracts(case):\n        c,x,m,cov,p,run=setup_case()\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_universe.py:1000: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_immutable_source_contracts[expected-identities]",
+        "outcome": "failed",
+        "reason": "case = 'expected-identities'\n\n    @pytest.mark.parametrize('case',['source-scope','expected-identities','transitions'])\n    def test_immutable_source_contracts(case):\n        c,x,m,cov,p,run=setup_case()\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_universe.py:1000: Failed"
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_immutable_source_contracts[transitions]",
+        "outcome": "failed",
+        "reason": "case = 'transitions'\n\n    @pytest.mark.parametrize('case',['source-scope','expected-identities','transitions'])\n    def test_immutable_source_contracts(case):\n        c,x,m,cov,p,run=setup_case()\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_universe.py:1000: Failed"
+      }
+    ],
+    "start_utc": "2026-11-19T19:16:48.175244+00:00",
+    "end_utc": "2026-11-19T19:16:52.486841+00:00",
+    "elapsed_seconds": 4.311600384999963,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 78%]\n..........F......FFF                                                     [100%]\n=================================== FAILURES ===================================\n____________ test_od07_bound_integration[persist-authority-object] _____________\n\ncase = 'persist-authority-object'\ntmp_path = PosixPath('/work/job/tmp/test_od07_bound_integration_pe1')\n\n    @pytest.mark.parametrize(\n        \"case\", [\"valid-adjustment\", \"wrong-profile\", \"future-context\", \"persist-adjustment\", \"persist-authority-object\"]\n    )\n    def test_od07_bound_integration(case, tmp_path):\n        from test_od07_final import setup_bound\n    \n        from omegadata.adjustments.bound_chain import calculate_bound_chain\n        from omegadata.identity_adapters import MembershipClaim\n        from omegadata.universe import contracts as c\n        from omegadata.universe.repository import UniverseRepository\n    \n        pin = setup_bound()[8]\n        if case == \"persist-authority-object\":\n            from omegadata.identity_authority import EvidenceAuthority\n            pin=replace(pin,context=replace(pin.context,authority=EvidenceAuthority.unconfigured()))\n        raw = pin.raw.raw\n        result = calculate_bound_chain(pin)\n        e = raw.evidence\n        known = pin.context.known_at\n        day = pin.context.valid_at\n        claim = MembershipClaim(\n            \"m-bound\",\n            \"BOUND_CONTROL\",\n            raw.symbol,\n            raw.series,\n            raw.exchange,\n            raw.trade_date,\n            None,\n            raw.known_from,\n            None,\n            e,\n        )\n        member = c.MembershipRevision(\n            claim, \"event\", \"math-source\", \"artifact\", \"record\", raw.security_id, raw.listing_id\n        )\n        definition = c.UniverseDefinition(\n            \"BOUND_CONTROL\",\n            \"Anonymous bound contract\",\n            \"CUSTOM_POLICY_UNIVERSE\",\n            \"SECURITY\",\n            \"method\",\n            (\"math-source\",),\n            (raw.exchange,),\n            raw.trade_date,\n            None,\n            raw.known_from,\n            None,\n            e,\n        )\n        coverage = c.UniverseCoverage(\n            \"cov\",\n            \"BOUND_CONTROL\",\n            \"math-source\",\n            \"ref\",\n            \"method\",\n            raw.trade_date,\n            day + timedelta(days=1),\n            raw.known_from,\n            None,\n            \"COMPLETE_FOR_DECLARED_NON_MARKET_SCOPE\",\n            (raw.security_id,),\n            e,\n            \"independent-control\",\n            granularity=\"COMPLETE_CHANGE_HISTORY\",\n            ending_member_identities=(raw.security_id,),\n            ending_reference=\"end\",\n        )\n        obs = c.AvailabilityObservation(\n            \"bound-observation\",\n            \"CONTROL_ONLY\",\n            raw.listing_id,\n            raw.trade_date,\n            None,\n            raw.known_from,\n            None,\n            raw.known_from,\n            None,\n            None,\n            \"math-source\",\n            \"raw-artifact\",\n            e,\n            interval_completed_at=raw.known_from,\n            record_identity=\"record\",\n            adjustment=result,\n            adjustment_pin=pin,\n        )\n        x = c.UniverseContext(\n            \"source-pin\",\n            definition,\n            (member,),\n            (coverage,),\n            pin.context.identity_repository,\n            pin.context.calendar,\n            (obs,),\n            mode=\"CANARY_ONLY\",\n        )\n        policy = c.EligibilityPolicy(\n            \"bound-policy\", \"RESEARCH\", require_observations=True, require_adjustment=True\n        )\n        if case == \"wrong-profile\":\n            policy = replace(policy, required_profile=\"TOTAL_RETURN\")\n        if case == \"future-context\":\n            known -= timedelta(days=1)\n        from omegadata.universe.snapshots import get_universe_as_of\n    \n        out = get_universe_as_of(x, day, known, policy, \"source-pin\")\n        assert out.decisions[0].status == (\n            \"BLOCKED_AVAILABILITY\" if case in {\"wrong-profile\", \"future-context\"} else \"INCLUDED\"\n        )\n        assert not out.financial_accepted\n        if case in {\"persist-adjustment\", \"persist-authority-object\"}:\n            db = UniverseRepository(\"sqlite:///:memory:\", disposable_root=tmp_path)\n>           db.seed_context(x, policy)\n\ntests/unit/test_od08_universe.py:870: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/omegadata/universe/repository.py:344: in seed_context\n    self._put(con, observations, o.observation_id, o, definition=key)\nsrc/omegadata/universe/repository.py:265: in _put\n    body = pack(value)\n           ^^^^^^^^^^^\nsrc/omegadata/universe/repository.py:194: in pack\n    return ac.canonical(encode(v))\n           ^^^^^^^^^^^^^^^^^^^^^^^\nsrc/omegadata/adjustments/contracts.py:53: in canonical\n    return json.dumps(normalized(value), sort_keys=True, separators=(\",\", \":\"), allow_nan=False)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/usr/lib/python3.12/json/__init__.py:238: in dumps\n    **kw).encode(obj)\n          ^^^^^^^^^^^\n/usr/lib/python3.12/json/encoder.py:200: in encode\n    chunks = self.iterencode(o, _one_shot=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/usr/lib/python3.12/json/encoder.py:258: in iterencode\n    return _iterencode(o, 0)\n           ^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <json.encoder.JSONEncoder object at 0x751268e645f0>\no = <omegadata.identity_authority.EvidenceAuthority object at 0x751268b5b170>\n\n    def default(self, o):\n        \"\"\"Implement this method in a subclass such that it returns\n        a serializable object for ``o``, or calls the base implementation\n        (to raise a ``TypeError``).\n    \n        For example, to support arbitrary iterators, you could\n        implement default like this::\n    \n            def default(self, o):\n                try:\n                    iterable = iter(o)\n                except TypeError:\n                    pass\n                else:\n                    return list(iterable)\n                # Let the base class default method raise the TypeError\n                return super().default(o)\n    \n        \"\"\"\n>       raise TypeError(f'Object of type {o.__class__.__name__} '\n                        f'is not JSON serializable')\nE       TypeError: Object of type EvidenceAuthority is not JSON serializable\n\n/usr/lib/python3.12/json/encoder.py:180: TypeError\n________________ test_immutable_source_contracts[source-scope] _________________\n\ncase = 'source-scope'\n\n    @pytest.mark.parametrize('case',['source-scope','expected-identities','transitions'])\n    def test_immutable_source_contracts(case):\n        c,x,m,cov,p,run=setup_case()\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_universe.py:1000: Failed\n_____________ test_immutable_source_contracts[expected-identities] _____________\n\ncase = 'expected-identities'\n\n    @pytest.mark.parametrize('case',['source-scope','expected-identities','transitions'])\n    def test_immutable_source_contracts(case):\n        c,x,m,cov,p,run=setup_case()\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_universe.py:1000: Failed\n_________________ test_immutable_source_contracts[transitions] _________________\n\ncase = 'transitions'\n\n    @pytest.mark.parametrize('case',['source-scope','expected-identities','transitions'])\n    def test_immutable_source_contracts(case):\n        c,x,m,cov,p,run=setup_case()\n>       with pytest.raises(ValueError):\nE       Failed: DID NOT RAISE <class 'ValueError'>\n\ntests/unit/test_od08_universe.py:1000: Failed\n=========================== short test summary info ============================\nFAILED tests/unit/test_od08_universe.py::test_od07_bound_integration[persist-authority-object]\nFAILED tests/unit/test_od08_universe.py::test_immutable_source_contracts[source-scope]\nFAILED tests/unit/test_od08_universe.py::test_immutable_source_contracts[expected-identities]\nFAILED tests/unit/test_od08_universe.py::test_immutable_source_contracts[transitions]\n4 failed, 88 passed in 3.08s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/od08-8fb19b7c7e/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "od08",
+  "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+  "source_manifest_sha256": "654629a0c03cdbf3286c7e5d27bdf0389f8cc7336a11b3cbbf17ec67918f2349"
+}

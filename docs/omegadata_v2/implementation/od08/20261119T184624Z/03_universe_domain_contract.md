@@ -1,0 +1,4 @@
+# Versioned universe domain
+UniverseDefinition separates OFFICIAL_INDEX, EXCHANGE_LISTED_UNIVERSE, RESEARCH_ELIGIBLE_UNIVERSE, PROVISIONAL_RECONSTRUCTION and CUSTOM_POLICY_UNIVERSE. It declares SECURITY/LISTING granularity, methodology, source/venue scopes, valid and known intervals, evidence and version. Definition and coverage sequences must be actual tuples; mutable lists refuse.
+
+MembershipRevision wraps the existing OD06 MembershipClaim instead of replacing it. It adds opaque event/revision lineage, source/artifact/record IDs, optional stable security/listing, announcement/publication/ingestion, event type, revision and effective convention. Original symbol/series/ISIN/exchange remain in the claim. Unknown stable identity remains absent. EXPLICIT_TIMESTAMP retains aware effective/removal instants; UNKNOWN convention blocks use. No official identities or sessions invented.

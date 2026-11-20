@@ -1,0 +1,1156 @@
+[
+  {
+    "path": "scripts/backfill_pit_universe.py",
+    "sha256": "12af5e51964227963e9f0f1404f43e9628ef109db42597e32bfd7666a91b51de",
+    "lines": 81,
+    "hits": []
+  },
+  {
+    "path": "scripts/build_adjusted_ohlcv_proof.py",
+    "sha256": "7daa7313ae312d1e7d2fb55ab3f1b2049891331d7bd130148646f7e5747b59d7",
+    "lines": 202,
+    "hits": [
+      {
+        "line": 14,
+        "text": "from omegadata.db.models import ConfirmedCorporateAction, InstrumentMaster, PriceRecord, SymbolMap"
+      },
+      {
+        "line": 101,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 111,
+        "text": "SymbolMap("
+      }
+    ]
+  },
+  {
+    "path": "scripts/build_corporate_action_end_to_end_proof.py",
+    "sha256": "e1922e9460a8d2348a0f521219b1a4ef6c197f945f6c7040b46c655a3d988527",
+    "lines": 261,
+    "hits": [
+      {
+        "line": 14,
+        "text": "from omegadata.db.models import ConfirmedCorporateAction, InstrumentMaster, PriceRecord, SymbolMap"
+      },
+      {
+        "line": 102,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 112,
+        "text": "SymbolMap("
+      },
+      {
+        "line": 121,
+        "text": "SymbolMap("
+      }
+    ]
+  },
+  {
+    "path": "scripts/build_historical_trading_calendar_proof.py",
+    "sha256": "f2e972bac1f298169e9c9b666b151231a92fe75b1a429b48132722f5b34e93b4",
+    "lines": 99,
+    "hits": [
+      {
+        "line": 8,
+        "text": "from omegadata.track_a.trading_calendar import TradingCalendar"
+      },
+      {
+        "line": 19,
+        "text": "calendar: TradingCalendar,"
+      },
+      {
+        "line": 69,
+        "text": "calendar = TradingCalendar.from_config()"
+      }
+    ]
+  },
+  {
+    "path": "scripts/build_pit_universe_proof.py",
+    "sha256": "fba85e7f25ce2c8032d91250f0aa439c9e3bc00e766d6d3adebd80765edfe2e0",
+    "lines": 140,
+    "hits": [
+      {
+        "line": 11,
+        "text": "from omegadata.db.models import UniverseMembership"
+      },
+      {
+        "line": 85,
+        "text": "latest_snapshot = manager.get_universe(session, \"NIFTY50\", latest_snapshot_date)"
+      },
+      {
+        "line": 86,
+        "text": "previous_snapshot = manager.get_universe(session, \"NIFTY50\", previous_snapshot_date)"
+      },
+      {
+        "line": 89,
+        "text": "persisted_rows = len(session.scalars(select(UniverseMembership)).all())"
+      }
+    ]
+  },
+  {
+    "path": "scripts/check_trading_calendar_coverage.py",
+    "sha256": "0e83174f4cdea8afadcdf0886bf0d81c718a735ae2e70eaf8511339608cc4efc",
+    "lines": 52,
+    "hits": [
+      {
+        "line": 7,
+        "text": "from omegadata.track_a.trading_calendar import TradingCalendar"
+      },
+      {
+        "line": 13,
+        "text": "calendar = TradingCalendar.from_config()"
+      }
+    ]
+  },
+  {
+    "path": "scripts/run_full_pipeline.py",
+    "sha256": "145bbd921f1f4c743b7bf71e39fd6872ab6539cabaa8aa823e8f8596438b61c7",
+    "lines": 123,
+    "hits": [
+      {
+        "line": 12,
+        "text": "from omegadata.track_a.trading_calendar import TradingCalendar"
+      },
+      {
+        "line": 67,
+        "text": "TradingCalendar.from_config().recent_trading_days("
+      }
+    ]
+  },
+  {
+    "path": "tests/unit/test_discontinuity_sector_fallback.py",
+    "sha256": "2dd01af071730473b86942f827c100d05de2860cdfc04c8ee2d65f408bc3bae7",
+    "lines": 81,
+    "hits": [
+      {
+        "line": 8,
+        "text": "from omegadata.db.models import DiscontinuityEvent, InstrumentMaster, PriceRecord"
+      },
+      {
+        "line": 33,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 41,
+        "text": "InstrumentMaster("
+      }
+    ]
+  },
+  {
+    "path": "tests/unit/test_isin_master.py",
+    "sha256": "7c5024909bf634e8a612a0218681788598bb6ac6ba9232dbf1ac24c7adc2abb1",
+    "lines": 79,
+    "hits": [
+      {
+        "line": 8,
+        "text": "from omegadata.db.models import InstrumentMaster, SymbolMap"
+      },
+      {
+        "line": 10,
+        "text": "from omegadata.track_b.isin_master import ISINMasterService"
+      },
+      {
+        "line": 14,
+        "text": "svc = ISINMasterService()"
+      },
+      {
+        "line": 22,
+        "text": "svc = ISINMasterService()"
+      },
+      {
+        "line": 44,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 45,
+        "text": ".where(SymbolMap.symbol == \"INFY\")"
+      },
+      {
+        "line": 46,
+        "text": ".where(SymbolMap.exchange == Exchange.NSE)"
+      },
+      {
+        "line": 49,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 50,
+        "text": ".where(SymbolMap.symbol == \"INFOSYS\")"
+      },
+      {
+        "line": 51,
+        "text": ".where(SymbolMap.exchange == Exchange.NSE)"
+      },
+      {
+        "line": 58,
+        "text": "svc = ISINMasterService()"
+      },
+      {
+        "line": 76,
+        "text": "master = db_session.get(InstrumentMaster, \"INE009A01021\")"
+      }
+    ]
+  },
+  {
+    "path": "tests/unit/test_pipeline_and_api.py",
+    "sha256": "a647bb75b396bb27c8c7fc8481c8c58a9ccb13b9912f79074d87c563ef545c4f",
+    "lines": 1463,
+    "hits": [
+      {
+        "line": 21,
+        "text": "InstrumentMaster,"
+      },
+      {
+        "line": 28,
+        "text": "SymbolMap,"
+      },
+      {
+        "line": 40,
+        "text": "from omegadata.track_a.trading_calendar import CalendarMaintenance, TradingCalendar"
+      },
+      {
+        "line": 42,
+        "text": "from omegadata.track_b.isin_master import ISINMasterService"
+      },
+      {
+        "line": 53,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 57,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 159,
+        "text": "ISINMasterService().create_instrument("
+      },
+      {
+        "line": 202,
+        "text": "assert db_session.scalar(select(InstrumentMaster).where(InstrumentMaster.isin == \"INEIDEM00001\")) is not None"
+      },
+      {
+        "line": 203,
+        "text": "assert len(db_session.scalars(select(SymbolMap).where(SymbolMap.isin == \"INEIDEM00001\")).all()) == 1"
+      },
+      {
+        "line": 779,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 807,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 809,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 862,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 864,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 908,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 910,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 1022,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 1024,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 1104,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 1106,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 1289,
+        "text": "calendar = TradingCalendar("
+      },
+      {
+        "line": 1300,
+        "text": "calendar = TradingCalendar("
+      },
+      {
+        "line": 1310,
+        "text": "calendar = TradingCalendar("
+      },
+      {
+        "line": 1321,
+        "text": "calendar = TradingCalendar("
+      },
+      {
+        "line": 1334,
+        "text": "calendar = TradingCalendar("
+      },
+      {
+        "line": 1369,
+        "text": "calendar = TradingCalendar.from_config()"
+      },
+      {
+        "line": 1376,
+        "text": "calendar = TradingCalendar("
+      },
+      {
+        "line": 1398,
+        "text": "calendar = TradingCalendar.from_config()"
+      },
+      {
+        "line": 1419,
+        "text": "calendar = TradingCalendar.from_config()"
+      }
+    ]
+  },
+  {
+    "path": "tests/unit/test_universe_manager.py",
+    "sha256": "68f5cc6a674911363a7aa88edbc3845eaa7f387a80586a7c4391e432354eca3d",
+    "lines": 284,
+    "hits": [
+      {
+        "line": 14,
+        "text": "from omegadata.track_b.isin_master import ISINMasterService"
+      },
+      {
+        "line": 25,
+        "text": "ISINMasterService().create_instrument("
+      },
+      {
+        "line": 43,
+        "text": "before = manager.get_universe(db_session, \"NIFTY50\", date(2020, 3, 26))"
+      },
+      {
+        "line": 44,
+        "text": "on_day = manager.get_universe(db_session, \"NIFTY50\", date(2020, 3, 27))"
+      },
+      {
+        "line": 51,
+        "text": "svc = ISINMasterService()"
+      },
+      {
+        "line": 78,
+        "text": "future = manager.get_universe(db_session, \"NIFTY50\", date(2024, 1, 2))"
+      },
+      {
+        "line": 143,
+        "text": "before = {entry.isin for entry in manager.get_universe(db_session, \"NIFTY50\", date(2020, 3, 18))}"
+      },
+      {
+        "line": 144,
+        "text": "on_day = {entry.isin for entry in manager.get_universe(db_session, \"NIFTY50\", date(2020, 3, 19))}"
+      },
+      {
+        "line": 204,
+        "text": "ISINMasterService().create_instrument("
+      },
+      {
+        "line": 244,
+        "text": "existing = manager.get_universe(db_session, \"NIFTY50\", date(2019, 1, 2))"
+      }
+    ]
+  },
+  {
+    "path": "tests/unit/test_validation_policies.py",
+    "sha256": "7bf043d312d10d8cf944e62c9e989dc50ff2621db053512c8ba81d467de5eeea",
+    "lines": 588,
+    "hits": [
+      {
+        "line": 15,
+        "text": "InstrumentMaster,"
+      },
+      {
+        "line": 250,
+        "text": "session.execute(delete(InstrumentMaster))"
+      },
+      {
+        "line": 252,
+        "text": "InstrumentMaster("
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/domain.py",
+    "sha256": "cd1c00b0763c034f8a0178195dd2e9a53816e893758e429c0711e35527a7bbba",
+    "lines": 98,
+    "hits": []
+  },
+  {
+    "path": "src/omegadata/api/main.py",
+    "sha256": "d582f178772a1a0e91dc46255c996cbc2324fc91b3de52c98ab5e7ddfcc182a2",
+    "lines": 748,
+    "hits": [
+      {
+        "line": 22,
+        "text": "from omegadata.db.models import InstrumentMaster, PriceRecord, ReleaseRecord"
+      },
+      {
+        "line": 170,
+        "text": "primary = session.scalar(select(InstrumentMaster.primary_exchange).where(InstrumentMaster.isin == isin))"
+      },
+      {
+        "line": 457,
+        "text": "def get_universe("
+      },
+      {
+        "line": 474,
+        "text": "entries = universe.get_universe(session=session, index_name=index_name, as_of_date=as_of_date)"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/db/models.py",
+    "sha256": "e2305305c3051999a11e10418e556abda84873464553dd5942c390d977cebd29",
+    "lines": 451,
+    "hits": [
+      {
+        "line": 38,
+        "text": "class InstrumentMaster(Base):"
+      },
+      {
+        "line": 58,
+        "text": "class SymbolMap(Base):"
+      },
+      {
+        "line": 248,
+        "text": "class UniverseMembership(Base):"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/pipelines/sequential_pipeline.py",
+    "sha256": "84b58a67bdd9331e2a7714c357508a5f94335bd34e118e30df243c36b790890c",
+    "lines": 1067,
+    "hits": [
+      {
+        "line": 23,
+        "text": "InstrumentMaster,"
+      },
+      {
+        "line": 29,
+        "text": "SymbolMap,"
+      },
+      {
+        "line": 256,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 257,
+        "text": ".where(SymbolMap.exchange == Exchange.NSE)"
+      },
+      {
+        "line": 258,
+        "text": ".where(SymbolMap.symbol == normalized)"
+      },
+      {
+        "line": 259,
+        "text": ".where(SymbolMap.valid_to.is_(None))"
+      },
+      {
+        "line": 453,
+        "text": "else session.get(InstrumentMaster, isin) is not None"
+      },
+      {
+        "line": 454,
+        "text": "or any(isinstance(obj, InstrumentMaster) and obj.isin == isin for obj in session.new)"
+      },
+      {
+        "line": 458,
+        "text": "InstrumentMaster("
+      },
+      {
+        "line": 475,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 476,
+        "text": ".where(SymbolMap.isin == isin)"
+      },
+      {
+        "line": 477,
+        "text": ".where(SymbolMap.exchange == exchange)"
+      },
+      {
+        "line": 478,
+        "text": ".where(SymbolMap.symbol == symbol)"
+      },
+      {
+        "line": 479,
+        "text": ".where(SymbolMap.valid_to.is_(None))"
+      },
+      {
+        "line": 483,
+        "text": "isinstance(obj, SymbolMap)"
+      },
+      {
+        "line": 493,
+        "text": "SymbolMap("
+      },
+      {
+        "line": 520,
+        "text": "row[0] for row in session.execute(select(InstrumentMaster.isin)).all()"
+      },
+      {
+        "line": 523,
+        "text": "obj.isin for obj in session.new if isinstance(obj, InstrumentMaster)"
+      },
+      {
+        "line": 528,
+        "text": "select(SymbolMap.isin, SymbolMap.exchange, SymbolMap.symbol).where(SymbolMap.valid_to.is_(None))"
+      },
+      {
+        "line": 534,
+        "text": "if isinstance(obj, SymbolMap) and obj.valid_to is None"
+      },
+      {
+        "line": 632,
+        "text": "row[0] for row in session.execute(select(InstrumentMaster.isin)).all()"
+      },
+      {
+        "line": 635,
+        "text": "obj.isin for obj in session.new if isinstance(obj, InstrumentMaster)"
+      },
+      {
+        "line": 640,
+        "text": "select(SymbolMap.isin, SymbolMap.exchange, SymbolMap.symbol).where(SymbolMap.valid_to.is_(None))"
+      },
+      {
+        "line": 646,
+        "text": "if isinstance(obj, SymbolMap) and obj.valid_to is None"
+      },
+      {
+        "line": 797,
+        "text": "select(SymbolMap.isin)"
+      },
+      {
+        "line": 798,
+        "text": ".where(SymbolMap.exchange == Exchange.NSE)"
+      },
+      {
+        "line": 799,
+        "text": ".where(SymbolMap.symbol == symbol)"
+      },
+      {
+        "line": 800,
+        "text": ".where(SymbolMap.valid_to.is_(None))"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/track_a/trading_calendar.py",
+    "sha256": "468719b7f9f8be6f384d11b31a91c882cc78a1c5f7a88611319db69b4706ba68",
+    "lines": 292,
+    "hits": [
+      {
+        "line": 20,
+        "text": "class TradingCalendar:"
+      },
+      {
+        "line": 30,
+        "text": "def from_config(cls) -> TradingCalendar:"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/track_b/discontinuity.py",
+    "sha256": "fe9226c131b2c8860e138d1e7455802b1382eada07634939b500f1cfb828b3bc",
+    "lines": 351,
+    "hits": [
+      {
+        "line": 15,
+        "text": "InstrumentMaster,"
+      },
+      {
+        "line": 105,
+        "text": "select(InstrumentMaster.isin, InstrumentMaster.sector_name)"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/track_b/isin_master.py",
+    "sha256": "12e742a70972ee6db85a2a5bcab5a934ee283876c5edfe1b01251f090e1728e4",
+    "lines": 220,
+    "hits": [
+      {
+        "line": 13,
+        "text": "InstrumentMaster,"
+      },
+      {
+        "line": 16,
+        "text": "SymbolMap,"
+      },
+      {
+        "line": 33,
+        "text": "class ISINMasterService:"
+      },
+      {
+        "line": 66,
+        "text": ") -> InstrumentMaster:"
+      },
+      {
+        "line": 70,
+        "text": "existing = session.get(InstrumentMaster, isin)"
+      },
+      {
+        "line": 74,
+        "text": "master = InstrumentMaster("
+      },
+      {
+        "line": 86,
+        "text": "SymbolMap("
+      },
+      {
+        "line": 144,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 145,
+        "text": ".where(SymbolMap.isin == isin)"
+      },
+      {
+        "line": 146,
+        "text": ".where(SymbolMap.exchange == exchange)"
+      },
+      {
+        "line": 147,
+        "text": ".where(SymbolMap.valid_to.is_(None))"
+      },
+      {
+        "line": 156,
+        "text": "SymbolMap("
+      },
+      {
+        "line": 180,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 181,
+        "text": ".where(SymbolMap.isin == isin)"
+      },
+      {
+        "line": 182,
+        "text": ".where(SymbolMap.exchange == exchange)"
+      },
+      {
+        "line": 183,
+        "text": ".where(SymbolMap.valid_from <= as_of)"
+      },
+      {
+        "line": 184,
+        "text": ".where((SymbolMap.valid_to.is_(None)) | (SymbolMap.valid_to >= as_of))"
+      },
+      {
+        "line": 199,
+        "text": "master = session.get(InstrumentMaster, isin)"
+      },
+      {
+        "line": 207,
+        "text": "select(SymbolMap).where(SymbolMap.isin == isin).where(SymbolMap.valid_to.is_(None))"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/track_b/manual_review.py",
+    "sha256": "deb39d6da317aadf087073e4ff1c9c5e2174fd163379af81febff8e6628bcd91",
+    "lines": 472,
+    "hits": [
+      {
+        "line": 21,
+        "text": "from omegadata.track_a.trading_calendar import TradingCalendar"
+      },
+      {
+        "line": 67,
+        "text": "calendar = TradingCalendar.from_config()"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/track_b/release_manager.py",
+    "sha256": "a36e461b09f3c2e79da9185a892445f38c8048a05c0294772263d5c2d0fcb9e3",
+    "lines": 595,
+    "hits": [
+      {
+        "line": 28,
+        "text": "UniverseMembership,"
+      },
+      {
+        "line": 270,
+        "text": "select(UniverseMembership)"
+      },
+      {
+        "line": 271,
+        "text": ".where(UniverseMembership.effective_date <= as_of)"
+      },
+      {
+        "line": 272,
+        "text": ".order_by(UniverseMembership.index_name.asc(), UniverseMembership.isin.asc())"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/track_b/universe_manager.py",
+    "sha256": "37a36df3cb601a5384a941f95b6ca38b7927e04ffae60084efdede0aacc43cbf",
+    "lines": 486,
+    "hits": [
+      {
+        "line": 16,
+        "text": "from omegadata.db.models import InstrumentMaster, SymbolMap, UniverseMembership"
+      },
+      {
+        "line": 18,
+        "text": "from omegadata.track_b.isin_master import ISINMasterService"
+      },
+      {
+        "line": 53,
+        "text": ") -> UniverseMembership:"
+      },
+      {
+        "line": 54,
+        "text": "row = UniverseMembership("
+      },
+      {
+        "line": 67,
+        "text": "def get_universe(self, session: Session, index_name: str, as_of_date: date) -> list[UniverseEntry]:"
+      },
+      {
+        "line": 69,
+        "text": "select(UniverseMembership)"
+      },
+      {
+        "line": 70,
+        "text": ".where(UniverseMembership.index_name == index_name)"
+      },
+      {
+        "line": 71,
+        "text": ".where(UniverseMembership.effective_date <= as_of_date)"
+      },
+      {
+        "line": 74,
+        "text": "UniverseMembership.removal_effective.is_(None),"
+      },
+      {
+        "line": 75,
+        "text": "UniverseMembership.removal_effective > as_of_date,"
+      },
+      {
+        "line": 82,
+        "text": "master = session.get(InstrumentMaster, row.isin)"
+      },
+      {
+        "line": 107,
+        "text": "select(UniverseMembership)"
+      },
+      {
+        "line": 108,
+        "text": ".where(UniverseMembership.index_name == index_name)"
+      },
+      {
+        "line": 109,
+        "text": ".where(UniverseMembership.added_date <= as_of_date)"
+      },
+      {
+        "line": 110,
+        "text": ".where(UniverseMembership.effective_date > as_of_date)"
+      },
+      {
+        "line": 111,
+        "text": ".where(UniverseMembership.effective_date <= horizon)"
+      },
+      {
+        "line": 132,
+        "text": ") -> list[UniverseMembership]:"
+      },
+      {
+        "line": 144,
+        "text": "rows: list[UniverseMembership] = []"
+      },
+      {
+        "line": 146,
+        "text": "row = UniverseMembership("
+      },
+      {
+        "line": 169,
+        "text": "select(UniverseMembership)"
+      },
+      {
+        "line": 172,
+        "text": "UniverseMembership.isin == isin,"
+      },
+      {
+        "line": 173,
+        "text": "UniverseMembership.index_name == index_name,"
+      },
+      {
+        "line": 174,
+        "text": "UniverseMembership.removal_effective.is_(None),"
+      },
+      {
+        "line": 177,
+        "text": ".order_by(UniverseMembership.effective_date.desc())"
+      },
+      {
+        "line": 258,
+        "text": "svc = ISINMasterService()"
+      },
+      {
+        "line": 259,
+        "text": "master = session.get(InstrumentMaster, isin)"
+      },
+      {
+        "line": 278,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 279,
+        "text": ".where(SymbolMap.isin == isin)"
+      },
+      {
+        "line": 280,
+        "text": ".where(SymbolMap.exchange == Exchange.NSE)"
+      },
+      {
+        "line": 281,
+        "text": ".where(SymbolMap.symbol == symbol)"
+      },
+      {
+        "line": 282,
+        "text": ".where(SymbolMap.valid_to.is_(None))"
+      },
+      {
+        "line": 286,
+        "text": "SymbolMap("
+      },
+      {
+        "line": 333,
+        "text": "session.execute(delete(UniverseMembership).where(UniverseMembership.index_name.in_(index_names)))"
+      },
+      {
+        "line": 471,
+        "text": "entry.isin for entry in self.get_universe(session, index_name=index_name, as_of_date=as_of_date)"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/identity.py",
+    "sha256": "eed6fed316b674985f08007208305f769065261f4756b896d63752f26e41a49c",
+    "lines": 472,
+    "hits": [
+      {
+        "line": 161,
+        "text": "from omegadata.track_b.isin_master import ISINMasterService"
+      },
+      {
+        "line": 163,
+        "text": "if not ISINMasterService.validate_isin(self.isin):"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/identity_adapters.py",
+    "sha256": "2df613b251e51ba88e208392c0ee930d72201e10e9ac86d89970ed039aed9be7",
+    "lines": 382,
+    "hits": [
+      {
+        "line": 14,
+        "text": "from omegadata.db.models import InstrumentMaster, SymbolMap, UniverseMembership"
+      },
+      {
+        "line": 139,
+        "text": "class MembershipClaim:"
+      },
+      {
+        "line": 169,
+        "text": "resolved_entries: tuple[tuple[MembershipClaim, Resolution], ...]"
+      },
+      {
+        "line": 170,
+        "text": "unresolved_memberships: tuple[MembershipClaim, ...]"
+      },
+      {
+        "line": 171,
+        "text": "ambiguous_identifiers: tuple[MembershipClaim, ...]"
+      },
+      {
+        "line": 172,
+        "text": "source_blocked_entries: tuple[MembershipClaim, ...]"
+      },
+      {
+        "line": 193,
+        "text": "def membership_revision_ends(claims: tuple[MembershipClaim, ...]) -> dict[str, datetime]:"
+      },
+      {
+        "line": 215,
+        "text": "def strict_universe("
+      },
+      {
+        "line": 216,
+        "text": "claims: tuple[MembershipClaim, ...],"
+      },
+      {
+        "line": 292,
+        "text": "\"\"\"Read-only opt-in companion to get_universe; accounts for missing masters."
+      },
+      {
+        "line": 298,
+        "text": "select(UniverseMembership)"
+      },
+      {
+        "line": 300,
+        "text": "UniverseMembership.index_name == index_name,"
+      },
+      {
+        "line": 301,
+        "text": "UniverseMembership.effective_date <= valid_at,"
+      },
+      {
+        "line": 303,
+        "text": "UniverseMembership.removal_effective.is_(None),"
+      },
+      {
+        "line": 304,
+        "text": "UniverseMembership.removal_effective > valid_at,"
+      },
+      {
+        "line": 307,
+        "text": ".order_by(UniverseMembership.id)"
+      },
+      {
+        "line": 313,
+        "text": "session.get(InstrumentMaster, row.isin) is not None,"
+      },
+      {
+        "line": 363,
+        "text": "select(SymbolMap)"
+      },
+      {
+        "line": 365,
+        "text": "SymbolMap.exchange == exchange,"
+      },
+      {
+        "line": 366,
+        "text": "SymbolMap.symbol == symbol,"
+      },
+      {
+        "line": 367,
+        "text": "SymbolMap.valid_from <= valid_at,"
+      },
+      {
+        "line": 368,
+        "text": "or_(SymbolMap.valid_to.is_(None), SymbolMap.valid_to >= valid_at),"
+      },
+      {
+        "line": 370,
+        "text": ".order_by(SymbolMap.id)"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/identity_repository.py",
+    "sha256": "ae5e1e6c8ac1bf4513ea1c3654659cd3e0291b9d6614b2f7c65515cbde7dc192",
+    "lines": 696,
+    "hits": [
+      {
+        "line": 49,
+        "text": "MembershipClaim,"
+      },
+      {
+        "line": 52,
+        "text": "strict_universe,"
+      },
+      {
+        "line": 649,
+        "text": "def append_membership(self, value: MembershipClaim, *, idempotent: bool = False) -> None:"
+      },
+      {
+        "line": 651,
+        "text": "old = self._rows(conn, memberships, MembershipClaim)"
+      },
+      {
+        "line": 672,
+        "text": "return strict_universe("
+      },
+      {
+        "line": 673,
+        "text": "self._rows(conn, memberships, MembershipClaim),"
+      }
+    ]
+  },
+  {
+    "path": "src/omegadata/session_calendar.py",
+    "sha256": "779141af68899f346e159c4e65a6463de4cdc6f478b72eaf226055ec7ab5436d",
+    "lines": 291,
+    "hits": [
+      {
+        "line": 12,
+        "text": "from omegadata.track_a.trading_calendar import TradingCalendar"
+      },
+      {
+        "line": 287,
+        "text": "def legacy_session(calendar: TradingCalendar, exchange: str, candidate: date) -> SessionResolution:"
+      }
+    ]
+  },
+  {
+    "path": "tests/unit/test_od06_contracts.py",
+    "sha256": "de2c432631ddfcc129114dbf183872a2ae41c7e2b9b3aa4d1d13e75e1a0e8933",
+    "lines": 412,
+    "hits": [
+      {
+        "line": 93,
+        "text": "from omegadata.track_b.isin_master import ISINMasterService"
+      },
+      {
+        "line": 94,
+        "text": "assert not ISINMasterService.validate_isin('NON_MARKET_CANARY')"
+      },
+      {
+        "line": 120,
+        "text": "from omegadata.identity_adapters import MembershipClaim, strict_universe"
+      },
+      {
+        "line": 121,
+        "text": "membership = MembershipClaim('membership-a', 'INDEX_CANARY', 'MISSING', 'SERIES',"
+      },
+      {
+        "line": 123,
+        "text": "result = strict_universe((membership,), repo, 'INDEX_CANARY', D, K, 'CANARY_ONLY')"
+      },
+      {
+        "line": 127,
+        "text": "from omegadata.identity_adapters import MembershipClaim, strict_universe"
+      },
+      {
+        "line": 128,
+        "text": "item = MembershipClaim('member-a', 'INDEX_CANARY', 'TOKEN', 'SERIES', 'CANARY-X',"
+      },
+      {
+        "line": 130,
+        "text": "result = strict_universe((item,), repo, 'INDEX_CANARY', D, K, 'CANARY_ONLY')"
+      },
+      {
+        "line": 166,
+        "text": "from omegadata.track_a.trading_calendar import TradingCalendar"
+      },
+      {
+        "line": 167,
+        "text": "legacy = TradingCalendar({}, {'CANARY-X': {2001}})"
+      },
+      {
+        "line": 263,
+        "text": "from omegadata.identity_adapters import MembershipClaim, strict_universe"
+      },
+      {
+        "line": 264,
+        "text": "item = MembershipClaim('m1', 'INDEX_CANARY', 'MISSING', 'SERIES', 'CANARY-X',"
+      },
+      {
+        "line": 266,
+        "text": "result = strict_universe((item,), repo, 'INDEX_CANARY', D, K, 'CANARY_ONLY')"
+      },
+      {
+        "line": 270,
+        "text": "result = strict_universe((replace(item, symbol='TOKEN'),), r,"
+      },
+      {
+        "line": 279,
+        "text": "from omegadata.db.models import UniverseMembership"
+      },
+      {
+        "line": 284,
+        "text": "session.add(UniverseMembership(isin='CANARY-NONE', index_name='INDEX_CANARY',"
+      },
+      {
+        "line": 296,
+        "text": "from omegadata.db.models import SymbolMap"
+      },
+      {
+        "line": 302,
+        "text": "session.add(SymbolMap(isin='CANARY-NONE', exchange=Exchange.NSE, symbol='CANARY',"
+      },
+      {
+        "line": 378,
+        "text": "from omegadata.track_a.trading_calendar import TradingCalendar"
+      },
+      {
+        "line": 380,
+        "text": "assert legacy_session(TradingCalendar({}, {}, config_state=state), 'CANARY-X', D).status == 'COVERAGE_UNKNOWN'"
+      }
+    ]
+  },
+  {
+    "path": "tests/unit/test_od06_foundation.py",
+    "sha256": "4596964ceeba8209df47d879542e8ebc91dd4ec6c20272e039d32e23549718af",
+    "lines": 748,
+    "hits": [
+      {
+        "line": 220,
+        "text": "from omegadata.identity_adapters import strict_universe"
+      },
+      {
+        "line": 222,
+        "text": "u = strict_universe((), r, \"EMPTY\", D, K, \"CANARY_ONLY\")"
+      },
+      {
+        "line": 360,
+        "text": "from omegadata.identity_adapters import MembershipClaim, strict_universe"
+      },
+      {
+        "line": 363,
+        "text": "a = MembershipClaim("
+      },
+      {
+        "line": 377,
+        "text": "result = strict_universe((a,), r, \"INDEX_CANARY\", D, K, \"CANARY_ONLY\")"
+      },
+      {
+        "line": 388,
+        "text": "before = strict_universe((a, b), r, \"INDEX_CANARY\", D, K, \"CANARY_ONLY\")"
+      },
+      {
+        "line": 389,
+        "text": "after = strict_universe((a, b), r, \"INDEX_CANARY\", D, b.known_from, \"CANARY_ONLY\")"
+      },
+      {
+        "line": 398,
+        "text": "result = strict_universe(claims, r, \"INDEX_CANARY\", D, K, \"CANARY_ONLY\")"
+      },
+      {
+        "line": 401,
+        "text": "result = strict_universe("
+      },
+      {
+        "line": 478,
+        "text": "from omegadata.identity_adapters import MembershipClaim"
+      },
+      {
+        "line": 480,
+        "text": "member = MembershipClaim("
+      },
+      {
+        "line": 637,
+        "text": "from omegadata.identity_adapters import MembershipClaim"
+      },
+      {
+        "line": 645,
+        "text": "monkeypatch.setattr(module, \"strict_universe\", forbidden)"
+      },
+      {
+        "line": 646,
+        "text": "member = MembershipClaim("
+      }
+    ]
+  }
+]

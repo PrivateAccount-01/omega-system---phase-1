@@ -1,0 +1,491 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-7fb1a8cc95-manifest.json",
+    "--manifest-sha256",
+    "20fca18e41c1992999de418ba95d8182e0fc721e1aac2fc220b81e6912a90daa",
+    "--policy",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/od08-7fb1a8cc95-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od08-20261119T184624Z/od08-7fb1a8cc95/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od08-20261119T184624Z",
+  "start_utc": "2026-11-19T19:09:00.301230+00:00",
+  "end_utc": "2026-11-19T19:09:07.097477+00:00",
+  "elapsed_seconds": 6.796219248,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "od08",
+    "exit_code": 1,
+    "counts": {
+      "passed": 86,
+      "failed": 1
+    },
+    "reports": [
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U07]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U08]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U09]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[U10]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[I06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[C05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[A05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[L05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[E04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[R01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[R02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P05]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[P06]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S01]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S02]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S03]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_acceptance[S04]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[order]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[future-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[naive]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[wrong-pin]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[replay]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[explain]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[changed-policy]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[unknown-schema]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[nonempty-rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[foreign-key]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[immutable]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[bounds]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[cancel-lineage]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[provisional]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[observation-future-digest]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_review_controls[definition-expired]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[context-checksum]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[replay-restart]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[omitted-ledger]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[omitted-coverage]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[order-observations]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[complete-transition]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[listing-granularity]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[actual-rollback]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[migration-empty]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[read-only-backfill]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[closed-session]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[same-instant-correction]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[replay-bool]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[future-definition]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_independent_review[ranking-tie]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[valid-adjustment]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[wrong-profile]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[future-context]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_od07_bound_integration[persist-adjustment]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-announcement]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[future-publication]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-before]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_source_time_boundaries[intraday-at]",
+        "outcome": "passed",
+        "reason": null
+      },
+      {
+        "nodeid": "tests/unit/test_od08_universe.py::test_identity_selection_candidate_budget",
+        "outcome": "failed",
+        "reason": "monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f5ed140e8d0>\n\n    def test_identity_selection_candidate_budget(monkeypatch):\n        from omegadata.identity import Security,Listing,MemoryIdentityRepository\n        c,x,m,cov,p,run=setup_case()\n        securities=(Security('s0','issuer-a'),Security('s1','issuer-a'),Security('s2','issuer-a'))\n        listings=tuple(Listing('l'+str(i),s.security_id,'CANARY-X') for i,s in enumerate(securities))\n        claims=tuple(replace(x.identity.claims[0],claim_id='i'+str(i),listing_id=l.listing_id,symbol='T'+str(i)) for i,l in enumerate(listings))\n        identity=replace(x.identity,securities=securities,listings=listings,claims=claims)\n        members=tuple(replace(m,claim=replace(m.claim,membership_id='m'+str(i),symbol='T'+str(i)),event_id='event'+str(i),security_id=s.security_id,listing_id=listings[i].listing_id) for i,s in enumerate(securities))\n        y=replace(x,identity=identity,memberships=members,coverage=(replace(cov,expected_member_identities=('s0','s1','s2'),ending_member_identities=('s0','s1','s2')),))\n        examined=[];original=MemoryIdentityRepository.resolve_listing\n        def trace(repository,*args,**kwargs):\n            examined.append(len(repository.claims));return original(repository,*args,**kwargs)\n        monkeypatch.setattr(MemoryIdentityRepository,'resolve_listing',trace)\n        assert query(y).included_member_ids==('s0','s1','s2')\n>       assert sum(examined)<=4*len(members)\nE       AssertionError: assert 18 <= (4 * 3)\nE        +  where 18 = sum([3, 3, 3, 3, 3, 3])\nE        +  and   3 = len((MembershipRevision(claim=MembershipClaim(membership_id='m0', index_name='CONTROL_SCOPE', symbol='T0', series='SERIES'...ber=1, effective_convention='SOURCE_DATE', version='od08.membership/v1', effective_at=None, removal_effective_at=None)))\n\ntests/unit/test_od08_universe.py:913: AssertionError"
+      }
+    ],
+    "start_utc": "2026-11-19T19:09:01.701983+00:00",
+    "end_utc": "2026-11-19T19:09:06.451700+00:00",
+    "elapsed_seconds": 4.749721356,
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "stdout_stderr": "........................................................................ [ 82%]\n..............F                                                          [100%]\n=================================== FAILURES ===================================\n___________________ test_identity_selection_candidate_budget ___________________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f5ed140e8d0>\n\n    def test_identity_selection_candidate_budget(monkeypatch):\n        from omegadata.identity import Security,Listing,MemoryIdentityRepository\n        c,x,m,cov,p,run=setup_case()\n        securities=(Security('s0','issuer-a'),Security('s1','issuer-a'),Security('s2','issuer-a'))\n        listings=tuple(Listing('l'+str(i),s.security_id,'CANARY-X') for i,s in enumerate(securities))\n        claims=tuple(replace(x.identity.claims[0],claim_id='i'+str(i),listing_id=l.listing_id,symbol='T'+str(i)) for i,l in enumerate(listings))\n        identity=replace(x.identity,securities=securities,listings=listings,claims=claims)\n        members=tuple(replace(m,claim=replace(m.claim,membership_id='m'+str(i),symbol='T'+str(i)),event_id='event'+str(i),security_id=s.security_id,listing_id=listings[i].listing_id) for i,s in enumerate(securities))\n        y=replace(x,identity=identity,memberships=members,coverage=(replace(cov,expected_member_identities=('s0','s1','s2'),ending_member_identities=('s0','s1','s2')),))\n        examined=[];original=MemoryIdentityRepository.resolve_listing\n        def trace(repository,*args,**kwargs):\n            examined.append(len(repository.claims));return original(repository,*args,**kwargs)\n        monkeypatch.setattr(MemoryIdentityRepository,'resolve_listing',trace)\n        assert query(y).included_member_ids==('s0','s1','s2')\n>       assert sum(examined)<=4*len(members)\nE       AssertionError: assert 18 <= (4 * 3)\nE        +  where 18 = sum([3, 3, 3, 3, 3, 3])\nE        +  and   3 = len((MembershipRevision(claim=MembershipClaim(membership_id='m0', index_name='CONTROL_SCOPE', symbol='T0', series='SERIES'...ber=1, effective_convention='SOURCE_DATE', version='od08.membership/v1', effective_at=None, removal_effective_at=None)))\n\ntests/unit/test_od08_universe.py:913: AssertionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_od08_universe.py::test_identity_selection_candidate_budget\n1 failed, 86 passed in 3.05s\n",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532222]",
+        "net": "net:[4026532227]",
+        "pid": "pid:[4026532225]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/od08-7fb1a8cc95/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "od08",
+  "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+  "source_manifest_sha256": "20fca18e41c1992999de418ba95d8182e0fc721e1aac2fc220b81e6912a90daa"
+}

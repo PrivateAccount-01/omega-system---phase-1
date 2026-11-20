@@ -1,0 +1,46 @@
+{
+  "job": "od08perf",
+  "exit_code": 0,
+  "counts": {},
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "interpreter": "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+  "start_utc": "2026-11-19T19:07:19.237106+00:00",
+  "end_utc": "2026-11-19T19:07:28.585529+00:00",
+  "stdout_stderr": "NON_MARKET_STRUCTURAL_CONTROL only; no exchange-scale throughput claim",
+  "boundary": {
+    "backend": "bwrap+seccomp/v1",
+    "worker_namespaces": {
+      "mnt": "mnt:[4026532224]",
+      "net": "net:[4026532229]",
+      "pid": "pid:[4026532227]",
+      "user": "user:[4026532295]"
+    },
+    "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/od08perf-925cdd21bc/NON_MARKET_CANARY",
+    "verified": true,
+    "source_mounts": "EXACT_READ_ONLY",
+    "no_new_privs": true,
+    "seccomp_mode": 2
+  },
+  "members": 200,
+  "revisions": 201,
+  "query_samples_seconds": [
+    0.18611215100003164,
+    0.19204112500000292,
+    0.15162999699998636
+  ],
+  "query_median_seconds": 0.18611215100003164,
+  "seed_insert_seconds": 1.74376188399998,
+  "snapshot_admission_seconds": 5.394779224999979,
+  "membership_history_seconds": 0.0005540700000210563,
+  "correction_append_seconds": 0.005216927999981635,
+  "restart_replay_seconds": 0.2439074590000132,
+  "two_step_replay_seconds": 0.25372207000003755,
+  "rollback_seconds": 0.0005114570000159802,
+  "peak_tracemalloc_bytes": 6066297,
+  "snapshot_bytes": 109397,
+  "query_plan": [
+    "SEARCH od08_membership USING INDEX od08_membership_query (universe=? AND valid_from<?)"
+  ],
+  "candidate_upper_bound": 200,
+  "deterministic_digest": "9271b0cdec4cf176527e32f3246a26f7891f8fd7e8071fa07854bd38f3d5f434"
+}

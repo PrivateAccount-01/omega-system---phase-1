@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "/home/parilrupani/omega-od02v-37b3vimd/venv312/bin/python",
+    "-B",
+    "/home/parilrupani/omega-od08-20261119T184624Z/staged2/repo/scripts/od05x_isolated_runner.py",
+    "launch",
+    "--manifest",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/report-9fb3cb9917-manifest.json",
+    "--manifest-sha256",
+    "f4b76afcf19820e2a25552d42f1fa97a703c1b09dd470ddede78e266f135b537",
+    "--policy",
+    "/home/parilrupani/omega-od08-20261119T184624Z/logs/report-9fb3cb9917-policy.json",
+    "--output",
+    "/home/parilrupani/omega-od08-20261119T184624Z/report-9fb3cb9917/output"
+  ],
+  "cwd": "/home/parilrupani/omega-od08-20261119T184624Z",
+  "start_utc": "2026-11-19T19:26:49.231342+00:00",
+  "end_utc": "2026-11-19T19:26:51.346263+00:00",
+  "elapsed_seconds": 2.1148950589999984,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "worker_result": {
+    "job": "report",
+    "exit_code": 0,
+    "counts": {},
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "stdout_stderr": "{\"schema_version\": \"od05.final-report.receipt/v1\", \"files\": [\"00_scope_and_source_identity.md\", \"01_upstream_adoption_manifest.json\", \"02_existing_universe_audit.md\", \"03_universe_domain_contract.md\", \"04_bitemporal_membership_contract.md\", \"05_information_availability_contract.md\", \"06_survivorship_bias_controls.md\", \"07_historical_coverage_contract.md\", \"08_exact_constituent_reconciliation.md\", \"09_consumer_eligibility_policies.md\", \"10_liquidity_and_tradability_contract.md\", \"11_OD07_context_integration.md\", \"12_provisional_reconstruction_contract.md\", \"13_snapshot_admission_and_integrity.md\", \"14_persistence_and_rollback.md\", \"15_negative_first_tests.md\", \"16_targeted_test_results.json\", \"17_full_engineering_matrix.json\", \"18_performance_results.json\", \"19_external_dependencies.json\", \"20_preservation_manifest.json\", \"21_acceptance_matrix.json\", \"22_final_gatekeeper.json\", \"23_od09_dependency_handoff.md\", \"24_final_report.md\"], \"manifest_sha256\": \"399469000b8e88a1de50f3b68306b068b3d708baf7b8228fa392d3cd0934d031\", \"sha256\": {\"00_scope_and_source_identity.md\": \"9e159d853a597068cc5edd59b996d4d63faec149ca34ec38bf9a8b5060053b69\", \"01_upstream_adoption_manifest.json\": \"3b7ddcf3a267e80b09cd299f1a3b02377f3d390a83369132f36f7df7f52d147b\", \"02_existing_universe_audit.md\": \"f79576a177bcee72dcf4c65b207491a97b00f98e42123088edbe61fbab634e41\", \"03_universe_domain_contract.md\": \"3d5f0b789ba3e1ccc32d18a6da7bdd32f0aa11c8573def4dd8971fbe13bf6b17\", \"04_bitemporal_membership_contract.md\": \"a6256a2a2ececf466723bb40fc178b7b428e3212a0f15d3846d5d0083bd07439\", \"05_information_availability_contract.md\": \"edf571fbceaf16e9d7356cd421c487af2e59c8c44a88892f47e0d872b290bfa0\", \"06_survivorship_bias_controls.md\": \"dba2bce438f1dcf6129840a96a4be6c6d7b1e4e4925d2aac98651b22a931555a\", \"07_historical_coverage_contract.md\": \"eb015616400c8477a1d183f8785002bd37332534fad395877e2969d00b95aca2\", \"08_exact_constituent_reconciliation.md\": \"792dcb291240f5b45ff12098b3ce07e7e17f487c71f76e998abc2bb2a92c86a6\", \"09_consumer_eligibility_policies.md\": \"4aba371220faafe0f37a02a5cf0d8349d7785e76e60e361f49204ee14efbeb8d\", \"10_liquidity_and_tradability_contract.md\": \"3b632c700f2e1e8ee07cb96e3859751270ddd009b99d255e56dbd368aba84539\", \"11_OD07_context_integration.md\": \"24d32cb21af3b0defddd8d30c335c8cbeddb55ce423ca0408c8ceef711cd2928\", \"12_provisional_reconstruction_contract.md\": \"d3c9aa4dc910d5f7360683c73869df6dc1dea268cf549b55512062996906a4d5\", \"13_snapshot_admission_and_integrity.md\": \"0ff0e28e6c184ab482e0ffcf66ab3ad8a48198dbb7267fbc6090e159297cc19a\", \"14_persistence_and_rollback.md\": \"5e6217360dacc599f62e2b49cc8b7d4aa399486f5f8e965468bc0ba3a34af7e3\", \"15_negative_first_tests.md\": \"5c9e8ad2a142c57ef2ad36d89d3ff6ff0e620a473648c7c6a396ce661fab9699\", \"16_targeted_test_results.json\": \"091c0ab84167929f978ebcc6e5c46bdd16f3db46107a4324428a0713567ba72f\", \"17_full_engineering_matrix.json\": \"4bacf5dc6197b8161aa8ff7a5fbb3d11f995005b75eac9243071f369156d86e8\", \"18_performance_results.json\": \"2b69b2b8880bf3fa329337a66c0e2204252609ab378fdff11ecafa2acb5061aa\", \"19_external_dependencies.json\": \"9178fe6e7cc7c64fef6baa18d40e6903f208a65c4092c25f7493e6b3ef5e77db\", \"20_preservation_manifest.json\": \"81c21bf467cb9277f76deb6183f3181c286b49c235e2d3d8645ad246f68d6e77\", \"21_acceptance_matrix.json\": \"11b9ca2b1040c84b4a240705b0f780d8eaacbd38863b3ad04fe049b2c394ac55\", \"22_final_gatekeeper.json\": \"bcbf4f0132d54b28e2b573ca67df375b1525d9d93c392194d8a51e6fe248010c\", \"23_od09_dependency_handoff.md\": \"cebd8a7f66813bae818e784734b646173af43ce02d5af05bc3dcf34f709c7675\", \"24_final_report.md\": \"6126a747392687a29929fc916a34cc9cb808b8e4a379503d9658b3f5b49b3f49\"}, \"boundary\": {\"backend\": \"bwrap+seccomp/v1\", \"worker_namespaces\": {\"mnt\": \"mnt:[4026532223]\", \"net\": \"net:[4026532228]\", \"pid\": \"pid:[4026532226]\", \"user\": \"user:[4026532291]\"}, \"outside_canary\": \"/home/parilrupani/omega-od08-20261119T184624Z/report-9fb3cb9917/NON_MARKET_CANARY\", \"verified\": true, \"source_mounts\": \"EXACT_READ_ONLY\", \"no_new_privs\": true, \"seccomp_mode\": 2}, \"git_calls\": 0, \"original_repository_mounted\": false}",
+    "boundary": {
+      "backend": "bwrap+seccomp/v1",
+      "worker_namespaces": {
+        "mnt": "mnt:[4026532223]",
+        "net": "net:[4026532228]",
+        "pid": "pid:[4026532226]",
+        "user": "user:[4026532291]"
+      },
+      "outside_canary": "/home/parilrupani/omega-od08-20261119T184624Z/report-9fb3cb9917/NON_MARKET_CANARY",
+      "verified": true,
+      "source_mounts": "EXACT_READ_ONLY",
+      "no_new_privs": true,
+      "seccomp_mode": 2
+    }
+  },
+  "job": "report",
+  "source_commit": "d81657666238bf20f093cec54bb9cb3788feea99",
+  "source_manifest_sha256": "f4b76afcf19820e2a25552d42f1fa97a703c1b09dd470ddede78e266f135b537"
+}

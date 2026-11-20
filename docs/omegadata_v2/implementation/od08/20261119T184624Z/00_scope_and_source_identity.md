@@ -1,0 +1,6 @@
+# OD08 code-only scope and identity
+Repository PrivateAccount-01/omega-system---phase-1; branch feature/od01-source-rights; reviewed local/remote HEAD d81657666238bf20f093cec54bb9cb3788feea99. Root operating instructions and controlling master read. Ref-only Git and cached-index metadata used; original unstaged/untracked content deliberately not scanned. No unrestricted status/diff/refresh or raw discovery.
+
+Applied workspace: /home/parilrupani/omega-od08-20261119T184624Z/staged2/repo. Exact 28-file sealed upstream delivery adopted through unchanged canonical Linux stage with before/null and after hashes. Prior seal 1b0039f2696287f71dd77a73d0720f1498702d46886dfd529c6751d681e91249; all 341 sealed entries verified/read and preserved. Baseline 3829 files, all unchanged. Nine new OD08 files; combined 37-file delivery. Final snapshot e432df06059d706432ffbf23bc5271aec5eaa78a15df98d4716c2401d6686ad9, 3838 approved files.
+
+Application execution uses the accepted data-free bwrap/seccomp boundary at normal module paths. No original raw archives, incident copies, credentials, signing material or operational DB mounts. Preparation/formatting/static lint uses only this approved snapshot. No original application integration, authentic financial observations, OD09, commit, push, release or trading.
